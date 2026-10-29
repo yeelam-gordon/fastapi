@@ -1,0 +1,567 @@
+test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) ... 
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='invalid-runtime-hash') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='inconsistent-runtime-hash') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='translated') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='missing-uv-hash') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='invalid-uv-hash') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='non-arm-uv') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='missing-wrapper-identities') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='missing-wrapper-lock') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='wrapper-source-mismatch') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='wrapper-code-mismatch') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='wrapper-runtime-mismatch') ... FAIL
+  test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='wrapper-uv-mismatch') ... FAIL
+test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) ... 
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='malformed') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='failed') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='errors') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='schema') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='wrong-workers') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-environment') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='malformed-environment') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='preexisting') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='not-cleaned') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='wrong-prefix') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='base-equals-prefix') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='wrong-python') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='wrong-backend') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='user-site') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-phases') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='malformed-phases') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-phase') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='phase-failed') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='phase-reordered') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-cleanup') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='cleanup-failed') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='cleanup-wrong-path') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-clock') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='malformed-clock') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-nan') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-negative') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-overlap') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-after-exit') ... FAIL
+  test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-outside-parent') ... FAIL
+test_reused_environment_rejects (__main__.FixedBehaviorGates.test_reused_environment_rejects) ... FAIL
+test_valid_distinct_platform_binaries_accept (__main__.FixedBehaviorGates.test_valid_distinct_platform_binaries_accept) ... ok
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='invalid-runtime-hash')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='inconsistent-runtime-hash')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='translated')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='missing-uv-hash')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='invalid-uv-hash')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='non-arm-uv')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='missing-wrapper-identities')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='missing-wrapper-lock')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='wrapper-source-mismatch')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='wrapper-code-mismatch')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='wrapper-runtime-mismatch')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) (case='wrapper-uv-mismatch')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 317, in test_identities_reject
+    self.rejected(mutate)
+    ~~~~~~~~~~~~~^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='malformed')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='failed')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='errors')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='schema')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='wrong-workers')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-environment')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='malformed-environment')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='preexisting')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='not-cleaned')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='wrong-prefix')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='base-equals-prefix')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='wrong-python')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='wrong-backend')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='user-site')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-phases')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='malformed-phases')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-phase')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='phase-failed')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='phase-reordered')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-cleanup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='cleanup-failed')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='cleanup-wrong-path')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='missing-clock')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='malformed-clock')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-nan')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-negative')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-overlap')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-after-exit')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) (case='clock-outside-parent')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 279, in test_lifecycle_rejects
+    self.rejected(lambda r, mutate=mutate_sample: mutate(r["samples"][1]))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+======================================================================
+FAIL: test_reused_environment_rejects (__main__.FixedBehaviorGates.test_reused_environment_rejects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 285, in test_reused_environment_rejects
+    self.rejected(mutate, both=True)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\paired-protocol-review\Generated Files\arm-build\reviews\paired-protocol\test_fixed_gates.py", line 226, in rejected
+    with self.assertRaises((ValueError, TypeError, KeyError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'TypeError'>, <class 'KeyError'>) not raised
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.915s
+
+FAILED (failures=43)
