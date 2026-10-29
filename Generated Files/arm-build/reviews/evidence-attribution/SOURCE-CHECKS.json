@@ -1,0 +1,55 @@
+{
+  "method": "Read-only gh api public contents at pinned revisions and public commit metadata; source inspection, not foreign execution.",
+  "checked": [
+    {
+      "repository": "astral-sh/python-build-standalone",
+      "revision": "b498734a5791d0e6786695a226fd398a41c6f7f6",
+      "path": "cpython-windows/build.py",
+      "lines": [[1630, 1642], [1670, 1712]],
+      "observed": "PGInstrument, instrumented training tests, PGUpdate."
+    },
+    {
+      "repository": "python/cpython",
+      "revision": "v3.13.15",
+      "path": "Tools/msi/buildrelease.bat",
+      "lines": [[91, 104], [238, 253]],
+      "observed": "MSI wrapper passes PGO job to x64, not ARM64; explicit wrapper-default comment."
+    },
+    {
+      "repository": "crutkas/pip",
+      "revision": "d86a728fdcfa2f694149a466c745115af476ee11",
+      "path": "src/pip/_internal/operations/install/wheel.py",
+      "lines": [[417, 444], [671, 705]],
+      "observed": "Windows threshold gate, forced compile_file, pycompile gate."
+    },
+    {
+      "repository": "crutkas/cpython",
+      "revision": "0e522c49773a4be778a843d3a0251cae3b9d34c7",
+      "path": "Lib/ensurepip/__init__.py",
+      "lines": [[167, 208]],
+      "observed": "Bundled wheel hardlink with OSError byte-copy fallback, no platform gate."
+    },
+    {
+      "repository": "crutkas/HOBL",
+      "revision": "5e9e1ae540a8099485e30e2044ceb68d29d982e6",
+      "path": "scenarios/windows/fast_api/fast_api_resources/fast_api_run.ps1",
+      "lines": [[342, 419]],
+      "observed": "Separate legacy build, uv build and test timers; their sum is scenario runtime."
+    },
+    {
+      "repository": "crutkas/HOBL",
+      "revision": "5e9e1ae540a8099485e30e2044ceb68d29d982e6",
+      "path": "scenarios/common/fast_api_app_workload/benchmark_inner_loop.py",
+      "lines": [[389, 444]],
+      "observed": "Application aggregate sums startup, import/OpenAPI and app-test medians."
+    }
+  ],
+  "commit_author_checks": {
+    "crutkas/pip@d86a728fdcfa2f694149a466c745115af476ee11": "Clint Rutkas; Co-authored-by: Copilot App",
+    "crutkas/cpython@0e522c49773a4be778a843d3a0251cae3b9d34c7": "Clint Rutkas; Co-authored-by: Copilot App",
+    "crutkas/uvicorn@58779399365e7a79b5cbccaf9bb67fc25b73a9a6": "Clint Rutkas; Co-authored-by: Copilot App",
+    "crutkas/uvicorn@70ab5bafa84ac0f2b6520fdc223bd3a7831580f6": "Clint Rutkas; Co-authored-by: Copilot App",
+    "crutkas/HOBL@a428df4efeeff36cadb00f8f95f90ef97cc12b6f": "Clint Rutkas; Co-authored-by: Copilot App"
+  },
+  "limits": "Published binary downloads, exact executed CI executable identity, performance, foreign tests and historical private numerical results not independently reproduced."
+}

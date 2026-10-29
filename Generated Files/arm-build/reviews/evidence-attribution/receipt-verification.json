@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "scope": "retained metadata, manifests and arithmetic; no benchmark or archive re-execution",
+  "review_base": "bfc306726db5727d6a358e85630ced44aa4aa4e2",
+  "stdlib_medians_seconds": {
+    "seq-attrs": 3.3030668000028527,
+    "seq-noattrs": 3.200373799998488,
+    "thread-attrs": 2.4256860000023153,
+    "thread-noattrs": 2.388463999999658
+  },
+  "stdlib_combined_reduction_percent": 27.689503585044207,
+  "stdlib_process_cpu_medians_seconds": {
+    "seq-attrs": 1.875,
+    "seq-noattrs": 1.8125,
+    "thread-attrs": 2.09375,
+    "thread-noattrs": 2.09375
+  },
+  "frontend_medians_seconds": {
+    "A": 13.42088209999929,
+    "B": 9.67176180000024,
+    "C": 5.961412100001326
+  },
+  "frontend_C_reduction_from_A_percent": 55.581070934214964,
+  "followup_medians_seconds": {
+    "uv": 5.013572600000771,
+    "full": 6.275076699999772,
+    "selective": 3.300382900000841
+  },
+  "retained_ci_conclusions": {
+    "40814042898": {
+      "resolve": "success",
+      "macos-15": "failure",
+      "windows-11-arm": "success"
+    },
+    "40814588064": {
+      "macos-15": "success",
+      "windows-11-arm": "success"
+    }
+  },
+  "strict_ci_comparison": "failed",
+  "input_sha256": {
+    "filesystem/stdlib-ops/evidence.json": "fdc21e12a8f25fae015e456051cc170971436ace4c2bd756bd81fb54e60e6e48",
+    "filesystem/stdlib-ops/reference-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/1-seq-attrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/2-seq-attrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/3-seq-attrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/1-seq-noattrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/2-seq-noattrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/3-seq-noattrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/1-thread-attrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/2-thread-attrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/3-thread-attrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/1-thread-noattrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/2-thread-noattrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "filesystem/stdlib-ops/3-thread-noattrs-manifest.json": "1dd9338d902d7c7ea48a4c81a6d3be6ba017e42601b8559fe61079598c418db3",
+    "frontends/evidence-c87512b2b70d/results.json": "9878ade3ff537e2ed02d48952a2b813ccfe0931eb790eabf51a1d4512262353d",
+    "frontends/evidence-c87512b2b70d/canonical-windows-reference.json": "1db6716a0a8659d7fd9975bc5eba986a6e0acab098d581fd6cafbe6401bbcb08",
+    "frontends/evidence-c87512b2b70d/trial-1-A.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "frontends/evidence-c87512b2b70d/trial-2-A.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "frontends/evidence-c87512b2b70d/trial-3-A.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "frontends/evidence-c87512b2b70d/trial-1-B.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "frontends/evidence-c87512b2b70d/trial-2-B.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "frontends/evidence-c87512b2b70d/trial-3-B.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "frontends/evidence-c87512b2b70d/trial-1-C.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "frontends/evidence-c87512b2b70d/trial-2-C.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "frontends/evidence-c87512b2b70d/trial-3-C.manifest.json": "7638a0bf40f2f10ae671fdf101ed69d73087a9da0b0726a32aefdbaa221a9edd",
+    "filesystem/c-vs-q/followup/evidence.json": "6218bb43301685932ebf5d93ebb494d25a71805ba27972802126e0cc1b4e7289",
+    "results/ci-40814042898/jobs.json": "0568f054299e1cf75b54c3e718fe198fae6d65cadcc6c17b51441134e2dd87ac",
+    "results/ci-40814588064/jobs.json": "d0aced0545b360c58e8018db9e3a4856324fcf28ca689a91f7c1a93976e2d4cf",
+    "results/ci-40814588064/comparison-r2.json": "4b28d0ef9ccb63f4267804ef99800ed4f6e9d26f7ee713c3b91247983154350f"
+  }
+}
