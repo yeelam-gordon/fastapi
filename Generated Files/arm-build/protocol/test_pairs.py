@@ -4,9 +4,12 @@ import copy
 import csv
 import hashlib
 import io
+import shutil
 import struct
+import subprocess
 import tarfile
 import unittest
+import uuid
 import zipfile
 from dataclasses import asdict, replace
 from pathlib import Path
@@ -438,6 +441,72 @@ class ComparisonTests(unittest.TestCase):
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_real_git_sparse_inventory_from_nested_tool_directory(self):
+        root = Path(__file__).resolve().parent / (".inventory-test-" + uuid.uuid4().hex)
+        root.mkdir()
+
+        def cleanup():
+            def retry(function, name, error):
+                Path(name).chmod(0o700)
+                function(name)
+
+            shutil.rmtree(root, onexc=retry)
+
+        self.addCleanup(cleanup)
+        extra = measure.PREFIX + "candidate/new_helper.py"
+        expected = measure.REQUIRED_TOOL_INPUTS | {extra}
+        for name in expected | {"historical/evidence.log"}:
+            target = root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(b"fixture\n")
+
+        def git(*args):
+            return subprocess.check_output(
+                ["git", "-c", "core.autocrlf=false", "-C", str(root), *args]
+            )
+
+        git("init", "--quiet")
+        git("add", "--all")
+        git(
+            "-c",
+            "user.name=Fixture",
+            "-c",
+            "user.email=fixture@example.invalid",
+            "-c",
+            "commit.gpgsign=false",
+            "-c",
+            "core.hooksPath=" + str(root / "no-hooks"),
+            "commit",
+            "--quiet",
+            "-m",
+            "fixture",
+        )
+        revision = git("rev-parse", "HEAD").decode().strip()
+        subprocess.run(
+            [
+                "git",
+                "-c",
+                "core.autocrlf=false",
+                "-C",
+                str(root),
+                "sparse-checkout",
+                "set",
+                "--no-cone",
+                "--stdin",
+            ],
+            input="\n".join("/" + name for name in sorted(expected)).encode(),
+            check=True,
+        )
+        self.assertFalse((root / "historical" / "evidence.log").exists())
+        with patch.object(measure, "ROOT", root / "Generated Files" / "arm-build"):
+            self.assertEqual(measure.tool_inventory(revision), expected)
+            receipts = measure.code_receipts()
+            self.assertEqual(set(receipts), expected)
+            self.assertEqual(set(receipts.values()), {measure.digest(b"fixture\n")})
+            (root / measure.PREFIX / "protocol" / "owned_process.py").unlink()
+            with self.assertRaises(FileNotFoundError):
+                measure.code_receipts()
+
     def test_pinned_inventory_includes_new_helpers_and_rejects_missing_required(self):
         revision = "a" * 40
         extra = measure.PREFIX + "candidate/new_helper.py"

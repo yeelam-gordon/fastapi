@@ -89,7 +89,11 @@ def valid_hex(value, size=64):
 def tool_inventory(revision):
     if not valid_hex(revision, 40):
         raise ValueError("Full harness Git SHA required")
-    names = git(ROOT, "ls-tree", "-r", "--name-only", revision).decode().splitlines()
+    names = (
+        git(ROOT, "ls-tree", "--full-tree", "-r", "--name-only", revision)
+        .decode()
+        .splitlines()
+    )
     inventory = set(REQUIRED_TOOL_INPUTS)
     if not inventory <= set(names):
         raise ValueError("Committed tool inventory is incomplete")
