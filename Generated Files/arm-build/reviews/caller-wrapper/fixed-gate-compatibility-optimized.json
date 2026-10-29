@@ -1,0 +1,18 @@
+[
+  {
+    "case": "old_control",
+    "outcome": "accepted"
+  },
+  {
+    "case": "additive_identity_field",
+    "outcome": "accepted"
+  },
+  {
+    "case": "fixed_identity",
+    "outcome": "Caller identity/cleanup operation mismatch"
+  },
+  {
+    "case": "fixed_sdk",
+    "outcome": "Caller phase command mismatch"
+  }
+]
