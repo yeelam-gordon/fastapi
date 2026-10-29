@@ -40,8 +40,10 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 
 | Current lane | Branch / worktree suffix | Owned output |
 |---|---|---|
-| Standard uv supported-practice screen (active) | `investigate/arm-uv-build-bytecode` / `uv-build-bytecode` | P22 source audit rejects an upstream default change now; stock-command C: bytecode-setting A/B only |
-| Generic PDM archive prototype/proof (active) | `investigate/arm-pdm-archive-io` / `pdm-archive-io` | P23 capped small-file overlap inside official PDM, about 80 source lines maximum; focused Q: tests only, no benchmark/adoption |
+| Standard uv supported-practice screen (completed; rejected) | `investigate/arm-uv-build-bytecode` / `uv-build-bytecode` | P22 five C: pairs show no meaningful benefit; retain all outputs, no further CI |
+| Generic PDM archive prototype (blocked) | `investigate/arm-pdm-archive-io` / `pdm-archive-io` | P23 68-line patch and focused proof/lint pass; owner mypy unavailable after secure TLS attempts, assistance requested; no performance screen |
+| Shared pathlib V2 source proof (active) | `investigate/arm-pathlib-relative` / `pathlib-relative` | P25 V1 rejected on equal/fallback micro regressions; no full C: build. One separate small complete-default-case design proof only |
+| Standard backend codec attribution (completed) | `investigate/arm-compression-attribution` / `compression-attribution` | P20 CRC ~3 ms, raw deflate ~246 ms in one public-sdist profile; no rebuild or gain claim |
 | Temporary uv activation files (source triage only) | `investigate/arm-uv-build-activators` / `uv-build-activators` | P24 source fact, not cost attribution or a justified change |
 | Controller preflight repair (completed) | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |
 | Ownership correction and independent review (completed) | `investigate/arm-process-lifecycle`, `review/arm-process-containment` | Complete owned-member wait states and cleanup repair; original causal uncertainty retained; no further framework work |

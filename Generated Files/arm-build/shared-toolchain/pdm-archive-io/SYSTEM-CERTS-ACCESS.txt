@@ -1,0 +1,5 @@
+Using Python 3.13.15 environment at: Generated Files\arm-build\tools\mypy-owner-2.3.1-c597da738c154582947bc93fbcdc1d89
+error: Failed to fetch: https://files.pythonhosted.org/packages/f0/f8/7eb68c136e4abd30569fe31ef2bfcb7eceae9952cab80017c04cd09f5d0c/mypy-2.3.1-cp313-cp313-win_arm64.whl.metadata
+  cause: error sending request for url (https://files.pythonhosted.org/packages/f0/f8/7eb68c136e4abd30569fe31ef2bfcb7eceae9952cab80017c04cd09f5d0c/mypy-2.3.1-cp313-cp313-win_arm64.whl.metadata)
+  cause: client error (Connect)
+  cause: received fatal alert: HandshakeFailure

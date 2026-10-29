@@ -2,4 +2,6 @@
 test_small_prefetch.py -text whitespace=cr-at-eol
 PROOF.txt -text whitespace=cr-at-eol
 OWNER-CHECKS.txt -text whitespace=cr-at-eol
+ROOT-REVIEW.txt -text whitespace=cr-at-eol
+SYSTEM-CERTS-ACCESS.txt -text whitespace=cr-at-eol
 prototype-provenance.json -text whitespace=cr-at-eol
