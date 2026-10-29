@@ -1,0 +1,31 @@
+{
+  "scope": "Wrapper-only POSIX process-group inheritance prerequisite",
+  "inspected_outer_helper_commit": "935b9bedcad2f876901b17e3d2a93dc0553adbde",
+  "wrapper_sha256": "adcae580b8e2086a12fd3b5d9d0cf2793c9e64cc24125551f6b083b2e3739d33",
+  "changes": [
+    "POSIX phase Popen inherits the controller session/process group by default",
+    "POSIX interruption kills only the direct child and waits, never signals the shared group",
+    "Windows creation flags unchanged: CREATE_NEW_PROCESS_GROUP, no breakaway"
+  ],
+  "tests": [
+    {"command": "python -B -m unittest -v test_isolated_build", "tests": 6, "returncode": 0},
+    {"command": "python -B -O -m unittest -v test_isolated_build", "tests": 6, "returncode": 0},
+    {"command": "ruff check isolated_build.py test_isolated_build.py", "returncode": 0},
+    {"command": "ruff format --check isolated_build.py test_isolated_build.py", "returncode": 0}
+  ],
+  "fixture_proof": [
+    "Normal phase returns child exit code with no new session/group",
+    "Interrupted phase preserves the original interruption, kills direct child and waits twice",
+    "No os.killpg call on normal or interrupted POSIX path"
+  ],
+  "CLI_and_report_schema_unchanged": true,
+  "prior_receipts_unchanged": true,
+  "new_C_benchmarks": false,
+  "native_POSIX_execution": false,
+  "confidence": "High for minimal inheritance semantics and mocked regression coverage",
+  "remaining_risks": [
+    "Outer harness integration must provide owned group/job containment and drain descendants",
+    "Native macOS containment has not been executed in this lane",
+    "Hard kill still cannot guarantee wrapper cleanup/report finalization"
+  ]
+}

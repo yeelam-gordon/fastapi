@@ -122,6 +122,47 @@ class WrapperTests(unittest.TestCase):
             self.assertIn("absent", self.receipt()["errors"][0]["message"])
             process.assert_not_called()
 
+    def test_posix_phase_inherits_controller_group_and_returns_exit(self):
+        with (
+            patch.object(wrapper, "os") as operating_system,
+            patch.object(wrapper.subprocess, "Popen") as popen,
+        ):
+            operating_system.name = "posix"
+            child = popen.return_value
+            child.wait.return_value = 17
+            self.assertEqual(
+                wrapper.run_process(
+                    ["fixture"], cwd=self.root, env={}, log=self.root / "phase.log"
+                ),
+                17,
+            )
+            options = popen.call_args.kwargs
+            self.assertFalse(options.get("start_new_session", False))
+            self.assertIn(options.get("process_group"), (None, -1))
+            self.assertEqual(options["creationflags"], 0)
+            operating_system.killpg.assert_not_called()
+            child.kill.assert_not_called()
+            child.wait.assert_called_once_with()
+
+    def test_posix_interruption_never_signals_shared_controller_group(self):
+        interrupted = KeyboardInterrupt("fixture interruption")
+        with (
+            patch.object(wrapper, "os") as operating_system,
+            patch.object(wrapper.subprocess, "Popen") as popen,
+        ):
+            operating_system.name = "posix"
+            child = popen.return_value
+            child.wait.side_effect = [interrupted, -9]
+            with self.assertRaises(KeyboardInterrupt) as caught:
+                wrapper.run_process(
+                    ["fixture"], cwd=self.root, env={}, log=self.root / "interrupt.log"
+                )
+            self.assertIs(caught.exception, interrupted)
+            self.assertFalse(popen.call_args.kwargs.get("start_new_session", False))
+            operating_system.killpg.assert_not_called()
+            child.kill.assert_called_once_with()
+            self.assertEqual(child.wait.call_count, 2)
+
 
 if __name__ == "__main__":
     unittest.main()

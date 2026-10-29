@@ -5,7 +5,6 @@ import hashlib
 import json
 import os
 import shutil
-import signal
 import subprocess
 import sys
 import time
@@ -28,7 +27,6 @@ def run_process(argv, *, cwd, env, log):
             env=env,
             stdout=stream,
             stderr=subprocess.STDOUT,
-            start_new_session=os.name != "nt",
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == "nt" else 0,
         )
         try:
@@ -48,7 +46,7 @@ def run_process(argv, *, cwd, env, log):
                         f"Process-tree termination failed: taskkill exit {killed.returncode}"
                     ) from error
             else:
-                os.killpg(child.pid, signal.SIGKILL)
+                child.kill()
             child.wait()
             raise
 

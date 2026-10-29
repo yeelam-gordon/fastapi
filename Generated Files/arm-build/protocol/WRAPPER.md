@@ -33,10 +33,15 @@ deleted, never source, output, wheelhouse or cache.
 
 Timeouts belong to the outer harness, which must terminate the **process tree**,
 not only the wrapper PID, and retain its own raw timeout log. The wrapper has
-no hidden timeout/retry. If interrupted while waiting, it terminates and waits
-for its child (Windows tree termination; POSIX process group). A hard external
-kill cannot guarantee wrapper cleanup/report finalization; the harness must
-record that as failure, not infer successful cleanup.
+no hidden timeout/retry. POSIX phases inherit the outer controller's owned
+session/process group; the wrapper neither detaches phases nor signals that
+shared group. If interrupted while waiting, it kills and reaps only its direct
+POSIX child and surfaces the interruption. The outer harness remains responsible
+for descendant termination and group draining. Windows phase creation keeps its
+existing flags, without breakaway, so outer Job Object membership is inherited;
+the existing direct-interruption tree-termination path is unchanged. A hard
+external kill cannot guarantee wrapper cleanup/report finalization; the harness
+must record that as failure, not infer successful cleanup.
 
 Time the complete process externally: bootstrap, locked installation, identity,
 SDK, cleanup and final report writes all belong to that wall.
@@ -49,6 +54,11 @@ outside the measured process.
 `python -B -m unittest -v test_isolated_build` covers fresh environments,
 offline/hash argv, raw subprocess failure, simultaneous cleanup failure, input
 rejection and preserved reports.
+POSIX containment fixtures additionally verify inherited group options, returned
+exit codes, direct-child reaping on interruption, and no controller-group signals.
+These fixtures run normally and with `python -O`; no native POSIX execution is
+claimed. Earlier C: readiness receipts retain their original code hashes and are
+not reinterpreted as measurements of this process-group-only revision.
 `wrapper-evidence/readiness.py` stages hash-verified tools/wheels and canonical
 Git archive source on C:, reuses the already managed native interpreter, and
 executes S1, S3, stock B, then S3-after-B against one shared source. It independently
