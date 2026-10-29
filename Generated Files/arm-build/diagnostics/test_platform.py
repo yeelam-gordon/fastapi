@@ -182,6 +182,7 @@ class PlatformTests(unittest.TestCase):
     def test_native_capture_skips_callback_and_all_recording(self):
         calls = []
         with (
+            patch.dict(os.environ, {"DIAG_NATIVE_TRACES_REQUESTED": "true"}),
             patch.object(shutil, "which", return_value="native-tool"),
             patch.object(platform, "_binary", return_value={"status": "measured"}),
             patch.object(
@@ -206,8 +207,34 @@ class PlatformTests(unittest.TestCase):
         self.assertEqual(result["upload_summaries"], [])
         self.assertFalse(list(self.root.rglob("*.etl")))
 
+    def test_native_explicitly_disabled_never_probes_or_builds(self):
+        with (
+            patch.dict(os.environ, {"DIAG_NATIVE_TRACES_REQUESTED": "false"}),
+            patch.object(shutil, "which", side_effect=AssertionError("must not probe")),
+            patch.object(
+                platform, "_probe", side_effect=AssertionError("must not run tools")
+            ),
+        ):
+            result = platform.native_capture(
+                lambda: self.fail("disabled native pass must not invoke build"),
+                str(self.root),
+            )
+        self.assertEqual(result["status"], "not-requested")
+        self.assertFalse(result["requested"])
+        self.assertFalse(result["build_invoked"])
+        self.assertEqual(result["capabilities"], {})
+        self.assertIsNone(result["capture_window"])
+        for collector in result["collectors"].values():
+            self.assertFalse(collector["requested"])
+            self.assertEqual(collector["status"], "not-requested")
+            self.assertIsNone(collector["value"])
+        self.assertEqual(
+            json.loads((self.root / "native-capabilities.json").read_text()), result
+        )
+
     def test_missing_native_tools_and_darwin_candidate_no_recording(self):
         with (
+            patch.dict(os.environ, {"DIAG_NATIVE_TRACES_REQUESTED": "true"}),
             patch.object(shutil, "which", return_value=None),
             patch.object(platform.sys, "platform", "darwin"),
         ):

@@ -716,6 +716,41 @@ def inventory(paths: list[str], output_dir: str) -> dict:
 
 def native_capture(run_build, output_dir: str) -> dict:
     """Request native CPU/file-I/O, fail closed before an unvalidated trace."""
+    if (
+        os.environ.get("DIAG_NATIVE_TRACES_REQUESTED", "true").strip().lower()
+        == "false"
+    ):
+        reason = (
+            "DIAG_NATIVE_TRACES_REQUESTED=false; native collectors explicitly disabled"
+        )
+        result = {
+            "schema_version": 1,
+            "status": "not-requested",
+            "performance_eligible": False,
+            "requested": False,
+            "build_invoked": False,
+            "build_result": None,
+            "collectors": {
+                name: {
+                    "requested": False,
+                    "status": "not-requested",
+                    "value": None,
+                    "reason": reason,
+                }
+                for name in ("native_cpu", "native_file_io", "native_scheduling")
+            },
+            "capabilities": {},
+            "reason": reason,
+            "capture_window": None,
+            "lost_events": {"status": "not-requested", "value": None, "reason": reason},
+            "symbols": {"status": "not-requested", "value": None, "reason": reason},
+            "raw_policy": "private_raw only, excluded from upload; no raw traces produced",
+            "upload_summaries": [],
+            "mac_runtime_validation": "runner-only, not executed locally",
+        }
+        _write_json(output_dir, "native-capabilities.json", result)
+        return result
+
     import shutil
 
     candidates = (
