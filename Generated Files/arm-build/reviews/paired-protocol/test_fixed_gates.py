@@ -12,6 +12,7 @@ import os
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 PROTOCOL = Path(
     os.environ.get(
@@ -34,7 +35,7 @@ def path(system, *parts):
 
 
 def evidence(system):
-    tools = measure.code_receipts()
+    tools = {name: sha(name) for name in measure.REQUIRED_TOOL_INPUTS}
     tools["Generated Files/arm-build/protocol/isolated_build.py"] = sha("wrapper")
     tools["Generated Files/arm-build/protocol/backend.lock"] = sha("backend lock")
     executable = path(system, "runtime", "python.exe" if system == "Windows" else "python")
@@ -213,11 +214,26 @@ def evidence(system):
                     "--report", join("wrapper.json"),
                 ]
                 sample["wrapper_report"] = receipt
+                sample["correctness"]["archive_sha256"] = copy.deepcopy(
+                    receipt["artifacts"]
+                )
             result["samples"].append(sample)
     return result
 
 
 class FixedBehaviorGates(unittest.TestCase):
+    def setUp(self):
+        def fixture_git(root, *args):
+            self.assertEqual(root, measure.ROOT)
+            self.assertEqual(
+                args, ("ls-tree", "-r", "--name-only", "a" * 40)
+            )
+            return "\n".join(sorted(measure.REQUIRED_TOOL_INPUTS)).encode()
+
+        git_patch = patch.object(measure, "git", side_effect=fixture_git)
+        git_patch.start()
+        self.addCleanup(git_patch.stop)
+
     def rejected(self, mutate, both=False):
         windows, mac = evidence("Windows"), evidence("Darwin")
         mutate(windows)
@@ -238,6 +254,23 @@ class FixedBehaviorGates(unittest.TestCase):
             mac["runtime"]["shared_library_sha256"],
         )
         self.assertTrue(compare.compare(windows, mac)["complete"])
+
+    def test_required_inventory_and_digest_forms_reject(self):
+        for name in sorted(measure.REQUIRED_TOOL_INPUTS):
+            for value in (None, "", "g" * 64, "a" * 63, "a" * 65):
+                with self.subTest(input=name, digest=value):
+                    def mutate(report, item=name, digest=value):
+                        if digest is None:
+                            report["tool_hashes"].pop(item)
+                        else:
+                            report["tool_hashes"][item] = digest
+                    self.rejected(mutate, both=True)
+        incomplete = measure.REQUIRED_TOOL_INPUTS - {
+            "Generated Files/arm-build/protocol/isolated_build.py"
+        }
+        with patch.object(measure, "git", return_value="\n".join(incomplete).encode()):
+            with self.assertRaises(ValueError):
+                measure.tool_inventory("a" * 40)
 
     def test_lifecycle_rejects(self):
         cases = {

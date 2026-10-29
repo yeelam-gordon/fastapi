@@ -1,0 +1,22 @@
+{
+  "immutable_receipt_commit": "a08208414c28b5bf3525345a65380e8b52538971",
+  "raw_summary_sha256": "d152040577ece8a11d88a600069236684a187863c6ce5ad259444a0e7f75505c",
+  "samples": [
+    {
+      "sample": "S1",
+      "raw_receipt_sha256": "53254d4304651660215568623484f05a3da3dbf528f35abe6d384e9982b93818",
+      "lifecycle_gate": "accepted"
+    },
+    {
+      "sample": "S3",
+      "raw_receipt_sha256": "3c8f34a8480c9dd63b69f826656b8fb853ac1fea99b50492ca764c568b8b2663",
+      "lifecycle_gate": "accepted"
+    },
+    {
+      "sample": "S3-after-B",
+      "raw_receipt_sha256": "80920a92031a80ff65441e137c41304d382763d6dd01b48c1b3f92e62d8cfea5",
+      "lifecycle_gate": "accepted"
+    }
+  ],
+  "scope": "receipt-schema replay only; no new run or artifact re-verification"
+}

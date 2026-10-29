@@ -1,0 +1,10 @@
+test_identities_reject (__main__.FixedBehaviorGates.test_identities_reject) ... ok
+test_lifecycle_rejects (__main__.FixedBehaviorGates.test_lifecycle_rejects) ... ok
+test_required_inventory_and_digest_forms_reject (__main__.FixedBehaviorGates.test_required_inventory_and_digest_forms_reject) ... ok
+test_reused_environment_rejects (__main__.FixedBehaviorGates.test_reused_environment_rejects) ... ok
+test_valid_distinct_platform_binaries_accept (__main__.FixedBehaviorGates.test_valid_distinct_platform_binaries_accept) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.107s
+
+OK
