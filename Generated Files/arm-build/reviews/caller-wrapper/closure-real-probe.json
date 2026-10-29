@@ -1,0 +1,32 @@
+{
+  "executable": "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+  "cases": [
+    {
+      "phase": "identity",
+      "actual_wrapper_flags": [
+        "-B",
+        "-I"
+      ],
+      "actual_child": {
+        "dont_write_bytecode": true,
+        "value": 42
+      },
+      "pycache_directories": [],
+      "pyc_files": []
+    },
+    {
+      "phase": "sdk",
+      "actual_wrapper_flags": [
+        "-B",
+        "-E",
+        "-s"
+      ],
+      "actual_child": {
+        "dont_write_bytecode": true,
+        "value": 42
+      },
+      "pycache_directories": [],
+      "pyc_files": []
+    }
+  ]
+}
