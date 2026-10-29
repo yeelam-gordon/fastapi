@@ -18,16 +18,16 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 | Actual sparse input deployment | passed locally | Frozen `102ddabc` actual receipts validate 22 inputs and 3,233 canonical source files; C: NTFS placement recorded |
 | Wrapper/controller integration | CW002 independently closed | `d339ef22` exact argv repair independently verified against frozen master; lifecycle guards retained |
 | Final v4 integration fixtures | bounded independent pass | `VERIFY-V4.md`; native Mac and complete real package campaign remain outside that proof |
-| Managed-venv normal process exit | **LOCAL-OWNERSHIP-004 blocks readiness** | Real C: helper test exits 0 but reports `survivors=true`; producer and independent reviewer investigating, not waived |
-| Official uv version preflight | **LOCAL-UV-VERSION-002 blocks readiness** | Exact full-string comparison rejects correct 0.13.6 with official build metadata; minimal parser repair in progress |
+| Managed-venv normal process exit | **LOCAL-OWNERSHIP-004 blocks readiness** | Real C: helper test exits 0 but reports `survivors=true`; bounded diagnostics did not reproduce it; original failure remains valid |
+| Official uv version preflight | repaired and locally exercised | `f17b593b` validates exact 0.13.6 plus structured optional metadata; 17 integrated tests include the verified native executable |
 | Full fixed-schedule local campaign | paused before any samples | Original failures retained; no retries/replacements, fake Mac comparison or performance claim |
 | Matched new native ARM CI | gated | Only after local integration and artifact gates pass; no automatic retry |
 
-| Active bounded lane | Branch / worktree suffix | Owned output |
+| Current lane | Branch / worktree suffix | Owned output |
 |---|---|---|
-| Controller preflight repair | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |
-| Ownership diagnosis and independent review | `investigate/arm-process-lifecycle`, `review/arm-process-containment` | Real managed-venv normal-exit counterexample; no guard weakening |
-| Compression-path research | `investigate/arm-compression-path` / `compression-path` | Primary-source compiler/ISA evidence; no new timed work or readiness requirement |
+| Controller preflight repair (completed) | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |
+| Ownership correction and independent review | `investigate/arm-process-lifecycle`, `review/arm-process-containment` | Complete owned-member wait states, not an unsupported inference from job association accounting; causal uncertainty retained |
+| Source-only next proposals (completed) | `investigate/arm-compression-path`, `investigate/arm-sdk-validation-cost` | P20 codec attribution and P21 metadata reuse; no new timed work or readiness requirement |
 | Integrated C: readiness (paused) | `investigate/arm-local-paired-readiness` / `local-paired-readiness` | Prepared inputs retained; wait for repaired frozen snapshot and explicit master go |
 
 These are independent preparation/verification lanes. Only the local-readiness lane may run the full C: campaign. Workers do not push, dispatch CI, change security controls or modify the read-only original source worktree. No additional full-agent coordinator is needed.
