@@ -48,3 +48,9 @@ allocation, establish whether its package component is the intended target
 or whether the dashboard's broader workload must be reproduced. The user
 clarification dialog was unavailable; public metric-definition tracing can
 continue without spending CI or publishing unclassified supplied values.
+
+That public trace is now complete in
+`arm-build\benchmark-row-scope\ROW-DEFINITION.md`: HOBL preserves several metrics,
+but the matching dashboard row selector/renderer was not established.
+The remaining input is the dashboard/report URL or FastAPI hyperlink target,
+or its exact exported field and revision. No additional CI allocation was used.

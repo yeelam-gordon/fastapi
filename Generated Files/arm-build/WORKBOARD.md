@@ -23,6 +23,10 @@ its actual command/aggregate, to avoid measuring a smaller workload and claiming
 it explains the full row. The original build-first goal is unchanged.
 `MEASUREMENT-BOUNDARIES.md` explains repository preparation, package creation,
 aggregate benchmark metrics and the previously confusing word "window".
+The bounded public row-definition trace is complete in
+`benchmark-row-scope\ROW-DEFINITION.md`: multiple fields/aggregate revisions
+exist, but the screenshot's renderer/selector remains unidentified. Await its
+URL/hyperlink target or exact field/revision before using the held allocation.
 See `diagnostics\ANALYSIS-PLAN.md` and `CONTRACT.md`.
 
 Optimization followups are paused. P25's completed 2.79% local full-build
