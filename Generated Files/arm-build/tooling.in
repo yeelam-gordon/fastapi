@@ -1,0 +1,5 @@
+build>=1.2,<2
+pip>=25,<27
+psutil>=7,<8
+pdm-backend==2.5.0
+ruff>=0.15,<1

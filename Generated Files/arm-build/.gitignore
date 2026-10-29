@@ -1,0 +1,9 @@
+.venv/
+tools/
+wheelhouse/
+__pycache__/
+.ruff_cache/
+.uv-cache/
+*.whl
+*.tar.gz
+*.etl

@@ -1,0 +1,48 @@
+{
+  "measured_at_utc": "2026-10-29T03:24:58.7412287Z",
+  "os_architecture": "Arm64",
+  "process_architecture": "Arm64",
+  "cpu": {
+    "Name": "Cobalt 100",
+    "NumberOfCores": 16,
+    "NumberOfLogicalProcessors": 16
+  },
+  "os": {
+    "Caption": "Microsoft Windows 11 Enterprise",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200"
+  },
+  "workspace_volume": {
+    "DriveLetter": "Q",
+    "FileSystem": "ReFS",
+    "AllocationUnitSize": 4096
+  },
+  "source_sha": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "uv": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)",
+  "python": [
+    "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+    "ARM64",
+    "C:\\Program Files\\Python313-arm64\\python.exe"
+  ],
+  "tools": [
+    {
+      "Name": "wpr.exe",
+      "Source": "C:\\Windows\\system32\\wpr.exe"
+    },
+    {
+      "Name": "wpa.exe",
+      "Source": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\wpa.exe"
+    }
+  ],
+  "package_host_dns": [
+    {
+      "Name": "files.pythonhosted.org",
+      "IPAddress": null
+    },
+    {
+      "Name": "dualstack.python.map.fastly.net",
+      "IPAddress": "6.6.0.190"
+    }
+  ],
+  "note": "Native Python and uv work. Wheel downloads fail TLS in uv, curl and Python; no insecure transport used. Q is ReFS. This 16-core VM is not the eventual physical comparison machine."
+}
