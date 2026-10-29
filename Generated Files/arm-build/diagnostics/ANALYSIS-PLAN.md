@@ -15,7 +15,7 @@ not be added:
 | One isolated complete build, median of seven | 3.1288 s | 0.9504 s | 2.1784 s | Primary build-only gap; internal stages unavailable |
 | One dedicated/no-isolation build, median of seven | 2.6787 s | 0.7302 s | 1.9485 s | Most of the observed gap persists; not a timed setup decomposition |
 | Checkout step, one coarse observation | 19 s | 3 s | 16 s | Separate CI-job latency, not package build time |
-| Six auth setup/removal `foreach` log windows | 8.5415 s | 0.4381 s | 8.1034 s | Repeated command-family lead, not exact subprocess or CPU time |
+| Six Git credential setup/cleanup intervals (`git submodule foreach`) | 8.5415 s | 0.4381 s | 8.1034 s | Repeated command-family lead, not exact subprocess or CPU time |
 | Repository fetch log group | 2.7232 s | 2.0993 s | 0.6240 s | Smaller checkout difference; no evidence to prioritize network tuning |
 
 Both runners emitted 34 selected Git commands. Actual Actions Node

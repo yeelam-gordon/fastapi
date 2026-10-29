@@ -15,8 +15,14 @@ the cause of a Windows/Mac gap.
 The separate manual `arm-build-diagnostics.yml` is implemented with normal
 context and distinct resource/function/import/allocation passes, actual hook
 identities and explicit native-coverage gaps. Its instrumented data is never
-performance-eligible. Local integrated validation and reviewed handoff fixes
-must pass before one budgeted analysis allocation; no new run is dispatched.
+performance-eligible. Local integrated validation and all four reviewed handoff
+fixes passed their bounded gates. `diagnostics\READINESS.md` records approval
+for one two-job analysis allocation; no new run has yet been dispatched.
+Dispatch is currently held while the user-shared dashboard metric is mapped to
+its actual command/aggregate, to avoid measuring a smaller workload and claiming
+it explains the full row. The original build-first goal is unchanged.
+`MEASUREMENT-BOUNDARIES.md` explains repository preparation, package creation,
+aggregate benchmark metrics and the previously confusing word "window".
 See `diagnostics\ANALYSIS-PLAN.md` and `CONTRACT.md`.
 
 Optimization followups are paused. P25's completed 2.79% local full-build
