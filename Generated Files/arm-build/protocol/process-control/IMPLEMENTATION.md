@@ -148,3 +148,55 @@ secondary diagnostics, preserved status 7, all three close attempts and
 fail-closed cleanup. Existing tiny Windows lifecycle proofs still pass;
 POSIX remains mocked/unexecuted on macOS. No leftover proof directories.
 No CI, build, push, dependency install or producer integration.
+
+## Approved LOCAL-OWNERSHIP-004 liveness correction
+
+Positive Windows accounting now triggers a complete documented owned-job
+membership query and public process-handle wait-state checks, not an immediate
+live-survivor classification. Only the known, already-waited supervisor launch
+PID is excluded; its Windows Popen process object/handle remains held during
+observation. No guessed launcher, process name, or arbitrary grace interval
+is used.
+
+Every other member is opened with SYNCHRONIZE plus QUERY_LIMITED_INFORMATION
+and validated with IsProcessInJob on that exact handle. WAIT_OBJECT_0 means
+terminated; WAIT_TIMEOUT means live and still rejects success. Failed access,
+membership identity mismatch, failed wait, incomplete enumeration and newly
+appearing members all fail closed. ERROR_INVALID_PARAMETER on OpenProcess is
+recorded as departed, but acceptance additionally requires absence from the
+complete second snapshot; reappearance is unknown, not assumed PID identity.
+
+All opened member handles remain held across the second snapshot, preventing
+their process identities from being recycled during validation. No new PID
+may appear in that snapshot. If every observed non-supervisor member is
+terminated/departed and membership has no unexplained additions, there is no
+observed executing member left to create another child. This is a bounded
+two-snapshot validation, not a repetition-until-success loop.
+
+Receipt adds a defaulted `liveness` tuple containing diagnostic dictionaries
+when accounting is positive: member IDs/states, newly seen IDs, and any
+query/wait/close error. It contains no environment or private process details.
+Existing receipt fields and succeeded predicate remain unchanged. Producer
+serialization should retain this additive evidence field. Job ownership,
+KILL_ON_JOB_CLOSE, POSIX scope, and whole-command clock are unchanged.
+
+The original frozen failure remains an unclassified observation. This
+corrects a source/API inference; it does **not** prove that accounting
+reference lifetime caused LOCAL-OWNERSHIP-004. The old frozen receipt is not
+reclassified or replaced, and this commit authorizes no preflight/campaign.
+
+Validation uses the supplied read-only managed native ARM64 interpreter.
+Focused mocked regressions cover positive accounting with terminated/live
+members, unknown access/identity/wait/enumeration, concurrent new membership,
+departed-PID reappearance, and keeping identity handles until validation.
+Existing real normal, genuine fast-root/grandchild leak and timeout gates,
+plus the project-local `process-control\test_parent_death.py` known-PID gate,
+are run before commit. No new benchmark, CI, C: write or system process scan.
+
+Final results: **14 ownership tests passed normally and with `-O`**, exit 0
+each; **one real parent-death gate passed normally and with `-O`**, exit 0
+each. All used the supplied managed interpreter and Q: scratch, with only
+explicit owned PIDs touched. `git diff --check` passed. Confidence is high
+for these demonstrated Windows paths, medium for the bounded membership
+argument pending independent review, low for unexecuted macOS runtime.
+Original LOCAL-OWNERSHIP-004 causality remains unestablished.

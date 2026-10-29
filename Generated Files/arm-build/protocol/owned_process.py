@@ -25,6 +25,7 @@ class Receipt:
     survivors: bool | None
     cleanup_complete: bool
     errors: tuple[str, ...]
+    liveness: tuple[dict, ...] = ()
 
     @property
     def succeeded(self):
@@ -58,6 +59,7 @@ def _windows():
         "CloseHandle": ([w.HANDLE], w.BOOL),
         "OpenProcess": ([w.DWORD, w.BOOL, w.DWORD], w.HANDLE),
         "WaitForSingleObject": ([w.HANDLE, w.DWORD], w.DWORD),
+        "IsProcessInJob": ([w.HANDLE, w.HANDLE, ctypes.POINTER(w.BOOL)], w.BOOL),
     }
     for name, (args, result) in signatures.items():
         function = getattr(api, name)
@@ -134,33 +136,92 @@ class _Job:
         ))
         return bool(info.ActiveProcesses)
 
-    def kill(self):
+    def members(self):
         from ctypes import wintypes as w
 
-        capacity, handles = 8, []
-        try:
-            while True:
-                class Members(ctypes.Structure):
-                    _fields_ = [
-                        ("NumberOfAssignedProcesses", w.DWORD),
-                        ("NumberOfProcessIdsInList", w.DWORD),
-                        ("ProcessIdList", ctypes.c_size_t * capacity),
-                    ]
+        capacity = 8
+        while True:
+            class Members(ctypes.Structure):
+                _fields_ = [
+                    ("NumberOfAssignedProcesses", w.DWORD),
+                    ("NumberOfProcessIdsInList", w.DWORD),
+                    ("ProcessIdList", ctypes.c_size_t * capacity),
+                ]
 
-                members = Members()
-                queried = self.api.QueryInformationJobObject(
-                    self.handle, 3, ctypes.byref(members), ctypes.sizeof(members), None
-                )
-                if queried and (
-                    members.NumberOfProcessIdsInList == members.NumberOfAssignedProcesses
-                ):
-                    break
-                if not queried and ctypes.get_last_error() != 234:  # ERROR_MORE_DATA
+            members = Members()
+            queried = self.api.QueryInformationJobObject(
+                self.handle, 3, ctypes.byref(members), ctypes.sizeof(members), None
+            )
+            if queried and (
+                members.NumberOfProcessIdsInList == members.NumberOfAssignedProcesses
+            ):
+                return set(members.ProcessIdList[:members.NumberOfProcessIdsInList])
+            if not queried and ctypes.get_last_error() != 234:  # ERROR_MORE_DATA
+                _checked(False)
+            capacity *= 2
+            if capacity > 65536:
+                raise RuntimeError("Owned job process list exceeded bound")
+
+    def live_members(self, supervisor_pid, evidence):
+        from ctypes import wintypes as w
+
+        record = {"accounting_positive": True, "members": []}
+        evidence.append(record)
+        handles, departed, primary = [], set(), None
+        try:
+            pids = self.members()
+            live = False
+            for pid in sorted(pids):
+                item = {"pid": pid, "state": "unknown"}
+                record["members"].append(item)
+                if pid == supervisor_pid:
+                    item["state"] = "waited_supervisor"
+                    continue
+                handle = self.api.OpenProcess(0x101000, False, pid)
+                if not handle:
+                    if ctypes.get_last_error() == 87:
+                        item["state"] = "departed"
+                        departed.add(pid)
+                        continue
                     _checked(False)
-                capacity *= 2
-                if capacity > 65536:
-                    raise RuntimeError("Owned job process list exceeded bound")
-            for pid in members.ProcessIdList[:members.NumberOfProcessIdsInList]:
+                handles.append(handle)
+                owned = w.BOOL()
+                _checked(self.api.IsProcessInJob(handle, self.handle, ctypes.byref(owned)))
+                if not owned.value:
+                    raise RuntimeError("Listed PID no longer identifies an owned process")
+                state = self.api.WaitForSingleObject(handle, 0)
+                if state not in (0, 258):
+                    raise RuntimeError(f"Unknown owned process wait state: {state}")
+                item["state"] = "terminated" if state == 0 else "live"
+                live |= state == 258
+            after = self.members()
+            if after & departed:
+                raise RuntimeError("Departed owned PID reappeared during observation")
+            new_members = after - pids
+            if new_members:
+                record["new_members"] = sorted(new_members)
+                raise RuntimeError("Owned membership changed during liveness observation")
+            return live
+        except Exception as error:
+            primary = error
+            record["error"] = f"{type(error).__name__}: {error}"
+            raise
+        finally:
+            close_errors = []
+            for handle in handles:
+                try:
+                    _checked(self.api.CloseHandle(handle))
+                except Exception as error:
+                    close_errors.append(f"{type(error).__name__}: {error}")
+            if close_errors:
+                record["close_errors"] = close_errors
+                if primary is None:
+                    raise RuntimeError("Owned observation handle cleanup failed")
+
+    def kill(self):
+        handles = []
+        try:
+            for pid in self.members():
                 handle = self.api.OpenProcess(0x100000, False, pid)  # SYNCHRONIZE
                 if handle:
                     handles.append(handle)
@@ -227,7 +288,7 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
         raise ValueError("timeout must be positive and finite")
     clock = time.perf_counter()
     job = process = None
-    data, errors = {}, []
+    data, errors, liveness = {}, [], []
     survivors = None
     clean = False
     try:
@@ -266,7 +327,10 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
                 if process.poll() is None:
                     process.kill()
                     process.wait(timeout=5)
-                alive = job.alive if job else lambda: _group_alive(process.pid)
+                def alive():
+                    if job:
+                        return job.alive() and job.live_members(process.pid, liveness)
+                    return _group_alive(process.pid)
                 survivors = alive()
                 if survivors:
                     if job:
@@ -305,7 +369,7 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
         data.get("returncode"), data.get("timed_out", False)
         or (wall is not None and wall > timeout), wall,
         infrastructure, data.get("owned", False),
-        survivors, clean, tuple(errors),
+        survivors, clean, tuple(errors), tuple(liveness),
     )
 
 

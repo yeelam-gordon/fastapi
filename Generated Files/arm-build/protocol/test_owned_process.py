@@ -87,6 +87,7 @@ class OwnedTests(unittest.TestCase):
                     self.assertTrue(result.ownership_established, result)
                     self.assertTrue(result.cleanup_complete, result)
                     self.assertTrue(result.survivors, result)
+                    self.assertTrue(result.liveness, result)
                     self.assertEqual(result.timed_out, role == "timeout", result)
                     if role == "orphan":
                         self.assertEqual(result.returncode, 0)
@@ -220,6 +221,81 @@ class OwnedTests(unittest.TestCase):
         for timeout in (0, -1, float("nan"), float("inf")):
             with self.assertRaises(ValueError):
                 self.run_helper("normal", timeout)
+
+    def test_accounting_positive_uses_owned_member_wait_states(self):
+        from ctypes import wintypes as w
+
+        for state, expected in ((0, False), (258, True)):
+            with self.subTest(state=state):
+                job = object.__new__(owned._Job)
+                job.handle, job.api = 1, Mock()
+                observations = []
+
+                def members():
+                    if observations:
+                        job.api.CloseHandle.assert_not_called()
+                    observations.append(True)
+                    return {10, 20}
+
+                job.members = Mock(side_effect=members)
+                job.api.OpenProcess.return_value = 99
+                job.api.WaitForSingleObject.return_value = state
+
+                def belongs(process, handle, flag):
+                    ctypes.cast(flag, ctypes.POINTER(w.BOOL)).contents.value = True
+                    return True
+
+                job.api.IsProcessInJob.side_effect = belongs
+                evidence = []
+                self.assertEqual(job.live_members(10, evidence), expected)
+                self.assertEqual(evidence[0]["members"][0]["state"], "waited_supervisor")
+                self.assertEqual(
+                    evidence[0]["members"][1]["state"],
+                    "terminated" if state == 0 else "live",
+                )
+                job.api.CloseHandle.assert_called_once_with(99)
+
+    def test_departed_member_requires_absence_from_complete_second_snapshot(self):
+        for after in (set(), {20}):
+            job = object.__new__(owned._Job)
+            job.handle, job.api = 1, Mock()
+            job.members = Mock(side_effect=[{20}, after])
+            job.api.OpenProcess.return_value = 0
+            evidence = []
+            with patch.object(ctypes, "get_last_error", return_value=87, create=True):
+                if after:
+                    with self.assertRaisesRegex(RuntimeError, "reappeared"):
+                        job.live_members(10, evidence)
+                else:
+                    self.assertFalse(job.live_members(10, evidence))
+                    self.assertEqual(evidence[0]["members"][0]["state"], "departed")
+
+    def test_member_identity_wait_and_enumeration_unknowns_fail_closed(self):
+        from ctypes import wintypes as w
+
+        for kind in ("access", "identity", "wait", "enumeration", "new-member"):
+            with self.subTest(kind=kind):
+                job = object.__new__(owned._Job)
+                job.handle, job.api = 1, Mock()
+                job.members = Mock(side_effect=[{20}, {20, 30} if kind == "new-member" else {20}])
+                job.api.OpenProcess.return_value = 99
+                job.api.WaitForSingleObject.return_value = 0
+
+                def belongs(process, handle, flag):
+                    ctypes.cast(flag, ctypes.POINTER(w.BOOL)).contents.value = kind != "identity"
+                    return True
+
+                job.api.IsProcessInJob.side_effect = belongs
+                if kind == "access":
+                    job.api.OpenProcess.side_effect = PermissionError("access denied")
+                elif kind == "wait":
+                    job.api.WaitForSingleObject.return_value = 0xFFFFFFFF
+                elif kind == "enumeration":
+                    job.members.side_effect = OSError("incomplete membership")
+                evidence = []
+                with self.assertRaises((OSError, RuntimeError)):
+                    job.live_members(10, evidence)
+                self.assertIn("error", evidence[0])
 
 
 def helper(role, root):
