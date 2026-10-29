@@ -1,5 +1,8 @@
 # Independent prefetch code/failure-path review
 
+Historical pre-fix report. The committed-fix disposition is in `FIX-REVIEW.md`;
+the original findings and evidence below remain unchanged.
+
 **Disposition: readiness blocked by PC-001.** Fresh canonical-source artifact
 checks pass; this is not approval for the shared-source paired experiment.
 Reviewed `candidate/build.py`, `ops.py`, `selector.py`, `validate.py`,

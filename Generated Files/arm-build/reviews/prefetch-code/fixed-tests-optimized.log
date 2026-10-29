@@ -1,0 +1,128 @@
+test_archive_links_and_duplicates_rejected (test_candidate.CandidateTests.test_archive_links_and_duplicates_rejected) ... ok
+test_archive_selector_and_extraction_filters (test_candidate.CandidateTests.test_archive_selector_and_extraction_filters) ... ok
+test_canonical_mode_and_metadata (test_candidate.CandidateTests.test_canonical_mode_and_metadata) ... ok
+test_pdm_pin_fails_before_output (test_candidate.CandidateTests.test_pdm_pin_fails_before_output) ... ok
+test_read_failure_joins (test_candidate.CandidateTests.test_read_failure_joins) ... ok
+test_reads_fresh_bytes_in_order_and_closes (test_candidate.CandidateTests.test_reads_fresh_bytes_in_order_and_closes) ... ok
+test_target_write_failure_joins (test_candidate.CandidateTests.test_target_write_failure_joins) ... ok
+test_unsafe_configs_and_paths (test_candidate.CandidateTests.test_unsafe_configs_and_paths) ... ok
+test_backend_junction_rejected_without_touching_target (test_reuse.ReuseTests.test_backend_junction_rejected_without_touching_target) ... ok
+test_backend_state_cannot_be_claimed_or_cleanup_disabled (test_reuse.ReuseTests.test_backend_state_cannot_be_claimed_or_cleanup_disabled) ... ok
+test_case_alias_hook_rejected_before_execution (test_reuse.ReuseTests.test_case_alias_hook_rejected_before_execution) ... ok
+test_repeat_unchanged_manifest (test_reuse.ReuseTests.test_repeat_unchanged_manifest) ... ok
+test_unknown_backend_state_is_preserved_and_rejected (test_reuse.ReuseTests.test_unknown_backend_state_is_preserved_and_rejected) ... ok
+test_case_alias_build_state_junction_rejected (fixed_checks.FixedBehaviorChecks.test_case_alias_build_state_junction_rejected) ... ok
+test_case_alias_build_state_symlink_rejected (fixed_checks.FixedBehaviorChecks.test_case_alias_build_state_symlink_rejected) ... ok
+test_fresh_payload_and_metadata_without_build_state_cleanup (fixed_checks.FixedBehaviorChecks.test_fresh_payload_and_metadata_without_build_state_cleanup) ... ok
+test_hook_case_aliases_rejected_before_execution (fixed_checks.FixedBehaviorChecks.test_hook_case_aliases_rejected_before_execution) ... ok
+test_nested_build_state_junction_rejected (fixed_checks.FixedBehaviorChecks.test_nested_build_state_junction_rejected) ... ok
+test_nested_build_state_symlink_rejected (fixed_checks.FixedBehaviorChecks.test_nested_build_state_symlink_rejected) ... ok
+test_root_build_state_junction_rejected (fixed_checks.FixedBehaviorChecks.test_root_build_state_junction_rejected) ... ok
+test_root_build_state_symlink_rejected (fixed_checks.FixedBehaviorChecks.test_root_build_state_symlink_rejected) ... ok
+test_s1_then_s3_same_source_and_manifest (fixed_checks.FixedBehaviorChecks.test_s1_then_s3_same_source_and_manifest) ... ok
+test_stock_isolated_b_then_sdk_same_source_and_manifest (fixed_checks.FixedBehaviorChecks.test_stock_isolated_b_then_sdk_same_source_and_manifest) ... ok
+test_unmanifested_source_not_mistaken_for_build_state (fixed_checks.FixedBehaviorChecks.test_unmanifested_source_not_mistaken_for_build_state) ... ok
+test_manifest_extra_missing_and_invalid_modes (review_checks.ReviewChecks.test_manifest_extra_missing_and_invalid_modes) ... ok
+test_plugins_and_configuration_rejected (review_checks.ReviewChecks.test_plugins_and_configuration_rejected) ... ok
+test_wheel_only_reads_new_sdist (review_checks.ReviewChecks.test_wheel_only_reads_new_sdist) ... ok
+test_existing_and_nested_output_rejected (review_checks.ReviewChecks.test_existing_and_nested_output_rejected) ... ok
+test_three_initial_reads_then_close_joins (review_checks.ReviewChecks.test_three_initial_reads_then_close_joins) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 4.439s
+
+OK
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-2.dist-info\METADATA -> demo-2.dist-info/METADATA
+ - Adding .pdm-build\demo-2.dist-info\WHEEL -> demo-2.dist-info/WHEEL
+ - Adding .pdm-build\demo-2.dist-info\entry_points.txt -> demo-2.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-2.dist-info\RECORD -> demo-2.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+FIXED GATE STOCK B: ['Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe', 'build', 'Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\review-unit\\source', '--python', 'Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe', '--offline', '--no-index', '--find-links', 'Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse', '--cache-dir', 'Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\review-unit\\uv-cache', '--out-dir', 'Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\review-unit\\baseline'] 0
+Building source distribution...
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+Building wheel from source distribution...
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+Successfully built scratch\review-unit\baseline\demo-1.tar.gz
+Successfully built scratch\review-unit\baseline\demo-1-py2.py3-none-any.whl
+
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD

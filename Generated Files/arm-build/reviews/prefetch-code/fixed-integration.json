@@ -1,0 +1,45 @@
+{
+  "s1": {
+    "sdist": "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\s1\\artifacts\\fastapi-0.162.0.tar.gz",
+    "wheel": "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\s1\\artifacts\\fastapi-0.162.0-py3-none-any.whl",
+    "selected_files": 64,
+    "strict_pass": true,
+    "differences": [],
+    "source_and_manifest_unchanged": true
+  },
+  "s3-after-sdk": {
+    "sdist": "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\s3-after-sdk\\artifacts\\fastapi-0.162.0.tar.gz",
+    "wheel": "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\s3-after-sdk\\artifacts\\fastapi-0.162.0-py3-none-any.whl",
+    "selected_files": 64,
+    "strict_pass": true,
+    "differences": [],
+    "source_and_manifest_unchanged": true
+  },
+  "baseline": {
+    "command": [
+      "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+      "build",
+      "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\baseline-source",
+      "--python",
+      "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+      "--offline",
+      "--no-index",
+      "--find-links",
+      "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+      "--cache-dir",
+      "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\uv-cache",
+      "--out-dir",
+      "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\baseline-output"
+    ],
+    "exit": 0,
+    "artifact_correctness": "not waived; baseline is not SDK oracle"
+  },
+  "s3-after-baseline": {
+    "sdist": "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\s3-after-baseline\\artifacts\\fastapi-0.162.0.tar.gz",
+    "wheel": "Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\fixed-integration\\s3-after-baseline\\artifacts\\fastapi-0.162.0-py3-none-any.whl",
+    "selected_files": 64,
+    "strict_pass": true,
+    "differences": [],
+    "source_and_manifest_unchanged": true
+  }
+}

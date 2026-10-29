@@ -1,8 +1,11 @@
 # Pending fix verification
 
-Status: **tests prepared, not executed against a fix; awaiting producer SHA**.
-The original findings and receipts in REPORT.md remain unchanged. No producer
-working files have been reread for this follow-up. Do not poll.
+Status: **executed against committed producer fix
+`3c10320c9ce03966a4d5f51cd8e8076a1095d235`; see FIX-REVIEW.md**.
+The preparation instructions below are retained for reproduction.
+The original findings and receipts in REPORT.md remain unchanged. No uncommitted
+producer working files were read; verification used the authorized committed
+fix cherry-picked without changes into this review branch.
 
 After notification, export the candidate **from the supplied committed SHA**
 into owned Q: scratch, record that SHA and file hashes, and put that exported

@@ -1,0 +1,43 @@
+{
+  "origin_fix_sha": "3c10320c9ce03966a4d5f51cd8e8076a1095d235",
+  "review_cherry_pick_sha": "c13c1ff0b4e2e878b81f5820c7679cc5c7026fb6",
+  "candidate_identical_to_origin": true,
+  "producer_attribution_preserved": true,
+  "source_revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "source_status": "",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "pdm_backend": "2.5.0",
+  "candidate_sha256": {
+    "build.py": "8bf1d28045f5884235fc67a14608aa1aa4f0eff9eafea97821a1f4eb016c2ec4",
+    "ops.py": "2a11aef272496577d9f499fe9056c6225b224a673a6f6966c1ebab8bbc62c474",
+    "selector.py": "c798feca66a3ca274b50faff9262d9b8fdb78d9b017f02fc7bb37038b3467545",
+    "test_candidate.py": "7831b414abf761fd22f51eca32860299a5481fdff55f1041de38fe9dadd7f012",
+    "test_reuse.py": "3f5f2f1bd202da335e49c26b41721bb12b194e84371929e15281349226c7a0b1",
+    "validate.py": "f345c7566b57857b2359dedcdf5054f03640b475d7687ee0bd9f3cc83d2f763a",
+    "verify.py": "38250308d22c59cd4fed9ee5b419e0a32d972c02ae7e894c3f2671a0291fb2c8",
+    "verify_reuse.py": "f74546ce566559796fff63e12364129ffea88dcb6118338b2dec5ecb1d0cc807"
+  },
+  "exits": {
+    "normal_29_tests": 0,
+    "optimized_29_tests": 0,
+    "fresh_s3_golden": 0,
+    "full_source_reuse_integration": 0,
+    "cli_s1": 0,
+    "cli_s3": 0,
+    "ruff_check": 0,
+    "ruff_format_check": 0
+  },
+  "skips": 0,
+  "manifest_unchanged": true,
+  "cli_strict_comparisons": {
+    "cli-s1": {
+      "strict_pass": true,
+      "differences": []
+    },
+    "cli-s3": {
+      "strict_pass": true,
+      "differences": []
+    }
+  },
+  "scope": "Q-resident functional validation only; no performance measurement or CI"
+}
