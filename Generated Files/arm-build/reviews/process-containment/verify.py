@@ -95,23 +95,39 @@ class ReviewProof(unittest.TestCase):
                 self.assertEqual(result.infrastructure_wall, 3.0)
                 self.assertEqual(result.command_wall, 9.0)
 
-    def test_job_setup_double_failure_loses_original_error(self):
+    def test_job_setup_double_failure_preserves_both_errors(self):
         api = Mock()
         api.CreateJobObjectW.return_value = 1
         api.SetInformationJobObject.side_effect = OSError("original setup failure")
         api.CloseHandle.side_effect = OSError("secondary close failure")
-        with patch.object(owned, "_windows", return_value=api):
-            with self.assertRaisesRegex(OSError, "secondary close failure"):
-                owned._Job("mock-only")
+        with (
+            patch.object(owned, "_WINDOWS", True),
+            patch.object(owned, "_windows", return_value=api),
+            patch.object(owned.subprocess, "Popen") as spawn,
+        ):
+            result = owned.run_owned(
+                ["fixed"], cwd=self.root, env={},
+                stdout_path=self.root / "out",
+                stderr_path=self.root / "err", timeout=5,
+            )
+        self.assertFalse(result.succeeded, result)
+        self.assertFalse(result.cleanup_complete, result)
+        self.assertFalse(result.ownership_established, result)
+        self.assertTrue(any("original setup failure" in e for e in result.errors))
+        self.assertTrue(any("secondary close failure" in e for e in result.errors))
+        spawn.assert_not_called()
+        api.CloseHandle.assert_called_once_with(1)
 
-    def test_pipe_close_failure_escapes_instead_of_preserving_receipt(self):
+    def test_pipe_close_failures_preserve_receipt_and_attempt_all_pipes(self):
         process = Mock(pid=123, returncode=0)
         process.poll.return_value = 0
         process.communicate.return_value = (
             json.dumps(dict(owned=True, started=time.perf_counter(),
-                            returncode=7, timed_out=False)), ""
+                            returncode=7, timed_out=False,
+                            error="original invocation failure")), ""
         )
-        process.stdin.close.side_effect = OSError("pipe close failed")
+        process.stdin.close.side_effect = OSError("stdin close failed")
+        process.stdout.close.side_effect = OSError("stdout close failed")
         job = Mock()
         job.alive.return_value = False
         with (
@@ -119,14 +135,22 @@ class ReviewProof(unittest.TestCase):
             patch.object(owned, "_Job", return_value=job),
             patch.object(owned.subprocess, "Popen", return_value=process),
         ):
-            with self.assertRaisesRegex(OSError, "pipe close failed"):
-                owned.run_owned(
-                    ["fixed"], cwd=self.root, env={},
-                    stdout_path=self.root / "out",
-                    stderr_path=self.root / "err", timeout=5,
-                )
-        process.stdout.close.assert_not_called()
-        process.stderr.close.assert_not_called()
+            result = owned.run_owned(
+                ["fixed"], cwd=self.root, env={},
+                stdout_path=self.root / "out",
+                stderr_path=self.root / "err", timeout=5,
+            )
+        self.assertIsInstance(result, owned.Receipt)
+        self.assertEqual(result.returncode, 7)
+        self.assertFalse(result.succeeded, result)
+        self.assertFalse(result.cleanup_complete, result)
+        for message in (
+            "original invocation failure", "stdin close failed", "stdout close failed"
+        ):
+            self.assertTrue(any(message in e for e in result.errors), result)
+        for stream in (process.stdin, process.stdout, process.stderr):
+            stream.close.assert_called_once()
+        job.close.assert_called_once()
 
 
 def helper(role, root):
