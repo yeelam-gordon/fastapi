@@ -26,6 +26,10 @@ and measured value, show why the simplest supported alternative is insufficient,
 and justify compatibility, code size, review burden and ongoing upkeep. A
 maintainer should be able to understand why the change belongs in their project.
 Do not open an upstream PR or claim owner agreement without authorization.
+Any eventual owner-facing change must be a narrow patch in the appropriate
+repository with focused tests and a short reproducible explanation. Do not
+submit this research branch, generated evidence bundle or prototype framework
+as a new requirement for FastAPI.
 
 Keep diagnostic prototypes as evidence, not adoption recommendations. In
 particular, the current FastAPI-specific SDK/private-PDM integration is

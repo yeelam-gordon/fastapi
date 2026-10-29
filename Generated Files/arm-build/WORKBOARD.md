@@ -40,8 +40,9 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 
 | Current lane | Branch / worktree suffix | Owned output |
 |---|---|---|
-| Standard uv build lifecycle (active) | `investigate/arm-uv-build-bytecode` / `uv-build-bytecode` | P22 shared-toolchain feasibility, existing policy and repeated-hook tradeoffs |
-| Generic PDM archive I/O (active) | `investigate/arm-pdm-archive-io` / `pdm-archive-io` | P23 maintainer-facing owner-level candidate or no-go; no FastAPI-specific machinery |
+| Standard uv supported-practice screen (active) | `investigate/arm-uv-build-bytecode` / `uv-build-bytecode` | P22 source audit rejects an upstream default change now; stock-command C: bytecode-setting A/B only |
+| Generic PDM archive prototype/proof (active) | `investigate/arm-pdm-archive-io` / `pdm-archive-io` | P23 capped small-file overlap inside official PDM, about 80 source lines maximum; focused Q: tests only, no benchmark/adoption |
+| Temporary uv activation files (source triage only) | `investigate/arm-uv-build-activators` / `uv-build-activators` | P24 source fact, not cost attribution or a justified change |
 | Controller preflight repair (completed) | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |
 | Ownership correction and independent review (completed) | `investigate/arm-process-lifecycle`, `review/arm-process-containment` | Complete owned-member wait states and cleanup repair; original causal uncertainty retained; no further framework work |
 | Source-only next proposals (completed) | `investigate/arm-compression-path`, `investigate/arm-sdk-validation-cost` | P20 codec attribution and P21 metadata reuse; no new timed work or readiness requirement |
@@ -50,6 +51,9 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 These are independent preparation/verification lanes. Only the local-readiness lane may run the full C: campaign. Workers do not push, dispatch CI, change security controls or modify the read-only original source worktree. No additional full-agent coordinator is needed.
 
 **Fork budget protection:** read-only inspection found two ARM experiment runs and three incidental push-triggered Ubuntu Conflict detector runs. The latter's most recent job lasted about three seconds, but it was still an unnecessary allocation. The master disabled **only** `detect-conflicts.yml` in `yeelam-gordon/fastapi` through the workflow API and verified `disabled_manually`; no upstream workflow file was changed. The manual ARM experiment remains active. No new experiment has been dispatched.
+
+Read-only latest-release checks on 2026-10-29 returned uv **0.13.6** and
+pdm-backend **2.5.0**, matching the inspected pins; no tool upgrade was made.
 
 ### Earlier isolated-lane history
 

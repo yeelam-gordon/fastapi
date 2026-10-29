@@ -27,9 +27,12 @@ Its C: campaign and next CI allocation are paused by this adoption decision,
 not merely waiting for technical readiness. Finish only tightly coupled cleanup
 repairs already in flight; do not extend the measurement framework. Existing
 artifact, lifecycle and failure evidence remains intact. Parity is unproven.
-Two independent source-only lanes now assess standard uv build bytecode
-lifecycle (P22) and generic PDM archive I/O (P23); neither assumes a fix is
-necessary or authorizes implementation/CI.
+P22/P23 source audits found no justified upstream default/metadata patch.
+P22 now screens the existing process-scoped bytecode setting with stock
+`uv build` on C:, as a rank-2 practice hypothesis only. P23's capped small-file
+design passed a conditional feasibility review; a tightly bounded upstream-shaped
+prototype and focused functional proof are authorized, not adoption or a timed
+campaign. Neither lane authorizes CI.
 
 ## Investigation evidence ledger
 
@@ -59,8 +62,9 @@ ranking. A mechanism inferred from a prototype is not yet a portable fix.
 | P19 | Matched C: uv samples show stock/managed roughly 5.85/6.00 s; build/pip roughly 13.37/13.16 s | Reject a runtime-distribution switch as a demonstrated performance fix | Three pairs; no convincing advantage; distributions differ beyond PGO and no causal compiler claim | Runtime branch integrated; no adoption recommendation |
 | P20 | Historical sdist compress time ~13.3%; managed Windows zlib 1.3.2 and Mac system-libz recipes differ; active binary acceleration remains unproven | Later bounded codec attribution; reject a custom runtime/codec rebuild now | Separate raw deflate from CRC, flush and writes; no compiler/ISA causal claim or frozen Mac finish line | [Source report](arm-build/compression-path/REPORT.md) complete; no implementation or readiness blocker |
 | P21 | SDK-added safety walk repeats metadata queries; historical ~0.524 s / 10,578 Python calls is not a clean gain measurement | Retain as SDK engineering evidence, not a FastAPI/shared-toolchain optimization recommendation | Do not optimize overhead introduced solely by the rejected bespoke route and call it progress on the original build | [Source note](arm-build/profiles/sdk-validation/README.md) retained; **no implementation planned** |
-| P22 | Ephemeral import-bytecode writes might affect standard isolated builds; uv's actual flags, environment reuse and existing policy must be checked first | Inspect pinned uv source; consider only an owner-level policy or supported practice if existing behavior leaves a real gap | Preserve repeated-hook/backend performance; distinguish runtime imports from prior pip compilation; evaluate Mac and multiple backends before adoption | `uv-build-bytecode` / source-only feasibility active; no measured gain or implementation |
-| P23 | Historical archive I/O and prototype prefetch suggest a mechanism, not a generic PDM improvement | Inspect official PDM archive path for simple metadata reuse or maintainable bounded prefetch within the tool itself | Preserve standard selection/hooks/errors/streaming/large-file bounds; no FastAPI selector, private monkey-patch or custom format | `pdm-archive-io` / source-only feasibility active; upstream rationale or explicit no-go required |
+| P22 | uv inherits bytecode-suppression environment settings and reuses each stage's venv across hooks; no upstream default change justified | Screen existing `PYTHONDONTWRITEBYTECODE=1` against an explicitly unset control using unchanged standard `uv build` | Include lost between-hook cache benefit in full-command time; preserve artifacts; conditional Windows practice requires evidence, with Mac's best setting later tested too | [Source audit](arm-build/shared-toolchain/uv-bytecode/REPORT.md) complete; bounded C: practice screen active; no adoption claim |
+| P23 | Official PDM has no trivial safe stat reuse; a capped small-file fast path removes reservation-framework complexity, but net value remains unproven | One owner-level prototype within the existing archive loop, about 80 source lines maximum; large files retain stock streaming | Focused cap/EOF/order/link/hook/error-cleanup proof first; reject complexity rather than add a framework; standard-command measurement only after review | [Source audit/addendum](arm-build/shared-toolchain/pdm-archive-io/REPORT.md) complete; bounded generic prototype/proof active, no adoption or timing claim |
+| P24 | Pinned uv's temporary build path uses the shared venv constructor that writes activation templates | Retain as a shared-toolchain source lead; do not propose omitting files without cost and compatibility evidence | Existing whole `uv venv` timing is not activation-file attribution; a negligible benefit fails the maintainer gate | [Source triage](arm-build/shared-toolchain/uv-activators/REPORT.md) complete; no implementation, measurement or CI |
 
 ## Relative benefit and maintenance review
 
