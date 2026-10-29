@@ -1,14 +1,15 @@
 diff --git a/Lib/pathlib/_local.py b/Lib/pathlib/_local.py
-index 0188e7c..32e9b92 100644
+index 0188e7c..a96251e 100644
 --- a/Lib/pathlib/_local.py
 +++ b/Lib/pathlib/_local.py
-@@ -378,6 +378,18 @@ def relative_to(self, other, /, *_deprecated, walk_up=False):
+@@ -378,6 +378,19 @@ def relative_to(self, other, /, *_deprecated, walk_up=False):
              other = self.with_segments(other, *_deprecated)
          elif not isinstance(other, PurePath):
              other = self.with_segments(other)
 +        stock_types = (PurePosixPath, PureWindowsPath, PosixPath, WindowsPath)
 +        if (not walk_up and not _deprecated
-+                and type(self) in stock_types and type(other) in stock_types
++                and any(type(self) is cls for cls in stock_types)
++                and any(type(other) is cls for cls in stock_types)
 +                and self.parser is other.parser):
 +            size = len(other._tail)
 +            if size <= len(self._tail):

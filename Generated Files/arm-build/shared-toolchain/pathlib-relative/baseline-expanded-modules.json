@@ -68,9 +68,9 @@
     "Lib\\test\\support\\os_helper.py": "319aa16f49850051b4060ae43def2c679140bd42a3b2aa044778943c4eb2f60d",
     "Lib\\test\\support\\import_helper.py": "7fbfef33da3502d96411504d8817351d5359d11af202ebd442f3c06f08995916",
     "Lib\\test\\test_pathlib\\test_pathlib_abc.py": "8b205ee50a475a584195eaabb1d2da34a31858cb250149b10d3f514f46a52faf",
-    "Lib\\test\\test_pathlib\\test_pathlib.py": "e9d53c4c7e230582e9097cca886da70fba52d9ab6799d936de255685547fa78a"
+    "Lib\\test\\test_pathlib\\test_pathlib.py": "82e4e3576881a69a1fb6282c3c8e352a1d3e8c38b1d4845a8316cb52f291e877"
   },
-  "tests": 431,
+  "tests": 447,
   "failures": 0,
   "errors": 0,
   "skips": [
@@ -324,6 +324,14 @@
     ],
     [
       "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_lexical_boundaries",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_metaclass_equality_fallback",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_metaclass_parents_fallback",
       "test requires a POSIX-compatible system"
     ],
     [

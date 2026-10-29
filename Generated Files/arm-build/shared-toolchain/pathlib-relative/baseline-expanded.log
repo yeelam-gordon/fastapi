@@ -62,6 +62,8 @@ test_parts_windows (test.test_pathlib.test_pathlib.PurePathTest.test_parts_windo
 test_pickling_common (test.test_pathlib.test_pathlib.PurePathTest.test_pickling_common) ... ok
 test_relative_to_common (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_common) ... ok
 test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_metaclass_equality_fallback (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_metaclass_equality_fallback) ... ok
+test_relative_to_metaclass_parents_fallback (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_metaclass_parents_fallback) ... ok
 test_relative_to_several_args (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_several_args) ... ok
 test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_subclass_factory_fallback) ... ok
 test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_unicode_whole_string_lower) ... ok
@@ -159,6 +161,8 @@ test_parts_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parts_
 test_pickling_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_pickling_common) ... ok
 test_relative_to_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_common) ... ok
 test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_metaclass_equality_fallback (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_metaclass_equality_fallback) ... ok
+test_relative_to_metaclass_parents_fallback (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_metaclass_parents_fallback) ... ok
 test_relative_to_several_args (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_several_args) ... ok
 test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_subclass_factory_fallback) ... ok
 test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_unicode_whole_string_lower) ... skipped 'requires Windows-flavoured path class'
@@ -256,6 +260,8 @@ test_parts_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_part
 test_pickling_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_pickling_common) ... ok
 test_relative_to_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_common) ... ok
 test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_metaclass_equality_fallback (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_metaclass_equality_fallback) ... ok
+test_relative_to_metaclass_parents_fallback (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_metaclass_parents_fallback) ... ok
 test_relative_to_several_args (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_several_args) ... ok
 test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_subclass_factory_fallback) ... ok
 test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_unicode_whole_string_lower) ... ok
@@ -353,6 +359,8 @@ test_parts_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_par
 test_pickling_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_pickling_common) ... ok
 test_relative_to_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_common) ... ok
 test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_metaclass_equality_fallback (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_metaclass_equality_fallback) ... ok
+test_relative_to_metaclass_parents_fallback (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_metaclass_parents_fallback) ... ok
 test_relative_to_several_args (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_several_args) ... ok
 test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_subclass_factory_fallback) ... ok
 test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_unicode_whole_string_lower) ... ok
@@ -390,6 +398,8 @@ test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PathTest.test_i
 test_is_relative_to_windows (test.test_pathlib.test_pathlib.PathTest.test_is_relative_to_windows) ... ok
 test_relative_to_common (test.test_pathlib.test_pathlib.PathTest.test_relative_to_common) ... ok
 test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_metaclass_equality_fallback (test.test_pathlib.test_pathlib.PathTest.test_relative_to_metaclass_equality_fallback) ... ok
+test_relative_to_metaclass_parents_fallback (test.test_pathlib.test_pathlib.PathTest.test_relative_to_metaclass_parents_fallback) ... ok
 test_relative_to_several_args (test.test_pathlib.test_pathlib.PathTest.test_relative_to_several_args) ... ok
 test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PathTest.test_relative_to_subclass_factory_fallback) ... ok
 test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PathTest.test_relative_to_unicode_whole_string_lower) ... ok
@@ -401,6 +411,8 @@ test_is_relative_to_several_args (test.test_pathlib.test_pathlib.WindowsPathTest
 test_is_relative_to_windows (test.test_pathlib.test_pathlib.WindowsPathTest.test_is_relative_to_windows) ... ok
 test_relative_to_common (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_common) ... ok
 test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_metaclass_equality_fallback (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_metaclass_equality_fallback) ... ok
+test_relative_to_metaclass_parents_fallback (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_metaclass_parents_fallback) ... ok
 test_relative_to_several_args (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_several_args) ... ok
 test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_subclass_factory_fallback) ... ok
 test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_unicode_whole_string_lower) ... ok
@@ -412,6 +424,8 @@ test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PosixPathTest.t
 test_is_relative_to_windows (test.test_pathlib.test_pathlib.PosixPathTest.test_is_relative_to_windows) ... skipped 'test requires a POSIX-compatible system'
 test_relative_to_common (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_common) ... skipped 'test requires a POSIX-compatible system'
 test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_lexical_boundaries) ... skipped 'test requires a POSIX-compatible system'
+test_relative_to_metaclass_equality_fallback (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_metaclass_equality_fallback) ... skipped 'test requires a POSIX-compatible system'
+test_relative_to_metaclass_parents_fallback (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_metaclass_parents_fallback) ... skipped 'test requires a POSIX-compatible system'
 test_relative_to_several_args (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_several_args) ... skipped 'test requires a POSIX-compatible system'
 test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_subclass_factory_fallback) ... skipped 'test requires a POSIX-compatible system'
 test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_unicode_whole_string_lower) ... skipped 'test requires a POSIX-compatible system'
@@ -423,6 +437,8 @@ test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PathSubclassTes
 test_is_relative_to_windows (test.test_pathlib.test_pathlib.PathSubclassTest.test_is_relative_to_windows) ... ok
 test_relative_to_common (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_common) ... ok
 test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_metaclass_equality_fallback (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_metaclass_equality_fallback) ... ok
+test_relative_to_metaclass_parents_fallback (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_metaclass_parents_fallback) ... ok
 test_relative_to_several_args (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_several_args) ... ok
 test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_subclass_factory_fallback) ... ok
 test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_unicode_whole_string_lower) ... ok
@@ -431,13 +447,13 @@ test_with_segments (test.test_pathlib.test_pathlib.PathSubclassTest.test_with_se
 test_with_segments_common (test.test_pathlib.test_pathlib.PathSubclassTest.test_with_segments_common) ... ok
 
 ----------------------------------------------------------------------
-Ran 431 tests in 0.387s
+Ran 447 tests in 0.442s
 
-OK (skipped=69)
+OK (skipped=71)
 EXECUTABLE C:\Program Files\Python313-arm64\python.exe
 VERSION 3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]
 PATHLIB_ORIGIN Q:\fastapi\Generated Files\worktrees\pathlib-relative\Generated Files\arm-build\shared-toolchain\pathlib-relative\cpython\Lib\pathlib\_local.py
 UNICODE_BASELINE_OR_CANDIDATE 'C:\u03a3' 'C:\u03c2' '.'
 UNICODE_BASELINE_OR_CANDIDATE 'C:\u03a3/Leaf' 'C:\u03c2' 'Leaf'
 UNICODE_BASELINE_OR_CANDIDATE 'C:/\u0130/Leaf' 'c:/i\u0307' 'Leaf'
-RESULT 431 failures 0 errors 0 skips 69
+RESULT 447 failures 0 errors 0 skips 71
