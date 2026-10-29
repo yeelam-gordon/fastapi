@@ -142,7 +142,13 @@ class PlatformTests(unittest.TestCase):
             }
 
         with (
-            patch.object(platform.sys, "platform", "win32"),
+            patch.object(
+                platform,
+                "sys",
+                types.SimpleNamespace(
+                    platform="win32", executable=sys.executable, version=sys.version
+                ),
+            ),
             patch.object(platform, "_probe", side_effect=probe),
             patch.object(
                 shutil,
@@ -158,13 +164,16 @@ class PlatformTests(unittest.TestCase):
         )
         self.assertEqual(len(result["candidates"]), 7)
         by_name = {item["path"]: item for item in result["candidates"]}
-        script = by_name[str(helpers / "git-submodule")]
+        script = by_name[platform._safe(helpers / "git-submodule")]
         self.assertEqual(script["shebang"]["value"], "#!/bin/sh")
         self.assertEqual(script["identity"]["status"], "measured")
         self.assertEqual(script["identity"]["architecture"]["status"], "unavailable")
-        self.assertEqual(by_name[str(shell)]["identity"]["status"], "measured")
         self.assertEqual(
-            by_name[str(root / "bin" / "bash.exe")]["identity"]["status"], "unavailable"
+            by_name[platform._safe(shell)]["identity"]["status"], "measured"
+        )
+        self.assertEqual(
+            by_name[platform._safe(root / "bin" / "bash.exe")]["identity"]["status"],
+            "unavailable",
         )
         self.assertTrue(
             all(
@@ -421,11 +430,22 @@ class PlatformTests(unittest.TestCase):
 
     def test_filesystem_failure_retains_requested_actual_path(self):
         missing = self.root / "not-created" / "source"
-        with patch.object(platform.sys, "platform", "unsupported"):
+        with (
+            patch.object(
+                platform, "sys", types.SimpleNamespace(platform="unsupported")
+            ),
+            patch.object(
+                platform.os.path,
+                "expanduser",
+                return_value=str(self.root.parent.resolve()),
+            ),
+        ):
             result = platform._filesystem(str(missing))
+            expected_ancestor = platform._safe(self.root.resolve())
         self.assertEqual(result["status"], "unavailable")
         self.assertFalse(result["exists"])
-        self.assertEqual(result["probed_existing_ancestor"], str(self.root.resolve()))
+        self.assertEqual(result["probed_existing_ancestor"], expected_ancestor)
+        self.assertTrue(result["probed_existing_ancestor"].startswith("<HOME>"))
         self.assertIn("not-created", result["requested_path"])
 
 
