@@ -1,0 +1,6 @@
+*.py text eol=lf
+*.md text eol=lf
+*.json -text -whitespace
+*.log -text -whitespace
+*.pstats -text -diff
+*.csv -text -whitespace

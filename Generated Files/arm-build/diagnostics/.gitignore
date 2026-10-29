@@ -1,0 +1,5 @@
+.scratch/
+.local/
+private_raw/
+__pycache__/
+*.pyc

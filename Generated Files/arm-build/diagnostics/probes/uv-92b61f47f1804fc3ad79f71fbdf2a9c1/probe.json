@@ -1,0 +1,13 @@
+{
+  "command": [
+    "uv",
+    "--no-config",
+    "cache",
+    "dir"
+  ],
+  "duration_export_requested": true,
+  "scope": "Read-only cache-directory query; no build or CI",
+  "uv_sha256": "EC27977D62B5F6091BCE410A8E69D40D07541803314E0120905C0AD0AFFAA5CC",
+  "exit_code": 0,
+  "duration_export_present": false
+}
