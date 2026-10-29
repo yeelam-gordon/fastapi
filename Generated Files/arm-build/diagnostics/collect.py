@@ -365,6 +365,20 @@ def verify_wheelhouse(directory):
     return hashes
 
 
+def verify_artifact_membership(directory):
+    artifacts = list(directory.iterdir())
+    marker = directory / ".gitignore"
+    if marker in artifacts and marker.is_file() and marker.read_bytes() == b"*":
+        artifacts.remove(marker)
+    if (
+        len(artifacts) != 2
+        or sum(path.name.endswith(".whl") for path in artifacts) != 1
+        or sum(path.name.endswith(".tar.gz") for path in artifacts) != 1
+        or not all(path.is_file() for path in artifacts)
+    ):
+        raise ValueError("Unexpected build artifact membership")
+
+
 def canonical_archive(checkout, destination):
     with destination.open("xb") as stream:
         subprocess.run(
@@ -700,14 +714,7 @@ def main(argv=None):
                 ):
                     result["status"] = "partial"
             try:
-                artifacts = list(out.iterdir())
-                if (
-                    len(artifacts) != 2
-                    or sum(path.name.endswith(".whl") for path in artifacts) != 1
-                    or sum(path.name.endswith(".tar.gz") for path in artifacts) != 1
-                    or not all(path.is_file() for path in artifacts)
-                ):
-                    raise ValueError("Unexpected build artifact membership")
+                verify_artifact_membership(out)
                 actual = validator.inventory(out)
                 verification = validator.compare(expected, actual)
                 write_json(public / "actual-manifest.json", actual)

@@ -6,7 +6,7 @@
   "validation": {
     "stdlib_unittest": {
       "command": "python -m unittest -v test_collect",
-      "tests": 11,
+      "tests": 12,
       "status": "passed"
     },
     "ruff_check": {
@@ -27,9 +27,11 @@
   "unit_only_doubles": "Labelled unit platform/backend fixtures test monitoring, importtime, cProfile and memory machinery. No production fallback.",
   "platform_integration_candidate": "fdaace345c8f53a855fb398ef764b9113ffb27d5",
   "integration": {
-    "status": "unavailable",
-    "value": null,
-    "reason": "Awaiting root integration SHA before full owned-C stock uv/PDM build. No real hook propagation or artifact proof claimed from unit fixtures."
+    "status": "partial",
+    "coverage": "complete",
+    "actual_hook_receipts": 16,
+    "evidence": "COLLECTOR-INTEGRATION-001.json",
+    "reason": "One real owned-C stock uv/PDM attempt completed. Every instrumented pass covered all four roles. Original attempt remains failed: stock uv output marker initially rejected; independent no-build postcheck with the narrow marker fix preserves five strict sdist mode failures in every pass."
   },
   "native": {
     "requested": true,
@@ -43,8 +45,8 @@
     "reason": "Runner-only integration gate; no matched Mac hook timings."
   },
   "confidence": {
-    "high": "Focused unit-tested receipt, profiler, status and privacy mechanics",
-    "medium": "Intended stock uv startup-hook propagation, pending actual integrated proof",
+    "high": "Unit-tested receipt/privacy mechanics plus real stock-child propagation, isolated PDM locations, parsed profiles and native counter units/statuses across sixteen children",
+    "medium": "Instrumentation overhead and bootstrap preloading limit interpretation; final workflow-freeze smoke remains separate",
     "low": "Cross-platform causal attribution or performance parity"
   }
 }

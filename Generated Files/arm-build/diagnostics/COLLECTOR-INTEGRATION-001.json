@@ -1,0 +1,3686 @@
+{
+  "actual_hook_receipts": 16,
+  "collection_coverage": "complete",
+  "context_passes": 4,
+  "fixed_collector_sha256": "f5ec8e3c6936bd3900bf080bb636fa639f29eb0d50903161c324642ca2e09997",
+  "identity": "fe0cdca6d1b94b3b9701bf1bc2f289c6",
+  "instrumented_passes": 4,
+  "local_native_capture_started": false,
+  "native": {
+    "build_invoked": false,
+    "build_result": null,
+    "capabilities": {
+      "wpr": {
+        "binary": {
+          "architecture": {
+            "source": "binary header",
+            "status": "measured",
+            "value": [
+              {
+                "machine": "0xaa64",
+                "name": "arm64"
+              }
+            ]
+          },
+          "path": "C:\\Windows\\system32\\wpr.EXE",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Windows\\System32\\wpr.exe",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "a19275562a4ed8f329ce1ab248a44cb4af60c1091ea2f275097dee43761bd693",
+          "size_bytes": 410112,
+          "status": "measured"
+        },
+        "help_observed": true,
+        "help_status": "measured",
+        "reason": "help is not proof of safe bounded owned-process capture and reviewed export",
+        "returncode": 0,
+        "status": "unavailable"
+      },
+      "xperf": {
+        "binary": {
+          "architecture": {
+            "source": "binary header",
+            "status": "measured",
+            "value": [
+              {
+                "machine": "0xaa64",
+                "name": "arm64"
+              }
+            ]
+          },
+          "path": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.EXE",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.exe",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "312d62ad857e66fe9022178a9c1581fc9904628b00fb337445dee3d278def3e0",
+          "size_bytes": 467368,
+          "status": "measured"
+        },
+        "help_observed": false,
+        "help_status": "measured",
+        "reason": "help is not proof of safe bounded owned-process capture and reviewed export",
+        "returncode": 0,
+        "status": "unavailable"
+      }
+    },
+    "capture_window": null,
+    "collectors": {
+      "native_cpu": {
+        "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+        "requested": true,
+        "status": "unavailable",
+        "value": null
+      },
+      "native_file_io": {
+        "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+        "requested": true,
+        "status": "unavailable",
+        "value": null
+      },
+      "native_scheduling": {
+        "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+        "requested": true,
+        "status": "unavailable",
+        "value": null
+      }
+    },
+    "lost_events": {
+      "reason": "no capture",
+      "status": "unavailable",
+      "value": null
+    },
+    "mac_runtime_validation": "runner-only, not executed locally",
+    "performance_eligible": false,
+    "raw_policy": "private_raw only, excluded from upload; no raw traces produced",
+    "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+    "requested": true,
+    "schema_version": 1,
+    "status": "partial",
+    "symbols": {
+      "reason": "no capture",
+      "status": "unavailable",
+      "value": null
+    },
+    "upload_summaries": []
+  },
+  "notes": [
+    "Original attempt failed artifact-membership check because stock uv creates .gitignore containing exactly one star byte. Independent postcheck permits only this exact known marker; it does not rerun or replace any build.",
+    "All strict comparisons remain FAIL for five sdist executable-mode differences. Windows native stat permission proxy differences are also retained, not waived."
+  ],
+  "original_attempt_preserved": true,
+  "original_report_sha256": "576cab4964fc1e3e9efcc39c9d35ca198e4cff719ae06c78e6d65e026de4e5aa",
+  "original_status": "failed",
+  "passes": {
+    "context-1": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "5531d6e8028eb54d8f3d49ada47d4a7d5b416faecff71f0a9b4513fa0a779755"
+      },
+      "original_status": "failed",
+      "result_sha256": "c32152676eb229fb936e08d627f90d964d96e3da196faabc1f3e306d64a5605d",
+      "returncode": 0,
+      "source_manifest_files": 3233,
+      "source_native_mode_proxy_differences": 3233,
+      "strict_pass": false,
+      "timed_out": false,
+      "uninstrumented": true
+    },
+    "context-2": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "d9a946eced2b39af02ac08570e4b55f747012cefdc9b525c90e61423308f9d12"
+      },
+      "original_status": "failed",
+      "result_sha256": "6724adb8dc98db8abc812427ebe7622c17d8d12c1391c1abdc7d501bc8f38f81",
+      "returncode": 0,
+      "source_manifest_files": 3233,
+      "source_native_mode_proxy_differences": 3233,
+      "strict_pass": false,
+      "timed_out": false,
+      "uninstrumented": true
+    },
+    "context-3": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "32286e8984fa6b793929c7fd6e9c4bfc2fc72a3fce17b3975f6c48758a6ebaeb"
+      },
+      "original_status": "failed",
+      "result_sha256": "8e33ee5820a8687778dfa14e5bd78288d174f7a2b75dafc1471a5b24d91715d7",
+      "returncode": 0,
+      "source_manifest_files": 3233,
+      "source_native_mode_proxy_differences": 3233,
+      "strict_pass": false,
+      "timed_out": false,
+      "uninstrumented": true
+    },
+    "context-warmup": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "a5b4009d8d40f408d3d60c681ed91b5ab4e7cb652d78b3e3b518f997412c6d0b"
+      },
+      "original_status": "failed",
+      "result_sha256": "bb907103a97ce27ae5fb9cc3c9cdc3d6871051538fbfb696b88519dee0d033c2",
+      "returncode": 0,
+      "source_manifest_files": 3233,
+      "source_native_mode_proxy_differences": 3233,
+      "strict_pass": false,
+      "timed_out": false,
+      "uninstrumented": true
+    },
+    "cprofile": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "c8b1eb90707df40d09601c1bd611744c874e6ca3d556ef403518c7cc2889105e"
+      },
+      "children": [
+        {
+          "caller_edges": 3880,
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.171875
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.21875
+            }
+          },
+          "pid": 12428,
+          "ppid": 26520,
+          "preloaded_modules": 59,
+          "profile_functions": 1903,
+          "receipt_sha256": "ecf725099cde32eb1fad66d7042e17e6247b4be02124ca3bbdc069ff04da7648",
+          "role": "build-wheel",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.5717894
+        },
+        {
+          "caller_edges": 3085,
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.140625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.21875
+            }
+          },
+          "pid": 12936,
+          "ppid": 8664,
+          "preloaded_modules": 59,
+          "profile_functions": 1569,
+          "receipt_sha256": "d7a9638c0499823d98567f16cd7fbe3b445eb94e3315cf6506a037f0bdeff66f",
+          "role": "get-requires-wheel",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.4883302
+        },
+        {
+          "caller_edges": 3669,
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.578125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 1.21875
+            }
+          },
+          "pid": 13612,
+          "ppid": 12488,
+          "preloaded_modules": 59,
+          "profile_functions": 1811,
+          "receipt_sha256": "40c94ec7377353928eac3eb8dd066b7ff821181cea150e589a2e18c1c3588c32",
+          "role": "build-sdist",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 2.5123638
+        },
+        {
+          "caller_edges": 955,
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.0625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.015625
+            }
+          },
+          "pid": 15324,
+          "ppid": 27652,
+          "preloaded_modules": 59,
+          "profile_functions": 514,
+          "receipt_sha256": "7928ff8d2c3664bb4d5a9395f2469bee0a7fe873a3610cce1693689cd6ea2195",
+          "role": "get-requires-sdist",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.0677086
+        }
+      ],
+      "coverage": "complete",
+      "original_status": "failed",
+      "result_sha256": "04f4a9c50734d0a2770bae1e26f741f78c23066364ec212138942360177a45dd",
+      "returncode": 0,
+      "source_manifest_files": 3233,
+      "source_native_mode_proxy_differences": 3233,
+      "strict_pass": false,
+      "timed_out": false,
+      "uninstrumented": false
+    },
+    "importtime": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "2aeaa1e34f19d2b297d32ead36f36bd5b9e9e33bb13a4b289269afd51754fefb"
+      },
+      "children": [
+        {
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.03125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.015625
+            }
+          },
+          "numeric_pdm_child_import_rows": 38,
+          "pid": 11580,
+          "ppid": 25220,
+          "preloaded_modules": 52,
+          "receipt_sha256": "b05370174bc273edd06387d34e031c6190a21cb7f7d070e4b5c95a03242019d1",
+          "role": "get-requires-sdist",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.057526
+        },
+        {
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.140625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.21875
+            }
+          },
+          "numeric_pdm_child_import_rows": 167,
+          "pid": 18712,
+          "ppid": 17924,
+          "preloaded_modules": 52,
+          "receipt_sha256": "ece99dc79650df49561e44cdea19f7dc152935fb269ab4c58adcba16a2694bf8",
+          "role": "get-requires-wheel",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.4192207
+        },
+        {
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.1875
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.109375
+            }
+          },
+          "numeric_pdm_child_import_rows": 172,
+          "pid": 25364,
+          "ppid": 24828,
+          "preloaded_modules": 52,
+          "receipt_sha256": "75d066701b9c4cb1de81f94fa7012fa97a42a42b6fb21d67f723e3181bfe3e91",
+          "role": "build-wheel",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.4970107
+        },
+        {
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.5
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.96875
+            }
+          },
+          "numeric_pdm_child_import_rows": 163,
+          "pid": 3684,
+          "ppid": 4808,
+          "preloaded_modules": 52,
+          "receipt_sha256": "8a1023fcc53a9aaadf0924cd4f61aaadfe052cb431ad23aa88dc2e1d711a2166",
+          "role": "build-sdist",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 2.1221977
+        }
+      ],
+      "coverage": "complete",
+      "original_status": "failed",
+      "result_sha256": "3239dac46b56b09f246b3b096d0fc7bcf91ce9493628686dfbf176a1c43d2430",
+      "returncode": 0,
+      "source_manifest_files": 3233,
+      "source_native_mode_proxy_differences": 3233,
+      "strict_pass": false,
+      "timed_out": false,
+      "uninstrumented": false
+    },
+    "memory": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "ce13d7bffeeaa1b5ddaa50e1b3b6cb371f6b03ea50e6800911e133f5f6b1a826"
+      },
+      "children": [
+        {
+          "allocation": {
+            "aggregation": "current_and_window_peak",
+            "current": 7967956,
+            "end_live_top": [
+              {
+                "bytes": 3885807,
+                "count": 29992,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 781
+                  }
+                ]
+              },
+              {
+                "bytes": 931235,
+                "count": 8504,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 488
+                  }
+                ]
+              },
+              {
+                "bytes": 166072,
+                "count": 1192,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 798
+                  }
+                ]
+              },
+              {
+                "bytes": 141781,
+                "count": 540,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 106
+                  }
+                ]
+              },
+              {
+                "bytes": 46993,
+                "count": 217,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 512
+                  }
+                ]
+              },
+              {
+                "bytes": 43062,
+                "count": 257,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 128
+                  }
+                ]
+              },
+              {
+                "bytes": 40864,
+                "count": 87,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\re\\_compiler.py",
+                    "line": 764
+                  }
+                ]
+              },
+              {
+                "bytes": 39178,
+                "count": 354,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\dataclasses.py",
+                    "line": 498
+                  }
+                ]
+              },
+              {
+                "bytes": 24968,
+                "count": 136,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 107
+                  }
+                ]
+              },
+              {
+                "bytes": 21577,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\importlib\\metadata\\__init__.py",
+                    "line": 61
+                  }
+                ]
+              },
+              {
+                "bytes": 21551,
+                "count": 185,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1701
+                  }
+                ]
+              },
+              {
+                "bytes": 21234,
+                "count": 93,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 3186
+                  }
+                ]
+              },
+              {
+                "bytes": 18512,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\locale.py",
+                    "line": 1498
+                  }
+                ]
+              },
+              {
+                "bytes": 18392,
+                "count": 121,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 866
+                  }
+                ]
+              },
+              {
+                "bytes": 16914,
+                "count": 174,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1031
+                  }
+                ]
+              },
+              {
+                "bytes": 16262,
+                "count": 43,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 569
+                  }
+                ]
+              },
+              {
+                "bytes": 16128,
+                "count": 237,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 49
+                  }
+                ]
+              },
+              {
+                "bytes": 16017,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\_policybase.py",
+                    "line": 97
+                  }
+                ]
+              },
+              {
+                "bytes": 15954,
+                "count": 183,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 444
+                  }
+                ]
+              },
+              {
+                "bytes": 13464,
+                "count": 258,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\quoprimime.py",
+                    "line": 55
+                  }
+                ]
+              },
+              {
+                "bytes": 13056,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\locale.py",
+                    "line": 880
+                  }
+                ]
+              },
+              {
+                "bytes": 11528,
+                "count": 121,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1617
+                  }
+                ]
+              },
+              {
+                "bytes": 10240,
+                "count": 168,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 490
+                  }
+                ]
+              },
+              {
+                "bytes": 9976,
+                "count": 58,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 1890
+                  }
+                ]
+              },
+              {
+                "bytes": 9728,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1698
+                  }
+                ]
+              },
+              {
+                "bytes": 8944,
+                "count": 52,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 275
+                  }
+                ]
+              },
+              {
+                "bytes": 8176,
+                "count": 87,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 546
+                  }
+                ]
+              },
+              {
+                "bytes": 8176,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\ast.py",
+                    "line": 617
+                  }
+                ]
+              },
+              {
+                "bytes": 7784,
+                "count": 139,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 606
+                  }
+                ]
+              },
+              {
+                "bytes": 7736,
+                "count": 85,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tomllib\\_parser.py",
+                    "line": 180
+                  }
+                ]
+              },
+              {
+                "bytes": 7728,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\importlib\\metadata\\_collections.py",
+                    "line": 24
+                  }
+                ]
+              },
+              {
+                "bytes": 7626,
+                "count": 120,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\opcode.py",
+                    "line": 19
+                  }
+                ]
+              },
+              {
+                "bytes": 6864,
+                "count": 33,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 57
+                  }
+                ]
+              },
+              {
+                "bytes": 6664,
+                "count": 57,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 545
+                  }
+                ]
+              },
+              {
+                "bytes": 6640,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 2893
+                  }
+                ]
+              },
+              {
+                "bytes": 6598,
+                "count": 23,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 506
+                  }
+                ]
+              },
+              {
+                "bytes": 6512,
+                "count": 1,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\inspect.py",
+                    "line": 2736
+                  }
+                ]
+              },
+              {
+                "bytes": 6512,
+                "count": 1,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\dis.py",
+                    "line": 59
+                  }
+                ]
+              },
+              {
+                "bytes": 6512,
+                "count": 1,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 947
+                  }
+                ]
+              },
+              {
+                "bytes": 6496,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\zipfile\\_path\\__init__.py",
+                    "line": 204
+                  }
+                ]
+              },
+              {
+                "bytes": 6272,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 451
+                  }
+                ]
+              },
+              {
+                "bytes": 6225,
+                "count": 120,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1695
+                  }
+                ]
+              },
+              {
+                "bytes": 6200,
+                "count": 108,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1601
+                  }
+                ]
+              },
+              {
+                "bytes": 6048,
+                "count": 126,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 510
+                  }
+                ]
+              },
+              {
+                "bytes": 6048,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 473
+                  }
+                ]
+              },
+              {
+                "bytes": 6048,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 460
+                  }
+                ]
+              },
+              {
+                "bytes": 5929,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\logging\\__init__.py",
+                    "line": 1338
+                  }
+                ]
+              },
+              {
+                "bytes": 5824,
+                "count": 59,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 429
+                  }
+                ]
+              },
+              {
+                "bytes": 5824,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 477
+                  }
+                ]
+              },
+              {
+                "bytes": 5824,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 469
+                  }
+                ]
+              }
+            ],
+            "peak": 8645466,
+            "scope": "self_python_allocations_after_command_entry",
+            "status": "measured",
+            "top_scope": "live allocations at window end, not peak allocation attribution",
+            "unit": "bytes"
+          },
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.140625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.703125
+            }
+          },
+          "pid": 16320,
+          "ppid": 13324,
+          "preloaded_modules": 75,
+          "receipt_sha256": "0309df1b84c68dec15b80a343967fd1a2fe6b10c22d5ea3015ca9ca7b598407c",
+          "role": "get-requires-wheel",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.7221505
+        },
+        {
+          "allocation": {
+            "aggregation": "current_and_window_peak",
+            "current": 986543,
+            "end_live_top": [
+              {
+                "bytes": 548722,
+                "count": 4618,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 781
+                  }
+                ]
+              },
+              {
+                "bytes": 50420,
+                "count": 210,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 106
+                  }
+                ]
+              },
+              {
+                "bytes": 15371,
+                "count": 158,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 488
+                  }
+                ]
+              },
+              {
+                "bytes": 9120,
+                "count": 54,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 107
+                  }
+                ]
+              },
+              {
+                "bytes": 6640,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 2893
+                  }
+                ]
+              },
+              {
+                "bytes": 4560,
+                "count": 30,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 128
+                  }
+                ]
+              },
+              {
+                "bytes": 4133,
+                "count": 18,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_local.py",
+                    "line": 59
+                  }
+                ]
+              },
+              {
+                "bytes": 3725,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1415
+                  }
+                ]
+              },
+              {
+                "bytes": 3595,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_abc.py",
+                    "line": 403
+                  }
+                ]
+              },
+              {
+                "bytes": 3584,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\json\\encoder.py",
+                    "line": 74
+                  }
+                ]
+              },
+              {
+                "bytes": 3328,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\json\\decoder.py",
+                    "line": 262
+                  }
+                ]
+              },
+              {
+                "bytes": 3325,
+                "count": 14,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 2238
+                  }
+                ]
+              },
+              {
+                "bytes": 3320,
+                "count": 44,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 24
+                  }
+                ]
+              },
+              {
+                "bytes": 3203,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\contextlib.py",
+                    "line": 105
+                  }
+                ]
+              },
+              {
+                "bytes": 3068,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 3417
+                  }
+                ]
+              },
+              {
+                "bytes": 3016,
+                "count": 32,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 546
+                  }
+                ]
+              },
+              {
+                "bytes": 2957,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1315
+                  }
+                ]
+              },
+              {
+                "bytes": 2915,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_abc.py",
+                    "line": 55
+                  }
+                ]
+              },
+              {
+                "bytes": 2802,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_local.py",
+                    "line": 482
+                  }
+                ]
+              },
+              {
+                "bytes": 2772,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 598
+                  }
+                ]
+              },
+              {
+                "bytes": 2768,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\encodings\\cp1252.py",
+                    "line": 17
+                  }
+                ]
+              },
+              {
+                "bytes": 2759,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 3487
+                  }
+                ]
+              },
+              {
+                "bytes": 2672,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1784
+                  }
+                ]
+              },
+              {
+                "bytes": 2672,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 579
+                  }
+                ]
+              },
+              {
+                "bytes": 2664,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1645
+                  }
+                ]
+              },
+              {
+                "bytes": 2624,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\glob.py",
+                    "line": 358
+                  }
+                ]
+              },
+              {
+                "bytes": 2622,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_abc.py",
+                    "line": 101
+                  }
+                ]
+              },
+              {
+                "bytes": 2607,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\contextlib.py",
+                    "line": 472
+                  }
+                ]
+              },
+              {
+                "bytes": 2560,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\encodings\\cp1252.py",
+                    "line": 25
+                  }
+                ]
+              },
+              {
+                "bytes": 2560,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\__future__.py",
+                    "line": 81
+                  }
+                ]
+              },
+              {
+                "bytes": 2544,
+                "count": 16,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 536
+                  }
+                ]
+              },
+              {
+                "bytes": 2544,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1720
+                  }
+                ]
+              },
+              {
+                "bytes": 2542,
+                "count": 16,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1018
+                  }
+                ]
+              },
+              {
+                "bytes": 2536,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1705
+                  }
+                ]
+              },
+              {
+                "bytes": 2529,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1929
+                  }
+                ]
+              },
+              {
+                "bytes": 2514,
+                "count": 29,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1655
+                  }
+                ]
+              },
+              {
+                "bytes": 2488,
+                "count": 21,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 545
+                  }
+                ]
+              },
+              {
+                "bytes": 2472,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\glob.py",
+                    "line": 554
+                  }
+                ]
+              },
+              {
+                "bytes": 2449,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\contextlib.py",
+                    "line": 89
+                  }
+                ]
+              },
+              {
+                "bytes": 2392,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\encodings\\cp1252.py",
+                    "line": 28
+                  }
+                ]
+              },
+              {
+                "bytes": 2392,
+                "count": 9,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1770
+                  }
+                ]
+              },
+              {
+                "bytes": 2379,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\contextlib.py",
+                    "line": 66
+                  }
+                ]
+              },
+              {
+                "bytes": 2368,
+                "count": 9,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\encodings\\cp1252.py",
+                    "line": 21
+                  }
+                ]
+              },
+              {
+                "bytes": 2312,
+                "count": 9,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\re\\_compiler.py",
+                    "line": 764
+                  }
+                ]
+              },
+              {
+                "bytes": 2304,
+                "count": 9,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1900
+                  }
+                ]
+              },
+              {
+                "bytes": 2304,
+                "count": 9,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1840
+                  }
+                ]
+              },
+              {
+                "bytes": 2288,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 57
+                  }
+                ]
+              },
+              {
+                "bytes": 2280,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 3350
+                  }
+                ]
+              },
+              {
+                "bytes": 2280,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 3136
+                  }
+                ]
+              },
+              {
+                "bytes": 2272,
+                "count": 8,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1737
+                  }
+                ]
+              }
+            ],
+            "peak": 995562,
+            "scope": "self_python_allocations_after_command_entry",
+            "status": "measured",
+            "top_scope": "live allocations at window end, not peak allocation attribution",
+            "unit": "bytes"
+          },
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.0625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.015625
+            }
+          },
+          "pid": 18036,
+          "ppid": 24596,
+          "preloaded_modules": 75,
+          "receipt_sha256": "5e19fb4b46f006e80a0e156371ae5b9af31c48f0fe656f7c587635e8d08b926b",
+          "role": "get-requires-sdist",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.0495691
+        },
+        {
+          "allocation": {
+            "aggregation": "current_and_window_peak",
+            "current": 8023930,
+            "end_live_top": [
+              {
+                "bytes": 4703473,
+                "count": 37136,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 781
+                  }
+                ]
+              },
+              {
+                "bytes": 154144,
+                "count": 1421,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 488
+                  }
+                ]
+              },
+              {
+                "bytes": 141781,
+                "count": 540,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 106
+                  }
+                ]
+              },
+              {
+                "bytes": 46993,
+                "count": 217,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 512
+                  }
+                ]
+              },
+              {
+                "bytes": 45120,
+                "count": 100,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\re\\_compiler.py",
+                    "line": 764
+                  }
+                ]
+              },
+              {
+                "bytes": 44617,
+                "count": 267,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 128
+                  }
+                ]
+              },
+              {
+                "bytes": 40586,
+                "count": 366,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\dataclasses.py",
+                    "line": 498
+                  }
+                ]
+              },
+              {
+                "bytes": 28800,
+                "count": 231,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\headerregistry.py",
+                    "line": 606
+                  }
+                ]
+              },
+              {
+                "bytes": 24968,
+                "count": 136,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 107
+                  }
+                ]
+              },
+              {
+                "bytes": 21577,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\importlib\\metadata\\__init__.py",
+                    "line": 61
+                  }
+                ]
+              },
+              {
+                "bytes": 21551,
+                "count": 185,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1701
+                  }
+                ]
+              },
+              {
+                "bytes": 21474,
+                "count": 95,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 3186
+                  }
+                ]
+              },
+              {
+                "bytes": 19752,
+                "count": 131,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 866
+                  }
+                ]
+              },
+              {
+                "bytes": 18512,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\locale.py",
+                    "line": 1498
+                  }
+                ]
+              },
+              {
+                "bytes": 17994,
+                "count": 183,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1031
+                  }
+                ]
+              },
+              {
+                "bytes": 17562,
+                "count": 197,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 444
+                  }
+                ]
+              },
+              {
+                "bytes": 16808,
+                "count": 247,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 49
+                  }
+                ]
+              },
+              {
+                "bytes": 16262,
+                "count": 43,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 569
+                  }
+                ]
+              },
+              {
+                "bytes": 16017,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\_policybase.py",
+                    "line": 97
+                  }
+                ]
+              },
+              {
+                "bytes": 13464,
+                "count": 258,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\quoprimime.py",
+                    "line": 55
+                  }
+                ]
+              },
+              {
+                "bytes": 13056,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\locale.py",
+                    "line": 880
+                  }
+                ]
+              },
+              {
+                "bytes": 11968,
+                "count": 126,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1617
+                  }
+                ]
+              },
+              {
+                "bytes": 11324,
+                "count": 132,
+                "traceback": [
+                  {
+                    "file": "<owned-output>\\private_raw\\cache\\builds-v0\\.tmpASXLjs\\Lib\\site-packages\\pdm\\backend\\base.py",
+                    "line": 341
+                  }
+                ]
+              },
+              {
+                "bytes": 10976,
+                "count": 117,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 546
+                  }
+                ]
+              },
+              {
+                "bytes": 10240,
+                "count": 168,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 490
+                  }
+                ]
+              },
+              {
+                "bytes": 9976,
+                "count": 58,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 1890
+                  }
+                ]
+              },
+              {
+                "bytes": 9728,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1698
+                  }
+                ]
+              },
+              {
+                "bytes": 9000,
+                "count": 75,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tomllib\\_parser.py",
+                    "line": 180
+                  }
+                ]
+              },
+              {
+                "bytes": 8984,
+                "count": 77,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 545
+                  }
+                ]
+              },
+              {
+                "bytes": 8944,
+                "count": 52,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 275
+                  }
+                ]
+              },
+              {
+                "bytes": 8944,
+                "count": 43,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 57
+                  }
+                ]
+              },
+              {
+                "bytes": 8620,
+                "count": 85,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 123
+                  }
+                ]
+              },
+              {
+                "bytes": 8176,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\ast.py",
+                    "line": 617
+                  }
+                ]
+              },
+              {
+                "bytes": 8064,
+                "count": 144,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 606
+                  }
+                ]
+              },
+              {
+                "bytes": 8016,
+                "count": 61,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\importlib\\metadata\\_collections.py",
+                    "line": 24
+                  }
+                ]
+              },
+              {
+                "bytes": 7626,
+                "count": 120,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\opcode.py",
+                    "line": 19
+                  }
+                ]
+              },
+              {
+                "bytes": 6640,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 2893
+                  }
+                ]
+              },
+              {
+                "bytes": 6598,
+                "count": 23,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 506
+                  }
+                ]
+              },
+              {
+                "bytes": 6512,
+                "count": 1,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\inspect.py",
+                    "line": 2736
+                  }
+                ]
+              },
+              {
+                "bytes": 6512,
+                "count": 1,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\dis.py",
+                    "line": 59
+                  }
+                ]
+              },
+              {
+                "bytes": 6512,
+                "count": 1,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 928
+                  }
+                ]
+              },
+              {
+                "bytes": 6496,
+                "count": 12,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\zipfile\\_path\\__init__.py",
+                    "line": 204
+                  }
+                ]
+              },
+              {
+                "bytes": 6400,
+                "count": 100,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\re\\__init__.py",
+                    "line": 339
+                  }
+                ]
+              },
+              {
+                "bytes": 6368,
+                "count": 82,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 24
+                  }
+                ]
+              },
+              {
+                "bytes": 6272,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 451
+                  }
+                ]
+              },
+              {
+                "bytes": 6225,
+                "count": 120,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1695
+                  }
+                ]
+              },
+              {
+                "bytes": 6200,
+                "count": 108,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1601
+                  }
+                ]
+              },
+              {
+                "bytes": 6048,
+                "count": 126,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 510
+                  }
+                ]
+              },
+              {
+                "bytes": 6048,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 473
+                  }
+                ]
+              },
+              {
+                "bytes": 6048,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 460
+                  }
+                ]
+              }
+            ],
+            "peak": 8727478,
+            "scope": "self_python_allocations_after_command_entry",
+            "status": "measured",
+            "top_scope": "live allocations at window end, not peak allocation attribution",
+            "unit": "bytes"
+          },
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.703125
+            }
+          },
+          "pid": 28384,
+          "ppid": 26444,
+          "preloaded_modules": 75,
+          "receipt_sha256": "0b25294811a88a71c5dbd23e0287a4abae731cc8536a8d4bffefd75e40a0003e",
+          "role": "build-wheel",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.7361051
+        },
+        {
+          "allocation": {
+            "aggregation": "current_and_window_peak",
+            "current": 9278976,
+            "end_live_top": [
+              {
+                "bytes": 4137552,
+                "count": 31998,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 781
+                  }
+                ]
+              },
+              {
+                "bytes": 834720,
+                "count": 7522,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 488
+                  }
+                ]
+              },
+              {
+                "bytes": 243648,
+                "count": 1269,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\copyreg.py",
+                    "line": 99
+                  }
+                ]
+              },
+              {
+                "bytes": 154421,
+                "count": 1118,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 798
+                  }
+                ]
+              },
+              {
+                "bytes": 147964,
+                "count": 616,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\headerregistry.py",
+                    "line": 606
+                  }
+                ]
+              },
+              {
+                "bytes": 147242,
+                "count": 561,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 106
+                  }
+                ]
+              },
+              {
+                "bytes": 133356,
+                "count": 1268,
+                "traceback": [
+                  {
+                    "file": "<frozen ntpath>",
+                    "line": 167
+                  }
+                ]
+              },
+              {
+                "bytes": 116176,
+                "count": 3472,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+                    "line": 2172
+                  }
+                ]
+              },
+              {
+                "bytes": 81216,
+                "count": 1269,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+                    "line": 964
+                  }
+                ]
+              },
+              {
+                "bytes": 71008,
+                "count": 1268,
+                "traceback": [
+                  {
+                    "file": "<owned-output>\\private_raw\\cache\\builds-v0\\.tmptUkHr2\\Lib\\site-packages\\pdm\\backend\\base.py",
+                    "line": 221
+                  }
+                ]
+              },
+              {
+                "bytes": 71008,
+                "count": 1268,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+                    "line": 2181
+                  }
+                ]
+              },
+              {
+                "bytes": 47657,
+                "count": 213,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 512
+                  }
+                ]
+              },
+              {
+                "bytes": 42810,
+                "count": 256,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 128
+                  }
+                ]
+              },
+              {
+                "bytes": 42768,
+                "count": 93,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\re\\_compiler.py",
+                    "line": 764
+                  }
+                ]
+              },
+              {
+                "bytes": 40608,
+                "count": 1269,
+                "traceback": [
+                  {
+                    "file": "<owned-output>\\private_raw\\cache\\builds-v0\\.tmptUkHr2\\Lib\\site-packages\\pdm\\backend\\utils.py",
+                    "line": 174
+                  }
+                ]
+              },
+              {
+                "bytes": 40608,
+                "count": 1269,
+                "traceback": [
+                  {
+                    "file": "<owned-output>\\private_raw\\cache\\builds-v0\\.tmptUkHr2\\Lib\\site-packages\\pdm\\backend\\sdist.py",
+                    "line": 38
+                  }
+                ]
+              },
+              {
+                "bytes": 38874,
+                "count": 352,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\dataclasses.py",
+                    "line": 498
+                  }
+                ]
+              },
+              {
+                "bytes": 36888,
+                "count": 1,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+                    "line": 2193
+                  }
+                ]
+              },
+              {
+                "bytes": 33008,
+                "count": 4,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\gzip.py",
+                    "line": 240
+                  }
+                ]
+              },
+              {
+                "bytes": 26208,
+                "count": 143,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 107
+                  }
+                ]
+              },
+              {
+                "bytes": 21551,
+                "count": 185,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1701
+                  }
+                ]
+              },
+              {
+                "bytes": 21474,
+                "count": 95,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 3186
+                  }
+                ]
+              },
+              {
+                "bytes": 20816,
+                "count": 11,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\dataclasses.py",
+                    "line": 197
+                  }
+                ]
+              },
+              {
+                "bytes": 18512,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\locale.py",
+                    "line": 1498
+                  }
+                ]
+              },
+              {
+                "bytes": 18240,
+                "count": 120,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 866
+                  }
+                ]
+              },
+              {
+                "bytes": 16128,
+                "count": 237,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 49
+                  }
+                ]
+              },
+              {
+                "bytes": 16017,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\_policybase.py",
+                    "line": 97
+                  }
+                ]
+              },
+              {
+                "bytes": 15974,
+                "count": 42,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 569
+                  }
+                ]
+              },
+              {
+                "bytes": 15951,
+                "count": 165,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\typing.py",
+                    "line": 1031
+                  }
+                ]
+              },
+              {
+                "bytes": 13670,
+                "count": 162,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 444
+                  }
+                ]
+              },
+              {
+                "bytes": 13464,
+                "count": 258,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\quoprimime.py",
+                    "line": 55
+                  }
+                ]
+              },
+              {
+                "bytes": 13056,
+                "count": 2,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\locale.py",
+                    "line": 880
+                  }
+                ]
+              },
+              {
+                "bytes": 12760,
+                "count": 145,
+                "traceback": [
+                  {
+                    "file": "<frozen abc>",
+                    "line": 123
+                  }
+                ]
+              },
+              {
+                "bytes": 11232,
+                "count": 120,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1617
+                  }
+                ]
+              },
+              {
+                "bytes": 11232,
+                "count": 1,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+                    "line": 2361
+                  }
+                ]
+              },
+              {
+                "bytes": 9976,
+                "count": 58,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 1890
+                  }
+                ]
+              },
+              {
+                "bytes": 9873,
+                "count": 162,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\collections\\__init__.py",
+                    "line": 490
+                  }
+                ]
+              },
+              {
+                "bytes": 9728,
+                "count": 13,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap_external>",
+                    "line": 1698
+                  }
+                ]
+              },
+              {
+                "bytes": 9000,
+                "count": 75,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tomllib\\_parser.py",
+                    "line": 180
+                  }
+                ]
+              },
+              {
+                "bytes": 8944,
+                "count": 52,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 275
+                  }
+                ]
+              },
+              {
+                "bytes": 8880,
+                "count": 77,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\ast.py",
+                    "line": 84
+                  }
+                ]
+              },
+              {
+                "bytes": 8176,
+                "count": 87,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 546
+                  }
+                ]
+              },
+              {
+                "bytes": 8176,
+                "count": 10,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\ast.py",
+                    "line": 617
+                  }
+                ]
+              },
+              {
+                "bytes": 7904,
+                "count": 76,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\ast.py",
+                    "line": 76
+                  }
+                ]
+              },
+              {
+                "bytes": 7904,
+                "count": 76,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\ast.py",
+                    "line": 72
+                  }
+                ]
+              },
+              {
+                "bytes": 7728,
+                "count": 56,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\importlib\\metadata\\_collections.py",
+                    "line": 24
+                  }
+                ]
+              },
+              {
+                "bytes": 7626,
+                "count": 120,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\opcode.py",
+                    "line": 19
+                  }
+                ]
+              },
+              {
+                "bytes": 7616,
+                "count": 136,
+                "traceback": [
+                  {
+                    "file": "<frozen importlib._bootstrap>",
+                    "line": 606
+                  }
+                ]
+              },
+              {
+                "bytes": 6886,
+                "count": 24,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\enum.py",
+                    "line": 506
+                  }
+                ]
+              },
+              {
+                "bytes": 6864,
+                "count": 33,
+                "traceback": [
+                  {
+                    "file": "<home>\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\functools.py",
+                    "line": 57
+                  }
+                ]
+              }
+            ],
+            "peak": 11261563,
+            "scope": "self_python_allocations_after_command_entry",
+            "status": "measured",
+            "top_scope": "live allocations at window end, not peak allocation attribution",
+            "unit": "bytes"
+          },
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.578125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 1.875
+            }
+          },
+          "pid": 4536,
+          "ppid": 4360,
+          "preloaded_modules": 75,
+          "receipt_sha256": "9a7bfef2b103bfd783bded5a93511008d1930e16088cfe6cd263e573818f8300",
+          "role": "build-sdist",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 2.9764293
+        }
+      ],
+      "coverage": "complete",
+      "original_status": "failed",
+      "result_sha256": "e641fa3c905846f3a0c374a6abf326d8aedcbeda6d9ef57f118972362b633517",
+      "returncode": 0,
+      "source_manifest_files": 3233,
+      "source_native_mode_proxy_differences": 3233,
+      "strict_pass": false,
+      "timed_out": false,
+      "uninstrumented": false
+    },
+    "resource": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "997c3dc21ab527a36d89d24236b37ef9ab41a52ee48316f5cc61bb17199ac4b6"
+      },
+      "children": [
+        {
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.515625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.96875
+            }
+          },
+          "pid": 20420,
+          "ppid": 26968,
+          "preloaded_modules": 52,
+          "python_operations": {
+            "reason": "Not kernel I/O, stat coverage, physical reads, latency or scanner events",
+            "requested": true,
+            "scope": "self Python audit events only; no arguments retained",
+            "status": "measured",
+            "value": {
+              "open": 1505,
+              "os.listdir": 30,
+              "os.mkdir": 7,
+              "os.rename": 32,
+              "os.scandir": 438
+            }
+          },
+          "receipt_sha256": "52f8034f956595546974d1a831848fe9a350cb867e9d53d471ce1e69e005955a",
+          "role": "build-sdist",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 2.1261564
+        },
+        {
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.15625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.109375
+            }
+          },
+          "pid": 22124,
+          "ppid": 28632,
+          "preloaded_modules": 52,
+          "python_operations": {
+            "reason": "Not kernel I/O, stat coverage, physical reads, latency or scanner events",
+            "requested": true,
+            "scope": "self Python audit events only; no arguments retained",
+            "status": "measured",
+            "value": {
+              "open": 240,
+              "os.listdir": 29,
+              "os.mkdir": 7,
+              "os.rename": 34
+            }
+          },
+          "receipt_sha256": "7f7f5480a622d70491eb2928ddc3ef50db9d086f3fb43d6e609d1e0e7da39f3f",
+          "role": "get-requires-wheel",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.4164689
+        },
+        {
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.203125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.109375
+            }
+          },
+          "pid": 22964,
+          "ppid": 8744,
+          "preloaded_modules": 52,
+          "python_operations": {
+            "reason": "Not kernel I/O, stat coverage, physical reads, latency or scanner events",
+            "requested": true,
+            "scope": "self Python audit events only; no arguments retained",
+            "status": "measured",
+            "value": {
+              "open": 217,
+              "os.listdir": 31,
+              "os.mkdir": 3,
+              "os.remove": 1,
+              "os.rename": 1,
+              "os.scandir": 24
+            }
+          },
+          "receipt_sha256": "68858f41d085d66f962693f32f7de7d52fdec1a254c302a116600a2603b251b3",
+          "role": "build-wheel",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.4692995
+        },
+        {
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.0
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.0625
+            }
+          },
+          "pid": 27896,
+          "ppid": 23820,
+          "preloaded_modules": 52,
+          "python_operations": {
+            "reason": "Not kernel I/O, stat coverage, physical reads, latency or scanner events",
+            "requested": true,
+            "scope": "self Python audit events only; no arguments retained",
+            "status": "measured",
+            "value": {
+              "open": 31,
+              "os.listdir": 7,
+              "os.mkdir": 1,
+              "os.rename": 1
+            }
+          },
+          "receipt_sha256": "bd110fbb65a2ea9f1882f35d2149fd189bf965066729bcdcab896713d8e91aa2",
+          "role": "get-requires-sdist",
+          "runtime_platform": "win-arm64",
+          "wall_seconds_analysis_only": 0.057266
+        }
+      ],
+      "coverage": "complete",
+      "original_status": "failed",
+      "result_sha256": "e2ebd0663ca82543ee4bb0ff7bc0b0eefcdea0167f5a5ab22e5591618b6a46c1",
+      "returncode": 0,
+      "source_manifest_files": 3233,
+      "source_native_mode_proxy_differences": 3233,
+      "strict_pass": false,
+      "timed_out": false,
+      "uninstrumented": false
+    }
+  },
+  "performance_eligible": false,
+  "replacement_builds": 0,
+  "root_freeze": "d3c9c1782a6da9ad222cd6155fce33d9dd2523ef",
+  "schema": 1,
+  "snapshot_and_isolation_audit": {
+    "actions_node": "unavailable/null: separate receipt not supplied locally",
+    "backend_location": "all PDM backend module paths under fresh child sys.prefix in owned output, not controller site-packages",
+    "checked_children": 16,
+    "io": "all six native process I/O counters measured; operations/bytes, self scope, lifetime cumulative; no disk/latency inference",
+    "memory": "RSS/peak measured bytes; peaks lifetime scope",
+    "native_callback_invoked": false,
+    "native_trace_requested": true,
+    "runtime_platform": "win-arm64"
+  },
+  "stage_receipt_sha256": "063634fdc740a4d8846490156d519adc29a86141a791ac56a425703e627f2f54",
+  "status": "partial",
+  "strict_artifact_status": "failed",
+  "upload_privacy": {
+    "allowed_suffixes": [
+      ".json",
+      ".log"
+    ],
+    "environment_policy": "explicit whitelist only; no PATH dump",
+    "files": 34,
+    "generated_command_code_found": false,
+    "raw_pstats_or_native_traces": false,
+    "status": "checked"
+  }
+}

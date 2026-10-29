@@ -94,7 +94,7 @@ Default retention is three days; deletion/upload enforcement belongs to the
 caller. Noncomplete reports return exit status 1, including known strict-mode
 failures; do not turn that status into equivalence.
 
-## First-pass validation and remaining integration gate
+## Validation and remaining integration gates
 
 Focused stdlib tests exercise role classification, failed/missing/stale/end
 receipts, nonadditive clock/CPU scope, unavailable metrics, redaction,
@@ -102,13 +102,56 @@ private/upload separation and all three profilers against labelled unit
 children. Unit backend/platform doubles prove instrumentation machinery only,
 not actual uv/PDM propagation. Ruff and static compilation are required.
 
-Platform integration candidate: `fdaace345c8f53a855fb398ef764b9113ffb27d5`.
-The full stock uv isolated PDM dry run, native Windows artifact/resource
-receipts and all four role propagation remain an integration gate; no
-production proof is claimed from a unit double. macOS remains runner-only.
-Native capture remains explicitly unavailable until a safe supported
-owned-workload exporter exists. No CI, trace, push or PR was run here.
+Real integration used immutable root
+`d3c9c1782a6da9ad222cd6155fce33d9dd2523ef` (collector `028a8595`, platform
+`fdaace345c8f53a855fb398ef764b9113ffb27d5`) staged under
+`C:\fastapi-arm-build-lab\diagnostics-integration-028a8595\code`.
+Canonical original source Git objects were copied to that mirror before
+execution. Existing locked C tool environment and wheelhouse were read-only;
+all build inputs, interpreters, cache, source/out/tmp were on C: NTFS.
 
-Confidence: **high** in unit-tested receipt/privacy/status mechanics;
-**medium** in intended stock-child propagation until the real integrated
-dry run; **low/unestablished** in cross-platform causes or performance parity.
+Exact invocation (from the C code mirror; the prefixes below are literal):
+
+```powershell
+$base = 'C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e'
+$lab = 'C:\fastapi-arm-build-lab\diagnostics-integration-028a8595'
+$env:DIAG_NATIVE_TRACES_REQUESTED = 'true'
+& "$base\env\Scripts\python.exe" -B '.\Generated Files\arm-build\diagnostics\collect.py' --uv "$base\uv.exe" --source-checkout "$lab\code" --wheelhouse "$base\wheelhouse" --output "$lab\attempt-001" --context-repeats 3
+```
+
+Only **one** real attempt ran: one warmup, three context samples and four
+separate instrumented builds. All eight uv commands returned zero, with
+established ownership, no survivors/timeouts and complete cleanup.
+Every instrumented pass had the four required actual roles: **16 validated
+child start/end pairs**, complete parsed cProfile/callers, per-child numeric
+PDM importtime, allocation sites/current/peak, and resource receipts. Each
+backend was PDM 2.5.0 under its fresh isolated prefix, not controller
+site-packages; no controller psutil modules were preloaded. Counters were
+verified self/all-thread user/kernel seconds, native I/O operations/bytes,
+RSS and lifetime peak bytes. Bootstrap/window/export ordering was checked.
+The missing local Actions Node receipt is explicitly null/unavailable.
+
+The original attempt is retained **failed**, not rewritten. Stock uv adds
+an output `.gitignore` containing exactly one `*` byte; initial membership
+validation incorrectly rejected it before artifact comparison. The collector
+fix permits only that exact known marker and tests rejection of other bytes.
+An independent postcheck re-read all existing outputs and receipts using the
+fixed validator, without additional builds or replacement context samples.
+Every strict artifact comparison remains **FAIL for exactly five sdist
+executable-mode differences**, no content differences. The full source
+manifest also retains 3,233 Windows native-stat permission-proxy differences
+per extraction; these are not silently normalized into POSIX equivalence.
+
+Evidence: `COLLECTOR-INTEGRATION-001.json`. Original stdout/stderr, original
+results/report, profiles and source/out trees remain under
+`$lab\attempt-001`; postcheck data is under `$lab\postcheck-001`.
+Upload review found only allowed JSON/redacted logs, no raw pstats/native
+traces, no generated command text and no full environment/PATH dump.
+No native callback/build/recording occurred: safe native capture was
+requested and explicitly unavailable. No CI, push or PR was run.
+
+The final workflow-freeze smoke and native Mac execution remain separate
+gates. Native collection still needs a safe supported owned-workload exporter.
+Confidence: **high** in real stock-child coverage and tested mechanics;
+**medium** in interpretation under declared bootstrap/profiling overhead;
+**low/unestablished** in cross-platform causes or performance parity.

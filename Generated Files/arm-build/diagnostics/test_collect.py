@@ -187,6 +187,20 @@ class CollectorTests(unittest.TestCase):
         with self.assertRaises((ValueError, EOFError, TypeError)):
             collect.profile_export(bad, ())
 
+    def test_stock_uv_output_marker_is_not_an_artifact(self):
+        (self.root / "package.whl").write_bytes(b"wheel")
+        (self.root / "package.tar.gz").write_bytes(b"sdist")
+        # Use a separate output directory from the test's receipt/upload dirs.
+        output = self.root / "out"
+        output.mkdir()
+        for name in ("package.whl", "package.tar.gz"):
+            shutil.move(self.root / name, output / name)
+        (output / ".gitignore").write_bytes(b"*")
+        collect.verify_artifact_membership(output)
+        (output / ".gitignore").write_bytes(b"unexpected content")
+        with self.assertRaisesRegex(ValueError, "artifact membership"):
+            collect.verify_artifact_membership(output)
+
     def test_setup_failure_preserves_private_upload_boundary(self):
         destination = self.root / "failed-run"
         result = collect.main(
