@@ -15,18 +15,24 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 | Strict caller receipts and code identities | PP001/PP002 independently closed | Preserve all guards when updating the wrapper argv contract |
 | Process-family ownership | native Windows proof passed | Named Job Object and cleanup fixes verified; native Mac and hosted nested-job behavior remain runner-only |
 | Explicit caller bytecode policy | CW001 independently closed | `63b17359` passes `-B` explicitly; real interpreter probes confirm effective suppression |
-| Actual sparse input deployment | inventory repair committed | Real checkout exposed subtree-relative `ls-tree`; `d5536b59` adds `--full-tree` and a real-Git regression; independent sparse rerun active |
-| Wrapper/controller integration | **CW002 blocks readiness** | Exact argv validation still expects old flags; harness owner repairing without relaxing lifecycle checks |
-| Full fixed-schedule local campaign | preparing | All timed runtime, source, code, temp, cache and outputs on C:; no fake Mac comparison |
+| Actual sparse input deployment | passed locally | Frozen `102ddabc` actual receipts validate 22 inputs and 3,233 canonical source files; C: NTFS placement recorded |
+| Wrapper/controller integration | CW002 independently closed | `d339ef22` exact argv repair independently verified against frozen master; lifecycle guards retained |
+| Final v4 integration fixtures | bounded independent pass | `VERIFY-V4.md`; native Mac and complete real package campaign remain outside that proof |
+| Managed-venv normal process exit | **LOCAL-OWNERSHIP-004 blocks readiness** | Real C: helper test exits 0 but reports `survivors=true`; producer and independent reviewer investigating, not waived |
+| Official uv version preflight | **LOCAL-UV-VERSION-002 blocks readiness** | Exact full-string comparison rejects correct 0.13.6 with official build metadata; minimal parser repair in progress |
+| Full fixed-schedule local campaign | paused before any samples | Original failures retained; no retries/replacements, fake Mac comparison or performance claim |
 | Matched new native ARM CI | gated | Only after local integration and artifact gates pass; no automatic retry |
 
 | Active bounded lane | Branch / worktree suffix | Owned output |
 |---|---|---|
-| Controller integration repair | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | CW002 contract and focused regressions |
-| Independent sparse deployment proof | `review/arm-checkout-readiness` / `checkout-readiness` | SHA-scoped real-Git/input receipts |
-| Integrated C: readiness | `investigate/arm-local-paired-readiness` / `local-paired-readiness` | Preparation now; complete campaign only after frozen repaired inputs |
+| Controller preflight repair | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |
+| Ownership diagnosis and independent review | `investigate/arm-process-lifecycle`, `review/arm-process-containment` | Real managed-venv normal-exit counterexample; no guard weakening |
+| Compression-path research | `investigate/arm-compression-path` / `compression-path` | Primary-source compiler/ISA evidence; no new timed work or readiness requirement |
+| Integrated C: readiness (paused) | `investigate/arm-local-paired-readiness` / `local-paired-readiness` | Prepared inputs retained; wait for repaired frozen snapshot and explicit master go |
 
 These are independent preparation/verification lanes. Only the local-readiness lane may run the full C: campaign. Workers do not push, dispatch CI, change security controls or modify the read-only original source worktree. No additional full-agent coordinator is needed.
+
+**Fork budget protection:** read-only inspection found two ARM experiment runs and three incidental push-triggered Ubuntu Conflict detector runs. The latter's most recent job lasted about three seconds, but it was still an unnecessary allocation. The master disabled **only** `detect-conflicts.yml` in `yeelam-gordon/fastapi` through the workflow API and verified `disabled_manually`; no upstream workflow file was changed. The manual ARM experiment remains active. No new experiment has been dispatched.
 
 ### Earlier isolated-lane history
 
