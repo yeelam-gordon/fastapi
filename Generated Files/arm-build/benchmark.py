@@ -290,7 +290,10 @@ def execute(args: argparse.Namespace) -> int:
             "harness_snapshot": "harness.py",
             "cpu": cpu_metadata(),
             "source_checkout": str(source),
-            "source_policy": "git archive HEAD; uncommitted/untracked files excluded",
+            "source_policy": (
+                "git -c core.autocrlf=false archive HEAD; "
+                "uncommitted/untracked files excluded; canonical Git text bytes"
+            ),
             "cache_policy": (
                 "dedicated shared cache; baseline and candidate online preparation, "
                 "then offline measured builds; no cache clearing; NOT cold-cache"
@@ -334,7 +337,15 @@ def execute(args: argparse.Namespace) -> int:
         )
         source_tar = output / "source.tar"
         recorder.run(
-            ["git", "archive", "--format=tar", f"--output={source_tar}", sha],
+            [
+                "git",
+                "-c",
+                "core.autocrlf=false",
+                "archive",
+                "--format=tar",
+                f"--output={source_tar}",
+                sha,
+            ],
             source,
             "source-snapshot",
             env,
@@ -342,7 +353,29 @@ def execute(args: argparse.Namespace) -> int:
         snapshot = output / "source"
         snapshot.mkdir()
         with tarfile.open(source_tar) as archive:
+            source_manifest = {}
+            for info in archive.getmembers():
+                if info.isfile():
+                    stream = archive.extractfile(info)
+                    assert stream is not None
+                    source_manifest[info.name] = {
+                        "sha256": digest(stream.read()),
+                        "mode": info.mode,
+                    }
             archive.extractall(snapshot, filter="data")
+        source_manifest_path = output / "source-manifest.json"
+        source_manifest_path.write_text(
+            json.dumps(source_manifest, sort_keys=True, indent=2) + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        recorder.report["metadata"].update(
+            {
+                "source_manifest": "source-manifest.json",
+                "source_manifest_sha256": digest(source_manifest_path.read_bytes()),
+                "source_manifest_scope": "regular file contents and Git archive permission bits",
+            }
+        )
         import tomllib
 
         config = tomllib.loads((snapshot / "pyproject.toml").read_text("utf-8"))

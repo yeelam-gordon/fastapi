@@ -122,6 +122,53 @@ class CompareTests(unittest.TestCase):
     def compare(self):
         return compare_ci.compare(self.windows, self.macos)
 
+    def save_harness(self, root, raw):
+        (root / "ci" / "harness.py").write_bytes(raw)
+        self.mutate(
+            root,
+            lambda report: report["metadata"].update(
+                harness_sha256=hashlib.sha256(raw).hexdigest()
+            ),
+        )
+
+    def test_harness_newlines_only_normalization(self):
+        self.save_harness(self.windows, b"def build():\r\n    return 0\r\n")
+        self.save_harness(self.macos, b"def build():\n    return 0\n")
+        result = self.compare()
+        self.assertEqual(result["status"], "unknown")
+        checked = result["harness_comparison"]
+        self.assertEqual(checked["status"], "passed")
+        self.assertFalse(checked["raw_bytes_equal"])
+        self.assertEqual(
+            checked["windows"]["normalized_sha256"],
+            checked["macos"]["normalized_sha256"],
+        )
+        self.assertNotEqual(checked["windows"]["sha256"], checked["macos"]["sha256"])
+        self.assertEqual(checked["windows"]["crlf_pairs"], 2)
+
+    def test_harness_other_byte_changes_rejected(self):
+        self.save_harness(self.windows, b"def build():\r\n    return 0\r\n")
+        for raw in (
+            b"def build():\n    return 1\n",
+            b"def build():\n    return 0 \n",
+            b"def build():\r    return 0\r",
+        ):
+            with self.subTest(raw=raw):
+                self.save_harness(self.macos, raw)
+                result = self.compare()
+                self.assertEqual(result["status"], "failed")
+                self.assertIn("harness mismatch", result["error"])
+                self.assertEqual(result["harness_comparison"]["status"], "failed")
+
+    def test_harness_raw_digest_checked_before_normalization(self):
+        self.save_harness(self.windows, b"print('build')\r\n")
+        self.save_harness(self.macos, b"print('build')\n")
+        (self.windows / "ci" / "harness.py").write_bytes(b"print('build')\n")
+        result = self.compare()
+        self.assertEqual(result["status"], "failed")
+        self.assertIn("harness.py digest mismatch", result["error"])
+        self.assertNotIn("harness_comparison", result)
+
     def test_ratios_ranges_and_unknown_archives(self):
         result = self.compare()
         self.assertEqual(result["status"], "unknown")

@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "python": "3.13.15 (main, Sep 29 2026, 14:49:54) [Clang 22.1.3 ]",
+  "machine": "arm64",
+  "interpreter_platform": "macosx-11.0-arm64",
+  "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+  "logical_cores": 3,
+  "runner_image": "20260907.0337.1",
+  "runner_label": "macOS",
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "pip",
+        "install",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--require-hashes",
+        "--only-binary",
+        ":all:",
+        "-r",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/smoke.lock"
+      ],
+      "phase": "smoke-dependencies",
+      "returncode": 0,
+      "seconds": 0.2593149590000223
+    },
+    {
+      "argv": [
+        "uv",
+        "pip",
+        "install",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-deps",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/prepare-baseline/fastapi-0.162.0-py3-none-any.whl"
+      ],
+      "phase": "install-artifact",
+      "returncode": 0,
+      "seconds": 0.026951249999996207
+    },
+    {
+      "argv": [
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "-I",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/bootstrap/artifact_smoke.py"
+      ],
+      "phase": "artifact-smoke",
+      "returncode": 0,
+      "seconds": 0.6225243330000012
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+Using CPython 3.13.15 interpreter at: C:\a\_temp\uv-python-dir\cpython-3.13.15-windows-aarch64-none\python.exe
+Creating virtual environment at: Generated Files\arm-build\.venv
+Activate with: & "Generated Files\arm-build\.venv\Scripts\activate"

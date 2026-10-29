@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "finding": "git archive source bytes depend on core.autocrlf; explicit false matches canonical Git blobs",
+  "checks": [
+    {
+      "member": "fastapi/applications.py",
+      "canonical_matches_git_blob": true,
+      "canonical_crlf_count": 0,
+      "earlier_archive_crlf_count": 4816,
+      "earlier_archive_matches_canonical": false
+    },
+    {
+      "member": "README.md",
+      "canonical_matches_git_blob": true,
+      "canonical_crlf_count": 0,
+      "earlier_archive_crlf_count": 533,
+      "earlier_archive_matches_canonical": false
+    },
+    {
+      "member": "scripts/test.sh",
+      "canonical_matches_git_blob": true,
+      "canonical_crlf_count": 0,
+      "earlier_archive_crlf_count": 7,
+      "earlier_archive_matches_canonical": false
+    }
+  ]
+}

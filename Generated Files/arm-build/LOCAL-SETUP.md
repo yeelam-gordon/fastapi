@@ -13,11 +13,11 @@ The native interpreter already existed at `C:\Program Files\Python313-arm64\pyth
 | `cProfile` / `pstats` | Python standard library | Direct PDM phase profile executed, artifacts checked against baseline |
 | WPR / WPA | Existing Windows installations | `wpr -profiles` succeeds; no shared trace session was started |
 
-`build`, `psutil` and the full runtime/test dependencies are prepared in manifests but **not installed locally** because PyPI binary download TLS fails. Local measurement requires only the installed PDM backend and uv. The optional benchmark `--importtime` frontend diagnostic requires the additional `build` package; use the executed direct-backend profiler instead on this host.
+The initial local measurements required only PDM and uv because PyPI wheel TLS failed. After the first successful Windows CI job exported a wheelhouse, the complete pinned tool/minimal-runtime set was restored offline into `tools\official-tool-environment`, including native `build`, `psutil`, pytest and Ruff. `pip check` and an installed-FastAPI smoke passed. The original measured `.venv` was retained, so its provenance was not silently changed. The full repository test dependencies/suite were not installed or run.
 
 ## Reproduce the successful PDM bootstrap
 
-Use the already verified uv binary, or obtain it through the checksum-checking first part of `provision.ps1`. The complete provisioning script requires registry access or the full CI wheelhouse; the smaller source bootstrap below is the path actually used locally.
+Use the already verified uv binary, or obtain it through the checksum-checking first part of `provision.ps1`. The complete provisioning script requires registry access or the full CI wheelhouse; the smaller source bootstrap below is the path used for the initial local benchmarks.
 
 ```powershell
 $root = 'Q:\fastapi\Generated Files\arm-build'

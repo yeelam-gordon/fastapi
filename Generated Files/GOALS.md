@@ -1,8 +1,6 @@
 # Goals: FastAPI build performance on Windows ARM
 
-## Project relationship and authority
-
-This is an independent performance investigation, not an upstream FastAPI initiative. No contributor or maintainer authority is assumed. Keep experimental changes local or on the owned fork; opening an upstream pull request requires an explicit user request.
+The project relationship, original circumstances, login-assistance rule and limited-CI-capacity gate are owned by [CIRCUMSTANCES.md](CIRCUMSTANCES.md).
 
 ## Ultimate outcomes
 
@@ -22,10 +20,6 @@ These are targets, not already achieved results. Missing Mac access must not pre
 
 ## Required deliverables
 
-- Keep persona, goals, research, actions, scripts and evidence under `Generated Files`.
-- Install missing native Python/build/profiling tools as needed; verify existing installations before replacing them.
-- Prepare extra CI timing, architecture and artifact evidence on explicit ARM runners. The executable workflow necessarily lives in `.github\workflows`; its research and evidence belong here.
-- Use independent subagents for substantial parallel work and verification, following the supplied graph-routing instructions.
-- Request required login or command assistance through a dialog while continuing independent useful work.
+Deliver measured, artifact-equivalent optimizations, a reproducible native toolchain, explicit ARM CI timing/architecture evidence and honest findings. Follow the storage, assistance and CI-budget constraints in [CIRCUMSTANCES.md](CIRCUMSTANCES.md).
 
 The execution state is owned by [arm-build/WORKBOARD.md](arm-build/WORKBOARD.md); measured outcomes and limits are in [arm-build/FINDINGS.md](arm-build/FINDINGS.md).

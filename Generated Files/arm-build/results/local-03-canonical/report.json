@@ -1,0 +1,710 @@
+{
+  "status": "passed",
+  "metadata": {
+    "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+    "executable": "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "ARM64",
+    "interpreter_platform": "win-arm64",
+    "harness_sha256": "43ce4b7cee546194fed58e53a8167103fa9f25cdb6beaef6a404cd322dfac9aa",
+    "harness_snapshot": "harness.py",
+    "cpu": {
+      "logical_count": 16,
+      "processor": "ARMv8 (64-bit) Family 8 Model D49 Revision   0, MICROSOFT CORPORATION",
+      "identifier": "ARMv8 (64-bit) Family 8 Model D49 Revision   0, MICROSOFT CORPORATION"
+    },
+    "source_checkout": "Q:\\fastapi",
+    "source_policy": "git -c core.autocrlf=false archive HEAD; uncommitted/untracked files excluded; canonical Git text bytes",
+    "cache_policy": "dedicated shared cache; baseline and candidate online preparation, then offline measured builds; no cache clearing; NOT cold-cache; preparation uses a local wheelhouse, not registry downloads",
+    "environment_policy": "inherit except UV_*, PIP_*, PYTHONPATH, PYTHONHOME; PYTHONNOUSERSITE=1; uv --no-config; explicit harness interpreter",
+    "candidate_scope": "diagnostic isolation removal, SAME pdm.backend",
+    "repeats": 5,
+    "uv": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)",
+    "git_sha": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+    "git_status": " M .github/workflows/arm-build-experiment.yml\n M \"Generated Files/GOALS.md\"\n M \"Generated Files/arm-build/CI.md\"\n M \"Generated Files/arm-build/FINDINGS.md\"\n M \"Generated Files/arm-build/README.md\"\n M \"Generated Files/arm-build/benchmark.py\"\n M \"Generated Files/arm-build/compare_ci.py\"\n M \"Generated Files/arm-build/test_compare_ci.py\"\n?? \"Generated Files/CIRCUMSTANCES.md\"\n?? \"Generated Files/arm-build/NEXT-EXPERIMENTS.md\"\n?? \"Generated Files/arm-build/results/ci-40814042898/\"\n?? \"Generated Files/arm-build/results/ci-40814588064/\"\n?? \"Generated Files/arm-build/results/environment/ci-run-40814042898-watch.log\"\n?? \"Generated Files/arm-build/results/environment/ci-run-40814588064-watch.log\"\n?? \"Generated Files/arm-build/results/environment/source-newline-validation.json\"\n?? \"Generated Files/arm-build/results/local-03-canonical/\"\n",
+    "source_manifest": "source-manifest.json",
+    "source_manifest_sha256": "943fd9bf0a02d0dfcc85faf7d3561adcd13b04a40578c301e3b3fdeb0b40f73e",
+    "source_manifest_scope": "regular file contents and Git archive permission bits",
+    "build_system": {
+      "requires": [
+        "pdm-backend"
+      ],
+      "build-backend": "pdm.backend"
+    },
+    "installed_versions": {
+      "pdm-backend": "2.5.0",
+      "pip": "26.2.1"
+    },
+    "backend_requirements": [
+      "importlib-metadata>=3.6; python_version < \"3.10\""
+    ],
+    "constraints": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+    "constraints_sha256": "725ed4f3afaf8ba216a55b26236f5d1b5b7ecd8033476220282af99144030b8f",
+    "constraints_scope": "all installed distributions, including backend/tools",
+    "bootstrap_policy": "caller preinstalled dependencies; not included in build timing",
+    "wheelhouse": "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse"
+  },
+  "commands": [
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "--version"
+      ],
+      "cwd": "Q:\\fastapi",
+      "phase": "uv-version",
+      "stdout": "logs\\000-uv-version.stdout.log",
+      "stderr": "logs\\000-uv-version.stderr.log",
+      "started_utc": "2026-10-29T04:01:26Z",
+      "returncode": 0,
+      "wall_seconds": 0.11098719999972673
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "--help"
+      ],
+      "cwd": "Q:\\fastapi",
+      "phase": "uv-help",
+      "stdout": "logs\\001-uv-help.stdout.log",
+      "stderr": "logs\\001-uv-help.stderr.log",
+      "started_utc": "2026-10-29T04:01:26Z",
+      "returncode": 0,
+      "wall_seconds": 0.11017660000106844
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "Q:\\fastapi",
+      "phase": "git-head",
+      "stdout": "logs\\002-git-head.stdout.log",
+      "stderr": "logs\\002-git-head.stderr.log",
+      "started_utc": "2026-10-29T04:01:26Z",
+      "returncode": 0,
+      "wall_seconds": 0.08643500000107451
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "cwd": "Q:\\fastapi",
+      "phase": "git-status",
+      "stdout": "logs\\003-git-status.stdout.log",
+      "stderr": "logs\\003-git-status.stderr.log",
+      "started_utc": "2026-10-29T04:01:26Z",
+      "returncode": 0,
+      "wall_seconds": 0.0980117999988579
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "--output=Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source.tar",
+        "264cbad400c8336057a70b9b6a65bfdb4920321e"
+      ],
+      "cwd": "Q:\\fastapi",
+      "phase": "source-snapshot",
+      "stdout": "logs\\004-source-snapshot.stdout.log",
+      "stderr": "logs\\004-source-snapshot.stderr.log",
+      "started_utc": "2026-10-29T04:01:26Z",
+      "returncode": 0,
+      "wall_seconds": 0.34915840000030585
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\prepare-baseline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "prepare-baseline",
+      "stdout": "logs\\005-prepare-baseline.stdout.log",
+      "stderr": "logs\\005-prepare-baseline.stderr.log",
+      "started_utc": "2026-10-29T04:01:32Z",
+      "returncode": 0,
+      "wall_seconds": 3.939946399999826
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\prepare-candidate",
+        "--no-build-isolation"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "prepare-candidate",
+      "stdout": "logs\\006-prepare-candidate.stdout.log",
+      "stderr": "logs\\006-prepare-candidate.stderr.log",
+      "started_utc": "2026-10-29T04:01:36Z",
+      "returncode": 0,
+      "wall_seconds": 2.857182499999908
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-01-baseline",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-01-baseline",
+      "stdout": "logs\\007-repeat-01-baseline.stdout.log",
+      "stderr": "logs\\007-repeat-01-baseline.stderr.log",
+      "started_utc": "2026-10-29T04:01:39Z",
+      "returncode": 0,
+      "wall_seconds": 3.6622963000008895
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-01-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-01-candidate",
+      "stdout": "logs\\008-repeat-01-candidate.stdout.log",
+      "stderr": "logs\\008-repeat-01-candidate.stderr.log",
+      "started_utc": "2026-10-29T04:01:43Z",
+      "returncode": 0,
+      "wall_seconds": 2.7762696999998298
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-02-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-02-candidate",
+      "stdout": "logs\\009-repeat-02-candidate.stdout.log",
+      "stderr": "logs\\009-repeat-02-candidate.stderr.log",
+      "started_utc": "2026-10-29T04:01:46Z",
+      "returncode": 0,
+      "wall_seconds": 2.7793091000003187
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-02-baseline",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-02-baseline",
+      "stdout": "logs\\010-repeat-02-baseline.stdout.log",
+      "stderr": "logs\\010-repeat-02-baseline.stderr.log",
+      "started_utc": "2026-10-29T04:01:49Z",
+      "returncode": 0,
+      "wall_seconds": 3.8013480999998137
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-03-baseline",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-03-baseline",
+      "stdout": "logs\\011-repeat-03-baseline.stdout.log",
+      "stderr": "logs\\011-repeat-03-baseline.stderr.log",
+      "started_utc": "2026-10-29T04:01:53Z",
+      "returncode": 0,
+      "wall_seconds": 3.9228258000002825
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-03-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-03-candidate",
+      "stdout": "logs\\012-repeat-03-candidate.stdout.log",
+      "stderr": "logs\\012-repeat-03-candidate.stderr.log",
+      "started_utc": "2026-10-29T04:01:57Z",
+      "returncode": 0,
+      "wall_seconds": 2.954744799999389
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-04-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-04-candidate",
+      "stdout": "logs\\013-repeat-04-candidate.stdout.log",
+      "stderr": "logs\\013-repeat-04-candidate.stderr.log",
+      "started_utc": "2026-10-29T04:02:00Z",
+      "returncode": 0,
+      "wall_seconds": 2.912775299999339
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-04-baseline",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-04-baseline",
+      "stdout": "logs\\014-repeat-04-baseline.stdout.log",
+      "stderr": "logs\\014-repeat-04-baseline.stderr.log",
+      "started_utc": "2026-10-29T04:02:03Z",
+      "returncode": 0,
+      "wall_seconds": 3.71731009999894
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-05-baseline",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-05-baseline",
+      "stdout": "logs\\015-repeat-05-baseline.stdout.log",
+      "stderr": "logs\\015-repeat-05-baseline.stderr.log",
+      "started_utc": "2026-10-29T04:02:07Z",
+      "returncode": 0,
+      "wall_seconds": 3.76116329999968
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\build-constraints.txt",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\cache",
+        "--no-create-gitignore",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-05-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+      "phase": "repeat-05-candidate",
+      "stdout": "logs\\016-repeat-05-candidate.stdout.log",
+      "stderr": "logs\\016-repeat-05-candidate.stderr.log",
+      "started_utc": "2026-10-29T04:02:11Z",
+      "returncode": 0,
+      "wall_seconds": 2.868860099999438
+    }
+  ],
+  "artifacts": [
+    {
+      "phase": "prepare-baseline",
+      "variant": "baseline",
+      "measured": false,
+      "equivalent": true,
+      "manifest": "artifacts\\prepare-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "51375f47f651891de431f4acfad8616099817840ec7d528e9d8d12da836deba0",
+          "bytes": 525756
+        }
+      }
+    },
+    {
+      "phase": "prepare-candidate",
+      "variant": "candidate",
+      "measured": false,
+      "equivalent": true,
+      "manifest": "artifacts\\prepare-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "d94f7a68bcac86f6336ad6ba652641bc971c39c5833656d214444684410eac83",
+          "bytes": 525755
+        }
+      }
+    },
+    {
+      "phase": "repeat-01-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-01-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "02ea57318eda15f591e972b2a7bf01b2528ff43b7d2785ed8fa83f3cd7972584",
+          "bytes": 525755
+        }
+      }
+    },
+    {
+      "phase": "repeat-01-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-01-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "baec24abe5875c29608c260d9fe30f5b83be5e997167519bfb4259422a659aa0",
+          "bytes": 525753
+        }
+      }
+    },
+    {
+      "phase": "repeat-02-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-02-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "163024decddeeb938f72edc2c8572579c2f06983feeec1899b6565fc5aac2194",
+          "bytes": 525753
+        }
+      }
+    },
+    {
+      "phase": "repeat-02-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-02-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "90e0e2bf21c9874bdf9e3ed29f08bc019e554ac8ac23157468865f65d1df7462",
+          "bytes": 525757
+        }
+      }
+    },
+    {
+      "phase": "repeat-03-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-03-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "f9ea46a01e1c6cdd1e36ac74f95dc4dd43fd7b38cc8a9b3b9c38d4517adc2f71",
+          "bytes": 525753
+        }
+      }
+    },
+    {
+      "phase": "repeat-03-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-03-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "8174fcfdbacc4eb2103bb5788c1be4189ebcccc574b0fea1e01e570f3ba7bc2c",
+          "bytes": 525754
+        }
+      }
+    },
+    {
+      "phase": "repeat-04-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-04-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "41a034c05330d5889bbee67ebb766def1b29f64564382f13dace6fca6834992c",
+          "bytes": 525755
+        }
+      }
+    },
+    {
+      "phase": "repeat-04-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-04-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "e5157e51d4d6607f8c7a2a0a97761016b7b786915f2f7856b26c948e79dd4fc7",
+          "bytes": 525756
+        }
+      }
+    },
+    {
+      "phase": "repeat-05-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-05-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "0fdb072b33040efcc343d739e0af9f248df067799171887e1ea4d3cedbd17c24",
+          "bytes": 525754
+        }
+      }
+    },
+    {
+      "phase": "repeat-05-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts\\repeat-05-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "b375d3b844c89a89bdaf5f03b0b118f9f1324a9f252a3c89ae30871b2baee93d",
+          "bytes": 525755
+        }
+      }
+    }
+  ],
+  "summary": {
+    "median_seconds": {
+      "baseline": 3.76116329999968,
+      "candidate": 2.868860099999438
+    },
+    "range_seconds": {
+      "baseline": {
+        "min": 3.6622963000008895,
+        "max": 3.9228258000002825
+      },
+      "candidate": {
+        "min": 2.7762696999998298,
+        "max": 2.954744799999389
+      }
+    },
+    "candidate_over_baseline": 0.7627587188250193,
+    "interpretation": "Descriptive warm-download results on this host only"
+  }
+}

@@ -1,0 +1,602 @@
+﻿2026-10-29T03:47:09.8423378Z Current runner version: '2.338.0'
+2026-10-29T03:47:09.8452934Z ##[group]Runner Image Provisioner
+2026-10-29T03:47:09.8453771Z Hosted Compute Agent
+2026-10-29T03:47:09.8454240Z Version: 20261021.618
+2026-10-29T03:47:09.8454735Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+2026-10-29T03:47:09.8455333Z Build Date: 2026-10-21T00:45:21Z
+2026-10-29T03:47:09.8455910Z Worker ID: {971cec67-765d-438b-9ffd-a3035f76d4ce}
+2026-10-29T03:47:09.8456508Z Region: eastus
+2026-10-29T03:47:09.8456928Z Cloud: Azure
+2026-10-29T03:47:09.8457351Z ##[endgroup]
+2026-10-29T03:47:09.8459059Z ##[group]Operating System
+2026-10-29T03:47:09.8459646Z Microsoft Windows 11
+2026-10-29T03:47:09.8460330Z 10.0.26200
+2026-10-29T03:47:09.8460748Z Enterprise
+2026-10-29T03:47:09.8461151Z ##[endgroup]
+2026-10-29T03:47:09.8461574Z ##[group]Runner Image
+2026-10-29T03:47:09.8462047Z Image: windows-11-vs2026-arm64
+2026-10-29T03:47:09.8462539Z Version: 20261025.196.1
+2026-10-29T03:47:09.8464097Z Included Software: https://github.com/actions/runner-images/blob/win11-vs2026-arm64/20261025.196/images/windows/Windows11-VS2026-Arm64-Readme.md
+2026-10-29T03:47:09.8465588Z Image Release: https://github.com/actions/runner-images/releases/tag/win11-vs2026-arm64%2F20261025.196
+2026-10-29T03:47:09.8466424Z ##[endgroup]
+2026-10-29T03:47:09.8467371Z ##[group]GITHUB_TOKEN Permissions
+2026-10-29T03:47:09.8469557Z Contents: read
+2026-10-29T03:47:09.8470026Z Metadata: read
+2026-10-29T03:47:09.8470480Z ##[endgroup]
+2026-10-29T03:47:09.8473130Z Secret source: Actions
+2026-10-29T03:47:09.8473914Z Cache mode: write
+2026-10-29T03:47:09.8474686Z Prepare workflow directory
+2026-10-29T03:47:09.8938514Z Prepare all required actions
+2026-10-29T03:47:09.8991763Z Getting action download info
+2026-10-29T03:47:10.0826456Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-29T03:47:10.4206298Z Download action repository 'actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+2026-10-29T03:47:10.8638212Z Download action repository 'actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333' (SHA:9000827ccba6bdab643e8b6fd33ac0654aef8333)
+2026-10-29T03:47:11.4423168Z Download action repository 'astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7' (SHA:c18668ad3cf93ea998bef934396af7bb5c839dc7)
+2026-10-29T03:47:11.9043264Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-10-29T03:47:12.2962608Z Complete job name: windows-11-arm
+2026-10-29T03:47:12.4821664Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-10-29T03:47:12.4822885Z with:
+2026-10-29T03:47:12.4823143Z   persist-credentials: false
+2026-10-29T03:47:12.4823419Z   repository: yeelam-gordon/fastapi
+2026-10-29T03:47:12.4826302Z   token: ***
+2026-10-29T03:47:12.4826514Z   ssh-strict: true
+2026-10-29T03:47:12.4826729Z   ssh-user: git
+2026-10-29T03:47:12.4826991Z   clean: true
+2026-10-29T03:47:12.4827211Z   sparse-checkout-cone-mode: true
+2026-10-29T03:47:12.4827480Z   fetch-depth: 1
+2026-10-29T03:47:12.4827696Z   fetch-tags: false
+2026-10-29T03:47:12.4827934Z   show-progress: true
+2026-10-29T03:47:12.4828154Z   lfs: false
+2026-10-29T03:47:12.4828354Z   submodules: false
+2026-10-29T03:47:12.4828575Z   set-safe-directory: true
+2026-10-29T03:47:12.4828839Z   allow-unsafe-pr-checkout: false
+2026-10-29T03:47:12.4829568Z ##[endgroup]
+2026-10-29T03:47:12.7352655Z Syncing repository: yeelam-gordon/fastapi
+2026-10-29T03:47:12.7354462Z ##[group]Getting Git version info
+2026-10-29T03:47:12.7354841Z Working directory is 'C:\a\fastapi\fastapi'
+2026-10-29T03:47:12.8513774Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-29T03:47:13.5696456Z git version 2.56.0.windows.3
+2026-10-29T03:47:13.5754034Z ##[endgroup]
+2026-10-29T03:47:13.5795013Z Temporarily overriding HOME='C:\a\_temp\3e1776fe-af55-45a0-af48-51f676ff2901' before making global git config changes
+2026-10-29T03:47:13.5797949Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-29T03:47:13.5805732Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory C:\a\fastapi\fastapi
+2026-10-29T03:47:13.6803647Z Deleting the contents of 'C:\a\fastapi\fastapi'
+2026-10-29T03:47:13.6811139Z ##[group]Determining repository object format
+2026-10-29T03:47:13.6813315Z ##[endgroup]
+2026-10-29T03:47:13.6813724Z ##[group]Initializing the repository
+2026-10-29T03:47:13.6824404Z [command]"C:\Program Files\Git\bin\git.exe" init C:\a\fastapi\fastapi
+2026-10-29T03:47:13.8566319Z Initialized empty Git repository in C:/a/fastapi/fastapi/.git/
+2026-10-29T03:47:13.8629793Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/yeelam-gordon/fastapi
+2026-10-29T03:47:13.9376248Z ##[endgroup]
+2026-10-29T03:47:13.9376765Z ##[group]Disabling automatic garbage collection
+2026-10-29T03:47:13.9386142Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-10-29T03:47:13.9917037Z ##[endgroup]
+2026-10-29T03:47:13.9917572Z ##[group]Setting up auth
+2026-10-29T03:47:13.9918177Z Removing SSH command configuration
+2026-10-29T03:47:13.9928839Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-29T03:47:14.0470632Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-29T03:47:17.3211667Z Removing HTTP extra header
+2026-10-29T03:47:17.3213900Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-29T03:47:17.3733252Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-29T03:47:18.5919260Z Removing includeIf entries pointing to credentials config files
+2026-10-29T03:47:18.5930198Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-29T03:47:18.6444216Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-29T03:47:19.8828313Z [command]"C:\Program Files\Git\bin\git.exe" config --file C:\a\_temp\git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-10-29T03:47:19.9365594Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git.path C:\a\_temp\git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config
+2026-10-29T03:47:19.9871370Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C:\a\_temp\git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config
+2026-10-29T03:47:20.0378065Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config
+2026-10-29T03:47:20.0951188Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config
+2026-10-29T03:47:20.1460155Z ##[endgroup]
+2026-10-29T03:47:20.1460588Z ##[group]Fetching the repository
+2026-10-29T03:47:20.1473662Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +12cd0143005f9f86d4e0a5b3b4292216ca6c432a:refs/remotes/origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:23.0180828Z From https://github.com/yeelam-gordon/fastapi
+2026-10-29T03:47:23.0182606Z  * [new ref]         12cd0143005f9f86d4e0a5b3b4292216ca6c432a -> origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:23.0245270Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:23.0800991Z   origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:23.0857654Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:23.1412909Z 12cd0143005f9f86d4e0a5b3b4292216ca6c432a
+2026-10-29T03:47:23.1464596Z ##[endgroup]
+2026-10-29T03:47:23.1465516Z ##[group]Determining the checkout info
+2026-10-29T03:47:23.1466209Z ##[endgroup]
+2026-10-29T03:47:23.1475352Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-10-29T03:47:23.2236057Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-10-29T03:47:23.2763131Z ##[group]Checking out the ref
+2026-10-29T03:47:23.2772768Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B perf/windows-arm-build-experiment refs/remotes/origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:24.3675732Z Updating files:  22% (776/3386)
+2026-10-29T03:47:24.4073902Z Updating files:  23% (779/3386)
+2026-10-29T03:47:24.4389339Z Updating files:  24% (813/3386)
+2026-10-29T03:47:24.4814642Z Updating files:  25% (847/3386)
+2026-10-29T03:47:24.5545985Z Updating files:  26% (881/3386)
+2026-10-29T03:47:24.5982552Z Updating files:  27% (915/3386)
+2026-10-29T03:47:24.6331750Z Updating files:  28% (949/3386)
+2026-10-29T03:47:24.6797172Z Updating files:  29% (982/3386)
+2026-10-29T03:47:24.7242850Z Updating files:  30% (1016/3386)
+2026-10-29T03:47:24.7663833Z Updating files:  31% (1050/3386)
+2026-10-29T03:47:24.8098603Z Updating files:  32% (1084/3386)
+2026-10-29T03:47:24.8511229Z Updating files:  33% (1118/3386)
+2026-10-29T03:47:24.8962574Z Updating files:  34% (1152/3386)
+2026-10-29T03:47:24.9775554Z Updating files:  35% (1186/3386)
+2026-10-29T03:47:25.1370793Z Updating files:  36% (1219/3386)
+2026-10-29T03:47:25.2486810Z Updating files:  37% (1253/3386)
+2026-10-29T03:47:25.3574938Z Updating files:  38% (1287/3386)
+2026-10-29T03:47:25.3689591Z Updating files:  39% (1321/3386)
+2026-10-29T03:47:25.4566651Z Updating files:  39% (1323/3386)
+2026-10-29T03:47:25.5175205Z Updating files:  40% (1355/3386)
+2026-10-29T03:47:25.5501504Z Updating files:  41% (1389/3386)
+2026-10-29T03:47:25.5791179Z Updating files:  42% (1423/3386)
+2026-10-29T03:47:25.6082726Z Updating files:  43% (1456/3386)
+2026-10-29T03:47:25.6426493Z Updating files:  44% (1490/3386)
+2026-10-29T03:47:25.6754885Z Updating files:  45% (1524/3386)
+2026-10-29T03:47:25.7205400Z Updating files:  46% (1558/3386)
+2026-10-29T03:47:25.7569167Z Updating files:  47% (1592/3386)
+2026-10-29T03:47:25.7975159Z Updating files:  48% (1626/3386)
+2026-10-29T03:47:25.8371405Z Updating files:  49% (1660/3386)
+2026-10-29T03:47:25.8702722Z Updating files:  50% (1693/3386)
+2026-10-29T03:47:26.4111610Z Updating files:  51% (1727/3386)
+2026-10-29T03:47:26.8075481Z Updating files:  51% (1732/3386)
+2026-10-29T03:47:26.8633488Z Updating files:  52% (1761/3386)
+2026-10-29T03:47:26.9211197Z Updating files:  53% (1795/3386)
+2026-10-29T03:47:26.9655366Z Updating files:  54% (1829/3386)
+2026-10-29T03:47:27.0057343Z Updating files:  55% (1863/3386)
+2026-10-29T03:47:27.0329234Z Updating files:  56% (1897/3386)
+2026-10-29T03:47:27.0671782Z Updating files:  57% (1931/3386)
+2026-10-29T03:47:27.1110314Z Updating files:  58% (1964/3386)
+2026-10-29T03:47:27.1434675Z Updating files:  59% (1998/3386)
+2026-10-29T03:47:27.1752600Z Updating files:  60% (2032/3386)
+2026-10-29T03:47:27.2221078Z Updating files:  61% (2066/3386)
+2026-10-29T03:47:27.2654844Z Updating files:  62% (2100/3386)
+2026-10-29T03:47:27.3216349Z Updating files:  63% (2134/3386)
+2026-10-29T03:47:27.3766847Z Updating files:  64% (2168/3386)
+2026-10-29T03:47:27.3792976Z Updating files:  65% (2201/3386)
+2026-10-29T03:47:27.4817578Z Updating files:  65% (2202/3386)
+2026-10-29T03:47:27.5986785Z Updating files:  66% (2235/3386)
+2026-10-29T03:47:27.7877882Z Updating files:  67% (2269/3386)
+2026-10-29T03:47:27.9671740Z Updating files:  68% (2303/3386)
+2026-10-29T03:47:28.0905452Z Updating files:  69% (2337/3386)
+2026-10-29T03:47:28.1979561Z Updating files:  70% (2371/3386)
+2026-10-29T03:47:28.3415796Z Updating files:  71% (2405/3386)
+2026-10-29T03:47:28.3952821Z Updating files:  72% (2438/3386)
+2026-10-29T03:47:28.4209849Z Updating files:  72% (2446/3386)
+2026-10-29T03:47:28.4974990Z Updating files:  73% (2472/3386)
+2026-10-29T03:47:28.5898545Z Updating files:  74% (2506/3386)
+2026-10-29T03:47:28.6932335Z Updating files:  75% (2540/3386)
+2026-10-29T03:47:28.7636084Z Updating files:  76% (2574/3386)
+2026-10-29T03:47:28.7875800Z Updating files:  77% (2608/3386)
+2026-10-29T03:47:28.8177735Z Updating files:  78% (2642/3386)
+2026-10-29T03:47:30.2745060Z Updating files:  79% (2675/3386)
+2026-10-29T03:47:30.2964220Z Updating files:  79% (2695/3386)
+2026-10-29T03:47:30.3242783Z Updating files:  80% (2709/3386)
+2026-10-29T03:47:30.3612505Z Updating files:  81% (2743/3386)
+2026-10-29T03:47:30.3841656Z Updating files:  82% (2777/3386)
+2026-10-29T03:47:30.4021664Z Updating files:  83% (2811/3386)
+2026-10-29T03:47:30.4176283Z Updating files:  84% (2845/3386)
+2026-10-29T03:47:30.4256779Z Updating files:  85% (2879/3386)
+2026-10-29T03:47:30.4473738Z Updating files:  85% (2888/3386)
+2026-10-29T03:47:30.4692623Z Updating files:  86% (2912/3386)
+2026-10-29T03:47:30.4860235Z Updating files:  87% (2946/3386)
+2026-10-29T03:47:30.5041302Z Updating files:  88% (2980/3386)
+2026-10-29T03:47:30.5348762Z Updating files:  89% (3014/3386)
+2026-10-29T03:47:30.5603658Z Updating files:  90% (3048/3386)
+2026-10-29T03:47:30.5891853Z Updating files:  91% (3082/3386)
+2026-10-29T03:47:30.6103363Z Updating files:  92% (3116/3386)
+2026-10-29T03:47:30.6363757Z Updating files:  93% (3149/3386)
+2026-10-29T03:47:30.6606857Z Updating files:  94% (3183/3386)
+2026-10-29T03:47:30.6916674Z Updating files:  95% (3217/3386)
+2026-10-29T03:47:30.7176349Z Updating files:  96% (3251/3386)
+2026-10-29T03:47:30.7429771Z Updating files:  97% (3285/3386)
+2026-10-29T03:47:30.7729046Z Updating files:  98% (3319/3386)
+2026-10-29T03:47:30.7913553Z Updating files:  99% (3353/3386)
+2026-10-29T03:47:30.7913847Z Updating files: 100% (3386/3386)
+2026-10-29T03:47:30.7914079Z Updating files: 100% (3386/3386), done.
+2026-10-29T03:47:30.8132475Z Switched to a new branch 'perf/windows-arm-build-experiment'
+2026-10-29T03:47:30.8170106Z branch 'perf/windows-arm-build-experiment' set up to track 'origin/perf/windows-arm-build-experiment'.
+2026-10-29T03:47:30.8251121Z ##[endgroup]
+2026-10-29T03:47:30.9002398Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-10-29T03:47:30.9489391Z 12cd0143005f9f86d4e0a5b3b4292216ca6c432a
+2026-10-29T03:47:30.9547199Z ##[group]Removing auth
+2026-10-29T03:47:30.9547478Z Removing SSH command configuration
+2026-10-29T03:47:30.9557602Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-29T03:47:31.0055918Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-29T03:47:32.2103826Z Removing HTTP extra header
+2026-10-29T03:47:32.2111954Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-29T03:47:32.2608011Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-29T03:47:33.4445377Z Removing includeIf entries pointing to credentials config files
+2026-10-29T03:47:33.4453457Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-29T03:47:33.4889373Z includeif.gitdir:C:/a/fastapi/fastapi/.git.path
+2026-10-29T03:47:33.4890215Z includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path
+2026-10-29T03:47:33.4902958Z includeif.gitdir:/github/workspace/.git.path
+2026-10-29T03:47:33.4903310Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-29T03:47:33.4951408Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git.path
+2026-10-29T03:47:33.5430443Z C:\a\_temp\git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config
+2026-10-29T03:47:33.5489283Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git.path C\:\\a\\_temp\\git\-credentials\-ee498c81\-74a8\-49f0\-bf97\-39eb1f64dbd9\.config
+2026-10-29T03:47:33.6056501Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path
+2026-10-29T03:47:33.6521576Z C:\a\_temp\git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config
+2026-10-29T03:47:33.6580569Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C\:\\a\\_temp\\git\-credentials\-ee498c81\-74a8\-49f0\-bf97\-39eb1f64dbd9\.config
+2026-10-29T03:47:33.7136078Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-29T03:47:33.7604305Z /github/runner_temp/git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config
+2026-10-29T03:47:33.7660880Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-ee498c81\-74a8\-49f0\-bf97\-39eb1f64dbd9\.config
+2026-10-29T03:47:33.8184274Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-29T03:47:33.8656956Z /github/runner_temp/git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config
+2026-10-29T03:47:33.8708971Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-ee498c81\-74a8\-49f0\-bf97\-39eb1f64dbd9\.config
+2026-10-29T03:47:33.9215058Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-29T03:47:35.0986256Z Removing credentials config 'C:\a\_temp\git-credentials-ee498c81-74a8-49f0-bf97-39eb1f64dbd9.config'
+2026-10-29T03:47:35.1006909Z ##[endgroup]
+2026-10-29T03:47:35.1492339Z ##[group]Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+2026-10-29T03:47:35.1492821Z with:
+2026-10-29T03:47:35.1493003Z   python-version: 3.13.15
+2026-10-29T03:47:35.1493212Z   architecture: arm64
+2026-10-29T03:47:35.1493396Z   check-latest: false
+2026-10-29T03:47:35.1496031Z   token: ***
+2026-10-29T03:47:35.1496211Z   update-environment: true
+2026-10-29T03:47:35.1496446Z   allow-prereleases: false
+2026-10-29T03:47:35.1496645Z   freethreaded: false
+2026-10-29T03:47:35.1496824Z ##[endgroup]
+2026-10-29T03:47:35.3861473Z ##[group]Installed versions
+2026-10-29T03:47:35.3876690Z Version 3.13.15 was not found in the local cache
+2026-10-29T03:47:35.9755857Z Version 3.13.15 is available for downloading
+2026-10-29T03:47:35.9756466Z Download from "https://github.com/actions/python-versions/releases/download/3.13.15-31064747964/python-3.13.15-win32-arm64.zip"
+2026-10-29T03:47:36.5383791Z Extract downloaded archive
+2026-10-29T03:47:36.6422275Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command "$ErrorActionPreference = 'Stop' ; try { Add-Type -AssemblyName System.IO.Compression.ZipFile } catch { } ; try { [System.IO.Compression.ZipFile]::ExtractToDirectory('C:\a\_temp\python-3.13.15-win32-arm64.zip', 'C:\a\_temp\5be7557f-2e9e-4694-ad3e-6e752d73ad83', $true) } catch { if (($_.Exception.GetType().FullName -eq 'System.Management.Automation.MethodException') -or ($_.Exception.GetType().FullName -eq 'System.Management.Automation.RuntimeException') ){ Expand-Archive -LiteralPath 'C:\a\_temp\python-3.13.15-win32-arm64.zip' -DestinationPath 'C:\a\_temp\5be7557f-2e9e-4694-ad3e-6e752d73ad83' -Force } else { throw $_ } } ;"
+2026-10-29T03:47:37.1254332Z Execute installation script
+2026-10-29T03:48:12.5997377Z Check if Python hostedtoolcache folder exist...
+2026-10-29T03:48:12.6048100Z Check if current Python version is installed...
+2026-10-29T03:48:12.6048355Z 
+2026-10-29T03:48:12.6180744Z Python3.13 (arm64) was found in C:\hostedtoolcache\windows\Python...
+2026-10-29T03:48:12.6181226Z 
+2026-10-29T03:48:12.7376474Z Deleting C:\hostedtoolcache\windows\Python\3.13.17\arm64...
+2026-10-29T03:48:12.7377275Z 
+2026-10-29T03:48:21.5836926Z VERBOSE: Performing the operation "Remove File" on target "C:\hostedtoolcache\windows\Python\3.13.17\arm64.complete".
+2026-10-29T03:48:21.5837463Z 
+2026-10-29T03:48:21.5846100Z Remove registry entries for Python 3.13(arm64)...
+2026-10-29T03:48:21.5846434Z 
+2026-10-29T03:48:22.2164625Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2165317Z HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\168D5E7822814D04B99C9
+2026-10-29T03:48:22.2165811Z B9564168355".
+2026-10-29T03:48:22.2168320Z 
+2026-10-29T03:48:22.2188162Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2188832Z HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\2CB75C18675D7A0479237
+2026-10-29T03:48:22.2189333Z 855285EA66C".
+2026-10-29T03:48:22.2189438Z 
+2026-10-29T03:48:22.2205575Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2206174Z HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\2D35503E6AD2AAA43B45E
+2026-10-29T03:48:22.2206690Z 1EC2976456C".
+2026-10-29T03:48:22.2206793Z 
+2026-10-29T03:48:22.2225763Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2226352Z HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\3A48D5C1757B94E4EB64A
+2026-10-29T03:48:22.2226842Z 04A2869A15A".
+2026-10-29T03:48:22.2226947Z 
+2026-10-29T03:48:22.2247549Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2248159Z HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\52949F952E1BE8C458D0D
+2026-10-29T03:48:22.2251249Z 81F89CDAED0".
+2026-10-29T03:48:22.2252529Z 
+2026-10-29T03:48:22.2265417Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2266033Z HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\56589721ED10E1C4CB383
+2026-10-29T03:48:22.2266521Z A16B3B39357".
+2026-10-29T03:48:22.2266623Z 
+2026-10-29T03:48:22.2306307Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2306929Z HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\D1B0330DA5DC13943A7B2
+2026-10-29T03:48:22.2307424Z A586EB14F7E".
+2026-10-29T03:48:22.2307553Z 
+2026-10-29T03:48:22.2328260Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2328935Z HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Installer\UserData\S-1-5-18\Products\DBA2DE6E7463D2642B001
+2026-10-29T03:48:22.2329443Z 5C82A1F7E6E".
+2026-10-29T03:48:22.2329542Z 
+2026-10-29T03:48:22.2817988Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.2818467Z HKEY_CLASSES_ROOT\Installer\Products\168D5E7822814D04B99C9B9564168355".
+2026-10-29T03:48:22.2818740Z 
+2026-10-29T03:48:22.3000552Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.3001047Z HKEY_CLASSES_ROOT\Installer\Products\2CB75C18675D7A0479237855285EA66C".
+2026-10-29T03:48:22.3001945Z 
+2026-10-29T03:48:22.3035374Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.3035956Z HKEY_CLASSES_ROOT\Installer\Products\2D35503E6AD2AAA43B45E1EC2976456C".
+2026-10-29T03:48:22.3036235Z 
+2026-10-29T03:48:22.3140169Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.3140786Z HKEY_CLASSES_ROOT\Installer\Products\3A48D5C1757B94E4EB64A04A2869A15A".
+2026-10-29T03:48:22.3141063Z 
+2026-10-29T03:48:22.3325359Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.3326429Z HKEY_CLASSES_ROOT\Installer\Products\52949F952E1BE8C458D0D81F89CDAED0".
+2026-10-29T03:48:22.3326795Z 
+2026-10-29T03:48:22.3355281Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.3355745Z HKEY_CLASSES_ROOT\Installer\Products\56589721ED10E1C4CB383A16B3B39357".
+2026-10-29T03:48:22.3356019Z 
+2026-10-29T03:48:22.4152915Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.4153449Z HKEY_CLASSES_ROOT\Installer\Products\D1B0330DA5DC13943A7B2A586EB14F7E".
+2026-10-29T03:48:22.4153718Z 
+2026-10-29T03:48:22.4214834Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.4215306Z HKEY_CLASSES_ROOT\Installer\Products\DBA2DE6E7463D2642B0015C82A1F7E6E".
+2026-10-29T03:48:22.4215726Z 
+2026-10-29T03:48:22.4679091Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.4679743Z HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\{12798565-01DE-4C1E-BC83-A3613B3B3975}".
+2026-10-29T03:48:22.4680170Z 
+2026-10-29T03:48:22.4729459Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.4730019Z HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\{1C5D84A3-B757-4E49-BE46-0AA482961AA5}".
+2026-10-29T03:48:22.4730417Z 
+2026-10-29T03:48:22.4970169Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.4970763Z HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\{59F94925-B1E2-4C8E-850D-8DF198DCEA0D}".
+2026-10-29T03:48:22.4971165Z 
+2026-10-29T03:48:22.5100808Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.5101372Z HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\{81C57BC2-D576-40A7-9732-875582E56AC6}".
+2026-10-29T03:48:22.5101778Z 
+2026-10-29T03:48:22.5122528Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.5124756Z HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\{87E5D861-1822-40D4-9BC9-B95946613855}".
+2026-10-29T03:48:22.5125273Z 
+2026-10-29T03:48:22.5365719Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.5366334Z HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\{D0330B1D-CD5A-4931-A3B7-A285E61BF4E7}".
+2026-10-29T03:48:22.5366750Z 
+2026-10-29T03:48:22.5435870Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.5436501Z HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\{E30553D2-2DA6-4AAA-B354-1ECE926754C6}".
+2026-10-29T03:48:22.5436921Z 
+2026-10-29T03:48:22.5459749Z VERBOSE: Performing the operation "Remove Key" on target "Item: 
+2026-10-29T03:48:22.5460326Z HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\{E6ED2ABD-3647-462D-B200-518CA2F1E7E6}".
+2026-10-29T03:48:22.5460729Z 
+2026-10-29T03:48:22.6416744Z Create Python 3.13.15 folder in C:\hostedtoolcache\windows\Python
+2026-10-29T03:48:22.6417065Z 
+2026-10-29T03:48:22.6470656Z Copy Python binaries to C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:48:22.6483929Z 
+2026-10-29T03:48:22.6702872Z Install Python 3.13.15 in C:\hostedtoolcache\windows\Python...
+2026-10-29T03:48:22.6703216Z 
+2026-10-29T03:49:33.2892844Z Create python3 symlink
+2026-10-29T03:49:33.2894163Z 
+2026-10-29T03:49:33.7312390Z 
+2026-10-29T03:49:33.7313628Z 
+2026-10-29T03:49:33.7413254Z Directory: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:33.7413664Z 
+2026-10-29T03:49:33.7421398Z Mode                 LastWriteTime         Length Name
+2026-10-29T03:49:33.7424681Z ----                 -------------         ------ ----
+2026-10-29T03:49:33.7432721Z -a---l        10/28/2026   8:49 PM              0 python3.exe
+2026-10-29T03:49:33.7443575Z Install and upgrade Pip
+2026-10-29T03:49:33.7443926Z 
+2026-10-29T03:49:35.4868672Z Collecting pip
+2026-10-29T03:49:35.8630944Z Downloading pip-26.2.2-py3-none-any.whl.metadata (4.6 kB)
+2026-10-29T03:49:35.9847499Z Downloading pip-26.2.2-py3-none-any.whl (1.8 MB)
+2026-10-29T03:49:36.4473738Z 
+2026-10-29T03:49:36.4476497Z ---------------------------------------- 1.8/1.8 MB 6.4 MB/s  0:00:00
+2026-10-29T03:49:36.5073431Z Installing collected packages: pip
+2026-10-29T03:49:36.5073756Z Attempting uninstall: pip
+2026-10-29T03:49:36.5107340Z Found existing installation: pip 26.2.1
+2026-10-29T03:49:36.5955789Z Uninstalling pip-26.2.1:
+2026-10-29T03:49:36.6171080Z Successfully uninstalled pip-26.2.1
+2026-10-29T03:49:39.3391518Z Successfully installed pip-26.2.2
+2026-10-29T03:49:39.4025908Z Create complete file
+2026-10-29T03:49:39.4026247Z 
+2026-10-29T03:49:39.4043007Z 
+2026-10-29T03:49:39.4043194Z 
+2026-10-29T03:49:39.5172250Z Successfully set up CPython (3.13.15)
+2026-10-29T03:49:39.5173415Z ##[endgroup]
+2026-10-29T03:49:39.5669637Z ##[group]Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+2026-10-29T03:49:39.5670154Z with:
+2026-10-29T03:49:39.5670330Z   name: experiment-locks
+2026-10-29T03:49:39.5670542Z   path: Generated Files/arm-build
+2026-10-29T03:49:39.5670767Z   merge-multiple: false
+2026-10-29T03:49:39.5670976Z   repository: yeelam-gordon/fastapi
+2026-10-29T03:49:39.5671200Z   run-id: 40814042898
+2026-10-29T03:49:39.5671386Z   skip-decompress: false
+2026-10-29T03:49:39.5671587Z   digest-mismatch: error
+2026-10-29T03:49:39.5671877Z env:
+2026-10-29T03:49:39.5672148Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:39.5672624Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:49:39.5673055Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:39.5673442Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:39.5673875Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:39.5674183Z ##[endgroup]
+2026-10-29T03:49:39.8323099Z Downloading single artifact
+2026-10-29T03:49:39.9340795Z Preparing to download the following artifacts:
+2026-10-29T03:49:39.9341508Z - experiment-locks (ID: 12871463003, Size: 9447, Expected Digest: sha256:67e9269c6f7067c55356f3e6aacd9bd4729facadfb50b6804b6aad6d2f2dce29)
+2026-10-29T03:49:40.0868834Z Redirecting to blob download url: https://productionresultssa31.blob.core.windows.net/actions-results/40ca4ff2-5f64-4fef-877a-9dd747d857b6/workflow-job-run-de292cbd-fe28-5163-8755-b16373c7b070/artifacts/4e12ff86ccd408ce856632f777ca8ed62c965afa4a06e81e0806a20d1974c16f.zip
+2026-10-29T03:49:40.0870300Z Starting download of artifact to: C:\a\fastapi\fastapi\Generated Files\arm-build
+2026-10-29T03:49:40.1310687Z (node:4112) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-10-29T03:49:40.1311582Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-29T03:49:40.1370093Z SHA256 digest of downloaded artifact is 67e9269c6f7067c55356f3e6aacd9bd4729facadfb50b6804b6aad6d2f2dce29
+2026-10-29T03:49:40.1371000Z Artifact download completed successfully.
+2026-10-29T03:49:40.1371309Z Total of 1 artifact(s) downloaded
+2026-10-29T03:49:40.1381962Z Download artifact has finished successfully
+2026-10-29T03:49:40.1826034Z ##[group]Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+2026-10-29T03:49:40.1826538Z with:
+2026-10-29T03:49:40.1827101Z   version: 0.13.6
+2026-10-29T03:49:40.1827291Z   enable-cache: false
+2026-10-29T03:49:40.1827498Z   activate-environment: false
+2026-10-29T03:49:40.1827718Z   no-project: false
+2026-10-29T03:49:40.1827921Z   working-directory: C:\a\fastapi\fastapi
+2026-10-29T03:49:40.1830933Z   github-token: ***
+2026-10-29T03:49:40.1831465Z   cache-dependency-glob: **/*requirements*.txt
+**/*requirements*.in
+**/*constraints*.txt
+**/*constraints*.in
+**/pyproject.toml
+**/uv.lock
+**/*.py.lock
+
+2026-10-29T03:49:40.1832043Z   restore-cache: true
+2026-10-29T03:49:40.1832232Z   save-cache: auto
+2026-10-29T03:49:40.1832411Z   prune-cache: false
+2026-10-29T03:49:40.1832600Z   cache-python: false
+2026-10-29T03:49:40.1832801Z   ignore-nothing-to-cache: false
+2026-10-29T03:49:40.1833037Z   ignore-empty-workdir: false
+2026-10-29T03:49:40.1833329Z   download-from-astral-mirror: true
+2026-10-29T03:49:40.1833579Z   add-problem-matchers: true
+2026-10-29T03:49:40.1833786Z   quiet: false
+2026-10-29T03:49:40.1833974Z   resolution-strategy: highest
+2026-10-29T03:49:40.1834182Z env:
+2026-10-29T03:49:40.1834427Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:40.1834864Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:49:40.1835299Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:40.1835692Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:40.1836091Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:40.1836399Z ##[endgroup]
+2026-10-29T03:49:40.4774465Z Fetching manifest data from https://raw.githubusercontent.com/astral-sh/versions/main/v1/uv.ndjson ...
+2026-10-29T03:49:40.5364440Z Downloading uv from "https://releases.astral.sh/github/uv/releases/download/0.13.6/uv-aarch64-pc-windows-msvc.zip" ...
+2026-10-29T03:49:41.6366933Z [command]C:\Windows\system32\tar.exe x -C C:\a\_temp\790b073d-bf00-44de-82f8-1386618a0880 -f C:\a\_temp\d37f5fbf-d6eb-4257-bccc-503093a38d81
+2026-10-29T03:49:42.0839634Z Set UV_TOOL_BIN_DIR to C:\a\_temp\uv-tool-bin-dir
+2026-10-29T03:49:42.0844741Z Added C:\a\_temp\uv-tool-bin-dir to the path
+2026-10-29T03:49:42.0861251Z Added C:\hostedtoolcache\windows\uv\0.13.6\aarch64 to the path
+2026-10-29T03:49:42.0865190Z Set UV_TOOL_DIR to C:\a\_temp\uv-tool-dir
+2026-10-29T03:49:42.0869246Z Set UV_PYTHON_INSTALL_DIR to C:\a\_temp\uv-python-dir
+2026-10-29T03:49:42.0873194Z Added C:\a\_temp\uv-python-dir to the path
+2026-10-29T03:49:42.0883614Z Successfully installed uv version 0.13.6
+2026-10-29T03:49:44.3502130Z ##[group]Run python "Generated Files/arm-build/ci_prepare.py"
+2026-10-29T03:49:44.3502691Z [36;1mpython "Generated Files/arm-build/ci_prepare.py"[0m
+2026-10-29T03:49:44.3561783Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-29T03:49:44.3562120Z env:
+2026-10-29T03:49:44.3562379Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:44.3562862Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:49:44.3563306Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:44.3563702Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:44.3564104Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:44.3564443Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+2026-10-29T03:49:44.3564712Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+2026-10-29T03:49:44.3565028Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+2026-10-29T03:49:44.3565291Z ##[endgroup]
+2026-10-29T03:49:54.8199838Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-29T03:49:54.8200348Z with:
+2026-10-29T03:49:54.8200534Z   name: windows-arm-wheelhouse
+2026-10-29T03:49:54.8200785Z   path: Generated Files/arm-build/wheelhouse
+2026-10-29T03:49:54.8201042Z   if-no-files-found: error
+2026-10-29T03:49:54.8202134Z   retention-days: 7
+2026-10-29T03:49:54.8202325Z   compression-level: 6
+2026-10-29T03:49:54.8202525Z   overwrite: false
+2026-10-29T03:49:54.8202715Z   include-hidden-files: false
+2026-10-29T03:49:54.8202925Z   archive: true
+2026-10-29T03:49:54.8203090Z env:
+2026-10-29T03:49:54.8203331Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:54.8203774Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:49:54.8204211Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:54.8204648Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:54.8205046Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:54.8205388Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+2026-10-29T03:49:54.8205656Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+2026-10-29T03:49:54.8205922Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+2026-10-29T03:49:54.8206179Z ##[endgroup]
+2026-10-29T03:49:55.0934418Z With the provided path, there will be 27 files uploaded
+2026-10-29T03:49:55.0939383Z Artifact name is valid!
+2026-10-29T03:49:55.0941637Z Root directory input is valid!
+2026-10-29T03:49:55.2945761Z Uploading artifact: windows-arm-wheelhouse.zip
+2026-10-29T03:49:55.2982731Z Beginning upload of artifact content to blob storage
+2026-10-29T03:49:55.8897971Z Uploaded bytes 8388608
+2026-10-29T03:49:56.2395570Z Uploaded bytes 16777216
+2026-10-29T03:49:56.2773648Z Uploaded bytes 17104951
+2026-10-29T03:49:56.2946162Z Finished uploading artifact content to blob storage!
+2026-10-29T03:49:56.2959608Z SHA256 digest of uploaded artifact is ef53dd015b3363c4cdcc653c1a78de6a84250132b97a91bedebea8f44b98dba1
+2026-10-29T03:49:56.2960125Z Finalizing artifact upload
+2026-10-29T03:49:56.8551605Z Artifact windows-arm-wheelhouse successfully finalized. Artifact ID 12872130155
+2026-10-29T03:49:56.8552324Z Artifact windows-arm-wheelhouse has been successfully uploaded! Final size is 17104951 bytes. Artifact ID is 12872130155
+2026-10-29T03:49:56.8566875Z Artifact download URL: https://github.com/yeelam-gordon/fastapi/actions/runs/40814042898/artifacts/12872130155
+2026-10-29T03:49:56.8948264Z ##[group]Run python "Generated Files/arm-build/test_benchmark.py"
+2026-10-29T03:49:56.8948859Z [36;1mpython "Generated Files/arm-build/test_benchmark.py"[0m
+2026-10-29T03:49:56.9004639Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-29T03:49:56.9004975Z env:
+2026-10-29T03:49:56.9005241Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:56.9005687Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:49:56.9006138Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:56.9015242Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:56.9015777Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:56.9016161Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+2026-10-29T03:49:56.9016441Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+2026-10-29T03:49:56.9016755Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+2026-10-29T03:49:56.9017021Z ##[endgroup]
+2026-10-29T03:49:57.6258676Z .ValueError: uv executable not found: missing
+2026-10-29T03:49:57.6273507Z [WinError 183] Cannot create a file when that file already exists: 'C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.test-benchmark-45652920a06041e58358863f5b1c55f1\\results'
+2026-10-29T03:49:57.6682860Z ..........
+2026-10-29T03:49:57.6683198Z ----------------------------------------------------------------------
+2026-10-29T03:49:57.6683527Z Ran 11 tests in 0.150s
+2026-10-29T03:49:57.6683658Z 
+2026-10-29T03:49:57.6683734Z OK
+2026-10-29T03:49:57.8275521Z ##[group]Run python "Generated Files/arm-build/benchmark.py" --uv uv --repeats 7 --output "Generated Files/arm-build/results/ci" --importtime
+2026-10-29T03:49:57.8276570Z [36;1mpython "Generated Files/arm-build/benchmark.py" --uv uv --repeats 7 --output "Generated Files/arm-build/results/ci" --importtime[0m
+2026-10-29T03:49:57.8332943Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-29T03:49:57.8333274Z env:
+2026-10-29T03:49:57.8333539Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:57.8333988Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:49:57.8334443Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:57.8334848Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:57.8335253Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:49:57.8335847Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+2026-10-29T03:49:57.8336143Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+2026-10-29T03:49:57.8336410Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+2026-10-29T03:49:57.8336680Z ##[endgroup]
+2026-10-29T03:51:17.9327602Z ##[group]Run python "Generated Files/arm-build/ci_prepare.py" --smoke
+2026-10-29T03:51:17.9328220Z [36;1mpython "Generated Files/arm-build/ci_prepare.py" --smoke[0m
+2026-10-29T03:51:17.9383334Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-29T03:51:17.9383714Z env:
+2026-10-29T03:51:17.9383976Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:17.9384431Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:51:17.9384877Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:17.9385281Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:17.9385692Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:17.9386044Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+2026-10-29T03:51:17.9386320Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+2026-10-29T03:51:17.9386629Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+2026-10-29T03:51:17.9386914Z ##[endgroup]
+2026-10-29T03:51:21.2947170Z ##[group]Run python -m ruff check "Generated Files/arm-build/benchmark.py" "Generated Files/arm-build/test_benchmark.py" "Generated Files/arm-build/ci_prepare.py" --output-format github
+2026-10-29T03:51:21.2948576Z [36;1mpython -m ruff check "Generated Files/arm-build/benchmark.py" "Generated Files/arm-build/test_benchmark.py" "Generated Files/arm-build/ci_prepare.py" --output-format github[0m
+2026-10-29T03:51:21.3006190Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-10-29T03:51:21.3006529Z env:
+2026-10-29T03:51:21.3006795Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:21.3007247Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:51:21.3007701Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:21.3008111Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:21.3008577Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:21.3008927Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+2026-10-29T03:51:21.3009200Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+2026-10-29T03:51:21.3009468Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+2026-10-29T03:51:21.3009735Z ##[endgroup]
+2026-10-29T03:51:21.8703331Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-29T03:51:21.8703845Z with:
+2026-10-29T03:51:21.8704033Z   name: arm-build-windows-11-arm
+2026-10-29T03:51:21.8705684Z   path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap
+
+2026-10-29T03:51:21.8707740Z   if-no-files-found: error
+2026-10-29T03:51:21.8707956Z   retention-days: 14
+2026-10-29T03:51:21.8708152Z   compression-level: 6
+2026-10-29T03:51:21.8708347Z   overwrite: false
+2026-10-29T03:51:21.8708547Z   include-hidden-files: false
+2026-10-29T03:51:21.8708762Z   archive: true
+2026-10-29T03:51:21.8708961Z env:
+2026-10-29T03:51:21.8709212Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:21.8709658Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.13.15\arm64/lib/pkgconfig
+2026-10-29T03:51:21.8710106Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:21.8710506Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:21.8710911Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.13.15\arm64
+2026-10-29T03:51:21.8711256Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+2026-10-29T03:51:21.8711528Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+2026-10-29T03:51:21.8711805Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+2026-10-29T03:51:21.8712071Z ##[endgroup]
+2026-10-29T03:51:22.1798070Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-29T03:51:22.1803099Z The least common ancestor is C:\a\fastapi\fastapi\Generated Files\arm-build\results. This will be the root directory of the artifact
+2026-10-29T03:51:22.1803722Z With the provided path, there will be 74 files uploaded
+2026-10-29T03:51:22.1809098Z Artifact name is valid!
+2026-10-29T03:51:22.1811849Z Root directory input is valid!
+2026-10-29T03:51:22.3789503Z Uploading artifact: arm-build-windows-11-arm.zip
+2026-10-29T03:51:22.3825666Z Beginning upload of artifact content to blob storage
+2026-10-29T03:51:22.7057654Z Uploaded bytes 1772294
+2026-10-29T03:51:22.7205316Z Finished uploading artifact content to blob storage!
+2026-10-29T03:51:22.7208529Z SHA256 digest of uploaded artifact is 418e3aad0ccde1788e919292bb84f1d99279a78412f04abdc9f2e0c51c94e7c6
+2026-10-29T03:51:22.7209086Z Finalizing artifact upload
+2026-10-29T03:51:23.1394587Z Artifact arm-build-windows-11-arm successfully finalized. Artifact ID 12871682729
+2026-10-29T03:51:23.1395309Z Artifact arm-build-windows-11-arm has been successfully uploaded! Final size is 1772294 bytes. Artifact ID is 12871682729
+2026-10-29T03:51:23.1410271Z Artifact download URL: https://github.com/yeelam-gordon/fastapi/actions/runs/40814042898/artifacts/12871682729
+2026-10-29T03:51:23.1857968Z Post job cleanup.
+2026-10-29T03:51:23.4074573Z UV_PYTHON_INSTALL_DIR is already set to C:\a\_temp\uv-python-dir
+2026-10-29T03:51:23.4438571Z Post job cleanup.
+2026-10-29T03:51:23.7104943Z Post job cleanup.
+2026-10-29T03:51:24.0104591Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-10-29T03:51:24.0583493Z git version 2.56.0.windows.3
+2026-10-29T03:51:24.0665122Z Temporarily overriding HOME='C:\a\_temp\deb7376d-127a-41be-8368-7a31f342fcbe' before making global git config changes
+2026-10-29T03:51:24.0665837Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-29T03:51:24.0674668Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory C:\a\fastapi\fastapi
+2026-10-29T03:51:24.1197964Z Removing SSH command configuration
+2026-10-29T03:51:24.1209429Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-10-29T03:51:24.1729628Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-10-29T03:51:25.3766383Z Removing HTTP extra header
+2026-10-29T03:51:25.3775564Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-29T03:51:25.4293384Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-10-29T03:51:26.6412073Z Removing includeIf entries pointing to credentials config files
+2026-10-29T03:51:26.6423539Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-29T03:51:26.6938038Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-10-29T03:51:27.9784128Z Cleaning up orphan processes

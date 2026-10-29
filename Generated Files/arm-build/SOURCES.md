@@ -13,6 +13,8 @@ Read on 2026-10-28/29. Documentation is evidence for tool behavior, not measured
 | [Official uv 0.13.6 release](https://github.com/astral-sh/uv/releases/tag/0.13.6) | Installed `uv-aarch64-pc-windows-msvc.zip`; SHA256 `c2426c0c8e28b53d8c440e47a18d96ad4db51e159866c0e81435b196d7f0081c` matches GitHub release asset digest. Native executable reports `aarch64-pc-windows-msvc`. |
 | [PDM backend 2.5.0 build configuration](https://github.com/pdm-project/pdm-backend/blob/8c6653726f71afdb2059b44dc9c7706693e95be6/pyproject.toml) | `requires = []`, in-tree backend `pdm.backend.intree`, `backend-path = ["src"]`; Python 3.13 has no required external runtime dependencies. This enables the successful official-source self-bootstrap without changing TLS protection. |
 | [Official Ruff 0.17.3 release](https://github.com/astral-sh/ruff/releases/tag/0.17.3) | Downloaded the native ARM64 Windows archive and matched its SHA256 release-asset digest before running lint/format checks. |
+| [uv Python versions](https://docs.astral.sh/uv/concepts/python-versions/) | Exact platform/architecture requests and managed distributions are supported. Native Windows ARM 3.13.15 download/install was verified locally and in CI; the workflow now uses matching managed distribution families on both platforms. |
+| [uv build backend](https://docs.astral.sh/uv/concepts/build-backend/) | A native pure-Python-package backend and bundled fast path are documented, but its source-distribution rewrite/inclusion behavior differs from PDM. It is a research candidate, not an already validated drop-in optimization. |
 
 ## Engineering hypotheses, not sourced performance promises
 

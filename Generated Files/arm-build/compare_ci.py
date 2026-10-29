@@ -8,6 +8,8 @@ Archives may be omitted in synthetic fixtures or reduced downloads: manifests
 are still checked, but raw archive verification is explicitly unknown and the
 overall result cannot pass. Bootstrap reports are optional and never counted as
 zero seconds. Output is created exclusively, including on comparison failure.
+Harness snapshots must match their recorded raw digests; only CRLF-to-LF
+normalization is allowed when comparing the Windows and macOS harness bytes.
 """
 
 from __future__ import annotations
@@ -176,6 +178,7 @@ def load_run(root: Path, label: str) -> tuple[dict, dict, dict]:
         is not None,
         f"{label}: invalid source SHA",
     )
+    harness = None
     for key, filename in (
         ("harness_sha256", "harness.py"),
         ("constraints_sha256", "build-constraints.txt"),
@@ -187,6 +190,17 @@ def load_run(root: Path, label: str) -> tuple[dict, dict, dict]:
                 identity(local)["sha256"] == metadata[key],
                 f"{label}: {filename} digest mismatch",
             )
+            if filename == "harness.py":
+                raw = local.read_bytes()
+                harness = {
+                    **identity(local),
+                    "recorded_raw_sha256": metadata[key],
+                    "normalized_sha256": hashlib.sha256(
+                        raw.replace(b"\r\n", b"\n")
+                    ).hexdigest(),
+                    "normalization": "CRLF byte pairs replaced with LF only",
+                    "crlf_pairs": raw.count(b"\r\n"),
+                }
 
     commands = report["commands"]
     require(bool(commands), f"{label}: no commands")
@@ -319,6 +333,7 @@ def load_run(root: Path, label: str) -> tuple[dict, dict, dict]:
             for key in ("platform", "machine", "interpreter_platform", "cpu")
         },
         "versions": versions,
+        "harness": harness,
         "build_only": timings,
         "local_isolation": {
             "candidate_over_baseline": candidate / baseline,
@@ -409,10 +424,23 @@ def compare(windows: Path, macos: Path) -> dict:
         )
         if "harness_sha256" in win_metadata or "harness_sha256" in mac_metadata:
             require(
-                win_metadata.get("harness_sha256")
-                == mac_metadata.get("harness_sha256"),
-                "Benchmark harness mismatch",
+                win["harness"] is not None and mac["harness"] is not None,
+                "Benchmark harness missing from one input",
             )
+            win_raw = Path(win["harness"]["path"]).read_bytes()
+            mac_raw = Path(mac["harness"]["path"]).read_bytes()
+            result["harness_comparison"] = {
+                "status": "failed",
+                "raw_bytes_equal": win_raw == mac_raw,
+                "normalization": "CRLF byte pairs replaced with LF only",
+                "windows": win["harness"],
+                "macos": mac["harness"],
+            }
+            require(
+                win_raw.replace(b"\r\n", b"\n") == mac_raw.replace(b"\r\n", b"\n"),
+                "Benchmark harness mismatch after CRLF-to-LF normalization",
+            )
+            result["harness_comparison"]["status"] = "passed"
         result["normalized_artifact_check"] = cross_manifests(left, right)
         ratios = {
             variant: (

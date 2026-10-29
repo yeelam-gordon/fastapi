@@ -1,0 +1,167 @@
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814588064
+Triggered via workflow_dispatch about 1 minute ago
+
+JOBS
+✓ macos-15 in 33s (ID 123252588029)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native Python without MSI installation
+  - Preserve shared frozen experiment locks
+  ✓ Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  ✓ Measure complete PDM builds
+  ✓ Install built wheel and run artifact smoke check
+  ✓ Check experiment Python formatting
+  ✓ Upload measurements even on failure
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123252588171)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native Python without MSI installation
+  ✓ Preserve shared frozen experiment locks
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814588064
+Triggered via workflow_dispatch about 1 minute ago
+
+JOBS
+✓ macos-15 in 33s (ID 123252588029)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native Python without MSI installation
+  - Preserve shared frozen experiment locks
+  ✓ Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  ✓ Measure complete PDM builds
+  ✓ Install built wheel and run artifact smoke check
+  ✓ Check experiment Python formatting
+  ✓ Upload measurements even on failure
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123252588171)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native Python without MSI installation
+  ✓ Preserve shared frozen experiment locks
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814588064
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+✓ macos-15 in 33s (ID 123252588029)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native Python without MSI installation
+  - Preserve shared frozen experiment locks
+  ✓ Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  ✓ Measure complete PDM builds
+  ✓ Install built wheel and run artifact smoke check
+  ✓ Check experiment Python formatting
+  ✓ Upload measurements even on failure
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123252588171)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native Python without MSI installation
+  ✓ Preserve shared frozen experiment locks
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  ✓ Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+✓ perf/windows-arm-build-experiment ARM build experiment · 40814588064
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+✓ macos-15 in 33s (ID 123252588029)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native Python without MSI installation
+  - Preserve shared frozen experiment locks
+  ✓ Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  ✓ Measure complete PDM builds
+  ✓ Install built wheel and run artifact smoke check
+  ✓ Check experiment Python formatting
+  ✓ Upload measurements even on failure
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ windows-11-arm in 2m5s (ID 123252588171)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native Python without MSI installation
+  ✓ Preserve shared frozen experiment locks
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  ✓ Measure complete PDM builds
+  ✓ Install built wheel and run artifact smoke check
+  ✓ Check experiment Python formatting
+  ✓ Upload measurements even on failure
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+
+ANNOTATIONS
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+

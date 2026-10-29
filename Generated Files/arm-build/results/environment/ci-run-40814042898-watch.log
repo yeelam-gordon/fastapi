@@ -1,0 +1,1073 @@
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch less than a minute ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* macos-15 (ID 123250912873)
+  ✓ Set up job
+  * Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  * Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch less than a minute ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  * Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 1 minute ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 1 minute ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 1 minute ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 1 minute ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  * Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Provision pinned native tools and offline wheelhouse
+  * Upload Windows ARM offline dependencies
+  * Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 4 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+Refreshing run status every 15 seconds. Press Ctrl+C to quit.
+
+* perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 4 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* windows-11-arm (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  * Measure complete PDM builds
+  * Install built wheel and run artifact smoke check
+  * Check experiment Python formatting
+  * Upload measurements even on failure
+  * Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  * Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+
+X perf/windows-arm-build-experiment ARM build experiment · 40814042898
+Triggered via workflow_dispatch about 4 minutes ago
+
+JOBS
+✓ resolve in 12s (ID 123250834066)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Resolve identical hash-locked dependencies for both platforms
+  ✓ Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+X macos-15 in 18s (ID 123250912873)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  X Provision pinned native tools and offline wheelhouse
+  - Upload Windows ARM offline dependencies
+  - Verify benchmark logic
+  - Measure complete PDM builds
+  - Install built wheel and run artifact smoke check
+  - Check experiment Python formatting
+  X Upload measurements even on failure
+  - Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  - Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ windows-11-arm in 4m20s (ID 123250912876)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+  ✓ Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Provision pinned native tools and offline wheelhouse
+  ✓ Upload Windows ARM offline dependencies
+  ✓ Verify benchmark logic
+  ✓ Measure complete PDM builds
+  ✓ Install built wheel and run artifact smoke check
+  ✓ Check experiment Python formatting
+  ✓ Upload measurements even on failure
+  ✓ Post Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+  ✓ Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+resolve: .github#1
+
+X No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+macos-15: .github#29
+
+X Process completed with exit code 1.
+macos-15: .github#21
+
+- Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.
+macos-15: .github#1
+

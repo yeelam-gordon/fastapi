@@ -1,0 +1,5 @@
+Downloading cpython-3.13.15-windows-aarch64-none (download) (20.0MiB)
+ Downloaded cpython-3.13.15-windows-aarch64-none (download)
+Installed Python 3.13.15 in 3.46s
+ + cpython-3.13.15-windows-aarch64-none (python3.13.exe)
+warning: `C:\Users\runneradmin\.local\bin` is not on your PATH. To use installed Python executables, run `$env:PATH = "C:\Users\runneradmin\.local\bin;$env:PATH"` or `uv python update-shell`.

@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "python": "3.13.15 (main, Sep 29 2026, 08:22:55) [MSC v.1944 64 bit (ARM64)]",
+  "machine": "ARM64",
+  "interpreter_platform": "win-arm64",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "logical_cores": 4,
+  "runner_image": "20261026.197.1",
+  "runner_label": "Windows",
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "pip",
+        "install",
+        "--python",
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "--require-hashes",
+        "--only-binary",
+        ":all:",
+        "-r",
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\tooling.lock"
+      ],
+      "phase": "install-tools",
+      "returncode": 0,
+      "seconds": 1.0336210000000392
+    },
+    {
+      "argv": [
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "phase": "dependency-check",
+      "returncode": 0,
+      "seconds": 1.1390718999999763
+    },
+    {
+      "argv": [
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "download",
+        "--only-binary=:all:",
+        "--require-hashes",
+        "-r",
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\tooling.lock",
+        "-r",
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\smoke.lock",
+        "--dest",
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\wheelhouse"
+      ],
+      "phase": "download-wheelhouse",
+      "returncode": 0,
+      "seconds": 5.363221199999998
+    }
+  ]
+}

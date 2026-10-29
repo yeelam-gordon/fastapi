@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "python": "3.13.15 (main, Sep 29 2026, 14:49:54) [Clang 22.1.3 ]",
+  "machine": "arm64",
+  "interpreter_platform": "macosx-11.0-arm64",
+  "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+  "logical_cores": 3,
+  "runner_image": "20260907.0337.1",
+  "runner_label": "macOS",
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "pip",
+        "install",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--require-hashes",
+        "--only-binary",
+        ":all:",
+        "-r",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/tooling.lock"
+      ],
+      "phase": "install-tools",
+      "returncode": 0,
+      "seconds": 0.3309665829999915
+    },
+    {
+      "argv": [
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "phase": "dependency-check",
+      "returncode": 0,
+      "seconds": 0.664231583000003
+    }
+  ]
+}

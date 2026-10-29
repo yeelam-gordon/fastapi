@@ -1,0 +1,305 @@
+﻿2026-10-29T03:47:10.9484470Z Current runner version: '2.338.0'
+2026-10-29T03:47:10.9502840Z ##[group]Runner Image Provisioner
+2026-10-29T03:47:10.9503520Z Hosted Compute Agent
+2026-10-29T03:47:10.9504310Z Version: 20260828.587
+2026-10-29T03:47:10.9504750Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-10-29T03:47:10.9505300Z Build Date: 2026-08-28T16:44:25Z
+2026-10-29T03:47:10.9506920Z Worker ID: {c7e48470-e0b6-4ea2-89f9-9db37ca0a586}
+2026-10-29T03:47:10.9507510Z Azure Region: westus
+2026-10-29T03:47:10.9507940Z ##[endgroup]
+2026-10-29T03:47:10.9509550Z ##[group]Operating System
+2026-10-29T03:47:10.9509940Z macOS
+2026-10-29T03:47:10.9510820Z 15.7.9
+2026-10-29T03:47:10.9511150Z 24G830
+2026-10-29T03:47:10.9511470Z ##[endgroup]
+2026-10-29T03:47:10.9511830Z ##[group]Runner Image
+2026-10-29T03:47:10.9512660Z Image: macos-15-arm64
+2026-10-29T03:47:10.9513120Z Version: 20260907.0337.1
+2026-10-29T03:47:10.9514410Z Included Software: https://github.com/actions/runner-images/blob/macos-15-arm64/20260907.0337/images/macos/macos-15-arm64-Readme.md
+2026-10-29T03:47:10.9515720Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-15-arm64%2F20260907.0337
+2026-10-29T03:47:10.9516450Z ##[endgroup]
+2026-10-29T03:47:10.9517240Z ##[group]GITHUB_TOKEN Permissions
+2026-10-29T03:47:10.9519630Z Contents: read
+2026-10-29T03:47:10.9519990Z Metadata: read
+2026-10-29T03:47:10.9520370Z ##[endgroup]
+2026-10-29T03:47:10.9522340Z Secret source: Actions
+2026-10-29T03:47:10.9523040Z Cache mode: write
+2026-10-29T03:47:10.9531150Z Prepare workflow directory
+2026-10-29T03:47:10.9984020Z Prepare all required actions
+2026-10-29T03:47:11.0044330Z Getting action download info
+2026-10-29T03:47:11.3272260Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-29T03:47:11.6324530Z Download action repository 'actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+2026-10-29T03:47:11.7422750Z Download action repository 'actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333' (SHA:9000827ccba6bdab643e8b6fd33ac0654aef8333)
+2026-10-29T03:47:12.5130490Z Download action repository 'astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7' (SHA:c18668ad3cf93ea998bef934396af7bb5c839dc7)
+2026-10-29T03:47:13.2842380Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-10-29T03:47:14.1722130Z Complete job name: macos-15
+2026-10-29T03:47:14.2215750Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-10-29T03:47:14.2216230Z with:
+2026-10-29T03:47:14.2216400Z   persist-credentials: false
+2026-10-29T03:47:14.2216640Z   repository: yeelam-gordon/fastapi
+2026-10-29T03:47:14.2218700Z   token: ***
+2026-10-29T03:47:14.2218850Z   ssh-strict: true
+2026-10-29T03:47:14.2218990Z   ssh-user: git
+2026-10-29T03:47:14.2219130Z   clean: true
+2026-10-29T03:47:14.2219300Z   sparse-checkout-cone-mode: true
+2026-10-29T03:47:14.2219510Z   fetch-depth: 1
+2026-10-29T03:47:14.2219680Z   fetch-tags: false
+2026-10-29T03:47:14.2219840Z   show-progress: true
+2026-10-29T03:47:14.2220020Z   lfs: false
+2026-10-29T03:47:14.2220160Z   submodules: false
+2026-10-29T03:47:14.2220320Z   set-safe-directory: true
+2026-10-29T03:47:14.2220510Z   allow-unsafe-pr-checkout: false
+2026-10-29T03:47:14.2220890Z ##[endgroup]
+2026-10-29T03:47:14.6557460Z Syncing repository: yeelam-gordon/fastapi
+2026-10-29T03:47:14.6558990Z ##[group]Getting Git version info
+2026-10-29T03:47:14.6559800Z Working directory is '/Users/runner/work/fastapi/fastapi'
+2026-10-29T03:47:14.6560290Z [command]/opt/homebrew/bin/git version
+2026-10-29T03:47:14.7153550Z git version 2.55.0
+2026-10-29T03:47:14.7186270Z ##[endgroup]
+2026-10-29T03:47:14.7197290Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/8aab6e7a-d8d4-4ab3-b1c0-fe6e7cf600dd/.gitconfig'
+2026-10-29T03:47:14.7200380Z Temporarily overriding HOME='/Users/runner/work/_temp/8aab6e7a-d8d4-4ab3-b1c0-fe6e7cf600dd' before making global git config changes
+2026-10-29T03:47:14.7203380Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-29T03:47:14.7204830Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/fastapi/fastapi
+2026-10-29T03:47:14.7336370Z Deleting the contents of '/Users/runner/work/fastapi/fastapi'
+2026-10-29T03:47:14.7339110Z ##[group]Determining repository object format
+2026-10-29T03:47:14.7340850Z ##[endgroup]
+2026-10-29T03:47:14.7341240Z ##[group]Initializing the repository
+2026-10-29T03:47:14.7346330Z [command]/opt/homebrew/bin/git init /Users/runner/work/fastapi/fastapi
+2026-10-29T03:47:14.7692410Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-29T03:47:14.7693490Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-29T03:47:14.7694000Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-29T03:47:14.7694330Z hint: call:
+2026-10-29T03:47:14.7694540Z hint:
+2026-10-29T03:47:14.7694830Z hint: 	git config --global init.defaultBranch <name>
+2026-10-29T03:47:14.7695130Z hint:
+2026-10-29T03:47:14.7695480Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-29T03:47:14.7695990Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-29T03:47:14.7696360Z hint:
+2026-10-29T03:47:14.7696530Z hint: 	git branch -m <name>
+2026-10-29T03:47:14.7696750Z hint:
+2026-10-29T03:47:14.7697050Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-29T03:47:14.7697610Z Initialized empty Git repository in /Users/runner/work/fastapi/fastapi/.git/
+2026-10-29T03:47:14.7707520Z [command]/opt/homebrew/bin/git remote add origin https://github.com/yeelam-gordon/fastapi
+2026-10-29T03:47:14.7810310Z ##[endgroup]
+2026-10-29T03:47:14.7811270Z ##[group]Disabling automatic garbage collection
+2026-10-29T03:47:14.7815530Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+2026-10-29T03:47:14.7894140Z ##[endgroup]
+2026-10-29T03:47:14.7895350Z ##[group]Setting up auth
+2026-10-29T03:47:14.7896550Z Removing SSH command configuration
+2026-10-29T03:47:14.7904310Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-29T03:47:14.7971830Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-29T03:47:14.9179730Z Removing HTTP extra header
+2026-10-29T03:47:14.9181870Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-29T03:47:14.9270860Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-29T03:47:14.9988970Z Removing includeIf entries pointing to credentials config files
+2026-10-29T03:47:14.9992100Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-29T03:47:15.0047570Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-29T03:47:15.1253090Z [command]/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-29T03:47:15.1328600Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git.path /Users/runner/work/_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config
+2026-10-29T03:47:15.1397220Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config
+2026-10-29T03:47:15.1466010Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config
+2026-10-29T03:47:15.1689420Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config
+2026-10-29T03:47:15.1691270Z ##[endgroup]
+2026-10-29T03:47:15.1691760Z ##[group]Fetching the repository
+2026-10-29T03:47:15.1692640Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +12cd0143005f9f86d4e0a5b3b4292216ca6c432a:refs/remotes/origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:16.9687770Z From https://github.com/yeelam-gordon/fastapi
+2026-10-29T03:47:16.9689240Z  * [new ref]         12cd0143005f9f86d4e0a5b3b4292216ca6c432a -> origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:16.9694230Z [command]/opt/homebrew/bin/git branch --list --remote origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:16.9761710Z   origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:16.9767090Z [command]/opt/homebrew/bin/git rev-parse refs/remotes/origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:16.9823240Z 12cd0143005f9f86d4e0a5b3b4292216ca6c432a
+2026-10-29T03:47:16.9836140Z ##[endgroup]
+2026-10-29T03:47:16.9846600Z ##[group]Determining the checkout info
+2026-10-29T03:47:16.9852290Z ##[endgroup]
+2026-10-29T03:47:16.9853730Z [command]/opt/homebrew/bin/git sparse-checkout disable
+2026-10-29T03:47:16.9931270Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-29T03:47:16.9997870Z ##[group]Checking out the ref
+2026-10-29T03:47:17.0001970Z [command]/opt/homebrew/bin/git checkout --progress --force -B perf/windows-arm-build-experiment refs/remotes/origin/perf/windows-arm-build-experiment
+2026-10-29T03:47:17.7154740Z Switched to a new branch 'perf/windows-arm-build-experiment'
+2026-10-29T03:47:17.7166680Z branch 'perf/windows-arm-build-experiment' set up to track 'origin/perf/windows-arm-build-experiment'.
+2026-10-29T03:47:17.7235560Z ##[endgroup]
+2026-10-29T03:47:17.7303390Z [command]/opt/homebrew/bin/git log -1 --format=%H
+2026-10-29T03:47:17.7429800Z 12cd0143005f9f86d4e0a5b3b4292216ca6c432a
+2026-10-29T03:47:17.7438620Z ##[group]Removing auth
+2026-10-29T03:47:17.7439130Z Removing SSH command configuration
+2026-10-29T03:47:17.7443910Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-29T03:47:17.7614280Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-29T03:47:17.8692710Z Removing HTTP extra header
+2026-10-29T03:47:17.8693470Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-29T03:47:17.8762660Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-29T03:47:17.9724400Z Removing includeIf entries pointing to credentials config files
+2026-10-29T03:47:17.9729090Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-29T03:47:17.9820310Z includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path
+2026-10-29T03:47:17.9827230Z includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path
+2026-10-29T03:47:17.9862700Z includeif.gitdir:/github/workspace/.git.path
+2026-10-29T03:47:17.9894980Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-29T03:47:17.9898540Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path
+2026-10-29T03:47:17.9911980Z /Users/runner/work/_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config
+2026-10-29T03:47:17.9926300Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path \/Users\/runner\/work\/_temp\/git\-credentials\-2bd39fb2\-53bb\-4841\-b8ca\-7371b92db3e6\.config
+2026-10-29T03:47:18.0063110Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path
+2026-10-29T03:47:18.0148680Z /Users/runner/work/_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config
+2026-10-29T03:47:18.0155590Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path \/Users\/runner\/work\/_temp\/git\-credentials\-2bd39fb2\-53bb\-4841\-b8ca\-7371b92db3e6\.config
+2026-10-29T03:47:18.0294940Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-29T03:47:18.0356010Z /github/runner_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config
+2026-10-29T03:47:18.0361680Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-2bd39fb2\-53bb\-4841\-b8ca\-7371b92db3e6\.config
+2026-10-29T03:47:18.0588500Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-29T03:47:18.0694320Z /github/runner_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config
+2026-10-29T03:47:18.0708140Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-2bd39fb2\-53bb\-4841\-b8ca\-7371b92db3e6\.config
+2026-10-29T03:47:18.0847840Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-29T03:47:18.2193860Z Removing credentials config '/Users/runner/work/_temp/git-credentials-2bd39fb2-53bb-4841-b8ca-7371b92db3e6.config'
+2026-10-29T03:47:18.2327080Z ##[endgroup]
+2026-10-29T03:47:18.3655890Z ##[group]Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+2026-10-29T03:47:18.3657130Z with:
+2026-10-29T03:47:18.3657330Z   python-version: 3.13.15
+2026-10-29T03:47:18.3657960Z   architecture: arm64
+2026-10-29T03:47:18.3658450Z   check-latest: false
+2026-10-29T03:47:18.3673010Z   token: ***
+2026-10-29T03:47:18.3673330Z   update-environment: true
+2026-10-29T03:47:18.3673600Z   allow-prereleases: false
+2026-10-29T03:47:18.3673780Z   freethreaded: false
+2026-10-29T03:47:18.3674040Z ##[endgroup]
+2026-10-29T03:47:18.5283590Z ##[group]Installed versions
+2026-10-29T03:47:18.5308800Z Successfully set up CPython (3.13.15)
+2026-10-29T03:47:18.5310270Z ##[endgroup]
+2026-10-29T03:47:18.5426510Z ##[group]Run actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+2026-10-29T03:47:18.5426890Z with:
+2026-10-29T03:47:18.5427040Z   name: experiment-locks
+2026-10-29T03:47:18.5427250Z   path: Generated Files/arm-build
+2026-10-29T03:47:18.5427450Z   merge-multiple: false
+2026-10-29T03:47:18.5427730Z   repository: yeelam-gordon/fastapi
+2026-10-29T03:47:18.5427970Z   run-id: 40814042898
+2026-10-29T03:47:18.5428140Z   skip-decompress: false
+2026-10-29T03:47:18.5428310Z   digest-mismatch: error
+2026-10-29T03:47:18.5428500Z env:
+2026-10-29T03:47:18.5428740Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:18.5429170Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.13.15/arm64/lib/pkgconfig
+2026-10-29T03:47:18.5429590Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:18.5429950Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:18.5430360Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:18.5430640Z ##[endgroup]
+2026-10-29T03:47:18.8070870Z Downloading single artifact
+2026-10-29T03:47:19.2735300Z Preparing to download the following artifacts:
+2026-10-29T03:47:19.2781580Z - experiment-locks (ID: 12871463003, Size: 9447, Expected Digest: sha256:67e9269c6f7067c55356f3e6aacd9bd4729facadfb50b6804b6aad6d2f2dce29)
+2026-10-29T03:47:19.6150710Z Redirecting to blob download url: https://productionresultssa31.blob.core.windows.net/actions-results/40ca4ff2-5f64-4fef-877a-9dd747d857b6/workflow-job-run-de292cbd-fe28-5163-8755-b16373c7b070/artifacts/4e12ff86ccd408ce856632f777ca8ed62c965afa4a06e81e0806a20d1974c16f.zip
+2026-10-29T03:47:19.6152920Z Starting download of artifact to: /Users/runner/work/fastapi/fastapi/Generated Files/arm-build
+2026-10-29T03:47:19.8014420Z (node:1664) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-10-29T03:47:19.8029420Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-29T03:47:19.8031000Z SHA256 digest of downloaded artifact is 67e9269c6f7067c55356f3e6aacd9bd4729facadfb50b6804b6aad6d2f2dce29
+2026-10-29T03:47:19.8033000Z Artifact download completed successfully.
+2026-10-29T03:47:19.8060310Z Total of 1 artifact(s) downloaded
+2026-10-29T03:47:19.8098270Z Download artifact has finished successfully
+2026-10-29T03:47:19.8315600Z ##[group]Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+2026-10-29T03:47:19.8316180Z with:
+2026-10-29T03:47:19.8316340Z   version: 0.13.6
+2026-10-29T03:47:19.8316520Z   enable-cache: false
+2026-10-29T03:47:19.8316760Z   activate-environment: false
+2026-10-29T03:47:19.8317010Z   no-project: false
+2026-10-29T03:47:19.8317240Z   working-directory: /Users/runner/work/fastapi/fastapi
+2026-10-29T03:47:19.8319240Z   github-token: ***
+2026-10-29T03:47:19.8319720Z   cache-dependency-glob: **/*requirements*.txt
+**/*requirements*.in
+**/*constraints*.txt
+**/*constraints*.in
+**/pyproject.toml
+**/uv.lock
+**/*.py.lock
+
+2026-10-29T03:47:19.8320240Z   restore-cache: true
+2026-10-29T03:47:19.8320430Z   save-cache: auto
+2026-10-29T03:47:19.8320600Z   prune-cache: false
+2026-10-29T03:47:19.8320790Z   cache-python: false
+2026-10-29T03:47:19.8321020Z   ignore-nothing-to-cache: false
+2026-10-29T03:47:19.8321250Z   ignore-empty-workdir: false
+2026-10-29T03:47:19.8321530Z   download-from-astral-mirror: true
+2026-10-29T03:47:19.8321760Z   add-problem-matchers: true
+2026-10-29T03:47:19.8321970Z   quiet: false
+2026-10-29T03:47:19.8322150Z   resolution-strategy: highest
+2026-10-29T03:47:19.8322330Z env:
+2026-10-29T03:47:19.8322570Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:19.8323020Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.13.15/arm64/lib/pkgconfig
+2026-10-29T03:47:19.8323460Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:19.8323830Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:19.8324200Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:19.8324480Z ##[endgroup]
+2026-10-29T03:47:20.2711040Z Fetching manifest data from https://raw.githubusercontent.com/astral-sh/versions/main/v1/uv.ndjson ...
+2026-10-29T03:47:20.4904950Z Downloading uv from "https://releases.astral.sh/github/uv/releases/download/0.13.6/uv-aarch64-apple-darwin.tar.gz" ...
+2026-10-29T03:47:20.9699930Z [command]/usr/bin/tar xz -C /Users/runner/work/_temp/66b1726c-de0e-4304-9933-ee243a1166d9 -f /Users/runner/work/_temp/e2fcd73d-328b-47c3-a871-ff37f02d1370
+2026-10-29T03:47:21.4228700Z Added /Users/runner/.local/bin to the path
+2026-10-29T03:47:21.4642320Z Added /Users/runner/hostedtoolcache/uv/0.13.6/aarch64 to the path
+2026-10-29T03:47:21.4750030Z Set UV_PYTHON_INSTALL_DIR to /Users/runner/work/_temp/uv-python-dir
+2026-10-29T03:47:21.4879900Z Added /Users/runner/work/_temp/uv-python-dir to the path
+2026-10-29T03:47:21.5178570Z Successfully installed uv version 0.13.6
+2026-10-29T03:47:23.5905240Z ##[group]Run python "Generated Files/arm-build/ci_prepare.py"
+2026-10-29T03:47:23.5905700Z [36;1mpython "Generated Files/arm-build/ci_prepare.py"[0m
+2026-10-29T03:47:23.5982660Z shell: /bin/bash -e {0}
+2026-10-29T03:47:23.5984160Z env:
+2026-10-29T03:47:23.5984520Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:23.5985140Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.13.15/arm64/lib/pkgconfig
+2026-10-29T03:47:23.5985700Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:23.5986160Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:23.5986790Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:23.5987650Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+2026-10-29T03:47:23.5988800Z ##[endgroup]
+2026-10-29T03:47:24.1053560Z Traceback (most recent call last):
+2026-10-29T03:47:24.1099130Z   File "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/ci_prepare.py", line 165, in <module>
+2026-10-29T03:47:24.1100430Z     main()
+2026-10-29T03:47:24.1100780Z     ~~~~^^
+2026-10-29T03:47:24.1101440Z   File "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/ci_prepare.py", line 22, in main
+2026-10-29T03:47:24.1102070Z     raise RuntimeError(
+2026-10-29T03:47:24.1102480Z         f"Native ARM64 interpreter required, got {sysconfig.get_platform()}"
+2026-10-29T03:47:24.1103020Z     )
+2026-10-29T03:47:24.1103440Z RuntimeError: Native ARM64 interpreter required, got macosx-10.13-universal2
+2026-10-29T03:47:24.1199360Z ##[error]Process completed with exit code 1.
+2026-10-29T03:47:24.1365770Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-10-29T03:47:24.1366160Z with:
+2026-10-29T03:47:24.1366310Z   name: arm-build-macos-15
+2026-10-29T03:47:24.1367730Z   path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap
+
+2026-10-29T03:47:24.1369170Z   if-no-files-found: error
+2026-10-29T03:47:24.1369360Z   retention-days: 14
+2026-10-29T03:47:24.1369660Z   compression-level: 6
+2026-10-29T03:47:24.1369940Z   overwrite: false
+2026-10-29T03:47:24.1370120Z   include-hidden-files: false
+2026-10-29T03:47:24.1370330Z   archive: true
+2026-10-29T03:47:24.1370590Z env:
+2026-10-29T03:47:24.1370840Z   pythonLocation: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:24.1371270Z   PKG_CONFIG_PATH: /Users/runner/hostedtoolcache/Python/3.13.15/arm64/lib/pkgconfig
+2026-10-29T03:47:24.1371700Z   Python_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:24.1372110Z   Python2_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:24.1372540Z   Python3_ROOT_DIR: /Users/runner/hostedtoolcache/Python/3.13.15/arm64
+2026-10-29T03:47:24.1372900Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+2026-10-29T03:47:24.1373200Z ##[endgroup]
+2026-10-29T03:47:24.3101460Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-29T03:47:24.3103060Z The least common ancestor is /Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results. This will be the root directory of the artifact
+2026-10-29T03:47:24.3116970Z ##[error]No files were found with the provided path: Generated Files/arm-build/results/ci/report.json
+Generated Files/arm-build/results/ci/harness.py
+Generated Files/arm-build/results/ci/logs
+Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+Generated Files/arm-build/results/ci/build-constraints.txt
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+Generated Files/arm-build/results/bootstrap. No artifacts will be uploaded.
+2026-10-29T03:47:24.3229910Z Post job cleanup.
+2026-10-29T03:47:24.4452890Z [command]/opt/homebrew/bin/git version
+2026-10-29T03:47:24.4558440Z git version 2.55.0
+2026-10-29T03:47:24.4619810Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/205bd0c3-8293-424f-a79d-6871416b0229/.gitconfig'
+2026-10-29T03:47:24.4620620Z Temporarily overriding HOME='/Users/runner/work/_temp/205bd0c3-8293-424f-a79d-6871416b0229' before making global git config changes
+2026-10-29T03:47:24.4621410Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-29T03:47:24.4622040Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/fastapi/fastapi
+2026-10-29T03:47:24.4684080Z Removing SSH command configuration
+2026-10-29T03:47:24.4690900Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-29T03:47:24.4769990Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-29T03:47:24.5870440Z Removing HTTP extra header
+2026-10-29T03:47:24.5886770Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-29T03:47:24.5942450Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-29T03:47:24.7381770Z Removing includeIf entries pointing to credentials config files
+2026-10-29T03:47:24.7501180Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-29T03:47:24.7810510Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-29T03:47:24.9219220Z Cleaning up orphan processes

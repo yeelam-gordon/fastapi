@@ -1,0 +1,872 @@
+{
+  "status": "passed",
+  "metadata": {
+    "python": "3.13.15 (main, Sep 29 2026, 14:49:54) [Clang 22.1.3 ]",
+    "executable": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+    "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "interpreter_platform": "macosx-11.0-arm64",
+    "harness_sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+    "harness_snapshot": "harness.py",
+    "cpu": {
+      "logical_count": 3,
+      "processor": "arm",
+      "identifier": null,
+      "brand": "Apple M1 (Virtual)"
+    },
+    "source_checkout": "/Users/runner/work/fastapi/fastapi",
+    "source_policy": "git archive HEAD; uncommitted/untracked files excluded",
+    "cache_policy": "dedicated shared cache; baseline and candidate online preparation, then offline measured builds; no cache clearing; NOT cold-cache",
+    "environment_policy": "inherit except UV_*, PIP_*, PYTHONPATH, PYTHONHOME; PYTHONNOUSERSITE=1; uv --no-config; explicit harness interpreter",
+    "candidate_scope": "diagnostic isolation removal, SAME pdm.backend",
+    "repeats": 7,
+    "uv": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-apple-darwin)",
+    "git_sha": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+    "git_status": "?? \"Generated Files/arm-build/results/bootstrap/\"\n?? \"Generated Files/arm-build/results/ci/\"\n",
+    "build_system": {
+      "requires": [
+        "pdm-backend"
+      ],
+      "build-backend": "pdm.backend"
+    },
+    "installed_versions": {
+      "pdm-backend": "2.5.0",
+      "packaging": "26.3",
+      "ruff": "0.17.3",
+      "build": "1.6.1",
+      "pyproject-hooks": "1.3.3",
+      "pip": "26.2.2",
+      "psutil": "7.2.2"
+    },
+    "backend_requirements": [
+      "importlib-metadata>=3.6; python_version < \"3.10\""
+    ],
+    "constraints": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+    "constraints_sha256": "a7e01736cb9d0083b6459db69d628a855184613dacc6592213cf06b2abcab5a3",
+    "constraints_scope": "all installed distributions, including backend/tools",
+    "bootstrap_policy": "caller preinstalled dependencies; not included in build timing"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "--version"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi",
+      "phase": "uv-version",
+      "stdout": "logs/000-uv-version.stdout.log",
+      "stderr": "logs/000-uv-version.stderr.log",
+      "started_utc": "2026-10-29T03:52:52Z",
+      "returncode": 0,
+      "wall_seconds": 0.006090166999996427
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "--help"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi",
+      "phase": "uv-help",
+      "stdout": "logs/001-uv-help.stdout.log",
+      "stderr": "logs/001-uv-help.stderr.log",
+      "started_utc": "2026-10-29T03:52:52Z",
+      "returncode": 0,
+      "wall_seconds": 0.006789625000010346
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi",
+      "phase": "git-head",
+      "stdout": "logs/002-git-head.stdout.log",
+      "stderr": "logs/002-git-head.stderr.log",
+      "started_utc": "2026-10-29T03:52:52Z",
+      "returncode": 0,
+      "wall_seconds": 0.006607874999986052
+    },
+    {
+      "argv": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi",
+      "phase": "git-status",
+      "stdout": "logs/003-git-status.stdout.log",
+      "stderr": "logs/003-git-status.stderr.log",
+      "started_utc": "2026-10-29T03:52:52Z",
+      "returncode": 0,
+      "wall_seconds": 0.22951949999998078
+    },
+    {
+      "argv": [
+        "git",
+        "archive",
+        "--format=tar",
+        "--output=/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source.tar",
+        "264cbad400c8336057a70b9b6a65bfdb4920321e"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi",
+      "phase": "source-snapshot",
+      "stdout": "logs/004-source-snapshot.stdout.log",
+      "stderr": "logs/004-source-snapshot.stderr.log",
+      "started_utc": "2026-10-29T03:52:52Z",
+      "returncode": 0,
+      "wall_seconds": 0.12473283299999594
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/prepare-baseline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "prepare-baseline",
+      "stdout": "logs/005-prepare-baseline.stdout.log",
+      "stderr": "logs/005-prepare-baseline.stderr.log",
+      "started_utc": "2026-10-29T03:52:53Z",
+      "returncode": 0,
+      "wall_seconds": 1.4124781670000175
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/prepare-candidate",
+        "--no-build-isolation"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "prepare-candidate",
+      "stdout": "logs/006-prepare-candidate.stdout.log",
+      "stderr": "logs/006-prepare-candidate.stderr.log",
+      "started_utc": "2026-10-29T03:52:55Z",
+      "returncode": 0,
+      "wall_seconds": 0.8125836670000126
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-01-baseline",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-01-baseline",
+      "stdout": "logs/007-repeat-01-baseline.stdout.log",
+      "stderr": "logs/007-repeat-01-baseline.stderr.log",
+      "started_utc": "2026-10-29T03:52:56Z",
+      "returncode": 0,
+      "wall_seconds": 0.9940591250000068
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-01-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-01-candidate",
+      "stdout": "logs/008-repeat-01-candidate.stdout.log",
+      "stderr": "logs/008-repeat-01-candidate.stderr.log",
+      "started_utc": "2026-10-29T03:52:57Z",
+      "returncode": 0,
+      "wall_seconds": 0.7812927500000058
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-02-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-02-candidate",
+      "stdout": "logs/009-repeat-02-candidate.stdout.log",
+      "stderr": "logs/009-repeat-02-candidate.stderr.log",
+      "started_utc": "2026-10-29T03:52:58Z",
+      "returncode": 0,
+      "wall_seconds": 0.7382549589999883
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-02-baseline",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-02-baseline",
+      "stdout": "logs/010-repeat-02-baseline.stdout.log",
+      "stderr": "logs/010-repeat-02-baseline.stderr.log",
+      "started_utc": "2026-10-29T03:52:58Z",
+      "returncode": 0,
+      "wall_seconds": 1.0719296670000062
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-03-baseline",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-03-baseline",
+      "stdout": "logs/011-repeat-03-baseline.stdout.log",
+      "stderr": "logs/011-repeat-03-baseline.stderr.log",
+      "started_utc": "2026-10-29T03:53:00Z",
+      "returncode": 0,
+      "wall_seconds": 0.9503897499999994
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-03-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-03-candidate",
+      "stdout": "logs/012-repeat-03-candidate.stdout.log",
+      "stderr": "logs/012-repeat-03-candidate.stderr.log",
+      "started_utc": "2026-10-29T03:53:01Z",
+      "returncode": 0,
+      "wall_seconds": 0.7057384170000205
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-04-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-04-candidate",
+      "stdout": "logs/013-repeat-04-candidate.stdout.log",
+      "stderr": "logs/013-repeat-04-candidate.stderr.log",
+      "started_utc": "2026-10-29T03:53:01Z",
+      "returncode": 0,
+      "wall_seconds": 0.695190083
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-04-baseline",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-04-baseline",
+      "stdout": "logs/014-repeat-04-baseline.stdout.log",
+      "stderr": "logs/014-repeat-04-baseline.stderr.log",
+      "started_utc": "2026-10-29T03:53:02Z",
+      "returncode": 0,
+      "wall_seconds": 0.9092244590000007
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-05-baseline",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-05-baseline",
+      "stdout": "logs/015-repeat-05-baseline.stdout.log",
+      "stderr": "logs/015-repeat-05-baseline.stderr.log",
+      "started_utc": "2026-10-29T03:53:03Z",
+      "returncode": 0,
+      "wall_seconds": 0.9700689999999952
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-05-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-05-candidate",
+      "stdout": "logs/016-repeat-05-candidate.stdout.log",
+      "stderr": "logs/016-repeat-05-candidate.stderr.log",
+      "started_utc": "2026-10-29T03:53:04Z",
+      "returncode": 0,
+      "wall_seconds": 0.7301644579999902
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-06-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-06-candidate",
+      "stdout": "logs/017-repeat-06-candidate.stdout.log",
+      "stderr": "logs/017-repeat-06-candidate.stderr.log",
+      "started_utc": "2026-10-29T03:53:05Z",
+      "returncode": 0,
+      "wall_seconds": 0.7989662919999887
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-06-baseline",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-06-baseline",
+      "stdout": "logs/018-repeat-06-baseline.stdout.log",
+      "stderr": "logs/018-repeat-06-baseline.stderr.log",
+      "started_utc": "2026-10-29T03:53:06Z",
+      "returncode": 0,
+      "wall_seconds": 0.8665583749999826
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-07-baseline",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-07-baseline",
+      "stdout": "logs/019-repeat-07-baseline.stdout.log",
+      "stderr": "logs/019-repeat-07-baseline.stderr.log",
+      "started_utc": "2026-10-29T03:53:07Z",
+      "returncode": 0,
+      "wall_seconds": 0.8721672080000076
+    },
+    {
+      "argv": [
+        "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+        "build",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+        "--python",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--build-constraints",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+        "--cache-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+        "--no-create-gitignore",
+        "--out-dir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-07-candidate",
+        "--no-build-isolation",
+        "--offline"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "repeat-07-candidate",
+      "stdout": "logs/020-repeat-07-candidate.stdout.log",
+      "stderr": "logs/020-repeat-07-candidate.stderr.log",
+      "started_utc": "2026-10-29T03:53:08Z",
+      "returncode": 0,
+      "wall_seconds": 0.698832374999995
+    },
+    {
+      "argv": [
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+        "-X",
+        "importtime",
+        "-m",
+        "build",
+        "--no-isolation",
+        "--outdir",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/diagnostic",
+        "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source"
+      ],
+      "cwd": "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+      "phase": "diagnostic-importtime-UNMEASURED",
+      "stdout": "logs/021-diagnostic-importtime-UNMEASURED.stdout.log",
+      "stderr": "logs/021-diagnostic-importtime-UNMEASURED.stderr.log",
+      "started_utc": "2026-10-29T03:53:08Z",
+      "returncode": 0,
+      "wall_seconds": 1.0678887500000087
+    }
+  ],
+  "artifacts": [
+    {
+      "phase": "prepare-baseline",
+      "variant": "baseline",
+      "measured": false,
+      "equivalent": true,
+      "manifest": "artifacts/prepare-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "6b6c1dc057845154ba167d4846535502d57fcf27e928053147d2bdb2e72e970b",
+          "bytes": 525763
+        }
+      }
+    },
+    {
+      "phase": "prepare-candidate",
+      "variant": "candidate",
+      "measured": false,
+      "equivalent": true,
+      "manifest": "artifacts/prepare-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "cb1aaed910ef287687915589023f969eb8eae37e1f416c519918cb53193d2cda",
+          "bytes": 525763
+        }
+      }
+    },
+    {
+      "phase": "repeat-01-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-01-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "cf7e805b921ddbaada74369ac4c32a8fdaaf5cdfa3c4c4eda9f9125f00f533f9",
+          "bytes": 525763
+        }
+      }
+    },
+    {
+      "phase": "repeat-01-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-01-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "745b972b4edffccc5f08388ee59fd56db47a74e1ecde66b833fe0aa72e6d337e",
+          "bytes": 525763
+        }
+      }
+    },
+    {
+      "phase": "repeat-02-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-02-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "cd9fdddb84a9da1118fc041ad85082dce78caf93ad20b63bd6e5192bb74fd5d9",
+          "bytes": 525762
+        }
+      }
+    },
+    {
+      "phase": "repeat-02-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-02-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "e026e81d1be26c5e2119e02769caebbcb25470d217cbd5fbea804896a5743d18",
+          "bytes": 525764
+        }
+      }
+    },
+    {
+      "phase": "repeat-03-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-03-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "89d63953a62b73d176eaae9195a470bfab6175f4e988df3ec4e47374765034af",
+          "bytes": 525763
+        }
+      }
+    },
+    {
+      "phase": "repeat-03-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-03-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "047804626295275f04c1750eae88adf72e6bd82d02a3be6510d92a823fd8417f",
+          "bytes": 525762
+        }
+      }
+    },
+    {
+      "phase": "repeat-04-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-04-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "9d44442092dfb2d9cb1ef192c18227561330fba3c25df7471e4c09be4ed0d0f5",
+          "bytes": 525764
+        }
+      }
+    },
+    {
+      "phase": "repeat-04-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-04-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "8b706e8b5e3502d19f0e8b0b28b80eb93bfd8e25e275671ae068c77eacf95c3d",
+          "bytes": 525762
+        }
+      }
+    },
+    {
+      "phase": "repeat-05-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-05-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "ffb222ff6d87d80193c5a674fdbb1dcd592480fc0348197fafc1c2198106eb83",
+          "bytes": 525763
+        }
+      }
+    },
+    {
+      "phase": "repeat-05-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-05-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "af20e00d792f1ae6a2889a6fb786a23eadc521f383d42640f60f53b83aa1ef83",
+          "bytes": 525763
+        }
+      }
+    },
+    {
+      "phase": "repeat-06-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-06-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "df6c80e633ea3b04177c214059425c2e17d4445f100a8d8cffe4de6d5c98d51c",
+          "bytes": 525764
+        }
+      }
+    },
+    {
+      "phase": "repeat-06-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-06-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "4469639844671a2129115be7db51d6667f4995483725a56e8512a8b8c7ecc3d3",
+          "bytes": 525762
+        }
+      }
+    },
+    {
+      "phase": "repeat-07-baseline",
+      "variant": "baseline",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-07-baseline.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "1e442a73389adfb97f8c334cc9d27f013be40683689ff56c20e0725f25842115",
+          "bytes": 525762
+        }
+      }
+    },
+    {
+      "phase": "repeat-07-candidate",
+      "variant": "candidate",
+      "measured": true,
+      "equivalent": true,
+      "manifest": "artifacts/repeat-07-candidate.manifest.json",
+      "archives": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "sha256": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+          "bytes": 148912
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "sha256": "0d8d7dab86c145ec62acb8b02d753415df0e58e4a1abc0d3e7aaaecdf8b21641",
+          "bytes": 525761
+        }
+      }
+    }
+  ],
+  "summary": {
+    "median_seconds": {
+      "baseline": 0.9503897499999994,
+      "candidate": 0.7301644579999902
+    },
+    "range_seconds": {
+      "baseline": {
+        "min": 0.8665583749999826,
+        "max": 1.0719296670000062
+      },
+      "candidate": {
+        "min": 0.695190083,
+        "max": 0.7989662919999887
+      }
+    },
+    "candidate_over_baseline": 0.768278969759502,
+    "interpretation": "Descriptive warm-download results on this host only"
+  }
+}

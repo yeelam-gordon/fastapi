@@ -1,0 +1,267 @@
+{
+  "status": "failed",
+  "inputs": {
+    "windows": [
+      {
+        "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\report.json",
+        "sha256": "3c3f52352d4c461ed7315da72341be18caa2ba9e1cc7f31be30150cacdd368ef"
+      }
+    ],
+    "macos": [
+      {
+        "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\report.json",
+        "sha256": "a70a6139a8a1fd822051d0c0bb6636340403d9bc79c35525ef574a2b49de6bed"
+      }
+    ]
+  },
+  "limits": "Descriptive warm-download offline build-only timings, not statistical durability. Bootstrap install/download phases are separate; CI queue and total job times are unknown. Logical CPU counts do not establish physical 20-vs-16-core performance.",
+  "windows": {
+    "input_report": {
+      "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\report.json",
+      "sha256": "3c3f52352d4c461ed7315da72341be18caa2ba9e1cc7f31be30150cacdd368ef"
+    },
+    "native_platform": {
+      "platform": "Windows-11-10.0.26200-SP0",
+      "machine": "ARM64",
+      "interpreter_platform": "win-arm64",
+      "cpu": {
+        "logical_count": 4,
+        "processor": "ARMv8 (64-bit) Family 8 Model D49 Revision   0, MICROSOFT CORPORATION",
+        "identifier": "ARMv8 (64-bit) Family 8 Model D49 Revision   0, MICROSOFT CORPORATION"
+      }
+    },
+    "versions": {
+      "source_sha": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+      "python_patch": "3.13.15",
+      "uv_semver": "0.13.6",
+      "pdm_backend": "2.5.0",
+      "build_system": {
+        "requires": [
+          "pdm-backend"
+        ],
+        "build-backend": "pdm.backend"
+      }
+    },
+    "harness": {
+      "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\harness.py",
+      "sha256": "abdce336537f6670eceddc61ed15b5f086a8a0269a65c35f8152296403891bfd",
+      "recorded_raw_sha256": "abdce336537f6670eceddc61ed15b5f086a8a0269a65c35f8152296403891bfd",
+      "normalized_sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+      "normalization": "CRLF byte pairs replaced with LF only",
+      "crlf_pairs": 528
+    },
+    "build_only": {
+      "baseline": {
+        "count": 7,
+        "median_seconds": 3.1287604999999985,
+        "range_seconds": {
+          "min": 3.00237130000005,
+          "max": 4.587611600000059
+        },
+        "samples_seconds": [
+          3.0483361000000286,
+          3.7261473000000933,
+          3.2037427999999863,
+          3.00237130000005,
+          3.1287604999999985,
+          3.036293099999966,
+          4.587611600000059
+        ]
+      },
+      "candidate": {
+        "count": 7,
+        "median_seconds": 2.6786721000000853,
+        "range_seconds": {
+          "min": 2.4283222999999907,
+          "max": 2.735506600000008
+        },
+        "samples_seconds": [
+          2.6786721000000853,
+          2.7222174000000905,
+          2.4283222999999907,
+          2.4726538999999548,
+          2.690693300000021,
+          2.5513431999999057,
+          2.735506600000008
+        ]
+      }
+    },
+    "local_isolation": {
+      "candidate_over_baseline": 0.8561448215675461,
+      "baseline_over_candidate_speedup": 1.1680266875516039,
+      "median_seconds_saved": 0.45008839999991324,
+      "fraction_saved": 0.14385517843245388
+    },
+    "normalized_artifacts": "passed",
+    "raw_reference_archives": {
+      "status": "passed",
+      "checked": [
+        {
+          "phase": "prepare-baseline",
+          "status": "passed"
+        }
+      ],
+      "reason": "Reference wheel/sdist verified against manifest and archive hashes"
+    },
+    "bootstrap": {
+      "status": "passed",
+      "input": {
+        "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\provision.json",
+        "sha256": "3758a47b2cd80025a731fbf9277272d286cedc44a184a2ae7e3c2b08b0c721b0"
+      },
+      "phases_seconds": {
+        "install-tools": 1.0336210000000392,
+        "dependency-check": 1.1390718999999763,
+        "download-wheelhouse": 5.363221199999998
+      }
+    },
+    "runtime_smoke": {
+      "status": "passed",
+      "input": {
+        "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\smoke.json",
+        "sha256": "77e9943c960a1a6a1f71636a37ecb1a49b2a9cf3db0e60850c1b5f109dcfd31b"
+      },
+      "phases_seconds": {
+        "smoke-dependencies": 1.256791000000021,
+        "install-artifact": 0.11030289999996512,
+        "artifact-smoke": 1.3522821999999906
+      }
+    }
+  },
+  "macos": {
+    "input_report": {
+      "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\report.json",
+      "sha256": "a70a6139a8a1fd822051d0c0bb6636340403d9bc79c35525ef574a2b49de6bed"
+    },
+    "native_platform": {
+      "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+      "machine": "arm64",
+      "interpreter_platform": "macosx-11.0-arm64",
+      "cpu": {
+        "logical_count": 3,
+        "processor": "arm",
+        "identifier": null,
+        "brand": "Apple M1 (Virtual)"
+      }
+    },
+    "versions": {
+      "source_sha": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+      "python_patch": "3.13.15",
+      "uv_semver": "0.13.6",
+      "pdm_backend": "2.5.0",
+      "build_system": {
+        "requires": [
+          "pdm-backend"
+        ],
+        "build-backend": "pdm.backend"
+      }
+    },
+    "harness": {
+      "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\harness.py",
+      "sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+      "recorded_raw_sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+      "normalized_sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+      "normalization": "CRLF byte pairs replaced with LF only",
+      "crlf_pairs": 0
+    },
+    "build_only": {
+      "baseline": {
+        "count": 7,
+        "median_seconds": 0.9503897499999994,
+        "range_seconds": {
+          "min": 0.8665583749999826,
+          "max": 1.0719296670000062
+        },
+        "samples_seconds": [
+          0.9940591250000068,
+          1.0719296670000062,
+          0.9503897499999994,
+          0.9092244590000007,
+          0.9700689999999952,
+          0.8665583749999826,
+          0.8721672080000076
+        ]
+      },
+      "candidate": {
+        "count": 7,
+        "median_seconds": 0.7301644579999902,
+        "range_seconds": {
+          "min": 0.695190083,
+          "max": 0.7989662919999887
+        },
+        "samples_seconds": [
+          0.7812927500000058,
+          0.7382549589999883,
+          0.7057384170000205,
+          0.695190083,
+          0.7301644579999902,
+          0.7989662919999887,
+          0.698832374999995
+        ]
+      }
+    },
+    "local_isolation": {
+      "candidate_over_baseline": 0.768278969759502,
+      "baseline_over_candidate_speedup": 1.3016105338833297,
+      "median_seconds_saved": 0.22022529200000918,
+      "fraction_saved": 0.23172103024049795
+    },
+    "normalized_artifacts": "passed",
+    "raw_reference_archives": {
+      "status": "passed",
+      "checked": [
+        {
+          "phase": "prepare-baseline",
+          "status": "passed"
+        }
+      ],
+      "reason": "Reference wheel/sdist verified against manifest and archive hashes"
+    },
+    "bootstrap": {
+      "status": "passed",
+      "input": {
+        "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\provision.json",
+        "sha256": "f7ae27337b8b0b9bc26c08e91f73f4e1a8ed902b3f158bb5a53adc73f6e15f4c"
+      },
+      "phases_seconds": {
+        "install-tools": 0.3309665829999915,
+        "dependency-check": 0.664231583000003
+      }
+    },
+    "runtime_smoke": {
+      "status": "passed",
+      "input": {
+        "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\smoke.json",
+        "sha256": "551c0dc58a464e6d6f50e0a0d2cd7afbde054d6f94f8d380e87597607923690d"
+      },
+      "phases_seconds": {
+        "smoke-dependencies": 0.2593149590000223,
+        "install-artifact": 0.026951249999996207,
+        "artifact-smoke": 0.6225243330000012
+      }
+    }
+  },
+  "harness_comparison": {
+    "status": "passed",
+    "raw_bytes_equal": false,
+    "normalization": "CRLF byte pairs replaced with LF only",
+    "windows": {
+      "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\harness.py",
+      "sha256": "abdce336537f6670eceddc61ed15b5f086a8a0269a65c35f8152296403891bfd",
+      "recorded_raw_sha256": "abdce336537f6670eceddc61ed15b5f086a8a0269a65c35f8152296403891bfd",
+      "normalized_sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+      "normalization": "CRLF byte pairs replaced with LF only",
+      "crlf_pairs": 528
+    },
+    "macos": {
+      "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\harness.py",
+      "sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+      "recorded_raw_sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+      "normalized_sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+      "normalization": "CRLF byte pairs replaced with LF only",
+      "crlf_pairs": 0
+    }
+  },
+  "error": "ComparisonError: fastapi-0.162.0-py3-none-any.whl: changed content: ['fastapi-0.162.0.dist-info/licenses/LICENSE', 'fastapi/.agents/skills/fastapi/SKILL.md', 'fastapi/.agents/skills/fastapi/references/dependencies.md', 'fastapi/.agents/skills/fastapi/references/other-tools.md', 'fastapi/.agents/skills/fastapi/references/path-operations.md', 'fastapi/.agents/skills/fastapi/references/pydantic.md', 'fastapi/.agents/skills/fastapi/references/responses.md', 'fastapi/.agents/skills/fastapi/references/streaming.md', 'fastapi/__init__.py', 'fastapi/__main__.py', 'fastapi/_compat/__init__.py', 'fastapi/_compat/shared.py', 'fastapi/_compat/v2.py', 'fastapi/applications.py', 'fastapi/background.py', 'fastapi/cli.py', 'fastapi/concurrency.py', 'fastapi/datastructures.py', 'fastapi/dependencies/models.py', 'fastapi/dependencies/utils.py', 'fastapi/encoders.py', 'fastapi/exception_handlers.py', 'fastapi/exceptions.py', 'fastapi/logger.py', 'fastapi/middleware/__init__.py', 'fastapi/middleware/asyncexitstack.py', 'fastapi/middleware/cors.py', 'fastapi/middleware/gzip.py', 'fastapi/middleware/httpsredirect.py', 'fastapi/middleware/trustedhost.py', 'fastapi/middleware/wsgi.py', 'fastapi/openapi/constants.py', 'fastapi/openapi/docs.py', 'fastapi/openapi/models.py', 'fastapi/openapi/utils.py', 'fastapi/param_functions.py', 'fastapi/params.py', 'fastapi/requests.py', 'fastapi/responses.py', 'fastapi/routing.py', 'fastapi/security/__init__.py', 'fastapi/security/api_key.py', 'fastapi/security/base.py', 'fastapi/security/http.py', 'fastapi/security/oauth2.py', 'fastapi/security/open_id_connect_url.py', 'fastapi/security/utils.py', 'fastapi/sse.py', 'fastapi/staticfiles.py', 'fastapi/telemetry/__init__.py', 'fastapi/telemetry/_api.py', 'fastapi/telemetry/_asgi.py', 'fastapi/telemetry/_runtime.py', 'fastapi/templating.py', 'fastapi/testclient.py', 'fastapi/types.py', 'fastapi/utils.py', 'fastapi/websockets.py']",
+  "conclusion": "Comparison rejected; no performance goal established."
+}

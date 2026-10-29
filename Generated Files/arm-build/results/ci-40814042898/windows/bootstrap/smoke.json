@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "machine": "ARM64",
+  "interpreter_platform": "win-arm64",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "logical_cores": 4,
+  "runner_image": "20261026.197.1",
+  "runner_label": "Windows",
+  "commands": [
+    {
+      "argv": [
+        "uv",
+        "pip",
+        "install",
+        "--python",
+        "C:\\hostedtoolcache\\windows\\Python\\3.13.15\\arm64\\python.exe",
+        "--require-hashes",
+        "--only-binary",
+        ":all:",
+        "-r",
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\smoke.lock"
+      ],
+      "phase": "smoke-dependencies",
+      "returncode": 0,
+      "seconds": 1.2366453999999294
+    },
+    {
+      "argv": [
+        "uv",
+        "pip",
+        "install",
+        "--python",
+        "C:\\hostedtoolcache\\windows\\Python\\3.13.15\\arm64\\python.exe",
+        "--no-deps",
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\prepare-baseline\\fastapi-0.162.0-py3-none-any.whl"
+      ],
+      "phase": "install-artifact",
+      "returncode": 0,
+      "seconds": 0.224087499999996
+    },
+    {
+      "argv": [
+        "C:\\hostedtoolcache\\windows\\Python\\3.13.15\\arm64\\python.exe",
+        "-I",
+        "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\bootstrap\\artifact_smoke.py"
+      ],
+      "phase": "artifact-smoke",
+      "returncode": 0,
+      "seconds": 1.3130692000000863
+    }
+  ]
+}

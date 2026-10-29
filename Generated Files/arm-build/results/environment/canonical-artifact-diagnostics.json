@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "scope": "local canonical-source build versus retained Mac CI reference; NOT a new Windows CI timing comparison",
+  "source_sha": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+  "wheel_member_contents_equal": true,
+  "sdist_member_contents_equal": true,
+  "sdist_executable_modes_equal": false,
+  "differences": {
+    "fastapi-0.162.0-py3-none-any.whl": [],
+    "fastapi-0.162.0.tar.gz": [
+      "scripts/format.sh",
+      "scripts/lint.sh",
+      "scripts/test-cov-html.sh",
+      "scripts/test-cov.sh",
+      "scripts/test.sh"
+    ]
+  },
+  "local_summary": {
+    "median_seconds": {
+      "baseline": 3.76116329999968,
+      "candidate": 2.868860099999438
+    },
+    "range_seconds": {
+      "baseline": {
+        "min": 3.6622963000008895,
+        "max": 3.9228258000002825
+      },
+      "candidate": {
+        "min": 2.7762696999998298,
+        "max": 2.954744799999389
+      }
+    },
+    "candidate_over_baseline": 0.7627587188250193,
+    "interpretation": "Descriptive warm-download results on this host only"
+  }
+}
