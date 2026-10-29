@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "analysis_only": true,
+  "performance_eligible": false,
+  "status": "partial",
+  "validation": {
+    "stdlib_unittest": {
+      "command": "python -m unittest -v test_collect",
+      "tests": 11,
+      "status": "passed"
+    },
+    "ruff_check": {
+      "version": "0.17.3",
+      "command": "ruff check collect.py hook test_collect.py",
+      "status": "passed"
+    },
+    "ruff_format": {
+      "command": "ruff format --check collect.py hook test_collect.py",
+      "status": "passed"
+    },
+    "static_compile": {
+      "command": "python -m compileall -q collect.py hook test_collect.py",
+      "status": "passed"
+    },
+    "runtime": "CPython 3.13.15 ARM64 on Windows"
+  },
+  "unit_only_doubles": "Labelled unit platform/backend fixtures test monitoring, importtime, cProfile and memory machinery. No production fallback.",
+  "platform_integration_candidate": "fdaace345c8f53a855fb398ef764b9113ffb27d5",
+  "integration": {
+    "status": "unavailable",
+    "value": null,
+    "reason": "Awaiting root integration SHA before full owned-C stock uv/PDM build. No real hook propagation or artifact proof claimed from unit fixtures."
+  },
+  "native": {
+    "requested": true,
+    "status": "unavailable",
+    "value": null,
+    "reason": "Platform adapter has no validated safe owned-workload native exporter; no system-wide trace authorized."
+  },
+  "mac": {
+    "status": "unavailable",
+    "value": null,
+    "reason": "Runner-only integration gate; no matched Mac hook timings."
+  },
+  "confidence": {
+    "high": "Focused unit-tested receipt, profiler, status and privacy mechanics",
+    "medium": "Intended stock uv startup-hook propagation, pending actual integrated proof",
+    "low": "Cross-platform causal attribution or performance parity"
+  }
+}
