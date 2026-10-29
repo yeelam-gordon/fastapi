@@ -6,6 +6,12 @@ adoption recommendation.** GOALS/PERSONA/current
 maintainer value and small review cost remain mandatory. Parity is unmet,
 CI capacity limited, and no run is authorized.
 
+**Later authorized work:** the identity-fixed semantic prototype is in
+[PROOF.md](PROOF.md). Its subsequently authorized, single predeclared timeit
+screen **rejected the current form** on equal-path and nonancestor costs:
+[MICRO-SCREEN.md](MICRO-SCREEN.md). Stage B full builds were not started.
+Source-only conclusions below are historical, not a current recommendation.
+
 ## Evidence and decision
 
 | Hypothesis / confidence | Evidence | Unknown | Owner / review cost | Proposed discriminator |
