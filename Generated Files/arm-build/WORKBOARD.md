@@ -6,17 +6,19 @@ The user reaffirmed that the goal is Windows at least as fast as Mac, not merely
 
 ### Current isolated lanes
 
-The completed research checkpoint is `bfc306726db5727d6a358e85630ced44aa4aa4e2`. Four independently useful lanes are active; no additional full-agent coordinator is currently needed.
+The research checkpoint is `bfc306726db5727d6a358e85630ced44aa4aa4e2`. Four first isolated lanes completed and were integrated; the next readiness lanes are being established. No additional full-agent coordinator is currently needed.
 
 | Lane | Branch | Worktree under `Generated Files\worktrees` | State |
 |---|---|---|---|
-| Portable minimal PDM proposal | `investigate/arm-portable-candidate` | `portable-candidate` | implementation and functional tests |
-| Existing runtime distribution control | `investigate/arm-runtime-distribution` | `runtime-distribution` | serial C: timing |
-| Independent evidence/attribution review | `review/arm-evidence-attribution` | `evidence-attribution` | source and acceptance review |
-| Fair next-benchmark contract | `investigate/arm-benchmark-contract` | `benchmark-contract` | isolation boundaries, Mac applicability and CI readiness proposal |
+| Portable minimal PDM proposal | `investigate/arm-portable-candidate` | `portable-candidate` | integrated: eight tests and strict functional proof; independent code review next |
+| Existing runtime distribution control | `investigate/arm-runtime-distribution` | `runtime-distribution` | integrated: no convincing advantage; no pure-PGO claim |
+| Independent evidence/attribution review | `review/arm-evidence-attribution` | `evidence-attribution` | integrated: bounded evidence accepted; stale synthesis fixed in master |
+| Fair next-benchmark contract | `investigate/arm-benchmark-contract` | `benchmark-contract` | integrated: caller/standard isolation separated; no CI authorization |
 | Clean benchmark input, not a worker | `source/fastapi-base-79cab` | `source-fastapi` | read-only original source |
 
 Workers commit only owned paths on their branches and do not push or dispatch CI. The master owns integration. The clean source worktree must be archived/copied before builds; do not write backend state into the shared input tree. This also separates application source from research/evidence/worktree growth.
+
+Worker origin commits: portable `749e211d`, review `cc469129`, protocol `da23ed29`, runtime `6704ea2a`. Integrated master commits retain each worker's scoped changes and co-authorship. [INTERFACES.md](protocol/INTERFACES.md) coordinates the next independent wrapper, harness and code-review lanes.
 
 | Task | Dependencies | State | Acceptance |
 |---|---|---|---|
