@@ -1,4 +1,44 @@
-# Checkout/input readiness: blocked on production inventory discovery
+# Checkout/input readiness: committed-fix rerun
+
+## Final bounded gate — inventory fix works on the reviewed integration
+
+Producer commit `d5536b5931378c81f2be6cb36090aa3259047494` was
+attributed-cherry-picked as `d3e454b08874a5552c387621070e1460983df2be`.
+Only committed inputs were examined; no producer working files were read.
+
+- **Exact producer SHA fails completeness, correctly:** its committed tree lacks
+  `protocol/backend.lock`, `protocol/isolated_build.py`, and
+  `protocol/test_isolated_build.py`. The SHA-scoped negative receipt explicitly
+  records these missing required inputs, not an omitted or mismatched hash.
+  This producer-only tree is not the integrated wrapper tree.
+- **Integrated SHA passes the static/input gate:** production
+  `tool_inventory()` and `code_receipts()` now agree with independent full-tree
+  enumeration and all 22 actual file hashes in both Windows Git EOL
+  configurations. All LF-declared inputs remain canonical; workflow
+  `core.autocrlf=false` still protects un-attributed YAML and archive export.
+  Complete separate source remains 3,233 files at the pinned 79cab revision.
+- **31 focused tests pass:** 14 harness (including the new real-Git regression),
+  6 wrapper, 11 lifecycle. This deep review scratch initially exceeded Windows
+  Git's path limit in the regression fixture. That raw failure is retained.
+  The final `longpaths` attempt uses **process-only** `core.longpaths=true`
+  for test subprocesses; no machine or global configuration was changed.
+- The two tested SHAs deliberately differ. The exact producer SHA includes its
+  helper lineage; this integrated review branch retains the earlier 6aba helper
+  cleanup lineage. Each receipt pins its actual input revision and hashes.
+  No cross-revision helper equivalence or mismatch is claimed.
+
+Receipts: `receipts/reruns/<SHA>/`; final passing integrated evidence is under
+`receipts/reruns/d3e454b08874a5552c387621070e1460983df2be/longpaths/`.
+The original blocker and its receipts below remain historical, unmodified.
+An optional `--attempt <simple-name>` preserves separate attempts beneath a SHA.
+
+**Confidence/limits:** high for the exact local static/input assertions above;
+medium for hosted-action correspondence; Mac runtime, actual CI C: placement,
+and full build/readiness remain unverified. These are Windows Git EOL tests,
+not Mac execution. Pending wrapper-B/harness-argv CW002 changes are outside
+this gate. No CI, performance run, or full-readiness claim.
+
+## Original gate — preserved blocker history
 
 Reviewed integration `38ff65b812b29f2c6362295229c03726b9b65657`.
 No producer changes, CI dispatch, builds, traces, global Git configuration, or

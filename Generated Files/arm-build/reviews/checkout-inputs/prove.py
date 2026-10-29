@@ -54,6 +54,7 @@ def module(path, name):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--revision", help="Full committed integration SHA; never reads producer working files")
+    parser.add_argument("--attempt", help="Optional named attempt beneath the pinned SHA directory")
     args = parser.parse_args()
     for key in list(os.environ):
         if key.startswith("GIT_CONFIG"):
@@ -66,6 +67,9 @@ def main():
     assert re.fullmatch(r"[0-9a-f]{40}", revision), "Full committed SHA required"
     assert git(ROOT, "rev-parse", "--verify", f"{revision}^{{commit}}").decode().strip() == revision
     receipts = RECEIPTS / "reruns" / revision
+    if args.attempt:
+        assert re.fullmatch(r"[a-z0-9-]+", args.attempt), "Simple attempt name required"
+        receipts = receipts / args.attempt
     receipts.mkdir(parents=True, exist_ok=False)
     SCRATCH.mkdir()
     workflow_name = ".github/workflows/arm-build-experiment.yml"
@@ -107,7 +111,16 @@ def main():
                     and n.removeprefix(helper.PREFIX).split("/")[0] in ("candidate", "protocol")
                     and (n.endswith(".py") or ("/protocol/" in n and n.endswith(".lock")))))
         })
-        assert set(inventory) <= set(names)
+        missing_tracked = sorted(set(inventory) - set(names))
+        if missing_tracked:
+            report["status"] = "blocked"
+            report["missing_committed_required_inputs"] = missing_tracked
+            report["hash_inventory_complete"] = False
+            report["source_proof_executed"] = False
+            (receipts / "proof.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+            print(json.dumps({"status": "blocked", "revision": revision,
+                              "missing_committed_required_inputs": missing_tracked}))
+            return 1
         canonical = hashes(ROOT, revision, inventory)
         def required_hashes():
             return {n: hashlib.sha256((checkout / n).read_bytes()).hexdigest() for n in inventory}
@@ -182,9 +195,15 @@ def main():
     }
     test_checkout = SCRATCH / "tools-false"
     protocol = test_checkout / "Generated Files" / "arm-build" / "protocol"
+    test_env = ENV | {
+        "GIT_CONFIG_COUNT": "2",
+        "GIT_CONFIG_KEY_0": "core.autocrlf", "GIT_CONFIG_VALUE_0": "false",
+        "GIT_CONFIG_KEY_1": "core.longpaths", "GIT_CONFIG_VALUE_1": "true",
+    }
+    report["test_git_core_longpaths"] = "true; process-scoped for deep Windows review scratch"
     for test in ("test_pairs.py", "test_isolated_build.py", "test_owned_process.py"):
         result = subprocess.run([sys.executable, "-B", str(protocol / test)],
-                                cwd=protocol, env=ENV, capture_output=True)
+                                cwd=protocol, env=test_env, capture_output=True)
         (receipts / f"{test}.stdout.log").write_bytes(result.stdout)
         (receipts / f"{test}.stderr.log").write_bytes(result.stderr)
         report.setdefault("test_results", {})[test] = result.returncode
@@ -196,8 +215,9 @@ def main():
         "Actual CI C: NTFS placement", "Dependency acquisition/full artifact builds",
         "Performance, protection causality, PGO binary mapping",
     ]
+    report["status"] = "blocked" if report.get("production_inventory_errors") or any(report["test_results"].values()) else "passed"
     (receipts / "proof.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"status": "blocked" if report.get("production_inventory_errors") else "passed",
+    print(json.dumps({"status": report["status"],
                       "inputs": len(inventory), "source_files": len(manifest),
                       "test_results": report["test_results"]}))
     return 1 if report.get("production_inventory_errors") or any(report["test_results"].values()) else 0

@@ -1,0 +1,39 @@
+{
+  "harness_revision": "d5536b5931378c81f2be6cb36090aa3259047494",
+  "source_revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "platform": "win32",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "git": "git version 2.56.0.vfs.0.0",
+  "scope": "Two Windows Git EOL configurations, NOT a macOS runtime test",
+  "workflow_disables_autocrlf": true,
+  "sparse_patterns": [
+    "/.gitattributes",
+    "/.github/.gitattributes",
+    "/.github/workflows/.gitattributes",
+    "/.github/workflows/arm-build-experiment.yml",
+    "/Generated Files/.gitattributes",
+    "/Generated Files/arm-build/.gitattributes",
+    "/Generated Files/arm-build/*.lock",
+    "/Generated Files/arm-build/setup_python.cjs",
+    "/Generated Files/arm-build/ci_prepare.py",
+    "/Generated Files/arm-build/candidate/.gitattributes",
+    "/Generated Files/arm-build/candidate/*.py",
+    "/Generated Files/arm-build/candidate/actual-manifest.json",
+    "/Generated Files/arm-build/protocol/.gitattributes",
+    "/Generated Files/arm-build/protocol/*.py",
+    "/Generated Files/arm-build/protocol/owned_process.py",
+    "/Generated Files/arm-build/protocol/*.lock"
+  ],
+  "checkouts": [],
+  "production_inventory_errors": [
+    "Committed tool inventory is incomplete"
+  ],
+  "status": "blocked",
+  "missing_committed_required_inputs": [
+    "Generated Files/arm-build/protocol/backend.lock",
+    "Generated Files/arm-build/protocol/isolated_build.py",
+    "Generated Files/arm-build/protocol/test_isolated_build.py"
+  ],
+  "hash_inventory_complete": false,
+  "source_proof_executed": false
+}
