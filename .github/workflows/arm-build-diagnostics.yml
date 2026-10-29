@@ -60,7 +60,13 @@ jobs:
             /Generated Files/arm-build/.gitattributes
             /Generated Files/arm-build/setup_python.cjs
             /Generated Files/arm-build/tooling.lock
-            /Generated Files/arm-build/diagnostics/**
+            /Generated Files/arm-build/diagnostics/.gitattributes
+            /Generated Files/arm-build/diagnostics/*.py
+            /Generated Files/arm-build/diagnostics/*.md
+            /Generated Files/arm-build/diagnostics/hook/*.py
+            /Generated Files/arm-build/diagnostics/action/.gitattributes
+            /Generated Files/arm-build/diagnostics/action/*.yml
+            /Generated Files/arm-build/diagnostics/action/*.cjs
             /Generated Files/arm-build/protocol/backend.lock
             /Generated Files/arm-build/protocol/owned_process.py
             /Generated Files/arm-build/candidate/validate.py
@@ -133,6 +139,12 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           & $python -m pip download --only-binary=:all: --require-hashes --index-url https://pypi.org/simple -r (Join-Path (Join-Path $arm 'protocol') 'backend.lock') --dest $env:DIAG_WHEELHOUSE
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $wheelHashes = @{}
+          foreach ($wheel in Get-ChildItem -LiteralPath $env:DIAG_WHEELHOUSE -Filter '*.whl' -File) {
+            $wheelHashes[$wheel.Name] = (Get-FileHash -LiteralPath $wheel.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          }
+          if ($wheelHashes.Count -eq 0) { throw 'Hash-verified backend download produced no wheel' }
+          $wheelHashes | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $env:DIAG_WHEELHOUSE 'sha256.json') -Encoding utf8
           "DIAG_PYTHON=$python" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
       - name: Check collector contracts
         run: |
