@@ -1,0 +1,28 @@
+{
+  "scope": "Actual build AST prefix before ops import; one diagnostic, no build",
+  "wall_seconds": 0.5860474000000977,
+  "process_cpu_seconds": 0.53125,
+  "python_os_calls": {
+    "stat": 10594,
+    "lstat": 0
+  },
+  "phases": {
+    "source_files": {
+      "wall_seconds": 0.5244408000035037,
+      "process_cpu_seconds": 0.5,
+      "python_os_calls": {
+        "stat": 10578,
+        "lstat": 0
+      }
+    },
+    "configuration": {
+      "wall_seconds": 0.006240700000489596,
+      "process_cpu_seconds": 0.0,
+      "python_os_calls": {
+        "stat": 8,
+        "lstat": 0
+      }
+    }
+  },
+  "limitation": "Python API calls, not kernel operations; wrappers add overhead"
+}

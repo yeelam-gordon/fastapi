@@ -1,0 +1,604 @@
+{
+  "kind": "profile",
+  "identity": {
+    "version": "3.13.15 (main, Sep 29 2026, 08:22:55) [MSC v.1944 64 bit (ARM64)]",
+    "executable": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Scripts\\python.exe",
+    "base_prefix": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none",
+    "machine": "ARM64",
+    "platform": "win-arm64",
+    "backend": "2.5.0"
+  },
+  "hashes": {
+    "code\\build.py": "421ef1a85786c15454ae453e54e4f8c37ca441266c8e4cbcd86163a4477559cd",
+    "code\\ops.py": "aa8b1d6e069db462597239f7406cd6f1fc513154766938fcd0077261a4aa4f2e",
+    "code\\selector.py": "0777774f4a5001f4c549c6d719a0dced1894811b2c1b66ce089104379a06e9b7",
+    "code\\test_candidate.py": "163fe4e5d38f2e38b81998668f32fb785aa1a7b165be919a8fad102dacbf70e1",
+    "code\\test_reuse.py": "41c849122770e4a981f48b6ef1bfe96a930acfe2d4efef00de0a58490fe5d61d",
+    "code\\validate.py": "6a4c196ddc055cc759977c54fd4525c85d5400c0d35093d242dcf35844fcf00c",
+    "code\\verify.py": "33a7b5ba3665739c6c13464f675621a85043b9270f6d0a93085d4f0c788c282a",
+    "code\\verify_reuse.py": "d6bd26501f22a882d9e39698e4bdf44c613f8658b28435de06dbe9789b44691a",
+    "source.tar": "c6e91b20ed2990e2ce027d52085a269c9af9efe33b3f5237e3fc80004e5d8e43",
+    "source-manifest.json": "ab3a71c4e2eeb81e7977b8c7aa9f3abd722476ed04585b6e19d1286f2a4cf77c"
+  },
+  "build": {
+    "wall_seconds": 3.1291593000023568,
+    "process_cpu_seconds": 3.015625,
+    "workers": 3,
+    "artifacts": {
+      "sdist": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\profile-output\\artifacts\\fastapi-0.162.0.tar.gz",
+      "wheel": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\profile-output\\artifacts\\fastapi-0.162.0-py3-none-any.whl",
+      "selected_files": 64
+    }
+  },
+  "python_profile_total_calls": 1733859,
+  "top40_cumulative": [
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 64,
+      "function": "build",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.005039,
+      "cumulative_seconds": 3.1284923
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Lib\\site-packages\\pdm\\backend\\base.py",
+      "line": 203,
+      "function": "build",
+      "primitive_calls": 2,
+      "calls": 2,
+      "self_seconds": 0.00018790000000000001,
+      "cumulative_seconds": 1.8664028000000001
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\ops.py",
+      "line": 14,
+      "function": "payloads",
+      "primitive_calls": 1269,
+      "calls": 1269,
+      "self_seconds": 0.006014500000000001,
+      "cumulative_seconds": 1.4402131
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+      "line": 2333,
+      "function": "addfile",
+      "primitive_calls": 1269,
+      "calls": 1269,
+      "self_seconds": 0.0100579,
+      "cumulative_seconds": 1.2253344000000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'get' of '_queue.SimpleQueue' objects>",
+      "primitive_calls": 538,
+      "calls": 1268,
+      "self_seconds": 0.0412459,
+      "cumulative_seconds": 1.1231294
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\ops.py",
+      "line": 50,
+      "function": "build_artifact",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.00011300000000000001,
+      "cumulative_seconds": 1.1209322000000002
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\concurrent\\futures\\_base.py",
+      "line": 652,
+      "function": "__exit__",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 5.500000000000001e-06,
+      "cumulative_seconds": 1.1019594000000001
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\concurrent\\futures\\thread.py",
+      "line": 220,
+      "function": "shutdown",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 2.22e-05,
+      "cumulative_seconds": 1.1019536
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\threading.py",
+      "line": 1059,
+      "function": "join",
+      "primitive_calls": 3,
+      "calls": 3,
+      "self_seconds": 3e-05,
+      "cumulative_seconds": 1.1019193
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'join' of '_thread._ThreadHandle' objects>",
+      "primitive_calls": 3,
+      "calls": 3,
+      "self_seconds": 0.0001231,
+      "cumulative_seconds": 1.101828
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\threading.py",
+      "line": 1001,
+      "function": "_bootstrap",
+      "primitive_calls": 1,
+      "calls": 3,
+      "self_seconds": 2.05e-05,
+      "cumulative_seconds": 1.1016139
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\threading.py",
+      "line": 1028,
+      "function": "_bootstrap_inner",
+      "primitive_calls": 1,
+      "calls": 3,
+      "self_seconds": 2.7000000000000002e-05,
+      "cumulative_seconds": 1.1016094
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\threading.py",
+      "line": 984,
+      "function": "run",
+      "primitive_calls": 1,
+      "calls": 3,
+      "self_seconds": 0.0002321,
+      "cumulative_seconds": 1.1015929
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\concurrent\\futures\\thread.py",
+      "line": 70,
+      "function": "_worker",
+      "primitive_calls": 1,
+      "calls": 3,
+      "self_seconds": 3.48e-05,
+      "cumulative_seconds": 1.1013797
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\gzip.py",
+      "line": 309,
+      "function": "write",
+      "primitive_calls": 3542,
+      "calls": 3542,
+      "self_seconds": 0.006830500000000001,
+      "cumulative_seconds": 1.0243470000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'write' of '_io.BufferedWriter' objects>",
+      "primitive_calls": 3809,
+      "calls": 4039,
+      "self_seconds": 0.012342400000000002,
+      "cumulative_seconds": 0.6937689
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+      "line": 2139,
+      "function": "gettarinfo",
+      "primitive_calls": 1268,
+      "calls": 1268,
+      "self_seconds": 0.0186337,
+      "cumulative_seconds": 0.6459853000000001
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+      "line": 237,
+      "function": "copyfileobj",
+      "primitive_calls": 1333,
+      "calls": 1333,
+      "self_seconds": 0.0038972000000000004,
+      "cumulative_seconds": 0.6366079
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 25,
+      "function": "source_files",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.0001211,
+      "cumulative_seconds": 0.6005155000000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'extend' of 'list' objects>",
+      "primitive_calls": 201,
+      "calls": 201,
+      "self_seconds": 0.0013424,
+      "cumulative_seconds": 0.5975163
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 46,
+      "function": "<genexpr>",
+      "primitive_calls": 3231,
+      "calls": 3231,
+      "self_seconds": 0.0016513,
+      "cumulative_seconds": 0.5949092
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 54,
+      "function": "source_files_nested",
+      "primitive_calls": 3231,
+      "calls": 11340,
+      "self_seconds": 0.0132142,
+      "cumulative_seconds": 0.5932579
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 57,
+      "function": "<genexpr>",
+      "primitive_calls": 3061,
+      "calls": 8109,
+      "self_seconds": 0.0059789000000000005,
+      "cumulative_seconds": 0.5420602
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method nt.stat>",
+      "primitive_calls": 12553,
+      "calls": 12553,
+      "self_seconds": 0.5269924,
+      "cumulative_seconds": 0.5369974000000001
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_local.py",
+      "line": 510,
+      "function": "stat",
+      "primitive_calls": 12224,
+      "calls": 12224,
+      "self_seconds": 0.0065439,
+      "cumulative_seconds": 0.5173044
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _io.open>",
+      "primitive_calls": 396,
+      "calls": 1455,
+      "self_seconds": 0.5306338,
+      "cumulative_seconds": 0.4812559
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_local.py",
+      "line": 529,
+      "function": "open",
+      "primitive_calls": 319,
+      "calls": 1378,
+      "self_seconds": 0.0071383,
+      "cumulative_seconds": 0.465044
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\gzip.py",
+      "line": 134,
+      "function": "write",
+      "primitive_calls": 231,
+      "calls": 231,
+      "self_seconds": 0.0020115000000000003,
+      "cumulative_seconds": 0.4062347
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Lib\\site-packages\\pdm\\backend\\wheel.py",
+      "line": 143,
+      "function": "build_artifact",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.0003088,
+      "cumulative_seconds": 0.40259680000000003
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Lib\\site-packages\\pdm\\backend\\wheel.py",
+      "line": 261,
+      "function": "_add_file_to_zip",
+      "primitive_calls": 64,
+      "calls": 64,
+      "self_seconds": 0.0011958000000000001,
+      "cumulative_seconds": 0.3976595
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\gzip.py",
+      "line": 320,
+      "function": "_write_raw",
+      "primitive_calls": 231,
+      "calls": 231,
+      "self_seconds": 0.0034731000000000002,
+      "cumulative_seconds": 0.3212011
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Lib\\site-packages\\pdm\\backend\\sdist.py",
+      "line": 58,
+      "function": "get_files",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.00031360000000000003,
+      "cumulative_seconds": 0.2948934
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Lib\\site-packages\\pdm\\backend\\base.py",
+      "line": 189,
+      "function": "get_files",
+      "primitive_calls": 2,
+      "calls": 2,
+      "self_seconds": 4.5400000000000006e-05,
+      "cumulative_seconds": 0.2933213
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Lib\\site-packages\\pdm\\backend\\base.py",
+      "line": 234,
+      "function": "_collect_files",
+      "primitive_calls": 2,
+      "calls": 2,
+      "self_seconds": 0.0073334,
+      "cumulative_seconds": 0.29258520000000005
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\concurrent\\futures\\_base.py",
+      "line": 430,
+      "function": "result",
+      "primitive_calls": 1268,
+      "calls": 1268,
+      "self_seconds": 0.007804500000000001,
+      "cumulative_seconds": 0.2665843
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 15,
+      "function": "checked_children",
+      "primitive_calls": 4110,
+      "calls": 4110,
+      "self_seconds": 0.010483000000000001,
+      "cumulative_seconds": 0.25883870000000003
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_local.py",
+      "line": 365,
+      "function": "relative_to",
+      "primitive_calls": 2681,
+      "calls": 2681,
+      "self_seconds": 0.0178269,
+      "cumulative_seconds": 0.21950070000000002
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_abc.py",
+      "line": 476,
+      "function": "is_file",
+      "primitive_calls": 4799,
+      "calls": 4799,
+      "self_seconds": 0.0066698,
+      "cumulative_seconds": 0.21377610000000002
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\selector.py",
+      "line": 67,
+      "function": "select",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.0034873,
+      "cumulative_seconds": 0.19843760000000002
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\threading.py",
+      "line": 327,
+      "function": "wait",
+      "primitive_calls": 721,
+      "calls": 721,
+      "self_seconds": 0.0088001,
+      "cumulative_seconds": 0.1969664
+    }
+  ],
+  "attribution": [
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\importlib\\metadata\\__init__.py",
+      "line": 273,
+      "function": "select",
+      "primitive_calls": 4,
+      "calls": 4,
+      "self_seconds": 8.3e-06,
+      "cumulative_seconds": 0.0001026
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_local.py",
+      "line": 664,
+      "function": "resolve",
+      "primitive_calls": 2,
+      "calls": 2,
+      "self_seconds": 7.9e-06,
+      "cumulative_seconds": 0.0006375
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_abc.py",
+      "line": 432,
+      "function": "lstat",
+      "primitive_calls": 3672,
+      "calls": 3672,
+      "self_seconds": 0.0021101,
+      "cumulative_seconds": 0.17033210000000001
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_abc.py",
+      "line": 460,
+      "function": "is_dir",
+      "primitive_calls": 3673,
+      "calls": 3673,
+      "self_seconds": 0.0048674,
+      "cumulative_seconds": 0.14212260000000002
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_abc.py",
+      "line": 476,
+      "function": "is_file",
+      "primitive_calls": 4799,
+      "calls": 4799,
+      "self_seconds": 0.0066698,
+      "cumulative_seconds": 0.21377610000000002
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\pathlib\\_local.py",
+      "line": 510,
+      "function": "stat",
+      "primitive_calls": 12224,
+      "calls": 12224,
+      "self_seconds": 0.0065439,
+      "cumulative_seconds": 0.5173044
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\selector.py",
+      "line": 10,
+      "function": "safe_path",
+      "primitive_calls": 4516,
+      "calls": 4516,
+      "self_seconds": 0.0080785,
+      "cumulative_seconds": 0.0286851
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 15,
+      "function": "checked_children",
+      "primitive_calls": 4110,
+      "calls": 4110,
+      "self_seconds": 0.010483000000000001,
+      "cumulative_seconds": 0.25883870000000003
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 54,
+      "function": "source_files_nested",
+      "primitive_calls": 3231,
+      "calls": 11340,
+      "self_seconds": 0.0132142,
+      "cumulative_seconds": 0.5932579
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\ops.py",
+      "line": 79,
+      "function": "extract_selected",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.00024410000000000002,
+      "cumulative_seconds": 0.1746899
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Lib\\site-packages\\pdm\\backend\\base.py",
+      "line": 203,
+      "function": "build",
+      "primitive_calls": 2,
+      "calls": 2,
+      "self_seconds": 0.00018790000000000001,
+      "cumulative_seconds": 1.8664028000000001
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\zipfile\\__init__.py",
+      "line": 1257,
+      "function": "write",
+      "primitive_calls": 65,
+      "calls": 65,
+      "self_seconds": 0.0002655,
+      "cumulative_seconds": 0.011856400000000001
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 25,
+      "function": "source_files",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.0001211,
+      "cumulative_seconds": 0.6005155000000001
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\tarfile.py",
+      "line": 2139,
+      "function": "gettarinfo",
+      "primitive_calls": 1268,
+      "calls": 1268,
+      "self_seconds": 0.0186337,
+      "cumulative_seconds": 0.6459853000000001
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\selector.py",
+      "line": 19,
+      "function": "configuration",
+      "primitive_calls": 2,
+      "calls": 2,
+      "self_seconds": 8.38e-05,
+      "cumulative_seconds": 0.0207718
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\selector.py",
+      "line": 67,
+      "function": "select",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.0034873,
+      "cumulative_seconds": 0.19843760000000002
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\build.py",
+      "line": 64,
+      "function": "build",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.005039,
+      "cumulative_seconds": 3.1284923
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a\\code\\ops.py",
+      "line": 50,
+      "function": "build_artifact",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.00011300000000000001,
+      "cumulative_seconds": 1.1209322000000002
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\runtime-ab-2a73e36a\\attempt-2\\env-managed\\Lib\\site-packages\\pdm\\backend\\wheel.py",
+      "line": 143,
+      "function": "build_artifact",
+      "primitive_calls": 1,
+      "calls": 1,
+      "self_seconds": 0.0003088,
+      "cumulative_seconds": 0.40259680000000003
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\gzip.py",
+      "line": 309,
+      "function": "write",
+      "primitive_calls": 3542,
+      "calls": 3542,
+      "self_seconds": 0.006830500000000001,
+      "cumulative_seconds": 1.0243470000000001
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\gzip.py",
+      "line": 134,
+      "function": "write",
+      "primitive_calls": 231,
+      "calls": 231,
+      "self_seconds": 0.0020115000000000003,
+      "cumulative_seconds": 0.4062347
+    },
+    {
+      "file": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\Lib\\email\\generator.py",
+      "line": 70,
+      "function": "write",
+      "primitive_calls": 2310,
+      "calls": 2310,
+      "self_seconds": 0.0006171000000000001,
+      "cumulative_seconds": 0.0010633
+    }
+  ],
+  "oracle": {
+    "strict_pass": true,
+    "differences": []
+  },
+  "artifact_hashes": {
+    "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+    "fastapi-0.162.0.tar.gz": "1b696403a1edb028028be8b9a802a48ae54a579fbcae2d44286b7298d2e8a8ab"
+  }
+}

@@ -1,0 +1,7 @@
+__pycache__/
+*.pstats
+scratch/
+source/
+code/
+*-output/
+*.tar

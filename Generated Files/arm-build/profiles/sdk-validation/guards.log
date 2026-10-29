@@ -1,0 +1,29 @@
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.560s
+
+OK
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD

@@ -1,0 +1,11 @@
+{
+  "diagnose_sha256": "F85835C84EC8AD99A4EE8D154C90574BD4219791EDA189BB8AE38976BFC7706C",
+  "preflight_sha256": "4E4A36386C2D3A50F63084FE8EC486FD404F3FEFED6AAEFDC3DAD229C1DAF9E2",
+  "base_executable_sha256": "383D0FF495B7A4903426037FA003F72963AAEBD4F1AA3CD08A22895421C703BD",
+  "gold_sha256": "D9964C98785E809F31B46863C57047DCBDB847A251EC4A4F6051E397C63D6E33",
+  "retained_env_receipt": "Generated Files\\arm-build\\toolchain\\runtime-comparison\\evidence\\results.json",
+  "environment": "Reused env-managed; no installs; -E -s ignored PYTHONDONTWRITEBYTECODE=1 and imports wrote shared backend pyc caches. Read-only isolation acceptance failed; see README.",
+  "script_hash_scope": "Executed original C copies; committed scripts subsequently hardened with sys.dont_write_bytecode=True.",
+  "scope": "C:\\fastapi-arm-build-lab\\sdk-profile-2a73e36a",
+  "command": "python -E -s diagnose.py ROOT clean; separate python -E -s diagnose.py ROOT profile; python -E -s preflight.py ROOT"
+}
