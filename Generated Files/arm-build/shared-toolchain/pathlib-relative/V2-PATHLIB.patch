@@ -1,0 +1,153 @@
+diff --git a/Lib/pathlib/_local.py b/Lib/pathlib/_local.py
+index 0188e7c..b7f9754 100644
+--- a/Lib/pathlib/_local.py
++++ b/Lib/pathlib/_local.py
+@@ -378,6 +378,24 @@ def relative_to(self, other, /, *_deprecated, walk_up=False):
+             other = self.with_segments(other, *_deprecated)
+         elif not isinstance(other, PurePath):
+             other = self.with_segments(other)
++        cls = type(self)
++        if (walk_up is False and not _deprecated and type(other) is cls
++                and (cls is PurePosixPath or cls is PureWindowsPath
++                     or cls is PosixPath or cls is WindowsPath)):
++            size = len(other._tail)
++            if size == len(self._tail):
++                matched = self._str_normcase == other._str_normcase
++            elif size < len(self._tail):
++                prefix = self._format_parsed_parts(
++                    self.drive, self.root, self._tail[:size]) or '.'
++                if self.parser is not posixpath:
++                    prefix = prefix.lower()
++                matched = prefix == other._str_normcase
++            else:
++                matched = False
++            if matched:
++                return self._from_parsed_parts('', '', self._tail[size:])
++            raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+         for step, path in enumerate(chain([other], other.parents)):
+             if path == self or path in self.parents:
+                 break
+diff --git a/Lib/test/test_pathlib/test_pathlib.py b/Lib/test/test_pathlib/test_pathlib.py
+index be8e4dc..b854d60 100644
+--- a/Lib/test/test_pathlib/test_pathlib.py
++++ b/Lib/test/test_pathlib/test_pathlib.py
+@@ -320,6 +320,119 @@ def test_with_stem_empty(self):
+         self.assertRaises(ValueError, P('a/b').with_stem, '')
+         self.assertRaises(ValueError, P('a/b').with_stem, '.')
+ 
++    def test_relative_to_lexical_boundaries(self):
++        P = self.cls
++        self.assertEqual(P('a/./b/../Leaf').relative_to(P('a/b')), P('../Leaf'))
++        self.assertEqual(P('a/Leaf').relative_to(P()), P('a/Leaf'))
++        for path, base in [('ab/Leaf', 'a'), ('/a/Leaf', '//a'),
++                           ('/a/Leaf', 'a')]:
++            with self.subTest(path=path, base=base):
++                self.assertRaises(ValueError, P(path).relative_to, P(base))
++
++    @needs_windows
++    def test_relative_to_unicode_whole_string_lower(self):
++        P = self.cls
++        for path, base, expected in [
++                ('C:Σ', 'C:ς', '.'),
++                ('C:Σ/Leaf', 'C:ς', 'Leaf'),
++                ('C:/İ/Leaf', 'c:/i\u0307', 'Leaf'),
++                ('C:/Σ/Leaf', 'c:/σ', 'Leaf')]:
++            with self.subTest(path=path, base=base):
++                self.assertEqual(str(P(path).relative_to(P(base))), expected)
++        self.assertRaises(ValueError, P('C:/Σ/Leaf').relative_to, P('c:/ς'))
++        self.assertRaises(ValueError, P('C:Σ/Leaf').relative_to, P('C:/ς'))
++
++    def test_relative_to_subclass_factory_fallback(self):
++        calls = []
++
++        class P(self.cls):
++            def with_segments(self, *parts):
++                calls.append(parts)
++                result = type(self)(*parts)
++                result.marker = 42
++                return result
++
++        result = P('a/b/Leaf').relative_to(P('a'))
++        self.assertIs(type(result), P)
++        self.assertEqual(result.marker, 42)
++        self.assertGreater(len(calls), 1)
++
++    def test_relative_to_metaclass_equality_fallback(self):
++        class EqualMeta(type):
++            def __eq__(cls, other):
++                return True
++
++        class P(type(self.cls()), metaclass=EqualMeta):
++            def __eq__(self, other):
++                return False
++
++        self.assertRaises(ValueError, P('a/b/Leaf').relative_to, self.cls('a'))
++        self.assertRaises(ValueError, self.cls('a/b/Leaf').relative_to, P('a'))
++
++    def test_relative_to_metaclass_parents_fallback(self):
++        class EqualMeta(type):
++            def __eq__(cls, other):
++                return True
++
++        class P(type(self.cls()), metaclass=EqualMeta):
++            @property
++            def parents(self):
++                raise LookupError('subclass parents accessed')
++
++        self.assertRaises(LookupError, P('a/b/Leaf').relative_to, self.cls('a'))
++        self.assertRaises(LookupError, self.cls('a/b/Leaf').relative_to, P('a'))
++
++    def test_relative_to_walk_up_flag_evaluation(self):
++        calls = []
++
++        class Flag:
++            def __init__(self, value):
++                self.value = value
++
++            def __bool__(self):
++                calls.append(self.value)
++                if self.value is None:
++                    raise LookupError('flag evaluated')
++                return self.value
++
++        P = self.cls
++        for value in (None, False, True):
++            calls.clear()
++            self.assertEqual(P('a/Leaf').relative_to(P('a'), walk_up=Flag(value)),
++                             P('Leaf'))
++            self.assertEqual(calls, [])
++        self.assertRaises(LookupError, P('a/Leaf').relative_to, P('other'),
++                          walk_up=Flag(None))
++        self.assertEqual(calls, [None])
++        calls.clear()
++        self.assertRaises(ValueError, P('a/Leaf').relative_to, P('other'),
++                          walk_up=Flag(False))
++        self.assertEqual(calls, [False])
++        calls.clear()
++        self.assertEqual(P('a/Leaf').relative_to(P('other'), walk_up=Flag(True)),
++                         P('../a/Leaf'))
++        self.assertEqual(calls, [True])
++
++    def test_relative_to_stock_default_error_message(self):
++        P = self.cls
++        for path, base in [('a/Leaf', 'other'), ('a', 'a/Leaf'),
++                           ('/a/Leaf', 'a'), ('a', '/a'), ('ab/Leaf', 'a')]:
++            p, q = P(path), P(base)
++            with self.subTest(path=path, base=base):
++                with self.assertRaises(ValueError) as caught:
++                    p.relative_to(q)
++                self.assertEqual(str(caught.exception),
++                                 f"{str(p)!r} is not in the subpath of {str(q)!r}")
++
++    def test_relative_to_mixed_stock_classes(self):
++        pure = pathlib.PureWindowsPath if os.name == 'nt' else pathlib.PurePosixPath
++        concrete = pathlib.WindowsPath if os.name == 'nt' else pathlib.PosixPath
++        for left, right in [(pure, concrete), (concrete, pure)]:
++            result = left('a/Leaf').relative_to(right('a'))
++            self.assertIs(type(result), left)
++            self.assertEqual(str(result), 'Leaf')
++            self.assertRaises(ValueError, left('a/Leaf').relative_to, right('/a'))
++
+     def test_relative_to_several_args(self):
+         P = self.cls
+         p = P('a/b')

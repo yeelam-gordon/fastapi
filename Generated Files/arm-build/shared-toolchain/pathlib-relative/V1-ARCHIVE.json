@@ -1,0 +1,27 @@
+{
+  "archive_of_commit": "a45074ea04a3cb01877474f7ba1b56dcd048c66c",
+  "files_sha256": {
+    ".gitattributes": "fc231e52fcf1d0445ee061e3a6f2a6f8d56c3d6b033bfc6de2eb9894d6309c57",
+    ".gitignore": "7f057e0b2f54b511ac9be7796fdbf25597f9f1839ece3f5f8eba42a2b31aa05a",
+    "MICRO-PROVENANCE.json": "579395f5045809eaffb7f82e057ee5038735e746ca0adc880f12841c9d04f047",
+    "MICRO-RESULTS.json": "948f0ebced2e3c1d381450bdb0322205468f2421f5534410c8cb78b4dc40240a",
+    "MICRO-SCREEN.md": "285fd6be41a075af83d51c114cb522ffe66d1e10d76de7716703f10dcd1ecd3a",
+    "PROOF.md": "0982a8dd136c198df8fff6dd2f287b95afe62c8697b4a679f5dfa37ec3826186",
+    "PROVENANCE.json": "1fcf97ca2bb3326f5f084ad22dec4f9688b5d926e588cd4d1378ec986d1d599e",
+    "REPORT.md": "fdfb84449053389c883f983888eadbb8e61a00218af9cc68cbd271074fa3eab7",
+    "SEMANTIC-PROVENANCE.json": "fc33a3e7b99580708a4b0f689099d6bb127f7533e774dd889317dc69678ef8b8",
+    "baseline-expanded-modules.json": "a67788eaa92387d33b1cc8fa26c449a13514def4eddfd9e5d51dcd335e108f42",
+    "baseline-expanded.log": "c2087d7e57dd7642f37b5476e11dfdb8e5c05cf4fff3f147d2b385f95a819076",
+    "baseline.log": "6c4f2941c0cd816f8a107d8110204654152395bd5a42d4e40c7779c6014cd069",
+    "candidate-modules.json": "c76eed5f4e89ffd4c7ce877174958110753887bc1f67e7cc6eaf54af667acd8a",
+    "candidate.log": "74dbd4f03a9f92dc0cf51351416ef81a153cc0a743b2613fb2c20092b0bab6e7",
+    "micro-screen.log": "9247d07990be790d15fd70f05bfbe93586b4bed55116dfb31419a19fdfff29f6",
+    "micro_screen.py": "8f60d2807cdb1db201e629a375964640801bcaf3410ca0596676c3a152022b84",
+    "path001-before-modules.json": "95c3b530fbe4194ac1b044f1f7451458258b89ed7ea64e062b4e2fd2ae836025",
+    "path001-before-production.patch": "0ffcf58952497de47dbbae728bead34f3ecdddd4fb11f67516fbedec47608319",
+    "path001-before.log": "22c89e9621e315179a109cc4bd490adf1cae90bcf0ff63bf49f298bcbc28203a",
+    "pathlib-relative.patch": "391f360ef0870ce89f3d053b427bfedf3b6ae43923edefe693fe30c50aa122e8",
+    "production.patch": "bf7740e18dd38f89accd99d56d6d15e0755dc10f5cebf686c9ace2ad47e2dd81",
+    "semantic_proof.py": "5f835d0d26b190598dc01d235e40112a69eea1e66f6119f6bc30725d4e813daf"
+  }
+}

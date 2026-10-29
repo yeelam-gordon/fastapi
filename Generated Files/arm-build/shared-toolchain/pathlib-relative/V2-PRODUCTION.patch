@@ -1,0 +1,29 @@
+diff --git a/Lib/pathlib/_local.py b/Lib/pathlib/_local.py
+index 0188e7c..b7f9754 100644
+--- a/Lib/pathlib/_local.py
++++ b/Lib/pathlib/_local.py
+@@ -378,6 +378,24 @@ def relative_to(self, other, /, *_deprecated, walk_up=False):
+             other = self.with_segments(other, *_deprecated)
+         elif not isinstance(other, PurePath):
+             other = self.with_segments(other)
++        cls = type(self)
++        if (walk_up is False and not _deprecated and type(other) is cls
++                and (cls is PurePosixPath or cls is PureWindowsPath
++                     or cls is PosixPath or cls is WindowsPath)):
++            size = len(other._tail)
++            if size == len(self._tail):
++                matched = self._str_normcase == other._str_normcase
++            elif size < len(self._tail):
++                prefix = self._format_parsed_parts(
++                    self.drive, self.root, self._tail[:size]) or '.'
++                if self.parser is not posixpath:
++                    prefix = prefix.lower()
++                matched = prefix == other._str_normcase
++            else:
++                matched = False
++            if matched:
++                return self._from_parsed_parts('', '', self._tail[size:])
++            raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+         for step, path in enumerate(chain([other], other.parents)):
+             if path == self or path in self.parents:
+                 break

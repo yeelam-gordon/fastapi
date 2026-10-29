@@ -1,0 +1,36 @@
+{
+  "base_commit": "4061bc4c35f7c26f25264666d4ba083b93d2f6f9",
+  "v1_archive_commit": "a45074ea04a3cb01877474f7ba1b56dcd048c66c",
+  "production_added_lines": 18,
+  "production_deleted_lines": 0,
+  "test_added_lines": 113,
+  "test_deleted_lines": 0,
+  "new_test_lines_vs_v1": 51,
+  "source_hashes": {
+    "Lib/pathlib/_local.py": {
+      "base_sha256": "0530b4186ec5845e000bedf5817ff1ac970b9a39a6891ba6789a1776abdea42b",
+      "candidate_sha256": "b6616ee0240d1ced9e2ff3f02dcfbbe0f30e7c5d8b751e6f9f986cce4f4a1e3e"
+    },
+    "Lib/test/test_pathlib/test_pathlib.py": {
+      "base_sha256": "a05a5f33c04870a140f6d8d65d5fc96a98a979d49c7dfb02f0f2377355d1dffd",
+      "candidate_sha256": "734841b89487f3869ebf2f6a5040adc29be09ed884300e052fc3d3e94f2cb95c"
+    }
+  },
+  "artifact_sha256": {
+    "V2-PRODUCTION.patch": "ed919199d7a716f14dbdc77c73ea6126011566943d7b00b075600cf0b4a27264",
+    "V2-PATHLIB.patch": "0e121408a9586e55e84d1a025491f519371121dd65ae36f27111734f12ac55f5",
+    "semantic_proof.py": "5f835d0d26b190598dc01d235e40112a69eea1e66f6119f6bc30725d4e813daf",
+    "v2-baseline.log": "11d84f34b93d6fd784e2d06f9da8d2f4f832f917d1eb84fc372d795e837268a8",
+    "v2-candidate.log": "41b77d8a41de115ff49c813fc671a03fa7929fad2a74680fb8da7d99fc347ddd",
+    "v2-baseline-modules.json": "b3d24f28739167a1ce529d32a4bd32a5ed7e85ecb6b35fc68da8b7b4cc357fa1",
+    "v2-candidate-modules.json": "2b4de76309b7ec1ae23f7f6430ad8234b8d219c6e574f4ed6164b27081a60f65"
+  },
+  "commands": [
+    "git -C cpython apply --reverse ..\\V2-PRODUCTION.patch",
+    "python -I -S -B semantic_proof.py v2-baseline *> v2-baseline.log",
+    "git -C cpython apply ..\\V2-PRODUCTION.patch",
+    "python -I -S -B semantic_proof.py v2-candidate *> v2-candidate.log"
+  ],
+  "timing_authorized": false,
+  "phase_b_authorized": false
+}

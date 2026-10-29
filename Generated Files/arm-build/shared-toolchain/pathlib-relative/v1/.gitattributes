@@ -1,0 +1,6 @@
+*.patch -text
+*.log -text
+*-modules.json -text
+semantic_proof.py -text
+micro_screen.py -text
+MICRO-*.json -text

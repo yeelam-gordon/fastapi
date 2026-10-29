@@ -1,0 +1,19 @@
+{
+  "phase_a": "rejected current form",
+  "phase_b": "not started: failed predeclared Phase A gate",
+  "source_commit": "4061bc4c35f7c26f25264666d4ba083b93d2f6f9",
+  "candidate_source_sha256": "ffdec1568d6c4f6826ecfb8dfeaa77f9647ebc90598766ab353787927b019b3c",
+  "baseline_source_sha256": "0530b4186ec5845e000bedf5817ff1ac970b9a39a6891ba6789a1776abdea42b",
+  "command": "python -I -S -B \"Generated Files\\arm-build\\shared-toolchain\\pathlib-relative\\micro_screen.py\" *> \"Generated Files\\arm-build\\shared-toolchain\\pathlib-relative\\micro-screen.log\"",
+  "artifact_sha256": {
+    "micro_screen.py": "8f60d2807cdb1db201e629a375964640801bcaf3410ca0596676c3a152022b84",
+    "MICRO-RESULTS.json": "948f0ebced2e3c1d381450bdb0322205468f2421f5534410c8cb78b4dc40240a",
+    "micro-screen.log": "9247d07990be790d15fd70f05bfbe93586b4bed55116dfb31419a19fdfff29f6",
+    "production.patch": "bf7740e18dd38f89accd99d56d6d15e0755dc10f5cebf686c9ace2ad47e2dd81",
+    "pathlib-relative.patch": "391f360ef0870ce89f3d053b427bfedf3b6ae43923edefe693fe30c50aa122e8"
+  },
+  "runtime_sha256": {
+    "C:\\Program Files\\Python313-arm64\\python.exe": "7944f73d1dc202232cd0f615d14f909603af1cd00d6a3ff98dac51c49259c44b",
+    "C:\\Program Files\\Python313-arm64\\python313.dll": "0d7ca3451d6a5bd62ce8c45498290581cbbbfb2c073b3a507bdca9d9874c1d81"
+  }
+}
