@@ -66,3 +66,52 @@ states, preserving the original decision. Only evidence that distinguishes
 an already-terminated owned process from a genuinely executing descendant
 can support a narrow liveness correction. No arbitrary sleep, broad scan,
 survivor waiver, or acceptance retry is proposed.
+
+## Follow-up: documented accounting is not a process wait-state proof
+
+Read the independent `673b8227...` review report: its 8 raw and 8 instrumented
+normal repetitions also passed. Its separate PID observation shows a direct
+base-prefix supervisor/target relationship in that successful execution.
+Neither establishes the failing execution's membership or a launcher cause.
+No further repetition loop was launched in this follow-up.
+
+There is a **principled API distinction**, supported by Microsoft documentation:
+
+- [JOBOBJECT_BASIC_ACCOUNTING_INFORMATION, ActiveProcesses](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_accounting_information):
+  “The total number of processes currently associated with the job.”
+  The same member description discusses a temporary count on failed
+  limit-violating association, then states: “When the terminated process exits
+  and all references to the process are released, this value is decremented.”
+  This is accounting/association state, not a documented zero-time process
+  wait-state result. The failed-association context must not be presented as
+  evidence that a normal process here violated a limit.
+- [Terminating a Process](https://learn.microsoft.com/en-us/windows/win32/procthread/terminating-a-process):
+  a terminated process object becomes signaled, while kernel objects can
+  remain valid until outstanding handles are closed. Thus object/reference
+  lifetime and executing-work lifetime are distinct documented concepts.
+- [Job completion notifications](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_associate_completion_port):
+  ACTIVE_PROCESS_ZERO reports decrement of the accounting count to zero.
+  Ordinary job messages are explicitly **not guaranteed delivery**, so adding
+  a completion-port framework would not itself supply the missing guarantee.
+  The general Job Objects page also documents job-object signaling for the
+  end-of-job-time-limit condition; it does not license treating an ordinary
+  job-handle wait as a universal empty-family barrier.
+
+This explains why the current **type of observation is insufficient to identify
+an executing leak** without member wait states. It does **not** establish that
+reference retention/accounting teardown caused the original failure.
+
+A principled candidate correction would distinguish raw accounting from
+documented synchronization state for the owned job's members: reject every
+WAIT_TIMEOUT/live member immediately, accept no unknown wait/query/access
+state, and only classify members as terminated when their public process
+handles prove that state. It must still account for complete job membership,
+concurrent process creation, recycled PIDs and handle cleanup. Merely ignoring
+one positive count, excluding a guessed supervisor PID, waiting a grace period,
+or weakening the existing survivor guard is not such a correction.
+
+No production correction is committed on this source-only explanation.
+Confidence is **high** in the documented API distinction, **low** that it
+explains this specific failure. The original failed result and campaign block
+remain intact. Root can budget a narrow wait-state correction review or an
+actual first-positive capture; neither is implied by passing repetitions.
