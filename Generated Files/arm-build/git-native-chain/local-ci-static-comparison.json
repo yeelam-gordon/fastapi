@@ -1,0 +1,74 @@
+[
+  {
+    "scope": "static candidate; not execution proof",
+    "local": {
+      "path": "C:\\Program Files\\Git\\bin\\git.EXE",
+      "size_bytes": 39288,
+      "sha256": "d778d40470c57b6b1a0de2f6b18bfb1a1c1ac4782ef14a27fb57de10295399a3",
+      "pe_machine": "0xaa64",
+      "header_is_execution_proof": false
+    },
+    "ci_sha256": "8610a0786aaa02b92655a052e6b99caf386709a3746ae243668a6d8260f49fbd",
+    "hash_equal": false
+  },
+  {
+    "scope": "static candidate; not execution proof",
+    "local": {
+      "path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-submodule",
+      "size_bytes": 10493,
+      "sha256": "55a1a450b48fb98cc8c3f5745c411e3391ac7659f46eb4b7eef9053aa3614353",
+      "pe_machine": null,
+      "header_is_execution_proof": false
+    },
+    "ci_sha256": "55a1a450b48fb98cc8c3f5745c411e3391ac7659f46eb4b7eef9053aa3614353",
+    "hash_equal": true
+  },
+  {
+    "scope": "static candidate; not execution proof",
+    "local": {
+      "path": "C:\\Program Files\\Git\\bin\\sh.exe",
+      "size_bytes": 39248,
+      "sha256": "62be56d171e90cadc2d10b0815dfd283ab00857e8d78e5c6622a0b60af5527cb",
+      "pe_machine": "0xaa64",
+      "header_is_execution_proof": false
+    },
+    "ci_sha256": "c92fbdd7269256101bea62c28b69192693103653a58a98ab398b8484c1f188b8",
+    "hash_equal": false
+  },
+  {
+    "scope": "static candidate; not execution proof",
+    "local": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "size_bytes": 39248,
+      "sha256": "62be56d171e90cadc2d10b0815dfd283ab00857e8d78e5c6622a0b60af5527cb",
+      "pe_machine": "0xaa64",
+      "header_is_execution_proof": false
+    },
+    "ci_sha256": "c92fbdd7269256101bea62c28b69192693103653a58a98ab398b8484c1f188b8",
+    "hash_equal": false
+  },
+  {
+    "scope": "static candidate; not execution proof",
+    "local": {
+      "path": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "size_bytes": 2449886,
+      "sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+      "pe_machine": "0x8664",
+      "header_is_execution_proof": false
+    },
+    "ci_sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+    "hash_equal": true
+  },
+  {
+    "scope": "static candidate; not execution proof",
+    "local": {
+      "path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+      "size_bytes": 2449886,
+      "sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+      "pe_machine": "0x8664",
+      "header_is_execution_proof": false
+    },
+    "ci_sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+    "hash_equal": true
+  }
+]

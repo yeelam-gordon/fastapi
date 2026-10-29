@@ -1,0 +1,772 @@
+{
+  "command": [
+    "C:\\Program Files\\Git\\cmd\\git.EXE",
+    "-C",
+    "Q:\\fastapi\\Generated Files\\worktrees\\source-fastapi",
+    "submodule",
+    "foreach",
+    "--recursive",
+    "exit 0"
+  ],
+  "scope": "one private job; owned Git descendants only",
+  "sampling": "partial 5ms polling, not a complete process or CPU-family trace",
+  "python": {
+    "version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+    "executable": "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+    "psutil_version": "7.2.2",
+    "binary": {
+      "path": "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+      "size_bytes": 253664,
+      "sha256": "ea31bb20f89b66011a84fdfd2b2212e1e3ce5c800b049c35419fc4531f86f18f",
+      "pe_machine": "0xaa64",
+      "header_is_execution_proof": false
+    }
+  },
+  "ci_report_path": "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\artifacts\\arm-analysis-windows\\evidence\\upload\\report.json",
+  "ci_report_sha256": "c231b1188d1bf04b5056d8b506f9aefb0407bae6554acaa8c478bb934d8e3598",
+  "existing_trace_sha256": "bdf0777bb68eaf4d1303f7afe8e5f84363d8ca3feee5502549e8ac85c5493f7a",
+  "local_version_from_existing_trace_only": [
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2",
+    "2.56.0.vfs.0.2"
+  ],
+  "ci_version": {
+    "source": "--version",
+    "status": "measured",
+    "value": "git version 2.56.0.windows.3"
+  },
+  "elapsed_seconds_diagnostic_only_shared_host": 1.7503551000045263,
+  "exit_code": 0,
+  "timed_out": false,
+  "errors": [],
+  "processes": [
+    {
+      "pid": 12812,
+      "creation_time_100ns_since_1601": 134377456261714782,
+      "parent_pid": 10692,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "first_seen_seconds": 0.010834400003659539,
+      "last_seen_seconds": 1.7444422000044142
+    },
+    {
+      "pid": 18716,
+      "creation_time_100ns_since_1601": 134377456261932964,
+      "parent_pid": 12812,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\bin\\git.exe",
+      "first_seen_seconds": 0.027333500001986977,
+      "last_seen_seconds": 1.7392304000022705
+    },
+    {
+      "pid": 4804,
+      "creation_time_100ns_since_1601": 134377456262457960,
+      "parent_pid": 18716,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.07905920000484912,
+      "last_seen_seconds": 1.7336722000036389
+    },
+    {
+      "pid": 18324,
+      "creation_time_100ns_since_1601": 134377456263085063,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.14289360000111628,
+      "last_seen_seconds": 0.31517230000463314
+    },
+    {
+      "pid": 12264,
+      "creation_time_100ns_since_1601": 134377456263534185,
+      "parent_pid": 18324,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.18986389999918174,
+      "last_seen_seconds": 0.2679610000050161
+    },
+    {
+      "pid": 28584,
+      "creation_time_100ns_since_1601": 134377456263979858,
+      "parent_pid": 18324,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.23088149999966845,
+      "last_seen_seconds": 0.30964050000329735
+    },
+    {
+      "pid": 25724,
+      "creation_time_100ns_since_1601": 134377456264002545,
+      "parent_pid": 12264,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\basename.exe",
+      "first_seen_seconds": 0.23621909999928903,
+      "last_seen_seconds": 0.2679610000050161
+    },
+    {
+      "pid": 3144,
+      "creation_time_100ns_since_1601": 134377456264411611,
+      "parent_pid": 28584,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sed.exe",
+      "first_seen_seconds": 0.27829770000244025,
+      "last_seen_seconds": 0.30964050000329735
+    },
+    {
+      "pid": 20284,
+      "creation_time_100ns_since_1601": 134377456264895388,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.3259685000011814,
+      "last_seen_seconds": 0.3884418000016012
+    },
+    {
+      "pid": 8636,
+      "creation_time_100ns_since_1601": 134377456265306374,
+      "parent_pid": 20284,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 0.3675331000049482,
+      "last_seen_seconds": 0.3884418000016012
+    },
+    {
+      "pid": 20180,
+      "creation_time_100ns_since_1601": 134377456265653609,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.3994505000009667,
+      "last_seen_seconds": 0.5678189000027487
+    },
+    {
+      "pid": 25184,
+      "creation_time_100ns_since_1601": 134377456266063122,
+      "parent_pid": 20180,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.4420070000051055,
+      "last_seen_seconds": 0.5204302000056487
+    },
+    {
+      "pid": 23768,
+      "creation_time_100ns_since_1601": 134377456266490916,
+      "parent_pid": 20180,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.4840466000023298,
+      "last_seen_seconds": 0.5572300999992876
+    },
+    {
+      "pid": 23344,
+      "creation_time_100ns_since_1601": 134377456266513534,
+      "parent_pid": 25184,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\basename.exe",
+      "first_seen_seconds": 0.4840466000023298,
+      "last_seen_seconds": 0.5204302000056487
+    },
+    {
+      "pid": 22868,
+      "creation_time_100ns_since_1601": 134377456266937175,
+      "parent_pid": 23768,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sed.exe",
+      "first_seen_seconds": 0.5307499000045937,
+      "last_seen_seconds": 0.5572300999992876
+    },
+    {
+      "pid": 26196,
+      "creation_time_100ns_since_1601": 134377456267392948,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.5731981999997515,
+      "last_seen_seconds": 0.8833681000032811
+    },
+    {
+      "pid": 15308,
+      "creation_time_100ns_since_1601": 134377456267795591,
+      "parent_pid": 26196,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.6153159000023152,
+      "last_seen_seconds": 0.6522199000028195
+    },
+    {
+      "pid": 22648,
+      "creation_time_100ns_since_1601": 134377456268230089,
+      "parent_pid": 26196,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.6577579000004334,
+      "last_seen_seconds": 0.8726833000037004
+    },
+    {
+      "pid": 19332,
+      "creation_time_100ns_since_1601": 134377456268654877,
+      "parent_pid": 22648,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.6992425999997067,
+      "last_seen_seconds": 0.8042455000031623
+    },
+    {
+      "pid": 19540,
+      "creation_time_100ns_since_1601": 134377456269110320,
+      "parent_pid": 19332,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 0.7464488000041456,
+      "last_seen_seconds": 0.8042455000031623
+    },
+    {
+      "pid": 27292,
+      "creation_time_100ns_since_1601": 134377456269396172,
+      "parent_pid": 19540,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-sh-i18n--envsubst.exe",
+      "first_seen_seconds": 0.7725567000015872,
+      "last_seen_seconds": 0.7990962000039872
+    },
+    {
+      "pid": 24160,
+      "creation_time_100ns_since_1601": 134377456269787889,
+      "parent_pid": 22648,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 0.8145994000005885,
+      "last_seen_seconds": 0.8726833000037004
+    },
+    {
+      "pid": 24696,
+      "creation_time_100ns_since_1601": 134377456270084915,
+      "parent_pid": 24160,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-sh-i18n--envsubst.exe",
+      "first_seen_seconds": 0.8412109000055352,
+      "last_seen_seconds": 0.8671285000018543
+    },
+    {
+      "pid": 28412,
+      "creation_time_100ns_since_1601": 134377456270552117,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.888607900000352,
+      "last_seen_seconds": 0.9724604000002728
+    },
+    {
+      "pid": 22360,
+      "creation_time_100ns_since_1601": 134377456271008293,
+      "parent_pid": 28412,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\uname.exe",
+      "first_seen_seconds": 0.9363505000001169,
+      "last_seen_seconds": 0.9828253000014229
+    },
+    {
+      "pid": 22348,
+      "creation_time_100ns_since_1601": 134377456271554395,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 0.9881654000055278,
+      "last_seen_seconds": 1.0612980000005336
+    },
+    {
+      "pid": 24792,
+      "creation_time_100ns_since_1601": 134377456271985063,
+      "parent_pid": 22348,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 1.035273400004371,
+      "last_seen_seconds": 1.056116400002793
+    },
+    {
+      "pid": 23412,
+      "creation_time_100ns_since_1601": 134377456272431879,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.0774624000041513,
+      "last_seen_seconds": 1.1142981000011787
+    },
+    {
+      "pid": 25508,
+      "creation_time_100ns_since_1601": 134377456272895918,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.1252915000004577,
+      "last_seen_seconds": 1.1937786000053165
+    },
+    {
+      "pid": 13044,
+      "creation_time_100ns_since_1601": 134377456273305417,
+      "parent_pid": 25508,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 1.1672484000009717,
+      "last_seen_seconds": 1.1937786000053165
+    },
+    {
+      "pid": 9744,
+      "creation_time_100ns_since_1601": 134377456273694645,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.2047478000022238,
+      "last_seen_seconds": 1.3201170000029379
+    },
+    {
+      "pid": 2736,
+      "creation_time_100ns_since_1601": 134377456274095943,
+      "parent_pid": 9744,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.2422234000041499,
+      "last_seen_seconds": 1.3201170000029379
+    },
+    {
+      "pid": 25296,
+      "creation_time_100ns_since_1601": 134377456274579454,
+      "parent_pid": 2736,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 1.2938709000009112,
+      "last_seen_seconds": 1.3201170000029379
+    },
+    {
+      "pid": 2888,
+      "creation_time_100ns_since_1601": 134377456274934956,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.330945800000336,
+      "last_seen_seconds": 1.3984039000060875
+    },
+    {
+      "pid": 13380,
+      "creation_time_100ns_since_1601": 134377456275347064,
+      "parent_pid": 2888,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 1.3721617000046535,
+      "last_seen_seconds": 1.3931252000038512
+    },
+    {
+      "pid": 6572,
+      "creation_time_100ns_since_1601": 134377456275738436,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.4090519000019412,
+      "last_seen_seconds": 1.482454900004086
+    },
+    {
+      "pid": 19288,
+      "creation_time_100ns_since_1601": 134377456276150012,
+      "parent_pid": 6572,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 1.4508041000008234,
+      "last_seen_seconds": 1.4772914000059245
+    },
+    {
+      "pid": 28032,
+      "creation_time_100ns_since_1601": 134377456276543620,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.4877611000047182,
+      "last_seen_seconds": 1.6554980000000796
+    },
+    {
+      "pid": 27912,
+      "creation_time_100ns_since_1601": 134377456276933364,
+      "parent_pid": 28032,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.5293015999995987,
+      "last_seen_seconds": 1.5660047000055783
+    },
+    {
+      "pid": 13780,
+      "creation_time_100ns_since_1601": 134377456277367264,
+      "parent_pid": 28032,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.5713995000041905,
+      "last_seen_seconds": 1.645006500002637
+    },
+    {
+      "pid": 25348,
+      "creation_time_100ns_since_1601": 134377456277763244,
+      "parent_pid": 13780,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sed.exe",
+      "first_seen_seconds": 1.6135626000032062,
+      "last_seen_seconds": 1.645006500002637
+    },
+    {
+      "pid": 27496,
+      "creation_time_100ns_since_1601": 134377456278280524,
+      "parent_pid": 4804,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "first_seen_seconds": 1.6610920000020997,
+      "last_seen_seconds": 1.7336722000036389
+    },
+    {
+      "pid": 26240,
+      "creation_time_100ns_since_1601": 134377456278669147,
+      "parent_pid": 27496,
+      "IsWow64Process2": {
+        "status": "measured",
+        "process_machine": "0x0000",
+        "native_machine": "0xaa64",
+        "source": "live process query-limited handle"
+      },
+      "exe": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "first_seen_seconds": 1.702786500005459,
+      "last_seen_seconds": 1.72854410000582
+    }
+  ],
+  "unique_images": [
+    {
+      "path": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "size_bytes": 39288,
+      "sha256": "d778d40470c57b6b1a0de2f6b18bfb1a1c1ac4782ef14a27fb57de10295399a3",
+      "pe_machine": "0xaa64",
+      "header_is_execution_proof": false
+    },
+    {
+      "path": "C:\\Program Files\\Git\\clangarm64\\bin\\git.exe",
+      "size_bytes": 4030840,
+      "sha256": "3fa107936e321263d036360587eacb7c64d31a6197412f694d22773dc564a446",
+      "pe_machine": "0xaa64",
+      "header_is_execution_proof": false
+    },
+    {
+      "path": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "size_bytes": 2449886,
+      "sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+      "pe_machine": "0x8664",
+      "header_is_execution_proof": false
+    },
+    {
+      "path": "C:\\Program Files\\Git\\usr\\bin\\basename.exe",
+      "size_bytes": 34883,
+      "sha256": "6fe2e201a956304503f808d0909a26d9b49e1a7e99f6ee6d93721ac4a76a7c6e",
+      "pe_machine": "0x8664",
+      "header_is_execution_proof": false
+    },
+    {
+      "path": "C:\\Program Files\\Git\\usr\\bin\\sed.exe",
+      "size_bytes": 178140,
+      "sha256": "8d54e322dfc3faa60f0464691aba8634197406e53367aa8942409181c0808be8",
+      "pe_machine": "0x8664",
+      "header_is_execution_proof": false
+    },
+    {
+      "path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "size_bytes": 4030840,
+      "sha256": "3fa107936e321263d036360587eacb7c64d31a6197412f694d22773dc564a446",
+      "pe_machine": "0xaa64",
+      "header_is_execution_proof": false
+    },
+    {
+      "path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-sh-i18n--envsubst.exe",
+      "size_bytes": 2315088,
+      "sha256": "502b41d7f49c7181c8b6a47d3e81799e0f28410749c59bc6c8112944e12d292e",
+      "pe_machine": "0xaa64",
+      "header_is_execution_proof": false
+    },
+    {
+      "path": "C:\\Program Files\\Git\\usr\\bin\\uname.exe",
+      "size_bytes": 35876,
+      "sha256": "1cba275ff8e0c81f48898f017758c558ee5951cb0448c36628580beffdf4ef89",
+      "pe_machine": "0x8664",
+      "header_is_execution_proof": false
+    }
+  ],
+  "ci_comparisons": [
+    {
+      "local_path": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "local_sha256": "d778d40470c57b6b1a0de2f6b18bfb1a1c1ac4782ef14a27fb57de10295399a3",
+      "ci_same_hash_paths": [],
+      "ci_same_path": []
+    },
+    {
+      "local_path": "C:\\Program Files\\Git\\clangarm64\\bin\\git.exe",
+      "local_sha256": "3fa107936e321263d036360587eacb7c64d31a6197412f694d22773dc564a446",
+      "ci_same_hash_paths": [],
+      "ci_same_path": []
+    },
+    {
+      "local_path": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+      "local_sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+      "ci_same_hash_paths": [
+        "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+        "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+      ],
+      "ci_same_path": [
+        {
+          "path": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+          "sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+          "hash_equal": true
+        }
+      ]
+    },
+    {
+      "local_path": "C:\\Program Files\\Git\\usr\\bin\\basename.exe",
+      "local_sha256": "6fe2e201a956304503f808d0909a26d9b49e1a7e99f6ee6d93721ac4a76a7c6e",
+      "ci_same_hash_paths": [],
+      "ci_same_path": []
+    },
+    {
+      "local_path": "C:\\Program Files\\Git\\usr\\bin\\sed.exe",
+      "local_sha256": "8d54e322dfc3faa60f0464691aba8634197406e53367aa8942409181c0808be8",
+      "ci_same_hash_paths": [],
+      "ci_same_path": []
+    },
+    {
+      "local_path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git.exe",
+      "local_sha256": "3fa107936e321263d036360587eacb7c64d31a6197412f694d22773dc564a446",
+      "ci_same_hash_paths": [],
+      "ci_same_path": []
+    },
+    {
+      "local_path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-sh-i18n--envsubst.exe",
+      "local_sha256": "502b41d7f49c7181c8b6a47d3e81799e0f28410749c59bc6c8112944e12d292e",
+      "ci_same_hash_paths": [],
+      "ci_same_path": []
+    },
+    {
+      "local_path": "C:\\Program Files\\Git\\usr\\bin\\uname.exe",
+      "local_sha256": "1cba275ff8e0c81f48898f017758c558ee5951cb0448c36628580beffdf4ef89",
+      "ci_same_hash_paths": [],
+      "ci_same_path": []
+    }
+  ]
+}

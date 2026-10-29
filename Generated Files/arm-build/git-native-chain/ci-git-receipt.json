@@ -1,0 +1,196 @@
+{
+  "binary": {
+    "architecture": {
+      "source": "binary header",
+      "status": "measured",
+      "value": [
+        {
+          "machine": "0xaa64",
+          "name": "arm64"
+        }
+      ]
+    },
+    "path": "C:\\Program Files\\Git\\bin\\git.EXE",
+    "path_redaction": "home prefix only",
+    "resolved_path": "C:\\Program Files\\Git\\bin\\git.exe",
+    "selected_runtime_slice": {
+      "reason": "file architecture is not execution proof",
+      "status": "unavailable",
+      "value": null
+    },
+    "sha256": "8610a0786aaa02b92655a052e6b99caf386709a3746ae243668a6d8260f49fbd",
+    "size_bytes": 42696,
+    "status": "measured"
+  },
+  "helpers": {
+    "candidates": [
+      {
+        "execution": "candidate/not-proven-executed",
+        "identity": {
+          "architecture": {
+            "reason": "not a supported PE/Mach-O binary",
+            "status": "unavailable",
+            "value": null
+          },
+          "path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-submodule",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-submodule",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "55a1a450b48fb98cc8c3f5745c411e3391ac7659f46eb4b7eef9053aa3614353",
+          "size_bytes": 10493,
+          "status": "measured"
+        },
+        "path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-submodule",
+        "shebang": {
+          "source": "installed first line",
+          "status": "measured",
+          "value": "#!/bin/sh"
+        }
+      },
+      {
+        "execution": "candidate/not-proven-executed",
+        "identity": {
+          "reason": "FileNotFoundError",
+          "status": "unavailable",
+          "value": null
+        },
+        "path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-submodule.exe"
+      },
+      {
+        "execution": "candidate/not-proven-executed",
+        "identity": {
+          "reason": "FileNotFoundError",
+          "status": "unavailable",
+          "value": null
+        },
+        "path": "C:\\Program Files\\Git\\clangarm64\\libexec\\git-core\\git-submodule--helper.exe"
+      },
+      {
+        "execution": "candidate/not-proven-executed",
+        "identity": {
+          "architecture": {
+            "source": "binary header",
+            "status": "measured",
+            "value": [
+              {
+                "machine": "0xaa64",
+                "name": "arm64"
+              }
+            ]
+          },
+          "path": "C:\\Program Files\\Git\\bin\\sh.exe",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Program Files\\Git\\bin\\sh.exe",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "c92fbdd7269256101bea62c28b69192693103653a58a98ab398b8484c1f188b8",
+          "size_bytes": 42696,
+          "status": "measured"
+        },
+        "path": "C:\\Program Files\\Git\\bin\\sh.exe"
+      },
+      {
+        "execution": "candidate/not-proven-executed",
+        "identity": {
+          "architecture": {
+            "source": "binary header",
+            "status": "measured",
+            "value": [
+              {
+                "machine": "0xaa64",
+                "name": "arm64"
+              }
+            ]
+          },
+          "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Program Files\\Git\\bin\\bash.exe",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "c92fbdd7269256101bea62c28b69192693103653a58a98ab398b8484c1f188b8",
+          "size_bytes": 42696,
+          "status": "measured"
+        },
+        "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+      },
+      {
+        "execution": "candidate/not-proven-executed",
+        "identity": {
+          "architecture": {
+            "source": "binary header",
+            "status": "measured",
+            "value": [
+              {
+                "machine": "0x8664",
+                "name": "x86_64"
+              }
+            ]
+          },
+          "path": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Program Files\\Git\\usr\\bin\\sh.exe",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+          "size_bytes": 2449886,
+          "status": "measured"
+        },
+        "path": "C:\\Program Files\\Git\\usr\\bin\\sh.exe"
+      },
+      {
+        "execution": "candidate/not-proven-executed",
+        "identity": {
+          "architecture": {
+            "source": "binary header",
+            "status": "measured",
+            "value": [
+              {
+                "machine": "0x8664",
+                "name": "x86_64"
+              }
+            ]
+          },
+          "path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "5490d0da5e7cf9d92068cc48fcc590f2bcf8564add8ff91c3b5fe541eb2d72e3",
+          "size_bytes": 2449886,
+          "status": "measured"
+        },
+        "path": "C:\\Program Files\\Git\\usr\\bin\\bash.exe"
+      }
+    ],
+    "exec_path": {
+      "source": "git --exec-path",
+      "status": "measured",
+      "value": "C:/Program Files/Git/clangarm64/libexec/git-core"
+    },
+    "interpretation": "launcher/helper headers do not establish executed architecture or emulation",
+    "scope": "fixed installation-path candidates; no helper executed",
+    "status": "partial"
+  },
+  "selection": "PATH-selected executable; PATH itself not retained",
+  "version": {
+    "source": "--version",
+    "status": "measured",
+    "value": "git version 2.56.0.windows.3"
+  }
+}
