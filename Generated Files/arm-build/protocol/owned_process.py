@@ -49,7 +49,8 @@ def _windows():
         "GetCurrentProcess": ([], w.HANDLE),
         "AssignProcessToJobObject": ([w.HANDLE, w.HANDLE], w.BOOL),
         "SetInformationJobObject": (
-            [w.HANDLE, ctypes.c_int, ctypes.c_void_p, w.DWORD], w.BOOL
+            [w.HANDLE, ctypes.c_int, ctypes.c_void_p, w.DWORD],
+            w.BOOL,
         ),
         "QueryInformationJobObject": (
             [w.HANDLE, ctypes.c_int, ctypes.c_void_p, w.DWORD, ctypes.c_void_p],
@@ -105,9 +106,11 @@ class _Job:
         try:
             limits = Extended()
             limits.BasicLimitInformation.LimitFlags = 0x2000  # KILL_ON_JOB_CLOSE
-            _checked(self.api.SetInformationJobObject(
-                self.handle, 9, ctypes.byref(limits), ctypes.sizeof(limits)
-            ))
+            _checked(
+                self.api.SetInformationJobObject(
+                    self.handle, 9, ctypes.byref(limits), ctypes.sizeof(limits)
+                )
+            )
         except BaseException as error:
             try:
                 self.close()
@@ -131,9 +134,11 @@ class _Job:
             ]
 
         info = Accounting()
-        _checked(self.api.QueryInformationJobObject(
-            self.handle, 1, ctypes.byref(info), ctypes.sizeof(info), None
-        ))
+        _checked(
+            self.api.QueryInformationJobObject(
+                self.handle, 1, ctypes.byref(info), ctypes.sizeof(info), None
+            )
+        )
         return bool(info.ActiveProcesses)
 
     def members(self):
@@ -141,6 +146,7 @@ class _Job:
 
         capacity = 8
         while True:
+
             class Members(ctypes.Structure):
                 _fields_ = [
                     ("NumberOfAssignedProcesses", w.DWORD),
@@ -155,7 +161,7 @@ class _Job:
             if queried and (
                 members.NumberOfProcessIdsInList == members.NumberOfAssignedProcesses
             ):
-                return set(members.ProcessIdList[:members.NumberOfProcessIdsInList])
+                return set(members.ProcessIdList[: members.NumberOfProcessIdsInList])
             if not queried and ctypes.get_last_error() != 234:  # ERROR_MORE_DATA
                 _checked(False)
             capacity *= 2
@@ -186,9 +192,13 @@ class _Job:
                     _checked(False)
                 handles.append(handle)
                 owned = w.BOOL()
-                _checked(self.api.IsProcessInJob(handle, self.handle, ctypes.byref(owned)))
+                _checked(
+                    self.api.IsProcessInJob(handle, self.handle, ctypes.byref(owned))
+                )
                 if not owned.value:
-                    raise RuntimeError("Listed PID no longer identifies an owned process")
+                    raise RuntimeError(
+                        "Listed PID no longer identifies an owned process"
+                    )
                 state = self.api.WaitForSingleObject(handle, 0)
                 if state not in (0, 258):
                     raise RuntimeError(f"Unknown owned process wait state: {state}")
@@ -200,7 +210,9 @@ class _Job:
             new_members = after - pids
             if new_members:
                 record["new_members"] = sorted(new_members)
-                raise RuntimeError("Owned membership changed during liveness observation")
+                raise RuntimeError(
+                    "Owned membership changed during liveness observation"
+                )
             return live
         except Exception as error:
             primary = error
@@ -314,13 +326,17 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
             "job": name,
         }
         interpreter = (
-            str(Path(sys.base_prefix) / "python.exe")
-            if _WINDOWS else sys.executable
+            str(Path(sys.base_prefix) / "python.exe") if _WINDOWS else sys.executable
         )
         process = subprocess.Popen(
             [interpreter, "-I", str(Path(__file__).resolve()), "--supervisor"],
-            cwd=cwd, env=env, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE, text=True, start_new_session=not _WINDOWS,
+            cwd=cwd,
+            env=env,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            start_new_session=not _WINDOWS,
         )
         output, diagnostic = process.communicate(json.dumps(spec), timeout=timeout + 10)
         data = json.loads(output)
@@ -339,10 +355,12 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
                 if process.poll() is None:
                     process.kill()
                     process.wait(timeout=5)
+
                 def alive():
                     if job:
                         return job.alive() and job.live_members(process.pid, liveness)
                     return _group_alive(process.pid)
+
                 survivors = alive()
                 if survivors:
                     if job:
@@ -379,10 +397,15 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
     if data and started is None:
         infrastructure = ended - clock
     return Receipt(
-        data.get("returncode"), data.get("timed_out", False)
-        or (wall is not None and wall > timeout), wall,
-        infrastructure, data.get("owned", False),
-        survivors, clean, tuple(errors), tuple(liveness),
+        data.get("returncode"),
+        data.get("timed_out", False) or (wall is not None and wall > timeout),
+        wall,
+        infrastructure,
+        data.get("owned", False),
+        survivors,
+        clean,
+        tuple(errors),
+        tuple(liveness),
     )
 
 

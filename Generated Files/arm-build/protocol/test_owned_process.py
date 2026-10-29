@@ -15,7 +15,9 @@ from unittest.mock import Mock, patch
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import owned_process as owned  # noqa: E402
 
-PYTHON = str(Path(sys.base_prefix) / "python.exe") if os.name == "nt" else sys.executable
+PYTHON = (
+    str(Path(sys.base_prefix) / "python.exe") if os.name == "nt" else sys.executable
+)
 
 
 def known_pid_alive(pid, *, terminate=False):
@@ -54,10 +56,18 @@ class OwnedTests(unittest.TestCase):
 
     def run_helper(self, role, timeout=5):
         return owned.run_owned(
-            [PYTHON, "-I", str(Path(__file__).resolve()),
-             "--helper", role, str(self.root.resolve())],
-            cwd=self.root, env=os.environ.copy(),
-            stdout_path=self.root / "stdout", stderr_path=self.root / "stderr",
+            [
+                PYTHON,
+                "-I",
+                str(Path(__file__).resolve()),
+                "--helper",
+                role,
+                str(self.root.resolve()),
+            ],
+            cwd=self.root,
+            env=os.environ.copy(),
+            stdout_path=self.root / "stdout",
+            stderr_path=self.root / "stderr",
             timeout=timeout,
         )
 
@@ -130,9 +140,16 @@ class OwnedTests(unittest.TestCase):
         process = Mock(pid=123, returncode=0)
         process.poll.return_value = 0
         process.communicate.return_value = (
-            json.dumps({"owned": True, "started": time.perf_counter(),
-                        "returncode": 7, "timed_out": False,
-                        "error": "original invocation failure"}), ""
+            json.dumps(
+                {
+                    "owned": True,
+                    "started": time.perf_counter(),
+                    "returncode": 7,
+                    "timed_out": False,
+                    "error": "original invocation failure",
+                }
+            ),
+            "",
         )
         process.stdin.close.side_effect = OSError("stdin close failed")
         process.stdout.close.side_effect = OSError("stdout close failed")
@@ -148,7 +165,9 @@ class OwnedTests(unittest.TestCase):
         self.assertFalse(result.succeeded)
         self.assertFalse(result.cleanup_complete)
         for message in (
-            "original invocation failure", "stdin close failed", "stdout close failed"
+            "original invocation failure",
+            "stdin close failed",
+            "stdout close failed",
         ):
             self.assertTrue(any(message in e for e in result.errors), result)
         for stream in (process.stdin, process.stdout, process.stderr):
@@ -169,8 +188,15 @@ class OwnedTests(unittest.TestCase):
         process = Mock(pid=123, returncode=0)
         process.poll.return_value = 0
         process.communicate.return_value = (
-            json.dumps({"owned": True, "started": time.perf_counter(),
-                        "returncode": 0, "timed_out": False}), ""
+            json.dumps(
+                {
+                    "owned": True,
+                    "started": time.perf_counter(),
+                    "returncode": 0,
+                    "timed_out": False,
+                }
+            ),
+            "",
         )
         with (
             patch.object(owned, "_WINDOWS", False),
@@ -190,8 +216,15 @@ class OwnedTests(unittest.TestCase):
         process = Mock(pid=123, returncode=0)
         process.poll.return_value = 0
         process.communicate.return_value = (
-            json.dumps({"owned": True, "started": time.perf_counter(),
-                        "returncode": 7, "timed_out": False}), ""
+            json.dumps(
+                {
+                    "owned": True,
+                    "started": time.perf_counter(),
+                    "returncode": 7,
+                    "timed_out": False,
+                }
+            ),
+            "",
         )
         job = Mock()
         job.alive.return_value = True
@@ -231,7 +264,7 @@ class OwnedTests(unittest.TestCase):
                 job.handle, job.api = 1, Mock()
                 observations = []
 
-                def members():
+                def members(job=job, observations=observations):
                     if observations:
                         job.api.CloseHandle.assert_not_called()
                     observations.append(True)
@@ -248,7 +281,9 @@ class OwnedTests(unittest.TestCase):
                 job.api.IsProcessInJob.side_effect = belongs
                 evidence = []
                 self.assertEqual(job.live_members(10, evidence), expected)
-                self.assertEqual(evidence[0]["members"][0]["state"], "waited_supervisor")
+                self.assertEqual(
+                    evidence[0]["members"][0]["state"], "waited_supervisor"
+                )
                 self.assertEqual(
                     evidence[0]["members"][1]["state"],
                     "terminated" if state == 0 else "live",
@@ -277,12 +312,16 @@ class OwnedTests(unittest.TestCase):
             with self.subTest(kind=kind):
                 job = object.__new__(owned._Job)
                 job.handle, job.api = 1, Mock()
-                job.members = Mock(side_effect=[{20}, {20, 30} if kind == "new-member" else {20}])
+                job.members = Mock(
+                    side_effect=[{20}, {20, 30} if kind == "new-member" else {20}]
+                )
                 job.api.OpenProcess.return_value = 99
                 job.api.WaitForSingleObject.return_value = 0
 
-                def belongs(process, handle, flag):
-                    ctypes.cast(flag, ctypes.POINTER(w.BOOL)).contents.value = kind != "identity"
+                def belongs(process, handle, flag, kind=kind):
+                    ctypes.cast(flag, ctypes.POINTER(w.BOOL)).contents.value = (
+                        kind != "identity"
+                    )
                     return True
 
                 job.api.IsProcessInJob.side_effect = belongs
@@ -303,18 +342,29 @@ class OwnedTests(unittest.TestCase):
                 process = Mock(pid=123, returncode=0)
                 process.poll.return_value = 0
                 process.communicate.return_value = (
-                    json.dumps({"owned": True, "started": time.perf_counter(),
-                                "returncode": 7, "timed_out": False}), ""
+                    json.dumps(
+                        {
+                            "owned": True,
+                            "started": time.perf_counter(),
+                            "returncode": 7,
+                            "timed_out": False,
+                        }
+                    ),
+                    "",
                 )
                 job = object.__new__(owned._Job)
                 job.handle, job.api = 1, Mock()
                 job.members = Mock(return_value={101, 102, 103})
                 job.alive = Mock(return_value=True)
                 job.live_members = Mock(return_value=True)
-                job.api.OpenProcess.side_effect = lambda access, inherit, pid: (pid - 100) * 11
+                job.api.OpenProcess.side_effect = lambda access, inherit, pid: (
+                    (pid - 100) * 11
+                )
                 job.api.WaitForSingleObject.return_value = 0
                 if termination_fails:
-                    job.api.TerminateJobObject.side_effect = OSError("original terminate failure")
+                    job.api.TerminateJobObject.side_effect = OSError(
+                        "original terminate failure"
+                    )
 
                 def close(handle):
                     if handle in (11, 22):
@@ -332,11 +382,15 @@ class OwnedTests(unittest.TestCase):
                 self.assertFalse(result.succeeded)
                 self.assertFalse(result.cleanup_complete)
                 if termination_fails:
-                    self.assertTrue(any("original terminate failure" in e for e in result.errors))
+                    self.assertTrue(
+                        any("original terminate failure" in e for e in result.errors)
+                    )
                 for handle in (11, 22, 33, 1):
                     job.api.CloseHandle.assert_any_call(handle)
                 for handle in (11, 22):
-                    self.assertTrue(any(f"secondary close {handle}" in e for e in result.errors))
+                    self.assertTrue(
+                        any(f"secondary close {handle}" in e for e in result.errors)
+                    )
 
 
 def helper(role, root):
@@ -348,8 +402,12 @@ def helper(role, root):
         raise SystemExit(7)
     elif role in ("orphan", "timeout"):
         command = [
-            PYTHON, "-I", str(Path(__file__).resolve()),
-            "--helper", "intermediate", str(root),
+            PYTHON,
+            "-I",
+            str(Path(__file__).resolve()),
+            "--helper",
+            "intermediate",
+            str(root),
         ]
         child = subprocess.Popen(command)
         if role == "timeout":
@@ -358,10 +416,16 @@ def helper(role, root):
         else:
             child.wait(timeout=5)
     elif role == "intermediate":
-        child = subprocess.Popen([
-            PYTHON, "-I", str(Path(__file__).resolve()),
-            "--helper", "sleep", str(root),
-        ])
+        child = subprocess.Popen(
+            [
+                PYTHON,
+                "-I",
+                str(Path(__file__).resolve()),
+                "--helper",
+                "sleep",
+                str(root),
+            ]
+        )
         (root / ("pid-" + str(child.pid))).write_text(str(child.pid))
     elif role == "sleep":
         time.sleep(30)
