@@ -107,6 +107,10 @@ hashes. Phase intervals must be ordered and fit inside wrapper and charged outer
 wall clocks. Raw receipts remain retained; malformed receipts cannot establish
 SDK parity.
 
+The committed bytecode policy requires identity `-B -I -c` and SDK `-B -E -s`
+on both OSes, plus actual identity `dont_write_bytecode: true`. Missing or
+different flags fail the exact command gate; older receipts remain historical.
+
 Code identity completeness is checked against the pinned harness commit's Git
 tree plus the required versioned inventory, not merely equality of two reports.
 Analysis therefore requires that exact commit/tree locally available; there is

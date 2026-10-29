@@ -151,9 +151,10 @@ def attach_receipts(result, system):
                 "-r",
                 str(here / "backend.lock"),
             ],
-            [python, "-I", "-c", "frozen identity probe"],
+            [python, "-B", "-I", "-c", "frozen identity probe"],
             [
                 python,
+                "-B",
                 "-E",
                 "-s",
                 str(here.parent / "candidate" / "build.py"),
@@ -191,6 +192,7 @@ def attach_receipts(result, system):
                     "version": "3.13.15 (fixture)",
                     "backend": "2.5.0",
                     "user_site": False,
+                    "dont_write_bytecode": True,
                     "machine": "arm64",
                     "platform": runtime["tag"],
                 },
@@ -234,6 +236,40 @@ class ComparisonTests(unittest.TestCase):
         )
         inventory.start()
         self.addCleanup(inventory.stop)
+
+    def test_committed_bytecode_flags_accept_and_missing_or_wrong_flags_reject(self):
+        for system in ("Windows", "Darwin"):
+            evidence = report(system)
+            sample = evidence["samples"][1]
+            measure.validate_wrapper(sample, evidence, set())
+            for phase in ("identity", "sdk"):
+                for replacement in (None, "-b"):
+                    with self.subTest(
+                        system=system, phase=phase, replacement=replacement
+                    ):
+                        broken = copy.deepcopy(sample)
+                        argv = next(
+                            p["argv"]
+                            for p in broken["wrapper_report"]["phases"]
+                            if p["phase"] == phase
+                        )
+                        self.assertEqual(argv[1], "-B")
+                        if replacement is None:
+                            argv.pop(1)
+                        else:
+                            argv[1] = replacement
+                        with self.assertRaises(ValueError):
+                            measure.validate_wrapper(broken, evidence, set())
+            for observed in (None, False):
+                with self.subTest(system=system, bytecode_identity=observed):
+                    broken = copy.deepcopy(sample)
+                    identity = broken["wrapper_report"]["environment"]["identity"]
+                    if observed is None:
+                        identity.pop("dont_write_bytecode")
+                    else:
+                        identity["dont_write_bytecode"] = observed
+                    with self.assertRaises(ValueError):
+                        measure.validate_wrapper(broken, evidence, set())
 
     def test_comparison_rejects_failed_owned_family_receipts(self):
         for field, value in (

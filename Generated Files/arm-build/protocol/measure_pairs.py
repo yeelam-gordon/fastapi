@@ -218,6 +218,7 @@ def validate_wrapper(sample, report, seen):
         or key(identity["base_prefix"]) == key(identity["prefix"])
         or identity.get("backend") != "2.5.0"
         or identity.get("user_site") is not False
+        or identity.get("dont_write_bytecode") is not True
         or not identity.get("version", "").startswith("3.13.15 ")
         or not native_runtime(
             report["system"], identity["machine"], identity["platform"]
@@ -276,6 +277,7 @@ def validate_wrapper(sample, report, seen):
         None,
         [
             str(python),
+            "-B",
             "-E",
             "-s",
             str(here.parent / "candidate" / "build.py"),
@@ -327,9 +329,9 @@ def validate_wrapper(sample, report, seen):
         if expected[i] is not None and phase.get("argv") != expected[i]:
             raise ValueError("Caller phase command mismatch")
     if (
-        phases[2]["argv"][:3] != [str(python), "-I", "-c"]
-        or len(phases[2]["argv"]) != 4
-        or not phases[2]["argv"][3]
+        phases[2]["argv"][:4] != [str(python), "-B", "-I", "-c"]
+        or len(phases[2]["argv"]) != 5
+        or not phases[2]["argv"][4]
         or phases[4].get("operation") != "shutil.rmtree"
         or key(phases[4]["path"]) != root_key
     ):
