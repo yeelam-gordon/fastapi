@@ -116,19 +116,64 @@ class PlatformTests(unittest.TestCase):
         fat.write_bytes(b"\xca\xfe\xba\xbe" + struct.pack(">I", 1000))
         self.assertEqual(platform._binary(fat)["status"], "unavailable")
 
-    def test_inventory_privacy_and_action_whitelist(self):
+    def test_inventory_actual_action_contract_and_privacy(self):
         receipt = self.root / "action.json"
-        receipt.write_text(
-            json.dumps(
-                {
-                    "node_version": "v24.0",
-                    "arch": "arm64",
-                    "secret": "DO_NOT_COPY_ACTION_PAYLOAD",
-                    "PATH": "DO_NOT_COPY_ACTION_PATH",
-                }
-            ),
-            encoding="utf-8",
+        action = Path(__file__).parent / "action" / "main.cjs"
+        if not action.is_file():
+            common = subprocess.run(
+                ["git", "rev-parse", "--path-format=absolute", "--git-common-dir"],
+                cwd=Path(__file__).parent,
+                capture_output=True,
+                text=True,
+                timeout=5,
+                check=True,
+            ).stdout.strip()
+            action = (
+                Path(common).parent
+                / "Generated Files"
+                / "arm-build"
+                / "diagnostics"
+                / "action"
+                / "main.cjs"
+            )
+        self.assertTrue(
+            action.is_file(), "actual parent-owned action producer required"
         )
+        node = shutil.which("node")
+        self.assertIsNotNone(
+            node, "existing Node runtime required for producer contract test"
+        )
+        subprocess.run(
+            [node, str(action)],
+            env={
+                **os.environ,
+                "DIAG_ROOT": str(self.root),
+                "INPUT_OUTPUT": str(receipt),
+                "UNDECLARED_SECRET": "DO_NOT_COPY_ENV",
+            },
+            capture_output=True,
+            text=True,
+            timeout=15,
+            check=True,
+        )
+        produced = json.loads(receipt.read_text(encoding="utf-8"))
+        self.assertEqual(produced["schema"], "arm-analysis-action-runtime-v1")
+        self.assertNotIn("DO_NOT_COPY_ENV", json.dumps(produced))
+        with (
+            patch.dict(os.environ, {"ARM_DIAGNOSTIC_ACTION_JSON": str(receipt)}),
+            patch.object(shutil, "which", return_value=None),
+        ):
+            actual = platform.inventory([], str(self.root / "actual-producer"))
+        self.assertEqual(actual["actions_node"]["producer_schema"], produced["schema"])
+        self.assertEqual(
+            actual["actions_node"]["receipt"]["node"]["sha256"],
+            produced["node"]["sha256"],
+        )
+        # Add disallowed fields without inventing or replacing any producer identity.
+        produced["secret"] = "DO_NOT_COPY_ACTION_PAYLOAD"
+        produced["node"]["secret"] = "DO_NOT_COPY_NODE_SECRET"
+        produced["environment"]["PATH"] = "DO_NOT_COPY_ACTION_PATH"
+        receipt.write_text(json.dumps(produced), encoding="utf-8")
         with (
             patch.dict(
                 os.environ,
@@ -149,12 +194,62 @@ class PlatformTests(unittest.TestCase):
         for secret in (
             "DO_NOT_COPY_ACTION_PAYLOAD",
             "DO_NOT_COPY_ACTION_PATH",
+            "DO_NOT_COPY_NODE_SECRET",
             "DO_NOT_COPY_ENV",
             "DO_NOT_COPY_SECRET",
         ):
             self.assertNotIn(secret, serialized)
         self.assertNotIn("PATH", result["environment"])
-        self.assertEqual(result["actions_node"]["receipt"]["arch"], "arm64")
+        action_receipt = result["actions_node"]["receipt"]
+        self.assertEqual(action_receipt["schema"], produced["schema"])
+        for field in ("version", "architecture", "executable", "sha256"):
+            self.assertEqual(
+                action_receipt["node"][field], platform._safe(produced["node"][field])
+            )
+        self.assertEqual(
+            action_receipt["host"]["platform"], produced["host"]["platform"]
+        )
+        for field in (
+            "GITHUB_RUN_ID",
+            "GITHUB_RUN_ATTEMPT",
+            "GITHUB_JOB",
+            "ImageVersion",
+        ):
+            value = produced["environment"][field]
+            self.assertEqual(
+                action_receipt["environment"][field],
+                platform._safe(value) if value is not None else None,
+            )
+        self.assertNotIn("PATH", action_receipt["environment"])
+        for field in ("version", "architecture", "executable", "sha256"):
+            with self.subTest(missing_required_identity=field):
+                malformed = json.loads(json.dumps(produced))
+                del malformed["node"][field]
+                receipt.write_text(json.dumps(malformed), encoding="utf-8")
+                with patch.dict(
+                    os.environ, {"ARM_DIAGNOSTIC_ACTION_JSON": str(receipt)}
+                ):
+                    unavailable = platform._action_inventory()
+                self.assertEqual(unavailable["status"], "unavailable")
+                self.assertIn(f"node.{field}", unavailable["reason"])
+        for field, invalid in (
+            ("node.sha256", "not-a-hash"),
+            ("node.architecture", "unrecognized"),
+            ("node.version", ""),
+            ("node.executable", "relative"),
+            ("host.platform", None),
+        ):
+            with self.subTest(invalid_identity=field):
+                malformed = json.loads(json.dumps(produced))
+                section, key = field.split(".")
+                malformed[section][key] = invalid
+                receipt.write_text(json.dumps(malformed), encoding="utf-8")
+                with patch.dict(
+                    os.environ, {"ARM_DIAGNOSTIC_ACTION_JSON": str(receipt)}
+                ):
+                    unavailable = platform._action_inventory()
+                self.assertEqual(unavailable["status"], "unavailable")
+                self.assertIn(field, unavailable["reason"])
         self.assertEqual(
             result["environment"]["GITHUB_WORKFLOW"]["value"], "<REDACTED>"
         )

@@ -494,6 +494,8 @@ def _hardware():
 
 def _action_inventory():
     import json
+    import ntpath
+    import re
     from pathlib import Path
 
     path = os.environ.get("ARM_DIAGNOSTIC_ACTION_JSON")
@@ -504,23 +506,105 @@ def _action_inventory():
         if file.stat().st_size > 65536:
             raise ValueError("receipt exceeds limit")
         data = json.loads(file.read_text(encoding="utf-8"))
-        # Merge declared identity fields only; never copy arbitrary action payload.
-        allowed = (
-            "node_version",
-            "exec_path",
-            "arch",
-            "platform",
-            "sha256",
-            "action_ref",
-            "image_os",
-            "image_version",
-        )
-        receipt = {
-            key: _safe(data[key]) for key in allowed if isinstance(data.get(key), str)
+        schema = "arm-analysis-action-runtime-v1"
+        if not isinstance(data, dict) or data.get("schema") != schema:
+            return _unknown("missing or unsupported action runtime schema")
+        node, host = data.get("node"), data.get("host")
+        if not isinstance(node, dict) or not isinstance(host, dict):
+            return _unknown(
+                "action runtime node/host identity objects missing or invalid"
+            )
+        checks = {
+            "node.version": (
+                node.get("version"),
+                lambda value: re.fullmatch(
+                    r"v\d+\.\d+\.\d+(?:[-+][A-Za-z0-9.-]+)?", value
+                ),
+            ),
+            "node.architecture": (
+                node.get("architecture"),
+                lambda value: (
+                    value
+                    in {
+                        "arm",
+                        "arm64",
+                        "ia32",
+                        "loong64",
+                        "mips",
+                        "mipsel",
+                        "ppc",
+                        "ppc64",
+                        "riscv64",
+                        "s390",
+                        "s390x",
+                        "x64",
+                    }
+                ),
+            ),
+            "node.executable": (
+                node.get("executable"),
+                lambda value: os.path.isabs(value) or ntpath.isabs(value),
+            ),
+            "node.sha256": (
+                node.get("sha256"),
+                lambda value: re.fullmatch(r"[0-9a-fA-F]{64}", value),
+            ),
+            "host.platform": (
+                host.get("platform"),
+                lambda value: (
+                    value
+                    in {
+                        "aix",
+                        "android",
+                        "darwin",
+                        "freebsd",
+                        "linux",
+                        "openbsd",
+                        "sunos",
+                        "win32",
+                    }
+                ),
+            ),
         }
+        for field, (value, valid) in checks.items():
+            if not isinstance(value, str) or not value or not valid(value):
+                return _unknown(
+                    f"action runtime required identity missing or invalid: {field}"
+                )
+        environment = data.get("environment", {})
+        if not isinstance(environment, dict):
+            return _unknown("action runtime environment object invalid")
+        allowed_environment = (
+            "GITHUB_RUN_ID",
+            "GITHUB_RUN_ATTEMPT",
+            "GITHUB_JOB",
+            "RUNNER_OS",
+            "RUNNER_ARCH",
+            "RUNNER_ENVIRONMENT",
+            "ImageOS",
+            "ImageVersion",
+        )
+        # Preserve producer field paths; never copy arbitrary receipt/environment fields.
+        receipt = {
+            "schema": schema,
+            "node": {
+                key: _safe(node[key])
+                for key in ("version", "architecture", "executable", "sha256")
+            },
+            "host": {"platform": host["platform"]},
+            "environment": {
+                key: _safe(environment[key])
+                if isinstance(environment.get(key), str)
+                else None
+                for key in allowed_environment
+            },
+        }
+        if data.get("execution_context") in ("github-action", "local-validation"):
+            receipt["execution_context"] = data["execution_context"]
         return {
             "status": "partial",
             "source": "ARM_DIAGNOSTIC_ACTION_JSON",
+            "producer_schema": schema,
             "receipt": receipt,
             "reason": "external receipt retained separately; execution/binary not independently verified",
         }
