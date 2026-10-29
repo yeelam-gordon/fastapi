@@ -22,15 +22,16 @@ import importlib.metadata
 import io
 import json
 import os
-from pathlib import Path, PurePosixPath
 import platform
 import shutil
 import statistics
 import subprocess
 import sys
+import sysconfig
 import tarfile
 import time
 import zipfile
+from pathlib import Path, PurePosixPath
 
 
 class VerificationError(ValueError):
@@ -61,7 +62,9 @@ def wheel_members(path: Path) -> dict[str, str]:
     contents: dict[str, bytes] = {}
     with zipfile.ZipFile(path) as archive:
         for info in archive.infolist():
-            name = member_name(info.filename.rstrip("/") if info.is_dir() else info.filename)
+            name = member_name(
+                info.filename.rstrip("/") if info.is_dir() else info.filename
+            )
             if info.is_dir():
                 continue
             if name in contents:
@@ -85,7 +88,9 @@ def wheel_members(path: Path) -> dict[str, str]:
             seen.add(name)
             if name == record or name in signatures:
                 if hashed or size:
-                    raise VerificationError(f"RECORD/signature must be unhashed: {name}")
+                    raise VerificationError(
+                        f"RECORD/signature must be unhashed: {name}"
+                    )
                 continue
             if not hashed or not size:
                 raise VerificationError(f"Unhashed RECORD member: {name}")
@@ -93,9 +98,13 @@ def wheel_members(path: Path) -> dict[str, str]:
             # Wheel hashes must be SHA-256 or stronger; reject weak/unknown hashes.
             if algorithm not in {"sha256", "sha384", "sha512"}:
                 raise VerificationError(f"Unsupported RECORD hash: {algorithm}")
-            expected = base64.urlsafe_b64encode(
-                hashlib.new(algorithm, contents[name]).digest()
-            ).rstrip(b"=").decode("ascii")
+            expected = (
+                base64.urlsafe_b64encode(
+                    hashlib.new(algorithm, contents[name]).digest()
+                )
+                .rstrip(b"=")
+                .decode("ascii")
+            )
             if encoded != expected or str(len(contents[name])) != size:
                 raise VerificationError(f"RECORD hash/size mismatch: {name}")
     except (UnicodeError, csv.Error, ValueError) as exc:
@@ -200,7 +209,11 @@ class Recorder:
         try:
             with stdout.open("wb") as out, stderr.open("wb") as err:
                 completed = subprocess.run(
-                    record["argv"], cwd=cwd, env=env, stdout=out, stderr=err,
+                    record["argv"],
+                    cwd=cwd,
+                    env=env,
+                    stdout=out,
+                    stderr=err,
                     check=False,
                 )
             record["returncode"] = completed.returncode
@@ -231,41 +244,59 @@ def cpu_metadata() -> dict:
 
 
 def execute(args: argparse.Namespace) -> int:
+    interpreter_platform = sysconfig.get_platform().lower()
+    if not interpreter_platform.endswith(("arm64", "aarch64")):
+        raise ValueError(
+            f"Native ARM64 interpreter required, got {interpreter_platform}"
+        )
     source = Path(args.source).resolve()
     output = Path(args.output).resolve()
     generated = source / "Generated Files" / "arm-build" / "results"
-    if output == source or (source in output.parents and generated not in output.parents):
-        raise ValueError("--output must be outside the checkout or under Generated Files/arm-build/results")
+    if output == source or (
+        source in output.parents and generated not in output.parents
+    ):
+        raise ValueError(
+            "--output must be outside the checkout or under Generated Files/arm-build/results"
+        )
     if args.repeats < 5:
         raise ValueError("--repeats must be at least 5")
     # A new directory is required. Never clear or reuse arbitrary caller paths.
     output.mkdir(parents=True, exist_ok=False)
     env = {
-        key: value for key, value in os.environ.items()
+        key: value
+        for key, value in os.environ.items()
         if not key.startswith(("UV_", "PIP_"))
     }
     env["PYTHONNOUSERSITE"] = "1"
     env.pop("PYTHONPATH", None)
     env.pop("PYTHONHOME", None)
-    recorder = Recorder(output, {
-        "python": sys.version,
-        "executable": sys.executable,
-        "platform": platform.platform(),
-        "machine": platform.machine(),
-        "cpu": cpu_metadata(),
-        "source_checkout": str(source),
-        "source_policy": "git archive HEAD; uncommitted/untracked files excluded",
-        "cache_policy": (
-            "dedicated shared cache; baseline and candidate online preparation, "
-            "then offline measured builds; no cache clearing; NOT cold-cache"
-        ),
-        "environment_policy": (
-            "inherit except UV_*, PIP_*, PYTHONPATH, PYTHONHOME; "
-            "PYTHONNOUSERSITE=1; uv --no-config; explicit harness interpreter"
-        ),
-        "candidate_scope": "diagnostic isolation removal, SAME pdm.backend",
-        "repeats": args.repeats,
-    })
+    harness = Path(__file__).read_bytes()
+    (output / "harness.py").write_bytes(harness)
+    recorder = Recorder(
+        output,
+        {
+            "python": sys.version,
+            "executable": sys.executable,
+            "platform": platform.platform(),
+            "machine": platform.machine(),
+            "interpreter_platform": interpreter_platform,
+            "harness_sha256": digest(harness),
+            "harness_snapshot": "harness.py",
+            "cpu": cpu_metadata(),
+            "source_checkout": str(source),
+            "source_policy": "git archive HEAD; uncommitted/untracked files excluded",
+            "cache_policy": (
+                "dedicated shared cache; baseline and candidate online preparation, "
+                "then offline measured builds; no cache clearing; NOT cold-cache"
+            ),
+            "environment_policy": (
+                "inherit except UV_*, PIP_*, PYTHONPATH, PYTHONHOME; "
+                "PYTHONNOUSERSITE=1; uv --no-config; explicit harness interpreter"
+            ),
+            "candidate_scope": "diagnostic isolation removal, SAME pdm.backend",
+            "repeats": args.repeats,
+        },
+    )
     try:
         uv = shutil.which(args.uv)
         if uv is None:
@@ -276,9 +307,15 @@ def execute(args: argparse.Namespace) -> int:
         ).strip()
         help_text = recorder.run([uv, "build", "--help"], source, "uv-help", env)
         for flag in (
-            "--build-constraints", "--no-build-isolation", "--python",
-            "--no-python-downloads", "--no-managed-python", "--cache-dir",
-            "--no-config", "--offline", "--no-create-gitignore",
+            "--build-constraints",
+            "--no-build-isolation",
+            "--python",
+            "--no-python-downloads",
+            "--no-managed-python",
+            "--cache-dir",
+            "--no-config",
+            "--offline",
+            "--no-create-gitignore",
         ):
             if flag not in help_text:
                 raise ValueError(f"This uv does not advertise required support: {flag}")
@@ -292,7 +329,9 @@ def execute(args: argparse.Namespace) -> int:
         source_tar = output / "source.tar"
         recorder.run(
             ["git", "archive", "--format=tar", f"--output={source_tar}", sha],
-            source, "source-snapshot", env,
+            source,
+            "source-snapshot",
+            env,
         )
         snapshot = output / "source"
         snapshot.mkdir()
@@ -318,23 +357,36 @@ def execute(args: argparse.Namespace) -> int:
             raise ValueError("Preinstall build for --importtime")
         constraints = output / "build-constraints.txt"
         constraints.write_text(
-            "".join(f"{name}=={version}\n" for name, version in sorted(packages.items())),
+            "".join(
+                f"{name}=={version}\n" for name, version in sorted(packages.items())
+            ),
             encoding="utf-8",
         )
-        recorder.report["metadata"].update({
-            "build_system": system,
-            "installed_versions": packages,
-            "backend_requirements": importlib.metadata.requires("pdm-backend"),
-            "constraints": str(constraints),
-            "constraints_sha256": digest(constraints.read_bytes()),
-            "constraints_scope": "all installed distributions, including backend/tools",
-            "bootstrap_policy": "caller preinstalled dependencies; not included in build timing",
-        })
+        recorder.report["metadata"].update(
+            {
+                "build_system": system,
+                "installed_versions": packages,
+                "backend_requirements": importlib.metadata.requires("pdm-backend"),
+                "constraints": str(constraints),
+                "constraints_sha256": digest(constraints.read_bytes()),
+                "constraints_scope": "all installed distributions, including backend/tools",
+                "bootstrap_policy": "caller preinstalled dependencies; not included in build timing",
+            }
+        )
         cache = output / "cache"
         common = [
-            uv, "build", str(snapshot), "--python", sys.executable,
-            "--no-managed-python", "--no-python-downloads", "--no-config",
-            "--build-constraints", str(constraints), "--cache-dir", str(cache),
+            uv,
+            "build",
+            str(snapshot),
+            "--python",
+            sys.executable,
+            "--no-managed-python",
+            "--no-python-downloads",
+            "--no-config",
+            "--build-constraints",
+            str(constraints),
+            "--cache-dir",
+            str(cache),
             "--no-create-gitignore",
         ]
         if getattr(args, "wheelhouse", None):
@@ -366,36 +418,60 @@ def execute(args: argparse.Namespace) -> int:
             manifest_path.write_text(
                 json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
             )
-            recorder.report["artifacts"].append({
-                "phase": phase, "variant": label, "measured": measured,
-                "equivalent": True, "manifest": str(manifest_path.relative_to(output)),
-                "archives": {
-                    p.name: {"sha256": digest(p.read_bytes()), "bytes": p.stat().st_size}
-                    for p in directory.iterdir()
-                },
-            })
+            recorder.report["artifacts"].append(
+                {
+                    "phase": phase,
+                    "variant": label,
+                    "measured": measured,
+                    "equivalent": True,
+                    "manifest": str(manifest_path.relative_to(output)),
+                    "archives": {
+                        p.name: {
+                            "sha256": digest(p.read_bytes()),
+                            "bytes": p.stat().st_size,
+                        }
+                        for p in directory.iterdir()
+                    },
+                }
+            )
             recorder.save()
 
         for variant in ("baseline", "candidate"):
             build(variant, f"prepare-{variant}", False)
         for repeat in range(args.repeats):
-            order = ("baseline", "candidate") if repeat % 2 == 0 else ("candidate", "baseline")
+            order = (
+                ("baseline", "candidate")
+                if repeat % 2 == 0
+                else ("candidate", "baseline")
+            )
             for variant in order:
                 build(variant, f"repeat-{repeat + 1:02d}-{variant}", True)
         if args.importtime:
             diagnostic = output / "diagnostic"
             diagnostic.mkdir()
             recorder.run(
-                [sys.executable, "-X", "importtime", "-m", "build",
-                 "--no-isolation", "--outdir", str(diagnostic), str(snapshot)],
-                snapshot, "diagnostic-importtime-UNMEASURED", env,
+                [
+                    sys.executable,
+                    "-X",
+                    "importtime",
+                    "-m",
+                    "build",
+                    "--no-isolation",
+                    "--outdir",
+                    str(diagnostic),
+                    str(snapshot),
+                ],
+                snapshot,
+                "diagnostic-importtime-UNMEASURED",
+                env,
             )
             compare_manifests(reference, artifact_manifest(diagnostic))
         medians = {}
         ranges = {}
         for variant in ("baseline", "candidate"):
             durations = [
-                row["wall_seconds"] for row in recorder.report["commands"]
+                row["wall_seconds"]
+                for row in recorder.report["commands"]
                 if row["phase"].startswith("repeat-") and row["phase"].endswith(variant)
             ]
             medians[variant] = statistics.median(durations)
@@ -420,11 +496,20 @@ def execute(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--uv", required=True, help="Path to uv executable")
-    parser.add_argument("--output", required=True, help="NEW output directory; see source/output safety rule")
+    parser.add_argument(
+        "--output",
+        required=True,
+        help="NEW output directory; see source/output safety rule",
+    )
     parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--source", default=str(Path(__file__).resolve().parents[2]))
-    parser.add_argument("--importtime", action="store_true", help="Separate untimed build diagnostic")
-    parser.add_argument("--wheelhouse", help="Use verified local backend wheels instead of registry downloads")
+    parser.add_argument(
+        "--importtime", action="store_true", help="Separate untimed build diagnostic"
+    )
+    parser.add_argument(
+        "--wheelhouse",
+        help="Use verified local backend wheels instead of registry downloads",
+    )
     args = parser.parse_args(argv)
     try:
         return execute(args)

@@ -77,6 +77,7 @@ jobs:
           name: arm-build-${{ matrix.os }}
           path: |
             Generated Files/arm-build/results/ci/report.json
+            Generated Files/arm-build/results/ci/harness.py
             Generated Files/arm-build/results/ci/logs
             Generated Files/arm-build/results/ci/artifacts/*.manifest.json
             Generated Files/arm-build/results/ci/build-constraints.txt

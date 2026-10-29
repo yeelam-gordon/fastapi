@@ -4,12 +4,12 @@ import argparse
 import hashlib
 import json
 import os
-from pathlib import Path
 import platform
 import subprocess
 import sys
+import sysconfig
 import time
-
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 
@@ -18,8 +18,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
-    if platform.machine().lower() not in {"arm64", "aarch64"}:
-        raise RuntimeError(f"Native ARM64 required, got {platform.machine()}")
+    if not sysconfig.get_platform().lower().endswith(("arm64", "aarch64")):
+        raise RuntimeError(
+            f"Native ARM64 interpreter required, got {sysconfig.get_platform()}"
+        )
     output = ROOT / "results" / "bootstrap"
     output.mkdir(parents=True, exist_ok=True)
     report_path = output / ("smoke.json" if args.smoke else "provision.json")
@@ -27,6 +29,7 @@ def main() -> None:
         "status": "running",
         "python": sys.version,
         "machine": platform.machine(),
+        "interpreter_platform": sysconfig.get_platform(),
         "platform": platform.platform(),
         "logical_cores": os.cpu_count(),
         "runner_image": os.environ.get("ImageVersion"),
@@ -41,7 +44,9 @@ def main() -> None:
         log = output / f"{phase}.log"
         with log.open("wb") as stream:
             result = subprocess.run(command, stdout=stream, stderr=subprocess.STDOUT)
-        record.update(returncode=result.returncode, seconds=time.perf_counter() - started)
+        record.update(
+            returncode=result.returncode, seconds=time.perf_counter() - started
+        )
         report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         if result.returncode:
             print(log.read_text(encoding="utf-8", errors="replace"), file=sys.stderr)
@@ -49,14 +54,40 @@ def main() -> None:
 
     try:
         if args.smoke:
-            wheels = list((ROOT / "results" / "ci" / "artifacts" / "prepare-baseline").glob("*.whl"))
+            wheels = list(
+                (ROOT / "results" / "ci" / "artifacts" / "prepare-baseline").glob(
+                    "*.whl"
+                )
+            )
             if len(wheels) != 1:
                 raise RuntimeError("Expected one verified FastAPI wheel")
-            run(["uv", "pip", "install", "--python", sys.executable,
-                 "--require-hashes", "--only-binary", ":all:",
-                 "-r", str(ROOT / "smoke.lock")], "smoke-dependencies")
-            run(["uv", "pip", "install", "--python", sys.executable,
-                 "--no-deps", str(wheels[0])], "install-artifact")
+            run(
+                [
+                    "uv",
+                    "pip",
+                    "install",
+                    "--python",
+                    sys.executable,
+                    "--require-hashes",
+                    "--only-binary",
+                    ":all:",
+                    "-r",
+                    str(ROOT / "smoke.lock"),
+                ],
+                "smoke-dependencies",
+            )
+            run(
+                [
+                    "uv",
+                    "pip",
+                    "install",
+                    "--python",
+                    sys.executable,
+                    "--no-deps",
+                    str(wheels[0]),
+                ],
+                "install-artifact",
+            )
             # Run outside the checkout so importing FastAPI verifies the installed wheel.
             script = output / "artifact_smoke.py"
             script.write_text(
@@ -78,17 +109,42 @@ def main() -> None:
             )
             run([sys.executable, "-I", str(script)], "artifact-smoke")
         else:
-            run(["uv", "pip", "install", "--python", sys.executable,
-                 "--require-hashes", "--only-binary", ":all:",
-                 "-r", str(ROOT / "tooling.lock")], "install-tools")
+            run(
+                [
+                    "uv",
+                    "pip",
+                    "install",
+                    "--python",
+                    sys.executable,
+                    "--require-hashes",
+                    "--only-binary",
+                    ":all:",
+                    "-r",
+                    str(ROOT / "tooling.lock"),
+                ],
+                "install-tools",
+            )
             run([sys.executable, "-m", "pip", "check"], "dependency-check")
             if sys.platform == "win32":
                 wheelhouse = ROOT / "wheelhouse"
                 wheelhouse.mkdir(exist_ok=True)
-                run([sys.executable, "-m", "pip", "download",
-                     "--only-binary=:all:", "--require-hashes",
-                     "-r", str(ROOT / "tooling.lock"), "-r", str(ROOT / "smoke.lock"),
-                     "--dest", str(wheelhouse)], "download-wheelhouse")
+                run(
+                    [
+                        sys.executable,
+                        "-m",
+                        "pip",
+                        "download",
+                        "--only-binary=:all:",
+                        "--require-hashes",
+                        "-r",
+                        str(ROOT / "tooling.lock"),
+                        "-r",
+                        str(ROOT / "smoke.lock"),
+                        "--dest",
+                        str(wheelhouse),
+                    ],
+                    "download-wheelhouse",
+                )
                 hashes = {
                     path.name: hashlib.sha256(path.read_bytes()).hexdigest()
                     for path in sorted(wheelhouse.glob("*.whl"))

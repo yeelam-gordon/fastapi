@@ -7,3 +7,8 @@ __pycache__/
 *.whl
 *.tar.gz
 *.etl
+*.pstats
+results/*/source/
+results/*/cache/
+results/*/source.tar
+results/*/diagnostic/

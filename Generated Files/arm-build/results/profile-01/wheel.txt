@@ -1,0 +1,46 @@
+         129339 function calls (125943 primitive calls) in 0.159 seconds
+
+   Ordered by: cumulative time
+   List reduced from 840 to 40 due to restriction <40>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.159    0.159 __init__.py:47(build_wheel)
+        1    0.000    0.000    0.136    0.136 base.py:203(build)
+        1    0.000    0.000    0.071    0.071 wheel.py:143(build_artifact)
+     25/1    0.000    0.000    0.065    0.065 {built-in method builtins.sorted}
+       65    0.000    0.000    0.065    0.001 wheel.py:122(get_files)
+       64    0.001    0.000    0.064    0.001 wheel.py:261(_add_file_to_zip)
+        1    0.000    0.000    0.037    0.037 base.py:189(get_files)
+        1    0.000    0.000    0.037    0.037 wheel.py:107(_collect_files)
+        1    0.000    0.000    0.037    0.037 base.py:234(_collect_files)
+       65    0.001    0.000    0.031    0.000 wheel.py:278(_write_zip_info)
+      371    0.002    0.000    0.029    0.000 _local.py:365(relative_to)
+        1    0.000    0.000    0.027    0.027 wheel.py:326(_get_metadata_files)
+        1    0.000    0.000    0.026    0.026 wheel.py:236(_write_dist_info)
+       65    0.001    0.000    0.023    0.000 __init__.py:1939(writestr)
+      155    0.000    0.000    0.022    0.000 {built-in method builtins.any}
+       60    0.000    0.000    0.022    0.000 base.py:329(_is_excluded)
+      300    0.000    0.000    0.021    0.000 base.py:330(<genexpr>)
+       77    0.019    0.000    0.019    0.000 {built-in method _io.open}
+      240    0.000    0.000    0.019    0.000 base.py:30(is_same_or_descendant_path)
+       71    0.000    0.000    0.018    0.000 _local.py:529(open)
+        2    0.000    0.000    0.017    0.009 config.py:49(validate)
+        2    0.000    0.000    0.017    0.009 __init__.py:407(from_pyproject)
+      371    0.001    0.000    0.016    0.000 <frozen _collections_abc>:1041(__contains__)
+        1    0.000    0.000    0.015    0.015 wheel.py:71(__init__)
+        1    0.000    0.000    0.015    0.015 base.py:95(__init__)
+      179    0.012    0.000    0.013    0.000 {built-in method nt.stat}
+        1    0.000    0.000    0.013    0.013 config.py:66(from_pyproject)
+     1449    0.001    0.000    0.012    0.000 <frozen _collections_abc>:1031(__iter__)
+       65    0.000    0.000    0.012    0.000 __init__.py:1257(write)
+      144    0.004    0.000    0.012    0.000 {method '__exit__' of '_io._IOBase' objects}
+     1319    0.002    0.000    0.011    0.000 _local.py:44(__getitem__)
+      148    0.000    0.000    0.011    0.000 _local.py:510(stat)
+       65    0.011    0.000    0.011    0.000 {method 'compress' of 'zlib.Compress' objects}
+      214    0.000    0.000    0.011    0.000 requirements.py:82(__init__)
+        2    0.000    0.000    0.010    0.005 project_table.py:444(to_project_table)
+    376/2    0.001    0.000    0.009    0.005 project_table.py:394(_cast)
+     18/2    0.000    0.000    0.009    0.005 project_table.py:303(_cast_typed_dict)
+      214    0.000    0.000    0.009    0.000 _parser.py:106(parse_requirement)
+      214    0.001    0.000    0.009    0.000 _parser.py:110(_parse_requirement)
+     1209    0.001    0.000    0.008    0.000 _local.py:245(_from_parsed_parts)

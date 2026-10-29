@@ -1,0 +1,17 @@
+{
+  "backend": "2.5.0",
+  "source": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-01\\source",
+  "interpretation": "Untimed diagnostic relative to benchmark; profiler adds overhead",
+  "phases": {
+    "sdist": {
+      "profiled_seconds": 1.65925900000002,
+      "artifact": "fastapi-0.162.0.tar.gz"
+    },
+    "wheel": {
+      "profiled_seconds": 0.15924209999866434,
+      "artifact": "fastapi-0.162.0-py3-none-any.whl"
+    }
+  },
+  "status": "passed",
+  "artifacts_equivalent": true
+}

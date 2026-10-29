@@ -9,7 +9,7 @@ $tools = Join-Path $root 'tools'
 $uv = Join-Path $tools 'uv.exe'
 $venvPython = Join-Path $root '.venv\Scripts\python.exe'
 
-& $Python -c "import platform; assert platform.machine().lower() in ('arm64', 'aarch64'), 'Native ARM64 Python required'"
+& $Python -c "import sysconfig; assert sysconfig.get_platform().lower().endswith(('arm64', 'aarch64')), 'Native ARM64 Python required'"
 if ($LASTEXITCODE -ne 0) { throw 'A working native ARM64 Python is required' }
 
 if (-not (Test-Path -LiteralPath $uv)) {
@@ -29,6 +29,8 @@ if (-not (Test-Path -LiteralPath $venvPython)) {
     & $uv venv --python $Python (Join-Path $root '.venv')
     if ($LASTEXITCODE -ne 0) { throw 'ARM64 environment creation failed' }
 }
+& $venvPython -c "import sysconfig; assert sysconfig.get_platform().lower().endswith(('arm64', 'aarch64')), 'Reused environment must be ARM64'"
+if ($LASTEXITCODE -ne 0) { throw 'Existing environment is not native ARM64' }
 $install = @('pip', 'install', '--python', $venvPython, '--require-hashes', '--only-binary', ':all:',
     '--requirements', (Join-Path $root 'tooling.lock'))
 if ($Wheelhouse) {

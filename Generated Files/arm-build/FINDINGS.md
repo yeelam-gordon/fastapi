@@ -1,14 +1,23 @@
 # FastAPI ARM build investigation
 
-## What we can already conclude
+## Measured result: 25.1% lower repeated-build latency locally
 
-FastAPI builds a pure-Python distribution, not a native executable. Adding compiler workers cannot accelerate compilation that does not exist. The first experiment measures package-backend and environment overhead while retaining PDM, the source distribution and the wheel built from that source distribution. Windows/macOS parity remains unproven until matched CI results are available.
+On this Windows ARM VM, the complete warm-cache package build fell from **3.831 s to 2.869 s median** across seven alternating trials per variant, a **25.1% reduction**. All 16 builds (two preparations plus 14 timed builds) produced equivalent normalized sdist/wheel contents with valid wheel `RECORD` hashes and preserved sdist executable bits. This is a build-only result after backend provisioning, not a cold-install or end-to-end CI speedup. [Raw report](results/local-01/report.json).
 
-The local machine is a 16-core Cobalt 100 Windows ARM64 VM, not the eventual approximately 20-core physical Windows machine. Native CPython 3.13.15 already works. A verified official ARM64 uv 0.13.6 distribution is installed locally. Windows Performance Recorder and Analyzer are present.
+FastAPI builds a pure-Python distribution, not a native executable. Adding compiler workers cannot accelerate compilation that does not exist. The measured candidate retains PDM, the source distribution and the wheel built from that source distribution; it avoids repeated build-environment isolation using a dedicated pre-provisioned backend. Windows/macOS parity remains **unproven**: GitHub rejected the workflow push because the active login lacks the `workflow` OAuth scope, and the user was unavailable to authorize it.
+
+The local machine is a 16-core Cobalt 100 Windows ARM64 VM, not the eventual approximately 20-core physical Windows machine. Native CPython 3.13.15 works. Verified official ARM64 uv 0.13.6 and Ruff 0.17.3 are installed locally. PDM 2.5.0 was self-built from its verified official GitHub revision because PyPI wheel transport is blocked. Standard-library profiling was executed; Windows Performance Recorder and Analyzer are present.
+
+| Variant | Median | Observed range | Scope |
+|---|---:|---:|---|
+| Isolated PDM baseline | 3.831 s | 3.617-3.955 s | Default complete `uv build`, warmed local backend wheel cache |
+| Dedicated backend, no repeated isolation | 2.869 s | 2.681-3.013 s | Same Python, PDM version, source snapshot and archive verification |
+
+This saves about **0.962 s per repeated build** on this host. The comparison excludes backend acquisition/installation, and a single release build may not repay that bootstrap cost. Initial preparation builds were 3.780 s and 2.848 s respectively, but these also used a pre-downloaded local wheelhouse and are **not** cold dependency-install measurements. No full test suite or installed-FastAPI runtime smoke check ran locally: the required PyPI wheels remain unavailable.
 
 ## Scope and evidence
 
-The source revision is `79cab5bed28b24d92c185d236feb33f5783dfeb3`. The [workboard](WORKBOARD.md) owns goals, the expert operating method, task dependencies and current execution state. Raw local host evidence is in [host.json](results/environment/host.json).
+The FastAPI base revision is `79cab5bed28b24d92c185d236feb33f5783dfeb3`. The first measured immutable snapshot is local commit `cb9309673c4c06f71cae4fbc4461ba783ff91b49`, which adds experiment files but changes no FastAPI package source. That first run executed a locally modified harness while Ruff formatting ran in parallel; the recorded dirty status is retained, and its exact executed harness bytes were not separately captured. A subsequent committed-harness run addresses that provenance limitation instead of presenting the initial source SHA as the harness identity. The [workboard](WORKBOARD.md) owns goals, the expert operating method, task dependencies and current execution state. Raw local host evidence is in [host.json](results/environment/host.json).
 
 | Question | Observed answer | Repository evidence |
 |---|---|---|
@@ -25,17 +34,27 @@ An existing successful upstream Ubuntu release run reports its entire "Build dis
 
 ## Controlled experiment
 
-The baseline is the ordinary isolated PDM build. The candidate pre-provisions the same pinned PDM backend and disables repeated build-environment isolation. This is diagnostic, not yet a recommendation to change publishing. It must preserve normalized archive member contents and validate wheel `RECORD` hashes.
+The baseline is the ordinary isolated PDM build. The candidate pre-provisions the same pinned PDM backend and disables repeated build-environment isolation. This is diagnostic, not yet a recommendation to change publishing. Normalized archive member contents, sdist executable bits and wheel `RECORD` hashes were checked on every build.
 
 Measure package builds separately from dependency provisioning, cache preparation, diagnostic profiling, tests and runner queue time. Alternate baseline/candidate order over repeated trials. Report medians and ranges rather than selecting the fastest trial. A warm dependency cache is not a cold machine. Time saved by pre-provisioning is not free: report its separate cost and whether a single build amortizes it.
 
 Cross-machine comparisons must use the same source, Python patch release, uv version, backend version, artifact scope and cache policy. They describe the measured runners, not Windows versus macOS universally. Single-run parity is not sufficient evidence for a durable speed claim.
 
-## Local provisioning limitation and recovery
+## Profiling explains why core count is not the first lever
+
+The separate PDM function profile attributes **1.659 s to source-distribution creation and 0.159 s to wheel creation**. These profiled durations include instrumentation overhead and exclude uv orchestration, sdist extraction and other subprocess startup; they are not additive substitutes for the benchmark medians. Source-distribution work processes about 1,269 files; file opening, tar construction and compression are material components, with `zlib.compress` accounting for 0.221 s in that diagnostic. The measured package work is primarily serial Python/filesystem processing, not a compiler farm. [Profile result](results/profile-01/profile.json), [sdist functions](results/profile-01/sdist.txt), [wheel functions](results/profile-01/wheel.txt).
+
+Prioritize avoiding repeated setup and unnecessary builds, then investigate file traversal and storage. Do not remove tests/examples from the sdist, change compression or swap backends just to win a benchmark without an explicitly accepted artifact/compatibility requirement. For real native dependency builds, ARM64 wheel availability and compiler parallelism are separate follow-on investigations.
+
+## Provisioning recovery worked; CI authorization remains blocked
 
 `files.pythonhosted.org` fails TLS handshakes in uv, Windows curl and Python's TLS implementation. The observed DNS target is `6.6.0.190`; this observation alone does not establish why the network path fails. PyPI metadata and GitHub downloads are reachable. No certificate checking, DNS configuration or network protection was disabled.
 
-The owned fork `yeelam-gordon/fastapi` is available for requested CI execution because upstream access is read-only. The Windows ARM job will also produce a dependency wheelhouse for ordinary offline local installation. The local [provisioning script](provision.ps1) supports that wheelhouse and verifies the official uv archive digest.
+Local recovery did not require weakening transport: the official PDM repository declares an empty build requirement list and an in-tree backend. Its tag `2.5.0` resolved to `8c6653726f71afdb2059b44dc9c7706693e95be6`; uv self-built it without network dependencies, and the resulting wheel provisioned both variants. This locally built backend wheel is **not represented as the official PyPI wheel**. Backend/source/tool provenance and reproduction are recorded in [LOCAL-SETUP.md](LOCAL-SETUP.md).
+
+The owned public fork [yeelam-gordon/fastapi](https://github.com/yeelam-gordon/fastapi) exists because upstream access is read-only. The workflow explicitly targets `windows-11-arm` and `macos-15`, CPython 3.13.15 ARM64 and uv 0.13.6. A shared resolver job distributes identical hash-locked tool/runtime inputs, then each platform measures builds and an installed-wheel smoke check. The Windows job also exports a wheelhouse. **None of these jobs has run.** Authenticated push was rejected before a remote experiment branch or workflow was created.
+
+After interactive authorization, use the commands in [CI.md](CI.md). Do not treat preparation of a workflow as performance evidence. GitHub documents the selected public Windows runner as 4 CPUs/16 GB RAM and the Mac runner as 3 M1 CPUs/7 GB RAM; record actual metadata and compare workloads rather than declaring equal hardware. [Verified sources](SOURCES.md).
 
 ## Next optimization decisions depend on the measured critical path
 
@@ -47,6 +66,8 @@ The owned fork `yeelam-gordon/fastapi` is available for requested CI execution b
 | Tests dominate after build work | Measure collection, worker startup and per-test durations; sweep a small worker-count set | Preserve test selection, assertions and failures; no blanket `-n auto` promise |
 | Windows runner remains slower | Inspect CPU utilization, storage, power mode and runner resources with traces | Do not attribute a platform cause from elapsed time alone |
 
-## Status
+## Delivery and limits
 
-Implementation, CI execution and independent verification are in progress. This document will be updated with measured results and verified external sources; it does not yet claim a speedup or parity.
+The local improvement and unchanged package contents are measured. No FastAPI source, dependency requirements, existing release workflow or test selection was changed. The experiment is isolated on a local branch; upstream CI is untouched. Independent verification found and corrected executable-bit comparison and interpreter-architecture checks; final verification state is owned by the workboard.
+
+The requested Windows-versus-Mac and physical-machine goals remain open. The next required evidence is an authorized CI run, followed by the same experiment on physical ARM devices. Do not promote the no-isolation candidate into publishing until its bootstrap-adjusted benefit and clean-release correctness are established.

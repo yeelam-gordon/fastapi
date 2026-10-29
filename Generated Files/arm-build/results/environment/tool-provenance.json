@@ -1,0 +1,11 @@
+{
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "interpreter_platform": "win-arm64",
+  "backend_source": "https://github.com/pdm-project/pdm-backend",
+  "backend_commit": "8c6653726f71afdb2059b44dc9c7706693e95be6",
+  "backend_version": "2.5.0",
+  "locally_built_backend_wheel_sha256": "1863e9dd326d4e9408903a0fbb6faaf27ce521e9d1b276fcce9efd53da924e50",
+  "backend_wheel_origin": "self-built official tagged source, NOT PyPI binary",
+  "uv_archive_sha256": "c2426c0c8e28b53d8c440e47a18d96ad4db51e159866c0e81435b196d7f0081c",
+  "ruff_archive_sha256": "56cc54ae263ff46a30e095421ff8a93971d9c2dcad2a5e8b64eebc078cac5a16"
+}

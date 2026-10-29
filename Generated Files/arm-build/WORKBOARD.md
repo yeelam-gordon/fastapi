@@ -17,12 +17,12 @@ Root owns transitions, integration and this workboard. Native parallel tasks; no
 | Task/revision | Dependencies | State | Acceptance | Output |
 |---|---|---|---|---|
 | build-audit/r1 | none | done | Source-cited package/CI map and correct build unit | Agent final return; consolidated into FINDINGS.md |
-| arm-build-research/r1 | none | running | Primary-source runner/toolchain facts and expert method | Agent final return; consolidated into FINDINGS.md |
-| provision/r1 | none | running | Executable native ARM64 Python and minimal profiling/build tools | environment evidence and local measurements |
-| benchmark/r1 | build-audit/r1, provision/r1 | implementation running; execution awaits tools | Repeated baseline/candidate measurements and artifact equivalence | scripts and results |
-| ci/r1 | build-audit/r1, arm-build-research/r1 | implementation running; labels being verified | Matched ARM runners, explicit timings, artifacts; dispatch if authorized | Workflow and CI evidence |
-| verify/r1 | benchmark/r1, ci/r1 | pending | Independent review, relevant checks, no unsupported performance claims | Verification evidence |
-| findings/r1 | all above | pending | Actionable sourced outcome, exact limits and reproduction | FINDINGS.md |
+| arm-build-research/r1 | none | done by root after interrupted worker | Primary-source runner/toolchain facts and expert method | SOURCES.md |
+| provision/r1 | none | done for benchmark/profiling; full PyPI tool suite blocked | Executable native ARM64 Python, uv, PDM, Ruff and standard-library profiler | LOCAL-SETUP.md; host evidence |
+| benchmark/r1 | build-audit/r1, provision/r1 | done | Seven baseline/candidate trials, preserved artifacts | results/local-01; 25.1% lower median locally |
+| ci/r1 | build-audit/r1, arm-build-research/r1 | blocked after implementation and push attempts | Prepared matched jobs; execution requires workflow OAuth scope | CI.md |
+| verify/r2 | benchmark/r1, ci/r1 | local verification done; CI execution unverified | Independent benchmark PASS/high; architecture/style fixes PASS/high; CI readiness medium because unrun | VERIFY.md |
+| findings/r1 | all above | finalizing with blocked CI scope explicit | Actionable sourced outcome, exact limits and reproduction | FINDINGS.md |
 
 ## Initial evidence
 
@@ -38,4 +38,14 @@ Root owns transitions, integration and this workboard. Native parallel tasks; no
 - Installed verified official uv 0.13.6 ARM64 under `tools`. Created isolated `.venv`; tooling resolution succeeded but wheel installation is blocked by TLS handshake failures to `files.pythonhosted.org` in uv, curl and Python. DNS resolves its Fastly target to `6.6.0.190`. No TLS verification was disabled and no network controls were changed.
 - Upstream access is READ; created owned public fork `yeelam-gordon/fastapi` (ADMIN) without changing remotes. Its Actions are enabled. The requested CI experiment will run there, not alter upstream CI.
 - CI will produce an ARM64 Windows wheelhouse as well as comparison evidence, allowing reproducible local offline provisioning through ordinary GitHub artifacts.
-- Primary candidate: retain PDM and the complete sdist-to-wheel build, but measure a pre-provisioned, pinned backend without repeated build-isolation setup. It is an experiment, not yet a demonstrated improvement. Include provisioning separately so savings are not hidden.
+- Initial hypothesis: retain PDM and the complete sdist-to-wheel build, but measure a pre-provisioned, pinned backend without repeated build-isolation setup. The later trials demonstrated a local repeated-build improvement; CI/end-to-end benefit remains unproven. Include provisioning separately so savings are not hidden.
+
+## Final evidence and boundaries
+
+- The resume boundary interrupted three agents. Repository audit had returned usable results; the benchmark worker left source/tests that root recovered and integrated. Root completed missing CI implementation and external-source verification directly rather than restarting the same investigations.
+- Local result: baseline median 3.8309382 s; candidate 2.8691174 s; seven alternating pairs; all 16 preparation/timed builds passed normalized archive checks. This is a demonstrated repeated-build improvement, not a proven CI or cold-install improvement.
+- Direct PDM function profile passed archive equivalence and attributed 1.659 s to sdist creation and 0.159 s to wheel creation, with profiler overhead. No native compiler workload exists in FastAPI packaging.
+- Native Ruff checks/formatting and 11 stdlib tests passed. Independent review caught missing sdist executable-bit comparison and hardware-versus-interpreter architecture checks; both were fixed and independently rechecked.
+- Fork creation succeeded. Git push first lacked noninteractive credentials, then succeeded in authenticating through gh but was rejected for missing OAuth `workflow` scope. No remote experiment branch, workflow or run exists. User unavailable to authorize; no permissions bypass attempted.
+- Prepared CI has real ARM labels/explicit interpreter checks, separate provisioning timings, shared hash locks, seven paired builds, installed-wheel smoke and failure artifacts. Its execution remains unverified.
+- No production FastAPI behavior, package manifest, existing tests or existing workflows changed. No upstream PR was opened.

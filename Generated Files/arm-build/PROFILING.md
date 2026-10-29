@@ -20,18 +20,18 @@ Use the isolated experiment environment rather than modify the system interprete
 
 ## Diagnostic backend trace
 
-Once the pinned backend and `build` frontend are installed in the experiment environment:
+The direct PDM diagnostic was executed successfully on this host. It profiles backend work rather than just a frontend waiting on subprocesses:
 
 ```powershell
 $python = 'Q:\fastapi\Generated Files\arm-build\.venv\Scripts\python.exe'
-$results = 'Q:\fastapi\Generated Files\arm-build\results\profile'
-New-Item -ItemType Directory -Force -Path $results | Out-Null
-& $python -m cProfile -o "$results\build.pstats" -m build --no-isolation --outdir "$results\dist" Q:\fastapi
-if ($LASTEXITCODE -ne 0) { throw 'Profiled build failed' }
-& $python -m pstats "$results\build.pstats"
+$root = 'Q:\fastapi\Generated Files\arm-build'
+& $python "$root\profile_backend.py" --source "$root\results\local-01\source" --reference "$root\results\local-01\artifacts\prepare-baseline" --output "$root\results\profile-02"
+if ($LASTEXITCODE -ne 0) { throw 'Backend profile failed' }
 ```
 
-The `build` frontend invokes backend subprocesses. This frontend profile alone does **not** profile all PDM work. Use separate backend subprocess/import diagnostics or Windows CPU tracing to attribute that work; do not conclude that backend functions are cheap because they are absent from this profile. These commands are diagnostic alternatives to the timed uv path, not matched uv timing samples.
+Each phase writes a `pstats` binary and a sorted text report, builds the wheel from an extracted sdist, and checks artifact equivalence against the timed baseline. These profiled durations exclude uv orchestration and do not replace end-to-end wall timings.
+
+The optional benchmark `--importtime` diagnostic uses the separately installed `build` frontend. That frontend invokes backend subprocesses: profiling the frontend alone does **not** profile all PDM work. Do not conclude that backend functions are cheap because they are absent from a frontend profile.
 
 ## Windows trace safety
 

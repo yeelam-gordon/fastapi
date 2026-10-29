@@ -8,15 +8,14 @@ import importlib.util
 import io
 import json
 import os
-from pathlib import Path
 import shutil
 import sys
 import tarfile
 import unittest
-from unittest import mock
 import uuid
 import zipfile
-
+from pathlib import Path
+from unittest import mock
 
 HERE = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("benchmark", HERE / "benchmark.py")
@@ -32,11 +31,18 @@ class BenchmarkTests(unittest.TestCase):
 
     def wheel(self, name="one.whl", payload=b"hello", *, timestamp=2024, bad=None):
         path = self.root / name
-        entries = {"pkg/__init__.py": payload, "pkg-1.dist-info/METADATA": b"Version: 1\n"}
+        entries = {
+            "pkg/__init__.py": payload,
+            "pkg-1.dist-info/METADATA": b"Version: 1\n",
+        }
         record = "pkg-1.dist-info/RECORD"
         rows = []
         for member, data in entries.items():
-            hashed = base64.urlsafe_b64encode(hashlib.sha256(data).digest()).rstrip(b"=").decode()
+            hashed = (
+                base64.urlsafe_b64encode(hashlib.sha256(data).digest())
+                .rstrip(b"=")
+                .decode()
+            )
             rows.append([member, "sha256=" + hashed, str(len(data))])
         rows.append([record, "", ""])
         if bad == "hash":
@@ -54,7 +60,9 @@ class BenchmarkTests(unittest.TestCase):
         elif bad == "self-hash":
             rows[-1][1] = "sha256=invalid"
         stream = io.StringIO(newline="")
-        writer = csv.writer(stream, lineterminator="\r\n" if timestamp == 2025 else "\n")
+        writer = csv.writer(
+            stream, lineterminator="\r\n" if timestamp == 2025 else "\n"
+        )
         writer.writerows(rows)
         entries[record] = stream.getvalue().encode()
         with zipfile.ZipFile(path, "w") as archive:
@@ -67,7 +75,10 @@ class BenchmarkTests(unittest.TestCase):
         directory.mkdir(exist_ok=True)
         path = directory / "pkg-1.tar.gz"
         with tarfile.open(path, "w:gz") as archive:
-            entries = {"pkg-1/pkg/__init__.py": payload, "pkg-1/PKG-INFO": b"Version: 1\n"}
+            entries = {
+                "pkg-1/pkg/__init__.py": payload,
+                "pkg-1/PKG-INFO": b"Version: 1\n",
+            }
             if missing:
                 entries.pop("pkg-1/pkg/__init__.py")
             for name, data in entries.items():
@@ -85,14 +96,23 @@ class BenchmarkTests(unittest.TestCase):
 
     def test_wheel_validly_recorded_content_mutation_is_not_equivalent(self):
         first = {"pkg.whl": benchmark.wheel_members(self.wheel())}
-        second = {"pkg.whl": benchmark.wheel_members(self.wheel("two.whl", payload=b"changed"))}
+        second = {
+            "pkg.whl": benchmark.wheel_members(
+                self.wheel("two.whl", payload=b"changed")
+            )
+        }
         with self.assertRaisesRegex(benchmark.VerificationError, "changed content"):
             benchmark.compare_manifests(first, second)
 
     def test_record_errors_are_rejected(self):
         for error in (
-            "hash", "size", "missing-row", "duplicate", "missing-file",
-            "weak-hash", "self-hash",
+            "hash",
+            "size",
+            "missing-row",
+            "duplicate",
+            "missing-file",
+            "weak-hash",
+            "self-hash",
         ):
             with self.subTest(error=error):
                 with self.assertRaises(benchmark.VerificationError):
@@ -106,7 +126,9 @@ class BenchmarkTests(unittest.TestCase):
             with self.subTest(kwargs=kwargs):
                 actual = benchmark.sdist_members(self.sdist(self.root / "c", **kwargs))
                 with self.assertRaises(benchmark.VerificationError):
-                    benchmark.compare_manifests({"pkg.tar.gz": first}, {"pkg.tar.gz": actual})
+                    benchmark.compare_manifests(
+                        {"pkg.tar.gz": first}, {"pkg.tar.gz": actual}
+                    )
 
     def test_unexpected_artifact_sets_rejected(self):
         with self.assertRaises(benchmark.VerificationError):
@@ -126,8 +148,15 @@ class BenchmarkTests(unittest.TestCase):
             benchmark.compare_manifests({"pkg.tar.gz": first}, {"pkg.tar.gz": second})
 
     def test_unsafe_members_and_self_inclusion_rejected(self):
-        for name in ("../escape", "/absolute", "a\\b", "a//b", "a/./b", "C:/bad",
-                     "pkg/Generated Files/arm-build/result.json"):
+        for name in (
+            "../escape",
+            "/absolute",
+            "a\\b",
+            "a//b",
+            "a/./b",
+            "C:/bad",
+            "pkg/Generated Files/arm-build/result.json",
+        ):
             with self.subTest(name=name):
                 with self.assertRaises(benchmark.VerificationError):
                     benchmark.member_name(name)
@@ -136,9 +165,14 @@ class BenchmarkTests(unittest.TestCase):
         recorder = benchmark.Recorder(self.root, {})
         with self.assertRaises(RuntimeError):
             recorder.run(
-                [sys.executable, "-c",
-                 "import sys; print('out'); print('err', file=sys.stderr); sys.exit(7)"],
-                self.root, "failure", os.environ.copy(),
+                [
+                    sys.executable,
+                    "-c",
+                    "import sys; print('out'); print('err', file=sys.stderr); sys.exit(7)",
+                ],
+                self.root,
+                "failure",
+                os.environ.copy(),
             )
         report = json.loads((self.root / "report.json").read_text())
         row = report["commands"][0]
@@ -150,8 +184,12 @@ class BenchmarkTests(unittest.TestCase):
     def test_launch_failure_is_recorded(self):
         recorder = benchmark.Recorder(self.root, {})
         with self.assertRaises(RuntimeError):
-            recorder.run([str(self.root / "no-such-executable")], self.root,
-                         "missing", os.environ.copy())
+            recorder.run(
+                [str(self.root / "no-such-executable")],
+                self.root,
+                "missing",
+                os.environ.copy(),
+            )
         row = json.loads((self.root / "report.json").read_text())["commands"][0]
         self.assertIsNone(row["returncode"])
         self.assertIn("launch_error", row)
@@ -160,21 +198,37 @@ class BenchmarkTests(unittest.TestCase):
         source = self.root / "repo"
         source.mkdir()
         output = self.root / "results"
-        args = argparse.Namespace(source=str(source), output=str(output),
-                                  repeats=5, uv="missing", importtime=False)
+        args = argparse.Namespace(
+            source=str(source),
+            output=str(output),
+            repeats=5,
+            uv="missing",
+            importtime=False,
+        )
         with mock.patch.object(benchmark.shutil, "which", return_value=None):
             self.assertEqual(benchmark.execute(args), 1)
         report = json.loads((output / "report.json").read_text())
         self.assertEqual(report["status"], "failed")
         self.assertIn("uv executable not found", report["error"])
-        self.assertEqual(benchmark.main([
-            "--uv", "missing", "--source", str(source), "--output", str(output)
-        ]), 1)
+        self.assertEqual(
+            benchmark.main(
+                ["--uv", "missing", "--source", str(source), "--output", str(output)]
+            ),
+            1,
+        )
 
     def test_output_inside_source_and_too_few_repeats_rejected(self):
-        for output, repeats in ((self.root / "inside", 5), (self.root.parent / "unused", 4)):
-            args = argparse.Namespace(source=str(self.root), output=str(output),
-                                      repeats=repeats, uv="missing", importtime=False)
+        for output, repeats in (
+            (self.root / "inside", 5),
+            (self.root.parent / "unused", 4),
+        ):
+            args = argparse.Namespace(
+                source=str(self.root),
+                output=str(output),
+                repeats=repeats,
+                uv="missing",
+                importtime=False,
+            )
             with self.subTest(repeats=repeats), self.assertRaises(ValueError):
                 benchmark.execute(args)
             self.assertFalse(output.exists())
