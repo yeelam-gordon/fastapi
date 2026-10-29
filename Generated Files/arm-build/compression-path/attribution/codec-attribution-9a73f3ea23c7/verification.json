@@ -1,0 +1,125 @@
+{
+  "sdist_members": 1269,
+  "oracle_members": 1269,
+  "comparison": {
+    "strict_pass": false,
+    "differences": [
+      {
+        "kind": "sdist",
+        "name": "fastapi-0.162.0/scripts/test-cov.sh",
+        "expected": {
+          "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+          "mode": 493,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 87
+        },
+        "actual": {
+          "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+          "mode": 420,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 87
+        }
+      },
+      {
+        "kind": "sdist",
+        "name": "fastapi-0.162.0/scripts/lint.sh",
+        "expected": {
+          "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+          "mode": 493,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 134
+        },
+        "actual": {
+          "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+          "mode": 420,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 134
+        }
+      },
+      {
+        "kind": "sdist",
+        "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+        "expected": {
+          "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+          "mode": 493,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 110
+        },
+        "actual": {
+          "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+          "mode": 420,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 110
+        }
+      },
+      {
+        "kind": "sdist",
+        "name": "fastapi-0.162.0/scripts/test.sh",
+        "expected": {
+          "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+          "mode": 493,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 124
+        },
+        "actual": {
+          "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+          "mode": 420,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 124
+        }
+      },
+      {
+        "kind": "sdist",
+        "name": "fastapi-0.162.0/scripts/format.sh",
+        "expected": {
+          "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+          "mode": 493,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 119
+        },
+        "actual": {
+          "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+          "mode": 420,
+          "uid": 0,
+          "gid": 0,
+          "uname": "",
+          "gname": "",
+          "size": 119
+        }
+      }
+    ]
+  },
+  "payload_metadata_except_known_modes_pass": true,
+  "oracle": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\artifacts\\prepare-baseline\\fastapi-0.162.0.tar.gz",
+  "oracle_sha256": "6b6c1dc057845154ba167d4846535502d57fcf27e928053147d2bdb2e72e970b",
+  "artifact": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\output\\fastapi-0.162.0.tar.gz",
+  "artifact_sha256": "fa39561b1a268cb531b4d2aabf872bd68cea292a13371a25ac2679588f3b8e6f",
+  "validator_sha256": "f345c7566b57857b2359dedcdf5054f03640b475d7687ee0bd9f3cc83d2f763a"
+}

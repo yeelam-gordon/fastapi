@@ -1,0 +1,232 @@
+{
+  "wall_seconds": 2.088757400000759,
+  "process_cpu_seconds": 1.796875,
+  "cprofile_timer": "default elapsed/performance timer; not thread/process CPU",
+  "artifact": "fastapi-0.162.0.tar.gz",
+  "version": "3.13.15 (main, Sep 29 2026, 08:22:55) [MSC v.1944 64 bit (ARM64)]",
+  "machine": "ARM64",
+  "executable": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\env\\Scripts\\python.exe",
+  "base_prefix": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime",
+  "backend_version": "2.5.0",
+  "backend_origin": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\env\\Lib\\site-packages\\pdm\\backend\\__init__.py",
+  "backend_sha256": "24a162a914cf4b49c2c3b3d4e3e1617079549736f6cbba29a966d351cb9051c3",
+  "python_dll_sha256": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+  "zlib_origin": "built-in",
+  "zlib_version": "1.3.2",
+  "zlib_runtime_version": "1.3.2",
+  "zlib_binary_container": "python313.dll (built-in module)",
+  "dont_write_bytecode": false,
+  "pycache_prefix": null,
+  "profile_sha256": "6221c83a381f43053431c3cb5f62018dcc5d2314585e99e05d4c1f24bf6fcf73",
+  "codec_entries": [
+    {
+      "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\zipfile\\__init__.py",
+      "line": 770,
+      "function": "_check_compression",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 9.000000000000001e-07,
+      "cumulative_seconds": 9.000000000000001e-07,
+      "callers": [
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\zipfile\\__init__.py",
+          "line": 1350,
+          "function": "__init__",
+          "values": [
+            1,
+            1,
+            9.000000000000001e-07,
+            9.000000000000001e-07
+          ]
+        }
+      ]
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\zipfile\\__init__.py",
+      "line": 722,
+      "function": "LZMADecompressor",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 7.000000000000001e-07,
+      "cumulative_seconds": 7.000000000000001e-07,
+      "callers": [
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.__build_class__>",
+          "values": [
+            1,
+            1,
+            7.000000000000001e-07,
+            7.000000000000001e-07
+          ]
+        }
+      ]
+    },
+    {
+      "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\zipfile\\__init__.py",
+      "line": 699,
+      "function": "LZMACompressor",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 1.1e-06,
+      "cumulative_seconds": 1.1e-06,
+      "callers": [
+        {
+          "file": "~",
+          "line": 0,
+          "function": "<built-in method builtins.__build_class__>",
+          "values": [
+            1,
+            1,
+            1.1e-06,
+            1.1e-06
+          ]
+        }
+      ]
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'flush' of '_io.BufferedWriter' objects>",
+      "primitive_calls": 3,
+      "total_calls": 3,
+      "self_seconds": 2.5e-06,
+      "cumulative_seconds": 0.00010700000000000001,
+      "callers": [
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\gzip.py",
+          "line": 272,
+          "function": "tell",
+          "values": [
+            1,
+            1,
+            1.2000000000000002e-06,
+            1.2000000000000002e-06
+          ]
+        },
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\gzip.py",
+          "line": 423,
+          "function": "seek",
+          "values": [
+            1,
+            1,
+            3.0000000000000004e-07,
+            3.0000000000000004e-07
+          ]
+        },
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\gzip.py",
+          "line": 368,
+          "function": "close",
+          "values": [
+            1,
+            1,
+            1.0000000000000002e-06,
+            0.0001055
+          ]
+        }
+      ]
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method zlib.compressobj>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 4.3400000000000005e-05,
+      "cumulative_seconds": 4.3400000000000005e-05,
+      "callers": [
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\gzip.py",
+          "line": 160,
+          "function": "__init__",
+          "values": [
+            1,
+            1,
+            4.3400000000000005e-05,
+            4.3400000000000005e-05
+          ]
+        }
+      ]
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method zlib.crc32>",
+      "primitive_calls": 232,
+      "total_calls": 232,
+      "self_seconds": 0.0030105,
+      "cumulative_seconds": 0.0030105,
+      "callers": [
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\gzip.py",
+          "line": 264,
+          "function": "_init_write",
+          "values": [
+            1,
+            1,
+            4.1700000000000004e-05,
+            4.1700000000000004e-05
+          ]
+        },
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\gzip.py",
+          "line": 320,
+          "function": "_write_raw",
+          "values": [
+            231,
+            231,
+            0.0029688,
+            0.0029688
+          ]
+        }
+      ]
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'compress' of 'zlib.Compress' objects>",
+      "primitive_calls": 231,
+      "total_calls": 231,
+      "self_seconds": 0.246315,
+      "cumulative_seconds": 0.246315,
+      "callers": [
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\gzip.py",
+          "line": 320,
+          "function": "_write_raw",
+          "values": [
+            231,
+            231,
+            0.246315,
+            0.246315
+          ]
+        }
+      ]
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'flush' of 'zlib.Compress' objects>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 0.000239,
+      "cumulative_seconds": 0.000239,
+      "callers": [
+        {
+          "file": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\Lib\\gzip.py",
+          "line": 368,
+          "function": "close",
+          "values": [
+            1,
+            1,
+            0.000239,
+            0.000239
+          ]
+        }
+      ]
+    }
+  ]
+}

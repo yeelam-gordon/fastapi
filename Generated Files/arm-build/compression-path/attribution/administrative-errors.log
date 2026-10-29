@@ -1,0 +1,24 @@
+Initial discovery before the owned attribution directory was created:
+Get-ChildItem:
+Line |
+   2 |  … us --short; Get-ChildItem 'Generated Files\arm-build\compression-path …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'Q:\fastapi\Generated Files\worktrees\compression-attribution\Generated Files\arm-build\compression-path\attribution' because it does not exist.
+
+First commit-command attempt; no diagnostic was rerun:
+git:
+Line |
+   2 |  … stapi\Generated Files\worktrees\compression-attribution'; git add --  …
+     |                                                              ~~~
+     | The term 'git' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+Follow-up Get-Command git.exe resolved C:\Program Files\Git\cmd\git.exe.
+The commit retry uses that explicit executable, without changing PATH.
+
+The explicit Git retry stopped before commit because diff --cached --check
+reported CR-at-EOL as trailing whitespace throughout staged text receipts
+and an ending blank line emitted by pstats in stats.txt. Raw log/stat bytes
+were not trimmed. Owned .gitattributes now normalizes scripts/reports/JSON
+and preserves raw log/stat bytes with whitespace checks disabled for those
+unfiltered outputs, consistent with neighboring evidence directories.

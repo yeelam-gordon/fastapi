@@ -1,0 +1,93 @@
+{
+  "root": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7",
+  "commands": [
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\tools\\uv.exe",
+        "--version"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\tools\\uv.exe",
+        "python",
+        "find",
+        "3.13.15"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\tools\\uv.exe",
+        "venv",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\runtime\\python.exe",
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\env"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\tools\\uv.exe",
+        "pip",
+        "install",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\env\\Scripts\\python.exe",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\wheelhouse",
+        "--require-hashes",
+        "-r",
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\backend.lock"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-C",
+        "Q:\\fastapi\\Generated Files\\worktrees\\source-fastapi",
+        "archive",
+        "--format=tar",
+        "--output=C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\source.tar",
+        "79cab5bed28b24d92c185d236feb33f5783dfeb3"
+      ],
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\tools\\attribute.py",
+        "--child",
+        "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7"
+      ],
+      "returncode": 0
+    }
+  ],
+  "environment": {
+    "TEMP": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\temp",
+    "TMP": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\temp",
+    "TMPDIR": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\temp",
+    "UV_CACHE_DIR": "C:\\fastapi-arm-build-lab\\codec-attribution-9a73f3ea23c7\\cache",
+    "UV_OFFLINE": "1",
+    "UV_NO_CONFIG": "1",
+    "UV_PYTHON_DOWNLOADS": "never",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "removed_environment_names": [],
+  "source_revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "hashes": {
+    "uv": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+    "python": "383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd",
+    "python_dll": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+    "backend_wheel": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63",
+    "source_archive": "c6e91b20ed2990e2ce027d52085a269c9af9efe33b3f5237e3fc80004e5d8e43",
+    "helper": "da8b53a6738852d925c29a3f1d9c61b351f53b3641310d3c224be6994913ab52",
+    "lock": "44cd3f0dede0c36eaa0d1fcf11f575a905414b832b99ae39134d4130d0b53843"
+  },
+  "source_path": "Q:\\fastapi\\Generated Files\\worktrees\\source-fastapi",
+  "bytecode_policy": "default; inherited PYTHON* removed"
+}

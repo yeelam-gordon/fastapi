@@ -1,0 +1,137 @@
+{
+  "profile_entry_count": 1482,
+  "timer": "cProfile default elapsed/performance timer",
+  "wall_seconds": 2.088757400000759,
+  "process_cpu_seconds": 1.796875,
+  "native_zlib_leaves": [
+    {
+      "function": "<built-in method zlib.compressobj>",
+      "calls": 1,
+      "self_seconds": 4.3400000000000005e-05,
+      "fraction_of_region_wall": 2.0777903647395448e-05
+    },
+    {
+      "function": "<built-in method zlib.crc32>",
+      "calls": 232,
+      "self_seconds": 0.0030105,
+      "fraction_of_region_wall": 0.0014412875329604608
+    },
+    {
+      "function": "<method 'compress' of 'zlib.Compress' objects>",
+      "calls": 231,
+      "self_seconds": 0.246315,
+      "fraction_of_region_wall": 0.11792417826977442
+    },
+    {
+      "function": "<method 'flush' of 'zlib.Compress' objects>",
+      "calls": 1,
+      "self_seconds": 0.000239,
+      "fraction_of_region_wall": 0.00011442209612275373
+    }
+  ],
+  "native_zlib_self_seconds": 0.2496079,
+  "native_zlib_fraction_of_region_wall": 0.11950066580250503,
+  "no_profiled_native_calls": [
+    "decompress",
+    "adler32"
+  ],
+  "official_backend_python_files_verified": [
+    "pdm/backend/__init__.py",
+    "pdm/backend/_vendor/__init__.py",
+    "pdm/backend/_vendor/editables/__init__.py",
+    "pdm/backend/_vendor/editables/redirector.py",
+    "pdm/backend/_vendor/packaging/__init__.py",
+    "pdm/backend/_vendor/packaging/_elffile.py",
+    "pdm/backend/_vendor/packaging/_manylinux.py",
+    "pdm/backend/_vendor/packaging/_musllinux.py",
+    "pdm/backend/_vendor/packaging/_parser.py",
+    "pdm/backend/_vendor/packaging/_ranges.py",
+    "pdm/backend/_vendor/packaging/_structures.py",
+    "pdm/backend/_vendor/packaging/_tokenizer.py",
+    "pdm/backend/_vendor/packaging/dependency_groups.py",
+    "pdm/backend/_vendor/packaging/direct_url.py",
+    "pdm/backend/_vendor/packaging/errors.py",
+    "pdm/backend/_vendor/packaging/licenses/__init__.py",
+    "pdm/backend/_vendor/packaging/licenses/_spdx.py",
+    "pdm/backend/_vendor/packaging/markers.py",
+    "pdm/backend/_vendor/packaging/metadata.py",
+    "pdm/backend/_vendor/packaging/pylock.py",
+    "pdm/backend/_vendor/packaging/ranges.py",
+    "pdm/backend/_vendor/packaging/requirements.py",
+    "pdm/backend/_vendor/packaging/specifiers.py",
+    "pdm/backend/_vendor/packaging/tags.py",
+    "pdm/backend/_vendor/packaging/utils.py",
+    "pdm/backend/_vendor/packaging/version.py",
+    "pdm/backend/_vendor/pyproject_metadata/__init__.py",
+    "pdm/backend/_vendor/pyproject_metadata/_dispatch.py",
+    "pdm/backend/_vendor/pyproject_metadata/constants.py",
+    "pdm/backend/_vendor/pyproject_metadata/errors.py",
+    "pdm/backend/_vendor/pyproject_metadata/project_table.py",
+    "pdm/backend/_vendor/pyproject_metadata/pyproject.py",
+    "pdm/backend/_vendor/tomli/__init__.py",
+    "pdm/backend/_vendor/tomli/_parser.py",
+    "pdm/backend/_vendor/tomli/_re.py",
+    "pdm/backend/_vendor/tomli/_types.py",
+    "pdm/backend/_vendor/tomli_w/__init__.py",
+    "pdm/backend/_vendor/tomli_w/_writer.py",
+    "pdm/backend/base.py",
+    "pdm/backend/config.py",
+    "pdm/backend/editable.py",
+    "pdm/backend/exceptions.py",
+    "pdm/backend/hooks/__init__.py",
+    "pdm/backend/hooks/base.py",
+    "pdm/backend/hooks/setuptools.py",
+    "pdm/backend/hooks/version/__init__.py",
+    "pdm/backend/hooks/version/scm.py",
+    "pdm/backend/intree.py",
+    "pdm/backend/sdist.py",
+    "pdm/backend/structures.py",
+    "pdm/backend/utils.py",
+    "pdm/backend/wheel.py"
+  ],
+  "gzip_source_sha256": "c397e928174259f77190fb7ab15421196eadec4c0b3f33ef1b57ec5a8052eb56",
+  "gzip_source_codec_lines": [
+    {
+      "line": 233,
+      "text": "                self.compress = zlib.compressobj(compresslevel,"
+    },
+    {
+      "line": 235,
+      "text": "                                                 -zlib.MAX_WBITS,"
+    },
+    {
+      "line": 266,
+      "text": "        self.crc = zlib.crc32(b\"\")"
+    },
+    {
+      "line": 332,
+      "text": "            self.crc = zlib.crc32(data, self.crc)"
+    },
+    {
+      "line": 507,
+      "text": "                         wbits=-zlib.MAX_WBITS)"
+    },
+    {
+      "line": 513,
+      "text": "        self._crc = zlib.crc32(b\"\")"
+    },
+    {
+      "line": 571,
+      "text": "        self._crc = zlib.crc32(uncompress, self._crc)"
+    },
+    {
+      "line": 629,
+      "text": "        do = zlib.decompressobj(wbits=-zlib.MAX_WBITS)"
+    },
+    {
+      "line": 636,
+      "text": "        if crc != zlib.crc32(decompressed):"
+    }
+  ],
+  "filesystem": {
+    "drive": "C:",
+    "filesystem": "NTFS",
+    "observation": "Get-Volume -DriveLetter C; no protection changes"
+  },
+  "validation": "No second build or profile; retained raw profile hash verified"
+}

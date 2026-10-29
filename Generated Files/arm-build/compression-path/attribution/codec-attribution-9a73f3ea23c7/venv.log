@@ -1,0 +1,3 @@
+Using CPython 3.13.15 interpreter at: runtime\python.exe
+Creating virtual environment at: env
+Activate with: env\Scripts\activate
