@@ -62,3 +62,23 @@ handling and avoid repeating parent traversal after a failed lexical test.
 Other classes/flags retain the old fallback. This does not replace V1 samples,
 relax its gate or authorize another measurement automatically. Reject it if
 clarity or semantic compatibility requires a broad rewrite.
+
+## V2 semantic review
+
+The distinct 18-line revision limits the new algorithm to the same exact stock
+class and literal `walk_up=False`. It retains the old fallback otherwise,
+handles equal depths via existing normalized strings, and directly preserves
+the default failure message. Parent review found that decomposition coherent.
+
+`V2-ROOT-REVIEW.log` and `v2-root-modules.json` record an independent source-prefix
+run: 471 selected tests, zero failures/errors, 74 documented skips. Source
+SHA256 before/after is
+`b6616ee0240d1ced9e2ff3f02dcfbbe0f30e7c5d8b751e6f9f986cce4f4a1e3e`.
+This includes custom flag, mixed-class and PATH-001 behavior; it is not the full
+CPython/platform suite or a performance result.
+
+One separate V2 run of the unchanged micro cases and safeguards is authorized.
+Only a passing micro gate permits the fixed stock-uv C: comparison described
+in the worker contract. V1 evidence stays unchanged. No threshold relaxation,
+runtime deployment, CI, owner contact or further automatic design revision is
+authorized.

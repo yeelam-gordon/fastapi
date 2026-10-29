@@ -42,7 +42,7 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 |---|---|---|
 | Standard uv supported-practice screen (completed; rejected) | `investigate/arm-uv-build-bytecode` / `uv-build-bytecode` | P22 five C: pairs show no meaningful benefit; retain all outputs, no further CI |
 | Generic PDM archive prototype (blocked) | `investigate/arm-pdm-archive-io` / `pdm-archive-io` | P23 68-line patch and focused proof/lint pass; owner mypy unavailable after secure TLS attempts, assistance requested; no performance screen |
-| Shared pathlib V2 source proof (active) | `investigate/arm-pathlib-relative` / `pathlib-relative` | P25 V1 rejected on equal/fallback micro regressions; no full C: build. One separate small complete-default-case design proof only |
+| Shared pathlib V2 staged screen (active) | `investigate/arm-pathlib-relative` / `pathlib-relative` | P25 V1 rejected; V2 independent semantic proof passed. Same micro gate first; stock-uv C: only if justified, no CI |
 | Standard backend codec attribution (completed) | `investigate/arm-compression-attribution` / `compression-attribution` | P20 CRC ~3 ms, raw deflate ~246 ms in one public-sdist profile; no rebuild or gain claim |
 | Temporary uv activation files (source triage only) | `investigate/arm-uv-build-activators` / `uv-build-activators` | P24 source fact, not cost attribution or a justified change |
 | Controller preflight repair (completed) | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |
