@@ -1,0 +1,16 @@
+{
+  "schema": "frozen-preparation-input-proof-v1",
+  "revision": "a44aae9537e6c9b3a0826d9c55e0ff6db3449379",
+  "checked_at_epoch": 1793259761.087363,
+  "tool_inputs": 22,
+  "tools_exactly_match_frozen_git_blobs": true,
+  "frozen_checkout_clean": true,
+  "source_unchanged_from_original_canonical_identity": true,
+  "source_files": 3233,
+  "wheels": 26,
+  "wheels_match_original_verified_offline_inventory": true,
+  "archive_and_manifest_hashes_verified": true,
+  "controller_prepare_status": "prepared",
+  "original_failure_receipts": "unchanged; no replacement",
+  "campaign_samples": 0
+}

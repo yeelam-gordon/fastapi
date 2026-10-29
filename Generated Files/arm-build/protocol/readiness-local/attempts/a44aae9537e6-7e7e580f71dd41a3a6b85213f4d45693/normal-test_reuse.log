@@ -1,0 +1,34 @@
+test_backend_junction_rejected_without_touching_target (__main__.ReuseTests.test_backend_junction_rejected_without_touching_target) ... ok
+test_backend_state_cannot_be_claimed_or_cleanup_disabled (__main__.ReuseTests.test_backend_state_cannot_be_claimed_or_cleanup_disabled) ... ok
+test_case_alias_hook_rejected_before_execution (__main__.ReuseTests.test_case_alias_hook_rejected_before_execution) ... ok
+test_repeat_unchanged_manifest (__main__.ReuseTests.test_repeat_unchanged_manifest) ... ok
+test_unknown_backend_state_is_preserved_and_rejected (__main__.ReuseTests.test_unknown_backend_state_is_preserved_and_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.828s
+
+OK
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD

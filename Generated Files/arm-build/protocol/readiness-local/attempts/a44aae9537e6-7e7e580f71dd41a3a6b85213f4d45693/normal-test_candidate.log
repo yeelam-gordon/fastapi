@@ -1,0 +1,13 @@
+test_archive_links_and_duplicates_rejected (__main__.CandidateTests.test_archive_links_and_duplicates_rejected) ... ok
+test_archive_selector_and_extraction_filters (__main__.CandidateTests.test_archive_selector_and_extraction_filters) ... ok
+test_canonical_mode_and_metadata (__main__.CandidateTests.test_canonical_mode_and_metadata) ... ok
+test_pdm_pin_fails_before_output (__main__.CandidateTests.test_pdm_pin_fails_before_output) ... ok
+test_read_failure_joins (__main__.CandidateTests.test_read_failure_joins) ... ok
+test_reads_fresh_bytes_in_order_and_closes (__main__.CandidateTests.test_reads_fresh_bytes_in_order_and_closes) ... ok
+test_target_write_failure_joins (__main__.CandidateTests.test_target_write_failure_joins) ... ok
+test_unsafe_configs_and_paths (__main__.CandidateTests.test_unsafe_configs_and_paths) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.087s
+
+OK

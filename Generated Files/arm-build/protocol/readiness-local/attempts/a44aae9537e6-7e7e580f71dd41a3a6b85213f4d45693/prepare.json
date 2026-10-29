@@ -1,0 +1,127 @@
+{
+  "schema": "arm-pairs-v4",
+  "status": "prepared",
+  "commands": [
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\uv.exe",
+        "pip",
+        "install",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "--require-hashes",
+        "--only-binary",
+        ":all:",
+        "-r",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\tooling.lock"
+      ],
+      "returncode": 0,
+      "wall": 0.08563620000131777
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "download",
+        "--only-binary=:all:",
+        "--require-hashes",
+        "-r",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\tooling.lock",
+        "-r",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\smoke.lock",
+        "-r",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\protocol\\backend.lock",
+        "--dest",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\attempts\\a44aae9537e6-7e7e580f71dd41a3a6b85213f4d45693\\controller-output\\wheelhouse"
+      ],
+      "returncode": 0,
+      "wall": 2.4261144000010972
+    }
+  ],
+  "runtime": {
+    "version": "3.13.15",
+    "native_arm64": true,
+    "machine": "ARM64",
+    "tag": "win-arm64",
+    "translated": false,
+    "executable": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+    "executable_sha256": "53909489119635230bbaad0c276f86df2dbef18346648aefa612212fa4692531",
+    "executable_binary": {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+      "sha256": "53909489119635230bbaad0c276f86df2dbef18346648aefa612212fa4692531",
+      "arm64_slice": true
+    },
+    "shared_library": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python313.dll",
+    "shared_library_sha256": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+    "shared_library_binary": {
+      "path": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python313.dll",
+      "sha256": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+      "arm64_slice": true
+    },
+    "os": "Windows-11-10.0.26200-SP0",
+    "cores": 16,
+    "runner_image": null
+  },
+  "source": {
+    "revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+    "archive_sha256": "d10f4af3101343ddcd332a7873c06759b858ea944bbc9c317dd938580f15ee9e",
+    "manifest_sha256": "9f1bc8a6ebb9027c5f93e737ec98383d44d933360eaa45906c9593f977641d59",
+    "files": 3233
+  },
+  "wheels": {
+    "annotated_doc-0.0.5-py3-none-any.whl": "117bac03a25ede5df5440e855b32d556049ca169ead221505badf432fed4b101",
+    "annotated_types-0.8.0-py3-none-any.whl": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0",
+    "anyio-4.15.1-py3-none-any.whl": "6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101",
+    "build-1.6.1-py3-none-any.whl": "ecd351a4be9d35a9eaaba244a7687143c9c7d4aea6ac964e7e7ddab20cbcf4e7",
+    "certifi-2026.10.23-py3-none-any.whl": "e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1",
+    "colorama-0.4.6-py2.py3-none-any.whl": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+    "h11-0.16.0-py3-none-any.whl": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86",
+    "httpcore-1.0.9-py3-none-any.whl": "2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55",
+    "httpx-0.28.1-py3-none-any.whl": "d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad",
+    "idna-3.20-py3-none-any.whl": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+    "iniconfig-2.3.1-py3-none-any.whl": "9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7",
+    "opentelemetry_api-1.45.1-py3-none-any.whl": "b31553efa588ae44bc306f863c785c5333a9ecc091248c6ee68b4b6c87fdedfb",
+    "packaging-26.3-py3-none-any.whl": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+    "pdm_backend-2.5.0-py3-none-any.whl": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63",
+    "pip-26.2.2-py3-none-any.whl": "fd7f4dfa8190e014013b9f08f3e973f4e4c26ffd179a204895533a7254813a70",
+    "pluggy-1.7.0-py3-none-any.whl": "7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec",
+    "psutil-7.2.2-cp37-abi3-win_arm64.whl": "8c233660f575a5a89e6d4cb65d9f938126312bca76d8fe087b947b3a1aaac9ee",
+    "pydantic-2.14.1-py3-none-any.whl": "9195d967ec791692a04438115466764fb8b9a27b31f14a760437694f40d6b454",
+    "pydantic_core-2.50.1-cp313-cp313-win_arm64.whl": "c17799a62c142d61b8a3c51752a7cbc87fe2ad4ccfab10e628a77b405075c662",
+    "pygments-2.21.0-py3-none-any.whl": "2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9",
+    "pyproject_hooks-1.3.3-py3-none-any.whl": "5fc53fdac9f7bd63fbcdc868fb5f90b4784d78a53a3d3388cd738b807441a20b",
+    "pytest-9.2.0-py3-none-any.whl": "07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588",
+    "ruff-0.17.3-py3-none-win_arm64.whl": "81fce74bcd6be0e9da7c67c7553fd0f1f12964a2052cd728ef917b937a5ca1d9",
+    "starlette-1.10.0-py3-none-any.whl": "478c0ab3b4ced6e82719849c118fa406f0278a3499c1a898cd15cd31bdc38ce4",
+    "typing_extensions-4.16.0-py3-none-any.whl": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+    "typing_inspection-0.4.4-py3-none-any.whl": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147"
+  },
+  "tool_hashes": {
+    ".github/workflows/arm-build-experiment.yml": "c9b06380799f4bc8c516b2d1d4705910839718a4b63f1c070e1aa64a65d16687",
+    "Generated Files/arm-build/candidate/actual-manifest.json": "d9964c98785e809f31b46863c57047dcbdb847a251ec4a4f6051e397c63d6e33",
+    "Generated Files/arm-build/candidate/build.py": "421ef1a85786c15454ae453e54e4f8c37ca441266c8e4cbcd86163a4477559cd",
+    "Generated Files/arm-build/candidate/ops.py": "aa8b1d6e069db462597239f7406cd6f1fc513154766938fcd0077261a4aa4f2e",
+    "Generated Files/arm-build/candidate/selector.py": "0777774f4a5001f4c549c6d719a0dced1894811b2c1b66ce089104379a06e9b7",
+    "Generated Files/arm-build/candidate/test_candidate.py": "163fe4e5d38f2e38b81998668f32fb785aa1a7b165be919a8fad102dacbf70e1",
+    "Generated Files/arm-build/candidate/test_reuse.py": "41c849122770e4a981f48b6ef1bfe96a930acfe2d4efef00de0a58490fe5d61d",
+    "Generated Files/arm-build/candidate/validate.py": "6a4c196ddc055cc759977c54fd4525c85d5400c0d35093d242dcf35844fcf00c",
+    "Generated Files/arm-build/candidate/verify.py": "33a7b5ba3665739c6c13464f675621a85043b9270f6d0a93085d4f0c788c282a",
+    "Generated Files/arm-build/candidate/verify_reuse.py": "d6bd26501f22a882d9e39698e4bdf44c613f8658b28435de06dbe9789b44691a",
+    "Generated Files/arm-build/ci_prepare.py": "5f9aa687829b49943c7752286495de584f0526a04ebc4b70de8e993b6aba1dad",
+    "Generated Files/arm-build/protocol/backend.lock": "47ee94b1e5b6c958c9f02f2c318769cace5d203b16144d1e1119f8e8a36b0bbd",
+    "Generated Files/arm-build/protocol/compare_pairs.py": "d77ee35af896c11e4c75b356bc1607fe26d4c3e25e87b432c55f927b6d63bed8",
+    "Generated Files/arm-build/protocol/isolated_build.py": "6cd3df039c19b5dafb13f80e306a526bc45485c9976d2ff13c2c5e7971ab8842",
+    "Generated Files/arm-build/protocol/measure_pairs.py": "6b6cb8f4206ccf4112f4c8daba934bd591785ee21ddc0ddb7bbc2f6e513ca12e",
+    "Generated Files/arm-build/protocol/owned_process.py": "1117af6abd926a23961e5c51fcf444dc96e4b852f709c663c169b4166bc6a57a",
+    "Generated Files/arm-build/protocol/test_isolated_build.py": "8decea1878309dafe25cbca3d936d94ff22c41c6fb29ed2c5affcd6c8f3d2f81",
+    "Generated Files/arm-build/protocol/test_owned_process.py": "f7081a9977fd7d6b6e10b51add679438fd8efef926ed9b8216995f86abd01916",
+    "Generated Files/arm-build/protocol/test_pairs.py": "a1bbb3327d54620b345a8cc89d8888fa9a9afe2f1f4bd404bc474f558a53650b",
+    "Generated Files/arm-build/setup_python.cjs": "0b62007ec306f504dfbaf305da420cfc8986ff61ac741c824bd34a8cd86b5c5a",
+    "Generated Files/arm-build/smoke.lock": "4b22e7eca9f963222272fe2ee6ab3a41bacc26c01cb4cf8a9205b66b627fdb72",
+    "Generated Files/arm-build/tooling.lock": "b1a68ef06a6de2806a18593c7c248a3d6807fd4e2b06f75652268e0ff53f8694"
+  },
+  "harness_revision": "a44aae9537e6c9b3a0826d9c55e0ff6db3449379",
+  "prepare_wall": 10.541253899998992,
+  "python_provision": null
+}

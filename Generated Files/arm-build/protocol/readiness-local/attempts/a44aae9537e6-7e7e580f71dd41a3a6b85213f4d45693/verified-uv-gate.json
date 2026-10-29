@@ -1,0 +1,38 @@
+{
+  "schema": "verified-uv-gate-supplement-v1",
+  "revision": "a44aae9537e6c9b3a0826d9c55e0ff6db3449379",
+  "reason": "Pair suites initially skipped opt-in real uv gate because PAIRED_TEST_UV was unset; run only that previously unexecuted gate, no failed test retries",
+  "environment_changes": {
+    "PAIRED_TEST_UV": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\uv.exe"
+  },
+  "commands": [
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\protocol\\test_pairs.py",
+        "ArchiveTests.test_real_verified_uv_nonbuild_preflight",
+        "-v"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\attempts\\a44aae9537e6-7e7e580f71dd41a3a6b85213f4d45693",
+      "returncode": 0,
+      "wall": 0.8555733000030159,
+      "log": "normal-explicit-uv.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "-O",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\protocol\\test_pairs.py",
+        "ArchiveTests.test_real_verified_uv_nonbuild_preflight",
+        "-v"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\attempts\\a44aae9537e6-7e7e580f71dd41a3a6b85213f4d45693",
+      "returncode": 0,
+      "wall": 1.2396325999980036,
+      "log": "optimized-explicit-uv.log"
+    }
+  ],
+  "status": "passed"
+}

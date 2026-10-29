@@ -1,0 +1,54 @@
+Looking in links: c:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\build-1.6.1-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\tooling.lock (line 3))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\colorama-0.4.6-py2.py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\tooling.lock (line 7))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\packaging-26.3-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\tooling.lock (line 11))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\pdm_backend-2.5.0-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\tooling.lock (line 15))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\pip-26.2.2-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\tooling.lock (line 19))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\psutil-7.2.2-cp37-abi3-win_arm64.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\tooling.lock (line 23))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\pyproject_hooks-1.3.3-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\tooling.lock (line 46))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\ruff-0.17.3-py3-none-win_arm64.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\tooling.lock (line 50))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\annotated_doc-0.0.5-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 3))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\annotated_types-0.8.0-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 7))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\anyio-4.15.1-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 11))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\certifi-2026.10.23-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 17))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\h11-0.16.0-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 27))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\httpcore-1.0.9-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 31))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\httpx-0.28.1-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 35))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\idna-3.20-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 39))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\iniconfig-2.3.1-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 45))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\opentelemetry_api-1.45.1-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 49))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\pluggy-1.7.0-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 57))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\pydantic-2.14.1-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 61))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\pydantic_core-2.50.1-cp313-cp313-win_arm64.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 65))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\pygments-2.21.0-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 204))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\pytest-9.2.0-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 208))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\starlette-1.10.0-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 212))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\typing_extensions-4.16.0-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 216))
+Processing C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\wheelhouse\typing_inspection-0.4.4-py3-none-any.whl (from -r C:\fastapi-arm-build-lab\paired-v4-2a73e36a\f87c928ba5ad409087d1695f0995067e\code\Generated Files\arm-build\smoke.lock (line 226))
+Saved .\controller-output\wheelhouse\build-1.6.1-py3-none-any.whl
+Saved .\controller-output\wheelhouse\colorama-0.4.6-py2.py3-none-any.whl
+Saved .\controller-output\wheelhouse\packaging-26.3-py3-none-any.whl
+Saved .\controller-output\wheelhouse\pdm_backend-2.5.0-py3-none-any.whl
+Saved .\controller-output\wheelhouse\pip-26.2.2-py3-none-any.whl
+Saved .\controller-output\wheelhouse\psutil-7.2.2-cp37-abi3-win_arm64.whl
+Saved .\controller-output\wheelhouse\pyproject_hooks-1.3.3-py3-none-any.whl
+Saved .\controller-output\wheelhouse\ruff-0.17.3-py3-none-win_arm64.whl
+Saved .\controller-output\wheelhouse\annotated_doc-0.0.5-py3-none-any.whl
+Saved .\controller-output\wheelhouse\annotated_types-0.8.0-py3-none-any.whl
+Saved .\controller-output\wheelhouse\anyio-4.15.1-py3-none-any.whl
+Saved .\controller-output\wheelhouse\certifi-2026.10.23-py3-none-any.whl
+Saved .\controller-output\wheelhouse\h11-0.16.0-py3-none-any.whl
+Saved .\controller-output\wheelhouse\httpcore-1.0.9-py3-none-any.whl
+Saved .\controller-output\wheelhouse\httpx-0.28.1-py3-none-any.whl
+Saved .\controller-output\wheelhouse\idna-3.20-py3-none-any.whl
+Saved .\controller-output\wheelhouse\iniconfig-2.3.1-py3-none-any.whl
+Saved .\controller-output\wheelhouse\opentelemetry_api-1.45.1-py3-none-any.whl
+Saved .\controller-output\wheelhouse\pluggy-1.7.0-py3-none-any.whl
+Saved .\controller-output\wheelhouse\pydantic-2.14.1-py3-none-any.whl
+Saved .\controller-output\wheelhouse\pydantic_core-2.50.1-cp313-cp313-win_arm64.whl
+Saved .\controller-output\wheelhouse\pygments-2.21.0-py3-none-any.whl
+Saved .\controller-output\wheelhouse\pytest-9.2.0-py3-none-any.whl
+Saved .\controller-output\wheelhouse\starlette-1.10.0-py3-none-any.whl
+Saved .\controller-output\wheelhouse\typing_extensions-4.16.0-py3-none-any.whl
+Saved .\controller-output\wheelhouse\typing_inspection-0.4.4-py3-none-any.whl
+Successfully downloaded build colorama packaging pdm-backend pip psutil pyproject-hooks ruff annotated-doc annotated-types anyio certifi h11 httpcore httpx idna iniconfig opentelemetry-api pluggy pydantic pydantic-core pygments pytest starlette typing-extensions typing-inspection
