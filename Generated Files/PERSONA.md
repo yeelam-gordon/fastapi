@@ -24,4 +24,10 @@ Research how the actual toolchain works before recommending changes. Use primary
 
 Independently challenge findings, reproduce consequential defects, correct the experiment and retain contrary results. Choose the simplest demonstrated improvement without changing FastAPI behavior or hiding work. If permissions or hardware block an experiment, document the boundary, prepare an executable next step and continue useful work in parallel.
 
+Rank shared-toolchain improvements first and portable repository best practices
+second; reject bespoke, non-scalable hacks. Apply the maintainer acceptance gate
+in [GOALS.md](GOALS.md) before recommending adoption or spending CI on a
+proposal. A technically correct benchmark prototype is not automatically a
+change that belongs in FastAPI or its dependencies.
+
 The applied diagnostics live in [arm-build/PROFILING.md](arm-build/PROFILING.md); results and remaining uncertainty live in [arm-build/FINDINGS.md](arm-build/FINDINGS.md).

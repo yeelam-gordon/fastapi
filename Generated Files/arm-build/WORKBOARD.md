@@ -4,6 +4,20 @@
 
 The user reaffirmed that the goal is Windows at least as fast as Mac, not merely a partial improvement. The current task is reopened. [INVESTIGATION-AND-PROPOSALS.md](../INVESTIGATION-AND-PROPOSALS.md) owns the ranked proposal table and acceptance loop.
 
+### User-directed adoption priority
+
+Shared-toolchain improvements rank first; portable FastAPI best practices rank
+second. Bespoke/non-scalable hacks are rejected, and maintainer value and review
+burden are mandatory gates. The complete rule is in [GOALS.md](../GOALS.md).
+The current FastAPI-specific SDK/private-PDM route is **diagnostic-only**:
+its full C: campaign and next CI run are paused pending a credible generalizable
+owner-level proposal, even if its technical readiness gates pass.
+
+Workers finish only already-in-flight preparation and tightly coupled cleanup
+repairs, retain all evidence and then stop. Do not extend the measurement
+framework to pursue this rejected adoption form. Investigate standard-command
+bottlenecks and transferable changes next; no upstream PR is authorized.
+
 ### Current readiness checkpoint
 
 Parity is still unestablished. Exactly two hosted experiment runs have been used; no third run has been dispatched. The next hosted run remains gated on a complete local Windows campaign, not only unit tests or isolated component proofs.
@@ -18,15 +32,16 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 | Actual sparse input deployment | passed locally | Frozen `102ddabc` actual receipts validate 22 inputs and 3,233 canonical source files; C: NTFS placement recorded |
 | Wrapper/controller integration | CW002 independently closed | `d339ef22` exact argv repair independently verified against frozen master; lifecycle guards retained |
 | Final v4 integration fixtures | bounded independent pass | `VERIFY-V4.md`; native Mac and complete real package campaign remain outside that proof |
-| Managed-venv normal process exit | **LOCAL-OWNERSHIP-004 blocks readiness** | Real C: helper test exits 0 but reports `survivors=true`; bounded diagnostics did not reproduce it; original failure remains valid |
+| Managed-venv normal process exit | corrected liveness policy independently reviewed | Original failure cause remains unproven; frozen `a44aae95` focused C: gates and genuine offline preparation passed, without a campaign |
+| In-flight PC002 cleanup | repaired; lane closed | `6f03951b` attempts all pinned-handle closes and preserves termination/cleanup errors; final focused suite/lint passed; measurement hygiene only |
 | Official uv version preflight | repaired and locally exercised | `f17b593b` validates exact 0.13.6 plus structured optional metadata; 17 integrated tests include the verified native executable |
-| Full fixed-schedule local campaign | paused before any samples | Original failures retained; no retries/replacements, fake Mac comparison or performance claim |
-| Matched new native ARM CI | gated | Only after local integration and artifact gates pass; no automatic retry |
+| Full fixed-schedule local campaign | paused by adoption-priority decision | Preserve in-flight preparation/failure evidence; no new campaign for the current bespoke SDK |
+| Matched new native ARM CI | gated on a transferable proposal first | Technical readiness alone does not justify spending CI; no automatic retry |
 
 | Current lane | Branch / worktree suffix | Owned output |
 |---|---|---|
 | Controller preflight repair (completed) | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |
-| Ownership correction and independent review | `investigate/arm-process-lifecycle`, `review/arm-process-containment` | Complete owned-member wait states, not an unsupported inference from job association accounting; causal uncertainty retained |
+| Ownership correction and independent review (completed) | `investigate/arm-process-lifecycle`, `review/arm-process-containment` | Complete owned-member wait states and cleanup repair; original causal uncertainty retained; no further framework work |
 | Source-only next proposals (completed) | `investigate/arm-compression-path`, `investigate/arm-sdk-validation-cost` | P20 codec attribution and P21 metadata reuse; no new timed work or readiness requirement |
 | Integrated C: readiness (paused) | `investigate/arm-local-paired-readiness` / `local-paired-readiness` | Prepared inputs retained; wait for repaired frozen snapshot and explicit master go |
 

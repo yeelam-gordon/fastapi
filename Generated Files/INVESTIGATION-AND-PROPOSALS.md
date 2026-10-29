@@ -8,9 +8,30 @@ Keep the complete FastAPI source-distribution-to-wheel workload and accepted pac
 
 Local timing is a screening tool, not proof that the hosted runner meets parity. Physical-device parity remains a separate goal.
 
-## Investigation and proposal table
+## Adoption priority: ecosystem value before benchmark wins
 
-**Current execution priority:** finish the integrated P18 readiness gate before spending more CI capacity. SDK correctness, strict caller receipts, CW002 argv compatibility and actual frozen C: deployment have passed bounded checks. The official uv version-metadata rejection is repaired and passed a real executable preflight. The normal-exit ownership failure remains unresolved: bounded diagnostics did not reproduce it, and that does not invalidate the original failure. Zero new packaging samples or ARM CI runs have executed. Source-only P20/P21 proposals are documented for a later loop, not additional dispatch requirements. P13/P14/P19 research is complete. Complex packaging prototypes remain diagnostic evidence, not adoption recommendations. IDs remain stable as evidence changes.
+The ranking and mandatory maintainer gate are owned by [GOALS.md](GOALS.md).
+This table ranks adoption routes, not evidence strength or claimed speedups.
+
+| Priority | Proposal route / existing evidence | Current disposition | Maintainer-facing gate |
+|---|---|---|---|
+| **1 — shared toolchain** | Generic I/O, metadata and bounded read-prefetch mechanisms suggested by P1/P5/P6/P11/P18, implemented in the appropriate shared frontend/backend rather than a FastAPI wrapper | Highest-priority feasibility investigation; **no generic implementation or benefit across projects established yet** | Identify the owner and actual standard-command bottleneck; preserve hooks, layouts and artifacts without FastAPI-specific lists or private cross-package patches |
+| **1 — shared toolchain** | Codec/build-recipe differences in P20; credited pip/ensurepip prior art in P15/P16 when its workload applies | P20 diagnostic only; no custom runtime justified. Prior work remains credited and is off the observed package-build path | Demonstrate a relevant critical-path cost and supported, maintainable fix; do not infer benefit from architecture labels |
+| **2 — portable best practice** | Supported frontend/installer choices in P13, native ARM tooling and reproducible inputs | Existing capability; release already uses uv, so no new FastAPI change is justified merely to claim it | Small supported configuration, reusable guidance and honest attribution; separate setup/build metrics and test Mac too |
+| **Rejected form — not a lower-priority queue** | Custom archive/backend adapters, Node writer and FastAPI-specific SDK/private-PDM integration in P2/P3/P7/P8/P18; SDK-only overhead tuning in P21 | Preserve diagnostics; **do not recommend adoption or spend more CI on these forms** | Reconsider only a genuinely general, simpler owner-level change; renaming or wrapping the prototype does not make it transferable |
+| **Rejected/deferred for insufficient value** | Dependency ZIP/cache complexity, tiny native extraction and attribute-skipping gains in P9/P10/P12 | Existing rejection retained | A maintainable, material benefit would need new evidence, not more tuning of the same bespoke mechanism |
+
+**Current execution priority:** reassess a shared-toolchain path before another
+performance campaign. The current FastAPI-specific SDK is diagnostic-only.
+Its C: campaign and next CI allocation are paused by this adoption decision,
+not merely waiting for technical readiness. Finish only tightly coupled cleanup
+repairs already in flight; do not extend the measurement framework. Existing
+artifact, lifecycle and failure evidence remains intact. Parity is unproven.
+
+## Investigation evidence ledger
+
+IDs stay stable below; their historical timings do not override the adoption
+ranking. A mechanism inferred from a prototype is not yet a portable fix.
 
 | ID | Investigation and current evidence | Proposal to test | Local acceptance gate | Owner / state |
 |---|---|---|---|---|
@@ -31,10 +52,10 @@ Local timing is a screening tool, not proof that the hosted runner meets parity.
 | P15 | Prior pip branch implements Windows-only threaded bytecode compilation, but the inspected build frontend passes `--no-compile` | Keep as credited setup/install prior art; do not apply blindly to the current package-build timer | Reconsider only if the chosen workload actually compiles bytecode during pip install | Prior art / source-reviewed; off current timed path |
 | P16 | Prior ensurepip hardlink POC targets 3.12; current outer-pip build path does not call ensurepip | Keep as credited bootstrap prior art, not a package-build explanation here | Verify workload/version first; same-volume/fallback/read-only tests if relevant | Prior art / source-reviewed; off current timed path |
 | P17 | Prior Uvicorn changes alter Windows reload shutdown/dedup, not package building | Keep as credited runtime work for a later explicit reload metric | Do not mix reload gains into build/install; no ARM or MDE performance reproduced | Prior art / outside current package-build path |
-| P18 | Managed C: prototype 3.303 -> 2.426 s; portable shared-source/hook fixes independently pass 29 normal/optimized tests and full artifacts | Keep the small candidate gated on fair paired-OS protocol, not only golden artifacts | Earlier caller smokes are not paired performance results; final C: campaign and Mac benefit remain unmeasured | SDK/receipt/argv/deployment/version gates passed; LOCAL-OWNERSHIP-004 still blocks real campaign |
+| P18 | Managed C: prototype 3.303 -> 2.426 s; shared-source/hook fixes independently pass 29 normal/optimized tests and full artifacts | Retain mechanism evidence; investigate a shared-toolchain implementation instead of recommending this private-PDM/FastAPI-specific SDK | Generalizability and maintainer acceptance precede more CI; earlier smokes are not paired performance or Mac proof | **Diagnostic-only; current form rejected for adoption, campaign paused** |
 | P19 | Matched C: uv samples show stock/managed roughly 5.85/6.00 s; build/pip roughly 13.37/13.16 s | Reject a runtime-distribution switch as a demonstrated performance fix | Three pairs; no convincing advantage; distributions differ beyond PGO and no causal compiler claim | Runtime branch integrated; no adoption recommendation |
 | P20 | Historical sdist compress time ~13.3%; managed Windows zlib 1.3.2 and Mac system-libz recipes differ; active binary acceleration remains unproven | Later bounded codec attribution; reject a custom runtime/codec rebuild now | Separate raw deflate from CRC, flush and writes; no compiler/ISA causal claim or frozen Mac finish line | [Source report](arm-build/compression-path/REPORT.md) complete; no implementation or readiness blocker |
-| P21 | SDK-added safety walk repeats metadata queries; historical ~0.524 s / 10,578 Python calls is not a clean gain measurement | Consider reusing the existing fresh lstat result first; defer a cached DirEntry rewrite unless error/guard equivalence is demonstrated | Preserve whole-tree/link/reparse/error behavior; distinguish SDK overhead from original FastAPI/PDM work; measure both OSes later | [Source proposal](arm-build/profiles/sdk-validation/README.md) complete; no code change or readiness blocker |
+| P21 | SDK-added safety walk repeats metadata queries; historical ~0.524 s / 10,578 Python calls is not a clean gain measurement | Retain as SDK engineering evidence, not a FastAPI/shared-toolchain optimization recommendation | Do not optimize overhead introduced solely by the rejected bespoke route and call it progress on the original build | [Source note](arm-build/profiles/sdk-validation/README.md) retained; **no implementation planned** |
 
 ## Relative benefit and maintenance review
 
@@ -69,8 +90,8 @@ Prior-art source audits are recorded in [PRIOR-WORK.md](PRIOR-WORK.md). None of 
 
 1. Workers return concrete scripts, raw measurements, failed cases and a confidence assessment.
 2. Update this table: accept, reject, refine or escalate each proposal with a reason. Do not equate an untested suggestion with an optimization.
-3. Integrate the simplest correct candidate and obtain independent verification. Repeat local experiments when a new finding justifies them.
-4. Dispatch a budgeted ARM CI experiment only after local tests, static checks, bootstrap/build smoke, canonical inputs and full artifact checks pass. Record the runner-only question beforehand.
+3. Apply the ecosystem/portability ranking and maintainer gate first. Integrate only a justified, simple candidate and obtain independent verification; diagnostic prototypes are not adoption candidates.
+4. Dispatch a budgeted ARM CI experiment only after that adoption gate and local tests, static checks, bootstrap/build smoke, canonical inputs and full artifact checks pass. Record the runner-only question beforehand.
 5. Inspect the resulting medians, ranges, correctness and setup costs. If Windows remains slower, update the table and continue; do not stop at an improvement percentage.
 
 The constraints are owned by [CIRCUMSTANCES.md](CIRCUMSTANCES.md). [arm-build/WORKBOARD.md](arm-build/WORKBOARD.md) owns task state. Raw second-round experiments live under `arm-build\round-2`.

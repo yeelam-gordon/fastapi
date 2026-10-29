@@ -12,6 +12,28 @@ These are targets, not already achieved results. Missing Mac access must not pre
 
 Continue the investigation/proposal/experiment loop until parity is established or a specific approval/access blocker requires user input. A partial speedup is not completion. The live ranked table is [INVESTIGATION-AND-PROPOSALS.md](INVESTIGATION-AND-PROPOSALS.md).
 
+## Proposal ranking and adoption gate
+
+Rank performance proposals in this order:
+
+1. **Best: improve a common build toolchain.** Prefer maintainable changes in shared tools that benefit FastAPI and other similar projects without per-repository custom machinery.
+2. **Good: demonstrate portable best practices in FastAPI.** Prefer supported tools, options and small configurations that other repositories can reasonably reuse. Credit existing capabilities rather than claiming them as new inventions.
+3. **Reject: bespoke hacks or over-optimization.** Do not recommend non-scalable, FastAPI-specific machinery, private dependency monkey-patches or extra complexity whose technique cannot reasonably transfer to other projects. A faster prototype alone does not qualify.
+
+**Maintainer acceptance is mandatory, not a fourth-place preference.** Before
+recommending a change, identify the appropriate owner, explain the real problem
+and measured value, show why the simplest supported alternative is insufficient,
+and justify compatibility, code size, review burden and ongoing upkeep. A
+maintainer should be able to understand why the change belongs in their project.
+Do not open an upstream PR or claim owner agreement without authorization.
+
+Keep diagnostic prototypes as evidence, not adoption recommendations. In
+particular, the current FastAPI-specific SDK/private-PDM integration is
+diagnostic-only; it must not be relabeled as a general toolchain improvement
+without a credible owner-level implementation and validation across different
+project layouts. Do not spend further CI capacity merely to optimize that
+bespoke form.
+
 ## Acceptance principles
 
 - Preserve FastAPI package contents and runtime behavior; do not omit work to win timings.
