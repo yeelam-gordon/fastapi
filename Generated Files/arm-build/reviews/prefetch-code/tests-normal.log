@@ -1,0 +1,70 @@
+test_archive_links_and_duplicates_rejected (test_candidate.CandidateTests.test_archive_links_and_duplicates_rejected) ... ok
+test_archive_selector_and_extraction_filters (test_candidate.CandidateTests.test_archive_selector_and_extraction_filters) ... ok
+test_canonical_mode_and_metadata (test_candidate.CandidateTests.test_canonical_mode_and_metadata) ... ok
+test_pdm_pin_fails_before_output (test_candidate.CandidateTests.test_pdm_pin_fails_before_output) ... ok
+test_read_failure_joins (test_candidate.CandidateTests.test_read_failure_joins) ... ok
+test_reads_fresh_bytes_in_order_and_closes (test_candidate.CandidateTests.test_reads_fresh_bytes_in_order_and_closes) ... ok
+test_target_write_failure_joins (test_candidate.CandidateTests.test_target_write_failure_joins) ... ok
+test_unsafe_configs_and_paths (test_candidate.CandidateTests.test_unsafe_configs_and_paths) ... ok
+test_actual_payload_and_metadata_refresh (review_checks.ReviewChecks.test_actual_payload_and_metadata_refresh) ... ok
+test_existing_and_nested_output_rejected (review_checks.ReviewChecks.test_existing_and_nested_output_rejected) ... ok
+test_manifest_extra_missing_and_invalid_modes (review_checks.ReviewChecks.test_manifest_extra_missing_and_invalid_modes) ... ok
+test_plugins_and_configuration_rejected (review_checks.ReviewChecks.test_plugins_and_configuration_rejected) ... ok
+test_reproduce_case_variant_hook_execution (review_checks.ReviewChecks.test_reproduce_case_variant_hook_execution) ... ok
+test_reproduce_sdk_one_then_three_same_source (review_checks.ReviewChecks.test_reproduce_sdk_one_then_three_same_source) ... ok
+test_reproduce_stock_uv_then_sdk_same_source (review_checks.ReviewChecks.test_reproduce_stock_uv_then_sdk_same_source) ... ok
+test_three_initial_reads_then_close_joins (review_checks.ReviewChecks.test_three_initial_reads_then_close_joins) ... ok
+test_wheel_only_reads_new_sdist (review_checks.ReviewChecks.test_wheel_only_reads_new_sdist) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 2.529s
+
+OK
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-2.dist-info\METADATA -> demo-2.dist-info/METADATA
+ - Adding .pdm-build\demo-2.dist-info\WHEEL -> demo-2.dist-info/WHEEL
+ - Adding .pdm-build\demo-2.dist-info\entry_points.txt -> demo-2.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-2.dist-info\RECORD -> demo-2.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+STOCK UV COMMAND: ['Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe', 'build', 'Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\review-unit\\source', '--python', 'Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe', '--offline', '--no-index', '--find-links', 'Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse', '--out-dir', 'Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\review-unit\\baseline', '--cache-dir', 'Q:\\fastapi\\Generated Files\\worktrees\\prefetch-code-review\\Generated Files\\arm-build\\reviews\\prefetch-code\\scratch\\review-unit\\uv-cache']
+STOCK UV EXIT: 0
+Building source distribution...
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+Building wheel from source distribution...
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+Successfully built scratch\review-unit\baseline\demo-1.tar.gz
+Successfully built scratch\review-unit\baseline\demo-1-py2.py3-none-any.whl
+
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD

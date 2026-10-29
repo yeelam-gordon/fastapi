@@ -1,0 +1,19 @@
+{
+  "research_revision": "f27aa74bb92af71348f4004f73005cc32b0f26d6",
+  "source_revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "source_status": "",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "executable": "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+  "machine": "ARM64",
+  "pdm_backend": "2.5.0",
+  "candidate_sha256": {
+    "build.py": "c432dffe27abc4b71a14816bf2920808963ae2092bf7938fd664068711226265",
+    "ops.py": "2a11aef272496577d9f499fe9056c6225b224a673a6f6966c1ebab8bbc62c474",
+    "selector.py": "e854315132b33b38b583c1654ff104e1c1b2c3f2b43aa5afebad3dfad8241568",
+    "validate.py": "f345c7566b57857b2359dedcdf5054f03640b475d7687ee0bd9f3cc83d2f763a",
+    "test_candidate.py": "7831b414abf761fd22f51eca32860299a5481fdff55f1041de38fe9dadd7f012",
+    "verify.py": "38250308d22c59cd4fed9ee5b419e0a32d972c02ae7e894c3f2671a0291fb2c8",
+    "README.md": "38feb45cc082256842f176ff3c2070d61f9ed3c4740c9d2ba083e5ace4386ccd"
+  },
+  "scope": "Q-only functional checks; no timing or CI"
+}
