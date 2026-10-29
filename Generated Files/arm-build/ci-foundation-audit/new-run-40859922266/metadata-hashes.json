@@ -1,0 +1,34 @@
+{
+  "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\run-final.json": {
+    "sha256": "b86341e35942023d668323266fa25615b3f3763b23685c79116bda0ccd2b9661",
+    "bytes": 7059
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\workflow-console.log": {
+    "sha256": "1c06c3009cf297c48cbcd3aa5a61cdf944be6bb6d52dd562c5a7f973c8f8eccf",
+    "bytes": 240785
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\artifacts\\arm-analysis-setup-windows\\action-node.json": {
+    "sha256": "525ecd12eea52914c19e6acf1e2fe9692ba3897bd696fa3347c1507ece7558a7",
+    "bytes": 1718
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\artifacts\\arm-analysis-setup-macos\\action-node.json": {
+    "sha256": "27aaa932eb16ae011ca66ae25b86c8089cc4bcc158dd3a4184aefb17154a9a18",
+    "bytes": 1710
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\artifacts\\arm-analysis-setup-windows\\tools\\Generated Files\\arm-build\\results\\bootstrap\\python-setup.json": {
+    "sha256": "3fc7fa488a61170a3e9bb85bb804bc814710e39453a4cda8a1273bb25c64aa58",
+    "bytes": 1726
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\artifacts\\arm-analysis-setup-macos\\tools\\Generated Files\\arm-build\\results\\bootstrap\\python-setup.json": {
+    "sha256": "d24252282fe0b41043ed5d00fdd5dce03adb87edbdcb5ba359de9ac6db71b926",
+    "bytes": 1818
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\artifacts\\arm-analysis-windows\\context-upload\\git-context.json": {
+    "sha256": "2b79b3def00515f5febac4fa6cbbad1cd82241dcaabc9e98a5fa69d143baf031",
+    "bytes": 4827
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\diagnostics\\analysis-runs\\40859922266\\artifacts\\arm-analysis-windows\\evidence\\upload\\report.json": {
+    "sha256": "c231b1188d1bf04b5056d8b506f9aefb0407bae6554acaa8c478bb934d8e3598",
+    "bytes": 12716644
+  }
+}
