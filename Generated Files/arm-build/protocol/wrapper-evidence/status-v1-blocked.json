@@ -1,0 +1,30 @@
+{
+  "status": "blocked",
+  "blocker": "PC-001: SDK rejects PDM scratch left by a prior SDK or stock B call; producer fix awaits master integration",
+  "final_wrapper_uses_source_copy": false,
+  "final_wrapper_full_readiness_passed": false,
+  "final_wrapper_sha256": "1efc9b2dea08b20b70dc2adb18f94fedcb0f0b3cf6ae228b63ddc4b8dca09780",
+  "backend_lock_sha256": "163af042566f864cac35b3116f9dd9677618a111a551675630051c7c1ee013db",
+  "final_unit_tests": {"command": "python -B -m unittest -v test_isolated_build", "tests": 4, "returncode": 0},
+  "final_lint": {"commands": ["ruff check isolated_build.py test_isolated_build.py wrapper-evidence/readiness.py", "ruff format --check isolated_build.py test_isolated_build.py wrapper-evidence/readiness.py"], "returncode": 0},
+  "first_direct_source_sdk": {
+    "returncode": 0,
+    "coordinator_returncode": 1,
+    "whole_invocation_wall_seconds": 6.348292900001979,
+    "strict_oracle": "PASS: 1269 sdist and 65 wheel members, full modes, contents and RECORD",
+    "fresh_environment_existed_before": false,
+    "fresh_environment_exists_after_cleanup": false,
+    "source_unchanged": false,
+    "source_manifest_unchanged": true,
+    "evidence_directory": "initial-direct-source"
+  },
+  "source_revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "source_archive_sha256": "c6e91b20ed2990e2ce027d52085a269c9af9efe33b3f5237e3fc80004e5d8e43",
+  "source_manifest_sha256": "ab3a71c4e2eeb81e7977b8c7aa9f3abd722476ed04585b6e19d1286f2a4cf77c",
+  "base_python_sha256": "383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd",
+  "base_python_dll_sha256": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+  "uv_sha256": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+  "pdm_backend_wheel_sha256": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63",
+  "rejected_source_copy_trials": "Retained raw under rejected-* directories; not valid final-wrapper readiness or performance evidence",
+  "next_action": "Master integrates SDK producer fix and schedules serial C: B/S1/S3 same-source readiness; no CI or workaround"
+}

@@ -11,8 +11,9 @@ import time
 import uuid
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-PROTOCOL = HERE.parent
+EVIDENCE = Path(__file__).resolve().parent
+HERE = EVIDENCE / "readiness-v2"
+PROTOCOL = EVIDENCE.parent
 MASTER = Path(r"Q:\fastapi\Generated Files\arm-build")
 SOURCE_REPO = Path(r"Q:\fastapi\Generated Files\worktrees\source-fastapi")
 REV = "79cab5bed28b24d92c185d236feb33f5783dfeb3"
@@ -27,6 +28,7 @@ def digest(path):
 
 
 def main():
+    HERE.mkdir(exist_ok=False)
     root = BASE
     if root.exists():
         root = BASE / ("retry-" + uuid.uuid4().hex)
@@ -100,6 +102,8 @@ def main():
     receipts["source_manifest_sha256"] = digest(manifest_path)
     receipts["base_python_sha256"] = digest(PYTHON)
     receipts["base_python_dll_sha256"] = digest(PYTHON.parent / "python313.dll")
+    receipts["backend_lock_sha256"] = digest(code / "protocol" / "backend.lock")
+    receipts["producer_commit"] = "3c10320c9ce03966a4d5f51cd8e8076a1095d235"
     receipts["code"] = {str(p.relative_to(code)): digest(p) for p in code.rglob("*.py")}
     oracle = (
         MASTER
@@ -143,28 +147,32 @@ def main():
         "--out-dir",
         str(root / "B-output"),
     ]
-    clock = time.perf_counter()
-    with (HERE / "B.log").open("wb") as stream:
-        result = subprocess.run(
-            baseline, cwd=root, env=env, stdout=stream, stderr=subprocess.STDOUT
-        )
-    summary["baseline"] = {
-        "command": baseline,
-        "returncode": result.returncode,
-        "whole_invocation_wall_seconds": time.perf_counter() - clock,
-    }
-    if result.returncode == 0:
-        summary["baseline"]["validation"] = validator.compare(
-            expected, validator.inventory(root / "B-output")
-        )
     baseline_files = {
         p.relative_to(source).as_posix(): digest(p)
         for p in source.rglob("*")
         if p.is_file()
     }
-    summary["baseline"]["source_added"] = sorted(set(baseline_files) - set(manifest))
-    for workers in (1, 3):
-        label = f"S{workers}"
+    environment_roots = set()
+    for label, workers in (("S1", 1), ("S3", 3), ("B", None), ("S3-after-B", 3)):
+        if label == "B":
+            clock = time.perf_counter()
+            with (HERE / "B.log").open("wb") as stream:
+                result = subprocess.run(
+                    baseline, cwd=root, env=env, stdout=stream, stderr=subprocess.STDOUT
+                )
+            summary["baseline"] = {
+                "command": baseline,
+                "returncode": result.returncode,
+                "whole_invocation_wall_seconds": time.perf_counter() - clock,
+            }
+            if result.returncode == 0:
+                summary["baseline"]["validation"] = validator.compare(
+                    expected, validator.inventory(root / "B-output")
+                )
+            (HERE / "summary.json").write_text(json.dumps(summary, indent=2))
+            if result.returncode:
+                raise RuntimeError(f"Stock B failed: {result.returncode}")
+            continue
         report_path = root / f"{label}.json"
         output = root / f"{label}-output"
         command = [
@@ -192,7 +200,7 @@ def main():
         clock = time.perf_counter()
         with (HERE / f"{label}-outer.log").open("wb") as stream:
             result = subprocess.run(
-                command, cwd=root, stdout=stream, stderr=subprocess.STDOUT
+                command, cwd=root, env=env, stdout=stream, stderr=subprocess.STDOUT
             )
         wall = time.perf_counter() - clock
         shutil.copy2(report_path, HERE / report_path.name)
@@ -206,6 +214,17 @@ def main():
             "whole_invocation_wall_seconds": wall,
         }
         summary["samples"].append(row)
+        receipt = json.loads(report_path.read_text(encoding="utf-8"))
+        row["phase_clocks"] = receipt["phases"]
+        row["identities"] = receipt["identities"]
+        row["environment"] = receipt["environment"]
+        row["fresh_unique_environment"] = (
+            receipt["environment"]["root"] not in environment_roots
+            and receipt["environment"]["existed_before"] is False
+            and receipt["environment"]["exists_after_cleanup"] is False
+            and not Path(receipt["environment"]["root"]).exists()
+        )
+        environment_roots.add(receipt["environment"]["root"])
         if result.returncode == 0:
             actual = validator.inventory(output / "artifacts")
             verdict = validator.compare(expected, actual)
@@ -229,8 +248,9 @@ def main():
         assert result.returncode == 0, row
         assert (
             row["validation"]["strict_pass"]
-            and row["source_unchanged"]
+            and row["canonical_payloads_unchanged"]
             and row["manifest_unchanged"]
+            and row["fresh_unique_environment"]
         )
     print(json.dumps(summary, indent=2))
 

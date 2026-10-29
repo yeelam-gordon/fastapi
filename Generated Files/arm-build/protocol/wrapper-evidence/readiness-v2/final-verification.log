@@ -1,0 +1,3 @@
+Final code hashes, canonical payloads, original manifest, and all removed environment paths: PASS
+SDK source state files: ['.pdm-build\\.gitignore', '.pdm-build\\pyproject.toml']
+Source copy absent from wrapper phases: True

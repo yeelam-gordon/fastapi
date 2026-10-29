@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "phases": [
+    {
+      "phase": "create",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\cache",
+        "venv",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\venv"
+      ],
+      "start_offset_seconds": 0.4116684000000532,
+      "log": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\S3.json.logs\\create.log",
+      "returncode": 0,
+      "seconds": 0.06312469999829773
+    },
+    {
+      "phase": "install",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\cache",
+        "pip",
+        "install",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\venv\\Scripts\\python.exe",
+        "--require-hashes",
+        "--no-index",
+        "--only-binary",
+        ":all:",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\wheels",
+        "-r",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\code\\protocol\\backend.lock"
+      ],
+      "start_offset_seconds": 0.4749030999992101,
+      "log": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\S3.json.logs\\install.log",
+      "returncode": 0,
+      "seconds": 0.5747224000006099
+    },
+    {
+      "phase": "identity",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\venv\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys,site,json,platform,sysconfig,importlib.metadata as m;from pathlib import Path;assert sys.version_info[:3]==(3,13,15),sys.version;assert platform.machine().lower() in ('arm64','aarch64'),platform.machine();assert sys.platform!='win32' or sysconfig.get_platform()=='win-arm64';assert m.version('pdm-backend')=='2.5.0';assert sys.prefix!=sys.base_prefix;assert not site.ENABLE_USER_SITE;assert Path(sys.prefix).resolve()==Path('C:\\\\fastapi-arm-build-lab\\\\caller-readiness-2a73e36a\\\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\\\.caller-env-51d08d36da424998b61f805d1180522a\\\\venv').resolve();print(json.dumps(dict(executable=sys.executable,prefix=sys.prefix,base_prefix=sys.base_prefix,version=sys.version,machine=platform.machine(),platform=sysconfig.get_platform(),backend=m.version('pdm-backend'),user_site=site.ENABLE_USER_SITE)))"
+      ],
+      "start_offset_seconds": 1.049652599998808,
+      "log": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\S3.json.logs\\identity.log",
+      "returncode": 0,
+      "seconds": 0.3755901999975322
+    },
+    {
+      "phase": "sdk",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\venv\\Scripts\\python.exe",
+        "-E",
+        "-s",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\code\\candidate\\build.py",
+        "--source",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\source",
+        "--source-manifest",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\source-manifest.json",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\S3-output",
+        "--workers",
+        "3"
+      ],
+      "start_offset_seconds": 1.4348797999991802,
+      "log": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\S3.json.logs\\sdk.log",
+      "returncode": 0,
+      "seconds": 3.125006199999916
+    },
+    {
+      "phase": "cleanup",
+      "operation": "shutil.rmtree",
+      "path": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a",
+      "start_offset_seconds": 4.581438500001241,
+      "returncode": 0,
+      "seconds": 0.040597699997306336
+    }
+  ],
+  "isolation": "fresh caller environment shared by both SDK hooks",
+  "errors": [],
+  "workers": 3,
+  "environment": {
+    "root": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a",
+    "existed_before": false,
+    "exists_after_cleanup": false,
+    "identity": {
+      "executable": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\venv\\Scripts\\python.exe",
+      "prefix": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\venv",
+      "base_prefix": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none",
+      "version": "3.13.15 (main, Sep 29 2026, 08:22:55) [MSC v.1944 64 bit (ARM64)]",
+      "machine": "ARM64",
+      "platform": "win-arm64",
+      "backend": "2.5.0",
+      "user_site": false
+    }
+  },
+  "environment_changes": {
+    "unset": [
+      "PYTHONPATH",
+      "PYTHONHOME",
+      "VIRTUAL_ENV",
+      "UV_PROJECT_ENVIRONMENT"
+    ],
+    "set": {
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "UV_OFFLINE": "1",
+      "UV_NO_CONFIG": "1",
+      "UV_PYTHON_DOWNLOADS": "never",
+      "UV_CACHE_DIR": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\cache",
+      "TEMP": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\scratch",
+      "TMP": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\scratch",
+      "TMPDIR": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\.caller-env-51d08d36da424998b61f805d1180522a\\scratch"
+    }
+  },
+  "identities": {
+    "uv_sha256": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+    "base_python_sha256": "383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd",
+    "lock_sha256": "163af042566f864cac35b3116f9dd9677618a111a551675630051c7c1ee013db",
+    "wrapper_sha256": "1efc9b2dea08b20b70dc2adb18f94fedcb0f0b3cf6ae228b63ddc4b8dca09780",
+    "sdk_sha256": "8bf1d28045f5884235fc67a14608aa1aa4f0eff9eafea97821a1f4eb016c2ec4",
+    "source_manifest_sha256": "ab3a71c4e2eeb81e7977b8c7aa9f3abd722476ed04585b6e19d1286f2a4cf77c"
+  },
+  "artifacts": {
+    "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\S3-output\\artifacts\\fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+    "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-54b8d3b4d3564d4daaa947eb16c9cb65\\S3-output\\artifacts\\fastapi-0.162.0.tar.gz": "15d69bfeb62fc32bbcf95c02fafcc0f5456090303011dfb561ca5bf5bad73418"
+  },
+  "wall_seconds": 4.622072300000582
+}
