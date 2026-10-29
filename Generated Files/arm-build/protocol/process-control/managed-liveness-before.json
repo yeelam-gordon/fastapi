@@ -1,0 +1,162 @@
+[
+  {
+    "index": 0,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 16260,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 1,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 4844,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 2,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 25108,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 3,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 20964,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 4,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 12916,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 5,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 6720,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 6,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 12412,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 7,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 8956,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 8,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 25312,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 9,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 27532,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 10,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 8500,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 11,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 20036,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 12,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 23196,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 13,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 26512,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 14,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 4772,
+    "stdout": "out\n",
+    "observations": []
+  },
+  {
+    "index": 15,
+    "succeeded": true,
+    "survivors": false,
+    "errors": [],
+    "cleanup_complete": true,
+    "supervisor": 27556,
+    "stdout": "out\n",
+    "observations": []
+  }
+]
