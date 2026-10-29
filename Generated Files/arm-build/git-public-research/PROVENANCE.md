@@ -61,15 +61,15 @@ installation, CI run, push, PR or upstream contact was performed.
 Issue/comment IDs provide stable attribution; their text/status can be edited.
 Statuses below were observed on the access date and are not release promises.
 
-- **S11:** [MSYS2 #3834](https://github.com/msys2/MSYS2-packages/issues/3834),
+- **S11:** [msys2/MSYS2-packages#3834](https://github.com/msys2/MSYS2-packages/issues/3834),
   open; [runtime prerequisite comment](https://github.com/msys2/MSYS2-packages/issues/3834#issuecomment-1584837824).
-- **S12:** [Git-for-Windows #5292, original maintainer explanation](https://github.com/git-for-windows/git/issues/5292#issuecomment-2510738434);
+- **S12:** [git-for-windows/git#5292, original maintainer explanation](https://github.com/git-for-windows/git/issues/5292#issuecomment-2510738434);
   [2026 closure/runtime-roadmap comment](https://github.com/git-for-windows/git/issues/5292#issuecomment-4648108074).
   Issue closed `2026-06-08T10:51:24Z`. Historical Windows 10 compatibility
   discussion is not a diagnosis of Windows 11 startup performance.
-- **S13:** [MSYS2 #4583](https://github.com/msys2/MSYS2-packages/pull/4583),
-  closed 2024-11-13; [#4916](https://github.com/msys2/MSYS2-packages/pull/4916),
-  closed 2024-09-24; [#5000](https://github.com/msys2/MSYS2-packages/pull/5000),
+- **S13:** [msys2/MSYS2-packages#4583](https://github.com/msys2/MSYS2-packages/pull/4583),
+  closed 2024-11-13; [msys2/MSYS2-packages#4916](https://github.com/msys2/MSYS2-packages/pull/4916),
+  closed 2024-09-24; [msys2/MSYS2-packages#5000](https://github.com/msys2/MSYS2-packages/pull/5000),
   closed 2024-11-11. These describe hangs/crashes, not a proven fix here.
 - **S14:** [Microsoft IsWow64Process2 reference, Parameters/Return value](https://learn.microsoft.com/en-us/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64process2).
   Live authoritative documentation, not an immutable source snapshot.

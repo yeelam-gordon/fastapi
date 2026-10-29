@@ -25,7 +25,7 @@ This table ranks adoption routes, not evidence strength or claimed speedups.
 **Current execution priority: matched diagnosis before more optimization.**
 The paired-log audit now establishes a 2.178 s observed isolated-build gap and
 1.949 s gap without isolation, but actual backend-hook timings are missing.
-Checkout/auth is a separate CI-latency lead: six `foreach` windows contain
+Checkout/auth is a separate CI-latency lead: six credential setup/cleanup intervals contain
 8.103 s paired interval difference, not proven Git CPU or shell time.
 The [analysis plan](arm-build/diagnostics/ANALYSIS-PLAN.md) and separate manual
 diagnostic workflow fill declared coverage gaps; local integration and
@@ -33,7 +33,10 @@ independent review gate any new CI allocation. Instrumented data is not
 performance proof. No new optimization or official performance run is authorized.
 The bespoke SDK stays diagnostic-only. P22 was rejected; P23 typing is externally
 blocked; P25's 2.79% local full-build change failed its advancement gate and is
-parked. Parity and underlying cross-platform causes remain unproven.
+parked. Analysis run 40859922266 retained Windows profiles, but Mac stopped at
+our test-fixture defects before profiling. Repairs passed locally; an optional
+Mac-only backfill still requires allocation approval. Parity and underlying
+cross-platform causes remain unproven.
 
 ## Investigation evidence ledger
 
@@ -67,7 +70,7 @@ ranking. A mechanism inferred from a prototype is not yet a portable fix.
 | P23 | Generic 68-line PDM archive patch; eight focused proofs and owner-config lint/format pass; conservative four capped payloads plus normal overhead | Keep the small owner-level candidate pending real typing and broader compatibility checks; no FastAPI selector or framework | Mypy 2.3.1 download fails TLS; secure OS-store attempt also failed, assistance unavailable. No typing pass or standard-command gain claimed | [Parent review](arm-build/shared-toolchain/pdm-archive-io/MASTER-REVIEW.md): **blocked**, no performance screen or adoption |
 | P24 | Pinned uv's temporary build path uses the shared venv constructor that writes activation templates | Retain as a shared-toolchain source lead; do not propose omitting files without cost and compatibility evidence | Existing whole `uv venv` timing is not activation-file attribution; a negligible benefit fails the maintainer gate | [Source triage](arm-build/shared-toolchain/uv-activators/REPORT.md) complete; no implementation, measurement or CI |
 | P25 | V2 passed its micro gate; five stock-build pairs changed 5.7688 -> 5.6076 s median (~2.79%), below the 5% advancement gate; four pairs favored it | Park the common-toolchain lead, preserve all V1/V2 evidence and no further tuning | Local overlap/uncertainty, Mac benefit unmeasured, five existing mode failures retained; no CI/adoption | `V2-STAGED-SCREEN.md` retained; no advancement |
-| P26 | Existing CI auth/cleanup repeatedly spends much longer around `git submodule foreach`; six setup/removal windows contain 8.103 s paired gap with identical command counts | Collect actual Actions Node/Git/helper provenance and matched read-only command context before any shared-toolchain proposal | Log windows are not exact subprocess durations or emulation/MDE proof; checkout scope stays separate from build-only | [Checkout audit](arm-build/ci-foundation-audit/CHECKOUT-AUDIT.md) and new analysis collectors; no optimization patch |
+| P26 | Six historical credential setup/cleanup intervals contain an 8.103 s paired gap. New CI entry Git is ARM64; local actual ARM64 Git launches x64 MSYS helpers, consistent with public packaging sources | Investigate redundant shell/setup traversal in common checkout/Git code, preserving stale-credential and submodule semantics | Live CI helper execution and attributable CPU/startup costs remain unproved; local VFS Git differs. No general Git, emulation-cost or MDE conclusion; checkout remains separate from build-only | [Architecture boundary](arm-build/git-native-chain/ANSWER-BOUNDARY.md), public research and paired checkout audit retained; no optimization patch |
 
 ## Relative benefit and maintenance review
 

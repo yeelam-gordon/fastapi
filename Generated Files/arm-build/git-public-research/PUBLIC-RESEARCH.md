@@ -81,18 +81,18 @@ submodules or that its workspace contains any. They also explain why changing
 
 ## Existing upstream work and limitations
 
-MSYS2's open **#3834**, “Port bash recipe to Windows Arm64,” explicitly describes
+Open **msys2/MSYS2-packages#3834**, “Port bash recipe to Windows Arm64,” explicitly describes
 its proposed compiler/recipe work as a PoC pending upstream code-generation
 changes. Discussion identifies a working MSYS2/Cygwin runtime as a prerequisite.
-Git for Windows' maintainer stated in **#5292**, most recently in a 2026 closure
+Git for Windows' maintainer stated in **git-for-windows/git#5292**, most recently in a 2026 closure
 comment, that a fully native ARM64 MSYS2 runtime is still in the future.
 The current environment matrix continues to list MSYS as x86_64. This supports
 “not a fully supported native ARM64 MSYS stack,” not “ARM64 Git is unsupported,”
 and provides **no delivery date**. [S2, S11, S12]
 
 Existing fixes must not be relabelled as a new solution here:
-MSYS2 **#4583/#4916** address `pacman`/GPGME double-fork hangs;
-**#5000** backports an ARM64-canary crash fix. Their stated symptoms and paths
+**msys2/MSYS2-packages#4583** and **msys2/MSYS2-packages#4916** address `pacman`/GPGME double-fork hangs;
+**msys2/MSYS2-packages#5000** backports an ARM64-canary crash fix. Their stated symptoms and paths
 are not evidence of a fix for short successful `foreach` cleanup invocations.
 Bounded public searches for Git-for-Windows `submodule startup`, ARM64
 performance, and checkout `submodule foreach slow` did not identify a verified

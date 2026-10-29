@@ -17,7 +17,11 @@ context and distinct resource/function/import/allocation passes, actual hook
 identities and explicit native-coverage gaps. Its instrumented data is never
 performance-eligible. Local integrated validation and all four reviewed handoff
 fixes passed their bounded gates. `diagnostics\READINESS.md` records approval
-for one two-job analysis allocation; no new run has yet been dispatched.
+for one two-job analysis allocation, used by run 40859922266. Windows artifacts
+were retained; Mac stopped before profiling at two defects in our test fixtures.
+Both are repaired locally, but Mac collection remains missing. The platform
+selector now permits a Mac-only backfill; no additional allocation is approved.
+See `diagnostics\analysis-runs\40859922266\RESULT.md`.
 The original explicit build-first workload remains the analysis target.
 The unidentified dashboard row is excluded from claims, not silently replaced
 by package-only results; its separate clarification is not a reason to abandon
@@ -29,7 +33,7 @@ The bounded public row-definition trace is complete in
 exist, but the screenshot's renderer/selector remains unidentified. Its
 URL/hyperlink target or exact field/revision is needed before claiming results
 for that row. One bounded analysis allocation may use the known build-first
-scope; no aggregate benchmark reproduction is claimed.
+scope was used; no aggregate benchmark reproduction is claimed.
 See `diagnostics\ANALYSIS-PLAN.md` and `CONTRACT.md`.
 
 Optimization followups are paused. P25's completed 2.79% local full-build
@@ -51,7 +55,23 @@ bottlenecks and transferable changes next; no upstream PR is authorized.
 
 ### Current readiness checkpoint
 
-Parity is still unestablished. Exactly two hosted experiment runs have been used; no third run has been dispatched. The next hosted run remains gated on a complete local Windows campaign, not only unit tests or isolated component proofs.
+Parity is still unestablished. Two hosted experiment runs and one analysis
+allocation have been used. The SDK campaign below remains parked, not a
+prerequisite for more diagnostic-framework work. A proposed Mac-only backfill
+needs a new budget decision; local fixture repairs do not authorize a retry.
+
+### Git architecture follow-up
+
+The CI-selected Git entry file is ARM64. The local dynamic probe observed the
+real ARM64 Git body launching x64 MSYS shell/utilities: 43 sampled processes,
+eight images. Shell/script bytes match the installed CI candidates, but local
+VFS Git differs from the CI distribution and live CI descendants remain
+unverified. Public packaging sources corroborate the mixed toolchain. This is
+not proof that all Git is slow, that emulation explains the measured gap, or
+that MDE is responsible. See `git-native-chain\ANSWER-BOUNDARY.md`.
+
+WorkIQ returned technical references kept local/ignored; ADO connections timed
+out. Public reports rely on independently cited public sources.
 
 | Gate | State | Evidence / remaining question |
 |---|---|---|
@@ -83,7 +103,11 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 
 These are independent preparation/verification lanes. Only the local-readiness lane may run the full C: campaign. Workers do not push, dispatch CI, change security controls or modify the read-only original source worktree. No additional full-agent coordinator is needed.
 
-**Fork budget protection:** read-only inspection found two ARM experiment runs and three incidental push-triggered Ubuntu Conflict detector runs. The latter's most recent job lasted about three seconds, but it was still an unnecessary allocation. The master disabled **only** `detect-conflicts.yml` in `yeelam-gordon/fastapi` through the workflow API and verified `disabled_manually`; no upstream workflow file was changed. The manual ARM experiment remains active. No new experiment has been dispatched.
+**Fork budget protection:** two ARM experiment runs, one analysis allocation
+and three earlier incidental Ubuntu Conflict detector runs are recorded.
+The master disabled **only** `detect-conflicts.yml` in `yeelam-gordon/fastapi`
+through the workflow API and verified `disabled_manually`; no upstream workflow
+file was changed. No fourth ARM allocation is authorized.
 
 Read-only latest-release checks on 2026-10-29 returned uv **0.13.6** and
 pdm-backend **2.5.0**, matching the inspected pins; no tool upgrade was made.
