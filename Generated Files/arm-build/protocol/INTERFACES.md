@@ -41,3 +41,9 @@ Harness tests use controlled fixtures/mocked subprocesses. No C: smoke or perfor
 Review the portable SDK's real code and failure/configuration/path/mode/metadata guarantees, not just its successful golden build. Execute focused tests, including optimized Python where relevant. Report consequential findings with reproduction and confidence. Do not alter producers.
 
 Each lane stays in its own branch/worktree, commits owned paths only, and neither pushes nor dispatches CI. The master integrates and owns the final readiness gate.
+
+## Owned process-lifecycle addition
+
+The independent PP003 review requires durable invocation ownership rather than a polling-only ancestry claim. A small documented Windows job / POSIX group helper is being implemented in its own lane. No process-name cleanup, undocumented resume API, private system tracing or new general-purpose supervisor framework is accepted.
+
+Its trusted measurement boundary must cover the entire actual variant invocation, including caller environment creation/install/build/cleanup. Any separate supervision setup is recorded as measurement infrastructure on both OSes, not hidden package work. Missing ownership, a survivor or timeout makes the sample incomplete and stops the job; no replacement samples or parity claim.

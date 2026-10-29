@@ -35,6 +35,14 @@ These are three active lanes. Only the wrapper lane runs C: readiness builds; th
 - Harness `73577fc7` passes its fixture/static checks but is not integration-ready by that fact alone; independent protocol review is active in `review/arm-paired-protocol`.
 - Targeted LF attributes protect versioned code/locks/oracle identities across Windows/Mac checkout. Raw captured evidence remains byte-preserved.
 
+### Latest verified gates
+
+- PC-001 and PC-002 are independently closed: producer origin `3c10320c`, independent fix review `21788c19`; 29 normal/optimized tests and unchanged-manifest shared-source integrations passed. No source-copy workaround was accepted.
+- Fresh C: caller readiness passed S1 → S3 → stock B → SDK after that fix. Three SDK environments were unique and removed; all SDK artifacts passed the full oracle. Single readiness invocation walls were 6.421 s (S1), 4.796 s (S3), and 4.952 s (SDK after B)—not a paired performance benchmark or Mac result.
+- Paired protocol review `16f0b4a` found PP001 (caller receipt/lifecycle not enforced), PP002 (missing identities accepted), and PP003 (polling ownership limit). Harness producer is fixing the first two; independent process-lifecycle adjudication is evaluating the smallest justified resolution of PP003.
+- The next three independent lanes are harness repair, fixed-behavior review preparation and process-lifecycle assessment. No third CI run is authorized by partial fixture success.
+- PP001/PP002 producer repair `8a58b8c6` is committed; independent fixed-behavior review is running. PP003 was independently retained as a real timeout-ownership limitation. The master approved a bounded documented job/group containment helper for measurement correctness, not a general supervisor framework or a claimed FastAPI speedup.
+
 | Task | Dependencies | State | Acceptance |
 |---|---|---|---|
 | round2-overhead | existing canonical input and reference | done | Selective proof retained; ZIP-import follow-up lacked a convincing gain |
