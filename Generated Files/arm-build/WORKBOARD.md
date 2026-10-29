@@ -4,7 +4,31 @@
 
 The user reaffirmed that the goal is Windows at least as fast as Mac, not merely a partial improvement. The current task is reopened. [INVESTIGATION-AND-PROPOSALS.md](../INVESTIGATION-AND-PROPOSALS.md) owns the ranked proposal table and acceptance loop.
 
-### Current isolated lanes
+### Current readiness checkpoint
+
+Parity is still unestablished. Exactly two hosted experiment runs have been used; no third run has been dispatched. The next hosted run remains gated on a complete local Windows campaign, not only unit tests or isolated component proofs.
+
+| Gate | State | Evidence / remaining question |
+|---|---|---|
+| SDK source reuse and unsupported hooks | independently passed | PC-001/PC-002 closed; 29 normal/optimized tests and full artifact oracle |
+| Fresh caller lifecycle | earlier real C: smokes passed | Repeat integrated campaign with the final committed wrapper and controller |
+| Strict caller receipts and code identities | PP001/PP002 independently closed | Preserve all guards when updating the wrapper argv contract |
+| Process-family ownership | native Windows proof passed | Named Job Object and cleanup fixes verified; native Mac and hosted nested-job behavior remain runner-only |
+| Explicit caller bytecode policy | CW001 independently closed | `63b17359` passes `-B` explicitly; real interpreter probes confirm effective suppression |
+| Actual sparse input deployment | inventory repair committed | Real checkout exposed subtree-relative `ls-tree`; `d5536b59` adds `--full-tree` and a real-Git regression; independent sparse rerun active |
+| Wrapper/controller integration | **CW002 blocks readiness** | Exact argv validation still expects old flags; harness owner repairing without relaxing lifecycle checks |
+| Full fixed-schedule local campaign | preparing | All timed runtime, source, code, temp, cache and outputs on C:; no fake Mac comparison |
+| Matched new native ARM CI | gated | Only after local integration and artifact gates pass; no automatic retry |
+
+| Active bounded lane | Branch / worktree suffix | Owned output |
+|---|---|---|
+| Controller integration repair | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | CW002 contract and focused regressions |
+| Independent sparse deployment proof | `review/arm-checkout-readiness` / `checkout-readiness` | SHA-scoped real-Git/input receipts |
+| Integrated C: readiness | `investigate/arm-local-paired-readiness` / `local-paired-readiness` | Preparation now; complete campaign only after frozen repaired inputs |
+
+These are independent preparation/verification lanes. Only the local-readiness lane may run the full C: campaign. Workers do not push, dispatch CI, change security controls or modify the read-only original source worktree. No additional full-agent coordinator is needed.
+
+### Earlier isolated-lane history
 
 The research checkpoint is `bfc306726db5727d6a358e85630ced44aa4aa4e2`. Four first isolated lanes completed and were integrated; the next readiness lanes are being established. No additional full-agent coordinator is currently needed.
 
@@ -26,16 +50,16 @@ Worker origin commits: portable `749e211d`, review `cc469129`, protocol `da23ed2
 | Fresh caller-isolation wrapper | `investigate/arm-caller-isolation` / `caller-isolation` | protocol wrapper, lock and focused tests |
 | Paired-OS experiment harness | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | versioned measurement/comparison, tests and manual workflow |
 
-These are three active lanes. Only the wrapper lane runs C: readiness builds; the harness uses fixtures until integration, and review is independent. No CI, push or release adoption is delegated.
+These were the initial three readiness lanes. Their component results and subsequent integration findings are summarized in the current checkpoint above. No CI, push or release adoption was delegated.
 
-### Readiness findings
+### Earlier readiness findings
 
 - Independent code review reproduced PC-001 (backend-generated `.pdm-build` state breaks shared-source reuse) and PC-002 (case-variant unsupported hook can execute before rejection). Both were forwarded unchanged and independently reproduced by the producer.
 - Producer fix `3c10320c` is committed; independent verification and same-source wrapper smokes are pending. No source-copy workaround or manifest weakening is accepted.
 - Harness `73577fc7` passes its fixture/static checks but is not integration-ready by that fact alone; independent protocol review is active in `review/arm-paired-protocol`.
 - Targeted LF attributes protect versioned code/locks/oracle identities across Windows/Mac checkout. Raw captured evidence remains byte-preserved.
 
-### Latest verified gates
+### Component-gate history
 
 - PC-001 and PC-002 are independently closed: producer origin `3c10320c`, independent fix review `21788c19`; 29 normal/optimized tests and unchanged-manifest shared-source integrations passed. No source-copy workaround was accepted.
 - Fresh C: caller readiness passed S1 → S3 → stock B → SDK after that fix. Three SDK environments were unique and removed; all SDK artifacts passed the full oracle. Single readiness invocation walls were 6.421 s (S1), 4.796 s (S3), and 4.952 s (SDK after B)—not a paired performance benchmark or Mac result.
