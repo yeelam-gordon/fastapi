@@ -1,10 +1,8 @@
 # Profile the measured bottleneck, not the machine's core count
 
-## Persona and decision rule
+## Applied scope
 
-Act as a Python packaging performance engineer: establish the deliverable, identify time spent on the critical path, form a falsifiable hypothesis, run a controlled experiment, inspect regressions and keep only demonstrated improvements. Distinguish application runtime benchmarks from packaging benchmarks. Do not prescribe more workers before measuring available parallel work.
-
-The target is Windows ARM build latency no worse than macOS ARM, eventually including tests. Neither a core-count ratio nor a faster repeated build establishes that target. The current Cobalt 100 VM cannot prove a result for the user's physical Windows ARM device.
+[PERSONA.md](../PERSONA.md) owns the expert reasoning method; [GOALS.md](../GOALS.md) owns the performance targets. This document applies them to profiling tools and follow-on experiments. The current Cobalt 100 VM cannot prove a result for the physical Windows ARM device.
 
 ## Toolchain layers
 

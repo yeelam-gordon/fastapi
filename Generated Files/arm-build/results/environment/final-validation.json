@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "executor": "root validation command, not independent auditor",
+  "artifact_pairs_checked": {
+    "local-01": 16,
+    "local-02": 16
+  },
+  "profile_artifacts_equivalent": true,
+  "confirmation_harness_matches_committed_bytes": true,
+  "production_source_diff_empty": true,
+  "exit_code": 0
+}

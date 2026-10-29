@@ -1,23 +1,25 @@
 # FastAPI ARM build investigation
 
-## Measured result: 25.1% lower repeated-build latency locally
+## Confirmed result: 23.8% lower repeated-build latency locally
 
-On this Windows ARM VM, the complete warm-cache package build fell from **3.831 s to 2.869 s median** across seven alternating trials per variant, a **25.1% reduction**. All 16 builds (two preparations plus 14 timed builds) produced equivalent normalized sdist/wheel contents with valid wheel `RECORD` hashes and preserved sdist executable bits. This is a build-only result after backend provisioning, not a cold-install or end-to-end CI speedup. [Raw report](results/local-01/report.json).
+On this Windows ARM VM, the complete warm-cache package build fell from **3.629 s to 2.764 s median** across seven alternating trials per variant, a **23.8% reduction** in the committed-harness confirmation run. All 16 builds (two preparations plus 14 timed builds) produced equivalent normalized sdist/wheel contents with valid wheel `RECORD` hashes and preserved sdist executable bits. This is a build-only result after backend provisioning, not a cold-install or end-to-end CI speedup. [Confirmation report](results/local-02/report.json).
 
-FastAPI builds a pure-Python distribution, not a native executable. Adding compiler workers cannot accelerate compilation that does not exist. The measured candidate retains PDM, the source distribution and the wheel built from that source distribution; it avoids repeated build-environment isolation using a dedicated pre-provisioned backend. Windows/macOS parity remains **unproven**: GitHub rejected the workflow push because the active login lacks the `workflow` OAuth scope, and the user was unavailable to authorize it.
+FastAPI builds a pure-Python distribution, not a native executable. Adding compiler workers cannot accelerate compilation that does not exist. The measured candidate retains PDM, the source distribution and the wheel built from that source distribution; it avoids repeated build-environment isolation using a dedicated pre-provisioned backend. Windows/macOS parity remains **unproven** pending CI measurements. The initial workflow-scope blocker is now resolved through the user's authorization.
 
 The local machine is a 16-core Cobalt 100 Windows ARM64 VM, not the eventual approximately 20-core physical Windows machine. Native CPython 3.13.15 works. Verified official ARM64 uv 0.13.6 and Ruff 0.17.3 are installed locally. PDM 2.5.0 was self-built from its verified official GitHub revision because PyPI wheel transport is blocked. Standard-library profiling was executed; Windows Performance Recorder and Analyzer are present.
 
 | Variant | Median | Observed range | Scope |
 |---|---:|---:|---|
-| Isolated PDM baseline | 3.831 s | 3.617-3.955 s | Default complete `uv build`, warmed local backend wheel cache |
-| Dedicated backend, no repeated isolation | 2.869 s | 2.681-3.013 s | Same Python, PDM version, source snapshot and archive verification |
+| Isolated PDM baseline | 3.629 s | 3.571-3.684 s | Default complete `uv build`, warmed local backend wheel cache |
+| Dedicated backend, no repeated isolation | 2.764 s | 2.660-2.867 s | Same Python, PDM version, source snapshot and archive verification |
 
-This saves about **0.962 s per repeated build** on this host. The comparison excludes backend acquisition/installation, and a single release build may not repay that bootstrap cost. Initial preparation builds were 3.780 s and 2.848 s respectively, but these also used a pre-downloaded local wheelhouse and are **not** cold dependency-install measurements. No full test suite or installed-FastAPI runtime smoke check ran locally: the required PyPI wheels remain unavailable.
+This saves about **0.865 s per repeated build** on this host. The first, exploratory run independently observed 3.831 s to 2.869 s (25.1% lower), but has the harness-provenance limitation below; it is retained rather than selected as the headline. [Exploratory report](results/local-01/report.json). The comparison excludes backend acquisition/installation, and a single release build may not repay that bootstrap cost. Preparation builds also used a pre-downloaded local wheelhouse and are **not** cold dependency-install measurements. No full test suite or installed-FastAPI runtime smoke check ran locally: the required PyPI wheels remain unavailable.
 
 ## Scope and evidence
 
-The FastAPI base revision is `79cab5bed28b24d92c185d236feb33f5783dfeb3`. The first measured immutable snapshot is local commit `cb9309673c4c06f71cae4fbc4461ba783ff91b49`, which adds experiment files but changes no FastAPI package source. That first run executed a locally modified harness while Ruff formatting ran in parallel; the recorded dirty status is retained, and its exact executed harness bytes were not separately captured. A subsequent committed-harness run addresses that provenance limitation instead of presenting the initial source SHA as the harness identity. The [workboard](WORKBOARD.md) owns goals, the expert operating method, task dependencies and current execution state. Raw local host evidence is in [host.json](results/environment/host.json).
+The FastAPI base revision is `79cab5bed28b24d92c185d236feb33f5783dfeb3`. The exploratory snapshot is local commit `cb9309673c4c06f71cae4fbc4461ba783ff91b49`, which adds experiment files but changes no FastAPI package source. That run executed a locally modified harness while Ruff formatting ran in parallel; the recorded dirty status is retained, and its exact executed harness bytes were not separately captured.
+
+The confirmation run uses committed snapshot `248555dc744c6fd74acde93254101ce7ff4484d0`, again without package-source changes. It saves the executed harness bytes and SHA256; that fingerprint was checked against `git show` of the same commit and matched. No edits or formatting were performed during this confirmation run. Top-level [GOALS.md](../GOALS.md) and [PERSONA.md](../PERSONA.md) own the task definition; the [workboard](WORKBOARD.md) owns execution state. Initial host inventory (not the measured source revision) is in [host.json](results/environment/host.json).
 
 | Question | Observed answer | Repository evidence |
 |---|---|---|

@@ -1,13 +1,15 @@
-# CI is prepared but authorization prevented execution
+# CI execution and authorization
 
-The active GitHub OAuth token lacks `workflow` scope. GitHub rejected the authenticated push with:
+The user completed GitHub authorization, and `workflow` scope is now verified on the active `yeelam-gordon` account. The prepared experiment can now be pushed and dispatched. Results remain pending until runner execution completes.
+
+The initial GitHub OAuth token lacked `workflow` scope. GitHub rejected the first authenticated push with:
 
 ```text
 refusing to allow an OAuth App to create or update workflow
 .github/workflows/arm-build-experiment.yml without workflow scope
 ```
 
-No experiment workflow was created remotely, no runner was started, and no Windows/Mac parity result exists. The fork itself was created successfully; upstream permissions and workflows were not changed. The user was unavailable when authorization was requested, so no interactive authentication flow was started.
+That rejected attempt created no remote workflow or runner. The user subsequently completed authorization after a dialog request; redundant agent-started authentication/dialog helpers were stopped. Upstream permissions and workflows were not changed.
 
 ## Authorize and run
 
