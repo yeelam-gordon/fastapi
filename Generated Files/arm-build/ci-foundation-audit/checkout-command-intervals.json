@@ -1,0 +1,1772 @@
+{
+  "source": {
+    "path": "workflow-console.log",
+    "sha256": "00e379f133cb5e6a61cb97f4fe4e550bbafe61abdcba16c58ee960da52834a66",
+    "bytes": 75812
+  },
+  "method": "Command emission to next emission/group boundary; first noncommand logged event may be an action message, not subprocess output. No exact process durations inferred. Post-checkout cleanup ends at a next-phase marker, not a process end. Nested git in foreach strings is not counted as separately observed subprocesses. No Node command emissions in these ranges.",
+  "groups": [
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "lines": [
+        352,
+        367
+      ],
+      "command_count": 11,
+      "classes": {
+        "config": 8,
+        "submodule-foreach": 3
+      },
+      "emission_interval_sums": {
+        "config": 0.428349,
+        "submodule-foreach": 4.753191
+      },
+      "interval_note": "Not process duration; includes unallocated action/runner/filesystem/logging overhead."
+    },
+    {
+      "os": "windows",
+      "group": "Checking out the ref",
+      "lines": [
+        381,
+        468
+      ],
+      "command_count": 1,
+      "classes": {
+        "checkout": 1
+      },
+      "emission_interval_sums": {
+        "checkout": 5.642363
+      },
+      "interval_note": "Not process duration; includes unallocated action/runner/filesystem/logging overhead."
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "lines": [
+        471,
+        498
+      ],
+      "command_count": 14,
+      "classes": {
+        "config": 11,
+        "submodule-foreach": 3
+      },
+      "emission_interval_sums": {
+        "config": 0.578756,
+        "submodule-foreach": 3.788339
+      },
+      "interval_note": "Not process duration; includes unallocated action/runner/filesystem/logging overhead."
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "lines": [
+        686,
+        700
+      ],
+      "command_count": 8,
+      "classes": {
+        "version": 1,
+        "config": 4,
+        "submodule-foreach": 3
+      },
+      "emission_interval_sums": {
+        "config": 0.206548,
+        "submodule-foreach": 3.6493149999999996,
+        "version": 0.054751
+      },
+      "interval_note": "Not process duration; includes unallocated action/runner/filesystem/logging overhead."
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "lines": [
+        85,
+        100
+      ],
+      "command_count": 11,
+      "classes": {
+        "config": 8,
+        "submodule-foreach": 3
+      },
+      "emission_interval_sums": {
+        "config": 0.047439999999999996,
+        "submodule-foreach": 0.246567
+      },
+      "interval_note": "Not process duration; includes unallocated action/runner/filesystem/logging overhead."
+    },
+    {
+      "os": "macos",
+      "group": "Checking out the ref",
+      "lines": [
+        114,
+        118
+      ],
+      "command_count": 1,
+      "classes": {
+        "checkout": 1
+      },
+      "emission_interval_sums": {
+        "checkout": 0.414599
+      },
+      "interval_note": "Not process duration; includes unallocated action/runner/filesystem/logging overhead."
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "lines": [
+        121,
+        148
+      ],
+      "command_count": 14,
+      "classes": {
+        "config": 11,
+        "submodule-foreach": 3
+      },
+      "emission_interval_sums": {
+        "config": 0.054669999999999996,
+        "submodule-foreach": 0.19153599999999998
+      },
+      "interval_note": "Not process duration; includes unallocated action/runner/filesystem/logging overhead."
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "lines": [
+        265,
+        280
+      ],
+      "command_count": 8,
+      "classes": {
+        "version": 1,
+        "config": 4,
+        "submodule-foreach": 3
+      },
+      "emission_interval_sums": {
+        "config": 0.023695,
+        "submodule-foreach": 0.2208,
+        "version": 0.004704
+      },
+      "interval_note": "Not process duration; includes unallocated action/runner/filesystem/logging overhead."
+    }
+  ],
+  "commands": [
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 1,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp core\\.sshCommand",
+      "start": {
+        "line": 354,
+        "timestamp": "2026-10-29T03:52:45.4198898Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp core\\.sshCommand"
+      },
+      "next_boundary": {
+        "line": 355,
+        "timestamp": "2026-10-29T03:52:45.4734759Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.053586,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 2,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\"",
+      "start": {
+        "line": 355,
+        "timestamp": "2026-10-29T03:52:45.4734759Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\""
+      },
+      "next_boundary": {
+        "line": 357,
+        "timestamp": "2026-10-29T03:52:47.7673647Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 2.293889,
+      "first_logged_noncommand": {
+        "line": 356,
+        "timestamp": "2026-10-29T03:52:47.7671292Z",
+        "message": "Removing HTTP extra header"
+      },
+      "start_to_first_logged_noncommand_seconds": 2.293654,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 3,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+      "start": {
+        "line": 357,
+        "timestamp": "2026-10-29T03:52:47.7673647Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "next_boundary": {
+        "line": 358,
+        "timestamp": "2026-10-29T03:52:47.8178983Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.050534,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 4,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\"",
+      "start": {
+        "line": 358,
+        "timestamp": "2026-10-29T03:52:47.8178983Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\""
+      },
+      "next_boundary": {
+        "line": 360,
+        "timestamp": "2026-10-29T03:52:49.0579079Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 1.240009,
+      "first_logged_noncommand": {
+        "line": 359,
+        "timestamp": "2026-10-29T03:52:49.0568108Z",
+        "message": "Removing includeIf entries pointing to credentials config files"
+      },
+      "start_to_first_logged_noncommand_seconds": 1.238912,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 5,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:",
+      "start": {
+        "line": 360,
+        "timestamp": "2026-10-29T03:52:49.0579079Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "next_boundary": {
+        "line": 361,
+        "timestamp": "2026-10-29T03:52:49.1101710Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.052264,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 6,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\"",
+      "start": {
+        "line": 361,
+        "timestamp": "2026-10-29T03:52:49.1101710Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\""
+      },
+      "next_boundary": {
+        "line": 362,
+        "timestamp": "2026-10-29T03:52:50.3294644Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --file C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config http.https://github.com/.extraheader \"AUTHORIZATION: basic ***\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 1.219293,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 7,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --file C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config http.https://github.com/.extraheader \"AUTHORIZATION: basic ***\"",
+      "start": {
+        "line": 362,
+        "timestamp": "2026-10-29T03:52:50.3294644Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --file C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config http.https://github.com/.extraheader \"AUTHORIZATION: basic ***\""
+      },
+      "next_boundary": {
+        "line": 363,
+        "timestamp": "2026-10-29T03:52:50.3836309Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git.path C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.054166,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 8,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git.path C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config",
+      "start": {
+        "line": 363,
+        "timestamp": "2026-10-29T03:52:50.3836309Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git.path C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "next_boundary": {
+        "line": 364,
+        "timestamp": "2026-10-29T03:52:50.4380956Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.054465,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 9,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config",
+      "start": {
+        "line": 364,
+        "timestamp": "2026-10-29T03:52:50.4380956Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "next_boundary": {
+        "line": 365,
+        "timestamp": "2026-10-29T03:52:50.4918445Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.053749,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 10,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config",
+      "start": {
+        "line": 365,
+        "timestamp": "2026-10-29T03:52:50.4918445Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "next_boundary": {
+        "line": 366,
+        "timestamp": "2026-10-29T03:52:50.5473992Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.055555,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Setting up auth",
+      "ordinal": 11,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config",
+      "start": {
+        "line": 366,
+        "timestamp": "2026-10-29T03:52:50.5473992Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "next_boundary": {
+        "line": 367,
+        "timestamp": "2026-10-29T03:52:50.6014294Z",
+        "message": "##[endgroup]"
+      },
+      "boundary_kind": "group-end-marker",
+      "emission_interval_seconds": 0.05403,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Checking out the ref",
+      "ordinal": 1,
+      "class": "checkout",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" checkout --progress --force -B perf/windows-arm-build-experiment refs/remotes/origin/perf/windows-arm-build-experiment",
+      "start": {
+        "line": 382,
+        "timestamp": "2026-10-29T03:52:53.4479023Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" checkout --progress --force -B perf/windows-arm-build-experiment refs/remotes/origin/perf/windows-arm-build-experiment"
+      },
+      "next_boundary": {
+        "line": 468,
+        "timestamp": "2026-10-29T03:52:59.0902654Z",
+        "message": "##[endgroup]"
+      },
+      "boundary_kind": "group-end-marker",
+      "emission_interval_seconds": 5.642363,
+      "first_logged_noncommand": {
+        "line": 383,
+        "timestamp": "2026-10-29T03:52:54.5471994Z",
+        "message": "Updating files:  23% (806/3390)"
+      },
+      "start_to_first_logged_noncommand_seconds": 1.099297,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 1,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp core\\.sshCommand",
+      "start": {
+        "line": 473,
+        "timestamp": "2026-10-29T03:52:59.2117945Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp core\\.sshCommand"
+      },
+      "next_boundary": {
+        "line": 474,
+        "timestamp": "2026-10-29T03:52:59.2615699Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.049775,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 2,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\"",
+      "start": {
+        "line": 474,
+        "timestamp": "2026-10-29T03:52:59.2615699Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\""
+      },
+      "next_boundary": {
+        "line": 476,
+        "timestamp": "2026-10-29T03:53:00.5380892Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 1.27652,
+      "first_logged_noncommand": {
+        "line": 475,
+        "timestamp": "2026-10-29T03:53:00.5372706Z",
+        "message": "Removing HTTP extra header"
+      },
+      "start_to_first_logged_noncommand_seconds": 1.275701,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 3,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+      "start": {
+        "line": 476,
+        "timestamp": "2026-10-29T03:53:00.5380892Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "next_boundary": {
+        "line": 477,
+        "timestamp": "2026-10-29T03:53:00.5872750Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.049186,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 4,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\"",
+      "start": {
+        "line": 477,
+        "timestamp": "2026-10-29T03:53:00.5872750Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\""
+      },
+      "next_boundary": {
+        "line": 479,
+        "timestamp": "2026-10-29T03:53:01.8348565Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 1.247581,
+      "first_logged_noncommand": {
+        "line": 478,
+        "timestamp": "2026-10-29T03:53:01.8340002Z",
+        "message": "Removing includeIf entries pointing to credentials config files"
+      },
+      "start_to_first_logged_noncommand_seconds": 1.246725,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 5,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:",
+      "start": {
+        "line": 479,
+        "timestamp": "2026-10-29T03:53:01.8348565Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "next_boundary": {
+        "line": 484,
+        "timestamp": "2026-10-29T03:53:01.8846256Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git.path"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.049769,
+      "first_logged_noncommand": {
+        "line": 480,
+        "timestamp": "2026-10-29T03:53:01.8784002Z",
+        "message": "includeif.gitdir:C:/a/fastapi/fastapi/.git.path"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.043544,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 6,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git.path",
+      "start": {
+        "line": 484,
+        "timestamp": "2026-10-29T03:53:01.8846256Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git.path"
+      },
+      "next_boundary": {
+        "line": 486,
+        "timestamp": "2026-10-29T03:53:01.9383665Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git.path C\\:\\\\a\\\\_temp\\\\git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.053741,
+      "first_logged_noncommand": {
+        "line": 485,
+        "timestamp": "2026-10-29T03:53:01.9322683Z",
+        "message": "C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.047643,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 7,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git.path C\\:\\\\a\\\\_temp\\\\git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config",
+      "start": {
+        "line": 486,
+        "timestamp": "2026-10-29T03:53:01.9383665Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git.path C\\:\\\\a\\\\_temp\\\\git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config"
+      },
+      "next_boundary": {
+        "line": 487,
+        "timestamp": "2026-10-29T03:53:01.9956979Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.057331,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 8,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path",
+      "start": {
+        "line": 487,
+        "timestamp": "2026-10-29T03:53:01.9956979Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path"
+      },
+      "next_boundary": {
+        "line": 489,
+        "timestamp": "2026-10-29T03:53:02.0480226Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C\\:\\\\a\\\\_temp\\\\git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.052325,
+      "first_logged_noncommand": {
+        "line": 488,
+        "timestamp": "2026-10-29T03:53:02.0419919Z",
+        "message": "C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.046294,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 9,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C\\:\\\\a\\\\_temp\\\\git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config",
+      "start": {
+        "line": 489,
+        "timestamp": "2026-10-29T03:53:02.0480226Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C\\:\\\\a\\\\_temp\\\\git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config"
+      },
+      "next_boundary": {
+        "line": 490,
+        "timestamp": "2026-10-29T03:53:02.1053291Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:/github/workspace/.git.path"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.057307,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 10,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:/github/workspace/.git.path",
+      "start": {
+        "line": 490,
+        "timestamp": "2026-10-29T03:53:02.1053291Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:/github/workspace/.git.path"
+      },
+      "next_boundary": {
+        "line": 492,
+        "timestamp": "2026-10-29T03:53:02.1561697Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:/github/workspace/.git.path \\/github\\/runner_temp\\/git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.05084,
+      "first_logged_noncommand": {
+        "line": 491,
+        "timestamp": "2026-10-29T03:53:02.1506174Z",
+        "message": "/github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.045288,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 11,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:/github/workspace/.git.path \\/github\\/runner_temp\\/git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config",
+      "start": {
+        "line": 492,
+        "timestamp": "2026-10-29T03:53:02.1561697Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:/github/workspace/.git.path \\/github\\/runner_temp\\/git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config"
+      },
+      "next_boundary": {
+        "line": 493,
+        "timestamp": "2026-10-29T03:53:02.2086928Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.052523,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 12,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path",
+      "start": {
+        "line": 493,
+        "timestamp": "2026-10-29T03:53:02.2086928Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path"
+      },
+      "next_boundary": {
+        "line": 495,
+        "timestamp": "2026-10-29T03:53:02.2608431Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \\/github\\/runner_temp\\/git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.052151,
+      "first_logged_noncommand": {
+        "line": 494,
+        "timestamp": "2026-10-29T03:53:02.2551755Z",
+        "message": "/github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.046483,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 13,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \\/github\\/runner_temp\\/git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config",
+      "start": {
+        "line": 495,
+        "timestamp": "2026-10-29T03:53:02.2608431Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \\/github\\/runner_temp\\/git\\-credentials\\-510d415a\\-babf\\-4655\\-ab87\\-6b9919e4e420\\.config"
+      },
+      "next_boundary": {
+        "line": 496,
+        "timestamp": "2026-10-29T03:53:02.3146515Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.053808,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "Removing auth",
+      "ordinal": 14,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\"",
+      "start": {
+        "line": 496,
+        "timestamp": "2026-10-29T03:53:02.3146515Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\""
+      },
+      "next_boundary": {
+        "line": 498,
+        "timestamp": "2026-10-29T03:53:03.5788891Z",
+        "message": "##[endgroup]"
+      },
+      "boundary_kind": "group-end-marker",
+      "emission_interval_seconds": 1.264238,
+      "first_logged_noncommand": {
+        "line": 497,
+        "timestamp": "2026-10-29T03:53:03.5768143Z",
+        "message": "Removing credentials config 'C:\\a\\_temp\\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config'"
+      },
+      "start_to_first_logged_noncommand_seconds": 1.262163,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "ordinal": 1,
+      "class": "version",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" version",
+      "start": {
+        "line": 686,
+        "timestamp": "2026-10-29T03:54:40.2850000Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" version"
+      },
+      "next_boundary": {
+        "line": 690,
+        "timestamp": "2026-10-29T03:54:40.3397517Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --global --add safe.directory C:\\a\\fastapi\\fastapi"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.054751,
+      "first_logged_noncommand": {
+        "line": 687,
+        "timestamp": "2026-10-29T03:54:40.3307992Z",
+        "message": "git version 2.56.0.windows.3"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.045799,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "ordinal": 2,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --global --add safe.directory C:\\a\\fastapi\\fastapi",
+      "start": {
+        "line": 690,
+        "timestamp": "2026-10-29T03:54:40.3397517Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --global --add safe.directory C:\\a\\fastapi\\fastapi"
+      },
+      "next_boundary": {
+        "line": 692,
+        "timestamp": "2026-10-29T03:54:40.3914085Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp core\\.sshCommand"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.051657,
+      "first_logged_noncommand": {
+        "line": 691,
+        "timestamp": "2026-10-29T03:54:40.3902194Z",
+        "message": "Removing SSH command configuration"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.050468,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "ordinal": 3,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp core\\.sshCommand",
+      "start": {
+        "line": 692,
+        "timestamp": "2026-10-29T03:54:40.3914085Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp core\\.sshCommand"
+      },
+      "next_boundary": {
+        "line": 693,
+        "timestamp": "2026-10-29T03:54:40.4421963Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.050788,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "ordinal": 4,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\"",
+      "start": {
+        "line": 693,
+        "timestamp": "2026-10-29T03:54:40.4421963Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\\\"\""
+      },
+      "next_boundary": {
+        "line": 695,
+        "timestamp": "2026-10-29T03:54:41.6671748Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 1.224978,
+      "first_logged_noncommand": {
+        "line": 694,
+        "timestamp": "2026-10-29T03:54:41.6660976Z",
+        "message": "Removing HTTP extra header"
+      },
+      "start_to_first_logged_noncommand_seconds": 1.223901,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "ordinal": 5,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+      "start": {
+        "line": 695,
+        "timestamp": "2026-10-29T03:54:41.6671748Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "next_boundary": {
+        "line": 696,
+        "timestamp": "2026-10-29T03:54:41.7202721Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.053098,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "ordinal": 6,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\"",
+      "start": {
+        "line": 696,
+        "timestamp": "2026-10-29T03:54:41.7202721Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"sh -c \\\"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\\\"\""
+      },
+      "next_boundary": {
+        "line": 698,
+        "timestamp": "2026-10-29T03:54:42.9554830Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 1.235211,
+      "first_logged_noncommand": {
+        "line": 697,
+        "timestamp": "2026-10-29T03:54:42.9543081Z",
+        "message": "Removing includeIf entries pointing to credentials config files"
+      },
+      "start_to_first_logged_noncommand_seconds": 1.234036,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "ordinal": 7,
+      "class": "config",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:",
+      "start": {
+        "line": 698,
+        "timestamp": "2026-10-29T03:54:42.9554830Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "next_boundary": {
+        "line": 699,
+        "timestamp": "2026-10-29T03:54:43.0064880Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.051005,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "windows",
+      "group": "post-checkout cleanup",
+      "ordinal": 8,
+      "class": "submodule-foreach",
+      "command": "\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\"",
+      "start": {
+        "line": 699,
+        "timestamp": "2026-10-29T03:54:43.0064880Z",
+        "message": "[command]\"C:\\Program Files\\Git\\bin\\git.exe\" submodule foreach --recursive \"git config --local --show-origin --name-only --get-regexp remote.origin.url\""
+      },
+      "next_boundary": {
+        "line": 700,
+        "timestamp": "2026-10-29T03:54:44.1956143Z",
+        "message": "Cleaning up orphan processes"
+      },
+      "boundary_kind": "next-phase-marker-no-group-end",
+      "emission_interval_seconds": 1.189126,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 1,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+      "start": {
+        "line": 87,
+        "timestamp": "2026-10-29T03:52:44.8572820Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\\.sshCommand"
+      },
+      "next_boundary": {
+        "line": 88,
+        "timestamp": "2026-10-29T03:52:44.8650240Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.007742,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 2,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+      "start": {
+        "line": 88,
+        "timestamp": "2026-10-29T03:52:44.8650240Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+      },
+      "next_boundary": {
+        "line": 90,
+        "timestamp": "2026-10-29T03:52:44.9665830Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.101559,
+      "first_logged_noncommand": {
+        "line": 89,
+        "timestamp": "2026-10-29T03:52:44.9662450Z",
+        "message": "Removing HTTP extra header"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.101221,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 3,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+      "start": {
+        "line": 90,
+        "timestamp": "2026-10-29T03:52:44.9665830Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "next_boundary": {
+        "line": 91,
+        "timestamp": "2026-10-29T03:52:44.9744560Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.007873,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 4,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+      "start": {
+        "line": 91,
+        "timestamp": "2026-10-29T03:52:44.9744560Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+      },
+      "next_boundary": {
+        "line": 93,
+        "timestamp": "2026-10-29T03:52:45.0485340Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.074078,
+      "first_logged_noncommand": {
+        "line": 92,
+        "timestamp": "2026-10-29T03:52:45.0482450Z",
+        "message": "Removing includeIf entries pointing to credentials config files"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.073789,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 5,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:",
+      "start": {
+        "line": 93,
+        "timestamp": "2026-10-29T03:52:45.0485340Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "next_boundary": {
+        "line": 94,
+        "timestamp": "2026-10-29T03:52:45.0546850Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.006151,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 6,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url",
+      "start": {
+        "line": 94,
+        "timestamp": "2026-10-29T03:52:45.0546850Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url"
+      },
+      "next_boundary": {
+        "line": 95,
+        "timestamp": "2026-10-29T03:52:45.1256150Z",
+        "message": "[command]/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config http.https://github.com/.extraheader AUTHORIZATION: basic ***"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.07093,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 7,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config http.https://github.com/.extraheader AUTHORIZATION: basic ***",
+      "start": {
+        "line": 95,
+        "timestamp": "2026-10-29T03:52:45.1256150Z",
+        "message": "[command]/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config http.https://github.com/.extraheader AUTHORIZATION: basic ***"
+      },
+      "next_boundary": {
+        "line": 96,
+        "timestamp": "2026-10-29T03:52:45.1308720Z",
+        "message": "[command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git.path /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.005257,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 8,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git.path /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config",
+      "start": {
+        "line": 96,
+        "timestamp": "2026-10-29T03:52:45.1308720Z",
+        "message": "[command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git.path /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "next_boundary": {
+        "line": 97,
+        "timestamp": "2026-10-29T03:52:45.1372610Z",
+        "message": "[command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.006389,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 9,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config",
+      "start": {
+        "line": 97,
+        "timestamp": "2026-10-29T03:52:45.1372610Z",
+        "message": "[command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "next_boundary": {
+        "line": 98,
+        "timestamp": "2026-10-29T03:52:45.1419570Z",
+        "message": "[command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004696,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 10,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config",
+      "start": {
+        "line": 98,
+        "timestamp": "2026-10-29T03:52:45.1419570Z",
+        "message": "[command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "next_boundary": {
+        "line": 99,
+        "timestamp": "2026-10-29T03:52:45.1467580Z",
+        "message": "[command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004801,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Setting up auth",
+      "ordinal": 11,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config",
+      "start": {
+        "line": 99,
+        "timestamp": "2026-10-29T03:52:45.1467580Z",
+        "message": "[command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "next_boundary": {
+        "line": 100,
+        "timestamp": "2026-10-29T03:52:45.1512890Z",
+        "message": "##[endgroup]"
+      },
+      "boundary_kind": "group-end-marker",
+      "emission_interval_seconds": 0.004531,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Checking out the ref",
+      "ordinal": 1,
+      "class": "checkout",
+      "command": "/opt/homebrew/bin/git checkout --progress --force -B perf/windows-arm-build-experiment refs/remotes/origin/perf/windows-arm-build-experiment",
+      "start": {
+        "line": 115,
+        "timestamp": "2026-10-29T03:52:47.2630380Z",
+        "message": "[command]/opt/homebrew/bin/git checkout --progress --force -B perf/windows-arm-build-experiment refs/remotes/origin/perf/windows-arm-build-experiment"
+      },
+      "next_boundary": {
+        "line": 118,
+        "timestamp": "2026-10-29T03:52:47.6776370Z",
+        "message": "##[endgroup]"
+      },
+      "boundary_kind": "group-end-marker",
+      "emission_interval_seconds": 0.414599,
+      "first_logged_noncommand": {
+        "line": 116,
+        "timestamp": "2026-10-29T03:52:47.6765310Z",
+        "message": "Switched to a new branch 'perf/windows-arm-build-experiment'"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.413493,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 1,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+      "start": {
+        "line": 123,
+        "timestamp": "2026-10-29T03:52:47.6965980Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\\.sshCommand"
+      },
+      "next_boundary": {
+        "line": 124,
+        "timestamp": "2026-10-29T03:52:47.7026700Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.006072,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 2,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+      "start": {
+        "line": 124,
+        "timestamp": "2026-10-29T03:52:47.7026700Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+      },
+      "next_boundary": {
+        "line": 126,
+        "timestamp": "2026-10-29T03:52:47.7767110Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.074041,
+      "first_logged_noncommand": {
+        "line": 125,
+        "timestamp": "2026-10-29T03:52:47.7764820Z",
+        "message": "Removing HTTP extra header"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.073812,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 3,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+      "start": {
+        "line": 126,
+        "timestamp": "2026-10-29T03:52:47.7767110Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "next_boundary": {
+        "line": 127,
+        "timestamp": "2026-10-29T03:52:47.7815240Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004813,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 4,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+      "start": {
+        "line": 127,
+        "timestamp": "2026-10-29T03:52:47.7815240Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+      },
+      "next_boundary": {
+        "line": 129,
+        "timestamp": "2026-10-29T03:52:47.8421910Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.060667,
+      "first_logged_noncommand": {
+        "line": 128,
+        "timestamp": "2026-10-29T03:52:47.8417680Z",
+        "message": "Removing includeIf entries pointing to credentials config files"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.060244,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 5,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:",
+      "start": {
+        "line": 129,
+        "timestamp": "2026-10-29T03:52:47.8421910Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "next_boundary": {
+        "line": 134,
+        "timestamp": "2026-10-29T03:52:47.8468920Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004701,
+      "first_logged_noncommand": {
+        "line": 130,
+        "timestamp": "2026-10-29T03:52:47.8463270Z",
+        "message": "includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.004136,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 6,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path",
+      "start": {
+        "line": 134,
+        "timestamp": "2026-10-29T03:52:47.8468920Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path"
+      },
+      "next_boundary": {
+        "line": 136,
+        "timestamp": "2026-10-29T03:52:47.8522240Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path \\/Users\\/runner\\/work\\/_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.005332,
+      "first_logged_noncommand": {
+        "line": 135,
+        "timestamp": "2026-10-29T03:52:47.8516200Z",
+        "message": "/Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.004728,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 7,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path \\/Users\\/runner\\/work\\/_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config",
+      "start": {
+        "line": 136,
+        "timestamp": "2026-10-29T03:52:47.8522240Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path \\/Users\\/runner\\/work\\/_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config"
+      },
+      "next_boundary": {
+        "line": 137,
+        "timestamp": "2026-10-29T03:52:47.8573580Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.005134,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 8,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path",
+      "start": {
+        "line": 137,
+        "timestamp": "2026-10-29T03:52:47.8573580Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path"
+      },
+      "next_boundary": {
+        "line": 139,
+        "timestamp": "2026-10-29T03:52:47.8625110Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path \\/Users\\/runner\\/work\\/_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.005153,
+      "first_logged_noncommand": {
+        "line": 138,
+        "timestamp": "2026-10-29T03:52:47.8616380Z",
+        "message": "/Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.00428,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 9,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path \\/Users\\/runner\\/work\\/_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config",
+      "start": {
+        "line": 139,
+        "timestamp": "2026-10-29T03:52:47.8625110Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path \\/Users\\/runner\\/work\\/_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config"
+      },
+      "next_boundary": {
+        "line": 140,
+        "timestamp": "2026-10-29T03:52:47.8677540Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.005243,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 10,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path",
+      "start": {
+        "line": 140,
+        "timestamp": "2026-10-29T03:52:47.8677540Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path"
+      },
+      "next_boundary": {
+        "line": 142,
+        "timestamp": "2026-10-29T03:52:47.8723000Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \\/github\\/runner_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004546,
+      "first_logged_noncommand": {
+        "line": 141,
+        "timestamp": "2026-10-29T03:52:47.8719410Z",
+        "message": "/github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.004187,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 11,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \\/github\\/runner_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config",
+      "start": {
+        "line": 142,
+        "timestamp": "2026-10-29T03:52:47.8723000Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \\/github\\/runner_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config"
+      },
+      "next_boundary": {
+        "line": 143,
+        "timestamp": "2026-10-29T03:52:47.8769170Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004617,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 12,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path",
+      "start": {
+        "line": 143,
+        "timestamp": "2026-10-29T03:52:47.8769170Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path"
+      },
+      "next_boundary": {
+        "line": 145,
+        "timestamp": "2026-10-29T03:52:47.8813400Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \\/github\\/runner_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004423,
+      "first_logged_noncommand": {
+        "line": 144,
+        "timestamp": "2026-10-29T03:52:47.8809100Z",
+        "message": "/github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.003993,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 13,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \\/github\\/runner_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config",
+      "start": {
+        "line": 145,
+        "timestamp": "2026-10-29T03:52:47.8813400Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \\/github\\/runner_temp\\/git\\-credentials\\-de70f7c8\\-bc79\\-4f6e\\-aefe\\-dcf8ae982d15\\.config"
+      },
+      "next_boundary": {
+        "line": 146,
+        "timestamp": "2026-10-29T03:52:47.8859760Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004636,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "Removing auth",
+      "ordinal": 14,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url",
+      "start": {
+        "line": 146,
+        "timestamp": "2026-10-29T03:52:47.8859760Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url"
+      },
+      "next_boundary": {
+        "line": 148,
+        "timestamp": "2026-10-29T03:52:47.9428040Z",
+        "message": "##[endgroup]"
+      },
+      "boundary_kind": "group-end-marker",
+      "emission_interval_seconds": 0.056828,
+      "first_logged_noncommand": {
+        "line": 147,
+        "timestamp": "2026-10-29T03:52:47.9418710Z",
+        "message": "Removing credentials config '/Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config'"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.055895,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "ordinal": 1,
+      "class": "version",
+      "command": "/opt/homebrew/bin/git version",
+      "start": {
+        "line": 265,
+        "timestamp": "2026-10-29T03:53:12.5550970Z",
+        "message": "[command]/opt/homebrew/bin/git version"
+      },
+      "next_boundary": {
+        "line": 270,
+        "timestamp": "2026-10-29T03:53:12.5598010Z",
+        "message": "[command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/fastapi/fastapi"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004704,
+      "first_logged_noncommand": {
+        "line": 266,
+        "timestamp": "2026-10-29T03:53:12.5572330Z",
+        "message": "git version 2.55.0"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.002136,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "ordinal": 2,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/fastapi/fastapi",
+      "start": {
+        "line": 270,
+        "timestamp": "2026-10-29T03:53:12.5598010Z",
+        "message": "[command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/fastapi/fastapi"
+      },
+      "next_boundary": {
+        "line": 272,
+        "timestamp": "2026-10-29T03:53:12.5663710Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\\.sshCommand"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.00657,
+      "first_logged_noncommand": {
+        "line": 271,
+        "timestamp": "2026-10-29T03:53:12.5659310Z",
+        "message": "Removing SSH command configuration"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.00613,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "ordinal": 3,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp core\\.sshCommand",
+      "start": {
+        "line": 272,
+        "timestamp": "2026-10-29T03:53:12.5663710Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\\.sshCommand"
+      },
+      "next_boundary": {
+        "line": 273,
+        "timestamp": "2026-10-29T03:53:12.5751360Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.008765,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "ordinal": 4,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"",
+      "start": {
+        "line": 273,
+        "timestamp": "2026-10-29T03:53:12.5751360Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+      },
+      "next_boundary": {
+        "line": 275,
+        "timestamp": "2026-10-29T03:53:12.6647670Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.089631,
+      "first_logged_noncommand": {
+        "line": 274,
+        "timestamp": "2026-10-29T03:53:12.6647110Z",
+        "message": "Removing HTTP extra header"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.089575,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "ordinal": 5,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader",
+      "start": {
+        "line": 275,
+        "timestamp": "2026-10-29T03:53:12.6647670Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader"
+      },
+      "next_boundary": {
+        "line": 276,
+        "timestamp": "2026-10-29T03:53:12.6684740Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.003707,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "ordinal": 6,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"",
+      "start": {
+        "line": 276,
+        "timestamp": "2026-10-29T03:53:12.6684740Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+      },
+      "next_boundary": {
+        "line": 278,
+        "timestamp": "2026-10-29T03:53:12.7362180Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.067744,
+      "first_logged_noncommand": {
+        "line": 277,
+        "timestamp": "2026-10-29T03:53:12.7358420Z",
+        "message": "Removing includeIf entries pointing to credentials config files"
+      },
+      "start_to_first_logged_noncommand_seconds": 0.067368,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "ordinal": 7,
+      "class": "config",
+      "command": "/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:",
+      "start": {
+        "line": 278,
+        "timestamp": "2026-10-29T03:53:12.7362180Z",
+        "message": "[command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:"
+      },
+      "next_boundary": {
+        "line": 279,
+        "timestamp": "2026-10-29T03:53:12.7408710Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url"
+      },
+      "boundary_kind": "next-command-emission",
+      "emission_interval_seconds": 0.004653,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    },
+    {
+      "os": "macos",
+      "group": "post-checkout cleanup",
+      "ordinal": 8,
+      "class": "submodule-foreach",
+      "command": "/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url",
+      "start": {
+        "line": 279,
+        "timestamp": "2026-10-29T03:53:12.7408710Z",
+        "message": "[command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url"
+      },
+      "next_boundary": {
+        "line": 280,
+        "timestamp": "2026-10-29T03:53:12.8042960Z",
+        "message": "Cleaning up orphan processes"
+      },
+      "boundary_kind": "next-phase-marker-no-group-end",
+      "emission_interval_seconds": 0.063425,
+      "first_logged_noncommand": null,
+      "start_to_first_logged_noncommand_seconds": null,
+      "exact_process_duration_seconds": null
+    }
+  ]
+}
