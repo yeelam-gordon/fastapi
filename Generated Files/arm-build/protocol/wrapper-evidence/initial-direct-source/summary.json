@@ -1,0 +1,58 @@
+{
+  "root": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a",
+  "revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "receipts": {
+    "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\tools\\uv.exe": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+    "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\wheels\\pdm_backend-2.5.0-py3-none-any.whl": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63",
+    "source_archive_sha256": "c6e91b20ed2990e2ce027d52085a269c9af9efe33b3f5237e3fc80004e5d8e43",
+    "source_manifest_sha256": "ab3a71c4e2eeb81e7977b8c7aa9f3abd722476ed04585b6e19d1286f2a4cf77c",
+    "base_python_sha256": "383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd",
+    "base_python_dll_sha256": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+    "code": {
+      "candidate\\build.py": "c432dffe27abc4b71a14816bf2920808963ae2092bf7938fd664068711226265",
+      "candidate\\ops.py": "2a11aef272496577d9f499fe9056c6225b224a673a6f6966c1ebab8bbc62c474",
+      "candidate\\selector.py": "e854315132b33b38b583c1654ff104e1c1b2c3f2b43aa5afebad3dfad8241568",
+      "candidate\\test_candidate.py": "7831b414abf761fd22f51eca32860299a5481fdff55f1041de38fe9dadd7f012",
+      "candidate\\validate.py": "f345c7566b57857b2359dedcdf5054f03640b475d7687ee0bd9f3cc83d2f763a",
+      "candidate\\verify.py": "38250308d22c59cd4fed9ee5b419e0a32d972c02ae7e894c3f2671a0291fb2c8",
+      "protocol\\isolated_build.py": "cac44de83fcfb2e12834f5b9f9ad20c9128aed9a00e67f08b5abe1d342d22c74"
+    }
+  },
+  "samples": [
+    {
+      "label": "S1",
+      "command": [
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\code\\protocol\\isolated_build.py",
+        "--uv",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\tools\\uv.exe",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--source",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\source",
+        "--source-manifest",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\source-manifest.json",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\S1-output",
+        "--workers",
+        "1",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\cache",
+        "--wheelhouse",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\wheels",
+        "--report",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\S1.json"
+      ],
+      "returncode": 0,
+      "whole_invocation_wall_seconds": 6.348292900001979,
+      "validation": {
+        "strict_pass": true,
+        "differences": []
+      },
+      "sdist_members": 1269,
+      "wheel_members": 65,
+      "source_unchanged": false,
+      "manifest_unchanged": true
+    }
+  ]
+}

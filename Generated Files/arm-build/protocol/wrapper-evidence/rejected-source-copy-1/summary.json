@@ -1,0 +1,237 @@
+{
+  "root": "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223",
+  "revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "receipts": {
+    "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\tools\\uv.exe": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+    "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\wheels\\pdm_backend-2.5.0-py3-none-any.whl": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63",
+    "source_archive_sha256": "c6e91b20ed2990e2ce027d52085a269c9af9efe33b3f5237e3fc80004e5d8e43",
+    "source_manifest_sha256": "ab3a71c4e2eeb81e7977b8c7aa9f3abd722476ed04585b6e19d1286f2a4cf77c",
+    "base_python_sha256": "383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd",
+    "base_python_dll_sha256": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+    "code": {
+      "candidate\\build.py": "c432dffe27abc4b71a14816bf2920808963ae2092bf7938fd664068711226265",
+      "candidate\\ops.py": "2a11aef272496577d9f499fe9056c6225b224a673a6f6966c1ebab8bbc62c474",
+      "candidate\\selector.py": "e854315132b33b38b583c1654ff104e1c1b2c3f2b43aa5afebad3dfad8241568",
+      "candidate\\test_candidate.py": "7831b414abf761fd22f51eca32860299a5481fdff55f1041de38fe9dadd7f012",
+      "candidate\\validate.py": "f345c7566b57857b2359dedcdf5054f03640b475d7687ee0bd9f3cc83d2f763a",
+      "candidate\\verify.py": "38250308d22c59cd4fed9ee5b419e0a32d972c02ae7e894c3f2671a0291fb2c8",
+      "protocol\\isolated_build.py": "38e73cd6c96ae0ed92e983b826aea9a5d783cc74de8402dde29fdf56c6681d7b"
+    }
+  },
+  "samples": [
+    {
+      "label": "S1",
+      "command": [
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\code\\protocol\\isolated_build.py",
+        "--uv",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\tools\\uv.exe",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--source",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\source",
+        "--source-manifest",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\source-manifest.json",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\S1-output",
+        "--workers",
+        "1",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\cache",
+        "--wheelhouse",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\wheels",
+        "--report",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\S1.json"
+      ],
+      "returncode": 0,
+      "whole_invocation_wall_seconds": 21.09240950000094,
+      "validation": {
+        "strict_pass": true,
+        "differences": []
+      },
+      "sdist_members": 1269,
+      "wheel_members": 65,
+      "source_unchanged": true,
+      "canonical_payloads_unchanged": true,
+      "manifest_unchanged": true
+    },
+    {
+      "label": "S3",
+      "command": [
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\code\\protocol\\isolated_build.py",
+        "--uv",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\tools\\uv.exe",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--source",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\source",
+        "--source-manifest",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\source-manifest.json",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\S3-output",
+        "--workers",
+        "3",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\cache",
+        "--wheelhouse",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\wheels",
+        "--report",
+        "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\S3.json"
+      ],
+      "returncode": 0,
+      "whole_invocation_wall_seconds": 16.39982610000152,
+      "validation": {
+        "strict_pass": true,
+        "differences": []
+      },
+      "sdist_members": 1269,
+      "wheel_members": 65,
+      "source_unchanged": true,
+      "canonical_payloads_unchanged": true,
+      "manifest_unchanged": true
+    }
+  ],
+  "baseline": {
+    "command": [
+      "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\tools\\uv.exe",
+      "--no-config",
+      "--offline",
+      "--cache-dir",
+      "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\cache",
+      "build",
+      "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\source",
+      "--python",
+      "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+      "--no-python-downloads",
+      "--no-index",
+      "--find-links",
+      "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\wheels",
+      "--build-constraints",
+      "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\code\\protocol\\backend.lock",
+      "--out-dir",
+      "C:\\fastapi-arm-build-lab\\caller-readiness-2a73e36a\\retry-7799779499cc43878abd1e60a1284223\\B-output"
+    ],
+    "returncode": 0,
+    "whole_invocation_wall_seconds": 6.579391399998713,
+    "validation": {
+      "strict_pass": false,
+      "differences": [
+        {
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh",
+          "expected": {
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "mode": 493,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 124
+          },
+          "actual": {
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "mode": 420,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 124
+          }
+        },
+        {
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh",
+          "expected": {
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "mode": 493,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 87
+          },
+          "actual": {
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "mode": 420,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 87
+          }
+        },
+        {
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh",
+          "expected": {
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "mode": 493,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 119
+          },
+          "actual": {
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "mode": 420,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 119
+          }
+        },
+        {
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+          "expected": {
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "mode": 493,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 110
+          },
+          "actual": {
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "mode": 420,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 110
+          }
+        },
+        {
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh",
+          "expected": {
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "mode": 493,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 134
+          },
+          "actual": {
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "mode": 420,
+            "uid": 0,
+            "gid": 0,
+            "uname": "",
+            "gname": "",
+            "size": 134
+          }
+        }
+      ]
+    },
+    "source_added": [
+      ".pdm-build/.gitignore",
+      ".pdm-build/pyproject.toml"
+    ]
+  }
+}

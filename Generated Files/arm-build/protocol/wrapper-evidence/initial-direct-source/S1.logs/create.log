@@ -1,0 +1,3 @@
+Using CPython 3.13.15 interpreter at: C:\Users\yeelam\AppData\Roaming\uv\python\cpython-3.13.15-windows-aarch64-none\python.exe
+Creating virtual environment at: C:\fastapi-arm-build-lab\caller-readiness-2a73e36a\.caller-env-2ea2bb4f1e7642ec8d0e67a6e7f4a6db\venv
+Activate with: C:\fastapi-arm-build-lab\caller-readiness-2a73e36a\.caller-env-2ea2bb4f1e7642ec8d0e67a6e7f4a6db\venv\Scripts\activate

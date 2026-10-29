@@ -1,0 +1,5 @@
+Using Python 3.13.15 environment at: C:\fastapi-arm-build-lab\caller-readiness-2a73e36a\.caller-env-2ea2bb4f1e7642ec8d0e67a6e7f4a6db\venv
+Resolved 1 package in 4ms
+Prepared 1 package in 249ms
+Installed 1 package in 68ms
+ + pdm-backend==2.5.0
