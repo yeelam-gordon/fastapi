@@ -1,5 +1,6 @@
 """Local checkout/input proof only: no builds, network, or runtime parity claim."""
 
+import argparse
 import hashlib
 import importlib.util
 import json
@@ -51,16 +52,22 @@ def module(path, name):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--revision", help="Full committed integration SHA; never reads producer working files")
+    args = parser.parse_args()
     for key in list(os.environ):
         if key.startswith("GIT_CONFIG"):
             del os.environ[key]
     os.environ.update(GIT_CONFIG_COUNT="1", GIT_CONFIG_KEY_0="core.autocrlf",
                       GIT_CONFIG_VALUE_0="false")
     assert not SCRATCH.exists(), "Use a fresh owned scratch directory"
-    SCRATCH.mkdir()
-    RECEIPTS.mkdir(exist_ok=True)
     before = git(ROOT, "status", "--porcelain", "--untracked-files=no")
-    revision = git(ROOT, "rev-parse", "HEAD").decode().strip()
+    revision = args.revision or git(ROOT, "rev-parse", "HEAD").decode().strip()
+    assert re.fullmatch(r"[0-9a-f]{40}", revision), "Full committed SHA required"
+    assert git(ROOT, "rev-parse", "--verify", f"{revision}^{{commit}}").decode().strip() == revision
+    receipts = RECEIPTS / "reruns" / revision
+    receipts.mkdir(parents=True, exist_ok=False)
+    SCRATCH.mkdir()
     workflow_name = ".github/workflows/arm-build-experiment.yml"
     workflow = git(ROOT, "show", f"{revision}:{workflow_name}").decode()
     blocks = re.findall(r"          sparse-checkout: \|\n((?:            .*\n)+)", workflow)
@@ -86,8 +93,9 @@ def main():
         protocol = checkout / "Generated Files" / "arm-build" / "protocol"
         sys.path.insert(0, str(protocol))
         helper = module(protocol / "measure_pairs.py", f"proof_{eol}")
+        production_inventory = None
         try:
-            helper.tool_inventory(revision)
+            production_inventory = helper.tool_inventory(revision)
         except ValueError as error:
             report.setdefault("production_inventory_errors", []).append(str(error))
         names = git(checkout, "ls-tree", "-r", "--full-tree", "--name-only", revision).decode().splitlines()
@@ -104,6 +112,9 @@ def main():
         def required_hashes():
             return {n: hashlib.sha256((checkout / n).read_bytes()).hexdigest() for n in inventory}
         actual = required_hashes()
+        if production_inventory is not None:
+            assert sorted(production_inventory) == inventory
+            assert helper.code_receipts() == actual
         differing = sorted(n for n in inventory if actual[n] != canonical[n])
         assert differing == ([] if eol == "false" else [workflow_name])
         materialized = sorted(
@@ -127,7 +138,7 @@ def main():
             victim.with_suffix(".missing").rename(victim)
         attrs = git(checkout, "check-attr", "--stdin", "text", "eol",
                     data=("\n".join(materialized) + "\n").encode())
-        (RECEIPTS / f"attributes-{eol}.txt").write_bytes(attrs)
+        (receipts / f"attributes-{eol}.txt").write_bytes(attrs)
         report["checkouts"].append({
             "command_scoped_core_autocrlf": eol,
             "hashes": actual, "materialized_paths": materialized,
@@ -162,7 +173,7 @@ def main():
     assert helper.source_matches(output / "source", manifest)
     assert not git(source, "status", "--porcelain")
     assert not list(source.rglob(".pdm-build"))
-    (RECEIPTS / "source-manifest.json").write_bytes((output / "source-manifest.json").read_bytes())
+    (receipts / "source-manifest.json").write_bytes((output / "source-manifest.json").read_bytes())
     report["source"] = {
         **identity, "complete_git_tree": True, "regular_git_modes_verified": True,
         "all_archive_payload_hashes_equal_git_blobs": True,
@@ -174,8 +185,8 @@ def main():
     for test in ("test_pairs.py", "test_isolated_build.py", "test_owned_process.py"):
         result = subprocess.run([sys.executable, "-B", str(protocol / test)],
                                 cwd=protocol, env=ENV, capture_output=True)
-        (RECEIPTS / f"{test}.stdout.log").write_bytes(result.stdout)
-        (RECEIPTS / f"{test}.stderr.log").write_bytes(result.stderr)
+        (receipts / f"{test}.stdout.log").write_bytes(result.stdout)
+        (receipts / f"{test}.stderr.log").write_bytes(result.stderr)
         report.setdefault("test_results", {})[test] = result.returncode
     assert git(ROOT, "status", "--porcelain", "--untracked-files=no") == before
     report["original_tracked_status_unchanged"] = True
@@ -185,7 +196,7 @@ def main():
         "Actual CI C: NTFS placement", "Dependency acquisition/full artifact builds",
         "Performance, protection causality, PGO binary mapping",
     ]
-    (RECEIPTS / "proof.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    (receipts / "proof.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"status": "blocked" if report.get("production_inventory_errors") else "passed",
                       "inputs": len(inventory), "source_files": len(manifest),
                       "test_results": report["test_results"]}))

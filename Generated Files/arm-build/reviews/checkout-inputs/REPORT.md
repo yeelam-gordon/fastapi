@@ -49,7 +49,14 @@ This proof does not patch or monkeypatch production discovery.
 ## Reproduction and remaining gate
 
 From this worktree root, run
-`python -B "Generated Files\arm-build\reviews\checkout-inputs\prove.py"`.
+`python -B "Generated Files\arm-build\reviews\checkout-inputs\prove.py" --revision <full-committed-integration-SHA>`.
+The original receipts above remain immutable. Subsequent runs write only to
+`receipts/reruns/<SHA>/`, refusing to overwrite an existing run. The optional
+revision defaults to this review branch's HEAD. Committed Git objects, never
+uncommitted producer files, supply the checkout. Once production discovery
+succeeds, its inventory and `code_receipts()` must match the independent
+enumeration and actual byte hashes; no positive result can rely solely on
+the independent fallback.
 The script requires its owned `.scratch` directory not to exist; remove only
 that directory before repeating. Clones reference local Git objects and never
 copy unrelated tracked research into their working directories.
