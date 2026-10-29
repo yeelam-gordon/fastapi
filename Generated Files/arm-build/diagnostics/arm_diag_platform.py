@@ -349,6 +349,59 @@ def _binary(path):
         return _unknown(type(exc).__name__)
 
 
+def _git_helpers(binary):
+    from pathlib import Path
+
+    root = Path(binary).resolve().parent
+    if root.name in ("cmd", "bin"):
+        root = root.parent
+    if root.name in ("mingw32", "mingw64", "clangarm64"):
+        root = root.parent
+    probe = _probe([binary, "--exec-path"])
+    text = probe.get("stdout", "").strip()
+    valid = (
+        probe["status"] == "measured" and Path(text).is_absolute() and "\n" not in text
+    )
+    paths = []
+    if valid:
+        names = ("git-submodule", "git-submodule.exe", "git-submodule--helper.exe")
+        paths.extend(Path(text) / name for name in names)
+    suffix = ".exe" if sys.platform == "win32" else ""
+    for directory in (root / "bin", root / "usr" / "bin"):
+        paths.extend(directory / (shell + suffix) for shell in ("sh", "bash"))
+    if sys.platform == "darwin":
+        paths.append(Path("/bin/sh"))
+    candidates = []
+    for path in paths:
+        candidate = {
+            "path": _safe(path),
+            "execution": "candidate/not-proven-executed",
+            "identity": _binary(path),
+        }
+        if path.name == "git-submodule":
+            candidate["shebang"] = _unknown("outside selected Git installation")
+            try:
+                if path.resolve().is_relative_to(root):
+                    with path.open("rb") as stream:
+                        first = stream.readline(512)
+                    candidate["shebang"] = _unknown("no shebang")
+                    if first.startswith(b"#!"):
+                        line = _safe(first.decode("utf-8").rstrip())
+                        candidate["shebang"] = _observed(line, "installed first line")
+            except (OSError, UnicodeError) as exc:
+                candidate["shebang"] = _unknown(type(exc).__name__)
+        candidates.append(candidate)
+    return {
+        "status": "partial",
+        "scope": "fixed installation-path candidates; no helper executed",
+        "exec_path": _observed(_safe(text), "git --exec-path")
+        if valid
+        else _unknown("exec-path unavailable or invalid"),
+        "candidates": candidates,
+        "interpretation": "launcher/helper headers do not establish executed architecture or emulation",
+    }
+
+
 def _filesystem(path):
     from pathlib import Path
 
@@ -677,6 +730,8 @@ def inventory(paths: list[str], output_dir: str) -> dict:
             else _unknown(version.get("reason", "version query failed")),
             "selection": "PATH-selected executable; PATH itself not retained",
         }
+        if name == "git":
+            tools[name]["helpers"] = _git_helpers(binary)
     packages = {}
     for package in ("pdm-backend", "psutil"):
         try:

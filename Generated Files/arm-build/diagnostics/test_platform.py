@@ -116,6 +116,67 @@ class PlatformTests(unittest.TestCase):
         fat.write_bytes(b"\xca\xfe\xba\xbe" + struct.pack(">I", 1000))
         self.assertEqual(platform._binary(fat)["status"], "unavailable")
 
+    def test_git_helper_candidates_are_bounded_and_not_execution_proof(self):
+        root = self.root / "Git"
+        launcher = root / "cmd" / "git.exe"
+        launcher.parent.mkdir(parents=True)
+        launcher.write_bytes(b"launcher")
+        helpers = root / "mingw64" / "libexec" / "git-core"
+        helpers.mkdir(parents=True)
+        (helpers / "git-submodule").write_bytes(
+            b"#!/bin/sh\nDO_NOT_CAPTURE_SCRIPT_BODY\n"
+        )
+        shell = root / "usr" / "bin" / "sh.exe"
+        shell.parent.mkdir(parents=True)
+        shell.write_bytes(b"shell fixture")
+        calls = []
+
+        def probe(argv):
+            calls.append(argv)
+            self.assertIn(argv[-1], ("--version", "--exec-path"))
+            return {
+                "status": "measured",
+                "stdout": str(helpers)
+                if argv[-1] == "--exec-path"
+                else "git version fixture",
+            }
+
+        with (
+            patch.object(platform.sys, "platform", "win32"),
+            patch.object(platform, "_probe", side_effect=probe),
+            patch.object(
+                shutil,
+                "which",
+                side_effect=lambda name: str(launcher) if name == "git" else None,
+            ),
+        ):
+            result = platform.inventory([], str(self.root / "out"))["tools"]["git"][
+                "helpers"
+            ]
+        self.assertEqual(
+            calls, [[str(launcher), "--version"], [str(launcher), "--exec-path"]]
+        )
+        self.assertEqual(len(result["candidates"]), 7)
+        by_name = {item["path"]: item for item in result["candidates"]}
+        script = by_name[str(helpers / "git-submodule")]
+        self.assertEqual(script["shebang"]["value"], "#!/bin/sh")
+        self.assertEqual(script["identity"]["status"], "measured")
+        self.assertEqual(script["identity"]["architecture"]["status"], "unavailable")
+        self.assertEqual(by_name[str(shell)]["identity"]["status"], "measured")
+        self.assertEqual(
+            by_name[str(root / "bin" / "bash.exe")]["identity"]["status"], "unavailable"
+        )
+        self.assertTrue(
+            all(
+                item["execution"] == "candidate/not-proven-executed"
+                for item in result["candidates"]
+            )
+        )
+        self.assertNotIn("DO_NOT_CAPTURE_SCRIPT_BODY", json.dumps(result))
+        with patch.object(platform, "_probe", return_value={"status": "unavailable"}):
+            missing = platform._git_helpers(str(launcher))
+        self.assertEqual(missing["exec_path"]["status"], "unavailable")
+
     def test_inventory_actual_action_contract_and_privacy(self):
         receipt = self.root / "action.json"
         action = Path(__file__).parent / "action" / "main.cjs"
