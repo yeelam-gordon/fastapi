@@ -3,6 +3,14 @@ name: ARM build diagnostics (analysis only)
 on:
   workflow_dispatch:
     inputs:
+      platform:
+        description: Limit a follow-up allocation to the missing platform.
+        type: choice
+        options:
+          - both
+          - windows
+          - macos
+        default: both
       native_traces:
         description: Request capability/privacy-gated native diagnostics.
         type: boolean
@@ -22,11 +30,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - runner: windows-11-arm
-            platform: windows
-          - runner: macos-15
-            platform: macos
+        include: >-
+          ${{ fromJSON(
+            inputs.platform == 'macos' && '[{"runner":"macos-15","platform":"macos"}]' ||
+            inputs.platform == 'windows' && '[{"runner":"windows-11-arm","platform":"windows"}]' ||
+            inputs.platform == 'both' && '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-15","platform":"macos"}]' ||
+            '[]'
+          ) }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 25
     defaults:
