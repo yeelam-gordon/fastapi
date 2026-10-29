@@ -4,6 +4,24 @@
 
 The user reaffirmed that the goal is Windows at least as fast as Mac, not merely a partial improvement. The current task is reopened. [INVESTIGATION-AND-PROPOSALS.md](../INVESTIGATION-AND-PROPOSALS.md) owns the ranked proposal table and acceptance loop.
 
+### Current priority: matched analysis pipeline
+
+User correction accepted: compare existing Windows/Mac wall durations first,
+rank differential critical-path seconds, then collect missing diagnostics.
+`performance-method` contains the checked method; `ci-foundation-audit` contains
+the actual paired timing/coverage audit. Local Windows hotspots do not establish
+the cause of a Windows/Mac gap.
+
+The separate manual `arm-build-diagnostics.yml` is implemented with normal
+context and distinct resource/function/import/allocation passes, actual hook
+identities and explicit native-coverage gaps. Its instrumented data is never
+performance-eligible. Local integrated validation and reviewed handoff fixes
+must pass before one budgeted analysis allocation; no new run is dispatched.
+See `diagnostics\ANALYSIS-PLAN.md` and `CONTRACT.md`.
+
+Optimization followups are paused. P25's completed 2.79% local full-build
+change failed its advancement gate; no further tuning or CI was started.
+
 ### User-directed adoption priority
 
 Shared-toolchain improvements rank first; portable FastAPI best practices rank
@@ -42,7 +60,7 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 |---|---|---|
 | Standard uv supported-practice screen (completed; rejected) | `investigate/arm-uv-build-bytecode` / `uv-build-bytecode` | P22 five C: pairs show no meaningful benefit; retain all outputs, no further CI |
 | Generic PDM archive prototype (blocked) | `investigate/arm-pdm-archive-io` / `pdm-archive-io` | P23 68-line patch and focused proof/lint pass; owner mypy unavailable after secure TLS attempts, assistance requested; no performance screen |
-| Shared pathlib V2 staged screen (active) | `investigate/arm-pathlib-relative` / `pathlib-relative` | P25 V1 rejected; V2 independent semantic proof passed. Same micro gate first; stock-uv C: only if justified, no CI |
+| Shared pathlib V2 screen (completed; parked) | `investigate/arm-pathlib-relative` / `pathlib-relative` | P25 micro passed, 2.79% full-build change failed advancement gate; preserve artifacts, no more tuning/CI |
 | Standard backend codec attribution (completed) | `investigate/arm-compression-attribution` / `compression-attribution` | P20 CRC ~3 ms, raw deflate ~246 ms in one public-sdist profile; no rebuild or gain claim |
 | Temporary uv activation files (source triage only) | `investigate/arm-uv-build-activators` / `uv-build-activators` | P24 source fact, not cost attribution or a justified change |
 | Controller preflight repair (completed) | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |

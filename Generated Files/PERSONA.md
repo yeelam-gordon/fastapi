@@ -8,6 +8,7 @@ Research how the actual toolchain works before recommending changes. Use primary
 
 - Define what "build" produces and what must remain unchanged. Separate Python provisioning, dependency setup, package creation, artifact verification and tests.
 - Find the critical path before choosing an optimization. Distinguish serial Python/file work, native dependency compilation, network transfer and process/environment overhead.
+- First compare existing Windows/Mac stage wall times and rank absolute critical-path gaps. Windows-local hotspots alone are not differential evidence. Check the analysis method against primary sources and independent research before selecting further work.
 - Treat core count as a hypothesis about parallel capacity, not a performance guarantee. Distinguish OS, CPU, filesystem, power, virtualization and cache effects.
 - Separate observed measurements, documented tool behavior, hypotheses and untested proposals. Never turn local evidence into a Windows-versus-macOS claim.
 

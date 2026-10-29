@@ -22,19 +22,18 @@ This table ranks adoption routes, not evidence strength or claimed speedups.
 | **Rejected form — not a lower-priority queue** | Custom archive/backend adapters, Node writer and FastAPI-specific SDK/private-PDM integration in P2/P3/P7/P8/P18; SDK-only overhead tuning in P21 | Preserve diagnostics; **do not recommend adoption or spend more CI on these forms** | Reconsider only a genuinely general, simpler owner-level change; renaming or wrapping the prototype does not make it transferable |
 | **Rejected/deferred for insufficient value** | Dependency ZIP/cache complexity, tiny native extraction and attribute-skipping gains in P9/P10/P12 | Existing rejection retained | A maintainable, material benefit would need new evidence, not more tuning of the same bespoke mechanism |
 
-**Current execution priority:** reassess a shared-toolchain path before another
-performance campaign. The current FastAPI-specific SDK is diagnostic-only.
-Its C: campaign and next CI allocation are paused by this adoption decision,
-not merely waiting for technical readiness. Finish only tightly coupled cleanup
-repairs already in flight; do not extend the measurement framework. Existing
-artifact, lifecycle and failure evidence remains intact. Parity is unproven.
-P22's stock-command C: screen rejected bytecode suppression: no meaningful gain.
-P23 has a 68-line owner-level prototype and passing focused functional/lint
-checks, but required mypy installation is externally blocked by TLS, including
-one secure OS-trust-store attempt. User assistance was requested and unavailable;
-its performance screen remains withheld. P20 measured CRC at only about 3 ms.
-Profile-backed P25 investigates a small shared pathlib semantic fast path.
-None of these results authorizes CI or establishes parity.
+**Current execution priority: matched diagnosis before more optimization.**
+The paired-log audit now establishes a 2.178 s observed isolated-build gap and
+1.949 s gap without isolation, but actual backend-hook timings are missing.
+Checkout/auth is a separate CI-latency lead: six `foreach` windows contain
+8.103 s paired interval difference, not proven Git CPU or shell time.
+The [analysis plan](arm-build/diagnostics/ANALYSIS-PLAN.md) and separate manual
+diagnostic workflow fill declared coverage gaps; local integration and
+independent review gate any new CI allocation. Instrumented data is not
+performance proof. No new optimization or official performance run is authorized.
+The bespoke SDK stays diagnostic-only. P22 was rejected; P23 typing is externally
+blocked; P25's 2.79% local full-build change failed its advancement gate and is
+parked. Parity and underlying cross-platform causes remain unproven.
 
 ## Investigation evidence ledger
 
@@ -67,7 +66,8 @@ ranking. A mechanism inferred from a prototype is not yet a portable fix.
 | P22 | Five C: pairs: baseline median 5.9503 s; suppression 5.9812 s, about 0.52% slower; only 1/5 pairs favored suppression, with overlapping ranges | **Reject and stop** for this workload; do not recommend a flag or upstream default change | All payload/metadata/RECORD checks and Windows semantics matched; both retain five known script-mode failures; no Mac/scan-causality claim | [Local screen](arm-build/shared-toolchain/uv-bytecode/LOCAL-SCREEN.md) retained; no further checks/CI justified |
 | P23 | Generic 68-line PDM archive patch; eight focused proofs and owner-config lint/format pass; conservative four capped payloads plus normal overhead | Keep the small owner-level candidate pending real typing and broader compatibility checks; no FastAPI selector or framework | Mypy 2.3.1 download fails TLS; secure OS-store attempt also failed, assistance unavailable. No typing pass or standard-command gain claimed | [Parent review](arm-build/shared-toolchain/pdm-archive-io/MASTER-REVIEW.md): **blocked**, no performance screen or adoption |
 | P24 | Pinned uv's temporary build path uses the shared venv constructor that writes activation templates | Retain as a shared-toolchain source lead; do not propose omitting files without cost and compatibility evidence | Existing whole `uv venv` timing is not activation-file attribution; a negligible benefit fails the maintainer gate | [Source triage](arm-build/shared-toolchain/uv-activators/REPORT.md) complete; no implementation, measurement or CI |
-| P25 | V1 failed equal/fallback cost gates and stays rejected; V2 is an 18-line same-stock-class default path with selected semantic parity independently checked | One V2 run of unchanged micro safeguards; stock-uv C: comparison only if that gate passes | Preserve all V1 data, error/flag/subclass behavior and runtime/source identities; no automatic revision or CI | [Parent review](arm-build/shared-toolchain/pathlib-relative/ROOT-REVIEW.md): V2 staged local screen active, no adoption or build-gain claim |
+| P25 | V2 passed its micro gate; five stock-build pairs changed 5.7688 -> 5.6076 s median (~2.79%), below the 5% advancement gate; four pairs favored it | Park the common-toolchain lead, preserve all V1/V2 evidence and no further tuning | Local overlap/uncertainty, Mac benefit unmeasured, five existing mode failures retained; no CI/adoption | `V2-STAGED-SCREEN.md` retained; no advancement |
+| P26 | Existing CI auth/cleanup repeatedly spends much longer around `git submodule foreach`; six setup/removal windows contain 8.103 s paired gap with identical command counts | Collect actual Actions Node/Git/helper provenance and matched read-only command context before any shared-toolchain proposal | Log windows are not exact subprocess durations or emulation/MDE proof; checkout scope stays separate from build-only | [Checkout audit](arm-build/ci-foundation-audit/CHECKOUT-AUDIT.md) and new analysis collectors; no optimization patch |
 
 ## Relative benefit and maintenance review
 

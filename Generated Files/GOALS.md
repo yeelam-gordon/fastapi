@@ -40,6 +40,9 @@ bespoke form.
 
 ## Acceptance principles
 
+- Establish matched Windows/Mac stage durations from existing logs before choosing optimization priorities. Rank absolute critical-path gaps, not just Windows-local duration or ratios; a phase equally slow on both platforms does not explain their gap.
+- Research and independently check the performance-analysis method when needed; do not treat an expert persona as evidence of expertise.
+- Keep analysis-only instrumentation in a separate pipeline. Enable declared comparable collectors, expose missing coverage and exclude instrumented timings from performance-improvement claims.
 - Preserve FastAPI package contents and runtime behavior; do not omit work to win timings.
 - Identify the actual build bottleneck and demonstrate improvements with repeated measurements and artifact verification.
 - Compare explicit native ARM64 interpreters and documented hardware/software/cache conditions. Report build-only and setup-inclusive costs separately.
