@@ -1,0 +1,9 @@
+test_command_clock_excludes_only_precommand_infrastructure (__main__.IntegrationGates.test_command_clock_excludes_only_precommand_infrastructure) ... ok
+test_owned_failures_rejected_by_controller_and_comparator (__main__.IntegrationGates.test_owned_failures_rejected_by_controller_and_comparator) ... ok
+test_real_frozen_inventory_includes_helper_with_raw_hash (__main__.IntegrationGates.test_real_frozen_inventory_includes_helper_with_raw_hash) ... ok
+test_wrapper_has_no_posix_detach_and_identity_requires_explicit_B (__main__.IntegrationGates.test_wrapper_has_no_posix_detach_and_identity_requires_explicit_B) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.231s
+
+OK
