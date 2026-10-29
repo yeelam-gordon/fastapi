@@ -194,7 +194,7 @@ Reject on complexity, cleanup failure or immaterial end-to-end benefit.
 
 **Disposition: ready for independent small-diff review, not adoption (medium).**
 [pdm-small-read-prefetch.patch](pdm-small-read-prefetch.patch) changes **one official
-PDM file**, `src/pdm/backend/sdist.py`: **53 added / 9 removed lines; 62 total**
+PDM file**, `src/pdm/backend/sdist.py`: **59 added / 9 removed lines; 68 total**
 including imports, helper and replacement loop. No hidden production module,
 configuration, API, selector, custom writer or dependency patch exists.
 The checkout is ignored at `.upstream`, pinned to the original official commit;
@@ -264,13 +264,39 @@ other functional workspace files are ignored, not committed.
 **Maintainer rationale:** This is a small PDM-owned overlap experiment around the
 existing archive loop, not a novel technique or a FastAPI extension. Its fixed
 cap and streaming barriers avoid an allocation scheduler, while standard tar/gzip
-and PDM metadata/hooks remain authoritative. The 62-line diff and eight focused
+and PDM metadata/hooks remain authoritative. The 68-line diff and eight focused
 proofs make independent review credible (**medium**); tested immutable-input
 semantics and normal error cleanup have **high confidence within these cases**.
 Unchanged behavior across the broader upstream matrix and useful full-command
 value remain **unproven/low confidence**. Root review should precede any separately
 authorized stock-command screen informed by P22; reject if review burden,
 compatibility or end-to-end benefit fails the existing maintainer gate.
+
+### Owner-check follow-up — not yet cleared for a standard-command screen
+
+The broad catch now has a **local** `noqa: BLE001`, immediately explaining that
+arbitrary failures are queued and reraised in order. It does not globally disable
+lint or incorrectly narrow iterator/metadata errors.
+The deque is explicitly typed as `Exception | tuple[str, Path, TarInfo,
+Future[bytes] | None]`; local narrowing checks an exception **before** tuple
+unpacking. No `None`-filled error tuples, casts, new `Any`, classes or framework
+remain. The barrier test similarly narrows its last-entry local before indexing.
+The full production diff is now **59 added + 9 removed = 68 lines**.
+
+[OWNER-CHECKS.txt](OWNER-CHECKS.txt) retains actual commands and results:
+existing **Ruff 0.17.3**, using the checkout's `pyproject.toml`, passes the owner
+check, an additional explicit BLE001 check, and format check. This validates the
+owner configuration with the available binary, **not** the pre-commit-pinned
+Ruff 0.16.6. All eight focused functional proofs also pass again.
+
+**Strict typing remains a check gap, not a pass or asserted source failure.**
+Both available interpreters lacked mypy. One isolated installation attempt of
+owner-pinned `mypy==2.3.1` into ignored `.upstream/.validation` failed with TLS
+`HandshakeFailure` (the installer reported internal retries); no second install
+invocation or security bypass was attempted. The actual owner-config mypy
+command exits before analysis with `No module named mypy`. Root must obtain a
+real owner-config typecheck before authorizing a stock-command screen. Receipt
+hashes were refreshed; no performance measurement or CI was run.
 
 [shutdown]: https://github.com/python/cpython/blob/4061bc4c35f7c26f25264666d4ba083b93d2f6f9/Lib/concurrent/futures/thread.py#L220-L239
 [cancel]: https://github.com/python/cpython/blob/4061bc4c35f7c26f25264666d4ba083b93d2f6f9/Lib/concurrent/futures/_base.py#L365-L379

@@ -1,0 +1,21 @@
+$ "Q:\fastapi\Generated Files\arm-build\tools\official-tool-environment\Scripts\ruff.exe" --version
+exit=0
+ruff 0.17.3
+
+$ "Q:\fastapi\Generated Files\arm-build\tools\official-tool-environment\Scripts\ruff.exe" check --config pyproject.toml --no-cache src\pdm\backend\sdist.py
+exit=0
+All checks passed!
+
+$ "Q:\fastapi\Generated Files\arm-build\tools\official-tool-environment\Scripts\ruff.exe" check --config pyproject.toml --extend-select BLE001 --no-cache src\pdm\backend\sdist.py
+exit=0
+All checks passed!
+
+$ "Q:\fastapi\Generated Files\arm-build\tools\official-tool-environment\Scripts\ruff.exe" format --config pyproject.toml --check --no-cache src\pdm\backend\sdist.py
+exit=0
+1 file already formatted
+
+$ "C:\Program Files\Python313-arm64\python.exe" -B -m mypy --config-file pyproject.toml --cache-dir .mypy_cache src\pdm\backend\sdist.py
+exit=1
+C:\Program Files\Python313-arm64\python.exe: No module named mypy
+
+TYPECHECK GAP: mypy missing in both existing interpreters. One isolated owner-pinned mypy==2.3.1 install invocation failed TLS HandshakeFailure (installer reported 3 internal retries); no second install invocation or security bypass. No mypy success claimed.

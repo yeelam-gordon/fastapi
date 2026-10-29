@@ -1,5 +1,5 @@
 diff --git a/src/pdm/backend/sdist.py b/src/pdm/backend/sdist.py
-index e739b70..0b56891 100644
+index e739b70..5a473f6 100644
 --- a/src/pdm/backend/sdist.py
 +++ b/src/pdm/backend/sdist.py
 @@ -2,7 +2,9 @@ from __future__ import annotations
@@ -8,7 +8,7 @@ index e739b70..0b56891 100644
  import tarfile
 +from collections import deque
  from collections.abc import Iterable
-+from concurrent.futures import ThreadPoolExecutor
++from concurrent.futures import Future, ThreadPoolExecutor
  from copy import copy
  from io import BytesIO
  from itertools import dropwhile
@@ -24,7 +24,7 @@ index e739b70..0b56891 100644
  def clean_tarinfo(tar_info: tarfile.TarInfo) -> tarfile.TarInfo:
      """
      Clean metadata from a TarInfo object to make it more reproducible.
-@@ -105,15 +112,52 @@ class SdistBuilder(Builder):
+@@ -105,15 +112,58 @@ class SdistBuilder(Builder):
          target = context.dist_dir / f"{dist_info}.tar.gz"
  
          with tarfile.open(target, mode="w:gz", format=tarfile.PAX_FORMAT) as tar:
@@ -37,15 +37,19 @@ index e739b70..0b56891 100644
 -                else:
 -                    tar.addfile(tar_info)
 -                self._show_add_file(relpath, path)
-+            pending = deque()
++            pending: deque[
++                Exception | tuple[str, Path, tarfile.TarInfo, Future[bytes] | None]
++            ] = deque()
 +            iterator = iter(files)
-+            pool = None
++            pool: ThreadPoolExecutor | None = None
 +            try:
 +                while True:
 +                    # Metadata-only and streaming entries are lookahead barriers.
-+                    while len(pending) < 3 and (
-+                        not pending or pending[-1][3] is not None
-+                    ):
++                    while len(pending) < 3:
++                        if pending:
++                            last = pending[-1]
++                            if isinstance(last, Exception) or last[3] is None:
++                                break
 +                        try:
 +                            item = next(iterator, None)
 +                            if item is None:
@@ -54,7 +58,7 @@ index e739b70..0b56891 100644
 +                            tar_info = clean_tarinfo(
 +                                tar.gettarinfo(path, pjoin(dist_info, relpath))
 +                            )
-+                            future = None
++                            future: Future[bytes] | None = None
 +                            if tar_info.isreg() and tar_info.size <= 64 * 1024:
 +                                if pool is None:
 +                                    pool = ThreadPoolExecutor(max_workers=3)
@@ -62,14 +66,16 @@ index e739b70..0b56891 100644
 +                                    _read_small_file, path, tar_info.size
 +                                )
 +                            pending.append((relpath, path, tar_info, future))
-+                        except Exception as error:
-+                            pending.append((None, None, error, None))
++                        except Exception as error:  # noqa: BLE001
++                            # Queue arbitrary failures; consumption reraises in order.
++                            pending.append(error)
 +                            break
 +                    if not pending:
 +                        break
-+                    relpath, path, tar_info, future = pending.popleft()
-+                    if isinstance(tar_info, Exception):
-+                        raise tar_info
++                    entry = pending.popleft()
++                    if isinstance(entry, Exception):
++                        raise entry
++                    relpath, path, tar_info, future = entry
 +                    if future is not None:
 +                        data = future.result()
 +                        tar.addfile(tar_info, BytesIO(data))

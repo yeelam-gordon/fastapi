@@ -96,3 +96,16 @@ installation attempt; eight functional proofs passed. All generated test files,
 archives and git checkout writes were Q:-owned, with TEMP/TMP explicitly mapped
 to `.proof-work`. Bytecode was disabled. No timed C screen, performance benchmark,
 uv rebuild, CI, push/PR, owner contact or production FastAPI edit was performed.
+
+## Owner lint/typing follow-up
+
+The production diff now has **59 additions / 9 deletions (68 combined)**, using
+an explicit exception-or-entry union and an explained local BLE001 annotation.
+`prototype-provenance.json` and the generated patch contain refreshed hashes.
+`OWNER-CHECKS.txt` preserves owner-config Ruff/format commands and the actual
+missing-mypy failure. Available Ruff is 0.17.3; owner pre-commit pins 0.16.6.
+The strict owner-config mypy command could not analyze code because neither
+existing interpreter had mypy. A single isolated `mypy==2.3.1` installer invocation
+failed TLS; no further installer invocation was attempted. No typecheck pass is
+claimed. Eight stdlib proofs passed again; forward/reverse check-only patch
+applicability and upstream diff whitespace checks passed.
