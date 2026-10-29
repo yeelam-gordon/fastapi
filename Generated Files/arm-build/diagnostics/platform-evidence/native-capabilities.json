@@ -1,0 +1,105 @@
+{
+  "build_invoked": false,
+  "build_result": null,
+  "capabilities": {
+    "wpr": {
+      "binary": {
+        "architecture": {
+          "source": "binary header",
+          "status": "measured",
+          "value": [
+            {
+              "machine": "0xaa64",
+              "name": "arm64"
+            }
+          ]
+        },
+        "path": "C:\\Windows\\system32\\wpr.EXE",
+        "path_redaction": "home prefix only",
+        "resolved_path": "C:\\Windows\\System32\\wpr.exe",
+        "selected_runtime_slice": {
+          "reason": "file architecture is not execution proof",
+          "status": "unavailable",
+          "value": null
+        },
+        "sha256": "a19275562a4ed8f329ce1ab248a44cb4af60c1091ea2f275097dee43761bd693",
+        "size_bytes": 410112,
+        "status": "measured"
+      },
+      "help_observed": true,
+      "help_status": "measured",
+      "reason": "help is not proof of safe bounded owned-process capture and reviewed export",
+      "returncode": 0,
+      "status": "unavailable"
+    },
+    "xperf": {
+      "binary": {
+        "architecture": {
+          "source": "binary header",
+          "status": "measured",
+          "value": [
+            {
+              "machine": "0xaa64",
+              "name": "arm64"
+            }
+          ]
+        },
+        "path": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.EXE",
+        "path_redaction": "home prefix only",
+        "resolved_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.exe",
+        "selected_runtime_slice": {
+          "reason": "file architecture is not execution proof",
+          "status": "unavailable",
+          "value": null
+        },
+        "sha256": "312d62ad857e66fe9022178a9c1581fc9904628b00fb337445dee3d278def3e0",
+        "size_bytes": 467368,
+        "status": "measured"
+      },
+      "help_observed": false,
+      "help_status": "measured",
+      "reason": "help is not proof of safe bounded owned-process capture and reviewed export",
+      "returncode": 0,
+      "status": "unavailable"
+    }
+  },
+  "capture_window": null,
+  "collectors": {
+    "native_cpu": {
+      "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+      "requested": true,
+      "status": "unavailable",
+      "value": null
+    },
+    "native_file_io": {
+      "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+      "requested": true,
+      "status": "unavailable",
+      "value": null
+    },
+    "native_scheduling": {
+      "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+      "requested": true,
+      "status": "unavailable",
+      "value": null
+    }
+  },
+  "lost_events": {
+    "reason": "no capture",
+    "status": "unavailable",
+    "value": null
+  },
+  "mac_runtime_validation": "runner-only, not executed locally",
+  "performance_eligible": false,
+  "raw_policy": "private_raw only, excluded from upload; no raw traces produced",
+  "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+  "requested": true,
+  "schema_version": 1,
+  "status": "partial",
+  "symbols": {
+    "reason": "no capture",
+    "status": "unavailable",
+    "value": null
+  },
+  "upload_summaries": []
+}

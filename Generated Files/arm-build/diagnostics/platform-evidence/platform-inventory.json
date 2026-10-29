@@ -1,0 +1,475 @@
+{
+  "actions_node": {
+    "reason": "separate Actions Node receipt not supplied",
+    "status": "unavailable",
+    "value": null
+  },
+  "controller_packages": {
+    "pdm-backend": {
+      "reason": "not installed in controller; isolated backend may differ",
+      "status": "unavailable",
+      "value": null
+    },
+    "psutil": {
+      "reason": "not installed in controller; isolated backend may differ",
+      "status": "unavailable",
+      "value": null
+    }
+  },
+  "environment": {
+    "CI": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "GITHUB_ACTIONS": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "GITHUB_JOB": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "GITHUB_RUN_ATTEMPT": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "GITHUB_RUN_ID": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "GITHUB_WORKFLOW": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "ImageOS": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "ImageVersion": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "PDM_CACHE_DIR": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "PIP_CACHE_DIR": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "PYTHONDONTWRITEBYTECODE": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "PYTHONHASHSEED": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "PYTHONPYCACHEPREFIX": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "RUNNER_ARCH": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "RUNNER_ENVIRONMENT": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "RUNNER_OS": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "SOURCE_DATE_EPOCH": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "UV_CACHE_DIR": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "UV_LOG_CONTEXT": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "UV_NO_CACHE": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    },
+    "UV_OFFLINE": {
+      "reason": "not set",
+      "status": "unavailable",
+      "value": null
+    }
+  },
+  "hardware": {
+    "controller_psutil": {
+      "reason": "optional controller psutil unavailable",
+      "status": "unavailable",
+      "value": null
+    },
+    "cpu_model": {
+      "source": "Windows registry",
+      "status": "measured",
+      "value": "Cobalt 100"
+    },
+    "logical_cores": {
+      "source": "os.cpu_count",
+      "status": "measured",
+      "value": 16
+    },
+    "physical_cores": {
+      "reason": "no native physical-core receipt",
+      "status": "unavailable",
+      "value": null
+    },
+    "power_frequency_contention": {
+      "reason": "not collected",
+      "status": "unavailable",
+      "value": null
+    },
+    "process_machine": {
+      "source": "platform.machine",
+      "status": "measured",
+      "value": "ARM64"
+    },
+    "ram_bytes": {
+      "source": "GlobalMemoryStatusEx",
+      "status": "measured",
+      "value": 68708864000
+    },
+    "virtualization": {
+      "reason": "not established by model string",
+      "status": "unavailable",
+      "value": null
+    }
+  },
+  "os": {
+    "release": "11",
+    "system": "Windows",
+    "version": "10.0.26200"
+  },
+  "paths": [
+    {
+      "file_identity": {
+        "architecture": {
+          "reason": "not a supported PE/Mach-O binary",
+          "status": "unavailable",
+          "value": null
+        },
+        "path": "Q:\\fastapi\\Generated Files\\worktrees\\diagnostics-platform\\Generated Files\\arm-build\\diagnostics\\arm_diag_platform.py",
+        "path_redaction": "home prefix only",
+        "resolved_path": "Q:\\fastapi\\Generated Files\\worktrees\\diagnostics-platform\\Generated Files\\arm-build\\diagnostics\\arm_diag_platform.py",
+        "selected_runtime_slice": {
+          "reason": "file architecture is not execution proof",
+          "status": "unavailable",
+          "value": null
+        },
+        "sha256": "5e74189dbb49c2f225571d7b8fc194d9018e342b84937e35f026f9b2761c07ed",
+        "size_bytes": 29042,
+        "status": "measured"
+      },
+      "filesystem": {
+        "exists": true,
+        "filesystem": "ReFS",
+        "mount": "Q:\\",
+        "path_redaction": "home prefix only",
+        "probed_existing_ancestor": "Q:\\fastapi\\Generated Files\\worktrees\\diagnostics-platform\\Generated Files\\arm-build\\diagnostics\\arm_diag_platform.py",
+        "requested_path": "Q:\\fastapi\\Generated Files\\worktrees\\diagnostics-platform\\Generated Files\\arm-build\\diagnostics\\arm_diag_platform.py",
+        "resolved_path": "Q:\\fastapi\\Generated Files\\worktrees\\diagnostics-platform\\Generated Files\\arm-build\\diagnostics\\arm_diag_platform.py",
+        "status": "measured",
+        "storage_device_class": {
+          "reason": "not exposed by filesystem identity",
+          "status": "unavailable",
+          "value": null
+        }
+      }
+    },
+    {
+      "file_identity": {
+        "architecture": {
+          "source": "binary header",
+          "status": "measured",
+          "value": [
+            {
+              "machine": "0xaa64",
+              "name": "arm64"
+            }
+          ]
+        },
+        "path": "C:\\Program Files\\Python313-arm64\\python.exe",
+        "path_redaction": "home prefix only",
+        "resolved_path": "C:\\Program Files\\Python313-arm64\\python.exe",
+        "selected_runtime_slice": {
+          "reason": "file architecture is not execution proof",
+          "status": "unavailable",
+          "value": null
+        },
+        "sha256": "7944f73d1dc202232cd0f615d14f909603af1cd00d6a3ff98dac51c49259c44b",
+        "size_bytes": 104672,
+        "status": "measured"
+      },
+      "filesystem": {
+        "exists": true,
+        "filesystem": "NTFS",
+        "mount": "C:\\",
+        "path_redaction": "home prefix only",
+        "probed_existing_ancestor": "C:\\Program Files\\Python313-arm64\\python.exe",
+        "requested_path": "C:\\Program Files\\Python313-arm64\\python.exe",
+        "resolved_path": "C:\\Program Files\\Python313-arm64\\python.exe",
+        "status": "measured",
+        "storage_device_class": {
+          "reason": "not exposed by filesystem identity",
+          "status": "unavailable",
+          "value": null
+        }
+      }
+    }
+  ],
+  "performance_eligible": false,
+  "privacy": "explicit field whitelist; no PATH/full environment/source contents; home prefix redacted",
+  "runner_image_origins": {
+    "current_environment": {
+      "ImageOS": null,
+      "ImageVersion": null
+    },
+    "historical_windows_bootstrap": {
+      "source": "ci-foundation-audit/AUDIT.md bootstrap runner_image",
+      "version": "20261026.197.1"
+    },
+    "historical_windows_console": {
+      "image": "windows-11-vs2026-arm64",
+      "source": "ci-foundation-audit/AUDIT.md console",
+      "version": "20261025.196.1"
+    },
+    "reconciliation": "unresolved historical conflict; new inventory does not supersede either origin"
+  },
+  "runtime": {
+    "binary": {
+      "architecture": {
+        "source": "binary header",
+        "status": "measured",
+        "value": [
+          {
+            "machine": "0xaa64",
+            "name": "arm64"
+          }
+        ]
+      },
+      "path": "C:\\Program Files\\Python313-arm64\\python.exe",
+      "path_redaction": "home prefix only",
+      "resolved_path": "C:\\Program Files\\Python313-arm64\\python.exe",
+      "selected_runtime_slice": {
+        "reason": "file architecture is not execution proof",
+        "status": "unavailable",
+        "value": null
+      },
+      "sha256": "7944f73d1dc202232cd0f615d14f909603af1cd00d6a3ff98dac51c49259c44b",
+      "size_bytes": 104672,
+      "status": "measured"
+    },
+    "build": [
+      "tags/v3.13.15:4061bc4",
+      "Aug  5 2026 13:51:22"
+    ],
+    "build_config": {
+      "CC": {
+        "reason": "not exposed by this runtime",
+        "status": "unavailable",
+        "value": null
+      },
+      "CFLAGS": {
+        "reason": "not exposed by this runtime",
+        "status": "unavailable",
+        "value": null
+      },
+      "CONFIG_ARGS": {
+        "reason": "not exposed by this runtime",
+        "status": "unavailable",
+        "value": null
+      },
+      "LTOFLAGS": {
+        "reason": "not exposed by this runtime",
+        "status": "unavailable",
+        "value": null
+      },
+      "PGO_PROF_USE_FLAG": {
+        "reason": "not exposed by this runtime",
+        "status": "unavailable",
+        "value": null
+      },
+      "PY_CFLAGS": {
+        "reason": "not exposed by this runtime",
+        "status": "unavailable",
+        "value": null
+      },
+      "PY_LDFLAGS": {
+        "reason": "not exposed by this runtime",
+        "status": "unavailable",
+        "value": null
+      }
+    },
+    "codecs": {
+      "bz2_version": {
+        "reason": "stdlib bz2 exposes no codec library version",
+        "status": "unavailable",
+        "value": null
+      },
+      "lzma_version": {
+        "reason": "stdlib lzma exposes no codec library version",
+        "status": "unavailable",
+        "value": null
+      },
+      "zlib_compile": "1.3.1",
+      "zlib_runtime": "1.3.1"
+    },
+    "compiler": "MSC v.1944 64 bit (ARM64)",
+    "execution_architecture": {
+      "source": "IsWow64Process2(current process)",
+      "status": "measured",
+      "value": {
+        "emulated": false,
+        "native_machine": "0xaa64",
+        "process_machine": "0x0",
+        "semantics": "process machine 0 means native on native_machine"
+      }
+    },
+    "implementation": "CPython",
+    "pgo_lto_applied": {
+      "reason": "configuration strings do not prove applied build recipe",
+      "status": "unavailable",
+      "value": null
+    },
+    "version": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]"
+  },
+  "schema_version": 1,
+  "scope": "controller and supplied paths; not isolated backend runtime identity",
+  "source_manifest": {
+    "reason": "caller must supply canonical byte/mode manifest separately",
+    "status": "unavailable",
+    "value": null
+  },
+  "status": "partial",
+  "tools": {
+    "git": {
+      "binary": {
+        "architecture": {
+          "source": "binary header",
+          "status": "measured",
+          "value": [
+            {
+              "machine": "0xaa64",
+              "name": "arm64"
+            }
+          ]
+        },
+        "path": "C:\\Program Files\\Git\\cmd\\git.EXE",
+        "path_redaction": "home prefix only",
+        "resolved_path": "C:\\Program Files\\Git\\cmd\\git.exe",
+        "selected_runtime_slice": {
+          "reason": "file architecture is not execution proof",
+          "status": "unavailable",
+          "value": null
+        },
+        "sha256": "d778d40470c57b6b1a0de2f6b18bfb1a1c1ac4782ef14a27fb57de10295399a3",
+        "size_bytes": 39288,
+        "status": "measured"
+      },
+      "selection": "PATH-selected executable; PATH itself not retained",
+      "version": {
+        "source": "--version",
+        "status": "measured",
+        "value": "git version 2.56.0.vfs.0.2"
+      }
+    },
+    "node": {
+      "binary": {
+        "architecture": {
+          "source": "binary header",
+          "status": "measured",
+          "value": [
+            {
+              "machine": "0xaa64",
+              "name": "arm64"
+            }
+          ]
+        },
+        "path": "C:\\Program Files\\nodejs\\node.EXE",
+        "path_redaction": "home prefix only",
+        "resolved_path": "C:\\Program Files\\nodejs\\node.exe",
+        "selected_runtime_slice": {
+          "reason": "file architecture is not execution proof",
+          "status": "unavailable",
+          "value": null
+        },
+        "sha256": "dff59da18b6ffe1bf1ca99e1d2af4906080c481740619f5b5098c0fca28bd9b7",
+        "size_bytes": 81881416,
+        "status": "measured"
+      },
+      "selection": "PATH-selected executable; PATH itself not retained",
+      "version": {
+        "source": "--version",
+        "status": "measured",
+        "value": "v24.21.0"
+      }
+    },
+    "uv": {
+      "binary": {
+        "architecture": {
+          "source": "binary header",
+          "status": "measured",
+          "value": [
+            {
+              "machine": "0x14c",
+              "name": "x86"
+            }
+          ]
+        },
+        "path": "C:\\Program Files\\WinGet\\Links\\uv.EXE",
+        "path_redaction": "home prefix only",
+        "resolved_path": "C:\\Program Files (x86)\\WinGet\\Packages\\astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe\\uv.exe",
+        "selected_runtime_slice": {
+          "reason": "file architecture is not execution proof",
+          "status": "unavailable",
+          "value": null
+        },
+        "sha256": "7f4b5f1d861176293f44c748f9cd5886b9b1d316065295d5947c870fe4f3c3f6",
+        "size_bytes": 33465648,
+        "status": "measured"
+      },
+      "selection": "PATH-selected executable; PATH itself not retained",
+      "version": {
+        "source": "--version",
+        "status": "measured",
+        "value": "uv 0.13.6 (329bf9448 2026-10-26 i686-pc-windows-msvc)"
+      }
+    }
+  },
+  "uv_duration_export": {
+    "reason": "uv 0.13.6 release tracing-durations-export is development-only; checked cache-dir probe emitted no export",
+    "status": "unavailable",
+    "value": null
+  },
+  "uv_log_context": "UV_LOG_CONTEXT=1 verbose timestamps are log event boundaries, not exact internal spans"
+}

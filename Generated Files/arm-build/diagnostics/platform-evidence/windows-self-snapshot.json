@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "performance_eligible": false,
+  "pid": 26432,
+  "ppid": 26760,
+  "scope": "self_all_threads",
+  "started_monotonic_ns": 34369386430000,
+  "ended_monotonic_ns": 34369410019400,
+  "cost_ns": 23589400,
+  "window": "sequential, non-atomic counters; collector cost included",
+  "family_coverage": "none; no child or polling-based family CPU claim",
+  "cpu": {
+    "status": "measured",
+    "user_seconds": 0.03125,
+    "kernel_seconds": 0.015625,
+    "unit": "seconds",
+    "scope": "self_all_threads",
+    "aggregation": "lifetime_cumulative",
+    "source": "os.times"
+  },
+  "memory": {
+    "rss": {
+      "status": "measured",
+      "value": 19222528,
+      "unit": "bytes",
+      "scope": "self_all_threads",
+      "source": "GetProcessMemoryInfo",
+      "aggregation": "gauge",
+      "semantics": "resident working set, not private bytes"
+    },
+    "peak_rss": {
+      "status": "measured",
+      "value": 19222528,
+      "unit": "bytes",
+      "scope": "self_all_threads",
+      "source": "GetProcessMemoryInfo",
+      "aggregation": "lifetime_peak",
+      "semantics": "resident working set, not private bytes"
+    }
+  },
+  "io": {
+    "ReadOperationCount": {
+      "status": "measured",
+      "value": 74,
+      "unit": "operations",
+      "scope": "self_all_threads",
+      "source": "GetProcessIoCounters",
+      "aggregation": "lifetime_cumulative",
+      "semantics": "Windows process I/O accounting, including file/device/other I/O; not physical disk activity, latency, or Darwin block I/O"
+    },
+    "WriteOperationCount": {
+      "status": "measured",
+      "value": 0,
+      "unit": "operations",
+      "scope": "self_all_threads",
+      "source": "GetProcessIoCounters",
+      "aggregation": "lifetime_cumulative",
+      "semantics": "Windows process I/O accounting, including file/device/other I/O; not physical disk activity, latency, or Darwin block I/O"
+    },
+    "OtherOperationCount": {
+      "status": "measured",
+      "value": 1001,
+      "unit": "operations",
+      "scope": "self_all_threads",
+      "source": "GetProcessIoCounters",
+      "aggregation": "lifetime_cumulative",
+      "semantics": "Windows process I/O accounting, including file/device/other I/O; not physical disk activity, latency, or Darwin block I/O"
+    },
+    "ReadTransferCount": {
+      "status": "measured",
+      "value": 769117,
+      "unit": "bytes",
+      "scope": "self_all_threads",
+      "source": "GetProcessIoCounters",
+      "aggregation": "lifetime_cumulative",
+      "semantics": "Windows process I/O accounting, including file/device/other I/O; not physical disk activity, latency, or Darwin block I/O"
+    },
+    "WriteTransferCount": {
+      "status": "measured",
+      "value": 0,
+      "unit": "bytes",
+      "scope": "self_all_threads",
+      "source": "GetProcessIoCounters",
+      "aggregation": "lifetime_cumulative",
+      "semantics": "Windows process I/O accounting, including file/device/other I/O; not physical disk activity, latency, or Darwin block I/O"
+    },
+    "OtherTransferCount": {
+      "status": "measured",
+      "value": 89298,
+      "unit": "bytes",
+      "scope": "self_all_threads",
+      "source": "GetProcessIoCounters",
+      "aggregation": "lifetime_cumulative",
+      "semantics": "Windows process I/O accounting, including file/device/other I/O; not physical disk activity, latency, or Darwin block I/O"
+    }
+  }
+}

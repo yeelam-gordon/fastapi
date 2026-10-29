@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-29",
+  "platform": "local Windows ARM64 DevBox, not historical CI hardware",
+  "python": "3.13.15",
+  "ruff": "0.17.3 existing tool",
+  "unittest": {
+    "command": "python -m unittest -q test_platform",
+    "passed": 12,
+    "failed": 0
+  },
+  "ruff_check": "passed",
+  "ruff_format": "passed",
+  "py_compile": "passed",
+  "isolated_stdlib_snapshot": "passed under python -I -S, no psutil import",
+  "live_windows": {
+    "self_cpu": "measured",
+    "working_set": "measured bytes",
+    "process_io": "measured",
+    "native_process": "IsWow64Process2 process=0, native=0xaa64",
+    "runtime_volume": "NTFS"
+  },
+  "builds_executed": 0,
+  "recordings_started": 0,
+  "mac_runtime": "unavailable; mocked unit cases only",
+  "comparison": "not a Windows/Mac performance result"
+}
