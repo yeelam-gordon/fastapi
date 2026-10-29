@@ -1,0 +1,13 @@
+{
+  "A": {
+    "Lib\\pathlib\\_local.py": "0530b4186ec5845e000bedf5817ff1ac970b9a39a6891ba6789a1776abdea42b",
+    "python.exe": "383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd",
+    "python313.dll": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f"
+  },
+  "B": {
+    "Lib\\pathlib\\_local.py": "b6616ee0240d1ced9e2ff3f02dcfbbe0f30e7c5d8b751e6f9f986cce4f4a1e3e",
+    "python.exe": "383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd",
+    "python313.dll": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f"
+  },
+  "original_managed_source_sha256": "0530b4186ec5845e000bedf5817ff1ac970b9a39a6891ba6789a1776abdea42b"
+}

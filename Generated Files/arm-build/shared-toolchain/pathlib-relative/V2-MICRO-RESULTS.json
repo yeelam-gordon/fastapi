@@ -1,0 +1,1169 @@
+{
+  "status": "complete",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "executable": "C:\\Program Files\\Python313-arm64\\python.exe",
+  "module_origin": "Q:\\fastapi\\Generated Files\\worktrees\\pathlib-relative\\Generated Files\\arm-build\\shared-toolchain\\pathlib-relative\\cpython\\Lib\\pathlib\\_local.py",
+  "baseline_sha256": "0530b4186ec5845e000bedf5817ff1ac970b9a39a6891ba6789a1776abdea42b",
+  "candidate_sha256": "b6616ee0240d1ced9e2ff3f02dcfbbe0f30e7c5d8b751e6f9f986cce4f4a1e3e",
+  "number": 10000,
+  "order": [
+    "AB",
+    "BA",
+    "AB",
+    "BA",
+    "AB"
+  ],
+  "decision_rule": {
+    "windows_success_median_improvement_at_least": 0.1,
+    "any_windows_success_regression_at_most": 0.2,
+    "any_fallback_regression_at_most": 0.2,
+    "scope": "A gate only; not a standard-build speedup or adoption criterion"
+  },
+  "case_set": {
+    "classes": [
+      "WindowsPath",
+      "PureWindowsPath",
+      "PurePosixPath"
+    ],
+    "cases": [
+      "shallow",
+      "deep",
+      "equal",
+      "root",
+      "nonancestor",
+      "walk_up",
+      "subclass"
+    ],
+    "deep_components": 16
+  },
+  "cases": [
+    {
+      "class": "WindowsPath",
+      "case": "shallow",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\a",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.06255150000288268,
+          "B": 0.024588000000221655
+        },
+        {
+          "order": "BA",
+          "B": 0.0247802000012598,
+          "A": 0.06290179999996326
+        },
+        {
+          "order": "AB",
+          "A": 0.06265449999773409,
+          "B": 0.024493200002325466
+        },
+        {
+          "order": "BA",
+          "B": 0.024470100001053652,
+          "A": 0.06246650000321097
+        },
+        {
+          "order": "AB",
+          "A": 0.06254489999992074,
+          "B": 0.024532699997507734
+        }
+      ],
+      "A": {
+        "median_seconds": 0.06255150000288268,
+        "range_seconds": [
+          0.06246650000321097,
+          0.06290179999996326
+        ]
+      },
+      "B": {
+        "median_seconds": 0.024532699997507734,
+        "range_seconds": [
+          0.024470100001053652,
+          0.0247802000012598
+        ]
+      },
+      "saving_fraction": 0.6077999728803123
+    },
+    {
+      "class": "WindowsPath",
+      "case": "deep",
+      "self": "C:\\part0\\part1\\part2\\part3\\part4\\part5\\part6\\part7\\part8\\part9\\part10\\part11\\part12\\part13\\part14\\part15\\Leaf",
+      "other": "C:\\part0",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "part1\\part2\\part3\\part4\\part5\\part6\\part7\\part8\\part9\\part10\\part11\\part12\\part13\\part14\\part15\\Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.4852501999994274,
+          "B": 0.026191699998889817
+        },
+        {
+          "order": "BA",
+          "B": 0.02616160000252421,
+          "A": 0.4829535999997461
+        },
+        {
+          "order": "AB",
+          "A": 0.4827770000010787,
+          "B": 0.026219200000923593
+        },
+        {
+          "order": "BA",
+          "B": 0.026206000002275687,
+          "A": 0.48267180000038934
+        },
+        {
+          "order": "AB",
+          "A": 0.48240420000001905,
+          "B": 0.02620999999999185
+        }
+      ],
+      "A": {
+        "median_seconds": 0.4827770000010787,
+        "range_seconds": [
+          0.48240420000001905,
+          0.4852501999994274
+        ]
+      },
+      "B": {
+        "median_seconds": 0.026206000002275687,
+        "range_seconds": [
+          0.02616160000252421,
+          0.026219200000923593
+        ]
+      },
+      "saving_fraction": 0.9457182094378623
+    },
+    {
+      "class": "WindowsPath",
+      "case": "equal",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\a\\Leaf",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "."
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.02415169999949285,
+          "B": 0.017731399999320274
+        },
+        {
+          "order": "BA",
+          "B": 0.017311999999947147,
+          "A": 0.023922000000311527
+        },
+        {
+          "order": "AB",
+          "A": 0.02387349999844446,
+          "B": 0.017225100000359816
+        },
+        {
+          "order": "BA",
+          "B": 0.017230500001460314,
+          "A": 0.023851800000556977
+        },
+        {
+          "order": "AB",
+          "A": 0.02382480000233045,
+          "B": 0.017682199999399018
+        }
+      ],
+      "A": {
+        "median_seconds": 0.02387349999844446,
+        "range_seconds": [
+          0.02382480000233045,
+          0.02415169999949285
+        ]
+      },
+      "B": {
+        "median_seconds": 0.017311999999947147,
+        "range_seconds": [
+          0.017225100000359816,
+          0.017731399999320274
+        ]
+      },
+      "saving_fraction": 0.27484449280268264
+    },
+    {
+      "class": "WindowsPath",
+      "case": "root",
+      "self": "C:\\part0\\part1\\part2\\part3\\part4\\part5\\part6\\part7\\part8\\part9\\part10\\part11\\part12\\part13\\part14\\part15\\Leaf",
+      "other": "C:\\",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "part0\\part1\\part2\\part3\\part4\\part5\\part6\\part7\\part8\\part9\\part10\\part11\\part12\\part13\\part14\\part15\\Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.507397099998343,
+          "B": 0.02530990000013844
+        },
+        {
+          "order": "BA",
+          "B": 0.02532749999954831,
+          "A": 0.5086593000014545
+        },
+        {
+          "order": "AB",
+          "A": 0.5061010999997961,
+          "B": 0.025388400001247646
+        },
+        {
+          "order": "BA",
+          "B": 0.025347999999212334,
+          "A": 0.5060674999986077
+        },
+        {
+          "order": "AB",
+          "A": 0.5059766000013042,
+          "B": 0.02538510000158567
+        }
+      ],
+      "A": {
+        "median_seconds": 0.5061010999997961,
+        "range_seconds": [
+          0.5059766000013042,
+          0.5086593000014545
+        ]
+      },
+      "B": {
+        "median_seconds": 0.025347999999212334,
+        "range_seconds": [
+          0.02530990000013844,
+          0.025388400001247646
+        ]
+      },
+      "saving_fraction": 0.949915145414182
+    },
+    {
+      "class": "WindowsPath",
+      "case": "nonancestor",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\other",
+      "kwargs": {},
+      "result": [
+        "ValueError",
+        "'C:\\\\a\\\\Leaf' is not in the subpath of 'C:\\\\other'"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.08055709999825922,
+          "B": 0.01611880000200472
+        },
+        {
+          "order": "BA",
+          "B": 0.016121799999382347,
+          "A": 0.08075670000107493
+        },
+        {
+          "order": "AB",
+          "A": 0.08073910000166507,
+          "B": 0.01606069999979809
+        },
+        {
+          "order": "BA",
+          "B": 0.016051700000389246,
+          "A": 0.08022790000177338
+        },
+        {
+          "order": "AB",
+          "A": 0.08023550000143587,
+          "B": 0.016090299999632407
+        }
+      ],
+      "A": {
+        "median_seconds": 0.08055709999825922,
+        "range_seconds": [
+          0.08022790000177338,
+          0.08075670000107493
+        ]
+      },
+      "B": {
+        "median_seconds": 0.016090299999632407,
+        "range_seconds": [
+          0.016051700000389246,
+          0.016121799999382347
+        ]
+      },
+      "saving_fraction": 0.8002621742840779
+    },
+    {
+      "class": "WindowsPath",
+      "case": "walk_up",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\other",
+      "kwargs": {
+        "walk_up": true
+      },
+      "result": [
+        "ok",
+        "..\\a\\Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.18425109999952838,
+          "B": 0.1848673000022245
+        },
+        {
+          "order": "BA",
+          "B": 0.18481810000230325,
+          "A": 0.18424199999935809
+        },
+        {
+          "order": "AB",
+          "A": 0.1840405999973882,
+          "B": 0.18470180000076653
+        },
+        {
+          "order": "BA",
+          "B": 0.18434800000250107,
+          "A": 0.18403519999992568
+        },
+        {
+          "order": "AB",
+          "A": 0.18395049999890034,
+          "B": 0.18487109999841778
+        }
+      ],
+      "A": {
+        "median_seconds": 0.1840405999973882,
+        "range_seconds": [
+          0.18395049999890034,
+          0.18425109999952838
+        ]
+      },
+      "B": {
+        "median_seconds": 0.18481810000230325,
+        "range_seconds": [
+          0.18434800000250107,
+          0.18487109999841778
+        ]
+      },
+      "saving_fraction": -0.004224611335357897
+    },
+    {
+      "class": "WindowsPath",
+      "case": "subclass",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\a",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.06654830000115908,
+          "B": 0.06654530000014347
+        },
+        {
+          "order": "BA",
+          "B": 0.06721990000005462,
+          "A": 0.06541920000017853
+        },
+        {
+          "order": "AB",
+          "A": 0.06538739999814425,
+          "B": 0.06704069999977946
+        },
+        {
+          "order": "BA",
+          "B": 0.06678800000008778,
+          "A": 0.06552780000129133
+        },
+        {
+          "order": "AB",
+          "A": 0.06590810000125202,
+          "B": 0.06659219999710331
+        }
+      ],
+      "A": {
+        "median_seconds": 0.06552780000129133,
+        "range_seconds": [
+          0.06538739999814425,
+          0.06654830000115908
+        ]
+      },
+      "B": {
+        "median_seconds": 0.06678800000008778,
+        "range_seconds": [
+          0.06654530000014347,
+          0.06721990000005462
+        ]
+      },
+      "saving_fraction": -0.019231532246948957
+    },
+    {
+      "class": "PureWindowsPath",
+      "case": "shallow",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\a",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.058162799999990966,
+          "B": 0.022173099998326506
+        },
+        {
+          "order": "BA",
+          "B": 0.021828000000823522,
+          "A": 0.05796919999920647
+        },
+        {
+          "order": "AB",
+          "A": 0.057761200001550606,
+          "B": 0.021792700001242338
+        },
+        {
+          "order": "BA",
+          "B": 0.02176070000132313,
+          "A": 0.05779679999977816
+        },
+        {
+          "order": "AB",
+          "A": 0.05757090000042808,
+          "B": 0.02185250000184169
+        }
+      ],
+      "A": {
+        "median_seconds": 0.05779679999977816,
+        "range_seconds": [
+          0.05757090000042808,
+          0.058162799999990966
+        ]
+      },
+      "B": {
+        "median_seconds": 0.021828000000823522,
+        "range_seconds": [
+          0.02176070000132313,
+          0.022173099998326506
+        ]
+      },
+      "saving_fraction": 0.6223320322075391
+    },
+    {
+      "class": "PureWindowsPath",
+      "case": "deep",
+      "self": "C:\\part0\\part1\\part2\\part3\\part4\\part5\\part6\\part7\\part8\\part9\\part10\\part11\\part12\\part13\\part14\\part15\\Leaf",
+      "other": "C:\\part0",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "part1\\part2\\part3\\part4\\part5\\part6\\part7\\part8\\part9\\part10\\part11\\part12\\part13\\part14\\part15\\Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.44858580000072834,
+          "B": 0.02367449999655946
+        },
+        {
+          "order": "BA",
+          "B": 0.02367460000095889,
+          "A": 0.44629429999986314
+        },
+        {
+          "order": "AB",
+          "A": 0.4464289999996254,
+          "B": 0.02376379999986966
+        },
+        {
+          "order": "BA",
+          "B": 0.023694800001976546,
+          "A": 0.44662160000007134
+        },
+        {
+          "order": "AB",
+          "A": 0.4463527999978396,
+          "B": 0.023707700001978083
+        }
+      ],
+      "A": {
+        "median_seconds": 0.4464289999996254,
+        "range_seconds": [
+          0.44629429999986314,
+          0.44858580000072834
+        ]
+      },
+      "B": {
+        "median_seconds": 0.023694800001976546,
+        "range_seconds": [
+          0.02367449999655946,
+          0.02376379999986966
+        ]
+      },
+      "saving_fraction": 0.946923698948777
+    },
+    {
+      "class": "PureWindowsPath",
+      "case": "equal",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\a\\Leaf",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "."
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.021902500000578584,
+          "B": 0.015103500001714565
+        },
+        {
+          "order": "BA",
+          "B": 0.015507300002354896,
+          "A": 0.02181130000099074
+        },
+        {
+          "order": "AB",
+          "A": 0.02179739999701269,
+          "B": 0.015035799999168376
+        },
+        {
+          "order": "BA",
+          "B": 0.01506350000272505,
+          "A": 0.021810800000821473
+        },
+        {
+          "order": "AB",
+          "A": 0.021803100000397535,
+          "B": 0.015054800001962576
+        }
+      ],
+      "A": {
+        "median_seconds": 0.021810800000821473,
+        "range_seconds": [
+          0.02179739999701269,
+          0.021902500000578584
+        ]
+      },
+      "B": {
+        "median_seconds": 0.01506350000272505,
+        "range_seconds": [
+          0.015035799999168376,
+          0.015507300002354896
+        ]
+      },
+      "saving_fraction": 0.30935591531912154
+    },
+    {
+      "class": "PureWindowsPath",
+      "case": "root",
+      "self": "C:\\part0\\part1\\part2\\part3\\part4\\part5\\part6\\part7\\part8\\part9\\part10\\part11\\part12\\part13\\part14\\part15\\Leaf",
+      "other": "C:\\",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "part0\\part1\\part2\\part3\\part4\\part5\\part6\\part7\\part8\\part9\\part10\\part11\\part12\\part13\\part14\\part15\\Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.4722605000024487,
+          "B": 0.023631600000953767
+        },
+        {
+          "order": "BA",
+          "B": 0.022981599999184255,
+          "A": 0.47032989999934216
+        },
+        {
+          "order": "AB",
+          "A": 0.46847039999920526,
+          "B": 0.022991099998762365
+        },
+        {
+          "order": "BA",
+          "B": 0.023006299998087343,
+          "A": 0.4688461000005191
+        },
+        {
+          "order": "AB",
+          "A": 0.46963619999951334,
+          "B": 0.023000799999863375
+        }
+      ],
+      "A": {
+        "median_seconds": 0.46963619999951334,
+        "range_seconds": [
+          0.46847039999920526,
+          0.4722605000024487
+        ]
+      },
+      "B": {
+        "median_seconds": 0.023000799999863375,
+        "range_seconds": [
+          0.022981599999184255,
+          0.023631600000953767
+        ]
+      },
+      "saving_fraction": 0.9510242183207188
+    },
+    {
+      "class": "PureWindowsPath",
+      "case": "nonancestor",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\other",
+      "kwargs": {},
+      "result": [
+        "ValueError",
+        "'C:\\\\a\\\\Leaf' is not in the subpath of 'C:\\\\other'"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.07621830000061891,
+          "B": 0.015919100002065534
+        },
+        {
+          "order": "BA",
+          "B": 0.015919199999189004,
+          "A": 0.07614800000010291
+        },
+        {
+          "order": "AB",
+          "A": 0.07608540000001085,
+          "B": 0.015920900001219707
+        },
+        {
+          "order": "BA",
+          "B": 0.015919400000711903,
+          "A": 0.07605169999806094
+        },
+        {
+          "order": "AB",
+          "A": 0.0760362000000896,
+          "B": 0.015921399997750996
+        }
+      ],
+      "A": {
+        "median_seconds": 0.07608540000001085,
+        "range_seconds": [
+          0.0760362000000896,
+          0.07621830000061891
+        ]
+      },
+      "B": {
+        "median_seconds": 0.015919400000711903,
+        "range_seconds": [
+          0.015919100002065534,
+          0.015921399997750996
+        ]
+      },
+      "saving_fraction": 0.790769319728757
+    },
+    {
+      "class": "PureWindowsPath",
+      "case": "walk_up",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\other",
+      "kwargs": {
+        "walk_up": true
+      },
+      "result": [
+        "ok",
+        "..\\a\\Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.17216159999952652,
+          "B": 0.1718161000026157
+        },
+        {
+          "order": "BA",
+          "B": 0.17211630000019795,
+          "A": 0.17177690000244183
+        },
+        {
+          "order": "AB",
+          "A": 0.17162109999844688,
+          "B": 0.1722418999997899
+        },
+        {
+          "order": "BA",
+          "B": 0.172238400002243,
+          "A": 0.17127009999967413
+        },
+        {
+          "order": "AB",
+          "A": 0.1718957999983104,
+          "B": 0.17234779999853345
+        }
+      ],
+      "A": {
+        "median_seconds": 0.17177690000244183,
+        "range_seconds": [
+          0.17127009999967413,
+          0.17216159999952652
+        ]
+      },
+      "B": {
+        "median_seconds": 0.172238400002243,
+        "range_seconds": [
+          0.1718161000026157,
+          0.17234779999853345
+        ]
+      },
+      "saving_fraction": -0.002686624335371146
+    },
+    {
+      "class": "PureWindowsPath",
+      "case": "subclass",
+      "self": "C:\\a\\Leaf",
+      "other": "C:\\a",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.06124669999917387,
+          "B": 0.06084800000098767
+        },
+        {
+          "order": "BA",
+          "B": 0.060964600001170766,
+          "A": 0.060512300002301345
+        },
+        {
+          "order": "AB",
+          "A": 0.060410599999158876,
+          "B": 0.06081919999996899
+        },
+        {
+          "order": "BA",
+          "B": 0.06085719999828143,
+          "A": 0.060420400001021335
+        },
+        {
+          "order": "AB",
+          "A": 0.06041450000338955,
+          "B": 0.06078049999996438
+        }
+      ],
+      "A": {
+        "median_seconds": 0.060420400001021335,
+        "range_seconds": [
+          0.060410599999158876,
+          0.06124669999917387
+        ]
+      },
+      "B": {
+        "median_seconds": 0.06084800000098767,
+        "range_seconds": [
+          0.06078049999996438,
+          0.060964600001170766
+        ]
+      },
+      "saving_fraction": -0.007077079925970509
+    },
+    {
+      "class": "PurePosixPath",
+      "case": "shallow",
+      "self": "/a/Leaf",
+      "other": "/a",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.058015300000988645,
+          "B": 0.021238799999991897
+        },
+        {
+          "order": "BA",
+          "B": 0.020866000002570217,
+          "A": 0.05749719999948866
+        },
+        {
+          "order": "AB",
+          "A": 0.057492899999488145,
+          "B": 0.020821499998419313
+        },
+        {
+          "order": "BA",
+          "B": 0.020810800000617746,
+          "A": 0.05740760000117007
+        },
+        {
+          "order": "AB",
+          "A": 0.05755640000279527,
+          "B": 0.020787199999176664
+        }
+      ],
+      "A": {
+        "median_seconds": 0.05749719999948866,
+        "range_seconds": [
+          0.05740760000117007,
+          0.058015300000988645
+        ]
+      },
+      "B": {
+        "median_seconds": 0.020821499998419313,
+        "range_seconds": [
+          0.020787199999176664,
+          0.021238799999991897
+        ]
+      },
+      "saving_fraction": 0.6378693223564889
+    },
+    {
+      "class": "PurePosixPath",
+      "case": "deep",
+      "self": "/part0/part1/part2/part3/part4/part5/part6/part7/part8/part9/part10/part11/part12/part13/part14/part15/Leaf",
+      "other": "/part0",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "part1/part2/part3/part4/part5/part6/part7/part8/part9/part10/part11/part12/part13/part14/part15/Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.44200759999876027,
+          "B": 0.022410699999454664
+        },
+        {
+          "order": "BA",
+          "B": 0.02236590000029537,
+          "A": 0.4400889999997162
+        },
+        {
+          "order": "AB",
+          "A": 0.43981129999883706,
+          "B": 0.022512500003358582
+        },
+        {
+          "order": "BA",
+          "B": 0.022438799998781178,
+          "A": 0.44036400000186404
+        },
+        {
+          "order": "AB",
+          "A": 0.4400021999972523,
+          "B": 0.022436799998104107
+        }
+      ],
+      "A": {
+        "median_seconds": 0.4400889999997162,
+        "range_seconds": [
+          0.43981129999883706,
+          0.44200759999876027
+        ]
+      },
+      "B": {
+        "median_seconds": 0.022436799998104107,
+        "range_seconds": [
+          0.02236590000029537,
+          0.022512500003358582
+        ]
+      },
+      "saving_fraction": 0.9490175850836567
+    },
+    {
+      "class": "PurePosixPath",
+      "case": "equal",
+      "self": "/a/Leaf",
+      "other": "/a/Leaf",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "."
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.022199800001544645,
+          "B": 0.01509989999976824
+        },
+        {
+          "order": "BA",
+          "B": 0.015106800001376541,
+          "A": 0.022110599998995895
+        },
+        {
+          "order": "AB",
+          "A": 0.02209660000153235,
+          "B": 0.01512910000019474
+        },
+        {
+          "order": "BA",
+          "B": 0.015112900000531226,
+          "A": 0.022122900001704693
+        },
+        {
+          "order": "AB",
+          "A": 0.022087700002884958,
+          "B": 0.015130799998587463
+        }
+      ],
+      "A": {
+        "median_seconds": 0.022110599998995895,
+        "range_seconds": [
+          0.022087700002884958,
+          0.022199800001544645
+        ]
+      },
+      "B": {
+        "median_seconds": 0.015112900000531226,
+        "range_seconds": [
+          0.01509989999976824,
+          0.015130799998587463
+        ]
+      },
+      "saving_fraction": 0.3164862101789392
+    },
+    {
+      "class": "PurePosixPath",
+      "case": "root",
+      "self": "/part0/part1/part2/part3/part4/part5/part6/part7/part8/part9/part10/part11/part12/part13/part14/part15/Leaf",
+      "other": "/",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "part0/part1/part2/part3/part4/part5/part6/part7/part8/part9/part10/part11/part12/part13/part14/part15/Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.46026250000068103,
+          "B": 0.02186240000082762
+        },
+        {
+          "order": "BA",
+          "B": 0.022591499997361097,
+          "A": 0.4600940000018454
+        },
+        {
+          "order": "AB",
+          "A": 0.459560600000259,
+          "B": 0.021856899998965673
+        },
+        {
+          "order": "BA",
+          "B": 0.022178699997311924,
+          "A": 0.4603215999995882
+        },
+        {
+          "order": "AB",
+          "A": 0.4605727999987721,
+          "B": 0.021764999997685663
+        }
+      ],
+      "A": {
+        "median_seconds": 0.46026250000068103,
+        "range_seconds": [
+          0.459560600000259,
+          0.4605727999987721
+        ]
+      },
+      "B": {
+        "median_seconds": 0.02186240000082762,
+        "range_seconds": [
+          0.021764999997685663,
+          0.022591499997361097
+        ]
+      },
+      "saving_fraction": 0.9525001493695548
+    },
+    {
+      "class": "PurePosixPath",
+      "case": "nonancestor",
+      "self": "/a/Leaf",
+      "other": "/other",
+      "kwargs": {},
+      "result": [
+        "ValueError",
+        "'/a/Leaf' is not in the subpath of '/other'"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.07569580000199494,
+          "B": 0.014783400001761038
+        },
+        {
+          "order": "BA",
+          "B": 0.01475410000057309,
+          "A": 0.07506279999870458
+        },
+        {
+          "order": "AB",
+          "A": 0.07501039999988279,
+          "B": 0.014766700001928257
+        },
+        {
+          "order": "BA",
+          "B": 0.014751099999557482,
+          "A": 0.0750069000023359
+        },
+        {
+          "order": "AB",
+          "A": 0.07481299999926705,
+          "B": 0.014767399999982445
+        }
+      ],
+      "A": {
+        "median_seconds": 0.07501039999988279,
+        "range_seconds": [
+          0.07481299999926705,
+          0.07569580000199494
+        ]
+      },
+      "B": {
+        "median_seconds": 0.014766700001928257,
+        "range_seconds": [
+          0.014751099999557482,
+          0.014783400001761038
+        ]
+      },
+      "saving_fraction": 0.8031379648428574
+    },
+    {
+      "class": "PurePosixPath",
+      "case": "walk_up",
+      "self": "/a/Leaf",
+      "other": "/other",
+      "kwargs": {
+        "walk_up": true
+      },
+      "result": [
+        "ok",
+        "../a/Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.1701987000014924,
+          "B": 0.1713008999977319
+        },
+        {
+          "order": "BA",
+          "B": 0.17023540000081994,
+          "A": 0.16976539999814122
+        },
+        {
+          "order": "AB",
+          "A": 0.1699642000021413,
+          "B": 0.17050559999916004
+        },
+        {
+          "order": "BA",
+          "B": 0.1708117999987735,
+          "A": 0.17051700000229175
+        },
+        {
+          "order": "AB",
+          "A": 0.17007360000206972,
+          "B": 0.17021920000115642
+        }
+      ],
+      "A": {
+        "median_seconds": 0.17007360000206972,
+        "range_seconds": [
+          0.16976539999814122,
+          0.17051700000229175
+        ]
+      },
+      "B": {
+        "median_seconds": 0.17050559999916004,
+        "range_seconds": [
+          0.17021920000115642,
+          0.1713008999977319
+        ]
+      },
+      "saving_fraction": -0.0025400767496253085
+    },
+    {
+      "class": "PurePosixPath",
+      "case": "subclass",
+      "self": "/a/Leaf",
+      "other": "/a",
+      "kwargs": {},
+      "result": [
+        "ok",
+        "Leaf"
+      ],
+      "repeats": [
+        {
+          "order": "AB",
+          "A": 0.05977269999857526,
+          "B": 0.06155209999997169
+        },
+        {
+          "order": "BA",
+          "B": 0.05971979999958421,
+          "A": 0.05923080000138725
+        },
+        {
+          "order": "AB",
+          "A": 0.059060600000520935,
+          "B": 0.059581000001344364
+        },
+        {
+          "order": "BA",
+          "B": 0.059559100001933984,
+          "A": 0.05904000000009546
+        },
+        {
+          "order": "AB",
+          "A": 0.0591056999983266,
+          "B": 0.05956460000015795
+        }
+      ],
+      "A": {
+        "median_seconds": 0.0591056999983266,
+        "range_seconds": [
+          0.05904000000009546,
+          0.05977269999857526
+        ]
+      },
+      "B": {
+        "median_seconds": 0.059581000001344364,
+        "range_seconds": [
+          0.059559100001933984,
+          0.06155209999997169
+        ]
+      },
+      "saving_fraction": -0.008041525657106252
+    }
+  ],
+  "caveats": [
+    "Hot cached reusable path objects, no timed constructors.",
+    "timeit default GC-disabled loop; same invoke wrapper for both arms.",
+    "One warm call per arm/case; five fixed paired repeats, no retries.",
+    "No full build, process CPU, Mac or parity inference from microtimings."
+  ],
+  "windows_success_median_saving_fraction": 0.7840251208227007,
+  "substantial_regressions": [],
+  "phase_b_gate_pass": true
+}

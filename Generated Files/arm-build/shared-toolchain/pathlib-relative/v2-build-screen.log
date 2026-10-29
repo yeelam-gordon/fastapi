@@ -1,0 +1,69 @@
+warmup-A 7.270779 validated
+warmup-B 5.796581 validated
+pair-1-A 5.631065 validated
+pair-1-B 5.706112 validated
+pair-2-B 5.494239 validated
+pair-2-A 6.067898 validated
+pair-3-A 6.016315 validated
+pair-3-B 5.923309 validated
+pair-4-B 5.607615 validated
+pair-4-A 5.768825 validated
+pair-5-A 5.626481 validated
+pair-5-B 5.412191 validated
+{
+  "summary": {
+    "A": {
+      "samples": [
+        5.631064899997,
+        6.0678984000005585,
+        6.016315200002282,
+        5.768825099999958,
+        5.626480899998569
+      ],
+      "median": 5.768825099999958,
+      "min": 5.626480899998569,
+      "max": 6.0678984000005585
+    },
+    "B": {
+      "samples": [
+        5.70611160000044,
+        5.494239100000414,
+        5.92330949999814,
+        5.607615000000806,
+        5.412191300005361
+      ],
+      "median": 5.607615000000806,
+      "min": 5.412191300005361,
+      "max": 5.92330949999814
+    }
+  },
+  "pairs": [
+    {
+      "pair": 1,
+      "A_minus_B_seconds": -0.07504670000344049,
+      "saving_percent": -1.3327266038699088
+    },
+    {
+      "pair": 2,
+      "A_minus_B_seconds": 0.5736593000001449,
+      "saving_percent": 9.454003053183818
+    },
+    {
+      "pair": 3,
+      "A_minus_B_seconds": 0.09300570000414154,
+      "saving_percent": 1.5458914121405452
+    },
+    {
+      "pair": 4,
+      "A_minus_B_seconds": 0.1612100999991526,
+      "saving_percent": 2.794504898391767
+    },
+    {
+      "pair": 5,
+      "A_minus_B_seconds": 0.21428959999320796,
+      "saving_percent": 3.8085901969961804
+    }
+  ],
+  "median_saving_percent": 2.794504898391767,
+  "verdict": "reject"
+}
