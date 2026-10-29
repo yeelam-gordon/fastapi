@@ -6,7 +6,7 @@
   "validation": {
     "stdlib_unittest": {
       "command": "python -m unittest -v test_collect",
-      "tests": 12,
+      "tests": 13,
       "status": "passed"
     },
     "ruff_check": {
@@ -26,6 +26,17 @@
   },
   "unit_only_doubles": "Labelled unit platform/backend fixtures test monitoring, importtime, cProfile and memory machinery. No production fallback.",
   "platform_integration_candidate": "fdaace345c8f53a855fb398ef764b9113ffb27d5",
+  "two_tree_helper_resolution": {
+    "status": "passed",
+    "test": "test_collect.CollectorTests.test_real_pristine_source_and_separate_tool_tree",
+    "source": "Real pristine detached Git checkout of 79cab5bed28b24d92c185d236feb33f5783dfeb3",
+    "tools": "Separate installed tool tree, derived from collector __file__",
+    "execution": "Real subprocess imports actual candidate validator/manifest and owned_process module; runs validator comparison and canonical source Git archive with cwd in pristine source",
+    "source_mutation": false,
+    "path_mocks": false,
+    "package_builds": 0,
+    "remaining_gate": "Root final-snapshot C smoke with separate source/tools checkouts and fresh hash-verified wheelhouse"
+  },
   "integration": {
     "status": "partial",
     "coverage": "complete",

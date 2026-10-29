@@ -13,10 +13,13 @@ python collect.py --uv <uv-0.13.6> --source-checkout <git-checkout> \
 
 On Windows stage collector/platform code, uv, verified wheelhouse and Python
 3.13.15 ARM64 on owned C: NTFS. All generated source/out/tmp/cache are under
-the new output root. The source checkout supplies canonical original Git
-archive `79cab5bed28b24d92c185d236feb33f5783dfeb3` and the existing independent
-`candidate/validate.py`, `candidate/actual-manifest.json`, and
-`protocol/owned_process.py`; these helpers are not modified.
+the new output root. `--source-checkout` supplies only the canonical original
+Git archive `79cab5bed28b24d92c185d236feb33f5783dfeb3`. The existing independent
+`candidate\validate.py`, `candidate\actual-manifest.json`, and
+`protocol\owned_process.py` are resolved beside the collector's own installed
+`diagnostics` directory, using `Path(__file__).resolve().parent.parent`.
+They are never looked up in or copied into the package-source checkout.
+These helpers are not modified.
 
 ## Passes and boundaries
 
@@ -152,6 +155,16 @@ requested and explicitly unavailable. No CI, push or PR was run.
 
 The final workflow-freeze smoke and native Mac execution remain separate
 gates. Native collection still needs a safe supported owned-workload exporter.
+The helper-root correction has a real two-tree regression: a pristine detached
+Git checkout of the original source commit contains no `Generated Files`
+tooling, while a separate installed tool tree contains the real validator,
+manifest and ownership module. With cwd in the pristine source, a subprocess
+imports those installed helpers, executes the validator against real manifest
+data, and archives the canonical Git source. The source remains Git-clean and
+contains no copied tools. No mocked path resolution or package build is used.
+The final smoke must still exercise the workflow's separate source/tools
+checkouts and fresh hash-verified wheelhouse; no extra full C build was run
+for this correction.
 Confidence: **high** in real stock-child coverage and tested mechanics;
 **medium** in interpretation under declared bootstrap/profiling overhead;
 **low/unestablished** in cross-platform causes or performance parity.

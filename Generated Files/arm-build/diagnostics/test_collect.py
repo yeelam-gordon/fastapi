@@ -201,6 +201,122 @@ class CollectorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "artifact membership"):
             collect.verify_artifact_membership(output)
 
+    def test_real_pristine_source_and_separate_tool_tree(self):
+        repository = subprocess.run(
+            ["git", "-C", str(HERE), "rev-parse", "--show-toplevel"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        source = self.root / "package-source"
+        subprocess.run(
+            [
+                "git",
+                "clone",
+                "--quiet",
+                "--shared",
+                "--no-checkout",
+                repository,
+                str(source),
+            ],
+            check=True,
+            capture_output=True,
+            timeout=60,
+        )
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(source),
+                "-c",
+                "core.autocrlf=false",
+                "checkout",
+                "--quiet",
+                "--detach",
+                collect.SOURCE,
+            ],
+            check=True,
+            capture_output=True,
+            timeout=120,
+        )
+        revision = subprocess.run(
+            ["git", "-C", str(source), "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        self.assertEqual(revision, collect.SOURCE)
+        arm = Path("Generated Files") / "arm-build"
+        self.assertFalse((source / arm).exists())
+        tools = self.root / "tools-checkout" / arm
+        installed = tools / "diagnostics" / "collect.py"
+        installed.parent.mkdir(parents=True)
+        shutil.copyfile(HERE / "collect.py", installed)
+        for relative in (
+            Path("candidate") / "validate.py",
+            Path("candidate") / "actual-manifest.json",
+            Path("protocol") / "owned_process.py",
+        ):
+            content = subprocess.run(
+                [
+                    "git",
+                    "-C",
+                    repository,
+                    "show",
+                    f"HEAD:{(arm / relative).as_posix()}",
+                ],
+                check=True,
+                capture_output=True,
+                timeout=30,
+            ).stdout
+            destination = tools / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(content)
+        # Execute real imported helpers and a real canonical Git archive while
+        # cwd is the pristine package checkout, with no helper/path mocks.
+        script = (
+            "import runpy,sys,json,pathlib; "
+            "m=runpy.run_path(sys.argv[1]); "
+            "root,v,expected,owner=m['load_tool_helpers'](); "
+            "manifest=m['canonical_archive'](pathlib.Path.cwd(),pathlib.Path(sys.argv[2])); "
+            "assert not v.compare(expected,{'sdist':{},'wheel':{}})['strict_pass']; "
+            "assert callable(owner.run_owned); "
+            "print(json.dumps({'root':str(root),'validator':v.__file__,"
+            "'supervisor':owner.__file__,'source_files':len(manifest)}))"
+        )
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-B",
+                "-c",
+                script,
+                str(installed),
+                str(self.root / "source.tar"),
+            ],
+            cwd=source,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        proof = json.loads(result.stdout)
+        self.assertEqual(Path(proof["root"]), tools)
+        self.assertEqual(Path(proof["validator"]), tools / "candidate" / "validate.py")
+        self.assertEqual(
+            Path(proof["supervisor"]), tools / "protocol" / "owned_process.py"
+        )
+        self.assertGreater(proof["source_files"], 0)
+        self.assertFalse((source / arm).exists())
+        self.assertEqual(
+            subprocess.run(
+                ["git", "-C", str(source), "status", "--porcelain"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout,
+            "",
+        )
+
     def test_setup_failure_preserves_private_upload_boundary(self):
         destination = self.root / "failed-run"
         result = collect.main(

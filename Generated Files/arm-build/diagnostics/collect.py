@@ -63,6 +63,18 @@ def load_module(name, path):
     return module
 
 
+def load_tool_helpers():
+    root = HERE.parent
+    validator = load_module("arm_diag_validator", root / "candidate" / "validate.py")
+    expected = json.loads(
+        (root / "candidate" / "actual-manifest.json").read_text(encoding="utf-8")
+    )
+    supervisor = load_module(
+        "arm_diag_owned_process", root / "protocol" / "owned_process.py"
+    )
+    return root, validator, expected, supervisor
+
+
 def redact(text, replacements=()):
     for original, replacement in sorted(replacements, key=lambda pair: -len(pair[0])):
         if original:
@@ -561,16 +573,7 @@ def main(argv=None):
         if version.split()[:2] != ["uv", "0.13.6"]:
             raise ValueError("Stock uv 0.13.6 required")
         hashes = verify_wheelhouse(args.wheelhouse)
-        root = args.source_checkout / "Generated Files" / "arm-build"
-        validator = load_module(
-            "arm_diag_validator", root / "candidate" / "validate.py"
-        )
-        expected = json.loads(
-            (root / "candidate" / "actual-manifest.json").read_text(encoding="utf-8")
-        )
-        supervisor = load_module(
-            "arm_diag_owned_process", root / "protocol" / "owned_process.py"
-        )
+        root, validator, expected, supervisor = load_tool_helpers()
         platform_module = load_module(
             "arm_diag_platform", HERE / "arm_diag_platform.py"
         )
