@@ -200,12 +200,15 @@ configuration, API, selector, custom writer or dependency patch exists.
 The checkout is ignored at `.upstream`, pinned to the original official commit;
 installed PDM and production FastAPI are untouched.
 
-The loop keeps at most three outstanding ordered entries in total, counting the
-current entry after it is popped: it refills only after that entry is
-written and its bytes/future references released. Thus at most three bounded
-payload results coexist (192 KiB logical bytes at 64 KiB each), plus normal
-buffering, tar/BytesIO transient copies and executor/exception overhead. This is
-not an exact RSS ceiling or a count of physical filesystem read bytes.
+The deque holds at most three pending entries, but the typed loop's `entry`
+local can retain the previous completed future/result during the next refill,
+despite `del data, future`. Budget conservatively for **four capped payloads
+(256 KiB logical bytes at 64 KiB each)**, plus normal buffering, tar/BytesIO
+transient copies and executor/exception/thread overhead. The `last` local also
+retains an entry reference; in this loop it aliases a queued entry or the
+previous/current entry rather than establishing an independent fifth payload.
+This corrects the earlier 192 KiB/three-total claim without changing code.
+It is not an exact RSS ceiling or a count of physical filesystem read bytes.
 Each worker performs one buffered `read(recorded_size)` and owns/closes its input
 handle. Growth cannot increase the returned payload above that recorded bound.
 
@@ -297,6 +300,13 @@ invocation or security bypass was attempted. The actual owner-config mypy
 command exits before analysis with `No module named mypy`. Root must obtain a
 real owner-config typecheck before authorizing a stock-command screen. Receipt
 hashes were refreshed; no performance measurement or CI was run.
+
+**Budget correction / paused:** The conservative four-payload allowance above
+accounts for tuple/future aliases introduced by explicit type narrowing.
+Production patch, hashes, checks and 68-line footprint are unchanged. Strict
+mypy validation still blocks a standard-command screen. Work stops pending
+approved owner-pinned tool availability; no further installation attempt or
+benchmark is authorized here.
 
 [shutdown]: https://github.com/python/cpython/blob/4061bc4c35f7c26f25264666d4ba083b93d2f6f9/Lib/concurrent/futures/thread.py#L220-L239
 [cancel]: https://github.com/python/cpython/blob/4061bc4c35f7c26f25264666d4ba083b93d2f6f9/Lib/concurrent/futures/_base.py#L365-L379

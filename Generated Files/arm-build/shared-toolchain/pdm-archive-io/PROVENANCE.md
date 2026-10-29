@@ -109,3 +109,10 @@ existing interpreter had mypy. A single isolated `mypy==2.3.1` installer invocat
 failed TLS; no further installer invocation was attempted. No typecheck pass is
 claimed. Eight stdlib proofs passed again; forward/reverse check-only patch
 applicability and upstream diff whitespace checks passed.
+
+Budget-only correction: `entry` can retain a completed future/result across
+refill; `last` also needs alias accounting. REPORT now conservatively allows
+four capped payloads (256 KiB logical bytes) plus buffering/copies and
+exception/thread overhead, not three/192 KiB or an exact RSS bound.
+No production patch, hash receipt or check output changed. Paused pending
+approved mypy availability; no further install attempt or benchmark performed.
