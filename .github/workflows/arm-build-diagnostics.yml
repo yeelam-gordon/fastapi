@@ -1,0 +1,174 @@
+name: ARM build diagnostics (analysis only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      native_traces:
+        description: Request capability/privacy-gated native diagnostics.
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+
+jobs:
+  diagnostics:
+    name: Analysis only (${{ matrix.platform }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-11-arm
+            platform: windows
+          - runner: macos-15
+            platform: macos
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Record pre-checkout tool context
+        run: |
+          $git = Get-Command git -ErrorAction Stop
+          $version = & $git.Source version
+          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
+            throw 'Git >= 2.28 is required; archive fallback is not permitted'
+          }
+          "Git executable: $($git.Source)"
+          git version --build-options
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          node -p "JSON.stringify({kind:'path-node',arch:process.arch,version:process.version,executable:process.execPath})"
+          exit $LASTEXITCODE
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/.gitattributes
+            /.github/workflows/.gitattributes
+            /.github/workflows/arm-build-diagnostics.yml
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/setup_python.cjs
+            /Generated Files/arm-build/tooling.lock
+            /Generated Files/arm-build/diagnostics/**
+            /Generated Files/arm-build/protocol/backend.lock
+            /Generated Files/arm-build/protocol/owned_process.py
+            /Generated Files/arm-build/candidate/validate.py
+            /Generated Files/arm-build/candidate/actual-manifest.json
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
+          path: package-source
+          persist-credentials: false
+      - name: Prepare owned analysis directories
+        env:
+          NATIVE_REQUESTED: ${{ inputs.native_traces }}
+        run: |
+          if (-not $env:GITHUB_RUN_ID -or -not $env:GITHUB_RUN_ATTEMPT) {
+            throw 'Run identity is required before creating an owned analysis directory'
+          }
+          $name = 'arm-analysis-{0}-{1}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT
+          $root = if ($env:RUNNER_OS -eq 'Windows') {
+            Join-Path 'C:\' $name
+          } else {
+            Join-Path $env:GITHUB_WORKSPACE $name
+          }
+          New-Item -ItemType Directory -Path $root -ErrorAction Stop | Out-Null
+          foreach ($folder in @('bin', 'temp', 'wheelhouse')) {
+            New-Item -ItemType Directory -Path (Join-Path $root $folder) | Out-Null
+          }
+          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
+          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
+          @(
+            "DIAG_ROOT=$root"
+            "DIAG_TOOLS=$(Join-Path $root 'tools')"
+            "DIAG_SOURCE=$(Join-Path $root 'package-source')"
+            "DIAG_WHEELHOUSE=$(Join-Path $root 'wheelhouse')"
+            "ARM_DIAGNOSTIC_ACTION_JSON=$(Join-Path $root 'action-node.json')"
+            "DIAG_NATIVE_TRACES_REQUESTED=$env:NATIVE_REQUESTED"
+            "UV_CACHE_DIR=$(Join-Path $root 'cache')"
+            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
+            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
+            "TEMP=$(Join-Path $root 'temp')"
+            "TMP=$(Join-Path $root 'temp')"
+            "TMPDIR=$(Join-Path $root 'temp')"
+          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+      - name: Record actual Actions Node runtime
+        uses: ./tools/Generated Files/arm-build/diagnostics/action
+        with:
+          output: ${{ env.ARM_DIAGNOSTIC_ACTION_JSON }}
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - name: Prepare native Python and locked diagnostic tools
+        run: |
+          $windowsHost = $env:RUNNER_OS -eq 'Windows'
+          $bin = Join-Path $env:DIAG_ROOT 'bin'
+          $uvName = if ($windowsHost) { 'uv.exe' } else { 'uv' }
+          $uv = Join-Path $bin $uvName
+          Copy-Item (Get-Command uv -ErrorAction Stop).Source $uv
+          $env:PATH = "$bin$([IO.Path]::PathSeparator)$env:PATH"
+          $bin | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
+          "DIAG_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
+          node (Join-Path $arm 'setup_python.cjs')
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $scripts = if ($windowsHost) { 'Scripts' } else { 'bin' }
+          $pythonName = if ($windowsHost) { 'python.exe' } else { 'python' }
+          $python = Join-Path (Join-Path (Join-Path $arm '.venv') $scripts) $pythonName
+          & $uv --no-config pip install --python $python --require-hashes --only-binary :all: -r (Join-Path $arm 'tooling.lock')
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          & $python -m pip check
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          & $python -m pip download --only-binary=:all: --require-hashes --index-url https://pypi.org/simple -r (Join-Path (Join-Path $arm 'protocol') 'backend.lock') --dest $env:DIAG_WHEELHOUSE
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          "DIAG_PYTHON=$python" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+      - name: Check collector contracts
+        run: |
+          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
+          $diagnostics = Join-Path $arm 'diagnostics'
+          & $env:DIAG_PYTHON -m unittest discover -s $diagnostics -p 'test_*.py'
+          exit $LASTEXITCODE
+      - name: Collect read-only checkout tool context
+        run: |
+          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
+          $probe = Join-Path (Join-Path $arm 'diagnostics') 'git_context.py'
+          & $env:DIAG_PYTHON $probe --repo $env:DIAG_SOURCE --output (Join-Path (Join-Path $env:DIAG_ROOT 'context-upload') 'git-context.json') --repeats 3
+          exit $LASTEXITCODE
+      - name: Collect matched build diagnostics, not performance results
+        run: |
+          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
+          $collector = Join-Path (Join-Path $arm 'diagnostics') 'collect.py'
+          & $env:DIAG_PYTHON $collector --uv $env:DIAG_UV --source-checkout $env:DIAG_SOURCE --wheelhouse $env:DIAG_WHEELHOUSE --output (Join-Path $env:DIAG_ROOT 'evidence') --context-repeats 3
+          exit $LASTEXITCODE
+      - name: Preserve safe diagnostic evidence even on failure
+        if: always() && env.DIAG_ROOT != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: arm-analysis-${{ matrix.platform }}
+          path: |
+            ${{ env.DIAG_ROOT }}/evidence/upload
+            ${{ env.DIAG_ROOT }}/context-upload
+          if-no-files-found: error
+          retention-days: 3
+      - name: Preserve native Python setup receipts
+        if: always() && env.DIAG_TOOLS != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: arm-analysis-setup-${{ matrix.platform }}
+          path: |
+            ${{ env.DIAG_TOOLS }}/Generated Files/arm-build/results/bootstrap
+            ${{ env.ARM_DIAGNOSTIC_ACTION_JSON }}
+          if-no-files-found: warn
+          retention-days: 3

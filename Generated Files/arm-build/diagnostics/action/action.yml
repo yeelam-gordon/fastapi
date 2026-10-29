@@ -1,0 +1,9 @@
+name: Record diagnostic Actions runtime
+description: Record the actual Actions Node runtime without reading credentials.
+inputs:
+  output:
+    description: New JSON receipt inside DIAG_ROOT.
+    required: true
+runs:
+  using: node24
+  main: main.cjs
