@@ -1,0 +1,29 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> Generated Files\arm-build\protocol\readiness-local\prepare.py:3:1
+   |
+ 1 |   """Prepare private local inputs only; never execute a packaging campaign."""
+ 2 |
+ 3 | / import argparse
+ 4 | | import hashlib
+ 5 | | import json
+ 6 | | import os
+ 7 | | from pathlib import Path
+ 8 | | import shutil
+ 9 | | import subprocess
+10 | | import time
+11 | | import uuid
+   | |___________^
+help: Organize imports
+   |
+6  | import os
+   - from pathlib import Path
+7  | import shutil
+8  | import subprocess
+9  | import time
+10 | import uuid
+11 + from pathlib import Path
+12 |
+   |
+
+Found 1 error.
+[*] 1 fixable with `--fix`.

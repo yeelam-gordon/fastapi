@@ -1,0 +1,183 @@
+{
+  "schema": "local-frozen-preflight-v1",
+  "status": "blocked",
+  "harness_revision": "102ddabcb3a03b33915cb11534925c0951c2df72",
+  "tool_hashes": {
+    ".github/workflows/arm-build-experiment.yml": "c9b06380799f4bc8c516b2d1d4705910839718a4b63f1c070e1aa64a65d16687",
+    "Generated Files/arm-build/candidate/actual-manifest.json": "d9964c98785e809f31b46863c57047dcbdb847a251ec4a4f6051e397c63d6e33",
+    "Generated Files/arm-build/candidate/build.py": "421ef1a85786c15454ae453e54e4f8c37ca441266c8e4cbcd86163a4477559cd",
+    "Generated Files/arm-build/candidate/ops.py": "aa8b1d6e069db462597239f7406cd6f1fc513154766938fcd0077261a4aa4f2e",
+    "Generated Files/arm-build/candidate/selector.py": "0777774f4a5001f4c549c6d719a0dced1894811b2c1b66ce089104379a06e9b7",
+    "Generated Files/arm-build/candidate/test_candidate.py": "163fe4e5d38f2e38b81998668f32fb785aa1a7b165be919a8fad102dacbf70e1",
+    "Generated Files/arm-build/candidate/test_reuse.py": "41c849122770e4a981f48b6ef1bfe96a930acfe2d4efef00de0a58490fe5d61d",
+    "Generated Files/arm-build/candidate/validate.py": "6a4c196ddc055cc759977c54fd4525c85d5400c0d35093d242dcf35844fcf00c",
+    "Generated Files/arm-build/candidate/verify.py": "33a7b5ba3665739c6c13464f675621a85043b9270f6d0a93085d4f0c788c282a",
+    "Generated Files/arm-build/candidate/verify_reuse.py": "d6bd26501f22a882d9e39698e4bdf44c613f8658b28435de06dbe9789b44691a",
+    "Generated Files/arm-build/ci_prepare.py": "5f9aa687829b49943c7752286495de584f0526a04ebc4b70de8e993b6aba1dad",
+    "Generated Files/arm-build/protocol/backend.lock": "47ee94b1e5b6c958c9f02f2c318769cace5d203b16144d1e1119f8e8a36b0bbd",
+    "Generated Files/arm-build/protocol/compare_pairs.py": "d77ee35af896c11e4c75b356bc1607fe26d4c3e25e87b432c55f927b6d63bed8",
+    "Generated Files/arm-build/protocol/isolated_build.py": "6cd3df039c19b5dafb13f80e306a526bc45485c9976d2ff13c2c5e7971ab8842",
+    "Generated Files/arm-build/protocol/measure_pairs.py": "bb648a9b0ac13355a5806afd5215edc1b682e23d1e9d7f053eacd283c08f911b",
+    "Generated Files/arm-build/protocol/owned_process.py": "9db21a2aab063a424b135588324835947f3d69a2e0d96ab422783d6b4bef9666",
+    "Generated Files/arm-build/protocol/test_isolated_build.py": "8decea1878309dafe25cbca3d936d94ff22c41c6fb29ed2c5affcd6c8f3d2f81",
+    "Generated Files/arm-build/protocol/test_owned_process.py": "9298d36c382a3cf09d4417491087891dc9dd874bbdbafd16f8a06a70fbaf017b",
+    "Generated Files/arm-build/protocol/test_pairs.py": "a90efe48cab051dfb7830b8e148bf04489f06cfabbb1c3e4d1f7350c44ae11f8",
+    "Generated Files/arm-build/setup_python.cjs": "0b62007ec306f504dfbaf305da420cfc8986ff61ac741c824bd34a8cd86b5c5a",
+    "Generated Files/arm-build/smoke.lock": "4b22e7eca9f963222272fe2ee6ab3a41bacc26c01cb4cf8a9205b66b627fdb72",
+    "Generated Files/arm-build/tooling.lock": "b1a68ef06a6de2806a18593c7c248a3d6807fd4e2b06f75652268e0ff53f8694"
+  },
+  "inventory_gate": "passed using actual frozen code_receipts; all receipt inputs match Git blobs",
+  "inventory_check_wall": 5.883021599998756,
+  "source": {
+    "revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+    "archive_sha256": "d10f4af3101343ddcd332a7873c06759b858ea944bbc9c317dd938580f15ee9e",
+    "manifest_sha256": "9f1bc8a6ebb9027c5f93e737ec98383d44d933360eaa45906c9593f977641d59",
+    "files": 3233
+  },
+  "root": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+  "runtime": {
+    "version": "3.13.15",
+    "native_arm64": true,
+    "machine": "ARM64",
+    "tag": "win-arm64",
+    "translated": false,
+    "executable": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+    "executable_sha256": "53909489119635230bbaad0c276f86df2dbef18346648aefa612212fa4692531",
+    "executable_binary": {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+      "sha256": "53909489119635230bbaad0c276f86df2dbef18346648aefa612212fa4692531",
+      "arm64_slice": true
+    },
+    "shared_library": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python313.dll",
+    "shared_library_sha256": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+    "shared_library_binary": {
+      "path": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python313.dll",
+      "sha256": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+      "arm64_slice": true
+    },
+    "os": "Windows-11-10.0.26200-SP0",
+    "cores": 16,
+    "runner_image": null
+  },
+  "uv": {
+    "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\uv.exe",
+    "sha256": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+    "arm64_slice": true
+  },
+  "uv_version_output": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)",
+  "volumes": [
+    {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    },
+    {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    },
+    {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\evidence",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    },
+    {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    },
+    {
+      "path": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    },
+    {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\uv.exe",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    },
+    {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\scratch",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    },
+    {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\cache",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    },
+    {
+      "path": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\wheelhouse",
+      "device": "C:\\",
+      "mountpoint": "C:\\",
+      "filesystem": "NTFS",
+      "trust": "not queried; unchanged"
+    }
+  ],
+  "samples_executed": 0,
+  "schedule_executed": false,
+  "cpu_seconds": null,
+  "gates": {
+    "frozen_normal_pairs": {
+      "passed": 15,
+      "failed": 0,
+      "log": "frozen-normal-test_pairs.py.log"
+    },
+    "frozen_normal_ownership": {
+      "passed": 10,
+      "failed": 1,
+      "log": "frozen-normal-test_owned_process.py.log"
+    },
+    "remaining_focused_gates": "not executed after unexpected ownership failure; no retry"
+  },
+  "blockers": [
+    {
+      "id": "LOCAL-OWNERSHIP-004",
+      "command": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\protocol\\test_owned_process.py"
+      ],
+      "test": "test_normal_unfiltered_logs_and_separate_infrastructure",
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.36868049999975483,
+        "infrastructure_wall": 0.1746759000016027,
+        "ownership_established": true,
+        "survivors": true,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "confidence": "Observed raw failure; underlying cause not established; no sample or test replacement"
+    },
+    {
+      "id": "LOCAL-UV-VERSION-002",
+      "expected": "uv 0.13.6",
+      "actual": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)",
+      "location": "frozen measure_pairs.py:941-945"
+    }
+  ],
+  "resolved_in_frozen_snapshot": [
+    "LOCAL-INVENTORY-001",
+    "CW002 (producer repair integrated; frozen pair fixtures pass)"
+  ],
+  "root_gate": "No campaign GO received; new actual ownership failure independently blocks execution",
+  "source_policy": "Actual controller per-sample source copies outside timer, unchanged, C:-resident"
+}

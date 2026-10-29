@@ -1,0 +1,256 @@
+{
+  "schema": "local-paired-preparation-v1",
+  "status": "preparation-failed",
+  "root": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-C",
+        "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.08339079999859678,
+      "log": "harness-revision.log"
+    },
+    {
+      "argv": [
+        "git",
+        "clone",
+        "--no-checkout",
+        "--no-hardlinks",
+        "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 1.9549155000022438,
+      "log": "clone.log"
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code",
+        "config",
+        "core.autocrlf",
+        "false"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.0794949999981327,
+      "log": "autocrlf.log"
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code",
+        "sparse-checkout",
+        "init",
+        "--no-cone"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.08485680000012508,
+      "log": "sparse-init.log"
+    },
+    {
+      "argv": [
+        "git",
+        "-C",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code",
+        "checkout",
+        "--detach",
+        "1052c15b1f22cf4e2db043f04de0000bb8139532"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.2500787999997556,
+      "log": "checkout.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\uv.exe",
+        "--version"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.27415359999940847,
+      "log": "uv-version.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\uv.exe",
+        "venv",
+        "--no-config",
+        "--offline",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.28639100000145845,
+      "log": "private-venv.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\uv.exe",
+        "pip",
+        "install",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-index",
+        "--only-binary",
+        ":all:",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\wheelhouse",
+        "--require-hashes",
+        "-r",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\tooling.lock"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 1.5484176999998454,
+      "log": "locked-tooling.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\protocol\\measure_pairs.py",
+        "--help"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.425252900000487,
+      "log": "controller-help.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\protocol\\isolated_build.py",
+        "--help"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.2056354000014835,
+      "log": "wrapper-help.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\code\\Generated Files\\arm-build\\candidate\\build.py",
+        "--help"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.2787647000004654,
+      "log": "sdk-help.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\uv.exe",
+        "build",
+        "--help"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e",
+      "returncode": 0,
+      "wall": 0.03607360000023618,
+      "log": "uv-build-help.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness\\Generated Files\\arm-build\\protocol\\test_pairs.py"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness",
+      "returncode": 0,
+      "wall": 0.7001950000012584,
+      "log": "test_pairs.py.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness\\Generated Files\\arm-build\\protocol\\test_owned_process.py"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness",
+      "returncode": 0,
+      "wall": 4.597599299999274,
+      "log": "test_owned_process.py.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness\\Generated Files\\arm-build\\protocol\\test_isolated_build.py"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness",
+      "returncode": 0,
+      "wall": 0.46055189999970025,
+      "log": "test_isolated_build.py.log"
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness\\Generated Files\\arm-build\\protocol\\readiness-local\\prepare.py"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\worktrees\\local-paired-readiness",
+      "returncode": 1,
+      "wall": 0.33020800000304007,
+      "log": "local-static.log"
+    }
+  ],
+  "samples_executed": 0,
+  "cpu_seconds": null,
+  "campaign_gate": "Root must provide committed inventory fix and refreshed worktree",
+  "environment_changes": {
+    "TEMP": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\scratch",
+    "TMP": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\scratch",
+    "TMPDIR": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\scratch",
+    "UV_CACHE_DIR": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\cache",
+    "PIP_CACHE_DIR": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\pip-cache",
+    "UV_OFFLINE": "1",
+    "UV_NO_INDEX": "1",
+    "UV_NO_CONFIG": "1",
+    "UV_PYTHON_DOWNLOADS": "never",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "harness_revision": "1052c15b1f22cf4e2db043f04de0000bb8139532",
+  "sparse_patterns": [
+    "/.gitattributes",
+    "/.github/.gitattributes",
+    "/.github/workflows/.gitattributes",
+    "/.github/workflows/arm-build-experiment.yml",
+    "/Generated Files/.gitattributes",
+    "/Generated Files/arm-build/.gitattributes",
+    "/Generated Files/arm-build/*.lock",
+    "/Generated Files/arm-build/setup_python.cjs",
+    "/Generated Files/arm-build/ci_prepare.py",
+    "/Generated Files/arm-build/candidate/.gitattributes",
+    "/Generated Files/arm-build/candidate/*.py",
+    "/Generated Files/arm-build/candidate/actual-manifest.json",
+    "/Generated Files/arm-build/protocol/.gitattributes",
+    "/Generated Files/arm-build/protocol/*.py",
+    "/Generated Files/arm-build/protocol/owned_process.py",
+    "/Generated Files/arm-build/protocol/*.lock"
+  ],
+  "uv_version": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)",
+  "uv_sha256": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+  "error": "RuntimeError: local-static exited 1",
+  "preparation_wall": 12.116861799997423
+}

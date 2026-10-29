@@ -1,0 +1,19 @@
+usage: isolated_build.py [-h] --uv UV --python PYTHON --source SOURCE
+                         --source-manifest SOURCE_MANIFEST --out-dir OUT_DIR
+                         --cache-dir CACHE_DIR --wheelhouse WHEELHOUSE
+                         --report REPORT --workers {1,3}
+
+Fresh, offline caller isolation for the experimental SDK (not per-hook
+isolation).
+
+options:
+  -h, --help            show this help message and exit
+  --uv UV
+  --python PYTHON
+  --source SOURCE
+  --source-manifest SOURCE_MANIFEST
+  --out-dir OUT_DIR
+  --cache-dir CACHE_DIR
+  --wheelhouse WHEELHOUSE
+  --report REPORT
+  --workers {1,3}

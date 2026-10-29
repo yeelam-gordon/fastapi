@@ -1,0 +1,8 @@
+__pycache__/
+.ruff_cache/
+payload/
+cache/
+env/
+*.whl
+*.exe
+*.dll

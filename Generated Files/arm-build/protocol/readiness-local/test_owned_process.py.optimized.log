@@ -1,0 +1,16 @@
+test_cleanup_query_failure_cannot_succeed (__main__.OwnedTests.test_cleanup_query_failure_cannot_succeed) ... ok
+test_failed_drain_preserves_failure_and_closes_job (__main__.OwnedTests.test_failed_drain_preserves_failure_and_closes_job) ... ok
+test_failure_retains_exit_code (__main__.OwnedTests.test_failure_retains_exit_code) ... ok
+test_invalid_budget (__main__.OwnedTests.test_invalid_budget) ... ok
+test_normal_unfiltered_logs_and_separate_infrastructure (__main__.OwnedTests.test_normal_unfiltered_logs_and_separate_infrastructure) ... ok
+test_pipe_close_failures_preserve_status_and_attempt_every_close (__main__.OwnedTests.test_pipe_close_failures_preserve_status_and_attempt_every_close) ... ok
+test_posix_group_cleanup_contract_mock (__main__.OwnedTests.test_posix_group_cleanup_contract_mock) ... ok
+test_posix_group_probe_is_owned_id_only (__main__.OwnedTests.test_posix_group_probe_is_owned_id_only) ... ok
+test_setup_and_close_failures_preserve_both_diagnostics (__main__.OwnedTests.test_setup_and_close_failures_preserve_both_diagnostics) ... ok
+test_setup_failure_never_launches_target (__main__.OwnedTests.test_setup_failure_never_launches_target) ... ok
+test_timeout_and_fast_intermediate_parent (__main__.OwnedTests.test_timeout_and_fast_intermediate_parent) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 4.048s
+
+OK

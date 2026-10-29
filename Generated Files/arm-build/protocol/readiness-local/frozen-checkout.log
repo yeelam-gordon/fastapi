@@ -1,0 +1,2 @@
+Previous HEAD position was 1052c15b1 Pass explicit bytecode suppression to isolated caller Python phases
+HEAD is now at 102ddabcb Prepare committed-SHA proof reruns without replacing blocker receipts

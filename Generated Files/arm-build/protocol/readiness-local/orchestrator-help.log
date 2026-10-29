@@ -1,0 +1,17 @@
+usage: prepare.py [-h] --repo-root REPO_ROOT --harness-repo HARNESS_REPO
+                  --harness-revision HARNESS_REVISION
+                  --source-checkout SOURCE_CHECKOUT --python PYTHON --uv UV
+                  --wheelhouse WHEELHOUSE --lab-parent LAB_PARENT
+
+Prepare private local inputs only; never execute a packaging campaign.
+
+options:
+  -h, --help            show this help message and exit
+  --repo-root REPO_ROOT
+  --harness-repo HARNESS_REPO
+  --harness-revision HARNESS_REVISION
+  --source-checkout SOURCE_CHECKOUT
+  --python PYTHON
+  --uv UV
+  --wheelhouse WHEELHOUSE
+  --lab-parent LAB_PARENT

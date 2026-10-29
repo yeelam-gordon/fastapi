@@ -1,0 +1,11 @@
+usage: measure_pairs.py [-h] [--prepare] [--source-checkout SOURCE_CHECKOUT]
+                        --output OUTPUT --uv UV
+
+Paired ARM protocol v4. Preparation and verification are never build timings.
+
+options:
+  -h, --help            show this help message and exit
+  --prepare
+  --source-checkout SOURCE_CHECKOUT
+  --output OUTPUT
+  --uv UV
