@@ -1,11 +1,12 @@
 # P23 — official PDM sdist I/O: source-only feasibility
 
-**Verdict: no-go for implementation/adoption now (high confidence).** There is
+**Initial source-only verdict: no-go for implementation/adoption (high confidence).** There is
 an authentic serial-open/read overlap opportunity, but no demonstrated tiny,
 generic PDM metadata fix or maintainable byte-bounded prefetch implementation.
 Keep prefetch as a conditional research candidate, not another SDK or campaign.
 No builds, benchmarks, installations, production edits, CI, owner contact or
-foreign code execution were performed. Public Python files were read, not imported.
+foreign code execution were performed in that initial phase. The subsequent
+authorized isolated functional prototype is recorded below; adoption remains gated.
 
 Scope follows [GOALS](../../../GOALS.md), [PERSONA](../../../PERSONA.md) and the
 [ranked table](../../../INVESTIGATION-AND-PROPOSALS.md): shared-toolchain value
@@ -188,6 +189,88 @@ a stress framework. Then one standard full-command paired screen, informed by
 P22, including tiny and many-small-file layouts and one oversized streaming file;
 retain the original report's artifact and contemporary Windows/Mac gates.
 Reject on complexity, cleanup failure or immaterial end-to-end benefit.
+
+## Authorized isolated prototype — functional proof only
+
+**Disposition: ready for independent small-diff review, not adoption (medium).**
+[pdm-small-read-prefetch.patch](pdm-small-read-prefetch.patch) changes **one official
+PDM file**, `src/pdm/backend/sdist.py`: **53 added / 9 removed lines; 62 total**
+including imports, helper and replacement loop. No hidden production module,
+configuration, API, selector, custom writer or dependency patch exists.
+The checkout is ignored at `.upstream`, pinned to the original official commit;
+installed PDM and production FastAPI are untouched.
+
+The loop keeps at most three outstanding ordered entries in total, counting the
+current entry after it is popped: it refills only after that entry is
+written and its bytes/future references released. Thus at most three bounded
+payload results coexist (192 KiB logical bytes at 64 KiB each), plus normal
+buffering, tar/BytesIO transient copies and executor/exception overhead. This is
+not an exact RSS ceiling or a count of physical filesystem read bytes.
+Each worker performs one buffered `read(recorded_size)` and owns/closes its input
+handle. Growth cannot increase the returned payload above that recorded bound.
+
+Main-thread metadata cleaning and hardlink bookkeeping stay ordered; oversized
+and nonregular entries are queue-drain barriers and use the original streaming
+or metadata-only paths. Later ordinary metadata/submission/iterator errors are
+queued as positional error entries. Ordered `Future.result()` preserves read
+failure ordering; earlier writer failures win. An enclosing `finally` cancels
+unstarted work and waits for running readers before PKG-INFO/finalization or
+exception return. It does not impose a storage-I/O timeout.
+
+### Proof evidence and boundaries
+
+Command, from this owned directory, with `TEMP`/`TMP` pointing at `.proof-work`
+on Q: and bytecode disabled: `python -B test_small_prefetch.py`.
+[PROOF.txt](PROOF.txt) records **8 passing unittest tests** on existing native
+ARM64 Python 3.13.15. This was small functional work, not a benchmark; unittest's
+elapsed duration is not a performance result.
+
+* Exact-cap, over-cap and empty inputs: capped worker requests, zero-size opens,
+  large-file main-thread chunk streaming and all input closures.
+* Appended tail ignored at original recorded length; short payload retains
+  stdlib `OSError("unexpected end of data")`.
+* Later metadata/read failures appear only after earlier successful member;
+  a primary writer error wins over a later speculative read error.
+* Actual Q: hardlink **and symlink** remain metadata-only; successful archive
+  member payloads/order/types/link targets/modes/ownership/timestamps/PAX fields
+  match the unmodified pinned source loaded in memory.
+* Real PDM update/finalize hooks replace/remove inputs and create build-dir
+  files; dynamic file version and PKG-INFO refresh across two builds. These also
+  compare against stock source, not a FastAPI artifact oracle.
+* Early writer failure waits for an already-running, handle-owning reader and
+  leaves no executor threads alive. A separate deterministically saturated
+  one-worker test executor proves the third queued task is cancelled unopened;
+  production still requests three workers. Test-only scheduling instrumentation
+  is not part of the production patch.
+
+**Gaps:** pytest was unavailable (`ModuleNotFoundError`), so the existing upstream
+pytest suite was **not run** and no packages were installed. This proof covers one
+flat-package hook layout, not the full upstream src/external-path/platform matrix,
+all special files, Python 3.9 compatibility execution or asynchronous interrupts.
+There is no full standard-command frontend proof, performance/memory measurement,
+Mac run or claim of improved Windows/Mac ratio. Earlier metadata/open timing and
+concurrent-mutation observations can differ; failed artifacts may have different
+partial tails. Running reads can delay cleanup on slow storage. The requested
+bounded normal success/error lifecycle was tested, not arbitrary interruption
+or process termination guarantees.
+
+Base-source, patched-source, patch, proof-script and proof-output SHA256 values,
+exact revision and line counts are in
+[prototype-provenance.json](prototype-provenance.json). Forward applicability was
+checked against the pristine checkout index and reverse applicability against
+the modified worktree; both were check-only. Checkout, generated archives and
+other functional workspace files are ignored, not committed.
+
+**Maintainer rationale:** This is a small PDM-owned overlap experiment around the
+existing archive loop, not a novel technique or a FastAPI extension. Its fixed
+cap and streaming barriers avoid an allocation scheduler, while standard tar/gzip
+and PDM metadata/hooks remain authoritative. The 62-line diff and eight focused
+proofs make independent review credible (**medium**); tested immutable-input
+semantics and normal error cleanup have **high confidence within these cases**.
+Unchanged behavior across the broader upstream matrix and useful full-command
+value remain **unproven/low confidence**. Root review should precede any separately
+authorized stock-command screen informed by P22; reject if review burden,
+compatibility or end-to-end benefit fails the existing maintainer gate.
 
 [shutdown]: https://github.com/python/cpython/blob/4061bc4c35f7c26f25264666d4ba083b93d2f6f9/Lib/concurrent/futures/thread.py#L220-L239
 [cancel]: https://github.com/python/cpython/blob/4061bc4c35f7c26f25264666d4ba083b93d2f6f9/Lib/concurrent/futures/_base.py#L365-L379

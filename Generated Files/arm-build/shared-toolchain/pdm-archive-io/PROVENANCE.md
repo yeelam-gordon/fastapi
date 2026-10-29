@@ -73,3 +73,26 @@ Additional complete public files fetched from the same immutable CPython commit:
 Relevant lines: thread worker exception storage 58–65, shutdown cancellation/join
 220–239; Future cancellation limits 365–379; executor context exit 652–654.
 No new production code, dependencies, framework, benchmark, C-drive write or CI.
+
+## Authorized bounded prototype
+
+Starting investigation commit: `cb21971325f3fe4851d2a18fad737586c4a5c3a3`.
+Cloned official `pdm-project/pdm-backend` tag 2.5.0 with depth one into ignored
+`.upstream`; verified HEAD is `8c6653726f71afdb2059b44dc9c7706693e95be6`.
+Only `src/pdm/backend/sdist.py` is modified inside that checkout. Its original
+`git show HEAD:<path>` bytes match the source hash above. No installed backend
+was modified. The test script inserts this checkout's `src` on its process path
+and loads the official unmodified comparison module from git bytes in memory.
+
+Artifacts: generated upstream-shaped `pdm-small-read-prefetch.patch`,
+`test_small_prefetch.py`, retained `PROOF.txt` and `prototype-provenance.json`
+with complete sourcebase/patch/proof hashes, interpreter and line-count receipt.
+The patch is 53 added / 9 removed production lines (62 combined).
+Check-only `git apply --cached --check` against the pinned index and
+`git apply --reverse --check` against the modified source both passed.
+
+Existing default Python lacked pytest. Used stdlib unittest instead, with no
+installation attempt; eight functional proofs passed. All generated test files,
+archives and git checkout writes were Q:-owned, with TEMP/TMP explicitly mapped
+to `.proof-work`. Bytecode was disabled. No timed C screen, performance benchmark,
+uv rebuild, CI, push/PR, owner contact or production FastAPI edit was performed.

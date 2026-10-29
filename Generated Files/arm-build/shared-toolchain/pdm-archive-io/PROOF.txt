@@ -1,0 +1,16 @@
+test_appended_tail_is_ignored (__main__.PrefetchProof.test_appended_tail_is_ignored) ... ok
+test_cap_overcap_zero_and_immutable_differential (__main__.PrefetchProof.test_cap_overcap_zero_and_immutable_differential) ... ok
+test_hardlink_and_symlink_metadata_only (__main__.PrefetchProof.test_hardlink_and_symlink_metadata_only) ... ok
+test_hooks_replacement_generated_files_and_fresh_dynamic_metadata (__main__.PrefetchProof.test_hooks_replacement_generated_files_and_fresh_dynamic_metadata) ... ok
+test_later_metadata_and_read_failures_are_ordered (__main__.PrefetchProof.test_later_metadata_and_read_failures_are_ordered) ... ok
+test_short_payload_keeps_tar_error (__main__.PrefetchProof.test_short_payload_keeps_tar_error) ... ok
+test_writer_failure_cancels_and_joins_running_readers (__main__.PrefetchProof.test_writer_failure_cancels_and_joins_running_readers) ... ok
+test_writer_failure_cancels_unstarted_task (__main__.PrefetchProof.test_writer_failure_cancels_unstarted_task) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.132s
+
+OK
+base: 8c6653726f71afdb2059b44dc9c7706693e95be6
+stock sdist SHA256: f62cdc17df1b922d03e1ef8103ce1c0109c94966931d8909f8543b9243f41396
+patched source: Q:\fastapi\Generated Files\worktrees\pdm-archive-io\Generated Files\arm-build\shared-toolchain\pdm-archive-io\.upstream\src\pdm\backend\sdist.py

@@ -1,0 +1,4 @@
+*.patch -text -whitespace
+test_small_prefetch.py -text whitespace=cr-at-eol
+PROOF.txt -text whitespace=cr-at-eol
+prototype-provenance.json -text whitespace=cr-at-eol

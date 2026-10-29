@@ -1,0 +1,18 @@
+{
+  "base_commit": "8c6653726f71afdb2059b44dc9c7706693e95be6",
+  "base_source_path": "src/pdm/backend/sdist.py",
+  "base_source_sha256": "f62cdc17df1b922d03e1ef8103ce1c0109c94966931d8909f8543b9243f41396",
+  "patched_source_sha256": "d3a692ca626618616e082ce54fabfe87e99e86873bdcd924203f0ec28094adf9",
+  "patch_sha256": "4727b89b6421e249a26c5e7ad9ab04627d8f9a4feecb593e63b2b12e62313271",
+  "production_lines_added": 53,
+  "production_lines_removed": 9,
+  "production_total_added_plus_removed": 62,
+  "proof_script_sha256": "41b04adc87841ff860384aa494370b6febc2f9db31019cc329d65cc55e3e1aa5",
+  "proof_output_sha256": "09591f8312017715e3b80f05ced6ad2eaa3a3fbf03d286fa1c7a8bd4ebda7107",
+  "python_executable": "C:\\Program Files\\Python313-arm64\\python.exe",
+  "python_version": "3.13.15",
+  "proof_command": "python -B test_small_prefetch.py",
+  "tests_passed": 8,
+  "upstream_pytest_suite": "not run: pytest unavailable; stdlib unittest proof used",
+  "performance_measurements": "none"
+}
