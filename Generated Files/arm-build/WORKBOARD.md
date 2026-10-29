@@ -40,6 +40,8 @@ Parity is still unestablished. Exactly two hosted experiment runs have been used
 
 | Current lane | Branch / worktree suffix | Owned output |
 |---|---|---|
+| Standard uv build lifecycle (active) | `investigate/arm-uv-build-bytecode` / `uv-build-bytecode` | P22 shared-toolchain feasibility, existing policy and repeated-hook tradeoffs |
+| Generic PDM archive I/O (active) | `investigate/arm-pdm-archive-io` / `pdm-archive-io` | P23 maintainer-facing owner-level candidate or no-go; no FastAPI-specific machinery |
 | Controller preflight repair (completed) | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | Exact semantic-version validation with original raw output retained |
 | Ownership correction and independent review (completed) | `investigate/arm-process-lifecycle`, `review/arm-process-containment` | Complete owned-member wait states and cleanup repair; original causal uncertainty retained; no further framework work |
 | Source-only next proposals (completed) | `investigate/arm-compression-path`, `investigate/arm-sdk-validation-cost` | P20 codec attribution and P21 metadata reuse; no new timed work or readiness requirement |
