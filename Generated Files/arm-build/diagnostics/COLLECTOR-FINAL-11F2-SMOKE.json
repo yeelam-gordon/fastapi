@@ -1,0 +1,2021 @@
+{
+  "after_handoff_checks": {
+    "package-source": {
+      "byte_hashes_unchanged": true,
+      "files": 3233,
+      "head": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+      "tracked_clean": true
+    },
+    "tools": {
+      "byte_hashes_unchanged": true,
+      "files": 32,
+      "head": "11f2ff73651c7869ee8d9de14dfe45b39c70afde",
+      "tracked_clean": true
+    }
+  },
+  "analysis_only": true,
+  "attempt": "attempt-001",
+  "audit_script_sha256": "efde6a184d18f67d1457baeb00aec1a7bbb245c03b0473525fe10be3ef8c8ce7",
+  "collector_report_sha256": "1a9e7a331baf305795389923470c774b3475adb83a87621f6e206abd05986523",
+  "collector_status": "failed",
+  "confidence": {
+    "high": "Actual stock child coverage, parsed profiles, counter/clock semantics, fresh wheelhouse, real nested Node receipt, two-tree helpers and unchanged bytes",
+    "low": "Unmeasured cross-platform causes, native Mac behavior and performance parity",
+    "medium": "Interpretation has declared bootstrap/preloading and profiler overhead; no native stacks"
+  },
+  "coverage": {
+    "instrumented_passes": 4,
+    "mac": null,
+    "native": "requested/unavailable",
+    "required_roles_per_instrumented_pass": 4,
+    "status": "complete",
+    "strict_artifacts": "failed; five mode-only differences per build",
+    "validated_actual_child_receipts": 16
+  },
+  "full_builds": 8,
+  "handoff_before_sha256": "32f8fa0dabffd8a42a4285c50e28771d7dd5d6d2cdd0c0837cb11abeda64edc5",
+  "identity": "e265ee557f9b45938d473b86ea801297",
+  "local_root": "C:\\fastapi-arm-build-lab\\diagnostics-final-11f2ff73",
+  "native": {
+    "build_invoked": false,
+    "build_result": null,
+    "capabilities": {
+      "wpr": {
+        "binary": {
+          "architecture": {
+            "source": "binary header",
+            "status": "measured",
+            "value": [
+              {
+                "machine": "0xaa64",
+                "name": "arm64"
+              }
+            ]
+          },
+          "path": "C:\\Windows\\system32\\wpr.EXE",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Windows\\System32\\wpr.exe",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "a19275562a4ed8f329ce1ab248a44cb4af60c1091ea2f275097dee43761bd693",
+          "size_bytes": 410112,
+          "status": "measured"
+        },
+        "help_observed": true,
+        "help_status": "measured",
+        "reason": "help is not proof of safe bounded owned-process capture and reviewed export",
+        "returncode": 0,
+        "status": "unavailable"
+      },
+      "xperf": {
+        "binary": {
+          "architecture": {
+            "source": "binary header",
+            "status": "measured",
+            "value": [
+              {
+                "machine": "0xaa64",
+                "name": "arm64"
+              }
+            ]
+          },
+          "path": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.EXE",
+          "path_redaction": "home prefix only",
+          "resolved_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.exe",
+          "selected_runtime_slice": {
+            "reason": "file architecture is not execution proof",
+            "status": "unavailable",
+            "value": null
+          },
+          "sha256": "312d62ad857e66fe9022178a9c1581fc9904628b00fb337445dee3d278def3e0",
+          "size_bytes": 467368,
+          "status": "measured"
+        },
+        "help_observed": false,
+        "help_status": "measured",
+        "reason": "help is not proof of safe bounded owned-process capture and reviewed export",
+        "returncode": 0,
+        "status": "unavailable"
+      }
+    },
+    "capture_window": null,
+    "collectors": {
+      "native_cpu": {
+        "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+        "requested": true,
+        "status": "unavailable",
+        "value": null
+      },
+      "native_file_io": {
+        "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+        "requested": true,
+        "status": "unavailable",
+        "value": null
+      },
+      "native_scheduling": {
+        "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+        "requested": true,
+        "status": "unavailable",
+        "value": null
+      }
+    },
+    "lost_events": {
+      "reason": "no capture",
+      "status": "unavailable",
+      "value": null
+    },
+    "mac_runtime_validation": "runner-only, not executed locally",
+    "performance_eligible": false,
+    "raw_policy": "private_raw only, excluded from upload; no raw traces produced",
+    "reason": "No validated owned-process-tree CPU/file-I/O capture and privacy-reviewed summary exporter. Local system-wide capture prohibited; CI identity alone is not consent or permission. Callback has no pre-launch process identity; sampling this controller would miss backend children. No recording started, existing session queried/cancelled, privilege changed, or extra build invoked.",
+    "requested": true,
+    "schema_version": 1,
+    "status": "partial",
+    "symbols": {
+      "reason": "no capture",
+      "status": "unavailable",
+      "value": null
+    },
+    "upload_summaries": []
+  },
+  "original_source": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "passes": {
+    "context-1": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "b9185c823c75c0c263721739da0cf41f04108489b494ee9eb4ae9ae5323c0afb"
+      },
+      "children": [],
+      "instrumentation": "none; stock default bytecode policy",
+      "original_status": "failed",
+      "owned_cleanup_complete": true,
+      "performance_eligible": false,
+      "result_sha256": "ffbee6c11fa292bc92c39969ba70df48e31a7438df60e326fa7138f15224e66c",
+      "returncode": 0,
+      "source_mode_proxy_differences": 3233,
+      "strict_artifact_pass": false,
+      "timed_out": false
+    },
+    "context-2": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "53ff6cc28d11b4e1d30bb7025c6bfd6e60ccdcd020dab908572af06669ccfe43"
+      },
+      "children": [],
+      "instrumentation": "none; stock default bytecode policy",
+      "original_status": "failed",
+      "owned_cleanup_complete": true,
+      "performance_eligible": false,
+      "result_sha256": "734cdc997e4bdeb8e6b5046c9a3de079db371d74f81822822079fb7a563a1c9e",
+      "returncode": 0,
+      "source_mode_proxy_differences": 3233,
+      "strict_artifact_pass": false,
+      "timed_out": false
+    },
+    "context-3": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "334be9f19f80500f55a015006883967e26f5007070e121de6f6958abb247840e"
+      },
+      "children": [],
+      "instrumentation": "none; stock default bytecode policy",
+      "original_status": "failed",
+      "owned_cleanup_complete": true,
+      "performance_eligible": false,
+      "result_sha256": "ce74b400df609447583d749b2785551e52500f262705d51bfc5339acaa0c9c41",
+      "returncode": 0,
+      "source_mode_proxy_differences": 3233,
+      "strict_artifact_pass": false,
+      "timed_out": false
+    },
+    "context-warmup": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "11818db99a9a302e5120b72ad4094e180b2fe0832ee37ede9f15d9b468ac8544"
+      },
+      "children": [],
+      "instrumentation": "none; stock default bytecode policy",
+      "original_status": "failed",
+      "owned_cleanup_complete": true,
+      "performance_eligible": false,
+      "result_sha256": "1f35d8e283659271f90fe27168ce2916bcbcdb9d14df877538bbd382bc6f45d4",
+      "returncode": 0,
+      "source_mode_proxy_differences": 3233,
+      "strict_artifact_pass": false,
+      "timed_out": false
+    },
+    "cprofile": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "7ca862950e72d2ded859d3dfa7fd02085a2db7f1d3fe004f75ea27a618330979"
+      },
+      "children": [
+        {
+          "caller_edges": 955,
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.0625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.0
+            }
+          },
+          "end_ns": 36655227819700,
+          "function_rows": 514,
+          "pid": 12284,
+          "ppid": 28356,
+          "preloaded_module_count": 59,
+          "receipt_sha256": "aa70aaff0957c1ac9980b02e5eda1633c654ac0d065aa9ef4aa9a136db7db643",
+          "role": "get-requires-sdist",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36655153059900,
+          "wall_seconds": 0.0747598
+        },
+        {
+          "caller_edges": 3085,
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.234375
+            }
+          },
+          "end_ns": 36660503110100,
+          "function_rows": 1569,
+          "pid": 18548,
+          "ppid": 27808,
+          "preloaded_module_count": 59,
+          "receipt_sha256": "8a40ef6821290401e0c9e6ac12498ed38b51d6a33b74ae8645a4a35892afd2cb",
+          "role": "get-requires-wheel",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36659980910200,
+          "wall_seconds": 0.5221999
+        },
+        {
+          "caller_edges": 3880,
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.21875
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.328125
+            }
+          },
+          "end_ns": 36661305656400,
+          "function_rows": 1903,
+          "pid": 25412,
+          "ppid": 20516,
+          "preloaded_module_count": 59,
+          "receipt_sha256": "cf08ed9c62bcc42c42a5e01101e0527362fc52c43f1b290f1ed436691d75c4cb",
+          "role": "build-wheel",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36660676908600,
+          "wall_seconds": 0.6287478
+        },
+        {
+          "caller_edges": 3669,
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.734375
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 1.359375
+            }
+          },
+          "end_ns": 36658260722000,
+          "function_rows": 1811,
+          "pid": 28444,
+          "ppid": 21084,
+          "preloaded_module_count": 59,
+          "receipt_sha256": "a30fb14e4809091be78513f4ddc0d483d3ad4c5011d49d18b6fb1b59cd8888f1",
+          "role": "build-sdist",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36655504759600,
+          "wall_seconds": 2.7559624
+        }
+      ],
+      "coverage": "complete",
+      "family_cpu": "unavailable, not inferred",
+      "isolated_environments": 2,
+      "observed_distinct_parent_pids": 4,
+      "original_status": "failed",
+      "owned_cleanup_complete": true,
+      "performance_eligible": false,
+      "result_sha256": "bb88fe1e3fcbc620fdd9cf82b80a6a43d15be024d5254d9f73ea38a2f915af20",
+      "returncode": 0,
+      "source_mode_proxy_differences": 3233,
+      "strict_artifact_pass": false,
+      "timed_out": false
+    },
+    "importtime": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "7b9f93abe9d27df1147d3bf30683bcf9ff1980c975aeb0c3d71ee4af165a0da5"
+      },
+      "children": [
+        {
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.15625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.28125
+            }
+          },
+          "end_ns": 36706987236100,
+          "numeric_child_import_rows": 172,
+          "pid": 26588,
+          "ppid": 4504,
+          "preloaded_module_count": 52,
+          "receipt_sha256": "362086836e8ab9dc300c326747282dd472486e53e8d4f08234868fd46acd234d",
+          "role": "build-wheel",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36706475274400,
+          "units": "microseconds, self/cumulative distinct",
+          "wall_seconds": 0.5119617
+        },
+        {
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.765625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.875
+            }
+          },
+          "end_ns": 36704233582400,
+          "numeric_child_import_rows": 163,
+          "pid": 27756,
+          "ppid": 27488,
+          "preloaded_module_count": 52,
+          "receipt_sha256": "1141349b1b7d8e54afbaabf5be9190cfc312753b72336f652ab045f948683e78",
+          "role": "build-sdist",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36701798367600,
+          "units": "microseconds, self/cumulative distinct",
+          "wall_seconds": 2.4352148
+        },
+        {
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.171875
+            }
+          },
+          "end_ns": 36706325953800,
+          "numeric_child_import_rows": 167,
+          "pid": 28504,
+          "ppid": 27660,
+          "preloaded_module_count": 52,
+          "receipt_sha256": "b53a4726e5c1354741255043a8645eeeece5741bb735d802b81668507f404407",
+          "role": "get-requires-wheel",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36705877892600,
+          "units": "microseconds, self/cumulative distinct",
+          "wall_seconds": 0.4480612
+        },
+        {
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.0
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.015625
+            }
+          },
+          "end_ns": 36701532903700,
+          "numeric_child_import_rows": 38,
+          "pid": 7632,
+          "ppid": 23056,
+          "preloaded_module_count": 52,
+          "receipt_sha256": "43a81b7fc040e87e0c04679421f4836796f6d389f12c5fbbcc6b4686a2991198",
+          "role": "get-requires-sdist",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36701468305700,
+          "units": "microseconds, self/cumulative distinct",
+          "wall_seconds": 0.064598
+        }
+      ],
+      "coverage": "complete",
+      "family_cpu": "unavailable, not inferred",
+      "isolated_environments": 2,
+      "observed_distinct_parent_pids": 4,
+      "original_status": "failed",
+      "owned_cleanup_complete": true,
+      "performance_eligible": false,
+      "result_sha256": "630b35be39b7bf1ad27fc2dcd6e2ccbe332b600ef31acfbb3ac79df8d817492d",
+      "returncode": 0,
+      "source_mode_proxy_differences": 3233,
+      "strict_artifact_pass": false,
+      "timed_out": false
+    },
+    "memory": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "3ecede44fa443794b071d103a154d715e888008f4f65713553da79b5e7d27aa3"
+      },
+      "children": [
+        {
+          "allocation": {
+            "current": 8023519,
+            "end_live_sites": 50,
+            "peak": 8726408,
+            "scope": "self_python_allocations_after_command_entry",
+            "unit": "bytes"
+          },
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.171875
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.625
+            }
+          },
+          "end_ns": 36753165042100,
+          "pid": 24556,
+          "ppid": 27884,
+          "preloaded_module_count": 75,
+          "receipt_sha256": "f188666e4e37e74937c0814893b67cd8c656531663177807765d05a314974f2c",
+          "role": "build-wheel",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36752420721700,
+          "wall_seconds": 0.7443204
+        },
+        {
+          "allocation": {
+            "current": 9277901,
+            "end_live_sites": 50,
+            "peak": 11245240,
+            "scope": "self_python_allocations_after_command_entry",
+            "unit": "bytes"
+          },
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.40625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 2.1875
+            }
+          },
+          "end_ns": 36749350140000,
+          "pid": 25888,
+          "ppid": 16692,
+          "preloaded_module_count": 75,
+          "receipt_sha256": "304048ed90220c183984624400bd1a53c1a12f6f9722c3772304319b46012416",
+          "role": "build-sdist",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36746287346000,
+          "wall_seconds": 3.062794
+        },
+        {
+          "allocation": {
+            "current": 986602,
+            "end_live_sites": 50,
+            "peak": 995621,
+            "scope": "self_python_allocations_after_command_entry",
+            "unit": "bytes"
+          },
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.046875
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.03125
+            }
+          },
+          "end_ns": 36745979986800,
+          "pid": 26000,
+          "ppid": 26192,
+          "preloaded_module_count": 75,
+          "receipt_sha256": "4311ce6370b8a09aef861e59c537aa6da8e8257426a0cbf819e9606bcc07757e",
+          "role": "get-requires-sdist",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36745928175900,
+          "wall_seconds": 0.0518109
+        },
+        {
+          "allocation": {
+            "current": 7967974,
+            "end_live_sites": 50,
+            "peak": 8646011,
+            "scope": "self_python_allocations_after_command_entry",
+            "unit": "bytes"
+          },
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.734375
+            }
+          },
+          "end_ns": 36752047075400,
+          "pid": 7968,
+          "ppid": 8948,
+          "preloaded_module_count": 75,
+          "receipt_sha256": "f513793c0bfca97125e94b0520098bc4b0811680801357aba0a96a7b92e876e1",
+          "role": "get-requires-wheel",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36751310171600,
+          "wall_seconds": 0.7369038
+        }
+      ],
+      "coverage": "complete",
+      "family_cpu": "unavailable, not inferred",
+      "isolated_environments": 2,
+      "observed_distinct_parent_pids": 4,
+      "original_status": "failed",
+      "owned_cleanup_complete": true,
+      "performance_eligible": false,
+      "result_sha256": "d093a2c624f49989ef5f72c9eca5c0ab0f20c100a16e4697664cfb9a0b01aefe",
+      "returncode": 0,
+      "source_mode_proxy_differences": 3233,
+      "strict_artifact_pass": false,
+      "timed_out": false
+    },
+    "resource": {
+      "artifact_differences": [
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+            "size": 119,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/format.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+            "size": 134,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/lint.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+            "size": 110,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov-html.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+            "size": 87,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test-cov.sh"
+        },
+        {
+          "actual": {
+            "gid": 0,
+            "gname": "",
+            "mode": 420,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "expected": {
+            "gid": 0,
+            "gname": "",
+            "mode": 493,
+            "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+            "size": 124,
+            "uid": 0,
+            "uname": ""
+          },
+          "kind": "sdist",
+          "name": "fastapi-0.162.0/scripts/test.sh"
+        }
+      ],
+      "artifact_hashes": {
+        ".gitignore": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "fastapi-0.162.0-py3-none-any.whl": "72ea6f5d5e5b5bbb684ab122d1dedf2fea02260783dee1eaa37c9c592708c722",
+        "fastapi-0.162.0.tar.gz": "8cb6572dc5038090ee8e791aefa3ebf6d33d1d5d0d4e6ca4ba9715d2f7405456"
+      },
+      "children": [
+        {
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.1875
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.171875
+            }
+          },
+          "end_ns": 36614375268500,
+          "pid": 14016,
+          "ppid": 18828,
+          "preloaded_module_count": 52,
+          "python_audit_operations": {
+            "reason": "Not kernel I/O, stat coverage, physical reads, latency or scanner events",
+            "requested": true,
+            "scope": "self Python audit events only; no arguments retained",
+            "status": "measured",
+            "value": {
+              "open": 240,
+              "os.listdir": 29,
+              "os.mkdir": 7,
+              "os.rename": 34
+            }
+          },
+          "receipt_sha256": "1ee122a410edad1e5c4657d5b0d1ceafe0f51804102388d74dc52564838689f3",
+          "role": "get-requires-wheel",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36613934892700,
+          "wall_seconds": 0.4403758
+        },
+        {
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.015625
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.0
+            }
+          },
+          "end_ns": 36609641941600,
+          "pid": 23112,
+          "ppid": 25092,
+          "preloaded_module_count": 52,
+          "python_audit_operations": {
+            "reason": "Not kernel I/O, stat coverage, physical reads, latency or scanner events",
+            "requested": true,
+            "scope": "self Python audit events only; no arguments retained",
+            "status": "measured",
+            "value": {
+              "open": 31,
+              "os.listdir": 7,
+              "os.mkdir": 1,
+              "os.rename": 1
+            }
+          },
+          "receipt_sha256": "b6f5f7922457c039d79e80fcb1e053da828169a5a10460fc89b052ad0dfe2638",
+          "role": "get-requires-sdist",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36609581213200,
+          "wall_seconds": 0.0607284
+        },
+        {
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.8125
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.78125
+            }
+          },
+          "end_ns": 36612223606400,
+          "pid": 25836,
+          "ppid": 18100,
+          "preloaded_module_count": 52,
+          "python_audit_operations": {
+            "reason": "Not kernel I/O, stat coverage, physical reads, latency or scanner events",
+            "requested": true,
+            "scope": "self Python audit events only; no arguments retained",
+            "status": "measured",
+            "value": {
+              "open": 1505,
+              "os.listdir": 30,
+              "os.mkdir": 7,
+              "os.rename": 32,
+              "os.scandir": 438
+            }
+          },
+          "receipt_sha256": "9f85f0fcaf7bbdf2e62820fa44240b7267130bf89e859a3d4a50eab8cd89e27b",
+          "role": "build-sdist",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36609901617200,
+          "wall_seconds": 2.3219892
+        },
+        {
+          "clock": "monotonic_ns",
+          "cpu_delta": {
+            "kernel_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.171875
+            },
+            "user_seconds": {
+              "aggregation": "delta_between_enclosing_snapshot_reads",
+              "scope": "self_all_threads",
+              "status": "measured",
+              "unit": "seconds",
+              "value": 0.140625
+            }
+          },
+          "end_ns": 36615036051700,
+          "pid": 27552,
+          "ppid": 24400,
+          "preloaded_module_count": 52,
+          "python_audit_operations": {
+            "reason": "Not kernel I/O, stat coverage, physical reads, latency or scanner events",
+            "requested": true,
+            "scope": "self Python audit events only; no arguments retained",
+            "status": "measured",
+            "value": {
+              "open": 217,
+              "os.listdir": 31,
+              "os.mkdir": 3,
+              "os.remove": 1,
+              "os.rename": 1,
+              "os.scandir": 24
+            }
+          },
+          "receipt_sha256": "290aae776b4b5ad37fcdc3f5bd802fe564a8805bbbb31ea1669e4354b73890ba",
+          "role": "build-wheel",
+          "scope": "actual_uv_generated_command_PY_START_to_PY_RETURN_or_UNWIND",
+          "start_ns": 36614524984100,
+          "wall_seconds": 0.5110676
+        }
+      ],
+      "coverage": "complete",
+      "family_cpu": "unavailable, not inferred",
+      "isolated_environments": 2,
+      "observed_distinct_parent_pids": 4,
+      "original_status": "failed",
+      "owned_cleanup_complete": true,
+      "performance_eligible": false,
+      "result_sha256": "2cc67ee72b65bbe8254462c99054845ef0cb30acd01a30179c5d18bb9c5ad0c8",
+      "returncode": 0,
+      "source_mode_proxy_differences": 3233,
+      "strict_artifact_pass": false,
+      "timed_out": false
+    }
+  },
+  "performance_eligible": false,
+  "platform_action_node": {
+    "producer_schema": "arm-analysis-action-runtime-v1",
+    "reason": "external receipt retained separately; execution/binary not independently verified",
+    "receipt": {
+      "environment": {
+        "GITHUB_JOB": null,
+        "GITHUB_RUN_ATTEMPT": null,
+        "GITHUB_RUN_ID": null,
+        "ImageOS": null,
+        "ImageVersion": null,
+        "RUNNER_ARCH": null,
+        "RUNNER_ENVIRONMENT": null,
+        "RUNNER_OS": null
+      },
+      "execution_context": "local-validation",
+      "host": {
+        "platform": "win32"
+      },
+      "node": {
+        "architecture": "arm64",
+        "executable": "C:\\Program Files\\nodejs\\node.exe",
+        "sha256": "dff59da18b6ffe1bf1ca99e1d2af4906080c481740619f5b5098c0fca28bd9b7",
+        "version": "v24.21.0"
+      },
+      "schema": "arm-analysis-action-runtime-v1"
+    },
+    "source": "ARM_DIAGNOSTIC_ACTION_JSON",
+    "status": "partial"
+  },
+  "raw_notes": [
+    "Earlier attempts/postchecks remain unchanged under diagnostics-integration-028a8595.",
+    "Initial final-snapshot preflight stopped before builds on shallow-source fixture failure; logs retained.",
+    "Test-only delta proved separately before starting this single final runtime attempt.",
+    "Original immutable runtime tools were never patched.",
+    "Initial source clone preparation failure retained; explicit source fetch succeeded before handoff.",
+    "Native capture requested/unavailable; no recording or extra native build performed.",
+    "Five strict sdist mode failures per build and native source mode proxies remain unwaived.",
+    "Standalone read-only Git context is not checkout/auth process timing.",
+    "Observed parent PIDs differ across hook children; no direct uv parentage or common parent is inferred.",
+    "Audit-only checks compare archive differences independent of set traversal order and retain observed PPIDs without assuming equality.",
+    "Wall/CPU partitions, complete family CPU, physical disk/scanner causes and benchmark eligibility are not inferred."
+  ],
+  "replacement_builds": 0,
+  "root_freeze": "11f2ff73651c7869ee8d9de14dfe45b39c70afde",
+  "runtime_and_code_identities": {
+    "code": {
+      "arm_diag_hook.py": "e75356e5204ef4e462d64c62034fc0e821d53bfa579d48f9e8ef546fa22d00cd",
+      "arm_diag_platform.py": "a2b727a94a5737d234a347720cf8683e1805de2da13ce4a86f12b422f32a7203",
+      "collect.py": "7c53b0277825777370333e1cf41a065ad42f5d673af143374da6423b86b192f7",
+      "sitecustomize.py": "299ddec9bef0fbef438a399be9d6034dc0ba43170d1b12f29e73bdb3e20859e8"
+    },
+    "environment_whitelist": {
+      "CI": null,
+      "GITHUB_JOB": null,
+      "GITHUB_RUN_ATTEMPT": null,
+      "GITHUB_RUN_ID": null,
+      "ImageOS": null,
+      "ImageVersion": null,
+      "PYTHONDONTWRITEBYTECODE": null,
+      "PYTHONHASHSEED": null,
+      "PYTHONPYCACHEPREFIX": null,
+      "RUNNER_ARCH": null,
+      "RUNNER_OS": null,
+      "SOURCE_DATE_EPOCH": null
+    },
+    "expected_manifest_sha256": "d9964c98785e809f31b46863c57047dcbdb847a251ec4a4f6051e397c63d6e33",
+    "python": {
+      "executable_sha256": "53909489119635230bbaad0c276f86df2dbef18346648aefa612212fa4692531",
+      "machine": "ARM64",
+      "version": "3.13.15 (main, Sep 29 2026, 08:22:55) [MSC v.1944 64 bit (ARM64)]"
+    },
+    "run": {
+      "GITHUB_JOB": null,
+      "GITHUB_RUN_ATTEMPT": null,
+      "GITHUB_RUN_ID": null
+    },
+    "source_archive_sha256": "c6e91b20ed2990e2ce027d52085a269c9af9efe33b3f5237e3fc80004e5d8e43",
+    "uv": {
+      "sha256": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+      "version": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)"
+    },
+    "verification_code_sha256": "6a4c196ddc055cc759977c54fd4525c85d5400c0d35093d242dcf35844fcf00c",
+    "wheelhouse": {
+      "pdm_backend-2.5.0-py3-none-any.whl": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63"
+    },
+    "wheelhouse_lock_sha256": "2972fe1b921e58c416c282742fc64691b215cd089da82e25c05862240a8ea43e"
+  },
+  "safe_upload_manifest": {
+    "canonical-source-manifest.json": {
+      "bytes": 572900,
+      "sha256": "a9fcd4cf4a12d709aeb6487b27eff5e8e2af4c88eb8eb661b82a86b2a2513b5c"
+    },
+    "context-1\\actual-manifest.json": {
+      "bytes": 367378,
+      "sha256": "52921a08db5bd17295ba4be35b7459241b05813fabdd6bc5fa22720553b93389"
+    },
+    "context-1\\result.json": {
+      "bytes": 1375433,
+      "sha256": "ffbee6c11fa292bc92c39969ba70df48e31a7438df60e326fa7138f15224e66c"
+    },
+    "context-1\\stderr.redacted.log": {
+      "bytes": 147500,
+      "sha256": "9290b202970fa44b3e03efd64bedaa0fc015bd97627fa98ff12e7681ea671197"
+    },
+    "context-1\\stdout.redacted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "context-2\\actual-manifest.json": {
+      "bytes": 367378,
+      "sha256": "52921a08db5bd17295ba4be35b7459241b05813fabdd6bc5fa22720553b93389"
+    },
+    "context-2\\result.json": {
+      "bytes": 1375433,
+      "sha256": "734cdc997e4bdeb8e6b5046c9a3de079db371d74f81822822079fb7a563a1c9e"
+    },
+    "context-2\\stderr.redacted.log": {
+      "bytes": 147500,
+      "sha256": "5a41df88b2d4f53ec678cac0608e897581e31fdd478332f8459fbd6dc8748992"
+    },
+    "context-2\\stdout.redacted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "context-3\\actual-manifest.json": {
+      "bytes": 367378,
+      "sha256": "52921a08db5bd17295ba4be35b7459241b05813fabdd6bc5fa22720553b93389"
+    },
+    "context-3\\result.json": {
+      "bytes": 1375433,
+      "sha256": "ce74b400df609447583d749b2785551e52500f262705d51bfc5339acaa0c9c41"
+    },
+    "context-3\\stderr.redacted.log": {
+      "bytes": 147500,
+      "sha256": "a6ec82032060878c5b017ccdbde1095dba21f0c3740875ef4803570c6027a231"
+    },
+    "context-3\\stdout.redacted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "context-warmup\\actual-manifest.json": {
+      "bytes": 367378,
+      "sha256": "52921a08db5bd17295ba4be35b7459241b05813fabdd6bc5fa22720553b93389"
+    },
+    "context-warmup\\result.json": {
+      "bytes": 1375454,
+      "sha256": "1f35d8e283659271f90fe27168ce2916bcbcdb9d14df877538bbd382bc6f45d4"
+    },
+    "context-warmup\\stderr.redacted.log": {
+      "bytes": 147510,
+      "sha256": "b36ee08971cbbe9c31c686b588ccf8c0233cb5339257bb562baff7c02e0e6441"
+    },
+    "context-warmup\\stdout.redacted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cprofile\\12284.profile.json": {
+      "bytes": 411062,
+      "sha256": "50bc417bf6f075f6b40347f48ae903f4b91e5cdce41489018aa32596b942717d"
+    },
+    "cprofile\\18548.profile.json": {
+      "bytes": 1362631,
+      "sha256": "32ce51348cb96b272077a7a9c86c5015b889fe721a5e0d6c6a8082302a351186"
+    },
+    "cprofile\\25412.profile.json": {
+      "bytes": 1718642,
+      "sha256": "235a59e30e81799324f69ab2c4d9cb49ad1ad857396d68d6fcfaba761e577745"
+    },
+    "cprofile\\28444.profile.json": {
+      "bytes": 1628332,
+      "sha256": "e0af40847b4fee217b7f82a5a373d4740cc687879382191ebcc2b1795bf985c0"
+    },
+    "cprofile\\actual-manifest.json": {
+      "bytes": 367378,
+      "sha256": "52921a08db5bd17295ba4be35b7459241b05813fabdd6bc5fa22720553b93389"
+    },
+    "cprofile\\result.json": {
+      "bytes": 1435496,
+      "sha256": "bb88fe1e3fcbc620fdd9cf82b80a6a43d15be024d5254d9f73ea38a2f915af20"
+    },
+    "cprofile\\stderr.redacted.log": {
+      "bytes": 147498,
+      "sha256": "aa5fe10fd408edb43eadfc8c4ae6baae9b74bf7de0b1a27271172c9ca09ec71b"
+    },
+    "cprofile\\stdout.redacted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "importtime\\26588.imports.redacted.log": {
+      "bytes": 10470,
+      "sha256": "5dc1aefcf32db41fb656a4954f1a5c7880f2353374f1100848567c62d061d366"
+    },
+    "importtime\\27756.imports.redacted.log": {
+      "bytes": 10163,
+      "sha256": "a96cd30843f735e62643da814d83adee662c097347481668885f3acd52abc4b7"
+    },
+    "importtime\\28504.imports.redacted.log": {
+      "bytes": 10151,
+      "sha256": "6cf8ce575274778ccc5f472eeaa493130d2ac817555152357fd6fe4b5850ab73"
+    },
+    "importtime\\7632.imports.redacted.log": {
+      "bytes": 2072,
+      "sha256": "dd30983df87a29021aa20869abc82e148bc0a91e42263aef5d0f3fb05f1ae709"
+    },
+    "importtime\\actual-manifest.json": {
+      "bytes": 367378,
+      "sha256": "52921a08db5bd17295ba4be35b7459241b05813fabdd6bc5fa22720553b93389"
+    },
+    "importtime\\result.json": {
+      "bytes": 1436094,
+      "sha256": "630b35be39b7bf1ad27fc2dcd6e2ccbe332b600ef31acfbb3ac79df8d817492d"
+    },
+    "importtime\\stderr.redacted.log": {
+      "bytes": 161518,
+      "sha256": "6c0bcfc6852a886206ea332a9d07953f7268f31615b8554c8e64d4b617667d22"
+    },
+    "importtime\\stdout.redacted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "memory\\actual-manifest.json": {
+      "bytes": 367378,
+      "sha256": "52921a08db5bd17295ba4be35b7459241b05813fabdd6bc5fa22720553b93389"
+    },
+    "memory\\result.json": {
+      "bytes": 1492603,
+      "sha256": "d093a2c624f49989ef5f72c9eca5c0ab0f20c100a16e4697664cfb9a0b01aefe"
+    },
+    "memory\\stderr.redacted.log": {
+      "bytes": 147494,
+      "sha256": "00b4119004e02151a087870ccc63af6ce1707e6fdacad52e4906c491c70d4c82"
+    },
+    "memory\\stdout.redacted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "report.json": {
+      "bytes": 12710412,
+      "sha256": "1a9e7a331baf305795389923470c774b3475adb83a87621f6e206abd05986523"
+    },
+    "resource\\actual-manifest.json": {
+      "bytes": 367378,
+      "sha256": "52921a08db5bd17295ba4be35b7459241b05813fabdd6bc5fa22720553b93389"
+    },
+    "resource\\result.json": {
+      "bytes": 1434839,
+      "sha256": "2cc67ee72b65bbe8254462c99054845ef0cb30acd01a30179c5d18bb9c5ad0c8"
+    },
+    "resource\\stderr.redacted.log": {
+      "bytes": 150096,
+      "sha256": "ac5d3544efae307dd84a1da6430ec52399c16d4ea8a75eecd77e8ea57f4e8593"
+    },
+    "resource\\stdout.redacted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema": 1,
+  "status": "partial",
+  "test_only_delta": "01916579cbf105e9d43eec785a0cb770d6bdb74d",
+  "tests": {
+    "node_action_tests": 1,
+    "node_status": "passed",
+    "python_integrated": 28,
+    "python_status": "passed in separate shallow-tools fixture",
+    "shallow_tools_source79_absent_before_and_after": true,
+    "test_only_delta": "01916579cbf105e9d43eec785a0cb770d6bdb74d"
+  },
+  "upload_privacy": {
+    "allowed_suffixes": [
+      ".json",
+      ".log"
+    ],
+    "full_environment_or_PATH_dump": false,
+    "generated_command_code": false,
+    "logs": "Explicit redacted copies; original bytes remain private_raw",
+    "raw_native_or_pstats": false
+  },
+  "wheelhouse": {
+    "pdm_backend-2.5.0-py3-none-any.whl": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63"
+  },
+  "wheelhouse_manifest_sha256": "2972fe1b921e58c416c282742fc64691b215cd089da82e25c05862240a8ea43e"
+}
