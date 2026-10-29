@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\portable-candidate\Generated Files\arm-build\candidate\build.py", line 78, in <module>
+    main()
+    ~~~~^^
+  File "Q:\fastapi\Generated Files\worktrees\portable-candidate\Generated Files\arm-build\candidate\build.py", line 73, in main
+    json.dumps(build(args.source, args.source_manifest, args.out_dir, args.workers))
+               ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\worktrees\portable-candidate\Generated Files\arm-build\candidate\build.py", line 42, in build
+    raise ValueError("Source files must exactly match canonical manifest paths")
+ValueError: Source files must exactly match canonical manifest paths

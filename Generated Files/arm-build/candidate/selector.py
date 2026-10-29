@@ -27,9 +27,9 @@ def configuration(config, files):
     build = pdm.get("build", {})
     if set(build) - {"source-includes"}:
         raise ValueError("Unsupported PDM build configuration")
-    if "pdm_build.py" in files or importlib.metadata.entry_points(
-        group="pdm.build.hook"
-    ):
+    if any(
+        n.casefold() == "pdm_build.py" for n in files
+    ) or importlib.metadata.entry_points(group="pdm.build.hook"):
         raise ValueError("Build hooks unsupported")
     if any(n.startswith("src/") for n in files):
         raise ValueError("src discovery unsupported")

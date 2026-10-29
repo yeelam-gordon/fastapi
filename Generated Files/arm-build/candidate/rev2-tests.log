@@ -1,0 +1,42 @@
+test_archive_links_and_duplicates_rejected (test_candidate.CandidateTests.test_archive_links_and_duplicates_rejected) ... ok
+test_archive_selector_and_extraction_filters (test_candidate.CandidateTests.test_archive_selector_and_extraction_filters) ... ok
+test_canonical_mode_and_metadata (test_candidate.CandidateTests.test_canonical_mode_and_metadata) ... ok
+test_pdm_pin_fails_before_output (test_candidate.CandidateTests.test_pdm_pin_fails_before_output) ... ok
+test_read_failure_joins (test_candidate.CandidateTests.test_read_failure_joins) ... ok
+test_reads_fresh_bytes_in_order_and_closes (test_candidate.CandidateTests.test_reads_fresh_bytes_in_order_and_closes) ... ok
+test_target_write_failure_joins (test_candidate.CandidateTests.test_target_write_failure_joins) ... ok
+test_unsafe_configs_and_paths (test_candidate.CandidateTests.test_unsafe_configs_and_paths) ... ok
+test_backend_junction_rejected_without_touching_target (test_reuse.ReuseTests.test_backend_junction_rejected_without_touching_target) ... ok
+test_backend_state_cannot_be_claimed_or_cleanup_disabled (test_reuse.ReuseTests.test_backend_state_cannot_be_claimed_or_cleanup_disabled) ... ok
+test_case_alias_hook_rejected_before_execution (test_reuse.ReuseTests.test_case_alias_hook_rejected_before_execution) ... ok
+test_repeat_unchanged_manifest (test_reuse.ReuseTests.test_repeat_unchanged_manifest) ... ok
+test_unknown_backend_state_is_preserved_and_rejected (test_reuse.ReuseTests.test_unknown_backend_state_is_preserved_and_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.273s
+
+OK
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding .pdm-build\pyproject.toml -> pyproject.toml
+ - Adding PKG-INFO -> PKG-INFO
+ - Adding .pdm-build\demo-1.dist-info\METADATA -> demo-1.dist-info/METADATA
+ - Adding .pdm-build\demo-1.dist-info\WHEEL -> demo-1.dist-info/WHEEL
+ - Adding .pdm-build\demo-1.dist-info\entry_points.txt -> demo-1.dist-info/entry_points.txt
+ - Adding demo\__init__.py -> demo/__init__.py
+ - Adding demo-1.dist-info\RECORD -> demo-1.dist-info/RECORD

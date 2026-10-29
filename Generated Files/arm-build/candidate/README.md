@@ -64,3 +64,29 @@ unsupported PDM options fail closed with ValueError. Narrow duplication of PDM
 discovery and the extra source safety scan are explicit maintenance/runtime
 costs. There are no Windows-only runtime paths, executable assumptions or
 architecture guards (including no rejection of native Mac universal2).
+
+## Revision 2: independent review follow-up
+
+Both PC-001 and PC-002 were independently reproduced before fixing:
+`rev2-repro-repeat.log` records unchanged-manifest reuse rejection;
+`rev2-repro-hook.log` records the mixed-case hook reaching the writer instead
+of being rejected before loading. Original evidence above remains historical.
+
+Preflight now distinguishes only the exact root `.pdm-build` directory with
+PDM 2.5's `*\n` sentinel and optional regular `pyproject.toml` from canonical
+inputs. These recognized files remain untouched by preflight: PDM's existing
+clean step removes/regenerates its own state **inside every build call**.
+There is no per-build source copy or external cleanup. Unknown state, modified
+sentinels, canonical claims on this directory, noncanonical case aliases,
+links/reparse points (including Windows junctions), and disabled PDM cleanup
+are rejected before output creation. Source trees must not mutate concurrently
+with safety checks/building; these checks do not claim race-proof isolation.
+Local hook names are rejected case-insensitively on every platform.
+
+`verify_reuse.py` prepares one source per family, then exercises S1→S3 and
+ordinary isolated/offline `uv build`→S3 with unchanged canonical manifests.
+`rev2-verification.json` and `rev2-*.log` retain new evidence. All three SDK
+builds match the unchanged Mac full-mode/RECORD oracle (1269/65 members).
+Stock build success is not stock artifact approval: its historical Windows
+mode discrepancy remains outside this fix. No performance or Mac-native
+execution claim is added.

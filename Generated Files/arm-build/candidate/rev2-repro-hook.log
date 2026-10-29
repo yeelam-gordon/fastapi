@@ -1,0 +1,20 @@
+test_case_alias_hook_rejected_before_execution (test_reuse.ReuseTests.test_case_alias_hook_rejected_before_execution) ... FAIL
+
+======================================================================
+FAIL: test_case_alias_hook_rejected_before_execution (test_reuse.ReuseTests.test_case_alias_hook_rejected_before_execution)
+----------------------------------------------------------------------
+ValueError: Missing canonical mode: pdm_build.py
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\worktrees\portable-candidate\Generated Files\arm-build\candidate\test_reuse.py", line 46, in test_case_alias_hook_rejected_before_execution
+    with self.assertRaisesRegex(ValueError, "hooks"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "hooks" does not match "Missing canonical mode: pdm_build.py"
+
+----------------------------------------------------------------------
+Ran 1 test in 0.188s
+
+FAILED (failures=1)
+ - Adding demo\__init__.py -> demo/__init__.py

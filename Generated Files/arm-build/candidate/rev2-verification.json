@@ -1,0 +1,34 @@
+{
+  "s1": {
+    "strict_pass": true,
+    "differences": []
+  },
+  "after-sdk": {
+    "strict_pass": true,
+    "differences": [],
+    "manifest_unchanged": true
+  },
+  "stock": {
+    "command": [
+      "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+      "build",
+      "Q:\\fastapi\\Generated Files\\worktrees\\portable-candidate\\Generated Files\\arm-build\\candidate\\scratch\\rev2-integration\\stock",
+      "--python",
+      "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+      "--offline",
+      "--no-index",
+      "--find-links",
+      "Q:\\fastapi\\Generated Files\\arm-build\\wheelhouse",
+      "--cache-dir",
+      "Q:\\fastapi\\Generated Files\\worktrees\\portable-candidate\\Generated Files\\arm-build\\candidate\\scratch\\rev2-integration\\cache",
+      "--out-dir",
+      "Q:\\fastapi\\Generated Files\\worktrees\\portable-candidate\\Generated Files\\arm-build\\candidate\\scratch\\rev2-integration\\baseline"
+    ],
+    "exit": 0
+  },
+  "after-stock": {
+    "strict_pass": true,
+    "differences": [],
+    "manifest_unchanged": true
+  }
+}
