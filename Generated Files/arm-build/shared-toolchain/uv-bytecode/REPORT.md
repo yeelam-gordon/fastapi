@@ -1,5 +1,9 @@
 # P22: uv isolated-hook import bytecode — source-only feasibility
 
+Follow-up: the separately authorized [RANK2 local screen](LOCAL-SCREEN.md)
+completed and rejected suppression as a useful practice for this workload.
+The source-only findings and upstream-default no-go below remain unchanged.
+
 2026-10-29. **Decision: no-go for an upstream default change on present evidence.**
 The write opportunity exists, but uv does not ignore Python's existing suppression
 environment variable, and the supposedly disposable cache is reused by later hooks.

@@ -1,0 +1,2045 @@
+{
+  "status": "complete",
+  "root": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993",
+  "revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "samples": [
+    {
+      "label": "warmup-A",
+      "arm": "A",
+      "timed": false,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\warmup-A\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\warmup-A\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\warmup-A\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\warmup-A\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": null,
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "warmup-A.stdout.log",
+      "stderr": "warmup-A.stderr.log",
+      "wall_seconds": 6.537635000000591,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "48d18ec8e1bfbcc985a122072f24f4a05a13499e46786ce40435af9df52441ae"
+        }
+      }
+    },
+    {
+      "label": "warmup-B",
+      "arm": "B",
+      "timed": false,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\warmup-B\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\warmup-B\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\warmup-B\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\warmup-B\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "warmup-B.stdout.log",
+      "stderr": "warmup-B.stderr.log",
+      "wall_seconds": 7.039413999998942,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "e19a2bba1e01d3240149d4409b8c074a209b4b6fa8a660ba49c907d373b31da7"
+        }
+      }
+    },
+    {
+      "label": "pair-1-A",
+      "arm": "A",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-1-A\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-1-A\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-1-A\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-1-A\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": null,
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-1-A.stdout.log",
+      "stderr": "pair-1-A.stderr.log",
+      "wall_seconds": 5.784674599999562,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "9c1939c8e009391144b106600c77dd3443972268e74122965fb29d40ebc42972"
+        }
+      }
+    },
+    {
+      "label": "pair-1-B",
+      "arm": "B",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-1-B\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-1-B\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-1-B\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-1-B\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-1-B.stdout.log",
+      "stderr": "pair-1-B.stderr.log",
+      "wall_seconds": 5.815331199999491,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "74c8566eb3a2eb8ee5facbc3d00002c0a06e8eb2f8e6e0071d41df8f657d1411"
+        }
+      }
+    },
+    {
+      "label": "pair-2-B",
+      "arm": "B",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-2-B\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-2-B\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-2-B\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-2-B\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-2-B.stdout.log",
+      "stderr": "pair-2-B.stderr.log",
+      "wall_seconds": 5.574930799997674,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "804b83655adc4183fd1fdc42d6e8caa0e3483a108081c619297b1c26f8373f75"
+        }
+      }
+    },
+    {
+      "label": "pair-2-A",
+      "arm": "A",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-2-A\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-2-A\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-2-A\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-2-A\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": null,
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-2-A.stdout.log",
+      "stderr": "pair-2-A.stderr.log",
+      "wall_seconds": 6.164161000000604,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "22c836a68981b8dac2cde04d04feec45c11d9624273f7fb8fd7f56c133b0fefd"
+        }
+      }
+    },
+    {
+      "label": "pair-3-A",
+      "arm": "A",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-3-A\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-3-A\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-3-A\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-3-A\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": null,
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-3-A.stdout.log",
+      "stderr": "pair-3-A.stderr.log",
+      "wall_seconds": 5.954842599996482,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "e134d979cd6ff944cf6f4a4761afd4577bd76a64acc036e0b565b3e3cffb5db4"
+        }
+      }
+    },
+    {
+      "label": "pair-3-B",
+      "arm": "B",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-3-B\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-3-B\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-3-B\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-3-B\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-3-B.stdout.log",
+      "stderr": "pair-3-B.stderr.log",
+      "wall_seconds": 5.981182899999112,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "b7ad01ffb49efa72323677cb40f8741873cd07a9b3eb5d085fb0cbd77527a516"
+        }
+      }
+    },
+    {
+      "label": "pair-4-B",
+      "arm": "B",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-4-B\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-4-B\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-4-B\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-4-B\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-4-B.stdout.log",
+      "stderr": "pair-4-B.stderr.log",
+      "wall_seconds": 6.060927000002266,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "654e81c3d3c750bb63fd870d1924c7d0b17a556ea63a082db9b270964031b6b3"
+        }
+      }
+    },
+    {
+      "label": "pair-4-A",
+      "arm": "A",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-4-A\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-4-A\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-4-A\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-4-A\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": null,
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-4-A.stdout.log",
+      "stderr": "pair-4-A.stderr.log",
+      "wall_seconds": 5.950318499999412,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "65c5014c79ea22111d12db3f3f087f3921247d79b25216391abdd5545b51151c"
+        }
+      }
+    },
+    {
+      "label": "pair-5-A",
+      "arm": "A",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-5-A\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-5-A\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-5-A\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-5-A\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": null,
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-5-A.stdout.log",
+      "stderr": "pair-5-A.stderr.log",
+      "wall_seconds": 5.780983199998445,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "85ee349f3ae708cbbf8a755fa898d423c707c1afd92ff2dc99c91c3261db2953"
+        }
+      }
+    },
+    {
+      "label": "pair-5-B",
+      "arm": "B",
+      "timed": true,
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools\\uv.exe",
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\cache",
+        "build",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-5-B\\source",
+        "--python",
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "--no-python-downloads",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\wheelhouse",
+        "--build-constraints",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\constraints.txt",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-5-B\\output",
+        "--no-create-gitignore"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-5-B\\source",
+      "temp": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\samples\\pair-5-B\\temp",
+      "source_bytes_verified": true,
+      "policy": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": null
+      },
+      "stdout": "pair-5-B.stdout.log",
+      "stderr": "pair-5-B.stderr.log",
+      "wall_seconds": 6.013401800002612,
+      "returncode": 0,
+      "validation": {
+        "oracle_strict_pass": false,
+        "oracle_differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 119
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 124
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 110
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 87
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 493,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "mode": 420,
+              "uid": 0,
+              "gid": 0,
+              "uname": "",
+              "gname": "",
+              "size": 134
+            }
+          }
+        ],
+        "oracle_payload_metadata_members_record_pass": true,
+        "same_windows_full_inventory_pass": true,
+        "source_payloads_unchanged": true,
+        "sdist_members": 1269,
+        "wheel_members": 65,
+        "artifact_sha256": {
+          "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+          "fastapi-0.162.0.tar.gz": "dc09aa61b671de8557fdfac9ad7a1597af21e2f89e36a9b6592c616c3e595201"
+        }
+      }
+    }
+  ],
+  "schedule": [
+    "AB",
+    "BA",
+    "AB",
+    "BA",
+    "AB"
+  ],
+  "decision_rule": "candidate only if B median >=5% faster and at least 4/5 paired savings positive; otherwise reject",
+  "ephemeral_pyc_counts": "unmeasured",
+  "aggregate_cpu": "unmeasured",
+  "removed_inherited_python_variables": {},
+  "oracle": {
+    "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\artifacts\\prepare-baseline",
+    "artifacts": {
+      "fastapi-0.162.0-py3-none-any.whl": "3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c",
+      "fastapi-0.162.0.tar.gz": "6b6c1dc057845154ba167d4846535502d57fcf27e928053147d2bdb2e72e970b"
+    },
+    "note": "Existing independent Mac standard-build oracle; exact member/payload/metadata checks below establish applicability, with five expected stock Windows mode failures retained."
+  },
+  "archive_argv": [
+    "git",
+    "-c",
+    "core.autocrlf=false",
+    "-C",
+    "Q:\\fastapi\\Generated Files\\worktrees\\source-fastapi",
+    "archive",
+    "--format=tar",
+    "--output=C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\source.tar",
+    "79cab5bed28b24d92c185d236feb33f5783dfeb3"
+  ],
+  "hashes": {
+    "uv": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+    "python": "383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd",
+    "python313.dll": "1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f",
+    "backend_wheel": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63",
+    "source_archive": "c6e91b20ed2990e2ce027d52085a269c9af9efe33b3f5237e3fc80004e5d8e43",
+    "source_manifest": "2ed77bd66fb7e16864b6a29dc25c4d37f87a179960f51aadf8edee8fbfefb57f",
+    "validator": "6a4c196ddc055cc759977c54fd4525c85d5400c0d35093d242dcf35844fcf00c",
+    "orchestrator": "49b62cc97063993e1c758fd3a40269cb9e358d6197aa0671f36547d9a253a5b4",
+    "constraints": "7ccf36a69911da0b3c006733d9e11105291d97f633d2951845f85c965e8f2abe"
+  },
+  "uv_version": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)",
+  "python_identity": {
+    "version": "3.13.15 (main, Sep 29 2026, 08:22:55) [MSC v.1944 64 bit (ARM64)]",
+    "executable": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+    "platform": "win-arm64",
+    "machine": "ARM64"
+  },
+  "common_environment": {
+    "PATH": "C:\\fastapi-arm-build-lab\\uv-bytecode-ba943ace3993\\tools;C:\\Program Files\\PowerShell\\7;C:\\Program Files\\coreutils\\bin;C:\\Program Files\\Python313-arm64\\Scripts\\;C:\\Program Files\\Python313-arm64\\;C:\\.Tools\\agency\\CurrentVersion;C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\CLI2\\wbin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\PowerShell\\7\\;C:\\Program Files\\Microsoft VS Code\\bin;C:\\Program Files\\Microsoft SQL Server\\170\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\Program Files\\dotnet\\;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;Q:\\.tools\\dotnet;Q:\\.tools\\.npm-global;C:\\Program Files\\PowerToys\\DSCModules\\;C:\\Program Files\\WinGet\\Links;C:\\Program Files\\Sysinternals;C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\arm64;C:\\Users\\vmadmin\\AppData\\Local\\nvm;C:\\nvm4w\\nodejs;C:\\Program Files\\GitHub CLI\\;C:\\Program Files\\Coreutils;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\VFS for Git;C:\\Program Files\\WinDev;C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;;C:\\Program Files\\Microsoft Dev Box Agent\\Scripts;C:\\Program Files\\WSL\\;C:\\Users\\yeelam\\AppData\\Local\\Microsoft\\WindowsApps;C:\\.tools\\.npm-global;C:\\Users\\yeelam\\.dotnet\\tools;C:\\Users\\yeelam\\AppData\\Local\\copilot\\pkg\\win32-arm64\\1.0.105\\ripgrep\\bin\\win32-arm64",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "policy_delta": {
+    "A": {
+      "PYTHONDONTWRITEBYTECODE": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "B": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "scope": "per subprocess env dictionary; no os.environ modification"
+  },
+  "summary": {
+    "A": {
+      "samples": [
+        5.784674599999562,
+        6.164161000000604,
+        5.954842599996482,
+        5.950318499999412,
+        5.780983199998445
+      ],
+      "median": 5.950318499999412,
+      "min": 5.780983199998445,
+      "max": 6.164161000000604
+    },
+    "B": {
+      "samples": [
+        5.815331199999491,
+        5.574930799997674,
+        5.981182899999112,
+        6.060927000002266,
+        6.013401800002612
+      ],
+      "median": 5.981182899999112,
+      "min": 5.574930799997674,
+      "max": 6.060927000002266
+    }
+  },
+  "pairs": [
+    {
+      "pair": 1,
+      "A_minus_B_seconds": -0.030656599999929313,
+      "saving_percent": -0.5299623940805872
+    },
+    {
+      "pair": 2,
+      "A_minus_B_seconds": 0.5892302000029304,
+      "saving_percent": 9.558968365733351
+    },
+    {
+      "pair": 3,
+      "A_minus_B_seconds": -0.0263403000026301,
+      "saving_percent": -0.44233410976548165
+    },
+    {
+      "pair": 4,
+      "A_minus_B_seconds": -0.11060850000285427,
+      "saving_percent": -1.8588668825520047
+    },
+    {
+      "pair": 5,
+      "A_minus_B_seconds": -0.23241860000416636,
+      "saving_percent": -4.020399159856214
+    }
+  ],
+  "median_saving_percent": -0.5187016459657294,
+  "verdict": "reject"
+}
