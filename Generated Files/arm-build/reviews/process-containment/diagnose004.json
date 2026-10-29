@@ -1,0 +1,561 @@
+{
+  "diagnostic_only": true,
+  "interpreter": "C:\\fastapi-arm-build-lab\\paired-v4-2a73e36a\\f87c928ba5ad409087d1695f0995067e\\env\\Scripts\\python.exe",
+  "base_prefix": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none",
+  "test_sha256": "9298d36c382a3cf09d4417491087891dc9dd874bbdbafd16f8a06a70fbaf017b",
+  "supervisor_sha256": "9db21a2aab063a424b135588324835947f3d69a2e0d96ab422783d6b4bef9666",
+  "records": [
+    {
+      "iteration": 0,
+      "instrumented": false,
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.3558074000029592,
+        "infrastructure_wall": 0.18271569999706117,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        20712
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 1,
+      "instrumented": false,
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.37622660000124597,
+        "infrastructure_wall": 0.1651729000004707,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        23484
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 2,
+      "instrumented": false,
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.35873590000119293,
+        "infrastructure_wall": 0.176593000000139,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        19124
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 3,
+      "instrumented": false,
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.3400980000005802,
+        "infrastructure_wall": 0.15887350000048173,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        25716
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 4,
+      "instrumented": false,
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.35207740000259946,
+        "infrastructure_wall": 0.1707246000005398,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        13440
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 5,
+      "instrumented": false,
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.34023440000237315,
+        "infrastructure_wall": 0.1527003999981389,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        10544
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 6,
+      "instrumented": false,
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.343113999999332,
+        "infrastructure_wall": 0.16836659999898984,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        11868
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 7,
+      "instrumented": false,
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.3295882000020356,
+        "infrastructure_wall": 0.16300539999792818,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        13360
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 8,
+      "instrumented": true,
+      "supervisor_launches": [
+        {
+          "argv": [
+            "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+            "-I",
+            "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+            "--supervisor"
+          ],
+          "pid": 20804,
+          "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+          "wait_state": 258
+        }
+      ],
+      "job_checks": [
+        {
+          "alive": false,
+          "at": 26501.5035193
+        },
+        {
+          "alive": false,
+          "at": 26501.503553
+        },
+        {
+          "alive": false,
+          "at": 26501.5035765
+        }
+      ],
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.3801628000001074,
+        "infrastructure_wall": 0.1613614999987476,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        21224
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 9,
+      "instrumented": true,
+      "supervisor_launches": [
+        {
+          "argv": [
+            "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+            "-I",
+            "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+            "--supervisor"
+          ],
+          "pid": 15900,
+          "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+          "wait_state": 258
+        }
+      ],
+      "job_checks": [
+        {
+          "alive": false,
+          "at": 26502.0141256
+        },
+        {
+          "alive": false,
+          "at": 26502.0141558
+        },
+        {
+          "alive": false,
+          "at": 26502.0141768
+        }
+      ],
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.3394756999987294,
+        "infrastructure_wall": 0.16760570000042208,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        26204
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 10,
+      "instrumented": true,
+      "supervisor_launches": [
+        {
+          "argv": [
+            "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+            "-I",
+            "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+            "--supervisor"
+          ],
+          "pid": 12224,
+          "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+          "wait_state": 258
+        }
+      ],
+      "job_checks": [
+        {
+          "alive": false,
+          "at": 26502.5230408
+        },
+        {
+          "alive": false,
+          "at": 26502.5230714
+        },
+        {
+          "alive": false,
+          "at": 26502.5231014
+        }
+      ],
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.3455662000014854,
+        "infrastructure_wall": 0.16041649999897345,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        22900
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 11,
+      "instrumented": true,
+      "supervisor_launches": [
+        {
+          "argv": [
+            "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+            "-I",
+            "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+            "--supervisor"
+          ],
+          "pid": 27260,
+          "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+          "wait_state": 258
+        }
+      ],
+      "job_checks": [
+        {
+          "alive": false,
+          "at": 26503.0603525
+        },
+        {
+          "alive": false,
+          "at": 26503.0603832
+        },
+        {
+          "alive": false,
+          "at": 26503.0604042
+        }
+      ],
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.3668733999984397,
+        "infrastructure_wall": 0.16730220000317786,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        24152
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 12,
+      "instrumented": true,
+      "supervisor_launches": [
+        {
+          "argv": [
+            "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+            "-I",
+            "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+            "--supervisor"
+          ],
+          "pid": 21272,
+          "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+          "wait_state": 258
+        }
+      ],
+      "job_checks": [
+        {
+          "alive": false,
+          "at": 26503.6027362
+        },
+        {
+          "alive": false,
+          "at": 26503.6027668
+        },
+        {
+          "alive": false,
+          "at": 26503.6027931
+        }
+      ],
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.37152550000246265,
+        "infrastructure_wall": 0.16777369999908842,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        4708
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 13,
+      "instrumented": true,
+      "supervisor_launches": [
+        {
+          "argv": [
+            "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+            "-I",
+            "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+            "--supervisor"
+          ],
+          "pid": 12840,
+          "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+          "wait_state": 258
+        }
+      ],
+      "job_checks": [
+        {
+          "alive": false,
+          "at": 26504.1575441
+        },
+        {
+          "alive": false,
+          "at": 26504.1575805
+        },
+        {
+          "alive": false,
+          "at": 26504.1576015
+        }
+      ],
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.37853460000042105,
+        "infrastructure_wall": 0.17320489999838173,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        22620
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 14,
+      "instrumented": true,
+      "supervisor_launches": [
+        {
+          "argv": [
+            "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+            "-I",
+            "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+            "--supervisor"
+          ],
+          "pid": 19716,
+          "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+          "wait_state": 258
+        }
+      ],
+      "job_checks": [
+        {
+          "alive": false,
+          "at": 26504.7202112
+        },
+        {
+          "alive": false,
+          "at": 26504.720246
+        },
+        {
+          "alive": false,
+          "at": 26504.7202749
+        }
+      ],
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.38228869999875315,
+        "infrastructure_wall": 0.17698580000069342,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        6584
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    },
+    {
+      "iteration": 15,
+      "instrumented": true,
+      "supervisor_launches": [
+        {
+          "argv": [
+            "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+            "-I",
+            "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+            "--supervisor"
+          ],
+          "pid": 19880,
+          "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+          "wait_state": 258
+        }
+      ],
+      "job_checks": [
+        {
+          "alive": false,
+          "at": 26505.2886135
+        },
+        {
+          "alive": false,
+          "at": 26505.2886444
+        },
+        {
+          "alive": false,
+          "at": 26505.2886704
+        }
+      ],
+      "receipt": {
+        "returncode": 0,
+        "timed_out": false,
+        "command_wall": 0.3868046999996295,
+        "infrastructure_wall": 0.17837890000009793,
+        "ownership_established": true,
+        "survivors": false,
+        "cleanup_complete": true,
+        "errors": []
+      },
+      "target_markers": [
+        23184
+      ],
+      "test_failures": 0,
+      "test_errors": []
+    }
+  ],
+  "relationship_probe": {
+    "kind": "separate minimal relationship probe, not original test",
+    "supervisor_launches": [
+      {
+        "argv": [
+          "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+          "-I",
+          "Q:\\fastapi\\Generated Files\\worktrees\\process-containment-review\\Generated Files\\arm-build\\protocol\\owned_process.py",
+          "--supervisor"
+        ],
+        "pid": 2888,
+        "image": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13.15-windows-aarch64-none\\python.exe",
+        "wait_state": 258
+      }
+    ],
+    "target": {
+      "pid": 23044,
+      "parent": 2888,
+      "executable": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+      "base_prefix": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none"
+    },
+    "receipt": {
+      "returncode": 0,
+      "timed_out": false,
+      "command_wall": 0.10171219999756431,
+      "infrastructure_wall": 0.17195690000153263,
+      "ownership_established": true,
+      "survivors": false,
+      "cleanup_complete": true,
+      "errors": []
+    }
+  }
+}
