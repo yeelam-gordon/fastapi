@@ -1,5 +1,7 @@
 /*.py text eol=lf
 /*.cjs text eol=lf
+/*.lock text eol=lf
+/*.in text eol=lf
 results/** -text whitespace=-blank-at-eol,-blank-at-eof
 round-2/** -text whitespace=-blank-at-eol,-blank-at-eof
 round-3/** -text whitespace=-blank-at-eol,-blank-at-eof

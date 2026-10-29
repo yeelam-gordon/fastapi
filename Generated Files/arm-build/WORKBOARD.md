@@ -20,6 +20,21 @@ Workers commit only owned paths on their branches and do not push or dispatch CI
 
 Worker origin commits: portable `749e211d`, review `cc469129`, protocol `da23ed29`, runtime `6704ea2a`. Integrated master commits retain each worker's scoped changes and co-authorship. [INTERFACES.md](protocol/INTERFACES.md) coordinates the next independent wrapper, harness and code-review lanes.
 
+| Next active lane | Branch / worktree suffix | Owned output |
+|---|---|---|
+| Independent portable-code review | `review/arm-prefetch-code` / `prefetch-code-review` | `reviews\prefetch-code` |
+| Fresh caller-isolation wrapper | `investigate/arm-caller-isolation` / `caller-isolation` | protocol wrapper, lock and focused tests |
+| Paired-OS experiment harness | `investigate/arm-paired-ci-harness` / `paired-ci-harness` | versioned measurement/comparison, tests and manual workflow |
+
+These are three active lanes. Only the wrapper lane runs C: readiness builds; the harness uses fixtures until integration, and review is independent. No CI, push or release adoption is delegated.
+
+### Readiness findings
+
+- Independent code review reproduced PC-001 (backend-generated `.pdm-build` state breaks shared-source reuse) and PC-002 (case-variant unsupported hook can execute before rejection). Both were forwarded unchanged and independently reproduced by the producer.
+- Producer fix `3c10320c` is committed; independent verification and same-source wrapper smokes are pending. No source-copy workaround or manifest weakening is accepted.
+- Harness `73577fc7` passes its fixture/static checks but is not integration-ready by that fact alone; independent protocol review is active in `review/arm-paired-protocol`.
+- Targeted LF attributes protect versioned code/locks/oracle identities across Windows/Mac checkout. Raw captured evidence remains byte-preserved.
+
 | Task | Dependencies | State | Acceptance |
 |---|---|---|---|
 | round2-overhead | existing canonical input and reference | done | Selective proof retained; ZIP-import follow-up lacked a convincing gain |
