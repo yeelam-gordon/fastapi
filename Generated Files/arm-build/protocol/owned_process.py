@@ -219,7 +219,7 @@ class _Job:
                     raise RuntimeError("Owned observation handle cleanup failed")
 
     def kill(self):
-        handles = []
+        handles, primary = [], None
         try:
             for pid in self.members():
                 handle = self.api.OpenProcess(0x100000, False, pid)  # SYNCHRONIZE
@@ -233,9 +233,21 @@ class _Job:
                 milliseconds = max(0, int((deadline - time.perf_counter()) * 1000))
                 if self.api.WaitForSingleObject(handle, milliseconds) != 0:
                     raise RuntimeError("Owned process termination did not complete")
+        except BaseException as error:
+            primary = error
+            raise
         finally:
+            close_errors = []
             for handle in handles:
-                _checked(self.api.CloseHandle(handle))
+                try:
+                    _checked(self.api.CloseHandle(handle))
+                except Exception as error:
+                    close_errors.append(f"close {type(error).__name__}: {error}")
+            if close_errors:
+                if primary is None:
+                    raise RuntimeError("; ".join(close_errors))
+                for diagnostic in close_errors:
+                    primary.add_note(diagnostic)
 
     def close(self):
         _checked(self.api.CloseHandle(self.handle))
@@ -345,6 +357,7 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
                     errors.append("Owned family did not drain before cleanup deadline")
         except Exception as error:
             errors.append(f"cleanup {type(error).__name__}: {error}")
+            errors.extend(getattr(error, "__notes__", ()))
         finally:
             if job:
                 try:

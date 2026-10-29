@@ -297,6 +297,47 @@ class OwnedTests(unittest.TestCase):
                     job.live_members(10, evidence)
                 self.assertIn("error", evidence[0])
 
+    def test_termination_closes_every_handle_and_retains_all_errors(self):
+        for termination_fails in (False, True):
+            with self.subTest(termination_fails=termination_fails):
+                process = Mock(pid=123, returncode=0)
+                process.poll.return_value = 0
+                process.communicate.return_value = (
+                    json.dumps({"owned": True, "started": time.perf_counter(),
+                                "returncode": 7, "timed_out": False}), ""
+                )
+                job = object.__new__(owned._Job)
+                job.handle, job.api = 1, Mock()
+                job.members = Mock(return_value={101, 102, 103})
+                job.alive = Mock(return_value=True)
+                job.live_members = Mock(return_value=True)
+                job.api.OpenProcess.side_effect = lambda access, inherit, pid: (pid - 100) * 11
+                job.api.WaitForSingleObject.return_value = 0
+                if termination_fails:
+                    job.api.TerminateJobObject.side_effect = OSError("original terminate failure")
+
+                def close(handle):
+                    if handle in (11, 22):
+                        raise OSError(f"secondary close {handle}")
+                    return True
+
+                job.api.CloseHandle.side_effect = close
+                with (
+                    patch.object(owned, "_WINDOWS", True),
+                    patch.object(owned, "_Job", return_value=job),
+                    patch.object(owned.subprocess, "Popen", return_value=process),
+                ):
+                    result = self.run_helper("failure")
+                self.assertEqual(result.returncode, 7)
+                self.assertFalse(result.succeeded)
+                self.assertFalse(result.cleanup_complete)
+                if termination_fails:
+                    self.assertTrue(any("original terminate failure" in e for e in result.errors))
+                for handle in (11, 22, 33, 1):
+                    job.api.CloseHandle.assert_any_call(handle)
+                for handle in (11, 22):
+                    self.assertTrue(any(f"secondary close {handle}" in e for e in result.errors))
+
 
 def helper(role, root):
     (root / ("pid-" + str(os.getpid()))).write_text(str(os.getpid()))

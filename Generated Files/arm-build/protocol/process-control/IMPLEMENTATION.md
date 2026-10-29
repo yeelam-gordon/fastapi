@@ -200,3 +200,31 @@ explicit owned PIDs touched. `git diff --check` passed. Confidence is high
 for these demonstrated Windows paths, medium for the bounded membership
 argument pending independent review, low for unexecuted macOS runtime.
 Original LOCAL-OWNERSHIP-004 causality remains unestablished.
+
+## PC002: final bounded termination-cleanup repair
+
+Independently reproduced the injected failure before editing: a failed first
+CloseHandle skipped subsequent pinned handles, and replaced a primary
+TerminateJobObject failure in receipt diagnostics. No native failure is claimed.
+
+`_Job.kill` now attempts every pinned-handle close independently. Secondary
+close errors are attached as notes to the original termination/wait exception,
+or raised together when termination itself succeeded. The existing receipt
+cleanup handler retains those notes, the original command status and all
+cleanup failures. Cleanup stays incomplete; job-close fallback is not silently
+represented as verified cleanup. Membership, ownership, receipt API and timer
+behavior are unchanged.
+
+Focused injected regression covers both successful and failing termination,
+two failed closes plus a third successful close, preservation of status 7,
+original termination error, every secondary diagnostic and final job close.
+With the supplied managed interpreter, **four mock-only focused tests passed
+normally and with `-O`, exit 0 each**, including PC001 and member-state guards.
+`git diff --check` passed. No additional native loop, diagnostic campaign,
+build, benchmark, CI, push, dependency or infrastructure was introduced.
+
+This helper is measurement hygiene only, not a performance improvement or
+adoption proposal. The private-PDM SDK remains diagnostic-only, and the
+campaign remains paused for the root's generalizability/ecosystem review.
+Work stops after this repair. Confidence in this narrow injected-error fix:
+high; original LOCAL-OWNERSHIP-004 causality remains unknown.
