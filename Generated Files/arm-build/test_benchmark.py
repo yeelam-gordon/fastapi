@@ -24,6 +24,24 @@ SPEC.loader.exec_module(benchmark)
 
 
 class BenchmarkTests(unittest.TestCase):
+    def test_native_architecture_uses_runtime_machine_for_macos_universal2(self):
+        cases = [
+            ("darwin", "macosx-10.13-universal2", "arm64", True),
+            ("darwin", "macosx-10.13-universal2", "x86_64", False),
+            ("win32", "win-arm64", "ARM64", True),
+            ("win32", "win-amd64", "ARM64", False),
+        ]
+        for system, tag, machine, expected in cases:
+            with (
+                self.subTest(system=system, tag=tag, machine=machine),
+                mock.patch.object(benchmark.sys, "platform", system),
+                mock.patch.object(
+                    benchmark.sysconfig, "get_platform", return_value=tag
+                ),
+                mock.patch.object(benchmark.platform, "machine", return_value=machine),
+            ):
+                self.assertEqual(benchmark.is_native_arm64(), expected)
+
     def setUp(self):
         self.root = HERE / f".test-benchmark-{uuid.uuid4().hex}"
         self.root.mkdir()

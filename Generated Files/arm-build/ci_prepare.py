@@ -11,6 +11,8 @@ import sysconfig
 import time
 from pathlib import Path
 
+from benchmark import is_native_arm64
+
 ROOT = Path(__file__).resolve().parent
 
 
@@ -18,10 +20,6 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
-    if not sysconfig.get_platform().lower().endswith(("arm64", "aarch64")):
-        raise RuntimeError(
-            f"Native ARM64 interpreter required, got {sysconfig.get_platform()}"
-        )
     output = ROOT / "results" / "bootstrap"
     output.mkdir(parents=True, exist_ok=True)
     report_path = output / ("smoke.json" if args.smoke else "provision.json")
@@ -53,6 +51,10 @@ def main() -> None:
             raise RuntimeError(f"{phase} failed with {result.returncode}")
 
     try:
+        if not is_native_arm64():
+            raise RuntimeError(
+                f"Native ARM64 interpreter required, got {sysconfig.get_platform()}, {platform.machine()}"
+            )
         if args.smoke:
             wheels = list(
                 (ROOT / "results" / "ci" / "artifacts" / "prepare-baseline").glob(

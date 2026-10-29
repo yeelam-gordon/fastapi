@@ -243,9 +243,15 @@ def cpu_metadata() -> dict:
     return result
 
 
+def is_native_arm64() -> bool:
+    if sys.platform == "darwin":
+        return platform.machine().lower() in {"arm64", "aarch64"}
+    return sysconfig.get_platform().lower().endswith(("arm64", "aarch64"))
+
+
 def execute(args: argparse.Namespace) -> int:
     interpreter_platform = sysconfig.get_platform().lower()
-    if not interpreter_platform.endswith(("arm64", "aarch64")):
+    if not is_native_arm64():
         raise ValueError(
             f"Native ARM64 interpreter required, got {interpreter_platform}"
         )
