@@ -137,6 +137,60 @@ above show material benefit without regressions or a substantial lifecycle/API
 burden. This is a concrete source-only no-go, not a claim that parallel I/O cannot
 help Windows, Mac, or packaging generally.
 
+## Addendum — fixed small-file overlap (source/design follow-up)
+
+**Revised feasibility: conditional go for a small proof, not adoption (medium).**
+The proposed fixed cap removes the reservation-framework objection. Three
+pending results plus one current result, each at most 64 KiB, bound logical
+payload storage to 256 KiB independently of project size or file growth. This
+does not bound total RSS to 256 KiB: input buffering, BytesIO/copy transients,
+executor objects and exception tracebacks need allowance. No configurable budget,
+new API, generic selector or tuning matrix is needed. The earlier implementation
+no-go remains the present action; byte accounting alone is **not** a sound reason
+to reject this narrower design.
+
+| Concern | Comparison with actual upstream semantics / required boundary |
+|---|---|
+| Reads, short reads and growth | [tar copy][copy] consumes exactly recorded size in 16 KiB chunks, rejecting a short chunk; it does not demand EOF afterward. A worker must request at most recorded size, never read to EOF or probe one extra byte. Growth is ignored as upstream ignores its tail. A short payload can be passed to unchanged `addfile` via BytesIO so its existing short-read check raises; do not silently shrink TarInfo, pad, or introduce the prototype's length-equality policy. An actual worker read/open exception must retain its type and surface at its member. Coalescing reads is not exact syscall/error timing equivalence, particularly with concurrently modified inputs. |
+| Empty/large/nonregular inputs | Upstream opens even zero-size regular files, although tar copies no payload: do not skip that open and suppress its permission/error behavior. Oversized files keep the original open/stream/close path. Links and other nonregular entries keep metadata-only `addfile`. A queue-drain barrier at these entries is a simple conservative alternative to a heterogeneous scheduling framework. |
+| Metadata lookahead and errors | Generate/clean TarInfo only on the main thread, in final sorted order; never call shared `tar.gettarinfo` from workers. Filling lookahead can encounter a later `lstat`/cleaning failure before earlier members are written. Store that failure as the next positional queue item, stop filling, finish earlier items, then raise; do not raise immediately from queue filling. Earlier archive/write/read errors must win over later queued errors. This is modest but essential logic. |
+| Links and hooks | Serial [gettarinfo][tarstat] preserves its inode bookkeeping order, including metadata-only hardlinks; cached TarInfo must not be regenerated at consumption. Start after PDM has completed selection/update hooks/generated files, and retain finalize and fresh PKG-INFO. No cached selection-era stat or mode manifest. Lookahead still moves stat/open/read earlier in wall time: a path replaced or truncated concurrently can produce a different observation than stock. This is an explicit limitation, not a proof of equivalence for mutable sources; stock also has a stat→open race. |
+| Failure artifact / logging | Keep logging after successful serial `addfile`. Prefetch may discover an input error before that member's header is emitted, whereas [addfile][taradd] writes its header before copying. The failed artifact can therefore contain a different partial tail. Exact failed-archive byte identity or identical read chronology is incompatible with ordinary lookahead; successful immutable-input archives and meaningful ordered errors are the credible contract. Do not claim stronger compatibility without maintainer acceptance. |
+| Early writer failure / handles | Each task owns its `with open` handle and returns only bounded bytes; the writer never receives live handles. An enclosing `finally` must cancel queued work and call [shutdown(wait=True, cancel_futures=True)][shutdown], including generator early exit. A generator merely abandoned by the caller is insufficient. Preserve the primary writer/ordered-input error; later speculative failures must not replace it. [Cancellation cannot stop running reads][cancel]; joining them may delay failure return on slow/blocked storage. Bounded bytes are not a latency bound. No detached workers or timeout/cancellation framework is justified. |
+
+**Size/maintenance judgment (medium):** A bounded deque, one capped-read helper,
+ordered failure item and explicit executor cleanup could plausibly fit within
+~80 new/changed production source lines while retaining PDM's existing tar writer.
+This is a design estimate, not a counted or reviewed patch. Drain barriers and
+lazy executor creation when a first eligible input is encountered keep the scope
+understandable, although even tiny projects may pay thread startup. Avoid a
+generic scheduler, metadata-policy API or concurrency settings. If ordered
+failure/cleanup cannot stay clear within this ceiling, reject rather than hide
+complexity in helpers. The remaining lifecycle burden is real but not, by itself,
+proof that this restricted patch is disproportionate.
+
+**Maintainer rationale:** PDM alone owns this final serial archive loop; overlapping
+only bounded ordinary-file reads could reduce per-file open latency across layouts
+without changing selection, hooks, modes, tar/gzip policy or large-file streaming.
+The cap makes memory reasoning locally reviewable. That is a credible small
+owner-level hypothesis, but speculative reads, failure cleanup and startup overhead
+must earn their cost through focused tests and ordinary-command results. Historical
+prototype savings still do not establish stock-command value (**low confidence**
+in net benefit); P22's stock C screen is separate evidence, not an outcome asserted
+here. No implementation or benchmark was run in this follow-up.
+
+**Bounded next proof, only after authorization:** one fixed-cap patch under the
+~80-line ceiling and a few extensions to existing tests: exact-cap/over-cap/zero
+inputs and ignored appended tail; short read and ordered later metadata/read error;
+hardlink plus hook-replaced/generated file; writer failure with queued/running
+readers demonstrating closure and join. Use deterministic coordination rather than
+a stress framework. Then one standard full-command paired screen, informed by
+P22, including tiny and many-small-file layouts and one oversized streaming file;
+retain the original report's artifact and contemporary Windows/Mac gates.
+Reject on complexity, cleanup failure or immaterial end-to-end benefit.
+
+[shutdown]: https://github.com/python/cpython/blob/4061bc4c35f7c26f25264666d4ba083b93d2f6f9/Lib/concurrent/futures/thread.py#L220-L239
+[cancel]: https://github.com/python/cpython/blob/4061bc4c35f7c26f25264666d4ba083b93d2f6f9/Lib/concurrent/futures/_base.py#L365-L379
 [entry]: https://github.com/pdm-project/pdm-backend/blob/8c6653726f71afdb2059b44dc9c7706693e95be6/src/pdm/backend/__init__.py#L61-L68
 [lifecycle]: https://github.com/pdm-project/pdm-backend/blob/8c6653726f71afdb2059b44dc9c7706693e95be6/src/pdm/backend/base.py#L184-L224
 [collect]: https://github.com/pdm-project/pdm-backend/blob/8c6653726f71afdb2059b44dc9c7706693e95be6/src/pdm/backend/base.py#L234-L269

@@ -57,3 +57,19 @@ fetching/line numbering. No source cache or scratch files were created.
 Documentation-only verification: local relative-link existence, immutable
 source-reference/hash consistency, scoped git diff whitespace check and committed
 path review; no performance or behavioral tests were run.
+
+## Fixed-cap design follow-up
+
+Read-only inspection on the same date, starting at P23 commit
+`87e32f3fea959eee8152cceb638a29a5a9ecd9d3`. Added source/design analysis only;
+P22's separate stock-command measurement was not run or inferred here.
+Additional complete public files fetched from the same immutable CPython commit:
+
+| CPython path | SHA256 |
+|---|---|
+| `Lib/concurrent/futures/thread.py` | `62e194f69dcd39919d8c06d0abee8b92c6c3d3c71229d7b55e151005e2960a76` |
+| `Lib/concurrent/futures/_base.py` | `6ca5d2bb59aa23af56d95dcdd31728fda687f7727e79f4465236d1f65c06b053` |
+
+Relevant lines: thread worker exception storage 58–65, shutdown cancellation/join
+220–239; Future cancellation limits 365–379; executor context exit 652–654.
+No new production code, dependencies, framework, benchmark, C-drive write or CI.
