@@ -1,0 +1,3 @@
+*.py text eol=lf
+evidence/** -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+executed-*.py -text whitespace=cr-at-eol

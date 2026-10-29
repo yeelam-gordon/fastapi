@@ -1,0 +1,3 @@
+Using CPython 3.13.15 interpreter at: C:\Program Files\Python313-arm64\python.exe
+Creating virtual environment at: C:\fastapi-arm-build-lab\runtime-ab-2a73e36a\attempt-2\env-stock
+Activate with: C:\fastapi-arm-build-lab\runtime-ab-2a73e36a\attempt-2\env-stock\Scripts\activate

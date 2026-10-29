@@ -1,0 +1,170 @@
+{'build': '1.6.1', 'pip': '26.2.2', 'pdm-backend': '2.5.0'}
+valid_outer_pip True virtualenv False create_with_virtualenv False
+class _PipBackend(_EnvBackend):
+    def __init__(self) -> None:
+        self._create_with_virtualenv = not self._has_valid_outer_pip and self._has_virtualenv
+
+    @functools.cached_property
+    def _has_valid_outer_pip(self) -> bool | None:
+        """
+        This checks for a valid global pip. Returns None if pip is missing, False
+        if pip is too old or debundled, and True if it can be used.
+        """
+
+        # Version to have added the `--python` option.
+        # `pip install --python` is nonfunctional on Gentoo debundled pip.
+        if dist := _has_dependency('pip', '22.3'):  # pragma: no cover
+            files = dist.files
+            if files:
+                return any(str(f).startswith('pip/_vendor') for f in files)
+            # The distribution package manager deleted the RECORD file,
+            # generally to force pip to be unable to uninstall itself
+            # Only try this on 3.12+ since it can have side effects before 3.12
+            # due to _distutils_hack and pip interacting.
+            if sys.version_info >= (3, 12):
+                with warnings.catch_warnings():
+                    warnings.simplefilter('ignore')
+                    if importlib.util.find_spec('pip._vendor') is not None:
+                        return True
+            return False
+
+        return None  # pragma: no cover
+
+    @functools.cached_property
+    def _has_virtualenv(self) -> bool:
+        """
+        virtualenv might be incompatible if it was installed separately
+        from build. This verifies that virtualenv and all of its
+        dependencies are installed as required by build.
+        """
+        name = 'virtualenv'
+
+        return importlib.util.find_spec(name) is not None and not any(
+            Requirement(d[1]).name == name for d in check_dependency(f'build[{name}]') if len(d) > 1
+        )
+
+    @staticmethod
+    def _get_minimum_pip_version_str() -> str:
+        if platform.system() == 'Darwin':
+            release, _, machine = platform.mac_ver()
+            major = release.split('.', 1)[0]
+            if major and int(major) >= 11:
+                # macOS 11+ name scheme change requires 20.3. Intel macOS 11.0 can be
+                # told to report 10.16 for backwards compatibility; but that also fixes
+                # earlier versions of pip so this is only needed for 11+.
+                is_apple_silicon_python = machine != 'x86_64'
+                return '21.0.1' if is_apple_silicon_python else '20.3.0'
+
+        # PEP-517 and manylinux1 was first implemented in 19.1
+        return '19.1.0'
+
+    def create(self, path: str) -> None:
+        if self._create_with_virtualenv:
+            import packaging.version
+            import virtualenv
+
+            from ._compat import importlib
+
+            virtualenv_ver = packaging.version.Version(importlib.metadata.version('virtualenv'))
+
+            opts = [
+                path,
+                '--activators',
+                '',
+                '--no-setuptools',
+                '--no-periodic-update',
+            ]
+
+            if virtualenv_ver < packaging.version.Version('20.31.0'):
+                opts.append('--no-wheel')
+
+            result = virtualenv.cli_run(opts, setup_logging=False)
+
+            # The creator attributes are `pathlib.Path`s.
+            self.python_executable = str(result.creator.exe)
+            self.scripts_dir = str(result.creator.script_dir)
+            self.purelib = str(result.creator.purelib)
+
+        else:
+            import venv
+
+            with_pip = not self._has_valid_outer_pip
+
+            try:
+                venv.EnvBuilder(symlinks=_USE_SYMLINKS, with_pip=with_pip).create(path)
+            except subprocess.CalledProcessError as exc:
+                _ctx.log_subprocess_error(exc)
+                raise FailedProcessError(exc, 'Failed to create venv. Maybe try installing virtualenv.') from None
+
+            self.python_executable, self.scripts_dir, purelib = _find_executable_and_scripts(path)
+            self.purelib = purelib
+
+            if with_pip:
+                minimum_pip_version_str = self._get_minimum_pip_version_str()
+                if not _has_dependency(
+                    'pip',
+                    minimum_pip_version_str,
+                    path=[purelib],
+                ):
+                    run_subprocess(
+                        [self.python_executable, '-Im', 'pip', 'install', '--no-input', f'pip>={minimum_pip_version_str}'],
+                        env=_pip_env(),
+                    )
+
+                # Uninstall setuptools from the build env to prevent depending on it implicitly.
+                # Pythons 3.12 and up do not install setuptools, check if it exists first.
+                if _has_dependency(
+                    'setuptools',
+                    path=[purelib],
+                ):
+                    run_subprocess(
+                        [self.python_executable, '-Im', 'pip', 'uninstall', '--no-input', '-y', 'setuptools'],
+                        env=_pip_env(),
+                    )
+
+    def install_dependencies(
+        self,
+        requirements: Collection[str],
+        constraints: Collection[str],
+        *,
+        _fresh: bool = False,
+    ) -> None:
+        with contextlib.ExitStack() as exit_stack:
+            if self._has_valid_outer_pip:
+                cmd = [sys.executable, '-m', 'pip', '--python', self.python_executable]
+            else:
+                cmd = [self.python_executable, '-Im', 'pip']
+
+            if (verbosity := _ctx.verbosity) > 1:
+                cmd += [f'-{"v" * (verbosity - 1)}']
+
+            cmd += ['install']
+            if _fresh:
+                cmd += ['--ignore-installed']
+            cmd += ['--use-pep517', '--no-warn-script-location', '--no-compile', '--no-input']
+
+            # pip does not honour environment markers in command line arguments
+            # but it does from requirement files.
+            with tempfile.NamedTemporaryFile(
+                'w', prefix='build-requirements-', suffix='.txt', delete=False, encoding='utf-8'
+            ) as requirement_file:
+                requirement_file.write('\n'.join(requirements))
+            exit_stack.callback(functools.partial(os.unlink, requirement_file.name))
+
+            cmd += ['-r', os.path.abspath(requirement_file.name)]
+
+            if constraints:
+                with tempfile.NamedTemporaryFile(
+                    'w', prefix='build-constraints-', suffix='.txt', delete=False, encoding='utf-8'
+                ) as constraint_file:
+                    constraint_file.write('\n'.join(constraints))
+                exit_stack.callback(functools.partial(os.unlink, constraint_file.name))
+
+                cmd += ['-c', os.path.abspath(constraint_file.name)]
+
+            run_subprocess(cmd, env=_pip_env())
+
+    @property
+    def display_name(self) -> str:
+        return 'virtualenv+pip' if self._create_with_virtualenv else 'venv+pip'
+

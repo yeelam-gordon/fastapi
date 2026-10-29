@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "artifact_pairs": {
+    "pyc-diagnostic-pip-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "699d70b92554eeffad0f30468e1f499c28558d1710150fe58cd149c04e4767e6"
+    },
+    "pyc-diagnostic-pip-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "415231c750be21e2298391f56fb33f17f4faefc237c38ceef1068162454719ac"
+    },
+    "pyc-diagnostic-uv-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "6c38746b03421ab19f02ac3cbc7c026d2c5770cbbb651897d3daf7e4750b5fb7"
+    },
+    "pyc-diagnostic-uv-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "8bdd8dbec0ba5cbf26fbeb65aca196427d5d8312dc2830f66e07ef9d64ffaa80"
+    },
+    "trial-pip-1-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "74ed78a53923777e85240f32d87483c0fc4e4a3cb9513b55f24f77a93879f2c2"
+    },
+    "trial-pip-1-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "28f138de0c81f2155db710ceef93fd64814011a702a6368888730aef871bf483"
+    },
+    "trial-pip-2-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "cc1a2b22bd18283d80488f700d546639b5231ef8aa6b5772858703866e05a848"
+    },
+    "trial-pip-2-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "ea9b3e03eb1cc33c6e7400c5b16280de9accf7e5f640158a9c43a69564eac284"
+    },
+    "trial-pip-3-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "ba89bf390baf0f38ed48cb359cf3b1db5969fde8e90a7fd8e7fca4003d82ad51"
+    },
+    "trial-pip-3-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "73841c25b2244b31c52e30500e98eb75920bce002921f9492234a57aa90b13ac"
+    },
+    "trial-uv-1-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "e3a87d4c20d08fbae184649ae0d223b8e0f001df4f8129d193e6556484051f1b"
+    },
+    "trial-uv-1-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "81ff8bcc10a2c1bb055ad75a9b569de483a969986bb0510b6e611c4be2414044"
+    },
+    "trial-uv-2-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "825bea8d5074787dc6726090b2269a2e512335a88c03cd5f27a04287347e6c65"
+    },
+    "trial-uv-2-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "48f7faf302aac79ad4a764cd5aac46c08c198662d5a8fa1ea8bf85bab51f677b"
+    },
+    "trial-uv-3-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "f4453c20a00770734fc04e3bffbb212edb5246148c257266def0341cdd407f75"
+    },
+    "trial-uv-3-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "7d5dddfce938b4485764fb1eaa2065bd403e425018d0885aaef336bea90d8e57"
+    },
+    "warm-pip-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "ec19fabe5c3df9dd56fd4e8584379d951b31e7883b06e21686e7e7b0432a5800"
+    },
+    "warm-pip-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "5407f259b34814b0ae3690a53e80168650d4b01b565ab235132fd0dec936ce24"
+    },
+    "warm-uv-managed": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "918409d673f9a1aea97daaf1c58bedb6f7c1d99d8fe8c9ca7e1d1c33e6db4d5b"
+    },
+    "warm-uv-stock": {
+      "fastapi-0.162.0-py3-none-any.whl": "c6ed2e9b23ef487c40e252b6d0ff5dcd7a45afd75a2042c2ab9c0e3f3beb31a9",
+      "fastapi-0.162.0.tar.gz": "fd1095b4198d4040e4da57958b90c4892a9910afb6d5db5a293950c568a8cbc7"
+    }
+  },
+  "assertions": [
+    "same Windows reference contents, RECORD and full modes",
+    "all measured hashes retained",
+    "native uv PE",
+    "executed harness fingerprint",
+    "transient PDM pycs observed"
+  ]
+}
