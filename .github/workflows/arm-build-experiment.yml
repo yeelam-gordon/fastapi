@@ -19,11 +19,35 @@ jobs:
       run:
         shell: pwsh
     steps:
+      - name: Require Git sparse checkout support before checkout
+        run: |
+          $git = Get-Command git -ErrorAction Stop
+          $version = & $git.Source version
+          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
+            throw 'Git >= 2.28 is required; archive fallback is not permitted'
+          }
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
           path: tools
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/.gitattributes
+            /.github/workflows/.gitattributes
+            /.github/workflows/arm-build-experiment.yml
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/*.lock
+            /Generated Files/arm-build/setup_python.cjs
+            /Generated Files/arm-build/ci_prepare.py
+            /Generated Files/arm-build/candidate/.gitattributes
+            /Generated Files/arm-build/candidate/*.py
+            /Generated Files/arm-build/candidate/actual-manifest.json
+            /Generated Files/arm-build/protocol/.gitattributes
+            /Generated Files/arm-build/protocol/*.py
+            /Generated Files/arm-build/protocol/*.lock
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
@@ -33,6 +57,23 @@ jobs:
         run: |
           $started = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() / 1000.0
           "PAIR_PROVISION_STARTED=$($started.ToString([Globalization.CultureInfo]::InvariantCulture))" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          $required = @(
+            '.github/workflows/arm-build-experiment.yml'
+            'Generated Files/arm-build/setup_python.cjs'
+            'Generated Files/arm-build/ci_prepare.py'
+            'Generated Files/arm-build/tooling.lock'
+            'Generated Files/arm-build/smoke.lock'
+            'Generated Files/arm-build/candidate/actual-manifest.json'
+            'Generated Files/arm-build/protocol/isolated_build.py'
+            'Generated Files/arm-build/protocol/backend.lock'
+          )
+          $required += git -C tools ls-files -- ':(glob)Generated Files/arm-build/candidate/*.py' ':(glob)Generated Files/arm-build/protocol/*.py' ':(glob)Generated Files/arm-build/protocol/*.lock' ':(glob)Generated Files/arm-build/*.lock'
+          if ($LASTEXITCODE) { throw 'Cannot enumerate complete tool hash inputs' }
+          foreach ($file in $required) {
+            if (-not (Test-Path -LiteralPath (Join-Path tools $file) -PathType Leaf)) {
+              throw "Required sparse tool input missing: $file"
+            }
+          }
           $root = "C:\arm-pairs-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
           New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
           Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
@@ -86,11 +127,35 @@ jobs:
       run:
         shell: pwsh
     steps:
+      - name: Require Git sparse checkout support before checkout
+        run: |
+          $git = Get-Command git -ErrorAction Stop
+          $version = & $git.Source version
+          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
+            throw 'Git >= 2.28 is required; archive fallback is not permitted'
+          }
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
           path: tools
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/.gitattributes
+            /.github/workflows/.gitattributes
+            /.github/workflows/arm-build-experiment.yml
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/*.lock
+            /Generated Files/arm-build/setup_python.cjs
+            /Generated Files/arm-build/ci_prepare.py
+            /Generated Files/arm-build/candidate/.gitattributes
+            /Generated Files/arm-build/candidate/*.py
+            /Generated Files/arm-build/candidate/actual-manifest.json
+            /Generated Files/arm-build/protocol/.gitattributes
+            /Generated Files/arm-build/protocol/*.py
+            /Generated Files/arm-build/protocol/*.lock
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
@@ -100,6 +165,23 @@ jobs:
         run: |
           $started = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() / 1000.0
           "PAIR_PROVISION_STARTED=$($started.ToString([Globalization.CultureInfo]::InvariantCulture))" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          $required = @(
+            '.github/workflows/arm-build-experiment.yml'
+            'Generated Files/arm-build/setup_python.cjs'
+            'Generated Files/arm-build/ci_prepare.py'
+            'Generated Files/arm-build/tooling.lock'
+            'Generated Files/arm-build/smoke.lock'
+            'Generated Files/arm-build/candidate/actual-manifest.json'
+            'Generated Files/arm-build/protocol/isolated_build.py'
+            'Generated Files/arm-build/protocol/backend.lock'
+          )
+          $required += git -C tools ls-files -- ':(glob)Generated Files/arm-build/candidate/*.py' ':(glob)Generated Files/arm-build/protocol/*.py' ':(glob)Generated Files/arm-build/protocol/*.lock' ':(glob)Generated Files/arm-build/*.lock'
+          if ($LASTEXITCODE) { throw 'Cannot enumerate complete tool hash inputs' }
+          foreach ($file in $required) {
+            if (-not (Test-Path -LiteralPath (Join-Path tools $file) -PathType Leaf)) {
+              throw "Required sparse tool input missing: $file"
+            }
+          }
           $root = Join-Path $env:GITHUB_WORKSPACE "arm-pairs-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
           New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
           Copy-Item -Recurse -Force tools (Join-Path $root 'tools')

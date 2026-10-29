@@ -17,6 +17,30 @@ executing ARM, not Rosetta. Windows runtime, helpers, source, caches, scratch,
 dependencies and output live on C:, checked against actual NTFS volume receipts.
 Trust/protection status is not inferred or modified.
 
+### Tool checkout scope
+
+Only the research/tool checkout uses non-cone sparse patterns. The pinned
+[checkout v7 inputs](https://github.com/actions/checkout/blob/3d3c42e5aac5ba805825da76410c181273ba90b1/action.yml)
+accept newline-separated `sparse-checkout` patterns and
+`sparse-checkout-cone-mode: false` for individual files. No `filter` override is
+set; checkout v7 requests `blob:none` automatically for sparse checkout. Each job
+requires Git >= 2.28 before checkout, rather than permitting the action's
+missing/old-Git archive fallback. Anchored patterns retain every immediate
+candidate/protocol Python helper,
+every lock covered by `code_receipts()`, the setup helper, the receipt-required
+`ci_prepare.py`, oracle, workflow and applicable attributes. Historical logs,
+result manifests, worktrees and unrelated research are not materialized.
+
+Before copying to the measured volume, each job checks the tracked helper/lock
+list against materialized files and explicitly requires the integrated caller
+and backend lock. Missing inputs fail; receipt discovery is not silently
+shrunk and there is no full-checkout fallback. Adding a new receipt input outside
+these patterns requires updating this allowlist. The separate package-source
+checkout at 79cab remains complete, with its canonical archive unchanged.
+Sparse checkout is a preparation/I/O scope change, not measured performance
+evidence. Provision remains separately reported. Attribute policy is integrated
+by the root lane; this change does not normalize historical raw evidence.
+
 ## Boundaries
 
 One disclosed untimed smoke build per B/S1/S3 precedes the five fixed blocks:
