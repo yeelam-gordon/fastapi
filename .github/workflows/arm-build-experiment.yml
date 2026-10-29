@@ -1,4 +1,4 @@
-name: Paired ARM build experiment v3 (manual only)
+name: Paired ARM build experiment v4 (manual only)
 
 on:
   workflow_dispatch:
@@ -47,6 +47,7 @@ jobs:
             /Generated Files/arm-build/candidate/actual-manifest.json
             /Generated Files/arm-build/protocol/.gitattributes
             /Generated Files/arm-build/protocol/*.py
+            /Generated Files/arm-build/protocol/owned_process.py
             /Generated Files/arm-build/protocol/*.lock
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -66,6 +67,7 @@ jobs:
             'Generated Files/arm-build/candidate/actual-manifest.json'
             'Generated Files/arm-build/protocol/isolated_build.py'
             'Generated Files/arm-build/protocol/backend.lock'
+            'Generated Files/arm-build/protocol/owned_process.py'
           )
           $required += git -C tools ls-files -- ':(glob)Generated Files/arm-build/candidate/*.py' ':(glob)Generated Files/arm-build/protocol/*.py' ':(glob)Generated Files/arm-build/protocol/*.lock' ':(glob)Generated Files/arm-build/*.lock'
           if ($LASTEXITCODE) { throw 'Cannot enumerate complete tool hash inputs' }
@@ -109,11 +111,11 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           python (Join-Path $protocol 'measure_pairs.py') --uv $env:PAIR_UV --output (Join-Path $env:PAIR_ROOT 'evidence')
           exit $LASTEXITCODE
-      - name: Preserve complete v3 evidence even on failure
+      - name: Preserve complete v4 evidence even on failure
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: paired-v3-windows
+          name: paired-v4-windows
           path: |
             ${{ env.PAIR_ROOT }}/evidence
             ${{ env.PAIR_TOOLS }}/Generated Files/arm-build/results/bootstrap
@@ -155,6 +157,7 @@ jobs:
             /Generated Files/arm-build/candidate/actual-manifest.json
             /Generated Files/arm-build/protocol/.gitattributes
             /Generated Files/arm-build/protocol/*.py
+            /Generated Files/arm-build/protocol/owned_process.py
             /Generated Files/arm-build/protocol/*.lock
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -174,6 +177,7 @@ jobs:
             'Generated Files/arm-build/candidate/actual-manifest.json'
             'Generated Files/arm-build/protocol/isolated_build.py'
             'Generated Files/arm-build/protocol/backend.lock'
+            'Generated Files/arm-build/protocol/owned_process.py'
           )
           $required += git -C tools ls-files -- ':(glob)Generated Files/arm-build/candidate/*.py' ':(glob)Generated Files/arm-build/protocol/*.py' ':(glob)Generated Files/arm-build/protocol/*.lock' ':(glob)Generated Files/arm-build/*.lock'
           if ($LASTEXITCODE) { throw 'Cannot enumerate complete tool hash inputs' }
@@ -216,11 +220,11 @@ jobs:
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           python (Join-Path $protocol 'measure_pairs.py') --uv $env:PAIR_UV --output (Join-Path $env:PAIR_ROOT 'evidence')
           exit $LASTEXITCODE
-      - name: Preserve complete v3 evidence even on failure
+      - name: Preserve complete v4 evidence even on failure
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: paired-v3-macos
+          name: paired-v4-macos
           path: |
             ${{ env.PAIR_ROOT }}/evidence
             ${{ env.PAIR_TOOLS }}/Generated Files/arm-build/results/bootstrap

@@ -36,6 +36,23 @@ The comparison reports all per-variant ratios and best correct SDK configuration
 
 Harness tests use controlled fixtures/mocked subprocesses. No C: smoke or performance loop until the wrapper lane has committed and the master schedules the integrated readiness check; this avoids concurrent disk-intensive tests.
 
+### Owned lifecycle and clocks (arm-pairs-v4)
+
+The harness calls `owned_process.run_owned(argv, *, cwd, env, stdout_path,
+stderr_path, timeout=120)` and samples only successful `Receipt`s. It retains
+the complete owned-family receipt, actual `command_wall` and separate
+`infrastructure_wall`; comparison rejects ownership failure, survivors, timeout,
+cleanup failure, errors or unavailable clocks. No ancestry-polling fallback exists.
+Command timing starts immediately before target spawn, after supervisor/ownership
+setup, and continues through target exit and owned-family drain. Thus wrapper
+creation, install, SDK build and wrapper cleanup remain charged. Infrastructure
+is pre-command ownership setup, not provision or command latency, and is reported
+separately on both OSes. This version does not mix v3 timings into comparison.
+
+POSIX targets, including every wrapper phase, must stay in the inherited owned
+process group: no per-phase detached sessions. The wrapper fix and independent
+helper review are integration prerequisites, not permissions to run measurements.
+
 ## Independent review lane
 
 Review the portable SDK's real code and failure/configuration/path/mode/metadata guarantees, not just its successful golden build. Execute focused tests, including optimized Python where relevant. Report consequential findings with reproduction and confidence. Do not alter producers.

@@ -1,4 +1,4 @@
-"""Paired ARM protocol v3. Preparation and verification are never build timings."""
+"""Paired ARM protocol v4. Preparation and verification are never build timings."""
 
 import argparse
 import base64
@@ -18,9 +18,12 @@ import sysconfig
 import tarfile
 import time
 import zipfile
+from dataclasses import asdict
 from pathlib import Path, PurePosixPath, PureWindowsPath
 
-SCHEMA = "arm-pairs-v3"
+from owned_process import Receipt, run_owned
+
+SCHEMA = "arm-pairs-v4"
 SOURCE = "79cab5bed28b24d92c185d236feb33f5783dfeb3"
 ORDERS = (
     ("B", "S1", "S3"),
@@ -54,6 +57,8 @@ REQUIRED_TOOL_INPUTS = {
             "protocol/measure_pairs.py",
             "protocol/compare_pairs.py",
             "protocol/test_pairs.py",
+            "protocol/owned_process.py",
+            "protocol/test_owned_process.py",
             "protocol/isolated_build.py",
             "protocol/test_isolated_build.py",
             "protocol/backend.lock",
@@ -440,62 +445,57 @@ def volumes(paths):
 
 
 def run(argv, log, cwd, env, timeout=120):
-    """Track only our process tree; CPU is deliberately unavailable."""
-    import psutil
-
-    started = time.perf_counter()
-    children = {}
-    cleanup_errors = []
-    timed_out = False
-    with log.open("wb") as stream:
-        process = subprocess.Popen(
-            argv, cwd=cwd, env=env, stdout=stream, stderr=subprocess.STDOUT
-        )
-        owner = psutil.Process(process.pid)
-        while process.poll() is None:
-            try:
-                children.update({p.pid: p for p in owner.children(recursive=True)})
-            except psutil.NoSuchProcess:
-                pass
-            if time.perf_counter() - started >= timeout:
-                timed_out = True
-                break
-            time.sleep(0.02)
-        # Also reject leaked descendants after an otherwise successful wrapper.
-        for child in reversed(list(children.values())):
-            try:
-                if child.is_running() and child.status() != psutil.STATUS_ZOMBIE:
-                    child.kill()
-                    child.wait(timeout=5)
-                    if not timed_out:
-                        cleanup_errors.append(f"Leaked child {child.pid}")
-            except psutil.NoSuchProcess:
-                pass
-            except psutil.Error as exc:
-                cleanup_errors.append(str(exc))
-        if process.poll() is None:
-            process.kill()
-        code = process.wait(timeout=10)
-    elapsed = time.perf_counter() - started
+    """Use only the committed OS-owned lifecycle; never fall back to ancestry polling."""
+    stderr = log.with_name(log.stem + ".stderr.log")
+    receipt = run_owned(
+        argv, cwd=cwd, env=env, stdout_path=log, stderr_path=stderr, timeout=timeout
+    )
     return {
         "argv": argv,
-        "wall": elapsed,
-        "returncode": code,
-        "timed_out": timed_out or elapsed > timeout,
-        "cleanup_errors": cleanup_errors,
+        "wall": receipt.command_wall,
+        "command_wall": receipt.command_wall,
+        "infrastructure_wall": receipt.infrastructure_wall,
+        "owned_family": asdict(receipt),
+        "ownership_succeeded": receipt.succeeded,
+        "returncode": receipt.returncode,
+        "timed_out": receipt.timed_out,
+        "cleanup_errors": list(receipt.errors),
         "cpu_seconds": None,
         "cpu_scope": "unavailable, not launcher CPU",
         "log": str(log),
+        "stderr_log": str(stderr),
     }
 
 
 def succeeded(result):
+    try:
+        receipt = Receipt(**result["owned_family"])
+        return (
+            receipt.succeeded
+            and result["ownership_succeeded"] is True
+            and result["returncode"] == receipt.returncode
+            and result["timed_out"] == receipt.timed_out
+            and not result["cleanup_errors"]
+            and result["wall"] == result["command_wall"] == receipt.command_wall
+            and result["infrastructure_wall"] == receipt.infrastructure_wall
+            and math.isfinite(receipt.command_wall)
+            and receipt.command_wall > 0
+            and math.isfinite(receipt.infrastructure_wall)
+            and receipt.infrastructure_wall >= 0
+        )
+    except (KeyError, TypeError, ValueError):
+        return False
+
+
+def total_clock(samples, key):
+    values = [sample[key] for sample in samples]
     return (
-        result["returncode"] == 0
-        and not result["timed_out"]
-        and not result["cleanup_errors"]
-        and math.isfinite(result["wall"])
-        and result["wall"] > 0
+        sum(values)
+        if all(
+            isinstance(value, (int, float)) and math.isfinite(value) and value >= 0
+            for value in values
+        )
+        else None
     )
 
 
@@ -1062,11 +1062,14 @@ def measure(args):
         report["error"] = f"{type(exc).__name__}: {exc}"
         raise
     finally:
-        report["charged_timed_wall"] = sum(
-            s["wall"] for s in report["samples"] if s["timed"]
+        report["charged_timed_wall"] = total_clock(
+            [s for s in report["samples"] if s["timed"]], "command_wall"
         )
-        report["untimed_smoke_build_wall"] = sum(
-            s["wall"] for s in report["samples"] if not s["timed"]
+        report["untimed_smoke_build_wall"] = total_clock(
+            [s for s in report["samples"] if not s["timed"]], "command_wall"
+        )
+        report["ownership_infrastructure_wall"] = total_clock(
+            report["samples"], "infrastructure_wall"
         )
         setup = prepared.get("python_provision") or {}
         provision = prepared.get("runner_provision_wall")
@@ -1075,12 +1078,19 @@ def measure(args):
                 p["seconds"] for p in setup.get("phases", [])
             )
         report["provision_wall"] = provision
-        report["provision_plus_all_build_commands"] = provision + sum(
-            s["wall"] for s in report["samples"]
+        commands = total_clock(report["samples"], "command_wall")
+        report["provision_plus_all_build_commands"] = (
+            provision + commands if commands is not None else None
+        )
+        report["clock_contract"] = (
+            "v4: command wall begins immediately before target spawn and ends after "
+            "owned-family drain; includes complete wrapper cleanup, excludes pre-spawn "
+            "supervisor/ownership setup. Setup infrastructure is reported separately."
         )
         report["total_scope"] = (
             "provision plus 3 smoke builds and up to 15 timed builds; "
-            "not cold single-build latency; post-exit verification excluded; "
+            "not cold single-build latency; post-exit verification and separately "
+            "reported pre-command ownership infrastructure excluded; "
             "provision runner wall includes tool/source placement, uv setup, "
             "Python acquisition, fixture gate, archive and locked wheel preparation"
         )

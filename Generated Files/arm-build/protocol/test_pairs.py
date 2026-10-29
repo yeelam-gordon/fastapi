@@ -5,13 +5,12 @@ import csv
 import hashlib
 import io
 import struct
-import sys
 import tarfile
-import types
 import unittest
 import zipfile
+from dataclasses import asdict, replace
 from pathlib import Path
-from unittest.mock import Mock, mock_open, patch
+from unittest.mock import patch
 
 import compare_pairs as compare
 import measure_pairs as measure
@@ -89,6 +88,13 @@ def attach_receipts(result, system):
         }
     result["uv"]["path"] = str(base / "uv")
     for number, sample in enumerate(result["samples"]):
+        owned = measure.Receipt(0, False, sample["wall"], 0.1, True, False, True, ())
+        sample.update(
+            command_wall=owned.command_wall,
+            infrastructure_wall=owned.infrastructure_wall,
+            owned_family=asdict(owned),
+            ownership_succeeded=owned.succeeded,
+        )
         if sample["variant"] == "B":
             continue
         directory = base / f"sample-{number}"
@@ -226,6 +232,23 @@ class ComparisonTests(unittest.TestCase):
         inventory.start()
         self.addCleanup(inventory.stop)
 
+    def test_comparison_rejects_failed_owned_family_receipts(self):
+        for field, value in (
+            ("ownership_established", False),
+            ("survivors", True),
+            ("survivors", None),
+            ("cleanup_complete", False),
+            ("errors", ["owner failure"]),
+            ("timed_out", True),
+            ("command_wall", None),
+            ("infrastructure_wall", None),
+        ):
+            with self.subTest(field=field, value=value):
+                windows = report("Windows")
+                windows["samples"][0]["owned_family"][field] = value
+                with self.assertRaises(ValueError):
+                    compare.compare(windows, report("Darwin"))
+
     def test_pp001_missing_failed_reused_and_inconsistent_receipts_rejected(self):
         def mutate(r, case):
             sample = r["samples"][1]
@@ -329,6 +352,8 @@ class ComparisonTests(unittest.TestCase):
         for sample in mac["samples"]:
             if sample["variant"] == "S1":
                 sample["wall"] = 2
+                sample["command_wall"] = 2
+                sample["owned_family"]["command_wall"] = 2
         result = compare.compare(windows, mac)
         self.assertEqual(result["best_correct_sdk"], {"Windows": "S3", "Darwin": "S1"})
         self.assertFalse(result["sdk_caller_isolated_sample_parity"])
@@ -526,33 +551,42 @@ class ArchiveTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 measure.binary_receipt(Path("fixture.exe"))
 
-    def test_timeout_kills_owned_tree_and_retains_elapsed(self):
-        process, child, owner = Mock(), Mock(), Mock()
-        process.pid, child.pid = 42, 43
-        process.poll.return_value = None
-        process.wait.return_value = -9
-        child.is_running.return_value = True
-        child.status.return_value = "running"
-        owner.children.return_value = [child]
-        psutil = types.SimpleNamespace(
-            Process=Mock(return_value=owner),
-            NoSuchProcess=LookupError,
-            Error=RuntimeError,
-            STATUS_ZOMBIE="zombie",
-        )
-        with (
-            patch.dict(sys.modules, {"psutil": psutil}),
-            patch.object(Path, "open", mock_open()),
-            patch.object(measure.subprocess, "Popen", return_value=process),
-            patch.object(measure.time, "perf_counter", side_effect=[0, 121, 122]),
-        ):
-            result = measure.run(["fixture"], Path("fixture.log"), Path("."), {})
-        self.assertTrue(result["timed_out"])
-        self.assertEqual(result["wall"], 122)
-        self.assertFalse(measure.succeeded(result))
-        child.kill.assert_called_once()
-        process.kill.assert_called_once()
-        self.assertIsNone(result["cpu_seconds"])
+    def test_owned_receipts_control_acceptance_and_keep_clocks_separate(self):
+        good = measure.Receipt(0, False, 3.0, 0.2, True, False, True, ())
+        failures = [
+            {"returncode": 1},
+            {"timed_out": True},
+            {"ownership_established": False},
+            {"survivors": True},
+            {"survivors": None},
+            {"cleanup_complete": False},
+            {"errors": ("ownership failed",)},
+            {"command_wall": None},
+            {"infrastructure_wall": None},
+            {"infrastructure_wall": -1},
+        ]
+        for changes in [{}, *failures]:
+            with self.subTest(changes=changes):
+                receipt = replace(good, **changes)
+                with patch.object(measure, "run_owned", return_value=receipt) as runner:
+                    result = measure.run(
+                        ["fixture"], Path("fixture.log"), Path("."), {}
+                    )
+                self.assertEqual(measure.succeeded(result), not changes)
+                self.assertEqual(result["wall"], receipt.command_wall)
+                self.assertEqual(
+                    result["infrastructure_wall"], receipt.infrastructure_wall
+                )
+                self.assertEqual(result["owned_family"], asdict(receipt))
+                runner.assert_called_once_with(
+                    ["fixture"],
+                    cwd=Path("."),
+                    env={},
+                    stdout_path=Path("fixture.log"),
+                    stderr_path=Path("fixture.stderr.log"),
+                    timeout=120,
+                )
+                self.assertIsNone(result["cpu_seconds"])
 
 
 if __name__ == "__main__":

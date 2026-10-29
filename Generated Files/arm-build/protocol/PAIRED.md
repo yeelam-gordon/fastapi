@@ -1,4 +1,4 @@
-# Paired ARM experiment v3 — prepared, not authorized or executed
+# Paired ARM experiment v4 — prepared, not authorized or executed
 
 `PROPOSAL.md` and `INTERFACES.md` remain authoritative. This harness does not
 change release packaging, endpoint protection, or old evidence schemas.
@@ -114,6 +114,22 @@ no network lookup or missing-inventory fallback. Digests and full revision forms
 native Python/shared-library and uv receipts are required. Runtime binary hashes
 are validated independently on each OS, not equated across OSes.
 
-PP003 polling-only process-family ownership remains unresolved pending the
-separate lifecycle design decision. These changes do not assert durable
-ownership or authorize readiness, C: smokes, benchmarks or CI.
+## PP003 ownership integration — still gated
+
+The unchanged producer helper from `935b9bedcad2f876901b17e3d2a93dc0553adbde`
+replaces polling. Windows uses an owned Job; POSIX uses an inherited process
+group, with non-detaching targets as an explicit precondition. Wrapper phases
+must stop creating detached POSIX sessions before integrated execution.
+
+Version **arm-pairs-v4** preserves the entire helper receipt and rejects any
+unsuccessful ownership/cleanup/timeout result in both measurement and comparison.
+`wall` aliases `command_wall`: from immediately before the actual target spawn
+through target completion and owned-family drain, including full caller cleanup.
+Pre-target supervisor/ownership setup is `infrastructure_wall`, retained raw and
+summarized separately on each OS, never folded into variant ratios or provision.
+Post-target drain remains charged; this is not a timer stopped before cleanup.
+Missing clocks remain unavailable, not zero. Separate stdout/stderr logs remain
+unfiltered. Old v3 reports cannot be compared as v4.
+
+Helper review, the wrapper no-detach fix, and integrated normal/optimized tests
+remain mandatory. No C: smoke, benchmark or CI is authorized by this integration.

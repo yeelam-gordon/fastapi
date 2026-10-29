@@ -1,8 +1,7 @@
-"""Fail-closed paired-v3 analysis; unmet performance targets are not job failures."""
+"""Fail-closed paired-v4 analysis; unmet performance targets are not job failures."""
 
 import argparse
 import json
-import math
 import statistics
 from pathlib import Path
 
@@ -12,6 +11,7 @@ from measure_pairs import (
     SOURCE,
     correct,
     known_baseline_failure,
+    succeeded,
     validate_identities,
     validate_wrapper,
 )
@@ -45,13 +45,7 @@ def validate(report, system):
     for sample in report["samples"]:
         if sample["timed"] != (sample["block"] >= 0):
             raise ValueError("Wrong timing scope")
-        if (
-            sample["returncode"] != 0
-            or sample["timed_out"]
-            or sample["cleanup_errors"]
-            or not math.isfinite(sample["wall"])
-            or sample["wall"] <= 0
-        ):
+        if not succeeded(sample):
             raise ValueError("Invalid/failed/timed-out sample")
         check = sample["correctness"]
         if sample["variant"] != "B":
@@ -69,6 +63,7 @@ def summarize(report):
             s for s in report["samples"] if s["variant"] == variant and s["timed"]
         ]
         walls = [s["wall"] for s in samples]
+        infrastructure = [s["infrastructure_wall"] for s in samples]
         result[variant] = {
             "raw": walls,
             "median": statistics.median(walls),
@@ -76,6 +71,13 @@ def summarize(report):
             "max": max(walls),
             "correct": all(correct(s["correctness"]) for s in samples),
             "scope": report["scopes"][variant],
+            "ownership_infrastructure": {
+                "raw": infrastructure,
+                "median": statistics.median(infrastructure),
+                "min": min(infrastructure),
+                "max": max(infrastructure),
+                "scope": "pre-command supervisor/ownership setup, excluded from command ratios",
+            },
         }
     return result
 
