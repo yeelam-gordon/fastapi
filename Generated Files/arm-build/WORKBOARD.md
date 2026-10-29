@@ -4,13 +4,27 @@
 
 The user reaffirmed that the goal is Windows at least as fast as Mac, not merely a partial improvement. The current task is reopened. [INVESTIGATION-AND-PROPOSALS.md](../INVESTIGATION-AND-PROPOSALS.md) owns the ranked proposal table and acceptance loop.
 
+### Current isolated lanes
+
+The completed research checkpoint is `bfc306726db5727d6a358e85630ced44aa4aa4e2`. Four independently useful lanes are active; no additional full-agent coordinator is currently needed.
+
+| Lane | Branch | Worktree under `Generated Files\worktrees` | State |
+|---|---|---|---|
+| Portable minimal PDM proposal | `investigate/arm-portable-candidate` | `portable-candidate` | implementation and functional tests |
+| Existing runtime distribution control | `investigate/arm-runtime-distribution` | `runtime-distribution` | serial C: timing |
+| Independent evidence/attribution review | `review/arm-evidence-attribution` | `evidence-attribution` | source and acceptance review |
+| Fair next-benchmark contract | `investigate/arm-benchmark-contract` | `benchmark-contract` | isolation boundaries, Mac applicability and CI readiness proposal |
+| Clean benchmark input, not a worker | `source/fastapi-base-79cab` | `source-fastapi` | read-only original source |
+
+Workers commit only owned paths on their branches and do not push or dispatch CI. The master owns integration. The clean source worktree must be archived/copied before builds; do not write backend state into the shared input tree. This also separates application source from research/evidence/worktree growth.
+
 | Task | Dependencies | State | Acceptance |
 |---|---|---|---|
-| round2-overhead | existing canonical input and reference | selective proof done; import follow-up running | 1.954 s paired selective result; fresh imports still targeted |
+| round2-overhead | existing canonical input and reference | done | Selective proof retained; ZIP-import follow-up lacked a convincing gain |
 | round2-native-archive | existing canonical input and Mac reference | done | Strict Mac equivalence; mode gap closed; 2.223 s insufficient |
 | round2-native-backend | existing canonical input and reference | rejected after proof | 1.660 s but incompatible metadata/version behavior |
 | round2-integrate | accepted worker evidence | local proof done; optimization continues | 1.700 s median; all Mac contents and execute bits match |
-| round3-node-writer | round2-stage attribution | running | Replace stat/mtree/native-process overhead using existing ARM64 runtime; strict artifacts and timing |
+| round3-node-writer | round2-stage attribution | diagnostic proof done; not adopted | Correct artifacts, but higher maintenance than the standard-library proposal |
 | round2-verify | round2-integrate | pending | Independent correctness/performance-readiness verdict |
 | round2-ci | round2-verify | gated | Only a locally justified, budgeted runner experiment; then inspect and loop |
 
@@ -20,8 +34,8 @@ The supplied prior branches were source-audited with pinned revisions and explic
 
 | Task | State | Acceptance |
 |---|---|---|
-| standard-frontends-C | running | Standard isolated frontend controls on C:, actual installer call path and backend setup inside timer |
-| native-toolchain-provenance | running | Verified build defaults/artifact provenance, no compiler blame from missing flags |
+| standard-frontends-C | done | 13.421 / 9.672 / 5.961 s for current isolated frontends; actual pip/no-ensurepip call path |
+| native-toolchain-provenance | done | Published standalone Windows ARM PGO verified; no blanket unoptimized-runtime claim |
 | prior-hobl / prior-bootstrap / prior-uvicorn | source audit done | Pinned sources, limits and credit; no foreign-patch performance claim |
 
 The user reaffirmed that expertise requires primary-source research and appropriate tools across interpreter, compiler/configuration, dependency, filesystem and ARM-optimization hypotheses—not a single assumed MDE cause.
