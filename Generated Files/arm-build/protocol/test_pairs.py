@@ -4,6 +4,7 @@ import copy
 import csv
 import hashlib
 import io
+import os
 import shutil
 import struct
 import subprocess
@@ -54,7 +55,12 @@ def report(system):
             "tag": "win-arm64" if system == "Windows" else "macosx-11.0-universal2",
             "translated": False,
         },
-        "uv": {"version": "0.13.6", "sha256": "f" * 64, "arm64_slice": True},
+        "uv": {
+            "version": "0.13.6",
+            "version_output": "uv 0.13.6\n",
+            "sha256": "f" * 64,
+            "arm64_slice": True,
+        },
         "scopes": {
             "B": "standard_uv_isolated_wall",
             "S1": "sdk_caller_isolated_wall",
@@ -353,7 +359,7 @@ class ComparisonTests(unittest.TestCase):
                     compare.compare(windows, report("Darwin"))
 
     def test_pp002_equal_incomplete_identities_rejected(self):
-        for case in ("empty", "inventory", "revision", "runtime", "uv"):
+        for case in ("empty", "inventory", "revision", "runtime", "uv", "uv-version"):
             with self.subTest(case=case):
                 windows, mac = report("Windows"), report("Darwin")
                 for item in (windows, mac):
@@ -368,6 +374,8 @@ class ComparisonTests(unittest.TestCase):
                         item["runtime"]["executable_sha256"] = "not-a-sha256"
                     elif case == "uv":
                         item["uv"].pop("arm64_slice")
+                    elif case == "uv-version":
+                        item["uv"]["version_output"] = "uv 0.13.60\n"
                 with self.assertRaises((ValueError, KeyError)):
                     compare.compare(windows, mac)
 
@@ -477,6 +485,46 @@ class ComparisonTests(unittest.TestCase):
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_exact_pinned_uv_version_with_optional_official_metadata(self):
+        for output in (
+            "uv 0.13.6",
+            "uv 0.13.6\n",
+            "uv 0.13.6\r\n",
+            "uv 0.13.6 (329bf9448 2026-10-26)",
+            "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)\r\n",
+            "uv 0.13.6 (329bf9448 2026-10-26 aarch64-apple-darwin)\n",
+        ):
+            with self.subTest(output=output):
+                self.assertEqual(measure.parse_uv_version(output), "0.13.6")
+        for output in (
+            "uv 0.13.60",
+            "uv 0.13.6rc1",
+            "uv 0.13.6-rc.1",
+            "uv 0.13.7",
+            "uv 0.13.6+local",
+            "uv 0.13.6\nextra",
+            "uv 0.13.6\n\n",
+            "uv 0.13.6 ()",
+            "uv 0.13.6 (garbage)",
+            "uv 0.13.6 ",
+            " uv 0.13.6",
+            "uv 0.13.6 (329bf9448 2026-02-30)",
+            "uv 0.13.6 (329bf9448 2026-10-26 target)",
+            "",
+        ):
+            with self.subTest(output=output):
+                with self.assertRaises(ValueError):
+                    measure.parse_uv_version(output)
+
+    @unittest.skipUnless(
+        os.environ.get("PAIRED_TEST_UV"), "Explicit verified uv path required"
+    )
+    def test_real_verified_uv_nonbuild_preflight(self):
+        executable = Path(os.environ["PAIRED_TEST_UV"])
+        raw = subprocess.check_output([str(executable), "--version"]).decode("utf-8")
+        self.assertEqual(measure.parse_uv_version(raw), "0.13.6")
+        self.assertTrue(measure.binary_receipt(executable)["arm64_slice"])
+
     def test_real_git_sparse_inventory_from_nested_tool_directory(self):
         root = Path(__file__).resolve().parent / (".inventory-test-" + uuid.uuid4().hex)
         root.mkdir()

@@ -19,6 +19,7 @@ import tarfile
 import time
 import zipfile
 from dataclasses import asdict
+from datetime import date
 from pathlib import Path, PurePosixPath, PureWindowsPath
 
 from owned_process import Receipt, run_owned
@@ -86,6 +87,21 @@ def valid_hex(value, size=64):
     )
 
 
+def parse_uv_version(output):
+    match = re.fullmatch(
+        r"uv (0\.13\.6)(?: \(([0-9a-f]{7,40}) (\d{4}-\d{2}-\d{2})"
+        r"(?: ([a-z0-9_]+(?:-[a-z0-9_]+){2,4}))?\))?(?:\r?\n)?",
+        output,
+    )
+    if match is None:
+        raise ValueError(
+            "Expected exactly uv 0.13.6 with optional official build metadata"
+        )
+    if match[3] is not None:
+        date.fromisoformat(match[3])
+    return match[1]
+
+
 def tool_inventory(revision):
     if not valid_hex(revision, 40):
         raise ValueError("Full harness Git SHA required")
@@ -147,6 +163,7 @@ def validate_identities(report):
     uv = report["uv"]
     if (
         uv.get("version") != "0.13.6"
+        or parse_uv_version(uv.get("version_output", "")) != uv["version"]
         or not valid_hex(uv.get("sha256"))
         or uv.get("arm64_slice") is not True
         or not uv.get("path")
@@ -938,12 +955,13 @@ def measure(args):
             for p in (output / "wheelhouse").glob("*.whl")
         } != prepared["wheels"]:
             raise ValueError("Offline wheelhouse changed after locked preparation")
-        if (
-            subprocess.check_output([args.uv, "--version"]).decode().strip()
-            != "uv 0.13.6"
-        ):
-            raise ValueError("Wrong uv version")
-        report["uv"] = {"version": "0.13.6", **binary_receipt(Path(args.uv))}
+        report["uv"] = {
+            "version_output": subprocess.check_output([args.uv, "--version"]).decode(
+                "utf-8"
+            ),
+            **binary_receipt(Path(args.uv)),
+        }
+        report["uv"]["version"] = parse_uv_version(report["uv"]["version_output"])
         validate_identities(report)
         report["memory_bytes"] = __import__("psutil").virtual_memory().total
         volume_paths = [

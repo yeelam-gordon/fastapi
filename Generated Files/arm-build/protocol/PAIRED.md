@@ -11,6 +11,9 @@ package source **79cab5bed28b24d92c185d236feb33f5783dfeb3** separately.
 Canonical Git archive bytes, Git modes, source manifest, raw helper/lock hashes,
 native CPython 3.13.15 executable/shared-library hashes, uv 0.13.6 hash, exact
 commands, whitelisted environment changes, logs and artifacts are retained.
+The uv receipt preserves unmodified `--version` output alongside its validated
+exact semantic version and binary hash. Optional official hash/date/target build
+metadata is accepted; other versions, prereleases and multiline output fail.
 Line endings are not normalized by hashing or verification; workflow checkout
 disables automatic CRLF conversion. Native macOS universal2 is allowed only when
 executing ARM, not Rosetta. Windows runtime, helpers, source, caches, scratch,
