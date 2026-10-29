@@ -73,22 +73,26 @@ root-prefix traps and lexical-dot cases, not a few happy-path examples.
 
 ## Existing attribution, not a new invention
 
-Barney Gale's **GH-111429 / PR #111431**, merged 2023-11-12 as
+Barney Gale's **python/cpython#111429 / python/cpython#111431**, merged 2023-11-12 as
 [`d7cef7bc7ea5478abb90a37c8ffb0792cc6e7518`](https://github.com/python/cpython/commit/d7cef7bc7ea5478abb90a37c8ffb0792cc6e7518),
 already skips unnecessary `with_segments` coercion and returns pre-parsed
 results. **Those improvements are already in the profiled 3.13.15 source**;
 they are not a newly discovered 3.14 upgrade fix or an ancestor-membership fix.
-PR #113882 / GH-113528, also Barney Gale, merged as
+python/cpython#113882 / python/cpython#113528, also Barney Gale, merged as
 [`cdca0ce0ad47604b7007229415817a7a152f7f9a`](https://github.com/python/cpython/commit/cdca0ce0ad47604b7007229415817a7a152f7f9a),
 explicitly distinguishes generalized pathlib ABC implementations from the
 battle-tested public PurePath implementation; its temporary-object-free ABC
 algorithm is **not evidence that public PurePath was fixed**.
-PR #130199's coercion change is
+python/cpython#130199's coercion change is
 [`d88677ac20b9466387459d5adb2e87b7de64bc19`](https://github.com/python/cpython/commit/d88677ac20b9466387459d5adb2e87b7de64bc19).
 Bounded GitHub issue/PR searches found no direct newer ancestor-allocation fix;
 this is not an exhaustive claim that no issue exists.
 
 ## Maintainer value and exactly one next proof
+
+**Historical source-only disposition below; the subsequently authorized
+semantic prototype and its results are recorded in [PROOF.md](PROOF.md).
+This does not authorize an unprofiled performance screen or adoption.**
 
 The case for CPython is a common allocation pattern visible in a real packaging
 profile, applicable beyond FastAPI; the case against immediate adoption is one

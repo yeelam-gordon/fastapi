@@ -1,0 +1,71 @@
+diff --git a/Lib/pathlib/_local.py b/Lib/pathlib/_local.py
+index 0188e7c..32e9b92 100644
+--- a/Lib/pathlib/_local.py
++++ b/Lib/pathlib/_local.py
+@@ -378,6 +378,18 @@ def relative_to(self, other, /, *_deprecated, walk_up=False):
+             other = self.with_segments(other, *_deprecated)
+         elif not isinstance(other, PurePath):
+             other = self.with_segments(other)
++        stock_types = (PurePosixPath, PureWindowsPath, PosixPath, WindowsPath)
++        if (not walk_up and not _deprecated
++                and type(self) in stock_types and type(other) in stock_types
++                and self.parser is other.parser):
++            size = len(other._tail)
++            if size <= len(self._tail):
++                prefix = self._format_parsed_parts(
++                    self.drive, self.root, self._tail[:size]) or '.'
++                if self.parser is not posixpath:
++                    prefix = prefix.lower()
++                if prefix == other._str_normcase:
++                    return self._from_parsed_parts('', '', self._tail[size:])
+         for step, path in enumerate(chain([other], other.parents)):
+             if path == self or path in self.parents:
+                 break
+diff --git a/Lib/test/test_pathlib/test_pathlib.py b/Lib/test/test_pathlib/test_pathlib.py
+index be8e4dc..c1490d9 100644
+--- a/Lib/test/test_pathlib/test_pathlib.py
++++ b/Lib/test/test_pathlib/test_pathlib.py
+@@ -320,6 +320,43 @@ def test_with_stem_empty(self):
+         self.assertRaises(ValueError, P('a/b').with_stem, '')
+         self.assertRaises(ValueError, P('a/b').with_stem, '.')
+ 
++    def test_relative_to_lexical_boundaries(self):
++        P = self.cls
++        self.assertEqual(P('a/./b/../Leaf').relative_to(P('a/b')), P('../Leaf'))
++        self.assertEqual(P('a/Leaf').relative_to(P()), P('a/Leaf'))
++        for path, base in [('ab/Leaf', 'a'), ('/a/Leaf', '//a'),
++                           ('/a/Leaf', 'a')]:
++            with self.subTest(path=path, base=base):
++                self.assertRaises(ValueError, P(path).relative_to, P(base))
++
++    @needs_windows
++    def test_relative_to_unicode_whole_string_lower(self):
++        P = self.cls
++        for path, base, expected in [
++                ('C:Σ', 'C:ς', '.'),
++                ('C:Σ/Leaf', 'C:ς', 'Leaf'),
++                ('C:/İ/Leaf', 'c:/i\u0307', 'Leaf'),
++                ('C:/Σ/Leaf', 'c:/σ', 'Leaf')]:
++            with self.subTest(path=path, base=base):
++                self.assertEqual(str(P(path).relative_to(P(base))), expected)
++        self.assertRaises(ValueError, P('C:/Σ/Leaf').relative_to, P('c:/ς'))
++        self.assertRaises(ValueError, P('C:Σ/Leaf').relative_to, P('C:/ς'))
++
++    def test_relative_to_subclass_factory_fallback(self):
++        calls = []
++
++        class P(self.cls):
++            def with_segments(self, *parts):
++                calls.append(parts)
++                result = type(self)(*parts)
++                result.marker = 42
++                return result
++
++        result = P('a/b/Leaf').relative_to(P('a'))
++        self.assertIs(type(result), P)
++        self.assertEqual(result.marker, 42)
++        self.assertGreater(len(calls), 1)
++
+     def test_relative_to_several_args(self):
+         P = self.cls
+         p = P('a/b')

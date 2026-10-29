@@ -1,0 +1,31 @@
+{
+  "source_commit": "4061bc4c35f7c26f25264666d4ba083b93d2f6f9",
+  "production_added_lines": 12,
+  "production_deleted_lines": 0,
+  "test_added_lines": 37,
+  "test_deleted_lines": 0,
+  "source_hashes": {
+    "Lib/pathlib/_local.py": {
+      "base_sha256": "0530b4186ec5845e000bedf5817ff1ac970b9a39a6891ba6789a1776abdea42b",
+      "candidate_sha256": "22d92f8e65b656629c1b5695d0e4352729037bf1b61aeed3935cc3f8d47b0065"
+    },
+    "Lib/test/test_pathlib/test_pathlib.py": {
+      "base_sha256": "a05a5f33c04870a140f6d8d65d5fc96a98a979d49c7dfb02f0f2377355d1dffd",
+      "candidate_sha256": "e9d53c4c7e230582e9097cca886da70fba52d9ab6799d936de255685547fa78a"
+    }
+  },
+  "artifact_sha256": {
+    "production.patch": "0ffcf58952497de47dbbae728bead34f3ecdddd4fb11f67516fbedec47608319",
+    "pathlib-relative.patch": "d19be837d3f9ab9369f9bcac18ced7f5ea952127e7aaf02d79902e9f461b1c1b",
+    "semantic_proof.py": "5f835d0d26b190598dc01d235e40112a69eea1e66f6119f6bc30725d4e813daf",
+    "baseline.log": "6c4f2941c0cd816f8a107d8110204654152395bd5a42d4e40c7779c6014cd069",
+    "baseline-expanded.log": "22ec2a74dbf8aef1011e51fb465cf6f914fcf2766f1758a2202b10daf289b181",
+    "candidate.log": "5ca04e10e172d485d1659bed7675057872dcecc0c801b1134cbbc022748286f9",
+    "baseline-expanded-modules.json": "d9434c709ca24e134672c5ca570e787f82d328fd3acf9f3979c514b306f8ee03",
+    "candidate-modules.json": "fdb94b10be45bb55bcda2baf688dce4c20f74598339009e6248b68599c508189"
+  },
+  "commands": [
+    "python -I -S -B semantic_proof.py baseline-expanded",
+    "python -I -S -B semantic_proof.py candidate"
+  ]
+}

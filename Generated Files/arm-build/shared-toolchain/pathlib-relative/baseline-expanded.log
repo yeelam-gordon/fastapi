@@ -1,0 +1,443 @@
+test_anchor_common (test.test_pathlib.test_pathlib.PurePathTest.test_anchor_common) ... ok
+test_anchor_windows (test.test_pathlib.test_pathlib.PurePathTest.test_anchor_windows) ... ok
+test_as_bytes_common (test.test_pathlib.test_pathlib.PurePathTest.test_as_bytes_common) ... ok
+test_as_posix_common (test.test_pathlib.test_pathlib.PurePathTest.test_as_posix_common) ... ok
+test_as_uri_common (test.test_pathlib.test_pathlib.PurePathTest.test_as_uri_common) ... ok
+test_as_uri_non_ascii (test.test_pathlib.test_pathlib.PurePathTest.test_as_uri_non_ascii) ... skipped 'requires POSIX-flavoured path class'
+test_as_uri_posix (test.test_pathlib.test_pathlib.PurePathTest.test_as_uri_posix) ... skipped 'requires POSIX-flavoured path class'
+test_as_uri_windows (test.test_pathlib.test_pathlib.PurePathTest.test_as_uri_windows) ... ok
+test_bytes (test.test_pathlib.test_pathlib.PurePathTest.test_bytes) ... ok
+test_bytes_exc_message (test.test_pathlib.test_pathlib.PurePathTest.test_bytes_exc_message) ... ok
+test_concrete_class (test.test_pathlib.test_pathlib.PurePathTest.test_concrete_class) ... ok
+test_concrete_parser (test.test_pathlib.test_pathlib.PurePathTest.test_concrete_parser) ... ok
+test_constructor_common (test.test_pathlib.test_pathlib.PurePathTest.test_constructor_common) ... ok
+test_constructor_nested (test.test_pathlib.test_pathlib.PurePathTest.test_constructor_nested) ... ok
+test_constructor_nested_foreign_flavour (test.test_pathlib.test_pathlib.PurePathTest.test_constructor_nested_foreign_flavour) ... ok
+test_different_parsers_unequal (test.test_pathlib.test_pathlib.PurePathTest.test_different_parsers_unequal) ... ok
+test_different_parsers_unordered (test.test_pathlib.test_pathlib.PurePathTest.test_different_parsers_unordered) ... ok
+test_div_common (test.test_pathlib.test_pathlib.PurePathTest.test_div_common) ... ok
+test_div_nested (test.test_pathlib.test_pathlib.PurePathTest.test_div_nested) ... ok
+test_div_posix (test.test_pathlib.test_pathlib.PurePathTest.test_div_posix) ... skipped 'requires POSIX-flavoured path class'
+test_div_windows (test.test_pathlib.test_pathlib.PurePathTest.test_div_windows) ... ok
+test_drive_common (test.test_pathlib.test_pathlib.PurePathTest.test_drive_common) ... ok
+test_drive_windows (test.test_pathlib.test_pathlib.PurePathTest.test_drive_windows) ... ok
+test_empty_path (test.test_pathlib.test_pathlib.PurePathTest.test_empty_path) ... ok
+test_eq_common (test.test_pathlib.test_pathlib.PurePathTest.test_eq_common) ... ok
+test_eq_posix (test.test_pathlib.test_pathlib.PurePathTest.test_eq_posix) ... skipped 'requires POSIX-flavoured path class'
+test_eq_windows (test.test_pathlib.test_pathlib.PurePathTest.test_eq_windows) ... ok
+test_equivalences (test.test_pathlib.test_pathlib.PurePathTest.test_equivalences) ... ok
+test_equivalences_windows (test.test_pathlib.test_pathlib.PurePathTest.test_equivalences_windows) ... ok
+test_fspath_common (test.test_pathlib.test_pathlib.PurePathTest.test_fspath_common) ... ok
+test_full_match_common (test.test_pathlib.test_pathlib.PurePathTest.test_full_match_common) ... ok
+test_is_absolute_posix (test.test_pathlib.test_pathlib.PurePathTest.test_is_absolute_posix) ... skipped 'requires POSIX-flavoured path class'
+test_is_absolute_windows (test.test_pathlib.test_pathlib.PurePathTest.test_is_absolute_windows) ... ok
+test_is_relative_to_common (test.test_pathlib.test_pathlib.PurePathTest.test_is_relative_to_common) ... ok
+test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PurePathTest.test_is_relative_to_several_args) ... ok
+test_is_relative_to_windows (test.test_pathlib.test_pathlib.PurePathTest.test_is_relative_to_windows) ... ok
+test_is_reserved_deprecated (test.test_pathlib.test_pathlib.PurePathTest.test_is_reserved_deprecated) ... ok
+test_join_common (test.test_pathlib.test_pathlib.PurePathTest.test_join_common) ... ok
+test_join_nested (test.test_pathlib.test_pathlib.PurePathTest.test_join_nested) ... ok
+test_join_posix (test.test_pathlib.test_pathlib.PurePathTest.test_join_posix) ... skipped 'requires POSIX-flavoured path class'
+test_join_windows (test.test_pathlib.test_pathlib.PurePathTest.test_join_windows) ... ok
+test_match_common (test.test_pathlib.test_pathlib.PurePathTest.test_match_common) ... ok
+test_match_empty (test.test_pathlib.test_pathlib.PurePathTest.test_match_empty) ... ok
+test_match_posix (test.test_pathlib.test_pathlib.PurePathTest.test_match_posix) ... skipped 'requires POSIX-flavoured path class'
+test_match_windows (test.test_pathlib.test_pathlib.PurePathTest.test_match_windows) ... ok
+test_name_common (test.test_pathlib.test_pathlib.PurePathTest.test_name_common) ... ok
+test_name_empty (test.test_pathlib.test_pathlib.PurePathTest.test_name_empty) ... ok
+test_name_windows (test.test_pathlib.test_pathlib.PurePathTest.test_name_windows) ... ok
+test_ordering_common (test.test_pathlib.test_pathlib.PurePathTest.test_ordering_common) ... ok
+test_ordering_windows (test.test_pathlib.test_pathlib.PurePathTest.test_ordering_windows) ... ok
+test_parent_common (test.test_pathlib.test_pathlib.PurePathTest.test_parent_common) ... ok
+test_parent_windows (test.test_pathlib.test_pathlib.PurePathTest.test_parent_windows) ... ok
+test_parents_common (test.test_pathlib.test_pathlib.PurePathTest.test_parents_common) ... ok
+test_parents_windows (test.test_pathlib.test_pathlib.PurePathTest.test_parents_windows) ... ok
+test_parse_path_common (test.test_pathlib.test_pathlib.PurePathTest.test_parse_path_common) ... ok
+test_parse_path_posix (test.test_pathlib.test_pathlib.PurePathTest.test_parse_path_posix) ... skipped 'requires POSIX-flavoured path class'
+test_parse_path_windows (test.test_pathlib.test_pathlib.PurePathTest.test_parse_path_windows) ... ok
+test_parse_windows_path (test.test_pathlib.test_pathlib.PurePathTest.test_parse_windows_path) ... skipped 'requires POSIX-flavoured path class'
+test_parts_common (test.test_pathlib.test_pathlib.PurePathTest.test_parts_common) ... ok
+test_parts_interning (test.test_pathlib.test_pathlib.PurePathTest.test_parts_interning) ... ok
+test_parts_windows (test.test_pathlib.test_pathlib.PurePathTest.test_parts_windows) ... ok
+test_pickling_common (test.test_pathlib.test_pathlib.PurePathTest.test_pickling_common) ... ok
+test_relative_to_common (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_common) ... ok
+test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_several_args (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_several_args) ... ok
+test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_subclass_factory_fallback) ... ok
+test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_unicode_whole_string_lower) ... ok
+test_relative_to_windows (test.test_pathlib.test_pathlib.PurePathTest.test_relative_to_windows) ... ok
+test_repr_common (test.test_pathlib.test_pathlib.PurePathTest.test_repr_common) ... ok
+test_repr_roundtrips (test.test_pathlib.test_pathlib.PurePathTest.test_repr_roundtrips) ... ok
+test_root_common (test.test_pathlib.test_pathlib.PurePathTest.test_root_common) ... ok
+test_root_posix (test.test_pathlib.test_pathlib.PurePathTest.test_root_posix) ... skipped 'requires POSIX-flavoured path class'
+test_root_windows (test.test_pathlib.test_pathlib.PurePathTest.test_root_windows) ... ok
+test_stem_common (test.test_pathlib.test_pathlib.PurePathTest.test_stem_common) ... ok
+test_stem_empty (test.test_pathlib.test_pathlib.PurePathTest.test_stem_empty) ... ok
+test_stem_windows (test.test_pathlib.test_pathlib.PurePathTest.test_stem_windows) ... ok
+test_str_common (test.test_pathlib.test_pathlib.PurePathTest.test_str_common) ... ok
+test_str_subclass_common (test.test_pathlib.test_pathlib.PurePathTest.test_str_subclass_common) ... ok
+test_str_subclass_windows (test.test_pathlib.test_pathlib.PurePathTest.test_str_subclass_windows) ... ok
+test_str_windows (test.test_pathlib.test_pathlib.PurePathTest.test_str_windows) ... ok
+test_suffix_common (test.test_pathlib.test_pathlib.PurePathTest.test_suffix_common) ... ok
+test_suffix_windows (test.test_pathlib.test_pathlib.PurePathTest.test_suffix_windows) ... ok
+test_suffixes_common (test.test_pathlib.test_pathlib.PurePathTest.test_suffixes_common) ... ok
+test_suffixes_windows (test.test_pathlib.test_pathlib.PurePathTest.test_suffixes_windows) ... ok
+test_with_name_common (test.test_pathlib.test_pathlib.PurePathTest.test_with_name_common) ... ok
+test_with_name_empty (test.test_pathlib.test_pathlib.PurePathTest.test_with_name_empty) ... ok
+test_with_name_seps (test.test_pathlib.test_pathlib.PurePathTest.test_with_name_seps) ... ok
+test_with_name_windows (test.test_pathlib.test_pathlib.PurePathTest.test_with_name_windows) ... ok
+test_with_segments_common (test.test_pathlib.test_pathlib.PurePathTest.test_with_segments_common) ... ok
+test_with_stem_common (test.test_pathlib.test_pathlib.PurePathTest.test_with_stem_common) ... ok
+test_with_stem_empty (test.test_pathlib.test_pathlib.PurePathTest.test_with_stem_empty) ... ok
+test_with_stem_seps (test.test_pathlib.test_pathlib.PurePathTest.test_with_stem_seps) ... ok
+test_with_stem_windows (test.test_pathlib.test_pathlib.PurePathTest.test_with_stem_windows) ... ok
+test_with_suffix_common (test.test_pathlib.test_pathlib.PurePathTest.test_with_suffix_common) ... ok
+test_with_suffix_empty (test.test_pathlib.test_pathlib.PurePathTest.test_with_suffix_empty) ... ok
+test_with_suffix_invalid (test.test_pathlib.test_pathlib.PurePathTest.test_with_suffix_invalid) ... ok
+test_with_suffix_windows (test.test_pathlib.test_pathlib.PurePathTest.test_with_suffix_windows) ... ok
+test_anchor_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_anchor_common) ... ok
+test_anchor_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_anchor_windows) ... skipped 'requires Windows-flavoured path class'
+test_as_bytes_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_as_bytes_common) ... ok
+test_as_posix_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_as_posix_common) ... ok
+test_as_uri_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_as_uri_common) ... ok
+test_as_uri_non_ascii (test.test_pathlib.test_pathlib.PurePosixPathTest.test_as_uri_non_ascii) ... ok
+test_as_uri_posix (test.test_pathlib.test_pathlib.PurePosixPathTest.test_as_uri_posix) ... ok
+test_as_uri_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_as_uri_windows) ... skipped 'requires Windows-flavoured path class'
+test_bytes (test.test_pathlib.test_pathlib.PurePosixPathTest.test_bytes) ... ok
+test_bytes_exc_message (test.test_pathlib.test_pathlib.PurePosixPathTest.test_bytes_exc_message) ... ok
+test_concrete_class (test.test_pathlib.test_pathlib.PurePosixPathTest.test_concrete_class) ... ok
+test_concrete_parser (test.test_pathlib.test_pathlib.PurePosixPathTest.test_concrete_parser) ... ok
+test_constructor_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_constructor_common) ... ok
+test_constructor_nested (test.test_pathlib.test_pathlib.PurePosixPathTest.test_constructor_nested) ... ok
+test_constructor_nested_foreign_flavour (test.test_pathlib.test_pathlib.PurePosixPathTest.test_constructor_nested_foreign_flavour) ... skipped 'requires Windows-flavoured path class'
+test_different_parsers_unequal (test.test_pathlib.test_pathlib.PurePosixPathTest.test_different_parsers_unequal) ... ok
+test_different_parsers_unordered (test.test_pathlib.test_pathlib.PurePosixPathTest.test_different_parsers_unordered) ... ok
+test_div_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_div_common) ... ok
+test_div_nested (test.test_pathlib.test_pathlib.PurePosixPathTest.test_div_nested) ... ok
+test_div_posix (test.test_pathlib.test_pathlib.PurePosixPathTest.test_div_posix) ... ok
+test_div_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_div_windows) ... skipped 'requires Windows-flavoured path class'
+test_drive_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_drive_common) ... ok
+test_drive_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_drive_windows) ... skipped 'requires Windows-flavoured path class'
+test_empty_path (test.test_pathlib.test_pathlib.PurePosixPathTest.test_empty_path) ... ok
+test_eq_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_eq_common) ... ok
+test_eq_posix (test.test_pathlib.test_pathlib.PurePosixPathTest.test_eq_posix) ... ok
+test_eq_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_eq_windows) ... skipped 'requires Windows-flavoured path class'
+test_equivalences (test.test_pathlib.test_pathlib.PurePosixPathTest.test_equivalences) ... ok
+test_equivalences_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_equivalences_windows) ... skipped 'requires Windows-flavoured path class'
+test_fspath_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_fspath_common) ... ok
+test_full_match_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_full_match_common) ... ok
+test_is_absolute_posix (test.test_pathlib.test_pathlib.PurePosixPathTest.test_is_absolute_posix) ... ok
+test_is_absolute_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_is_absolute_windows) ... skipped 'requires Windows-flavoured path class'
+test_is_relative_to_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_is_relative_to_common) ... ok
+test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PurePosixPathTest.test_is_relative_to_several_args) ... ok
+test_is_relative_to_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_is_relative_to_windows) ... skipped 'requires Windows-flavoured path class'
+test_is_reserved_deprecated (test.test_pathlib.test_pathlib.PurePosixPathTest.test_is_reserved_deprecated) ... ok
+test_join_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_join_common) ... ok
+test_join_nested (test.test_pathlib.test_pathlib.PurePosixPathTest.test_join_nested) ... ok
+test_join_posix (test.test_pathlib.test_pathlib.PurePosixPathTest.test_join_posix) ... ok
+test_join_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_join_windows) ... skipped 'requires Windows-flavoured path class'
+test_match_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_match_common) ... ok
+test_match_empty (test.test_pathlib.test_pathlib.PurePosixPathTest.test_match_empty) ... ok
+test_match_posix (test.test_pathlib.test_pathlib.PurePosixPathTest.test_match_posix) ... ok
+test_match_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_match_windows) ... skipped 'requires Windows-flavoured path class'
+test_name_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_name_common) ... ok
+test_name_empty (test.test_pathlib.test_pathlib.PurePosixPathTest.test_name_empty) ... ok
+test_name_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_name_windows) ... skipped 'requires Windows-flavoured path class'
+test_ordering_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_ordering_common) ... ok
+test_ordering_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_ordering_windows) ... skipped 'requires Windows-flavoured path class'
+test_parent_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parent_common) ... ok
+test_parent_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parent_windows) ... skipped 'requires Windows-flavoured path class'
+test_parents_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parents_common) ... ok
+test_parents_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parents_windows) ... skipped 'requires Windows-flavoured path class'
+test_parse_path_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parse_path_common) ... ok
+test_parse_path_posix (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parse_path_posix) ... ok
+test_parse_path_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parse_path_windows) ... skipped 'requires Windows-flavoured path class'
+test_parse_windows_path (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parse_windows_path) ... ok
+test_parts_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parts_common) ... ok
+test_parts_interning (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parts_interning) ... ok
+test_parts_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_parts_windows) ... skipped 'requires Windows-flavoured path class'
+test_pickling_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_pickling_common) ... ok
+test_relative_to_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_common) ... ok
+test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_several_args (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_several_args) ... ok
+test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_subclass_factory_fallback) ... ok
+test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_unicode_whole_string_lower) ... skipped 'requires Windows-flavoured path class'
+test_relative_to_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_windows) ... skipped 'requires Windows-flavoured path class'
+test_repr_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_repr_common) ... ok
+test_repr_roundtrips (test.test_pathlib.test_pathlib.PurePosixPathTest.test_repr_roundtrips) ... ok
+test_root_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_root_common) ... ok
+test_root_posix (test.test_pathlib.test_pathlib.PurePosixPathTest.test_root_posix) ... ok
+test_root_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_root_windows) ... skipped 'requires Windows-flavoured path class'
+test_stem_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_stem_common) ... ok
+test_stem_empty (test.test_pathlib.test_pathlib.PurePosixPathTest.test_stem_empty) ... ok
+test_stem_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_stem_windows) ... skipped 'requires Windows-flavoured path class'
+test_str_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_str_common) ... ok
+test_str_subclass_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_str_subclass_common) ... ok
+test_str_subclass_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_str_subclass_windows) ... skipped 'requires Windows-flavoured path class'
+test_str_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_str_windows) ... skipped 'requires Windows-flavoured path class'
+test_suffix_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_suffix_common) ... ok
+test_suffix_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_suffix_windows) ... skipped 'requires Windows-flavoured path class'
+test_suffixes_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_suffixes_common) ... ok
+test_suffixes_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_suffixes_windows) ... skipped 'requires Windows-flavoured path class'
+test_with_name_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_name_common) ... ok
+test_with_name_empty (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_name_empty) ... ok
+test_with_name_seps (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_name_seps) ... ok
+test_with_name_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_name_windows) ... skipped 'requires Windows-flavoured path class'
+test_with_segments_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_segments_common) ... ok
+test_with_stem_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_stem_common) ... ok
+test_with_stem_empty (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_stem_empty) ... ok
+test_with_stem_seps (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_stem_seps) ... ok
+test_with_stem_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_stem_windows) ... skipped 'requires Windows-flavoured path class'
+test_with_suffix_common (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_suffix_common) ... ok
+test_with_suffix_empty (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_suffix_empty) ... ok
+test_with_suffix_invalid (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_suffix_invalid) ... ok
+test_with_suffix_windows (test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_suffix_windows) ... skipped 'requires Windows-flavoured path class'
+test_anchor_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_anchor_common) ... ok
+test_anchor_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_anchor_windows) ... ok
+test_as_bytes_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_as_bytes_common) ... ok
+test_as_posix_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_as_posix_common) ... ok
+test_as_uri_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_as_uri_common) ... ok
+test_as_uri_non_ascii (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_as_uri_non_ascii) ... skipped 'requires POSIX-flavoured path class'
+test_as_uri_posix (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_as_uri_posix) ... skipped 'requires POSIX-flavoured path class'
+test_as_uri_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_as_uri_windows) ... ok
+test_bytes (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_bytes) ... ok
+test_bytes_exc_message (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_bytes_exc_message) ... ok
+test_concrete_class (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_concrete_class) ... ok
+test_concrete_parser (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_concrete_parser) ... ok
+test_constructor_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_constructor_common) ... ok
+test_constructor_nested (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_constructor_nested) ... ok
+test_constructor_nested_foreign_flavour (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_constructor_nested_foreign_flavour) ... ok
+test_different_parsers_unequal (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_different_parsers_unequal) ... ok
+test_different_parsers_unordered (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_different_parsers_unordered) ... ok
+test_div_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_div_common) ... ok
+test_div_nested (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_div_nested) ... ok
+test_div_posix (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_div_posix) ... skipped 'requires POSIX-flavoured path class'
+test_div_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_div_windows) ... ok
+test_drive_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_drive_common) ... ok
+test_drive_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_drive_windows) ... ok
+test_empty_path (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_empty_path) ... ok
+test_eq_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_eq_common) ... ok
+test_eq_posix (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_eq_posix) ... skipped 'requires POSIX-flavoured path class'
+test_eq_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_eq_windows) ... ok
+test_equivalences (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_equivalences) ... ok
+test_equivalences_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_equivalences_windows) ... ok
+test_fspath_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_fspath_common) ... ok
+test_full_match_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_full_match_common) ... ok
+test_is_absolute_posix (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_is_absolute_posix) ... skipped 'requires POSIX-flavoured path class'
+test_is_absolute_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_is_absolute_windows) ... ok
+test_is_relative_to_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_is_relative_to_common) ... ok
+test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_is_relative_to_several_args) ... ok
+test_is_relative_to_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_is_relative_to_windows) ... ok
+test_is_reserved_deprecated (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_is_reserved_deprecated) ... ok
+test_join_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_join_common) ... ok
+test_join_nested (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_join_nested) ... ok
+test_join_posix (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_join_posix) ... skipped 'requires POSIX-flavoured path class'
+test_join_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_join_windows) ... ok
+test_match_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_match_common) ... ok
+test_match_empty (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_match_empty) ... ok
+test_match_posix (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_match_posix) ... skipped 'requires POSIX-flavoured path class'
+test_match_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_match_windows) ... ok
+test_name_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_name_common) ... ok
+test_name_empty (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_name_empty) ... ok
+test_name_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_name_windows) ... ok
+test_ordering_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_ordering_common) ... ok
+test_ordering_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_ordering_windows) ... ok
+test_parent_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parent_common) ... ok
+test_parent_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parent_windows) ... ok
+test_parents_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parents_common) ... ok
+test_parents_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parents_windows) ... ok
+test_parse_path_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parse_path_common) ... ok
+test_parse_path_posix (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parse_path_posix) ... skipped 'requires POSIX-flavoured path class'
+test_parse_path_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parse_path_windows) ... ok
+test_parse_windows_path (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parse_windows_path) ... skipped 'requires POSIX-flavoured path class'
+test_parts_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parts_common) ... ok
+test_parts_interning (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parts_interning) ... ok
+test_parts_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parts_windows) ... ok
+test_pickling_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_pickling_common) ... ok
+test_relative_to_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_common) ... ok
+test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_several_args (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_several_args) ... ok
+test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_subclass_factory_fallback) ... ok
+test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_unicode_whole_string_lower) ... ok
+test_relative_to_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_relative_to_windows) ... ok
+test_repr_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_repr_common) ... ok
+test_repr_roundtrips (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_repr_roundtrips) ... ok
+test_root_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_root_common) ... ok
+test_root_posix (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_root_posix) ... skipped 'requires POSIX-flavoured path class'
+test_root_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_root_windows) ... ok
+test_stem_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_stem_common) ... ok
+test_stem_empty (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_stem_empty) ... ok
+test_stem_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_stem_windows) ... ok
+test_str_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_str_common) ... ok
+test_str_subclass_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_str_subclass_common) ... ok
+test_str_subclass_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_str_subclass_windows) ... ok
+test_str_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_str_windows) ... ok
+test_suffix_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_suffix_common) ... ok
+test_suffix_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_suffix_windows) ... ok
+test_suffixes_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_suffixes_common) ... ok
+test_suffixes_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_suffixes_windows) ... ok
+test_with_name_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_name_common) ... ok
+test_with_name_empty (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_name_empty) ... ok
+test_with_name_seps (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_name_seps) ... ok
+test_with_name_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_name_windows) ... ok
+test_with_segments_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_segments_common) ... ok
+test_with_stem_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_stem_common) ... ok
+test_with_stem_empty (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_stem_empty) ... ok
+test_with_stem_seps (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_stem_seps) ... ok
+test_with_stem_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_stem_windows) ... ok
+test_with_suffix_common (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_suffix_common) ... ok
+test_with_suffix_empty (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_suffix_empty) ... ok
+test_with_suffix_invalid (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_suffix_invalid) ... ok
+test_with_suffix_windows (test.test_pathlib.test_pathlib.PureWindowsPathTest.test_with_suffix_windows) ... ok
+test_anchor_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_anchor_common) ... ok
+test_anchor_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_anchor_windows) ... ok
+test_as_bytes_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_as_bytes_common) ... ok
+test_as_posix_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_as_posix_common) ... ok
+test_as_uri_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_as_uri_common) ... ok
+test_as_uri_non_ascii (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_as_uri_non_ascii) ... skipped 'requires POSIX-flavoured path class'
+test_as_uri_posix (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_as_uri_posix) ... skipped 'requires POSIX-flavoured path class'
+test_as_uri_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_as_uri_windows) ... ok
+test_bytes (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_bytes) ... ok
+test_bytes_exc_message (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_bytes_exc_message) ... ok
+test_concrete_class (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_concrete_class) ... ok
+test_concrete_parser (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_concrete_parser) ... ok
+test_constructor_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_constructor_common) ... ok
+test_constructor_nested (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_constructor_nested) ... ok
+test_constructor_nested_foreign_flavour (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_constructor_nested_foreign_flavour) ... ok
+test_different_parsers_unequal (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_different_parsers_unequal) ... ok
+test_different_parsers_unordered (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_different_parsers_unordered) ... ok
+test_div_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_div_common) ... ok
+test_div_nested (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_div_nested) ... ok
+test_div_posix (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_div_posix) ... skipped 'requires POSIX-flavoured path class'
+test_div_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_div_windows) ... ok
+test_drive_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_drive_common) ... ok
+test_drive_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_drive_windows) ... ok
+test_empty_path (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_empty_path) ... ok
+test_eq_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_eq_common) ... ok
+test_eq_posix (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_eq_posix) ... skipped 'requires POSIX-flavoured path class'
+test_eq_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_eq_windows) ... ok
+test_equivalences (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_equivalences) ... ok
+test_equivalences_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_equivalences_windows) ... ok
+test_fspath_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_fspath_common) ... ok
+test_full_match_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_full_match_common) ... ok
+test_is_absolute_posix (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_is_absolute_posix) ... skipped 'requires POSIX-flavoured path class'
+test_is_absolute_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_is_absolute_windows) ... ok
+test_is_relative_to_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_is_relative_to_common) ... ok
+test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_is_relative_to_several_args) ... ok
+test_is_relative_to_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_is_relative_to_windows) ... ok
+test_is_reserved_deprecated (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_is_reserved_deprecated) ... ok
+test_join_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_join_common) ... ok
+test_join_nested (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_join_nested) ... ok
+test_join_posix (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_join_posix) ... skipped 'requires POSIX-flavoured path class'
+test_join_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_join_windows) ... ok
+test_match_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_match_common) ... ok
+test_match_empty (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_match_empty) ... ok
+test_match_posix (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_match_posix) ... skipped 'requires POSIX-flavoured path class'
+test_match_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_match_windows) ... ok
+test_name_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_name_common) ... ok
+test_name_empty (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_name_empty) ... ok
+test_name_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_name_windows) ... ok
+test_ordering_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_ordering_common) ... ok
+test_ordering_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_ordering_windows) ... ok
+test_parent_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parent_common) ... ok
+test_parent_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parent_windows) ... ok
+test_parents_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parents_common) ... ok
+test_parents_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parents_windows) ... ok
+test_parse_path_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parse_path_common) ... ok
+test_parse_path_posix (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parse_path_posix) ... skipped 'requires POSIX-flavoured path class'
+test_parse_path_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parse_path_windows) ... ok
+test_parse_windows_path (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parse_windows_path) ... skipped 'requires POSIX-flavoured path class'
+test_parts_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parts_common) ... ok
+test_parts_interning (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parts_interning) ... ok
+test_parts_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parts_windows) ... ok
+test_pickling_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_pickling_common) ... ok
+test_relative_to_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_common) ... ok
+test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_several_args (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_several_args) ... ok
+test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_subclass_factory_fallback) ... ok
+test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_unicode_whole_string_lower) ... ok
+test_relative_to_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_relative_to_windows) ... ok
+test_repr_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_repr_common) ... ok
+test_root_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_root_common) ... ok
+test_root_posix (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_root_posix) ... skipped 'requires POSIX-flavoured path class'
+test_root_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_root_windows) ... ok
+test_stem_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_stem_common) ... ok
+test_stem_empty (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_stem_empty) ... ok
+test_stem_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_stem_windows) ... ok
+test_str_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_str_common) ... ok
+test_str_subclass_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_str_subclass_common) ... ok
+test_str_subclass_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_str_subclass_windows) ... ok
+test_str_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_str_windows) ... ok
+test_suffix_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_suffix_common) ... ok
+test_suffix_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_suffix_windows) ... ok
+test_suffixes_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_suffixes_common) ... ok
+test_suffixes_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_suffixes_windows) ... ok
+test_with_name_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_name_common) ... ok
+test_with_name_empty (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_name_empty) ... ok
+test_with_name_seps (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_name_seps) ... ok
+test_with_name_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_name_windows) ... ok
+test_with_segments_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_segments_common) ... ok
+test_with_stem_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_stem_common) ... ok
+test_with_stem_empty (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_stem_empty) ... ok
+test_with_stem_seps (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_stem_seps) ... ok
+test_with_stem_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_stem_windows) ... ok
+test_with_suffix_common (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_suffix_common) ... ok
+test_with_suffix_empty (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_suffix_empty) ... ok
+test_with_suffix_invalid (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_suffix_invalid) ... ok
+test_with_suffix_windows (test.test_pathlib.test_pathlib.PurePathSubclassTest.test_with_suffix_windows) ... ok
+test_is_relative_to_common (test.test_pathlib.test_pathlib.PathTest.test_is_relative_to_common) ... ok
+test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PathTest.test_is_relative_to_several_args) ... ok
+test_is_relative_to_windows (test.test_pathlib.test_pathlib.PathTest.test_is_relative_to_windows) ... ok
+test_relative_to_common (test.test_pathlib.test_pathlib.PathTest.test_relative_to_common) ... ok
+test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_several_args (test.test_pathlib.test_pathlib.PathTest.test_relative_to_several_args) ... ok
+test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PathTest.test_relative_to_subclass_factory_fallback) ... ok
+test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PathTest.test_relative_to_unicode_whole_string_lower) ... ok
+test_relative_to_windows (test.test_pathlib.test_pathlib.PathTest.test_relative_to_windows) ... ok
+test_with_segments (test.test_pathlib.test_pathlib.PathTest.test_with_segments) ... ok
+test_with_segments_common (test.test_pathlib.test_pathlib.PathTest.test_with_segments_common) ... ok
+test_is_relative_to_common (test.test_pathlib.test_pathlib.WindowsPathTest.test_is_relative_to_common) ... ok
+test_is_relative_to_several_args (test.test_pathlib.test_pathlib.WindowsPathTest.test_is_relative_to_several_args) ... ok
+test_is_relative_to_windows (test.test_pathlib.test_pathlib.WindowsPathTest.test_is_relative_to_windows) ... ok
+test_relative_to_common (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_common) ... ok
+test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_several_args (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_several_args) ... ok
+test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_subclass_factory_fallback) ... ok
+test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_unicode_whole_string_lower) ... ok
+test_relative_to_windows (test.test_pathlib.test_pathlib.WindowsPathTest.test_relative_to_windows) ... ok
+test_with_segments (test.test_pathlib.test_pathlib.WindowsPathTest.test_with_segments) ... ok
+test_with_segments_common (test.test_pathlib.test_pathlib.WindowsPathTest.test_with_segments_common) ... ok
+test_is_relative_to_common (test.test_pathlib.test_pathlib.PosixPathTest.test_is_relative_to_common) ... skipped 'test requires a POSIX-compatible system'
+test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PosixPathTest.test_is_relative_to_several_args) ... skipped 'test requires a POSIX-compatible system'
+test_is_relative_to_windows (test.test_pathlib.test_pathlib.PosixPathTest.test_is_relative_to_windows) ... skipped 'test requires a POSIX-compatible system'
+test_relative_to_common (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_common) ... skipped 'test requires a POSIX-compatible system'
+test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_lexical_boundaries) ... skipped 'test requires a POSIX-compatible system'
+test_relative_to_several_args (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_several_args) ... skipped 'test requires a POSIX-compatible system'
+test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_subclass_factory_fallback) ... skipped 'test requires a POSIX-compatible system'
+test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_unicode_whole_string_lower) ... skipped 'test requires a POSIX-compatible system'
+test_relative_to_windows (test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_windows) ... skipped 'test requires a POSIX-compatible system'
+test_with_segments (test.test_pathlib.test_pathlib.PosixPathTest.test_with_segments) ... skipped 'test requires a POSIX-compatible system'
+test_with_segments_common (test.test_pathlib.test_pathlib.PosixPathTest.test_with_segments_common) ... skipped 'test requires a POSIX-compatible system'
+test_is_relative_to_common (test.test_pathlib.test_pathlib.PathSubclassTest.test_is_relative_to_common) ... ok
+test_is_relative_to_several_args (test.test_pathlib.test_pathlib.PathSubclassTest.test_is_relative_to_several_args) ... ok
+test_is_relative_to_windows (test.test_pathlib.test_pathlib.PathSubclassTest.test_is_relative_to_windows) ... ok
+test_relative_to_common (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_common) ... ok
+test_relative_to_lexical_boundaries (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_lexical_boundaries) ... ok
+test_relative_to_several_args (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_several_args) ... ok
+test_relative_to_subclass_factory_fallback (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_subclass_factory_fallback) ... ok
+test_relative_to_unicode_whole_string_lower (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_unicode_whole_string_lower) ... ok
+test_relative_to_windows (test.test_pathlib.test_pathlib.PathSubclassTest.test_relative_to_windows) ... ok
+test_with_segments (test.test_pathlib.test_pathlib.PathSubclassTest.test_with_segments) ... ok
+test_with_segments_common (test.test_pathlib.test_pathlib.PathSubclassTest.test_with_segments_common) ... ok
+
+----------------------------------------------------------------------
+Ran 431 tests in 0.387s
+
+OK (skipped=69)
+EXECUTABLE C:\Program Files\Python313-arm64\python.exe
+VERSION 3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]
+PATHLIB_ORIGIN Q:\fastapi\Generated Files\worktrees\pathlib-relative\Generated Files\arm-build\shared-toolchain\pathlib-relative\cpython\Lib\pathlib\_local.py
+UNICODE_BASELINE_OR_CANDIDATE 'C:\u03a3' 'C:\u03c2' '.'
+UNICODE_BASELINE_OR_CANDIDATE 'C:\u03a3/Leaf' 'C:\u03c2' 'Leaf'
+UNICODE_BASELINE_OR_CANDIDATE 'C:/\u0130/Leaf' 'c:/i\u0307' 'Leaf'
+RESULT 431 failures 0 errors 0 skips 69

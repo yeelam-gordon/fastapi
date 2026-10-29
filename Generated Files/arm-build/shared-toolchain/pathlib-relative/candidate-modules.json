@@ -1,0 +1,354 @@
+{
+  "source_modules_sha256": {
+    "Lib\\keyword.py": "1f28f509383273238ad86eda04a96343fa0dc10eeaf3189439959d75cdac0a0b",
+    "Lib\\operator.py": "67913d932dac8b13318940921d45a3f7788d063435abeba40201a620d09014f1",
+    "Lib\\reprlib.py": "e3da8bc1dc78e91b0a8f78abda2312fa07f03fd3f83c07286aa9219fe7653706",
+    "Lib\\functools.py": "587ba6a69f57c2f3710aea3f2ee308f13889231e16b32ef62c42def7f496ec6f",
+    "Lib\\types.py": "96919d554410eba9ab752cd8cc5bb845d7f263a08bfeb8fe5ab94bc3d4c1aaab",
+    "Lib\\contextlib.py": "ca6071e379d65e1ed13fea5206fb4cee35fdb6b3063fa4a47254acf10e42b764",
+    "Lib\\enum.py": "ef73b4f4d123a78f1b808c7a4360fc3934bca63c3aa63fb3d65ce71ee9c2b419",
+    "Lib\\copyreg.py": "ea2363638fe83e8e5b007013a821841371a615d99414b3c2f8f19152ca109a07",
+    "Lib\\fnmatch.py": "f6bffb8506a5789658def5818c0e657003a4a39f5035d73662d439695acce42a",
+    "Lib\\glob.py": "a830bbdd3190691604ef7525c1928e324ccc7dcebbc1f08b44f9e6e2784907f5",
+    "Lib\\pathlib\\_abc.py": "e37c70955985422905b5ea77572f2e89b5bd45465f5d83a13e35bbc409f603c2",
+    "Lib\\warnings.py": "00de170abadda128ee79946e37f694cf0a550c3a3d7d42fe89db70039282ae42",
+    "Lib\\pathlib\\_local.py": "22d92f8e65b656629c1b5695d0e4352729037bf1b61aeed3935cc3f8d47b0065",
+    "Lib\\pathlib\\__init__.py": "62b3b842bda77ca6245f8c8657b8c72540e383fb9aa70e4c3a705947cc8611fd",
+    "Lib\\linecache.py": "83e3b94acc39847796b38a8df5dd63bd04aae4625cfbfffafbdab5b539c329ca",
+    "Lib\\textwrap.py": "c745a9c2814affd959c709b4f91e05252f229d9ecd3088156fcb5580ddc298df",
+    "Lib\\__future__.py": "bf11d13b6c9b2b8706be425addf399965738622bb4cc553217be16399c51d51a",
+    "Lib\\_colorize.py": "0e94876416e05f5892f64605e6bc9a86aa175cb159f57fd926c8de68a921b96b",
+    "Lib\\traceback.py": "c0f215c18748b636807b68d4ad6a223762489977c339d3b57673c073f34f7372",
+    "Lib\\heapq.py": "5bdbf0450b6721f00fb0508fce97625c9560a87ccae8d551d94a3e220c8195e6",
+    "Lib\\difflib.py": "3fd0b0ff9879430bf93e0baca88bf93de3ddacd582a51f19ea507cc776239afd",
+    "Lib\\_weakrefset.py": "cf8031a6e21150438f3d2964c4152615b91a03894616d5b6930e0f14f44dabda",
+    "Lib\\weakref.py": "6721c34ba3c404bf4a443890ed374b546a870c958935a6aa4fdf634876a5a980",
+    "Lib\\copy.py": "0b3bc4f3456e1a3f098db19c87acf94dfb31f56d90ae1e1e8d0073c70ea796db",
+    "Lib\\ast.py": "b1a5d789abd8fd3971fbc016d448a0d38479a51dc73988fbe874131bacf94e28",
+    "Lib\\_opcode_metadata.py": "e4d4ccf7a1899d532b6f256f0b60b67287963504478d628c3ec6207c313ae227",
+    "Lib\\opcode.py": "4bf9d8325382e530cf932e2c97857209b3312b3e731618a67b545742749e7cf8",
+    "Lib\\dis.py": "6c2ad8a31d579f4cd906e7c9f0c87e28d12048ac47823979f7a150ab4e933490",
+    "Lib\\token.py": "b215817074b415a8aff4792e06c1afa61f613ffd7eb08cf3f6434b727687e317",
+    "Lib\\tokenize.py": "70b06d82cccd6507073baf57ff463d6223bc3b3bdcef393e55be24f2ddacde08",
+    "Lib\\typing.py": "2d54548d0bac57bc4782ff8ff2f8140831f9987a27bd8a78a364bdec317ab742",
+    "Lib\\inspect.py": "dc090f08385504b32936f495f4852b76fb8ca65ae44c09d2cd91ef5a4da404bc",
+    "Lib\\dataclasses.py": "7f26050d2c2042f7d96bca1bc284837bb4d7e45a952bb27689260b0ac57573ee",
+    "Lib\\pprint.py": "544dcff1ca7b4ae0cff83f940e011016eb4ad14732afe3e44184c985039430b7",
+    "Lib\\gettext.py": "ea8b9b351d0c6b7d20db28c28c515075450aaa143e11b86aa84c7a33ab3a6e2a",
+    "Lib\\argparse.py": "c1a876bf8a98b45840222527f993f3d7a15683a1ee39743e9ca48fdc7aff7d76",
+    "Lib\\signal.py": "0b7e3d3d39a120142dbf4875d7d79579cad8fee662add30c2375a797f0d2386e",
+    "Lib\\test\\__init__.py": "b36ae7da13e8cafa693b64b57c6afc4511da2f9bbc10d0ac03667fca0f288214",
+    "Lib\\string.py": "7719ce39a7ff8e6133f57e89c43ca7189e6cf067026b77640b8913c922cf2fe9",
+    "Lib\\threading.py": "4aed0d27bf0b573c1ea45c76ca961575a084612d76832420d8ca2c1a52a09536",
+    "Lib\\test\\support\\__init__.py": "9555ef03dd617d4c6adac56da9043d0f3afa656002a230c4baa9be75d3ea51e4",
+    "Lib\\test\\test_pathlib\\__init__.py": "6546a8ef1019da695edeca7c68103a1a8e746d88b89faf7d5297a60753fd1225",
+    "Lib\\struct.py": "eadbcc540c3b6496e52449e712eca3694e31e1d935af0f1e26cff0e3cc370945",
+    "Lib\\_compat_pickle.py": "dd383f044e69d681fd46ced0bc2846f487e617380024a34aef06340ee34f43fb",
+    "Lib\\pickle.py": "8bf2110413b6c40885a7e8175b203ccbcb208f9a750e56e7e25b795310c6adc4",
+    "Lib\\selectors.py": "b3d6cebd4a3a03b4a614f12f171622ce4e4ba3295b9e8b89e2bde051003106eb",
+    "Lib\\socket.py": "550e0287589bcca4a3a90924cfa25324d04f2879047c664592d918facb8d516e",
+    "Lib\\_compression.py": "a10cf1a317374641bcdb8252499e9cb9d4d6e774ac724edfdddd0433ead771d9",
+    "Lib\\bz2.py": "03b5a9433545c22785fc0df71b636f5ecd45eb00887444916a091620ab8569d0",
+    "Lib\\lzma.py": "0d566283bbfd6aebf09160ef5b979ac7c5dc5684ed6fc0b6cd58532214cd0f5c",
+    "Lib\\shutil.py": "adf48ad360319b5b80fba955ab8537f6c6a0910e13eefc584250f1f18b4ced34",
+    "Lib\\bisect.py": "085dad54dd1a00d68aaa5361031c0c4bff5efbd281d1a02ddc8f317c519e540b",
+    "Lib\\random.py": "0fbda7cd67cf9bd191812dda0eedf33ea29fdab7f4463d2a775629a3ae2ec445",
+    "Lib\\tempfile.py": "e200f0d46f5f3361b1bbd70184dc2b5c00e191848c9fd6925e9f7bec26531c93",
+    "Lib\\locale.py": "ffc3e9ad7d8fa61945f2b44c4735c8a4388cadaedc8511d172863dcb1ce65937",
+    "Lib\\subprocess.py": "7b58820104e7243c80ced7ad4081bf971fed0a4099850bcfb50261625645ed20",
+    "Lib\\base64.py": "2b1a6be7934436393bb55dc6318c242aa4386ff6f70a95d2ffc1c133d8f0daf3",
+    "Lib\\ssl.py": "80321624e325af4c11a6fca3586e709c0341f483fdb53f750d2cc0d7ac19c3bc",
+    "Lib\\contextvars.py": "758a96e17249e1e97c5ca5d1ee39aa31e5d439d0922ae7af0064318e70b59fc8",
+    "Lib\\pkgutil.py": "3ba68ff63dda7e69cea449bf45640d742f0b829ebb8b299a7006a133a5788ccb",
+    "Lib\\hashlib.py": "406f36c3db109c14f737a8d99e6897d3ab8620be454abdbb3a4ce09c95713388",
+    "Lib\\quopri.py": "c0f509a538cf50cfd5f2e821568bfb726d35ea9ba56ceb1e1f522cd7f2177cd5",
+    "Lib\\datetime.py": "5068c4ed2c79bfb4b9ae426675112ca8c89ca27aa40b33dabe6cd313ab22dd73",
+    "Lib\\ipaddress.py": "86e7e91bb933bf68b844061b5cdfd391df4842ed7b9046cf4f23d785561d22de",
+    "Lib\\nturl2path.py": "9f654a3e0c24a4df05364349a532240a5f5eca651b170818b04e535940399d3e",
+    "Lib\\test\\support\\os_helper.py": "319aa16f49850051b4060ae43def2c679140bd42a3b2aa044778943c4eb2f60d",
+    "Lib\\test\\support\\import_helper.py": "7fbfef33da3502d96411504d8817351d5359d11af202ebd442f3c06f08995916",
+    "Lib\\test\\test_pathlib\\test_pathlib_abc.py": "8b205ee50a475a584195eaabb1d2da34a31858cb250149b10d3f514f46a52faf",
+    "Lib\\test\\test_pathlib\\test_pathlib.py": "e9d53c4c7e230582e9097cca886da70fba52d9ab6799d936de255685547fa78a"
+  },
+  "tests": 431,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_as_uri_non_ascii",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_as_uri_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_div_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_eq_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_is_absolute_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_join_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_match_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_parse_path_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_parse_windows_path",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathTest.test_root_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_anchor_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_as_uri_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_constructor_nested_foreign_flavour",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_div_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_drive_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_eq_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_equivalences_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_is_absolute_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_is_relative_to_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_join_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_match_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_name_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_ordering_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_parent_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_parents_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_parse_path_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_parts_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_unicode_whole_string_lower",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_relative_to_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_root_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_stem_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_str_subclass_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_str_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_suffix_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_suffixes_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_name_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_stem_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePosixPathTest.test_with_suffix_windows",
+      "requires Windows-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_as_uri_non_ascii",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_as_uri_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_div_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_eq_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_is_absolute_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_join_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_match_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parse_path_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_parse_windows_path",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PureWindowsPathTest.test_root_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_as_uri_non_ascii",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_as_uri_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_div_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_eq_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_is_absolute_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_join_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_match_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parse_path_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_parse_windows_path",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PurePathSubclassTest.test_root_posix",
+      "requires POSIX-flavoured path class"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_is_relative_to_common",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_is_relative_to_several_args",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_is_relative_to_windows",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_common",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_lexical_boundaries",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_several_args",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_subclass_factory_fallback",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_unicode_whole_string_lower",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_relative_to_windows",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_with_segments",
+      "test requires a POSIX-compatible system"
+    ],
+    [
+      "test.test_pathlib.test_pathlib.PosixPathTest.test_with_segments_common",
+      "test requires a POSIX-compatible system"
+    ]
+  ]
+}

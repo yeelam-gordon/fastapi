@@ -1,0 +1,4 @@
+*.patch -text
+*.log -text
+*-modules.json -text
+semantic_proof.py -text
