@@ -32,20 +32,27 @@ def report(system):
         True,
     )
     check.update(differences=[], canonical_record_sha256="record")
-    return {
+    result = {
         "schema": measure.SCHEMA,
         "status": "complete",
         "system": system,
-        "source": {"revision": measure.SOURCE, "archive_sha256": "source"},
-        "harness_revision": "tools",
-        "tool_hashes": {"wrapper.py": "raw"},
+        "source": {
+            "revision": measure.SOURCE,
+            "archive_sha256": "a" * 64,
+            "manifest_sha256": "b" * 64,
+        },
+        "harness_revision": "a" * 40,
+        "tool_hashes": dict.fromkeys(measure.REQUIRED_TOOL_INPUTS, "c" * 64),
         "runtime": {
             "version": "3.13.15",
             "native_arm64": True,
-            "executable_sha256": "exe",
-            "shared_library_sha256": "lib",
+            "executable_sha256": "d" * 64,
+            "shared_library_sha256": "e" * 64,
+            "machine": "arm64",
+            "tag": "win-arm64" if system == "Windows" else "macosx-11.0-universal2",
+            "translated": False,
         },
-        "uv": {"version": "0.13.6"},
+        "uv": {"version": "0.13.6", "sha256": "f" * 64, "arm64_slice": True},
         "scopes": {
             "B": "standard_uv_isolated_wall",
             "S1": "sdk_caller_isolated_wall",
@@ -66,9 +73,257 @@ def report(system):
             for variant in order
         ],
     }
+    return attach_receipts(result, system)
+
+
+def attach_receipts(result, system):
+    path = measure.PureWindowsPath if system == "Windows" else measure.PurePosixPath
+    base = path("C:/fixture" if system == "Windows" else "/fixture")
+    runtime = result["runtime"]
+    runtime["executable"] = str(base / "python")
+    for kind in ("executable", "shared_library"):
+        runtime[kind + "_binary"] = {
+            "sha256": runtime[kind + "_sha256"],
+            "arm64_slice": True,
+            "path": str(base / kind),
+        }
+    result["uv"]["path"] = str(base / "uv")
+    for number, sample in enumerate(result["samples"]):
+        if sample["variant"] == "B":
+            continue
+        directory = base / f"sample-{number}"
+        root = directory / (".caller-env-" + f"{number:032x}")
+        venv = root / "venv"
+        python = str(
+            venv / ("Scripts/python.exe" if system == "Windows" else "bin/python")
+        )
+        here = base / "tools" / "protocol"
+        args = {
+            "--uv": str(base / "uv"),
+            "--python": runtime["executable"],
+            "--source": str(directory / "source"),
+            "--source-manifest": str(base / "manifest"),
+            "--out-dir": str(directory / "out"),
+            "--workers": sample["variant"][1:],
+            "--cache-dir": str(base / "cache"),
+            "--wheelhouse": str(base / "wheels"),
+            "--report": str(directory / "wrapper.json"),
+        }
+        sample["argv"] = [runtime["executable"], str(here / "isolated_build.py")]
+        sample["argv"] += [part for pair in args.items() for part in pair]
+        uv = [
+            args["--uv"],
+            "--no-config",
+            "--offline",
+            "--cache-dir",
+            args["--cache-dir"],
+        ]
+        commands = [
+            uv
+            + [
+                "venv",
+                "--python",
+                runtime["executable"],
+                "--no-python-downloads",
+                str(venv),
+            ],
+            uv
+            + [
+                "pip",
+                "install",
+                "--python",
+                python,
+                "--require-hashes",
+                "--no-index",
+                "--only-binary",
+                ":all:",
+                "--find-links",
+                args["--wheelhouse"],
+                "-r",
+                str(here / "backend.lock"),
+            ],
+            [python, "-I", "-c", "frozen identity probe"],
+            [
+                python,
+                "-E",
+                "-s",
+                str(here.parent / "candidate" / "build.py"),
+                "--source",
+                args["--source"],
+                "--source-manifest",
+                args["--source-manifest"],
+                "--out-dir",
+                args["--out-dir"],
+                "--workers",
+                args["--workers"],
+            ],
+            None,
+        ]
+        artifacts = {
+            str(directory / "out" / "artifacts" / name): "a" * 64
+            for name in ("package.tar.gz", "package.whl")
+        }
+        sample["correctness"]["archive_sha256"] = artifacts
+        sample["wrapper_report"] = {
+            "schema_version": 1,
+            "status": "passed",
+            "errors": [],
+            "isolation": "fresh caller environment shared by both SDK hooks",
+            "workers": int(args["--workers"]),
+            "wall_seconds": 0.6,
+            "environment": {
+                "root": str(root),
+                "existed_before": False,
+                "exists_after_cleanup": False,
+                "identity": {
+                    "prefix": str(venv),
+                    "executable": python,
+                    "base_prefix": str(base),
+                    "version": "3.13.15 (fixture)",
+                    "backend": "2.5.0",
+                    "user_site": False,
+                    "machine": "arm64",
+                    "platform": runtime["tag"],
+                },
+            },
+            "identities": {
+                "uv_sha256": "f" * 64,
+                "base_python_sha256": "d" * 64,
+                "lock_sha256": "c" * 64,
+                "wrapper_sha256": "c" * 64,
+                "sdk_sha256": "c" * 64,
+                "source_manifest_sha256": "b" * 64,
+            },
+            "artifacts": artifacts,
+            "phases": [
+                {
+                    "phase": name,
+                    "argv": command,
+                    "returncode": 0,
+                    "start_offset_seconds": i * 0.1,
+                    "seconds": 0.05,
+                }
+                for i, (name, command) in enumerate(
+                    zip(
+                        ("create", "install", "identity", "sdk", "cleanup"),
+                        commands,
+                        strict=True,
+                    )
+                )
+            ],
+        }
+        sample["wrapper_report"]["phases"][-1].update(
+            operation="shutil.rmtree", path=str(root)
+        )
+    return result
 
 
 class ComparisonTests(unittest.TestCase):
+    def setUp(self):
+        inventory = patch.object(
+            measure, "tool_inventory", return_value=measure.REQUIRED_TOOL_INPUTS
+        )
+        inventory.start()
+        self.addCleanup(inventory.stop)
+
+    def test_pp001_missing_failed_reused_and_inconsistent_receipts_rejected(self):
+        def mutate(r, case):
+            sample = r["samples"][1]
+            receipt = sample["wrapper_report"]
+            if case == "missing":
+                del sample["wrapper_report"]
+            elif case == "failed":
+                sample["wrapper_report"] = {"status": "failed", "environment": "reused"}
+            elif case == "reuse":
+                r["samples"][2]["wrapper_report"]["environment"]["root"] = receipt[
+                    "environment"
+                ]["root"]
+            elif case == "reuse-whole":
+                for field in ("wrapper_report", "argv", "correctness"):
+                    r["samples"][4][field] = copy.deepcopy(sample[field])
+            elif case == "errors":
+                receipt["errors"] = [{"phase": "cleanup", "message": "failed"}]
+            elif case == "existed":
+                receipt["environment"]["existed_before"] = True
+            elif case == "cleanup":
+                receipt["environment"]["exists_after_cleanup"] = True
+            elif case == "phase":
+                receipt["phases"][1]["returncode"] = 1
+            elif case == "missing-phase":
+                receipt["phases"].pop()
+            elif case == "workers":
+                receipt["workers"] = 3
+            elif case == "source":
+                receipt["phases"][3]["argv"][-7] = "wrong"
+            elif case == "hash":
+                receipt["identities"]["sdk_sha256"] = "0" * 64
+            elif case == "clock":
+                receipt["wall_seconds"] = sample["wall"] + 1
+            elif case == "phase-clock":
+                receipt["phases"][3]["seconds"] = 10
+            elif case == "identity":
+                receipt["environment"]["identity"]["backend"] = "2.4"
+            elif case == "artifact":
+                receipt["artifacts"] = {}
+
+        for case in (
+            "missing",
+            "failed",
+            "reuse",
+            "reuse-whole",
+            "errors",
+            "existed",
+            "cleanup",
+            "phase",
+            "missing-phase",
+            "workers",
+            "source",
+            "hash",
+            "clock",
+            "phase-clock",
+            "identity",
+            "artifact",
+        ):
+            with self.subTest(case=case):
+                windows = report("Windows")
+                mutate(windows, case)
+                with self.assertRaises((ValueError, KeyError)):
+                    compare.compare(windows, report("Darwin"))
+
+    def test_pp002_equal_incomplete_identities_rejected(self):
+        for case in ("empty", "inventory", "revision", "runtime", "uv"):
+            with self.subTest(case=case):
+                windows, mac = report("Windows"), report("Darwin")
+                for item in (windows, mac):
+                    if case == "empty":
+                        item["tool_hashes"] = {}
+                        item["harness_revision"] = ""
+                    elif case == "inventory":
+                        item["tool_hashes"].pop(next(iter(item["tool_hashes"])))
+                    elif case == "revision":
+                        item["harness_revision"] = "short"
+                    elif case == "runtime":
+                        item["runtime"]["executable_sha256"] = "not-a-sha256"
+                    elif case == "uv":
+                        item["uv"].pop("arm64_slice")
+                with self.assertRaises((ValueError, KeyError)):
+                    compare.compare(windows, mac)
+
+    def test_native_runtime_binary_digests_may_differ_by_os(self):
+        windows, mac = report("Windows"), report("Darwin")
+        for kind, value in (("executable", "1" * 64), ("shared_library", "2" * 64)):
+            mac["runtime"][kind + "_sha256"] = value
+            mac["runtime"][kind + "_binary"]["sha256"] = value
+        mac["uv"]["sha256"] = "3" * 64
+        for sample in mac["samples"]:
+            if sample["variant"] != "B":
+                sample["wrapper_report"]["identities"].update(
+                    base_python_sha256="1" * 64, uv_sha256="3" * 64
+                )
+        self.assertTrue(
+            compare.compare(windows, mac)["sdk_caller_isolated_sample_parity"]
+        )
+
     def test_best_mac_is_not_frozen(self):
         windows, mac = report("Windows"), report("Darwin")
         for sample in mac["samples"]:
@@ -158,6 +413,19 @@ class ComparisonTests(unittest.TestCase):
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_pinned_inventory_includes_new_helpers_and_rejects_missing_required(self):
+        revision = "a" * 40
+        extra = measure.PREFIX + "candidate/new_helper.py"
+        names = sorted(measure.REQUIRED_TOOL_INPUTS | {extra, "historical/result.json"})
+        with patch.object(measure, "git", return_value="\n".join(names).encode()):
+            self.assertEqual(
+                measure.tool_inventory(revision), measure.REQUIRED_TOOL_INPUTS | {extra}
+            )
+        names.remove(measure.PREFIX + "protocol/isolated_build.py")
+        with patch.object(measure, "git", return_value="\n".join(names).encode()):
+            with self.assertRaises(ValueError):
+                measure.tool_inventory(revision)
+
     def test_independent_archive_record_and_modes(self):
         # Entirely in memory: these fixtures cannot run or modify the candidate.
         tarstream, zipstream = io.BytesIO(), io.BytesIO()
@@ -212,6 +480,7 @@ class ArchiveTests(unittest.TestCase):
         tarpath, wheelpath = directory / "a.tar.gz", directory / "a.whl"
         real_tar, real_zip = tarfile.open, zipfile.ZipFile
         with (
+            patch.object(Path, "read_bytes", return_value=b"raw archive fixture"),
             patch.object(
                 Path,
                 "rglob",

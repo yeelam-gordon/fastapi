@@ -6,12 +6,21 @@ import math
 import statistics
 from pathlib import Path
 
-from measure_pairs import ORDERS, SCHEMA, SOURCE, correct, known_baseline_failure
+from measure_pairs import (
+    ORDERS,
+    SCHEMA,
+    SOURCE,
+    correct,
+    known_baseline_failure,
+    validate_identities,
+    validate_wrapper,
+)
 
 
 def validate(report, system):
     if report.get("schema") != SCHEMA or report.get("status") != "complete":
         raise ValueError("Incomplete or incompatible experiment")
+    validate_identities(report)
     if report["system"] != system or report["source"]["revision"] != SOURCE:
         raise ValueError("Wrong OS/source identity")
     runtime = report["runtime"]
@@ -32,6 +41,7 @@ def validate(report, system):
     ]
     if [(s["block"], s["variant"]) for s in report["samples"]] != expected:
         raise ValueError("Missing/reordered/replacement samples")
+    seen_environments = set()
     for sample in report["samples"]:
         if sample["timed"] != (sample["block"] >= 0):
             raise ValueError("Wrong timing scope")
@@ -44,6 +54,8 @@ def validate(report, system):
         ):
             raise ValueError("Invalid/failed/timed-out sample")
         check = sample["correctness"]
+        if sample["variant"] != "B":
+            validate_wrapper(sample, report, seen_environments)
         if not correct(check) and not known_baseline_failure(
             sample["variant"], system, check
         ):

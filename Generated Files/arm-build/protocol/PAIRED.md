@@ -96,3 +96,24 @@ Unexecuted integration gates: wrapper/selector regression tests, local full
 smokes on frozen source, independent artifacts, hosted native runtime/volume
 receipts, and the authorized two-job allocation. Cross-day durability and
 physical hardware remain separate, explicitly budgeted work.
+
+## Review hardening: PP001 / PP002
+
+Measurement and comparison now enforce the committed caller schema_version 1:
+passed status, empty errors, fresh unique owned roots, complete successful
+create/install/identity/sdk/cleanup phases, removed environment, native backend
+identity, matching commands/workers/source manifest/tool hashes and raw archive
+hashes. Phase intervals must be ordered and fit inside wrapper and charged outer
+wall clocks. Raw receipts remain retained; malformed receipts cannot establish
+SDK parity.
+
+Code identity completeness is checked against the pinned harness commit's Git
+tree plus the required versioned inventory, not merely equality of two reports.
+Analysis therefore requires that exact commit/tree locally available; there is
+no network lookup or missing-inventory fallback. Digests and full revision forms,
+native Python/shared-library and uv receipts are required. Runtime binary hashes
+are validated independently on each OS, not equated across OSes.
+
+PP003 polling-only process-family ownership remains unresolved pending the
+separate lifecycle design decision. These changes do not assert durable
+ownership or authorize readiness, C: smokes, benchmarks or CI.

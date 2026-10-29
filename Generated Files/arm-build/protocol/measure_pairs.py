@@ -9,6 +9,7 @@ import json
 import math
 import os
 import platform
+import re
 import shutil
 import struct
 import subprocess
@@ -17,7 +18,7 @@ import sysconfig
 import tarfile
 import time
 import zipfile
-from pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
 SCHEMA = "arm-pairs-v3"
 SOURCE = "79cab5bed28b24d92c185d236feb33f5783dfeb3"
@@ -33,6 +34,32 @@ KNOWN_MODES = {
     f"fastapi-0.162.0/scripts/{name}.sh"
     for name in ("format", "lint", "test", "test-cov", "test-cov-html")
 }
+PREFIX = "Generated Files/arm-build/"
+REQUIRED_TOOL_INPUTS = {
+    ".github/workflows/arm-build-experiment.yml",
+    *(
+        PREFIX + name
+        for name in (
+            "setup_python.cjs",
+            "ci_prepare.py",
+            "tooling.lock",
+            "smoke.lock",
+            "candidate/actual-manifest.json",
+            "candidate/build.py",
+            "candidate/ops.py",
+            "candidate/selector.py",
+            "candidate/test_candidate.py",
+            "candidate/validate.py",
+            "candidate/verify.py",
+            "protocol/measure_pairs.py",
+            "protocol/compare_pairs.py",
+            "protocol/test_pairs.py",
+            "protocol/isolated_build.py",
+            "protocol/test_isolated_build.py",
+            "protocol/backend.lock",
+        )
+    ),
+}
 
 
 def digest(data):
@@ -45,6 +72,267 @@ def save(path, value):
 
 def git(root, *args):
     return subprocess.check_output(["git", "-C", str(root), *args])
+
+
+def valid_hex(value, size=64):
+    return (
+        isinstance(value, str)
+        and re.fullmatch(f"[0-9a-f]{{{size}}}", value) is not None
+    )
+
+
+def tool_inventory(revision):
+    if not valid_hex(revision, 40):
+        raise ValueError("Full harness Git SHA required")
+    names = git(ROOT, "ls-tree", "-r", "--name-only", revision).decode().splitlines()
+    inventory = set(REQUIRED_TOOL_INPUTS)
+    if not inventory <= set(names):
+        raise ValueError("Committed tool inventory is incomplete")
+    for name in names:
+        relative = name.removeprefix(PREFIX)
+        if name.startswith(PREFIX) and (
+            (relative.count("/") == 0 and relative.endswith(".lock"))
+            or (
+                relative.count("/") == 1
+                and relative.split("/")[0] in ("candidate", "protocol")
+                and (
+                    relative.endswith(".py")
+                    or relative.startswith("protocol/")
+                    and relative.endswith(".lock")
+                )
+            )
+        ):
+            inventory.add(name)
+    return inventory
+
+
+def validate_identities(report):
+    if not valid_hex(report["harness_revision"], 40):
+        raise ValueError("Full harness Git SHA required")
+    if set(report["tool_hashes"]) != tool_inventory(report["harness_revision"]):
+        raise ValueError("Missing or unexpected versioned tool hash inputs")
+    if not all(valid_hex(value) for value in report["tool_hashes"].values()):
+        raise ValueError("Invalid tool digest")
+    source = report["source"]
+    if source["revision"] != SOURCE or not all(
+        valid_hex(source.get(key)) for key in ("archive_sha256", "manifest_sha256")
+    ):
+        raise ValueError("Invalid canonical source identity")
+    runtime = report["runtime"]
+    if (
+        runtime["version"] != "3.13.15"
+        or runtime["native_arm64"] is not True
+        or runtime["translated"] is not False
+        or not native_runtime(report["system"], runtime["machine"], runtime["tag"])
+    ):
+        raise ValueError("Wrong native runtime identity")
+    for key in ("executable", "shared_library"):
+        binary = runtime[key + "_binary"]
+        if (
+            not valid_hex(runtime[key + "_sha256"])
+            or binary.get("sha256") != runtime[key + "_sha256"]
+            or binary.get("arm64_slice") is not True
+            or not binary.get("path")
+        ):
+            raise ValueError("Invalid native runtime binary receipt")
+    uv = report["uv"]
+    if (
+        uv.get("version") != "0.13.6"
+        or not valid_hex(uv.get("sha256"))
+        or uv.get("arm64_slice") is not True
+        or not uv.get("path")
+    ):
+        raise ValueError("Invalid native uv binary receipt")
+
+
+def validate_wrapper(sample, report, seen):
+    """Enforce the existing isolated_build schema_version=1, not a new schema."""
+    receipt = sample.get("wrapper_report")
+    if (
+        not isinstance(receipt, dict)
+        or receipt.get("schema_version") != 1
+        or receipt.get("status") != "passed"
+        or receipt.get("errors") != []
+        or receipt.get("isolation")
+        != "fresh caller environment shared by both SDK hooks"
+        or receipt.get("workers") != int(sample["variant"][1:])
+    ):
+        raise ValueError("Missing/failed caller isolation receipt")
+    path_type = PureWindowsPath if report["system"] == "Windows" else PurePosixPath
+
+    def path(value):
+        p = path_type(value)
+        if not p.is_absolute() or ".." in p.parts:
+            raise ValueError("Nonabsolute caller identity path")
+        return p
+
+    def key(value):
+        value = str(path(value))
+        return value.casefold() if report["system"] == "Windows" else value
+
+    argv = sample["argv"]
+    if len(argv) != 20 or len(set(argv[2::2])) != 9:
+        raise ValueError("Unexpected caller command")
+    args = dict(zip(argv[2::2], argv[3::2], strict=True))
+    if set(args) != {
+        "--uv",
+        "--python",
+        "--source",
+        "--source-manifest",
+        "--out-dir",
+        "--workers",
+        "--cache-dir",
+        "--wheelhouse",
+        "--report",
+    }:
+        # Nine flags plus the two launcher arguments.
+        raise ValueError("Unexpected caller arguments")
+    environment = receipt["environment"]
+    root = path(environment["root"])
+    root_key = key(str(root))
+    if (
+        environment.get("existed_before") is not False
+        or environment.get("exists_after_cleanup") is not False
+        or root.parent != path(args["--report"]).parent
+        or re.fullmatch(r"\.caller-env-[0-9a-f]{32}", root.name) is None
+        or root_key in seen
+    ):
+        raise ValueError("Reused or unclean caller environment")
+    venv = root / "venv"
+    python = venv / (
+        "Scripts/python.exe" if report["system"] == "Windows" else "bin/python"
+    )
+    identity = environment["identity"]
+    if (
+        key(identity["prefix"]) != key(str(venv))
+        or key(identity["executable"]) != key(str(python))
+        or key(identity["base_prefix"]) == key(identity["prefix"])
+        or identity.get("backend") != "2.5.0"
+        or identity.get("user_site") is not False
+        or not identity.get("version", "").startswith("3.13.15 ")
+        or not native_runtime(
+            report["system"], identity["machine"], identity["platform"]
+        )
+    ):
+        raise ValueError("Caller environment identity mismatch")
+    hashes = report["tool_hashes"]
+    expected_hashes = {
+        "uv_sha256": report["uv"]["sha256"],
+        "base_python_sha256": report["runtime"]["executable_sha256"],
+        "lock_sha256": hashes[PREFIX + "protocol/backend.lock"],
+        "wrapper_sha256": hashes[PREFIX + "protocol/isolated_build.py"],
+        "sdk_sha256": hashes[PREFIX + "candidate/build.py"],
+        "source_manifest_sha256": report["source"]["manifest_sha256"],
+    }
+    if receipt.get("identities") != expected_hashes:
+        raise ValueError("Caller source/tool hash mismatch")
+    if (
+        args["--workers"] != str(receipt["workers"])
+        or key(args["--uv"]) != key(report["uv"]["path"])
+        or key(argv[0]) != key(args["--python"])
+    ):
+        raise ValueError("Caller invocation identity mismatch")
+    here = path(argv[1]).parent
+    uv = [
+        str(path(args["--uv"])),
+        "--no-config",
+        "--offline",
+        "--cache-dir",
+        str(path(args["--cache-dir"])),
+    ]
+    expected = [
+        uv
+        + [
+            "venv",
+            "--python",
+            report["runtime"]["executable"],
+            "--no-python-downloads",
+            str(venv),
+        ],
+        uv
+        + [
+            "pip",
+            "install",
+            "--python",
+            str(python),
+            "--require-hashes",
+            "--no-index",
+            "--only-binary",
+            ":all:",
+            "--find-links",
+            str(path(args["--wheelhouse"])),
+            "-r",
+            str(here / "backend.lock"),
+        ],
+        None,
+        [
+            str(python),
+            "-E",
+            "-s",
+            str(here.parent / "candidate" / "build.py"),
+            "--source",
+            str(path(args["--source"])),
+            "--source-manifest",
+            str(path(args["--source-manifest"])),
+            "--out-dir",
+            str(path(args["--out-dir"])),
+            "--workers",
+            args["--workers"],
+        ],
+        None,
+    ]
+    wall = receipt["wall_seconds"]
+    if (
+        isinstance(wall, bool)
+        or not isinstance(wall, (int, float))
+        or not math.isfinite(wall)
+        or not 0 < wall <= sample["wall"]
+    ):
+        raise ValueError("Caller clock exceeds charged outer clock")
+    phases = receipt["phases"]
+    if [p["phase"] for p in phases] != [
+        "create",
+        "install",
+        "identity",
+        "sdk",
+        "cleanup",
+    ]:
+        raise ValueError("Missing/reordered caller lifecycle phases")
+    end = 0
+    for i, phase in enumerate(phases):
+        start, duration = phase["start_offset_seconds"], phase["seconds"]
+        if (
+            phase.get("returncode") != 0
+            or any(
+                isinstance(v, bool)
+                or not isinstance(v, (int, float))
+                or not math.isfinite(v)
+                for v in (start, duration)
+            )
+            or start < end
+            or duration < 0
+            or start + duration > wall
+        ):
+            raise ValueError("Failed or out-of-bounds caller phase")
+        end = start + duration
+        if expected[i] is not None and phase.get("argv") != expected[i]:
+            raise ValueError("Caller phase command mismatch")
+    if (
+        phases[2]["argv"][:3] != [str(python), "-I", "-c"]
+        or len(phases[2]["argv"]) != 4
+        or not phases[2]["argv"][3]
+        or phases[4].get("operation") != "shutil.rmtree"
+        or key(phases[4]["path"]) != root_key
+    ):
+        raise ValueError("Caller identity/cleanup operation mismatch")
+    artifacts = receipt["artifacts"]
+    if (
+        len(artifacts) != 2
+        or not all(valid_hex(v) for v in artifacts.values())
+        or artifacts != sample["correctness"]["archive_sha256"]
+    ):
+        raise ValueError("Caller artifact receipt mismatch")
+    seen.add(root_key)
 
 
 def native_runtime(system, machine, tag, translated=False):
@@ -382,6 +670,9 @@ def inspect_artifacts(directory, oracle):
         "canonical_record_sha256": digest(json.dumps(sorted(rows)).encode()),
         "record_order_only_policy": "self-validated; all other payloads match oracle",
         "wheel": str(wheels[0]),
+        "archive_sha256": {
+            str(p): digest(p.read_bytes()) for p in (tarballs[0], wheels[0])
+        },
     }
 
 
@@ -431,16 +722,8 @@ def correct(check):
 
 
 def code_receipts():
-    files = [
-        *ROOT.joinpath("candidate").glob("*.py"),
-        *ROOT.joinpath("protocol").glob("*.py"),
-        *ROOT.joinpath("protocol").glob("*.lock"),
-        *ROOT.glob("*.lock"),
-        ROOT / "setup_python.cjs",
-        ROOT / "ci_prepare.py",
-        ROOT.parents[1] / ".github" / "workflows" / "arm-build-experiment.yml",
-        ROOT / "candidate" / "actual-manifest.json",
-    ]
+    revision = git(ROOT, "rev-parse", "HEAD").decode().strip()
+    files = [ROOT.parents[1] / name for name in sorted(tool_inventory(revision))]
     return {
         p.relative_to(ROOT.parents[1]).as_posix(): digest(p.read_bytes())
         for p in sorted(files)
@@ -655,6 +938,7 @@ def measure(args):
         ):
             raise ValueError("Wrong uv version")
         report["uv"] = {"version": "0.13.6", **binary_receipt(Path(args.uv))}
+        validate_identities(report)
         report["memory_bytes"] = __import__("psutil").virtual_memory().total
         volume_paths = [
             ROOT,
@@ -681,6 +965,7 @@ def measure(args):
                 canonical[key] != info[key] for key in ("sha256", "mode", "size")
             ):
                 raise ValueError(f"Oracle disagrees with canonical Git source: {name}")
+        seen_environments = set()
         for block, order in [(-1, ("B", "S1", "S3")), *enumerate(ORDERS)]:
             for variant in order:
                 sample = output / "samples" / f"{block + 1}-{variant}"
@@ -762,6 +1047,8 @@ def measure(args):
                     check["wheel"], sample, args.uv, output / "wheelhouse", env
                 )
                 item["correctness"] = check
+                if variant != "B":
+                    validate_wrapper(item, report, seen_environments)
                 item["known_baseline_mode_failure"] = known_baseline_failure(
                     variant, report["system"], check
                 )
