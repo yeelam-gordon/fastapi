@@ -12,6 +12,15 @@ installs only binary wheels with hashes, no index, offline, without project
 configuration. No `uv run --isolated`, environment reuse, pip patch, or
 ensurepip substitution. User-site imports and inherited Python path/home
 overrides are disabled. Only whitelisted environment changes are recorded.
+Identity and SDK Python invocations also pass explicit `-B`: their `-I`/`-E`
+flags ignore environment-only bytecode suppression. Identity records the actual
+`sys.dont_write_bytecode` value as `environment.identity.dont_write_bytecode`.
+This common, all-OS interpreter policy prevents unused import-cache writes in
+fresh backend environments and beside candidate code. It does not change source
+compilation policy or delivered artifacts; it is ordinary CPython behavior, not
+a new technique or the prior pip threading fix. The tiny real-module controls
+in `wrapper-evidence/bytecode-policy` reproduce the original writes and explicit
+flag suppression without claiming performance or scanner benefits.
 
 One environment serves the SDK's sdist and wheel-from-sdist steps. This is
 **not** standard two-hook frontend isolation and authorizes no release adoption.
@@ -59,6 +68,9 @@ exit codes, direct-child reaping on interruption, and no controller-group signal
 These fixtures run normally and with `python -O`; no native POSIX execution is
 claimed. Earlier C: readiness receipts retain their original code hashes and are
 not reinterpreted as measurements of this process-group-only revision.
+Those historical receipts also precede the explicit `-B` correction and are not
+reinterpreted as bytecode-suppressed builds. New full integration readiness must
+wait until all components are frozen; no new C: matrix was run for this change.
 `wrapper-evidence/readiness.py` stages hash-verified tools/wheels and canonical
 Git archive source on C:, reuses the already managed native interpreter, and
 executes S1, S3, stock B, then S3-after-B against one shared source. It independently

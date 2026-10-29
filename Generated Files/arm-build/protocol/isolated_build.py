@@ -212,13 +212,14 @@ def execute(args):
             "assert m.version('pdm-backend')=='2.5.0';"
             "assert sys.prefix!=sys.base_prefix;"
             "assert not site.ENABLE_USER_SITE;"
+            "assert sys.dont_write_bytecode;"
             f"assert Path(sys.prefix).resolve()==Path({str(venv)!r}).resolve();"
             "print(json.dumps(dict(executable=sys.executable,prefix=sys.prefix,"
             "base_prefix=sys.base_prefix,version=sys.version,machine=platform.machine(),"
             "platform=sysconfig.get_platform(),backend=m.version('pdm-backend'),"
-            "user_site=site.ENABLE_USER_SITE)))"
+            "user_site=site.ENABLE_USER_SITE,dont_write_bytecode=sys.dont_write_bytecode)))"
         )
-        phase("identity", [str(python), "-I", "-c", probe])
+        phase("identity", [str(python), "-B", "-I", "-c", probe])
         report["environment"]["identity"] = json.loads(
             (logs / "identity.log").read_text(encoding="utf-8")
         )
@@ -226,6 +227,7 @@ def execute(args):
             "sdk",
             [
                 str(python),
+                "-B",
                 "-E",
                 "-s",
                 str(HERE.parent / "candidate" / "build.py"),

@@ -1,0 +1,78 @@
+{
+  "python": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+  "cases": [
+    {
+      "label": "sdk-before",
+      "command": [
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "-E",
+        "-s",
+        "-c",
+        "import sys,json;sys.path.insert(0,'Q:\\\\fastapi\\\\Generated Files\\\\worktrees\\\\caller-isolation\\\\Generated Files\\\\arm-build\\\\protocol\\\\wrapper-evidence\\\\bytecode-policy\\\\.probe-012c19fa270b4428b1d77a1e784e675c\\\\sdk-before');import fixture_module;print(json.dumps(dict(dont_write_bytecode=sys.dont_write_bytecode,value=fixture_module.value)))"
+      ],
+      "returncode": 0,
+      "identity": {
+        "dont_write_bytecode": false,
+        "value": 42
+      },
+      "pyc_files": [
+        "__pycache__\\fixture_module.cpython-313.pyc"
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "sdk-explicit-B",
+      "command": [
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "-B",
+        "-E",
+        "-s",
+        "-c",
+        "import sys,json;sys.path.insert(0,'Q:\\\\fastapi\\\\Generated Files\\\\worktrees\\\\caller-isolation\\\\Generated Files\\\\arm-build\\\\protocol\\\\wrapper-evidence\\\\bytecode-policy\\\\.probe-012c19fa270b4428b1d77a1e784e675c\\\\sdk-explicit-B');import fixture_module;print(json.dumps(dict(dont_write_bytecode=sys.dont_write_bytecode,value=fixture_module.value)))"
+      ],
+      "returncode": 0,
+      "identity": {
+        "dont_write_bytecode": true,
+        "value": 42
+      },
+      "pyc_files": [],
+      "source_unchanged": true
+    },
+    {
+      "label": "identity-before",
+      "command": [
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "-I",
+        "-c",
+        "import sys,json;sys.path.insert(0,'Q:\\\\fastapi\\\\Generated Files\\\\worktrees\\\\caller-isolation\\\\Generated Files\\\\arm-build\\\\protocol\\\\wrapper-evidence\\\\bytecode-policy\\\\.probe-012c19fa270b4428b1d77a1e784e675c\\\\identity-before');import fixture_module;print(json.dumps(dict(dont_write_bytecode=sys.dont_write_bytecode,value=fixture_module.value)))"
+      ],
+      "returncode": 0,
+      "identity": {
+        "dont_write_bytecode": false,
+        "value": 42
+      },
+      "pyc_files": [
+        "__pycache__\\fixture_module.cpython-313.pyc"
+      ],
+      "source_unchanged": true
+    },
+    {
+      "label": "identity-explicit-B",
+      "command": [
+        "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none\\python.exe",
+        "-B",
+        "-I",
+        "-c",
+        "import sys,json;sys.path.insert(0,'Q:\\\\fastapi\\\\Generated Files\\\\worktrees\\\\caller-isolation\\\\Generated Files\\\\arm-build\\\\protocol\\\\wrapper-evidence\\\\bytecode-policy\\\\.probe-012c19fa270b4428b1d77a1e784e675c\\\\identity-explicit-B');import fixture_module;print(json.dumps(dict(dont_write_bytecode=sys.dont_write_bytecode,value=fixture_module.value)))"
+      ],
+      "returncode": 0,
+      "identity": {
+        "dont_write_bytecode": true,
+        "value": 42
+      },
+      "pyc_files": [],
+      "source_unchanged": true
+    }
+  ],
+  "probe_root_removed": true
+}

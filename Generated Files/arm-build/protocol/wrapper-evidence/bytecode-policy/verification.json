@@ -1,0 +1,27 @@
+{
+  "finding": "CW001",
+  "independently_inspected_review_commit": "19da4c3b80c73fcd2f00bf72927e3e79cd7f3fae",
+  "wrapper_sha256": "ba798d1f8165ce4c8347f9a826d73bb6af401b1e935a0b0bd418fd04d6c0e4d9",
+  "tiny_real_probe_returncode": 0,
+  "probe_result": "Both -E -s and -I ignore PYTHONDONTWRITEBYTECODE=1 and create a real module pyc; explicit -B prevents both writes and reports dont_write_bytecode=true",
+  "probe_payloads_unchanged": true,
+  "owned_probe_root_removed": true,
+  "identity_and_sdk_pass_explicit_B": true,
+  "additive_identity_field": "environment.identity.dont_write_bytecode",
+  "validation": [
+    {"command": "python -B -m unittest -v test_isolated_build", "tests": 6, "returncode": 0},
+    {"command": "python -B -O -m unittest -v test_isolated_build", "tests": 6, "returncode": 0},
+    {"command": "ruff check isolated_build.py test_isolated_build.py wrapper-evidence/bytecode-policy/probe.py", "returncode": 0},
+    {"command": "ruff format --check isolated_build.py test_isolated_build.py wrapper-evidence/bytecode-policy/probe.py", "returncode": 0}
+  ],
+  "prior_receipts_unchanged": true,
+  "new_whole_C_matrix": false,
+  "artifact_revalidation": "Deferred to new full integration smoke after all components are frozen",
+  "confidence": "High for observed interpreter flag behavior and wrapper argv regression coverage",
+  "limits": [
+    "No scan or performance gain measured",
+    "No source compilation, SDK metadata, artifact or timing-boundary changes",
+    "Ordinary CPython flag policy, not a new feature or prior pip thread fix",
+    "Bytecode-write suppression is not read-only or hermetic isolation"
+  ]
+}

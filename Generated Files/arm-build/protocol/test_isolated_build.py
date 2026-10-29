@@ -38,8 +38,15 @@ class WrapperTests(unittest.TestCase):
         if log.stem == "create":
             (cwd.parent / "venv").mkdir()
         elif log.stem == "identity":
-            log.write_text(json.dumps({"prefix": str(cwd.parent / "venv")}))
+            self.assertEqual(argv[1:4], ["-B", "-I", "-c"])
+            self.assertIn("dont_write_bytecode=sys.dont_write_bytecode", argv[4])
+            log.write_text(
+                json.dumps(
+                    {"prefix": str(cwd.parent / "venv"), "dont_write_bytecode": True}
+                )
+            )
         elif log.stem == "sdk":
+            self.assertEqual(argv[1:4], ["-B", "-E", "-s"])
             self.assertEqual(
                 argv[argv.index("--source") + 1], str(self.args.source.resolve())
             )
@@ -60,6 +67,9 @@ class WrapperTests(unittest.TestCase):
                 self.args.report = self.root / f"report{n}.json"
                 self.assertEqual(wrapper.execute(self.args), 0)
                 report = self.receipt()
+                self.assertTrue(
+                    report["environment"]["identity"]["dont_write_bytecode"]
+                )
                 roots.append(report["environment"]["root"])
                 self.assertFalse(report["environment"]["existed_before"])
                 self.assertFalse(report["environment"]["exists_after_cleanup"])

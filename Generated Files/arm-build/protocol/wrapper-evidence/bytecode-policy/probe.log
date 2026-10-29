@@ -1,0 +1,1 @@
+Both -E and -I ignore environment-only suppression; explicit -B prevents pyc writes.
