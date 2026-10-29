@@ -1,4 +1,4 @@
-name: ARM build experiment
+name: Paired ARM build experiment v3 (manual only)
 
 on:
   workflow_dispatch:
@@ -6,64 +6,141 @@ on:
 permissions:
   contents: read
 
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+
 jobs:
-  measure:
-    name: ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+  windows:
+    runs-on: windows-11-arm
     timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-11-arm, macos-15]
+    defaults:
+      run:
+        shell: pwsh
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          ref: ${{ github.sha }}
+          path: tools
           persist-credentials: false
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
+          path: package-source
+          persist-credentials: false
+      - name: Place complete experiment on C without changing volume trust
+        run: |
+          $started = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() / 1000.0
+          "PAIR_PROVISION_STARTED=$($started.ToString([Globalization.CultureInfo]::InvariantCulture))" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          $root = "C:\arm-pairs-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
+          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
+          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
+          @(
+            "PAIR_ROOT=$root"
+            "PAIR_TOOLS=$(Join-Path $root 'tools')"
+            "UV_CACHE_DIR=$(Join-Path $root 'uv-cache')"
+            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
+            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
+            "TEMP=$root"
+            "TMP=$root"
+          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
         with:
           version: "0.13.6"
           enable-cache: "false"
-      - name: Provision pinned native Python without MSI installation
-        run: node "Generated Files/arm-build/setup_python.cjs"
-      - name: Preserve shared frozen experiment locks
-        if: runner.os == 'Windows'
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: experiment-locks
-          path: Generated Files/arm-build/*.lock
-          if-no-files-found: error
-      - name: Provision pinned native tools and offline wheelhouse
-        run: python "Generated Files/arm-build/ci_prepare.py"
-      - name: Upload Windows ARM offline dependencies
-        if: runner.os == 'Windows'
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: windows-arm-wheelhouse
-          path: Generated Files/arm-build/wheelhouse
-          if-no-files-found: error
-          retention-days: 7
-      - name: Verify benchmark logic
-        run: python "Generated Files/arm-build/test_benchmark.py"
-      - name: Measure complete PDM builds
-        run: python "Generated Files/arm-build/benchmark.py" --uv uv --repeats 7 --output "Generated Files/arm-build/results/ci" --importtime
-      - name: Install built wheel and run artifact smoke check
-        run: python "Generated Files/arm-build/ci_prepare.py" --smoke
-      - name: Check experiment Python formatting
-        run: python -m ruff check "Generated Files/arm-build/benchmark.py" "Generated Files/arm-build/test_benchmark.py" "Generated Files/arm-build/ci_prepare.py" --output-format github
-      - name: Upload measurements even on failure
+      - name: Pin native runtime and prepare locked offline wheels
+        run: |
+          $uv = Join-Path $env:PAIR_ROOT 'uv.exe'
+          Copy-Item (Get-Command uv).Source $uv
+          $env:PATH = "$env:PAIR_ROOT;$env:PATH"
+          "PAIR_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          $arm = Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build'
+          node (Join-Path $arm 'setup_python.cjs')
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Prepare canonical source and run fixed protocol
+        run: |
+          $protocol = Join-Path (Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build') 'protocol'
+          python (Join-Path $protocol 'test_pairs.py')
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python (Join-Path $protocol 'measure_pairs.py') --prepare --uv $env:PAIR_UV --source-checkout (Join-Path $env:PAIR_ROOT 'package-source') --output (Join-Path $env:PAIR_ROOT 'evidence')
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python (Join-Path $protocol 'measure_pairs.py') --uv $env:PAIR_UV --output (Join-Path $env:PAIR_ROOT 'evidence')
+          exit $LASTEXITCODE
+      - name: Preserve complete v3 evidence even on failure
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: arm-build-${{ matrix.os }}
+          name: paired-v3-windows
           path: |
-            Generated Files/arm-build/results/ci/report.json
-            Generated Files/arm-build/results/ci/harness.py
-            Generated Files/arm-build/results/ci/source-manifest.json
-            Generated Files/arm-build/results/ci/logs
-            Generated Files/arm-build/results/ci/artifacts/*.manifest.json
-            Generated Files/arm-build/results/ci/build-constraints.txt
-            Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
-            Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
-            Generated Files/arm-build/results/bootstrap
+            ${{ env.PAIR_ROOT }}/evidence
+            ${{ env.PAIR_TOOLS }}/Generated Files/arm-build/results/bootstrap
+          if-no-files-found: error
+          retention-days: 14
+
+  macos:
+    runs-on: macos-15
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
+          path: package-source
+          persist-credentials: false
+      - name: Prepare owned experiment root
+        run: |
+          $started = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() / 1000.0
+          "PAIR_PROVISION_STARTED=$($started.ToString([Globalization.CultureInfo]::InvariantCulture))" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          $root = Join-Path $env:GITHUB_WORKSPACE "arm-pairs-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
+          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
+          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
+          @(
+            "PAIR_ROOT=$root"
+            "PAIR_TOOLS=$(Join-Path $root 'tools')"
+            "UV_CACHE_DIR=$(Join-Path $root 'uv-cache')"
+            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
+            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
+            "TMPDIR=$root"
+          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - name: Pin native runtime
+        run: |
+          $uv = Join-Path $env:PAIR_ROOT 'uv'
+          Copy-Item (Get-Command uv).Source $uv
+          $env:PATH = "$env:PAIR_ROOT`:$env:PATH"
+          "PAIR_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+          $arm = Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build'
+          node (Join-Path $arm 'setup_python.cjs')
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Prepare canonical source and run fixed protocol
+        run: |
+          $protocol = Join-Path (Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build') 'protocol'
+          python (Join-Path $protocol 'test_pairs.py')
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python (Join-Path $protocol 'measure_pairs.py') --prepare --uv $env:PAIR_UV --source-checkout (Join-Path $env:PAIR_ROOT 'package-source') --output (Join-Path $env:PAIR_ROOT 'evidence')
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          python (Join-Path $protocol 'measure_pairs.py') --uv $env:PAIR_UV --output (Join-Path $env:PAIR_ROOT 'evidence')
+          exit $LASTEXITCODE
+      - name: Preserve complete v3 evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: paired-v3-macos
+          path: |
+            ${{ env.PAIR_ROOT }}/evidence
+            ${{ env.PAIR_TOOLS }}/Generated Files/arm-build/results/bootstrap
           if-no-files-found: error
           retention-days: 14
