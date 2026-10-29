@@ -107,6 +107,53 @@ class OwnedTests(unittest.TestCase):
                 self.assertIsNone(result.command_wall)
                 self.assertFalse((self.root / "stdout").exists())
 
+    def test_setup_and_close_failures_preserve_both_diagnostics(self):
+        api = Mock()
+        api.CreateJobObjectW.return_value = 1
+        api.SetInformationJobObject.side_effect = OSError("original setup failure")
+        api.CloseHandle.side_effect = OSError("secondary close failure")
+        with (
+            patch.object(owned, "_WINDOWS", True),
+            patch.object(owned, "_windows", return_value=api),
+            patch.object(owned.subprocess, "Popen") as spawn,
+        ):
+            result = self.run_helper("normal")
+        self.assertFalse(result.succeeded)
+        self.assertFalse(result.cleanup_complete)
+        self.assertTrue(any("original setup failure" in e for e in result.errors))
+        self.assertTrue(any("secondary close failure" in e for e in result.errors))
+        spawn.assert_not_called()
+        api.CloseHandle.assert_called_once_with(1)
+
+    def test_pipe_close_failures_preserve_status_and_attempt_every_close(self):
+        process = Mock(pid=123, returncode=0)
+        process.poll.return_value = 0
+        process.communicate.return_value = (
+            json.dumps({"owned": True, "started": time.perf_counter(),
+                        "returncode": 7, "timed_out": False,
+                        "error": "original invocation failure"}), ""
+        )
+        process.stdin.close.side_effect = OSError("stdin close failed")
+        process.stdout.close.side_effect = OSError("stdout close failed")
+        job = Mock()
+        job.alive.return_value = False
+        with (
+            patch.object(owned, "_WINDOWS", True),
+            patch.object(owned, "_Job", return_value=job),
+            patch.object(owned.subprocess, "Popen", return_value=process),
+        ):
+            result = self.run_helper("failure")
+        self.assertEqual(result.returncode, 7)
+        self.assertFalse(result.succeeded)
+        self.assertFalse(result.cleanup_complete)
+        for message in (
+            "original invocation failure", "stdin close failed", "stdout close failed"
+        ):
+            self.assertTrue(any(message in e for e in result.errors), result)
+        for stream in (process.stdin, process.stdout, process.stderr):
+            stream.close.assert_called_once()
+        job.close.assert_called_once()
+
     def test_posix_group_probe_is_owned_id_only(self):
         with patch.object(owned.os, "killpg", create=True) as kill:
             self.assertTrue(owned._group_alive(123))

@@ -106,8 +106,11 @@ class _Job:
             _checked(self.api.SetInformationJobObject(
                 self.handle, 9, ctypes.byref(limits), ctypes.sizeof(limits)
             ))
-        except BaseException:
-            self.close()
+        except BaseException as error:
+            try:
+                self.close()
+            except Exception as secondary:
+                error.add_note(f"close {type(secondary).__name__}: {secondary}")
             raise
 
     def alive(self):
@@ -254,6 +257,7 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
             raise RuntimeError("Supervisor ownership/setup failed: " + diagnostic)
     except Exception as error:
         errors.append(f"{type(error).__name__}: {error}")
+        errors.extend(getattr(error, "__notes__", ()))
         if isinstance(error, subprocess.TimeoutExpired):
             data["timed_out"] = True
     finally:
@@ -286,7 +290,11 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
                     errors.append(f"close {type(error).__name__}: {error}")
             if process:
                 for stream in (process.stdin, process.stdout, process.stderr):
-                    stream.close()
+                    try:
+                        stream.close()
+                    except Exception as error:
+                        clean = False
+                        errors.append(f"pipe close {type(error).__name__}: {error}")
     ended = time.perf_counter()
     started = data.get("started")
     wall = ended - started if started is not None else None

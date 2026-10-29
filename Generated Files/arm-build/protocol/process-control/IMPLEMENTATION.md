@@ -127,3 +127,24 @@ abort/report integration.
   public Popen, communicate/wait timeouts and start_new_session.
 - [Python perf_counter](https://docs.python.org/3.13/library/time.html#time.perf_counter)
   and [owned POSIX group signaling](https://docs.python.org/3.13/library/os.html#os.killpg).
+
+## PC001 follow-up: preserve cleanup failure evidence
+
+Independently reproduced the review's two injected failures before editing:
+the new setup/close regression lost the original diagnostic, and a stdin
+close exception escaped instead of returning the command's status 7.
+Both reproductions used mocks only.
+
+The bounded correction retains the original setup exception, attaches any
+secondary job-close failure as a Python exception note, and includes those
+notes in receipt errors. Each supervisor pipe close is now attempted
+independently; a failure appends a diagnostic and marks cleanup incomplete
+without discarding the original invocation error or returncode. API, timer
+boundaries, Windows job ownership and POSIX group scope are unchanged.
+
+Final validation: **11 tests passed normally and with `-O`, exit 0 each**;
+`git diff --check` passed. The two added regressions require original and
+secondary diagnostics, preserved status 7, all three close attempts and
+fail-closed cleanup. Existing tiny Windows lifecycle proofs still pass;
+POSIX remains mocked/unexecuted on macOS. No leftover proof directories.
+No CI, build, push, dependency install or producer integration.
