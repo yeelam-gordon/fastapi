@@ -1,0 +1,22 @@
+{
+  "source_revision": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "command": [
+    "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+    "Q:\\fastapi\\Generated Files\\worktrees\\portable-candidate\\Generated Files\\arm-build\\candidate\\build.py",
+    "--source",
+    "Q:\\fastapi\\Generated Files\\worktrees\\portable-candidate\\Generated Files\\arm-build\\candidate\\scratch\\source",
+    "--source-manifest",
+    "Q:\\fastapi\\Generated Files\\worktrees\\portable-candidate\\Generated Files\\arm-build\\candidate\\scratch\\source-manifest.json",
+    "--out-dir",
+    "Q:\\fastapi\\Generated Files\\worktrees\\portable-candidate\\Generated Files\\arm-build\\candidate\\scratch\\build",
+    "--workers",
+    "3"
+  ],
+  "build_exit": 0,
+  "sdist_members": 1269,
+  "wheel_members": 65,
+  "comparison": {
+    "strict_pass": true,
+    "differences": []
+  }
+}
