@@ -1,0 +1,11 @@
+test_attrs_and_payload (__main__.OpsTests.test_attrs_and_payload) ... ok
+test_failure_and_early_close_join_workers (__main__.OpsTests.test_failure_and_early_close_join_workers) ... ok
+test_invalid_archive_and_selector_guard (__main__.OpsTests.test_invalid_archive_and_selector_guard) ... ok
+test_path_filter_kept_for_both_cells (__main__.OpsTests.test_path_filter_kept_for_both_cells) ... ok
+test_prefetch_fresh_reads_and_order (__main__.OpsTests.test_prefetch_fresh_reads_and_order) ... ok
+test_unsafe_permissions_rejected_before_writes (__main__.OpsTests.test_unsafe_permissions_rejected_before_writes) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.071s
+
+OK

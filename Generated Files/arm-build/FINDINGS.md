@@ -1,5 +1,9 @@
 # FastAPI ARM build investigation
 
+## Active continuation
+
+The user reopened the optimization loop: a partial speedup does not meet the goal. The live [investigation/proposal table](../INVESTIGATION-AND-PROPOSALS.md) records current decisions. Round 2 now has an experimental **fully Mac-artifact-equivalent** PDM/native/selective pipeline at **1.700 s median locally**, including correct script executable bits. That resolves the old local permission blocker, not the speed target. Native writer and import investigations continue without another CI run. The sections below retain the completed first-round evidence and its limitations.
+
 ## Builds improved; strict Windows/Mac parity is not demonstrated
 
 The corrected [Windows/macOS ARM CI experiment passed both jobs](https://github.com/yeelam-gordon/fastapi/actions/runs/40814588064). Removing repeated PDM isolation reduced the observed Windows build time **14.4%**. Its optimized median was **3.67 times** the Mac median, but strict cross-platform validation rejected the comparison because source line endings and sdist executable modes differed. **The requested parity target is not demonstrated.** The current evidence also cannot establish physical 20-core Windows versus 16-core Mac performance.

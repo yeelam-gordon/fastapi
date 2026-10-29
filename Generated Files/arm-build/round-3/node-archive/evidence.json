@@ -1,0 +1,260 @@
+{
+  "node": "C:\\Program Files\\nodejs\\node.EXE",
+  "runtime": {
+    "version": "v24.21.0",
+    "arch": "arm64"
+  },
+  "python": "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+  "pdm_backend": "2.5.0",
+  "source_manifest_sha256": "943fd9bf0a02d0dfcc85faf7d3561adcd13b04a40578c301e3b3fdeb0b40f73e",
+  "reference": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\artifacts\\prepare-baseline",
+  "target_seconds": 0.73,
+  "timing_boundary": "parent spawn through child exit; imports, fresh PDM selection/metadata, Node IPC/startup/IO/gzip9, completed-sdist selection/extraction, fresh wheel",
+  "excluded": [
+    "source checkout copy",
+    "installed tool bootstrap",
+    "post-build validation"
+  ],
+  "trials": [
+    {
+      "label": "trial-1",
+      "workers": 4,
+      "child_seconds": 1.300257300001249,
+      "imports_seconds": 0.24649040000076639,
+      "sdist_seconds": 0.7778498000006948,
+      "select_extract_seconds": 0.17169769999964046,
+      "wheel_seconds": 0.10421940000014729,
+      "full_process_seconds": 1.4429182999992918,
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\node-archive\\experiment.py",
+        "--child",
+        "trial-1",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "strict_mac_validation": "passed",
+      "members": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      }
+    },
+    {
+      "label": "trial-2",
+      "workers": 4,
+      "child_seconds": 1.3318418999988353,
+      "imports_seconds": 0.2499853000008443,
+      "sdist_seconds": 0.7980018999987806,
+      "select_extract_seconds": 0.1807184999997844,
+      "wheel_seconds": 0.10313619999942603,
+      "full_process_seconds": 1.4730268999992404,
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\node-archive\\experiment.py",
+        "--child",
+        "trial-2",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "strict_mac_validation": "passed",
+      "members": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      }
+    },
+    {
+      "label": "trial-3",
+      "workers": 4,
+      "child_seconds": 1.3380036999988079,
+      "imports_seconds": 0.2604122000011557,
+      "sdist_seconds": 0.79416990000027,
+      "select_extract_seconds": 0.1772616999987804,
+      "wheel_seconds": 0.10615989999860176,
+      "full_process_seconds": 1.486729500000365,
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\node-archive\\experiment.py",
+        "--child",
+        "trial-3",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "strict_mac_validation": "passed",
+      "members": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      }
+    },
+    {
+      "label": "trial-4",
+      "workers": 4,
+      "child_seconds": 1.3008061000000453,
+      "imports_seconds": 0.25539430000208085,
+      "sdist_seconds": 0.7734080999980506,
+      "select_extract_seconds": 0.17213540000011562,
+      "wheel_seconds": 0.09986829999979818,
+      "full_process_seconds": 1.4476666000009573,
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\node-archive\\experiment.py",
+        "--child",
+        "trial-4",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "strict_mac_validation": "passed",
+      "members": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      }
+    },
+    {
+      "label": "trial-5",
+      "workers": 4,
+      "child_seconds": 1.3107544999984384,
+      "imports_seconds": 0.2539885999976832,
+      "sdist_seconds": 0.7796689000024344,
+      "select_extract_seconds": 0.17276249999849824,
+      "wheel_seconds": 0.10433449999982258,
+      "full_process_seconds": 1.4544237999980396,
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\node-archive\\experiment.py",
+        "--child",
+        "trial-5",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "strict_mac_validation": "passed",
+      "members": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      }
+    }
+  ],
+  "preparation": {
+    "label": "prepare",
+    "workers": 4,
+    "child_seconds": 1.341192800002318,
+    "imports_seconds": 0.2595428999993601,
+    "sdist_seconds": 0.8068912000017008,
+    "select_extract_seconds": 0.17312630000014906,
+    "wheel_seconds": 0.10163240000110818,
+    "full_process_seconds": 1.4859708000003593,
+    "command": [
+      "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+      "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\node-archive\\experiment.py",
+      "--child",
+      "prepare",
+      "4",
+      "0",
+      "C:\\Program Files\\nodejs\\node.EXE"
+    ],
+    "strict_mac_validation": "passed",
+    "members": {
+      "fastapi-0.162.0-py3-none-any.whl": 65,
+      "fastapi-0.162.0.tar.gz": 1269
+    }
+  },
+  "diagnostics": [
+    {
+      "label": "diagnostic-4",
+      "workers": 4,
+      "child_seconds": 1.3603263999975752,
+      "imports_seconds": 0.2673236000009638,
+      "sdist_seconds": 0.8080919999993057,
+      "select_extract_seconds": 0.1779365999973379,
+      "wheel_seconds": 0.10697419999996782,
+      "stages": {
+        "pdm_initialize": 0.0007547999994130805,
+        "fresh_pdm_selection": 0.14012039999943227,
+        "permission_manifest_read": 0.004855099999986123,
+        "fresh_pkg_info": 0.008798400001978735,
+        "fresh_ipc_manifest": 0.003082900002482347,
+        "node_internal": {
+          "validate_request": 0.01420750000000001,
+          "bounded_lstat_and_read": 0.25412039999999997,
+          "ustar_pax_serialization": 0.020369700000000022,
+          "gzip_level_9": 0.18882469999999996
+        },
+        "node_start_io_tar_gzip_and_output": 0.6306082000010065
+      },
+      "coordinator_modules_loaded": {
+        "benchmark": false,
+        "statistics": false
+      },
+      "full_process_seconds": 1.5109756000019843,
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\node-archive\\experiment.py",
+        "--child",
+        "diagnostic-4",
+        "4",
+        "1",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "strict_mac_validation": "passed",
+      "members": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      }
+    },
+    {
+      "label": "diagnostic-8",
+      "workers": 8,
+      "child_seconds": 1.2673754000024928,
+      "imports_seconds": 0.2697981000019354,
+      "sdist_seconds": 0.7045023999999103,
+      "select_extract_seconds": 0.18318429999999353,
+      "wheel_seconds": 0.10989060000065365,
+      "stages": {
+        "pdm_initialize": 0.000747499998396961,
+        "fresh_pdm_selection": 0.13952399999834597,
+        "permission_manifest_read": 0.005314999998518033,
+        "fresh_pkg_info": 0.009054999998625135,
+        "fresh_ipc_manifest": 0.003120999997918261,
+        "node_internal": {
+          "validate_request": 0.01399669999999999,
+          "bounded_lstat_and_read": 0.1461427,
+          "ustar_pax_serialization": 0.021089999999999973,
+          "gzip_level_9": 0.18909410000000001
+        },
+        "node_start_io_tar_gzip_and_output": 0.5276623999998264
+      },
+      "coordinator_modules_loaded": {
+        "benchmark": false,
+        "statistics": false
+      },
+      "full_process_seconds": 1.4188670000003185,
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\node-archive\\experiment.py",
+        "--child",
+        "diagnostic-8",
+        "8",
+        "1",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "strict_mac_validation": "passed",
+      "members": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      }
+    }
+  ],
+  "medians": {
+    "full_process_seconds": 1.4544237999980396,
+    "child_seconds": 1.3107544999984384,
+    "imports_seconds": 0.2539885999976832,
+    "sdist_seconds": 0.7796689000024344,
+    "select_extract_seconds": 0.17276249999849824,
+    "wheel_seconds": 0.10421940000014729
+  },
+  "strict_validation": "passed: preparation, five trials, both diagnostics",
+  "parity_target_met": false
+}

@@ -1,0 +1,1505 @@
+{
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "machine": "ARM64",
+  "platform": "win-arm64",
+  "uv": "uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)",
+  "reference": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\repeat-01-candidate",
+  "source": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\source",
+  "canonical_pyproject_sha256": "5e89c5c8f8882328483ac99ff3c40e3b9f6b2b33c55b55027e4e987488597105",
+  "policy": "Fresh output/cache per trial; offline; default uv build makes sdist then wheel from sdist. Timed AST version resolution and pyproject regeneration included. Source copying and validation excluded, like canonical harness. Static version is incompatible source-metadata change, not accepted optimization.",
+  "trials": [
+    {
+      "label": "dynamic-failure",
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\snapshots\\source",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\rawreports\\standard\\dynamic-failure",
+        "--offline",
+        "--no-config",
+        "--no-create-gitignore",
+        "--no-python-downloads",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\cache-standard\\dynamic-failure"
+      ],
+      "returncode": 2,
+      "wall_seconds_including_metadata": 0.3468987999985984
+    },
+    {
+      "label": "static-01",
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\snapshots\\source",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\rawreports\\standard\\static-01",
+        "--offline",
+        "--no-config",
+        "--no-create-gitignore",
+        "--no-python-downloads",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\cache-standard\\static-01"
+      ],
+      "returncode": 0,
+      "wall_seconds_including_metadata": 1.6604451999992307,
+      "strict_equivalent": false,
+      "differences": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "missing": [],
+          "extra": [],
+          "changed": [
+            "fastapi-0.162.0.dist-info/METADATA",
+            "fastapi-0.162.0.dist-info/WHEEL",
+            "fastapi-0.162.0.dist-info/entry_points.txt"
+          ],
+          "text_diffs": {
+            "fastapi-0.162.0.dist-info/METADATA": "--- PDM/fastapi-0.162.0.dist-info/METADATA\n+++ uv/fastapi-0.162.0.dist-info/METADATA\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "fastapi-0.162.0.dist-info/WHEEL": "--- PDM/fastapi-0.162.0.dist-info/WHEEL\n+++ uv/fastapi-0.162.0.dist-info/WHEEL\n@@ -1,4 +1,4 @@\n Wheel-Version: 1.0\n-Generator: pdm-backend (2.5.0)\n+Generator: uv 0.13.6\n Root-Is-Purelib: true\n Tag: py3-none-any\n",
+            "fastapi-0.162.0.dist-info/entry_points.txt": "--- PDM/fastapi-0.162.0.dist-info/entry_points.txt\n+++ uv/fastapi-0.162.0.dist-info/entry_points.txt\n@@ -1,5 +1,3 @@\n [console_scripts]\n fastapi = fastapi.cli:main\n \n-[gui_scripts]\n-\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 65,
+            "uv": 65
+          }
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "missing": [],
+          "extra": [
+            "pyproject.toml.orig"
+          ],
+          "changed": [
+            "PKG-INFO",
+            "pyproject.toml"
+          ],
+          "text_diffs": {
+            "PKG-INFO": "--- PDM/PKG-INFO\n+++ uv/PKG-INFO\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "pyproject.toml": "--- PDM/pyproject.toml\n+++ uv/pyproject.toml\n@@ -1,22 +1,15 @@\n [build-system]\n-requires = [\n-    \"pdm-backend\",\n-]\n-build-backend = \"pdm.backend\"\n+requires = [\"uv_build==0.13.6\"]\n+build-backend = \"uv_build\"\n \n [project]\n name = \"fastapi\"\n-dynamic = []\n+version = \"0.162.0\"\n description = \"FastAPI framework, high performance, easy to learn, fast to code, ready for production\"\n readme = \"README.md\"\n license = \"MIT\"\n-license-files = [\n-    \"LICENSE\",\n-]\n+license-files = [\"LICENSE\"]\n requires-python = \">=3.10\"\n-authors = [\n-    { name = \"Sebasti\u00e1n Ram\u00edrez\", email = \"tiangolo@gmail.com\" },\n-]\n classifiers = [\n     \"Intended Audience :: Information Technology\",\n     \"Intended Audience :: System Administrators\",\n@@ -53,7 +46,10 @@\n     \"annotated-doc>=0.0.2\",\n     \"opentelemetry-api>=1.44.0\",\n ]\n-version = \"0.162.0\"\n+\n+[[project.authors]]\n+name = \"Sebasti\u00e1n Ram\u00edrez\"\n+email = \"tiangolo@gmail.com\"\n \n [project.urls]\n Homepage = \"https://github.com/fastapi/fastapi\"\n@@ -201,9 +197,7 @@\n ]\n \n [tool.mypy]\n-plugins = [\n-    \"pydantic.mypy\",\n-]\n+plugins = [\"pydantic.mypy\"]\n strict = true\n \n [[tool.mypy.overrides]]\n@@ -230,9 +224,7 @@\n     \"--ignore=docs_src\",\n ]\n strict_xfail = true\n-filterwarnings = [\n-    \"error\",\n-]\n+filterwarnings = [\"error\"]\n timeout = \"20\"\n \n [tool.coverage.run]\n@@ -269,9 +261,7 @@\n show_contexts = true\n \n [tool.ruff]\n-extend-exclude = [\n-    \"scripts/tests/test_translation_fixer/**/*.md\",\n-]\n+extend-exclude = [\"scripts/tests/test_translation_fixer/**/*.md\"]\n \n [tool.ruff.lint]\n select = [\n@@ -290,72 +280,28 @@\n ]\n \n [tool.ruff.lint.per-file-ignores]\n-\"__init__.py\" = [\n-    \"F401\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_response/tutorial007_py310.py\" = [\n-    \"B007\",\n-]\n-\"docs_src/dependencies/tutorial007_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_an_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial008b_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial010_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/security/tutorial004_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial004_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\n-    \"UP012\",\n-]\n-\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial002_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/server_sent_events/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n+\"__init__.py\" = [\"F401\"]\n+\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\"B904\"]\n+\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\"B904\"]\n+\"docs_src/custom_response/tutorial007_py310.py\" = [\"B007\"]\n+\"docs_src/dependencies/tutorial007_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_an_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial008b_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial010_py310.py\" = [\"F821\"]\n+\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\"B904\"]\n+\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\"B006\"]\n+\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\"B006\"]\n+\"docs_src/security/tutorial004_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial004_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_py310.py\" = [\"B904\"]\n+\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\"UP012\"]\n+\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial002_py310.py\" = [\"UP028\"]\n+\"docs_src/server_sent_events/tutorial001_py310.py\" = [\"UP028\"]\n \n [tool.ruff.lint.isort]\n known-third-party = [\n@@ -450,3 +396,13 @@\n \n [tool.ty.terminal]\n error-on-warning = true\n+\n+[tool.uv.build-backend]\n+module-root = \"\"\n+module-name = \"fastapi\"\n+source-include = [\n+    \"tests/**\",\n+    \"docs_src/**\",\n+    \"scripts/**\",\n+    \"docs/en/docs/img/favicon.png\",\n+]\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 1269,
+            "uv": 1270
+          }
+        }
+      }
+    },
+    {
+      "label": "static-02",
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\snapshots\\source",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\rawreports\\standard\\static-02",
+        "--offline",
+        "--no-config",
+        "--no-create-gitignore",
+        "--no-python-downloads",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\cache-standard\\static-02"
+      ],
+      "returncode": 0,
+      "wall_seconds_including_metadata": 1.5979052000002412,
+      "strict_equivalent": false,
+      "differences": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "missing": [],
+          "extra": [],
+          "changed": [
+            "fastapi-0.162.0.dist-info/METADATA",
+            "fastapi-0.162.0.dist-info/WHEEL",
+            "fastapi-0.162.0.dist-info/entry_points.txt"
+          ],
+          "text_diffs": {
+            "fastapi-0.162.0.dist-info/METADATA": "--- PDM/fastapi-0.162.0.dist-info/METADATA\n+++ uv/fastapi-0.162.0.dist-info/METADATA\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "fastapi-0.162.0.dist-info/WHEEL": "--- PDM/fastapi-0.162.0.dist-info/WHEEL\n+++ uv/fastapi-0.162.0.dist-info/WHEEL\n@@ -1,4 +1,4 @@\n Wheel-Version: 1.0\n-Generator: pdm-backend (2.5.0)\n+Generator: uv 0.13.6\n Root-Is-Purelib: true\n Tag: py3-none-any\n",
+            "fastapi-0.162.0.dist-info/entry_points.txt": "--- PDM/fastapi-0.162.0.dist-info/entry_points.txt\n+++ uv/fastapi-0.162.0.dist-info/entry_points.txt\n@@ -1,5 +1,3 @@\n [console_scripts]\n fastapi = fastapi.cli:main\n \n-[gui_scripts]\n-\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 65,
+            "uv": 65
+          }
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "missing": [],
+          "extra": [
+            "pyproject.toml.orig"
+          ],
+          "changed": [
+            "PKG-INFO",
+            "pyproject.toml"
+          ],
+          "text_diffs": {
+            "PKG-INFO": "--- PDM/PKG-INFO\n+++ uv/PKG-INFO\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "pyproject.toml": "--- PDM/pyproject.toml\n+++ uv/pyproject.toml\n@@ -1,22 +1,15 @@\n [build-system]\n-requires = [\n-    \"pdm-backend\",\n-]\n-build-backend = \"pdm.backend\"\n+requires = [\"uv_build==0.13.6\"]\n+build-backend = \"uv_build\"\n \n [project]\n name = \"fastapi\"\n-dynamic = []\n+version = \"0.162.0\"\n description = \"FastAPI framework, high performance, easy to learn, fast to code, ready for production\"\n readme = \"README.md\"\n license = \"MIT\"\n-license-files = [\n-    \"LICENSE\",\n-]\n+license-files = [\"LICENSE\"]\n requires-python = \">=3.10\"\n-authors = [\n-    { name = \"Sebasti\u00e1n Ram\u00edrez\", email = \"tiangolo@gmail.com\" },\n-]\n classifiers = [\n     \"Intended Audience :: Information Technology\",\n     \"Intended Audience :: System Administrators\",\n@@ -53,7 +46,10 @@\n     \"annotated-doc>=0.0.2\",\n     \"opentelemetry-api>=1.44.0\",\n ]\n-version = \"0.162.0\"\n+\n+[[project.authors]]\n+name = \"Sebasti\u00e1n Ram\u00edrez\"\n+email = \"tiangolo@gmail.com\"\n \n [project.urls]\n Homepage = \"https://github.com/fastapi/fastapi\"\n@@ -201,9 +197,7 @@\n ]\n \n [tool.mypy]\n-plugins = [\n-    \"pydantic.mypy\",\n-]\n+plugins = [\"pydantic.mypy\"]\n strict = true\n \n [[tool.mypy.overrides]]\n@@ -230,9 +224,7 @@\n     \"--ignore=docs_src\",\n ]\n strict_xfail = true\n-filterwarnings = [\n-    \"error\",\n-]\n+filterwarnings = [\"error\"]\n timeout = \"20\"\n \n [tool.coverage.run]\n@@ -269,9 +261,7 @@\n show_contexts = true\n \n [tool.ruff]\n-extend-exclude = [\n-    \"scripts/tests/test_translation_fixer/**/*.md\",\n-]\n+extend-exclude = [\"scripts/tests/test_translation_fixer/**/*.md\"]\n \n [tool.ruff.lint]\n select = [\n@@ -290,72 +280,28 @@\n ]\n \n [tool.ruff.lint.per-file-ignores]\n-\"__init__.py\" = [\n-    \"F401\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_response/tutorial007_py310.py\" = [\n-    \"B007\",\n-]\n-\"docs_src/dependencies/tutorial007_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_an_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial008b_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial010_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/security/tutorial004_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial004_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\n-    \"UP012\",\n-]\n-\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial002_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/server_sent_events/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n+\"__init__.py\" = [\"F401\"]\n+\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\"B904\"]\n+\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\"B904\"]\n+\"docs_src/custom_response/tutorial007_py310.py\" = [\"B007\"]\n+\"docs_src/dependencies/tutorial007_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_an_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial008b_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial010_py310.py\" = [\"F821\"]\n+\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\"B904\"]\n+\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\"B006\"]\n+\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\"B006\"]\n+\"docs_src/security/tutorial004_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial004_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_py310.py\" = [\"B904\"]\n+\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\"UP012\"]\n+\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial002_py310.py\" = [\"UP028\"]\n+\"docs_src/server_sent_events/tutorial001_py310.py\" = [\"UP028\"]\n \n [tool.ruff.lint.isort]\n known-third-party = [\n@@ -450,3 +396,13 @@\n \n [tool.ty.terminal]\n error-on-warning = true\n+\n+[tool.uv.build-backend]\n+module-root = \"\"\n+module-name = \"fastapi\"\n+source-include = [\n+    \"tests/**\",\n+    \"docs_src/**\",\n+    \"scripts/**\",\n+    \"docs/en/docs/img/favicon.png\",\n+]\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 1269,
+            "uv": 1270
+          }
+        }
+      }
+    },
+    {
+      "label": "static-03",
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\snapshots\\source",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\rawreports\\standard\\static-03",
+        "--offline",
+        "--no-config",
+        "--no-create-gitignore",
+        "--no-python-downloads",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\cache-standard\\static-03"
+      ],
+      "returncode": 0,
+      "wall_seconds_including_metadata": 1.669707600000038,
+      "strict_equivalent": false,
+      "differences": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "missing": [],
+          "extra": [],
+          "changed": [
+            "fastapi-0.162.0.dist-info/METADATA",
+            "fastapi-0.162.0.dist-info/WHEEL",
+            "fastapi-0.162.0.dist-info/entry_points.txt"
+          ],
+          "text_diffs": {
+            "fastapi-0.162.0.dist-info/METADATA": "--- PDM/fastapi-0.162.0.dist-info/METADATA\n+++ uv/fastapi-0.162.0.dist-info/METADATA\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "fastapi-0.162.0.dist-info/WHEEL": "--- PDM/fastapi-0.162.0.dist-info/WHEEL\n+++ uv/fastapi-0.162.0.dist-info/WHEEL\n@@ -1,4 +1,4 @@\n Wheel-Version: 1.0\n-Generator: pdm-backend (2.5.0)\n+Generator: uv 0.13.6\n Root-Is-Purelib: true\n Tag: py3-none-any\n",
+            "fastapi-0.162.0.dist-info/entry_points.txt": "--- PDM/fastapi-0.162.0.dist-info/entry_points.txt\n+++ uv/fastapi-0.162.0.dist-info/entry_points.txt\n@@ -1,5 +1,3 @@\n [console_scripts]\n fastapi = fastapi.cli:main\n \n-[gui_scripts]\n-\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 65,
+            "uv": 65
+          }
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "missing": [],
+          "extra": [
+            "pyproject.toml.orig"
+          ],
+          "changed": [
+            "PKG-INFO",
+            "pyproject.toml"
+          ],
+          "text_diffs": {
+            "PKG-INFO": "--- PDM/PKG-INFO\n+++ uv/PKG-INFO\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "pyproject.toml": "--- PDM/pyproject.toml\n+++ uv/pyproject.toml\n@@ -1,22 +1,15 @@\n [build-system]\n-requires = [\n-    \"pdm-backend\",\n-]\n-build-backend = \"pdm.backend\"\n+requires = [\"uv_build==0.13.6\"]\n+build-backend = \"uv_build\"\n \n [project]\n name = \"fastapi\"\n-dynamic = []\n+version = \"0.162.0\"\n description = \"FastAPI framework, high performance, easy to learn, fast to code, ready for production\"\n readme = \"README.md\"\n license = \"MIT\"\n-license-files = [\n-    \"LICENSE\",\n-]\n+license-files = [\"LICENSE\"]\n requires-python = \">=3.10\"\n-authors = [\n-    { name = \"Sebasti\u00e1n Ram\u00edrez\", email = \"tiangolo@gmail.com\" },\n-]\n classifiers = [\n     \"Intended Audience :: Information Technology\",\n     \"Intended Audience :: System Administrators\",\n@@ -53,7 +46,10 @@\n     \"annotated-doc>=0.0.2\",\n     \"opentelemetry-api>=1.44.0\",\n ]\n-version = \"0.162.0\"\n+\n+[[project.authors]]\n+name = \"Sebasti\u00e1n Ram\u00edrez\"\n+email = \"tiangolo@gmail.com\"\n \n [project.urls]\n Homepage = \"https://github.com/fastapi/fastapi\"\n@@ -201,9 +197,7 @@\n ]\n \n [tool.mypy]\n-plugins = [\n-    \"pydantic.mypy\",\n-]\n+plugins = [\"pydantic.mypy\"]\n strict = true\n \n [[tool.mypy.overrides]]\n@@ -230,9 +224,7 @@\n     \"--ignore=docs_src\",\n ]\n strict_xfail = true\n-filterwarnings = [\n-    \"error\",\n-]\n+filterwarnings = [\"error\"]\n timeout = \"20\"\n \n [tool.coverage.run]\n@@ -269,9 +261,7 @@\n show_contexts = true\n \n [tool.ruff]\n-extend-exclude = [\n-    \"scripts/tests/test_translation_fixer/**/*.md\",\n-]\n+extend-exclude = [\"scripts/tests/test_translation_fixer/**/*.md\"]\n \n [tool.ruff.lint]\n select = [\n@@ -290,72 +280,28 @@\n ]\n \n [tool.ruff.lint.per-file-ignores]\n-\"__init__.py\" = [\n-    \"F401\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_response/tutorial007_py310.py\" = [\n-    \"B007\",\n-]\n-\"docs_src/dependencies/tutorial007_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_an_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial008b_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial010_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/security/tutorial004_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial004_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\n-    \"UP012\",\n-]\n-\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial002_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/server_sent_events/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n+\"__init__.py\" = [\"F401\"]\n+\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\"B904\"]\n+\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\"B904\"]\n+\"docs_src/custom_response/tutorial007_py310.py\" = [\"B007\"]\n+\"docs_src/dependencies/tutorial007_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_an_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial008b_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial010_py310.py\" = [\"F821\"]\n+\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\"B904\"]\n+\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\"B006\"]\n+\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\"B006\"]\n+\"docs_src/security/tutorial004_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial004_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_py310.py\" = [\"B904\"]\n+\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\"UP012\"]\n+\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial002_py310.py\" = [\"UP028\"]\n+\"docs_src/server_sent_events/tutorial001_py310.py\" = [\"UP028\"]\n \n [tool.ruff.lint.isort]\n known-third-party = [\n@@ -450,3 +396,13 @@\n \n [tool.ty.terminal]\n error-on-warning = true\n+\n+[tool.uv.build-backend]\n+module-root = \"\"\n+module-name = \"fastapi\"\n+source-include = [\n+    \"tests/**\",\n+    \"docs_src/**\",\n+    \"scripts/**\",\n+    \"docs/en/docs/img/favicon.png\",\n+]\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 1269,
+            "uv": 1270
+          }
+        }
+      }
+    },
+    {
+      "label": "static-04",
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\snapshots\\source",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\rawreports\\standard\\static-04",
+        "--offline",
+        "--no-config",
+        "--no-create-gitignore",
+        "--no-python-downloads",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\cache-standard\\static-04"
+      ],
+      "returncode": 0,
+      "wall_seconds_including_metadata": 1.6217832999991515,
+      "strict_equivalent": false,
+      "differences": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "missing": [],
+          "extra": [],
+          "changed": [
+            "fastapi-0.162.0.dist-info/METADATA",
+            "fastapi-0.162.0.dist-info/WHEEL",
+            "fastapi-0.162.0.dist-info/entry_points.txt"
+          ],
+          "text_diffs": {
+            "fastapi-0.162.0.dist-info/METADATA": "--- PDM/fastapi-0.162.0.dist-info/METADATA\n+++ uv/fastapi-0.162.0.dist-info/METADATA\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "fastapi-0.162.0.dist-info/WHEEL": "--- PDM/fastapi-0.162.0.dist-info/WHEEL\n+++ uv/fastapi-0.162.0.dist-info/WHEEL\n@@ -1,4 +1,4 @@\n Wheel-Version: 1.0\n-Generator: pdm-backend (2.5.0)\n+Generator: uv 0.13.6\n Root-Is-Purelib: true\n Tag: py3-none-any\n",
+            "fastapi-0.162.0.dist-info/entry_points.txt": "--- PDM/fastapi-0.162.0.dist-info/entry_points.txt\n+++ uv/fastapi-0.162.0.dist-info/entry_points.txt\n@@ -1,5 +1,3 @@\n [console_scripts]\n fastapi = fastapi.cli:main\n \n-[gui_scripts]\n-\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 65,
+            "uv": 65
+          }
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "missing": [],
+          "extra": [
+            "pyproject.toml.orig"
+          ],
+          "changed": [
+            "PKG-INFO",
+            "pyproject.toml"
+          ],
+          "text_diffs": {
+            "PKG-INFO": "--- PDM/PKG-INFO\n+++ uv/PKG-INFO\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "pyproject.toml": "--- PDM/pyproject.toml\n+++ uv/pyproject.toml\n@@ -1,22 +1,15 @@\n [build-system]\n-requires = [\n-    \"pdm-backend\",\n-]\n-build-backend = \"pdm.backend\"\n+requires = [\"uv_build==0.13.6\"]\n+build-backend = \"uv_build\"\n \n [project]\n name = \"fastapi\"\n-dynamic = []\n+version = \"0.162.0\"\n description = \"FastAPI framework, high performance, easy to learn, fast to code, ready for production\"\n readme = \"README.md\"\n license = \"MIT\"\n-license-files = [\n-    \"LICENSE\",\n-]\n+license-files = [\"LICENSE\"]\n requires-python = \">=3.10\"\n-authors = [\n-    { name = \"Sebasti\u00e1n Ram\u00edrez\", email = \"tiangolo@gmail.com\" },\n-]\n classifiers = [\n     \"Intended Audience :: Information Technology\",\n     \"Intended Audience :: System Administrators\",\n@@ -53,7 +46,10 @@\n     \"annotated-doc>=0.0.2\",\n     \"opentelemetry-api>=1.44.0\",\n ]\n-version = \"0.162.0\"\n+\n+[[project.authors]]\n+name = \"Sebasti\u00e1n Ram\u00edrez\"\n+email = \"tiangolo@gmail.com\"\n \n [project.urls]\n Homepage = \"https://github.com/fastapi/fastapi\"\n@@ -201,9 +197,7 @@\n ]\n \n [tool.mypy]\n-plugins = [\n-    \"pydantic.mypy\",\n-]\n+plugins = [\"pydantic.mypy\"]\n strict = true\n \n [[tool.mypy.overrides]]\n@@ -230,9 +224,7 @@\n     \"--ignore=docs_src\",\n ]\n strict_xfail = true\n-filterwarnings = [\n-    \"error\",\n-]\n+filterwarnings = [\"error\"]\n timeout = \"20\"\n \n [tool.coverage.run]\n@@ -269,9 +261,7 @@\n show_contexts = true\n \n [tool.ruff]\n-extend-exclude = [\n-    \"scripts/tests/test_translation_fixer/**/*.md\",\n-]\n+extend-exclude = [\"scripts/tests/test_translation_fixer/**/*.md\"]\n \n [tool.ruff.lint]\n select = [\n@@ -290,72 +280,28 @@\n ]\n \n [tool.ruff.lint.per-file-ignores]\n-\"__init__.py\" = [\n-    \"F401\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_response/tutorial007_py310.py\" = [\n-    \"B007\",\n-]\n-\"docs_src/dependencies/tutorial007_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_an_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial008b_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial010_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/security/tutorial004_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial004_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\n-    \"UP012\",\n-]\n-\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial002_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/server_sent_events/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n+\"__init__.py\" = [\"F401\"]\n+\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\"B904\"]\n+\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\"B904\"]\n+\"docs_src/custom_response/tutorial007_py310.py\" = [\"B007\"]\n+\"docs_src/dependencies/tutorial007_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_an_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial008b_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial010_py310.py\" = [\"F821\"]\n+\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\"B904\"]\n+\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\"B006\"]\n+\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\"B006\"]\n+\"docs_src/security/tutorial004_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial004_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_py310.py\" = [\"B904\"]\n+\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\"UP012\"]\n+\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial002_py310.py\" = [\"UP028\"]\n+\"docs_src/server_sent_events/tutorial001_py310.py\" = [\"UP028\"]\n \n [tool.ruff.lint.isort]\n known-third-party = [\n@@ -450,3 +396,13 @@\n \n [tool.ty.terminal]\n error-on-warning = true\n+\n+[tool.uv.build-backend]\n+module-root = \"\"\n+module-name = \"fastapi\"\n+source-include = [\n+    \"tests/**\",\n+    \"docs_src/**\",\n+    \"scripts/**\",\n+    \"docs/en/docs/img/favicon.png\",\n+]\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 1269,
+            "uv": 1270
+          }
+        }
+      }
+    },
+    {
+      "label": "static-05",
+      "command": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\snapshots\\source",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\rawreports\\standard\\static-05",
+        "--offline",
+        "--no-config",
+        "--no-create-gitignore",
+        "--no-python-downloads",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\cache-standard\\static-05"
+      ],
+      "returncode": 0,
+      "wall_seconds_including_metadata": 1.7742742000009457,
+      "strict_equivalent": false,
+      "differences": {
+        "fastapi-0.162.0-py3-none-any.whl": {
+          "missing": [],
+          "extra": [],
+          "changed": [
+            "fastapi-0.162.0.dist-info/METADATA",
+            "fastapi-0.162.0.dist-info/WHEEL",
+            "fastapi-0.162.0.dist-info/entry_points.txt"
+          ],
+          "text_diffs": {
+            "fastapi-0.162.0.dist-info/METADATA": "--- PDM/fastapi-0.162.0.dist-info/METADATA\n+++ uv/fastapi-0.162.0.dist-info/METADATA\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "fastapi-0.162.0.dist-info/WHEEL": "--- PDM/fastapi-0.162.0.dist-info/WHEEL\n+++ uv/fastapi-0.162.0.dist-info/WHEEL\n@@ -1,4 +1,4 @@\n Wheel-Version: 1.0\n-Generator: pdm-backend (2.5.0)\n+Generator: uv 0.13.6\n Root-Is-Purelib: true\n Tag: py3-none-any\n",
+            "fastapi-0.162.0.dist-info/entry_points.txt": "--- PDM/fastapi-0.162.0.dist-info/entry_points.txt\n+++ uv/fastapi-0.162.0.dist-info/entry_points.txt\n@@ -1,5 +1,3 @@\n [console_scripts]\n fastapi = fastapi.cli:main\n \n-[gui_scripts]\n-\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 65,
+            "uv": 65
+          }
+        },
+        "fastapi-0.162.0.tar.gz": {
+          "missing": [],
+          "extra": [
+            "pyproject.toml.orig"
+          ],
+          "changed": [
+            "PKG-INFO",
+            "pyproject.toml"
+          ],
+          "text_diffs": {
+            "PKG-INFO": "--- PDM/PKG-INFO\n+++ uv/PKG-INFO\n@@ -2,7 +2,8 @@\n Name: fastapi\n Version: 0.162.0\n Summary: FastAPI framework, high performance, easy to learn, fast to code, ready for production\n-Author-Email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n+Author: Sebasti\u00e1n Ram\u00edrez\n+Author-email: Sebasti\u00e1n Ram\u00edrez <tiangolo@gmail.com>\n License-Expression: MIT\n License-File: LICENSE\n Classifier: Intended Audience :: Information Technology\n@@ -31,60 +32,60 @@\n Classifier: Programming Language :: Python :: 3.14\n Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers\n Classifier: Topic :: Internet :: WWW/HTTP\n-Project-URL: Homepage, https://github.com/fastapi/fastapi\n-Project-URL: Documentation, https://fastapi.tiangolo.com/\n-Project-URL: Repository, https://github.com/fastapi/fastapi\n-Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n-Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n-Requires-Python: >=3.10\n Requires-Dist: starlette>=0.46.0\n Requires-Dist: pydantic>=2.9.0\n Requires-Dist: typing-extensions>=4.8.0\n Requires-Dist: typing-inspection>=0.4.2\n Requires-Dist: annotated-doc>=0.0.2\n Requires-Dist: opentelemetry-api>=1.44.0\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'all'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'all'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'all'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'all'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'all'\n+Requires-Dist: itsdangerous>=1.1.0 ; extra == 'all'\n+Requires-Dist: pyyaml>=5.3.1 ; extra == 'all'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'all'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'all'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'all'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'all'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'\n+Requires-Dist: fastapi-cli[standard]>=0.0.32 ; extra == 'standard'\n+Requires-Dist: fastar>=0.9.0 ; extra == 'standard'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard'\n+Requires-Dist: opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Dist: pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'\n+Requires-Python: >=3.10\n+Project-URL: Homepage, https://github.com/fastapi/fastapi\n+Project-URL: Documentation, https://fastapi.tiangolo.com/\n+Project-URL: Repository, https://github.com/fastapi/fastapi\n+Project-URL: Issues, https://github.com/fastapi/fastapi/issues\n+Project-URL: Changelog, https://fastapi.tiangolo.com/release-notes/\n+Provides-Extra: all\n Provides-Extra: opentelemetry\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"\n Provides-Extra: standard\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"standard\"\n-Requires-Dist: fastar>=0.9.0; extra == \"standard\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard\"\n Provides-Extra: standard-no-fastapi-cloud-cli\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"\n-Provides-Extra: all\n-Requires-Dist: opentelemetry-sdk>=1.44.0; extra == \"all\"\n-Requires-Dist: opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"\n-Requires-Dist: fastapi-cli[standard]>=0.0.32; extra == \"all\"\n-Requires-Dist: httpx<1.0.0,>=0.23.0; extra == \"all\"\n-Requires-Dist: httpx2>=2.0.0; extra == \"all\"\n-Requires-Dist: jinja2>=3.1.5; extra == \"all\"\n-Requires-Dist: python-multipart>=0.0.18; extra == \"all\"\n-Requires-Dist: itsdangerous>=1.1.0; extra == \"all\"\n-Requires-Dist: pyyaml>=5.3.1; extra == \"all\"\n-Requires-Dist: email-validator>=2.0.0; extra == \"all\"\n-Requires-Dist: uvicorn[standard]>=0.12.0; extra == \"all\"\n-Requires-Dist: pydantic-settings>=2.0.0; extra == \"all\"\n-Requires-Dist: pydantic-extra-types>=2.0.0; extra == \"all\"\n Description-Content-Type: text/markdown\n \n <p align=\"center\">\n",
+            "pyproject.toml": "--- PDM/pyproject.toml\n+++ uv/pyproject.toml\n@@ -1,22 +1,15 @@\n [build-system]\n-requires = [\n-    \"pdm-backend\",\n-]\n-build-backend = \"pdm.backend\"\n+requires = [\"uv_build==0.13.6\"]\n+build-backend = \"uv_build\"\n \n [project]\n name = \"fastapi\"\n-dynamic = []\n+version = \"0.162.0\"\n description = \"FastAPI framework, high performance, easy to learn, fast to code, ready for production\"\n readme = \"README.md\"\n license = \"MIT\"\n-license-files = [\n-    \"LICENSE\",\n-]\n+license-files = [\"LICENSE\"]\n requires-python = \">=3.10\"\n-authors = [\n-    { name = \"Sebasti\u00e1n Ram\u00edrez\", email = \"tiangolo@gmail.com\" },\n-]\n classifiers = [\n     \"Intended Audience :: Information Technology\",\n     \"Intended Audience :: System Administrators\",\n@@ -53,7 +46,10 @@\n     \"annotated-doc>=0.0.2\",\n     \"opentelemetry-api>=1.44.0\",\n ]\n-version = \"0.162.0\"\n+\n+[[project.authors]]\n+name = \"Sebasti\u00e1n Ram\u00edrez\"\n+email = \"tiangolo@gmail.com\"\n \n [project.urls]\n Homepage = \"https://github.com/fastapi/fastapi\"\n@@ -201,9 +197,7 @@\n ]\n \n [tool.mypy]\n-plugins = [\n-    \"pydantic.mypy\",\n-]\n+plugins = [\"pydantic.mypy\"]\n strict = true\n \n [[tool.mypy.overrides]]\n@@ -230,9 +224,7 @@\n     \"--ignore=docs_src\",\n ]\n strict_xfail = true\n-filterwarnings = [\n-    \"error\",\n-]\n+filterwarnings = [\"error\"]\n timeout = \"20\"\n \n [tool.coverage.run]\n@@ -269,9 +261,7 @@\n show_contexts = true\n \n [tool.ruff]\n-extend-exclude = [\n-    \"scripts/tests/test_translation_fixer/**/*.md\",\n-]\n+extend-exclude = [\"scripts/tests/test_translation_fixer/**/*.md\"]\n \n [tool.ruff.lint]\n select = [\n@@ -290,72 +280,28 @@\n ]\n \n [tool.ruff.lint.per-file-ignores]\n-\"__init__.py\" = [\n-    \"F401\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/custom_response/tutorial007_py310.py\" = [\n-    \"B007\",\n-]\n-\"docs_src/dependencies/tutorial007_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_an_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial008b_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/dependencies/tutorial010_py310.py\" = [\n-    \"F821\",\n-]\n-\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\n-    \"B006\",\n-]\n-\"docs_src/security/tutorial004_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial004_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_an_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/security/tutorial005_py310.py\" = [\n-    \"B904\",\n-]\n-\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\n-    \"UP012\",\n-]\n-\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/stream_data/tutorial002_py310.py\" = [\n-    \"UP028\",\n-]\n-\"docs_src/server_sent_events/tutorial001_py310.py\" = [\n-    \"UP028\",\n-]\n+\"__init__.py\" = [\"F401\"]\n+\"docs_src/custom_request_and_route/tutorial002_an_py310.py\" = [\"B904\"]\n+\"docs_src/custom_request_and_route/tutorial002_py310.py\" = [\"B904\"]\n+\"docs_src/custom_response/tutorial007_py310.py\" = [\"B007\"]\n+\"docs_src/dependencies/tutorial007_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_an_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008_py310.py\" = [\"F821\"]\n+\"docs_src/dependencies/tutorial008b_an_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial008b_py310.py\" = [\"B904\"]\n+\"docs_src/dependencies/tutorial010_py310.py\" = [\"F821\"]\n+\"docs_src/path_operation_advanced_configuration/tutorial007_py310.py\" = [\"B904\"]\n+\"docs_src/query_params_str_validations/tutorial012_an_py310.py\" = [\"B006\"]\n+\"docs_src/query_params_str_validations/tutorial013_an_py310.py\" = [\"B006\"]\n+\"docs_src/security/tutorial004_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial004_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_an_py310.py\" = [\"B904\"]\n+\"docs_src/security/tutorial005_py310.py\" = [\"B904\"]\n+\"docs_src/json_base64_bytes/tutorial001_py310.py\" = [\"UP012\"]\n+\"docs_src/stream_json_lines/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial001_py310.py\" = [\"UP028\"]\n+\"docs_src/stream_data/tutorial002_py310.py\" = [\"UP028\"]\n+\"docs_src/server_sent_events/tutorial001_py310.py\" = [\"UP028\"]\n \n [tool.ruff.lint.isort]\n known-third-party = [\n@@ -450,3 +396,13 @@\n \n [tool.ty.terminal]\n error-on-warning = true\n+\n+[tool.uv.build-backend]\n+module-root = \"\"\n+module-name = \"fastapi\"\n+source-include = [\n+    \"tests/**\",\n+    \"docs_src/**\",\n+    \"scripts/**\",\n+    \"docs/en/docs/img/favicon.png\",\n+]\n"
+          },
+          "metadata_field_differences": {
+            "Author": {
+              "PDM": null,
+              "uv": [
+                "Sebasti\u00e1n Ram\u00edrez"
+              ]
+            },
+            "Provides-Extra": {
+              "PDM": [
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli",
+                "all"
+              ],
+              "uv": [
+                "all",
+                "opentelemetry",
+                "standard",
+                "standard-no-fastapi-cloud-cli"
+              ]
+            },
+            "Requires-Dist": {
+              "PDM": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"opentelemetry\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"standard\"",
+                "fastar>=0.9.0; extra == \"standard\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard\"",
+                "httpx2>=2.0.0; extra == \"standard\"",
+                "jinja2>=3.1.5; extra == \"standard\"",
+                "python-multipart>=0.0.18; extra == \"standard\"",
+                "email-validator>=2.0.0; extra == \"standard\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+                "pydantic-settings>=2.0.0; extra == \"standard\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "httpx2>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "jinja2>=3.1.5; extra == \"standard-no-fastapi-cloud-cli\"",
+                "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+                "email-validator>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-settings>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "pydantic-extra-types>=2.0.0; extra == \"standard-no-fastapi-cloud-cli\"",
+                "opentelemetry-sdk>=1.44.0; extra == \"all\"",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0; extra == \"all\"",
+                "fastapi-cli[standard]>=0.0.32; extra == \"all\"",
+                "httpx<1.0.0,>=0.23.0; extra == \"all\"",
+                "httpx2>=2.0.0; extra == \"all\"",
+                "jinja2>=3.1.5; extra == \"all\"",
+                "python-multipart>=0.0.18; extra == \"all\"",
+                "itsdangerous>=1.1.0; extra == \"all\"",
+                "pyyaml>=5.3.1; extra == \"all\"",
+                "email-validator>=2.0.0; extra == \"all\"",
+                "uvicorn[standard]>=0.12.0; extra == \"all\"",
+                "pydantic-settings>=2.0.0; extra == \"all\"",
+                "pydantic-extra-types>=2.0.0; extra == \"all\""
+              ],
+              "uv": [
+                "starlette>=0.46.0",
+                "pydantic>=2.9.0",
+                "typing-extensions>=4.8.0",
+                "typing-inspection>=0.4.2",
+                "annotated-doc>=0.0.2",
+                "opentelemetry-api>=1.44.0",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'all'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'all'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'all'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'all'",
+                "httpx2>=2.0.0 ; extra == 'all'",
+                "jinja2>=3.1.5 ; extra == 'all'",
+                "python-multipart>=0.0.18 ; extra == 'all'",
+                "itsdangerous>=1.1.0 ; extra == 'all'",
+                "pyyaml>=5.3.1 ; extra == 'all'",
+                "email-validator>=2.0.0 ; extra == 'all'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'all'",
+                "pydantic-settings>=2.0.0 ; extra == 'all'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'all'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'opentelemetry'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard'",
+                "fastapi-cli[standard]>=0.0.32 ; extra == 'standard'",
+                "fastar>=0.9.0 ; extra == 'standard'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard'",
+                "httpx2>=2.0.0 ; extra == 'standard'",
+                "jinja2>=3.1.5 ; extra == 'standard'",
+                "python-multipart>=0.0.18 ; extra == 'standard'",
+                "email-validator>=2.0.0 ; extra == 'standard'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard'",
+                "opentelemetry-sdk>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "opentelemetry-exporter-otlp-proto-http>=1.44.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "fastapi-cli[standard-no-fastapi-cloud-cli]>=0.0.32 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx>=0.23.0,<1.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "httpx2>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "jinja2>=3.1.5 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "python-multipart>=0.0.18 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "email-validator>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "uvicorn[standard]>=0.12.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-settings>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'",
+                "pydantic-extra-types>=2.0.0 ; extra == 'standard-no-fastapi-cloud-cli'"
+              ]
+            }
+          },
+          "metadata_body_equal": true,
+          "member_counts": {
+            "PDM": 1269,
+            "uv": 1270
+          }
+        }
+      }
+    }
+  ],
+  "dynamic_returncode": 2,
+  "static_median_seconds": 1.6604451999992307,
+  "static_range_seconds": [
+    1.5979052000002412,
+    1.7742742000009457
+  ],
+  "strict_goal_achieved": false,
+  "canonical_pyproject_unchanged": true
+}

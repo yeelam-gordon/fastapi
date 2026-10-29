@@ -1,0 +1,103 @@
+UNTIMED DIAGNOSTIC: TOP 40 CUMULATIVE
+Wed Oct 28 22:10:49 2026    Q:\fastapi\Generated Files\arm-build\filesystem\c-vs-q\followup\sdist.pstats
+
+         793658 function calls (775219 primitive calls) in 2.338 seconds
+
+   Ordered by: cumulative time
+   List reduced from 751 to 40 due to restriction <40>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    2.316    2.316 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\base.py:203(build)
+        1    0.019    0.019    2.013    2.013 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\sdist.py:98(build_artifact)
+     1281    0.003    0.000    0.947    0.001 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:529(open)
+     1284    0.944    0.001    0.946    0.001 {built-in method _io.open}
+     1269    0.013    0.000    0.582    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:2333(addfile)
+     1269    0.005    0.000    0.303    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:237(copyfileobj)
+        1    0.000    0.000    0.300    0.300 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\sdist.py:58(get_files)
+        1    0.000    0.000    0.282    0.282 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\base.py:189(get_files)
+        1    0.007    0.007    0.282    0.282 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\base.py:234(_collect_files)
+     3542    0.005    0.000    0.278    0.000 C:\Program Files\Python313-arm64\Lib\gzip.py:309(write)
+3938/3708    0.006    0.000    0.271    0.000 {method 'write' of '_io.BufferedWriter' objects}
+      231    0.001    0.000    0.266    0.001 C:\Program Files\Python313-arm64\Lib\gzip.py:134(write)
+      231    0.002    0.000    0.266    0.001 C:\Program Files\Python313-arm64\Lib\gzip.py:320(_write_raw)
+      231    0.259    0.001    0.259    0.001 {method 'compress' of 'zlib.Compress' objects}
+     2535    0.019    0.000    0.224    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:365(relative_to)
+     1268    0.011    0.000    0.164    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:2139(gettarinfo)
+     1271    0.148    0.000    0.149    0.000 {built-in method nt.lstat}
+     1269    0.004    0.000    0.147    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:1061(tobuf)
+     2535    0.013    0.000    0.144    0.000 <frozen _collections_abc>:1041(__contains__)
+     1269    0.019    0.000    0.140    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:1105(create_pax_header)
+     1269    0.004    0.000    0.139    0.000 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\base.py:336(_show_add_file)
+    10729    0.008    0.000    0.101    0.000 <frozen _collections_abc>:1031(__iter__)
+     2537    0.028    0.000    0.098    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:1185(_create_header)
+     1488    0.002    0.000    0.094    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_abc.py:476(is_file)
+     8195    0.013    0.000    0.093    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:44(__getitem__)
+     2576    0.019    0.000    0.092    0.000 C:\Program Files\Python313-arm64\Lib\copy.py:62(copy)
+     1513    0.090    0.000    0.092    0.000 {built-in method nt.stat}
+     1498    0.001    0.000    0.092    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:510(stat)
+     1188    0.088    0.000    0.088    0.000 {method 'read' of '_io.BufferedReader' objects}
+    10728    0.010    0.000    0.086    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:245(_from_parsed_parts)
+     1279    0.082    0.000    0.082    0.000 {method '__exit__' of '_io._IOBase' objects}
+     1268    0.012    0.000    0.075    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:1254(_create_pax_generic_header)
+    12209    0.006    0.000    0.068    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:252(_from_parsed_string)
+    12240    0.014    0.000    0.063    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_abc.py:130(with_segments)
+     1269    0.004    0.000    0.061    0.000 C:\fastapi-arm-build-lab\copilot-2a73e36a\followup-shared-checkout\code\worker.py:22(canonical_clean_tarinfo)
+     1269    0.004    0.000    0.055    0.000 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\sdist.py:21(clean_tarinfo)
+     1483    0.001    0.000    0.053    0.000 C:\Program Files\Python313-arm64\Lib\glob.py:498(select_recursive)
+     1336    0.011    0.000    0.050    0.000 C:\Program Files\Python313-arm64\Lib\glob.py:507(select_recursive_step)
+    12256    0.014    0.000    0.040    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:498(__init__)
+    10731    0.009    0.000    0.039    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:193(__eq__)
+
+
+
+UNTIMED DIAGNOSTIC: TOP 40 TOTAL
+Wed Oct 28 22:10:49 2026    Q:\fastapi\Generated Files\arm-build\filesystem\c-vs-q\followup\sdist.pstats
+
+         793658 function calls (775219 primitive calls) in 2.338 seconds
+
+   Ordered by: internal time
+   List reduced from 751 to 40 due to restriction <40>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1284    0.944    0.001    0.946    0.001 {built-in method _io.open}
+      231    0.259    0.001    0.259    0.001 {method 'compress' of 'zlib.Compress' objects}
+     1271    0.148    0.000    0.149    0.000 {built-in method nt.lstat}
+     1513    0.090    0.000    0.092    0.000 {built-in method nt.stat}
+     1188    0.088    0.000    0.088    0.000 {method 'read' of '_io.BufferedReader' objects}
+     1279    0.082    0.000    0.082    0.000 {method '__exit__' of '_io._IOBase' objects}
+     2576    0.029    0.000    0.029    0.000 {method '__reduce_ex__' of 'object' objects}
+     2537    0.028    0.000    0.098    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:1185(_create_header)
+      439    0.027    0.000    0.027    0.000 {built-in method nt.scandir}
+    21459    0.025    0.000    0.029    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:174(_str_normcase)
+     2576    0.020    0.000    0.037    0.000 C:\Program Files\Python313-arm64\Lib\copy.py:248(_reconstruct)
+     2535    0.019    0.000    0.224    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:365(relative_to)
+     1269    0.019    0.000    0.140    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:1105(create_pax_header)
+        1    0.019    0.019    2.013    2.013 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\sdist.py:98(build_artifact)
+     2576    0.019    0.000    0.092    0.000 C:\Program Files\Python313-arm64\Lib\copy.py:62(copy)
+77145/60729    0.016    0.000    0.021    0.000 {built-in method builtins.len}
+    12262    0.016    0.000    0.025    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:117(__init__)
+    12685    0.015    0.000    0.015    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:194(itn)
+    12256    0.014    0.000    0.040    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:498(__init__)
+    12240    0.014    0.000    0.063    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_abc.py:130(with_segments)
+     1698    0.013    0.000    0.030    0.000 C:\Program Files\Python313-arm64\Lib\glob.py:451(select_wildcard)
+    17759    0.013    0.000    0.019    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:158(stn)
+    67547    0.013    0.000    0.013    0.000 {built-in method builtins.isinstance}
+     8195    0.013    0.000    0.093    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:44(__getitem__)
+     2535    0.013    0.000    0.144    0.000 <frozen _collections_abc>:1041(__contains__)
+     1269    0.013    0.000    0.582    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:2333(addfile)
+     1268    0.012    0.000    0.075    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:1254(_create_pax_generic_header)
+     1336    0.011    0.000    0.050    0.000 C:\Program Files\Python313-arm64\Lib\glob.py:507(select_recursive_step)
+     1268    0.011    0.000    0.164    0.000 C:\Program Files\Python313-arm64\Lib\tarfile.py:2139(gettarinfo)
+     5074    0.010    0.000    0.010    0.000 {built-in method builtins.sum}
+    10728    0.010    0.000    0.086    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:245(_from_parsed_parts)
+     1269    0.010    0.000    0.014    0.000 {built-in method builtins.print}
+    10770    0.009    0.000    0.016    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:237(_format_parsed_parts)
+     5074    0.009    0.000    0.009    0.000 {built-in method _struct.unpack_from}
+    10731    0.009    0.000    0.039    0.000 C:\Program Files\Python313-arm64\Lib\pathlib\_local.py:193(__eq__)
+    38346    0.009    0.000    0.009    0.000 {method 'get' of 'dict' objects}
+    10729    0.008    0.000    0.101    0.000 <frozen _collections_abc>:1031(__iter__)
+    45780    0.008    0.000    0.008    0.000 {built-in method builtins.setattr}
+        1    0.007    0.007    0.282    0.282 C:\fastapi-arm-build-lab\copilot-2a73e36a\env\Lib\site-packages\pdm\backend\base.py:234(_collect_files)
+    26974    0.007    0.000    0.007    0.000 {method 'encode' of 'str' objects}
+
+

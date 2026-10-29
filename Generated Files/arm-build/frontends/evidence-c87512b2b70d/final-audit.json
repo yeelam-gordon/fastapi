@@ -1,0 +1,12 @@
+{
+  "timed_trials": 9,
+  "validated_preparations_and_trials": 12,
+  "uv_pe_machine": "0xaa64",
+  "uv_matches_existing_pinned_archive": true,
+  "uv_sha256": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+  "script_sha256": "99c47c90bf667a7085dffbf166bcd65c556cf63e4419614b68bf9966e89249db",
+  "source_archive_sha256": "c21320fada884c0347873b278b2be176027468a2bb494d9b71b147531a39d6fa",
+  "record_validation_source_sha256": "43ce4b7cee546194fed58e53a8167103fa9f25cdb6beaef6a404cd322dfac9aa",
+  "full_mode_and_member_comparison": "passed",
+  "mac_execute_bit_differences_per_output": 5
+}

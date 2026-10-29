@@ -1,0 +1,10 @@
+{
+  "python_cpu_seconds": 0.671875,
+  "label": "node-3-resume",
+  "workers": 4,
+  "child_seconds": 1.3486749000003329,
+  "imports_seconds": 0.3188680999992357,
+  "sdist_seconds": 0.7731945999985328,
+  "select_extract_seconds": 0.16371060000165016,
+  "wheel_seconds": 0.09290160000091419
+}

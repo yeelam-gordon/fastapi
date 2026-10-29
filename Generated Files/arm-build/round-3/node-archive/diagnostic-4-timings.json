@@ -1,0 +1,27 @@
+{
+  "label": "diagnostic-4",
+  "workers": 4,
+  "child_seconds": 1.3603263999975752,
+  "imports_seconds": 0.2673236000009638,
+  "sdist_seconds": 0.8080919999993057,
+  "select_extract_seconds": 0.1779365999973379,
+  "wheel_seconds": 0.10697419999996782,
+  "stages": {
+    "pdm_initialize": 0.0007547999994130805,
+    "fresh_pdm_selection": 0.14012039999943227,
+    "permission_manifest_read": 0.004855099999986123,
+    "fresh_pkg_info": 0.008798400001978735,
+    "fresh_ipc_manifest": 0.003082900002482347,
+    "node_internal": {
+      "validate_request": 0.01420750000000001,
+      "bounded_lstat_and_read": 0.25412039999999997,
+      "ustar_pax_serialization": 0.020369700000000022,
+      "gzip_level_9": 0.18882469999999996
+    },
+    "node_start_io_tar_gzip_and_output": 0.6306082000010065
+  },
+  "coordinator_modules_loaded": {
+    "benchmark": false,
+    "statistics": false
+  }
+}

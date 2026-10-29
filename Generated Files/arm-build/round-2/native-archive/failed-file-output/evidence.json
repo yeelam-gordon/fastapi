@@ -1,0 +1,57 @@
+{
+  "tar": "C:\\Windows\\System32\\tar.exe",
+  "pe_machine": "0xaa64",
+  "tar_version": "bsdtar 3.8.9 - libarchive 3.8.9 zlib/1.2.13.1-motley liblzma/5.8.3 bz2lib/1.0.8 libzstd/1.5.7 cng/2.0 libb2/bundled",
+  "pdm_backend": "2.5.0",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "git_sha": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+  "local_vs_mac": [
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/format.sh",
+      "local": "0:8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+      "mac": "111:8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e"
+    },
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/lint.sh",
+      "local": "0:e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+      "mac": "111:e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382"
+    },
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/test-cov-html.sh",
+      "local": "0:dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+      "mac": "111:dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1"
+    },
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/test-cov.sh",
+      "local": "0:6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+      "mac": "111:6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692"
+    },
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/test.sh",
+      "local": "0:92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+      "mac": "111:92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d"
+    }
+  ],
+  "preparation": {
+    "label": "prepare",
+    "seconds": 1.9077419000004738,
+    "sdist_seconds": 1.0399938999998994,
+    "extract_seconds": 0.762006000000838,
+    "wheel_seconds": 0.10574199999973644,
+    "full_process_seconds": 2.332460199999332
+  },
+  "differences": [
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "PKG-INFO",
+      "expected": "0:71eccf0418f121959670e72e343ec964105ea0190783e5048eef970a539c4e63",
+      "actual": null
+    }
+  ],
+  "error": "VerificationError(\"fastapi-0.162.0.tar.gz: member names differ; missing=['PKG-INFO'], extra=[]\")"
+}

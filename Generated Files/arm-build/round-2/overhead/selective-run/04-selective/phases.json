@@ -1,0 +1,14 @@
+{
+  "sdist": {
+    "wall": 1.3081728999986808,
+    "python_cpu": 1.140625
+  },
+  "selection_and_extraction": {
+    "wall": 1.1700667000004614,
+    "python_cpu": 1.015625
+  },
+  "wheel": {
+    "wall": 0.11443710000094143,
+    "python_cpu": 0.09375
+  }
+}

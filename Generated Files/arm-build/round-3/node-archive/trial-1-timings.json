@@ -1,0 +1,9 @@
+{
+  "label": "trial-1",
+  "workers": 4,
+  "child_seconds": 1.300257300001249,
+  "imports_seconds": 0.24649040000076639,
+  "sdist_seconds": 0.7778498000006948,
+  "select_extract_seconds": 0.17169769999964046,
+  "wheel_seconds": 0.10421940000014729
+}

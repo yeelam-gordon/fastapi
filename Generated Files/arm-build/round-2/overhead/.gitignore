@@ -1,0 +1,14 @@
+# Disposable source snapshots, extracted trees and build scratch.
+/run/source/
+/**/extracted/
+/**/.pdm-build/
+/**/cache/
+/**/temp/
+/**/__pycache__/
+/**/tool-environment/
+/**/.venv/
+# Preserve JSON/text/log evidence, but do not publish binary build outputs.
+/**/*.tar
+/**/*.tar.gz
+/**/*.whl
+/**/*.zip

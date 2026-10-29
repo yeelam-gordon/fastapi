@@ -28,9 +28,37 @@ The fork's CI capacity is limited, not infinite. This does not prohibit useful r
 
 Do not retry automatically or use CI as a substitute for available local validation.
 
+### Protected Windows filesystem and repeated scanning
+
+The user reports that the Windows ARM CI machine does **not** use Dev Drive. The local Q: drive is reported as Dev Drive and may hide benefits from reducing scan-sensitive filesystem work; evaluate those optimizations on C: as well.
+
+The target is fewer unnecessary source copies, extracted files, intermediate writes, reopen/rewrite passes and repeated scans—not weaker endpoint protection. Do not disable Defender/MDE, add exclusions, change tamper/UAC settings or change drive trust. Attribute a speed difference to antivirus only with scan evidence, not merely a C:/Q: timing difference.
+
+### Shared gains and over-optimization
+
+An optimization that helps macOS too can be useful, but a Windows absolute speedup does not establish progress toward relative parity. Evaluate applicable common optimizations on both platforms and track the Windows/Mac ratio separately.
+
+Show maintenance cost and compatibility risk alongside timing gains. Do not recommend a complex custom packager or new toolchain for a small benefit; the user may reject over-optimization.
+
+### Supplied prior work and independent reasoning
+
+Prior optimization branches and reported benchmark results are inputs for independent research, not authority to replace our diagnosis. Some results may not be reproducible in this environment. If a proposal exactly matches existing work, credit that prior source and do not claim authorship. [PRIOR-WORK.md](PRIOR-WORK.md) owns the source and attribution ledger.
+
+### Per-investigation isolation and coordination capacity
+
+Delegate substantial investigations and proposal evaluations to subagents, with a separate Git branch/worktree for each active lane. Keep measured source inputs separate and immutable; do not move files during a timed experiment. The master owns integration, acceptance and the shared workboard.
+
+Use 2-3 active lanes as the normal minimum when independent work is ready, and no more than 15 subagents. Do not serialize independent research unnecessarily. Disk-intensive timed workloads sharing a device may require serialization while source research, implementation or review continues in parallel.
+
+If coordination capacity becomes the bottleneck, prepare a bounded handoff in a new `Generated Files` subfolder and show the user a dialog requesting another full agent. Do not silently expand into an unbounded worker fleet. Completed pre-isolation experiments remain historical evidence; new iterations use the isolated lanes.
+
+### Competing performance hypotheses
+
+Do not assume Defender is the sole cause. Research interpreter/toolchain optimization quality, compiler/build configuration, filesystem/storage behavior, dependency implementation and wheel availability, ARM-native execution/ISA acceleration, and the actual timed workload. Rank them using measured stage costs and verified source facts; do not rebuild toolchains or add complexity merely because a hypothesis sounds plausible.
+
 ## Observed environment, not assumptions
 
-The current host is a **16-core Cobalt 100 Windows ARM64 VM**, not the eventual approximately 20-core physical machine. CPython 3.13.15 was already installed and works natively. The PATH uv executable was broken; a verified native copy was installed for the experiment. PyPI binary TLS transport failed locally; official GitHub source bootstrap and the successful Windows CI wheelhouse provide recovery paths.
+The current host is a **16-core Cobalt 100 Windows ARM64 VM**, not the eventual approximately 20-core physical machine. Read-only inspection confirms Q: is ReFS and C: is NTFS; privileged Dev Drive status queries were denied, so effective local trust/performance-mode status is not independently established. CPython 3.13.15 was already installed and works natively. The PATH uv executable was broken; a verified native copy was installed for the experiment. PyPI binary TLS transport failed locally; official GitHub source bootstrap and the successful Windows CI wheelhouse provide recovery paths.
 
 GitHub initially rejected workflow pushes without the `workflow` OAuth scope. The user completed authorization; that blocker is resolved. No further login is needed.
 

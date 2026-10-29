@@ -1,0 +1,93 @@
+{
+  "script_sha256": "9a4e3a0052997c89fab071556a49d77711b777c55b9643bcbba2171ad359d209",
+  "source_and_metadata_members_unchanged": 71,
+  "installed_python_sources_match_official_wheel": true,
+  "bytecode_actually_imported": true,
+  "all_artifacts_equivalent": true,
+  "unmodified_wheel_probe": {
+    "argv": [
+      "C:\\Program Files\\Python313-arm64\\python.exe",
+      "-S",
+      "-c",
+      "import sys; sys.path.insert(0,'Q:\\\\fastapi\\\\Generated Files\\\\arm-build\\\\wheelhouse\\\\ci-40814042898\\\\pdm_backend-2.5.0-py3-none-any.whl'); import pdm.backend"
+    ],
+    "returncode": 1
+  },
+  "phase_medians": {
+    "installed": {
+      "imports_wall": 0.20862019999913173,
+      "sdist": {
+        "wall": 1.2323192999992898,
+        "python_cpu": 1.09375
+      },
+      "selection_and_extraction": {
+        "wall": 0.20146139999997104,
+        "python_cpu": 0.1875
+      },
+      "wheel": {
+        "wall": 0.09516589999839198,
+        "python_cpu": 0.09375
+      }
+    },
+    "sourcezip": {
+      "imports_wall": 0.3305543000005855,
+      "sdist": {
+        "wall": 1.2083325000003242,
+        "python_cpu": 1.078125
+      },
+      "selection_and_extraction": {
+        "wall": 0.1952902000011818,
+        "python_cpu": 0.171875
+      },
+      "wheel": {
+        "wall": 0.08581039999990026,
+        "python_cpu": 0.078125
+      }
+    },
+    "bytecodezip": {
+      "imports_wall": 0.22170039999946312,
+      "sdist": {
+        "wall": 1.2200076000008266,
+        "python_cpu": 1.09375
+      },
+      "selection_and_extraction": {
+        "wall": 0.19475899999997637,
+        "python_cpu": 0.1875
+      },
+      "wheel": {
+        "wall": 0.08620909999990545,
+        "python_cpu": 0.078125
+      }
+    }
+  },
+  "importtime_cumulative_microseconds": {
+    "installed": {
+      "importlib.metadata": 52489,
+      "pdm.backend": 1623,
+      "pdm.backend.base": 113013,
+      "pdm.backend.sdist": 154397,
+      "pdm.backend.wheel": 9696
+    },
+    "sourcezip": {
+      "importlib.metadata": 55368,
+      "pdm.backend": 2767,
+      "pdm.backend.base": 196319,
+      "pdm.backend.sdist": 273079,
+      "pdm.backend.wheel": 18050
+    },
+    "bytecodezip": {
+      "importlib.metadata": 55594,
+      "pdm.backend": 1490,
+      "pdm.backend.base": 122523,
+      "pdm.backend.sdist": 165030,
+      "pdm.backend.wheel": 10113
+    }
+  },
+  "paired_bytecode_savings_seconds": [
+    0.051707600001464016,
+    0.05079650000152469,
+    -0.11694849999912549,
+    0.049501100000270526,
+    0.09290859999964596
+  ]
+}

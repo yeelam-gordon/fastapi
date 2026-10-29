@@ -1,0 +1,16 @@
+# Disposable canonical copy and backend work directories.
+/snapshots/source/
+/cache/
+/cache-standard/
+/scratch/
+/.venv/
+/tool-environment/
+__pycache__/
+
+# Keep scripts, manifests, logs, source receipts and proposals visible.
+*.whl
+*.tar.gz
+*.tar
+*.zip
+*.exe
+*.dll

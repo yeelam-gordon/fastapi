@@ -1,0 +1,100 @@
+FRESH IMPORT / TOOL-ZIP FOLLOW-UP
+Confidence: HIGH for tested artifact equivalence and provenance; LOW for a
+durable speed benefit. No CI, global changes, site customization, native-builder
+combination, or writes outside owned experiment outputs.
+
+Five alternating measured full builds per variant, plus one preparation each:
+  installed official PDM:     median 1.972574 s, range 1.935894-2.007130 s
+  source ZIP, Python -S:      median 2.008345 s, range 1.992224-2.098343 s
+  precompiled ZIP, Python -S: median 1.923073 s, range 1.889474-2.052843 s
+Bytecode ZIP is 2.51% lower by medians (~49.5 ms). Four of five paired trials
+improved; one regressed by 116.9 ms. Paired savings in order:
+  +51.708, +50.797, -116.948, +49.501, +92.909 ms.
+This does NOT solve the ~1.95 s critical path. Stop rather than chase site.
+The host was not exclusive; independent workers may have run concurrently.
+
+MECHANICS AND ONE FAILED CASE
+The unmodified official wheel cannot directly zipimport pdm: its implicit
+namespace directory pdm/ has no explicit ZIP directory entry, so fresh -S
+reports ModuleNotFoundError: No module named 'pdm'. Exact failed command,
+return code and raw stderr are retained in ziptools-run/verification.json and
+unmodified-wheel-probe.stderr.txt.
+The bounded alternative repacks the TOOL wheel with explicit directory entries.
+No namespace module injection, metadata monkeypatch, global sys.path change,
+or project input cache. Only the derived tool ZIP is prepended to child sys.path.
+Source ZIP preserves every original source/resource/dist-info member byte.
+Bytecode ZIP additionally contains optimize=0 legacy .pyc siblings with valid
+source timestamps. Original sources remain available for normal fallback.
+Actual backend, sdist and wheel imports resolve to .pyc; verification asserts
+the backend bytecode origin. Both variants use native base Python -S.
+
+METADATA AND CORRECTNESS
+Official downloaded wheel:
+wheelhouse/ci-40814042898/pdm_backend-2.5.0-py3-none-any.whl
+SHA256 5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63
+Its Python sources match the installed official-tool-environment exactly.
+All 71 original wheel entries remain byte-identical in both derived ZIPs.
+importlib.metadata discovers version 2.5.0 and zero pdm.build.hook entry points,
+matching installed environment. Original dist-info/entry-point bytes retained.
+Runtime requirement is importlib-metadata only on Python <3.10, inapplicable here.
+All 18 complete sdist -> archive-derived selective-extraction -> fresh PDM
+wheel builds passed benchmark.artifact_manifest/compare_manifests:
+1269 full sdist file contents/executable masks, 65 wheel members and complete
+valid RECORD hashes/sizes/coverage, against the same local-03-canonical baseline.
+Every selection and metadata computation occurs inside timed child execution;
+no source fallback, prepared project metadata or project file-list cache.
+Source remains commit 264cbad400c8336057a70b9b6a65bfdb4920321e.
+No artifact failures. Cross-Mac five-script executable-mode gap remains
+UNRESOLVED: this follow-up did not combine the native sdist builder.
+
+PROVISIONING IS NOT FREE
+Tool-source ZIP construction: 0.018717 s.
+Tool-bytecode ZIP construction: 0.149488 s.
+Combined provisioning including reading wheel/setup: 0.176140 s.
+These bootstrap-only costs are excluded from repeated-build measurements.
+At the observed 49.5 ms median difference, conservative combined cost nominally
+amortizes after four builds; variance means this is NOT a reliable guarantee.
+A single build plus conservative provisioning costs ~2.099 s vs installed
+median 1.973 s. Existing installed-environment provisioning is also excluded.
+Compiler ABI: native CPython 3.13.15, cpython-313, magic f30d0d0a, optimize=0.
+Rebuild tool cache on Python ABI/optimization/source-wheel changes.
+ZIP sizes: source 201338 bytes, bytecode 547239 bytes; hashes in report.json.
+
+UNTIMED IMPORT DIAGNOSTICS (NOT BENCHMARK SAMPLES)
+-X importtime recorded separately for installed/sourcezip/bytecodezip.
+Cumulative pdm.backend.sdist import:
+  154397 / 273079 / 165030 microseconds.
+Fresh-child measured import block medians:
+  0.208620 / 0.330554 / 0.221700 seconds.
+Thus bytecode removes source-ZIP compilation overhead but does not demonstrate
+faster imports than the already bytecode-cached installed backend.
+Phase median wall / Python CPU, bytecode ZIP:
+  sdist 1.220008 / 1.093750 s
+  selection+extraction 0.194759 / 0.187500 s
+  wheel 0.086209 / 0.078125 s.
+Outer wall includes interpreter startup, all imports, fresh metadata, full
+sdist, selection/extraction, wheel, phase evidence and logs. Phase medians do
+not sum exactly to outer wall. No profiler in benchmark.
+
+COMMANDS / RAW OUTPUTS
+From Q:\fastapi:
+& 'Generated Files\arm-build\.venv\Scripts\python.exe' 'Generated Files\arm-build\round-2\overhead\ziptools.py'
+& 'Generated Files\arm-build\.venv\Scripts\python.exe' 'Generated Files\arm-build\round-2\overhead\ziptools-evidence.py'
+New output directory required for rerun; existing evidence is never erased.
+ziptools-run/report.json: all exact child argv, returns, walls, phase timings,
+selected archive manifest, sys.path, backend origin and bootstrap provenance.
+ziptools-run/verification.json: script fingerprint, unchanged-member proof,
+metadata/bytecode checks, importtime summary and paired savings.
+ziptools-run/{installed,sourcezip,bytecodezip}-importtime.txt: raw untimed
+import stages; corresponding -diagnostic.stdout.txt contains version/hooks.
+Per-trial stdout.log, stderr.log, phases.json, selection.json, tool.json and
+full normalized manifest.json retained. Loop wall 38.008052 s including
+validation/reporting, excluding provisioning/import diagnostics.
+Existing scoped .gitignore covers ZIPs, binary outputs, extracted/, temp/ and
+__pycache__/; scripts and JSON/text/log evidence remain visible.
+
+NEXT HYPOTHESIS
+The dominant unchanged sdist work is still ~1.22 s. Tool ZIP import is not the
+next high-value lever. Retain the simpler installed toolchain unless deployment
+constraints justify ZIP provisioning; investigate the sdist critical path or
+combine an independently verified native builder only under full equivalence.

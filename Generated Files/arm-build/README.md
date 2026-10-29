@@ -2,6 +2,8 @@
 
 The top-level [PERSONA.md](../PERSONA.md), [GOALS.md](../GOALS.md) and [CIRCUMSTANCES.md](../CIRCUMSTANCES.md) own the expert method, requested outcomes and working constraints. Start with [FINDINGS.md](FINDINGS.md) for results and limitations. [WORKBOARD.md](WORKBOARD.md) owns execution state; [SOURCES.md](SOURCES.md) records verified primary research; [PROFILING.md](PROFILING.md) applies that method to diagnostics.
 
+The goal remains active. [INVESTIGATION-AND-PROPOSALS.md](../INVESTIGATION-AND-PROPOSALS.md) is the live table of measured proposals and next experiments; first-round completion does not mean parity was reached.
+
 The experiment preserves FastAPI's PDM backend and complete source-distribution-to-wheel build. It compares normal isolation with a separately provisioned pinned backend. It does not change FastAPI runtime behavior or publishing.
 
 The current host's setup and exact commands are in [LOCAL-SETUP.md](LOCAL-SETUP.md). Initial measurements used official GitHub backend source because PyPI binary TLS was blocked; the successful Windows job subsequently supplied an offline wheelhouse for the complete tool/minimal-runtime environment.

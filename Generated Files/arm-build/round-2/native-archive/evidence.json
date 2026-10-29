@@ -1,0 +1,150 @@
+{
+  "tar": "C:\\Windows\\System32\\tar.exe",
+  "pe_machine": "0xaa64",
+  "tar_version": "bsdtar 3.8.9 - libarchive 3.8.9 zlib/1.2.13.1-motley liblzma/5.8.3 bz2lib/1.0.8 libzstd/1.5.7 cng/2.0 libb2/bundled",
+  "pdm_backend": "2.5.0",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "git_sha": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+  "local_vs_mac": [
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/format.sh",
+      "local": "0:8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+      "mac": "111:8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e"
+    },
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/lint.sh",
+      "local": "0:e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+      "mac": "111:e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382"
+    },
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/test-cov-html.sh",
+      "local": "0:dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+      "mac": "111:dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1"
+    },
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/test-cov.sh",
+      "local": "0:6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+      "mac": "111:6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692"
+    },
+    {
+      "archive": "fastapi-0.162.0.tar.gz",
+      "member": "scripts/test.sh",
+      "local": "0:92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+      "mac": "111:92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d"
+    }
+  ],
+  "preparation": {
+    "label": "prepare",
+    "seconds": 1.9511657000002742,
+    "sdist_seconds": 1.0540949999995064,
+    "extract_seconds": 0.7889253000012104,
+    "wheel_seconds": 0.10814539999955741,
+    "full_process_seconds": 2.3766649999997753
+  },
+  "differences": [],
+  "strict_validation": "passed: Mac member bytes, sdist execute bits and wheel RECORD",
+  "trials": [
+    {
+      "label": "trial-1",
+      "seconds": 1.9119826999994984,
+      "sdist_seconds": 1.04385209999964,
+      "extract_seconds": 0.7643322999992961,
+      "wheel_seconds": 0.10379830000056245,
+      "full_process_seconds": 2.3475211999993917
+    },
+    {
+      "label": "trial-2",
+      "seconds": 1.875828600001114,
+      "sdist_seconds": 1.0103178000008484,
+      "extract_seconds": 0.7614221999992878,
+      "wheel_seconds": 0.10408860000097775,
+      "full_process_seconds": 2.289579700000104
+    },
+    {
+      "label": "trial-3",
+      "seconds": 1.8557830000008835,
+      "sdist_seconds": 0.9983080000001792,
+      "extract_seconds": 0.7497726000001421,
+      "wheel_seconds": 0.10770240000056219,
+      "full_process_seconds": 2.259995500000514
+    },
+    {
+      "label": "trial-4",
+      "seconds": 1.7831375999994634,
+      "sdist_seconds": 0.9782586000001174,
+      "extract_seconds": 0.7039801999999327,
+      "wheel_seconds": 0.10089879999941331,
+      "full_process_seconds": 2.190993200001685
+    },
+    {
+      "label": "trial-5",
+      "seconds": 1.862200400000802,
+      "sdist_seconds": 0.962790400000813,
+      "extract_seconds": 0.7795295999985683,
+      "wheel_seconds": 0.11988040000142064,
+      "full_process_seconds": 2.2774187000013626
+    }
+  ],
+  "median_seconds": 1.862200400000802,
+  "median_full_process_seconds": 2.2774187000013626,
+  "assessment": "Correct native ARM64 packaging feasible; speed target NOT met.",
+  "confidence": {
+    "architecture": "high: tar.exe PE machine 0xaa64, not inferred from host",
+    "correctness": "high: preparation and all five final full-process trials strict-Mac equivalent, including five executable scripts and wheel RECORD",
+    "timing": "medium: five local warm trials, no paired baseline rerun; process includes evidence imports; not a production frontend benchmark",
+    "future_binding_speed": "low: not implemented or measured"
+  },
+  "commands": [
+    "& \"Generated Files\\arm-build\\.venv\\Scripts\\python.exe\" \"Generated Files\\arm-build\\round-2\\native-archive\\prototype.py\"",
+    "C:\\Windows\\System32\\tar.exe --version",
+    "C:\\Windows\\System32\\tar.exe -czf - --format=pax @<fresh-source-.pdm-build-archive.mtree>",
+    "C:\\Windows\\System32\\tar.exe -xf <fresh-sdist> -C <fresh-owned-extracted-directory>"
+  ],
+  "timing_scope": "Full-process elapsed includes Python startup/imports, fresh PDM metadata and file selection, canonical source.tar permission-map generation, fresh mtree generation, native gzip/pax serialization, native extraction, then unmodified PDM WheelBuilder on EXTRACTED SDIST ONLY. Source copying/checkout and post-build strict validator excluded, as in baseline. No prebuilt metadata or file-list reuse. In-process seconds separately show backend-only work.",
+  "backend_observations": "Installed pdm-backend 2.5.0 sdist.py/base.py/config.py/wheel.py read. NativeSdist overrides only build_artifact; inherited PDM get_files regenerates pyproject.toml and package metadata every build. No PDM pyproject-internals change required: generated pyproject and metadata match Mac exactly. No monkeypatch/fork.",
+  "native_edge_case": "Direct bsdtar -czf <file> @mtree intermittently exits zero while warning PKG-INFO: Cannot add archive to itself and omitting PKG-INFO. Explicit logical inode was insufficient. Final prototype captures native compressed stdout through pipe and writes bytes; stderr now fatal. Failed evidence retained under failed-size-lf and failed-file-output; validated-inprocess is a non-full-process preliminary result, not headline timing.",
+  "proposal": "Do not adopt native CLI substitution for speed: median native extraction alone ~0.761s exceeds ~0.730s target before serialization/metadata/wheel. A direct libarchive binding or carefully scoped in-process writer may avoid subprocess and mtree overhead, but new architecture exceeds disposable scope; requires separate packaging design, strict mode/provenance handling, safe extraction and end-to-end trials. No production changes proposed here.",
+  "ignored_paths": [
+    "source/",
+    "**/extracted/",
+    "**/__pycache__/",
+    "**/.pdm-build/",
+    "**/.venv/",
+    "*.whl",
+    "*.tar",
+    "*.tar.gz"
+  ],
+  "no_changes": "No production/shared source edits, installs, global config/protection changes, subagents or CI.",
+  "source_copy_verification": {
+    "regular_files_checked": 3390,
+    "sha256_all_equal": true
+  },
+  "same_host_reference_summary": {
+    "median_seconds": {
+      "baseline": 3.76116329999968,
+      "candidate": 2.868860099999438
+    },
+    "range_seconds": {
+      "baseline": {
+        "min": 3.6622963000008895,
+        "max": 3.9228258000002825
+      },
+      "candidate": {
+        "min": 2.7762696999998298,
+        "max": 2.954744799999389
+      }
+    },
+    "candidate_over_baseline": 0.7627587188250193,
+    "interpretation": "Descriptive warm-download results on this host only"
+  },
+  "stage_medians_seconds": {
+    "sdist_seconds": 0.9983080000001792,
+    "extract_seconds": 0.7614221999992878,
+    "wheel_seconds": 0.10408860000097775
+  },
+  "prototype_sha256": "0e9fcea73923efc1a56d2a443080aea2073e9a65f1bd4a6cf4a5c49b4275e96d"
+}

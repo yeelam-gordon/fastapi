@@ -1,0 +1,1830 @@
+{
+  "source_commit": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+  "commands": [
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "venv",
+        "--python",
+        "C:\\Program Files\\Python313-arm64\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env"
+      ],
+      "cwd": null,
+      "seconds": 0.4010511000014958,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "pip",
+        "sync",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-index",
+        "--find-links",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\wheelhouse",
+        "--require-hashes",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\tooling.lock"
+      ],
+      "cwd": null,
+      "seconds": 1.504896699996607,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "-c",
+        "import platform,sys,sysconfig,importlib.metadata as m,json; print(json.dumps({'python':sys.version,'base':sys.base_prefix,'platform':sysconfig.get_platform(),'pdm':m.version('pdm-backend')}))"
+      ],
+      "cwd": null,
+      "seconds": 0.2546563999967475,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "venv",
+        "--python",
+        "C:\\Program Files\\Python313-arm64\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env"
+      ],
+      "cwd": null,
+      "seconds": 0.3058010999993712,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "pip",
+        "sync",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-index",
+        "--find-links",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\wheelhouse",
+        "--require-hashes",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\tooling.lock"
+      ],
+      "cwd": null,
+      "seconds": 0.8940973999997368,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "-c",
+        "import platform,sys,sysconfig,importlib.metadata as m,json; print(json.dumps({'python':sys.version,'base':sys.base_prefix,'platform':sysconfig.get_platform(),'pdm':m.version('pdm-backend')}))"
+      ],
+      "cwd": null,
+      "seconds": 0.25641320000067935,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\baseline.py",
+        "pdm-1"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\pdm-1\\source",
+      "seconds": 5.874200300000666,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\experiment.py",
+        "--child",
+        "node-1",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\node-1\\source",
+      "seconds": 2.3761586000000534,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\baseline.py",
+        "pdm-1"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\pdm-1\\source",
+      "seconds": 3.7882729999982985,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\experiment.py",
+        "--child",
+        "node-1",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\node-1\\source",
+      "seconds": 1.5378392999991775,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\experiment.py",
+        "--child",
+        "node-2",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\node-2\\source",
+      "seconds": 1.5640660999997635,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\baseline.py",
+        "pdm-2"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\pdm-2\\source",
+      "seconds": 3.9962034999989555,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\experiment.py",
+        "--child",
+        "node-2",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\node-2\\source",
+      "seconds": 2.3605676000006497,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\baseline.py",
+        "pdm-2"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\pdm-2\\source",
+      "seconds": 6.200938599999063,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\baseline.py",
+        "pdm-3-resume"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\pdm-3-resume\\source",
+      "seconds": 6.065385199999582,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\experiment.py",
+        "--child",
+        "node-3-resume",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\node-3-resume\\source",
+      "seconds": 2.275016899999173,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\baseline.py",
+        "pdm-3-resume"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\pdm-3-resume\\source",
+      "seconds": 3.762489499997173,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\experiment.py",
+        "--child",
+        "node-3-resume",
+        "4",
+        "0",
+        "C:\\Program Files\\nodejs\\node.EXE"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\node-3-resume\\source",
+      "seconds": 1.498367899999721,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\selective_pdm.py",
+        "selective-pdm-1"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\selective-pdm-1\\source",
+      "seconds": 8.00035890000072,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\selective_pdm.py",
+        "selective-pdm-1"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\selective-pdm-1\\source",
+      "seconds": 2.016565300000366,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\selective_pdm.py",
+        "selective-pdm-2"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\selective-pdm-2\\source",
+      "seconds": 1.9901893999995082,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\selective_pdm.py",
+        "selective-pdm-2"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\selective-pdm-2\\source",
+      "seconds": 8.495372500001395,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\code\\selective_pdm.py",
+        "selective-pdm-3"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\runs\\selective-pdm-3\\source",
+      "seconds": 8.443098399999144,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\code\\selective_pdm.py",
+        "selective-pdm-3"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a\\runs\\selective-pdm-3\\source",
+      "seconds": 1.941267100002733,
+      "returncode": 0
+    }
+  ],
+  "preparation": [
+    {
+      "volume": "C",
+      "seconds": 2.2438218999996025,
+      "runtime": {
+        "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+        "base": "C:\\Program Files\\Python313-arm64",
+        "platform": "win-arm64",
+        "pdm": "2.5.0"
+      },
+      "driver_sha256": "8e1ceaf8cd7f4f3e84c0dcafe0e401b728555ad92e00e116e4d0dc1c49470dbe",
+      "tooling_lock_sha256": "b1a68ef06a6de2806a18593c7c248a3d6807fd4e2b06f75652268e0ff53f8694"
+    },
+    {
+      "volume": "Q",
+      "seconds": 1.5348333999972965,
+      "runtime": {
+        "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+        "base": "C:\\Program Files\\Python313-arm64",
+        "platform": "win-arm64",
+        "pdm": "2.5.0"
+      },
+      "driver_sha256": "8e1ceaf8cd7f4f3e84c0dcafe0e401b728555ad92e00e116e4d0dc1c49470dbe",
+      "tooling_lock_sha256": "b1a68ef06a6de2806a18593c7c248a3d6807fd4e2b06f75652268e0ff53f8694"
+    }
+  ],
+  "trials": [
+    {
+      "child_seconds": 5.721525600001769,
+      "imports_seconds": 0.33263350000197534,
+      "sdist_seconds": 1.9011927999999898,
+      "extract_seconds": 2.9732692999969004,
+      "wheel_seconds": 0.5144300000029034,
+      "python_cpu_seconds": 4.078125,
+      "extracted_files": 1269,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "C",
+      "algorithm": "pdm",
+      "trial": 1,
+      "diagnostic": false,
+      "full_process_seconds": 5.874200300000666,
+      "source_preparation_seconds": 42.850566300003265,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 674667
+    },
+    {
+      "python_cpu_seconds": 0.828125,
+      "label": "node-1",
+      "workers": 4,
+      "child_seconds": 2.2356510999998136,
+      "imports_seconds": 0.34568290000242996,
+      "sdist_seconds": 1.1214392999972915,
+      "select_extract_seconds": 0.23529659999985597,
+      "wheel_seconds": 0.5332323000002361,
+      "volume": "C",
+      "algorithm": "node",
+      "trial": 1,
+      "diagnostic": false,
+      "full_process_seconds": 2.3761586000000534,
+      "source_preparation_seconds": 34.42942300000141,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 649907,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "selected_source_payload_reads": 1268
+    },
+    {
+      "child_seconds": 3.6296536999980162,
+      "imports_seconds": 0.3229594999975234,
+      "sdist_seconds": 1.1472972000010486,
+      "extract_seconds": 2.0551420000010694,
+      "wheel_seconds": 0.10425499999837484,
+      "python_cpu_seconds": 3.109375,
+      "extracted_files": 1269,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "Q",
+      "algorithm": "pdm",
+      "trial": 1,
+      "diagnostic": false,
+      "full_process_seconds": 3.7882729999982985,
+      "source_preparation_seconds": 7.234055899996747,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 674669
+    },
+    {
+      "python_cpu_seconds": 0.703125,
+      "label": "node-1",
+      "workers": 4,
+      "child_seconds": 1.3822275999991689,
+      "imports_seconds": 0.32377469999846653,
+      "sdist_seconds": 0.7854723000018566,
+      "select_extract_seconds": 0.16822359999787295,
+      "wheel_seconds": 0.10475700000097277,
+      "volume": "Q",
+      "algorithm": "node",
+      "trial": 1,
+      "diagnostic": false,
+      "full_process_seconds": 1.5378392999991775,
+      "source_preparation_seconds": 7.293358499999158,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 649907,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "selected_source_payload_reads": 1268
+    },
+    {
+      "python_cpu_seconds": 0.640625,
+      "label": "node-2",
+      "workers": 4,
+      "child_seconds": 1.4010973000004014,
+      "imports_seconds": 0.3394042999971134,
+      "sdist_seconds": 0.7857416000006197,
+      "select_extract_seconds": 0.17461960000218824,
+      "wheel_seconds": 0.10133180000048014,
+      "volume": "Q",
+      "algorithm": "node",
+      "trial": 2,
+      "diagnostic": false,
+      "full_process_seconds": 1.5640660999997635,
+      "source_preparation_seconds": 7.220731299999898,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 649907,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "selected_source_payload_reads": 1268
+    },
+    {
+      "child_seconds": 3.8408859000010125,
+      "imports_seconds": 0.34963730000163196,
+      "sdist_seconds": 1.198361599999771,
+      "extract_seconds": 2.1879531999984465,
+      "wheel_seconds": 0.10493380000116304,
+      "python_cpu_seconds": 3.125,
+      "extracted_files": 1269,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "Q",
+      "algorithm": "pdm",
+      "trial": 2,
+      "diagnostic": false,
+      "full_process_seconds": 3.9962034999989555,
+      "source_preparation_seconds": 7.359264800001256,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 674670
+    },
+    {
+      "python_cpu_seconds": 0.8125,
+      "label": "node-2",
+      "workers": 4,
+      "child_seconds": 2.2172274999975343,
+      "imports_seconds": 0.3397229999973206,
+      "sdist_seconds": 1.1180552000005264,
+      "select_extract_seconds": 0.23041139999986626,
+      "wheel_seconds": 0.5290378999998211,
+      "volume": "C",
+      "algorithm": "node",
+      "trial": 2,
+      "diagnostic": false,
+      "full_process_seconds": 2.3605676000006497,
+      "source_preparation_seconds": 35.283991599997535,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 649907,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "selected_source_payload_reads": 1268
+    },
+    {
+      "child_seconds": 6.0526647999977286,
+      "imports_seconds": 0.33740299999772105,
+      "sdist_seconds": 1.9617815000019618,
+      "extract_seconds": 3.17933819999962,
+      "wheel_seconds": 0.5741420999984257,
+      "python_cpu_seconds": 4.546875,
+      "extracted_files": 1269,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "C",
+      "algorithm": "pdm",
+      "trial": 2,
+      "diagnostic": false,
+      "full_process_seconds": 6.200938599999063,
+      "source_preparation_seconds": 35.22679359999893,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 674668
+    },
+    {
+      "child_seconds": 5.921292700000777,
+      "imports_seconds": 0.33742999999958556,
+      "sdist_seconds": 1.9406111999996938,
+      "extract_seconds": 3.107865400001174,
+      "wheel_seconds": 0.5353861000003235,
+      "python_cpu_seconds": 4.328125,
+      "extracted_files": 1269,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "C",
+      "algorithm": "pdm",
+      "trial": 3,
+      "diagnostic": false,
+      "full_process_seconds": 6.065385199999582,
+      "source_preparation_seconds": 33.00638480000271,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 674668
+    },
+    {
+      "python_cpu_seconds": 0.8125,
+      "label": "node-3-resume",
+      "workers": 4,
+      "child_seconds": 2.137826700000005,
+      "imports_seconds": 0.3135333999998693,
+      "sdist_seconds": 1.0593442999997933,
+      "select_extract_seconds": 0.21893030000137514,
+      "wheel_seconds": 0.5460186999989673,
+      "volume": "C",
+      "algorithm": "node",
+      "trial": 3,
+      "diagnostic": false,
+      "full_process_seconds": 2.275016899999173,
+      "source_preparation_seconds": 34.211297199999535,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 649907,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "selected_source_payload_reads": 1268
+    },
+    {
+      "child_seconds": 3.6003550000023097,
+      "imports_seconds": 0.29866279999987455,
+      "sdist_seconds": 1.1770686000018031,
+      "extract_seconds": 2.022426399998949,
+      "wheel_seconds": 0.10219720000168309,
+      "python_cpu_seconds": 3.0625,
+      "extracted_files": 1269,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "Q",
+      "algorithm": "pdm",
+      "trial": 3,
+      "diagnostic": false,
+      "full_process_seconds": 3.762489499997173,
+      "source_preparation_seconds": 7.254690199999459,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 674669
+    },
+    {
+      "python_cpu_seconds": 0.671875,
+      "label": "node-3-resume",
+      "workers": 4,
+      "child_seconds": 1.3486749000003329,
+      "imports_seconds": 0.3188680999992357,
+      "sdist_seconds": 0.7731945999985328,
+      "select_extract_seconds": 0.16371060000165016,
+      "wheel_seconds": 0.09290160000091419,
+      "volume": "Q",
+      "algorithm": "node",
+      "trial": 3,
+      "diagnostic": false,
+      "full_process_seconds": 1.498367899999721,
+      "source_preparation_seconds": 7.346637599999667,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "archive_writes": 2,
+      "archive_bytes": 649907,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "selected_source_payload_reads": 1268
+    },
+    {
+      "child_seconds": 7.8445396999995864,
+      "imports_seconds": 0.33369669999956386,
+      "sdist_seconds": 6.673606000000291,
+      "extract_seconds": 0.27221230000213836,
+      "wheel_seconds": 0.5650246999975934,
+      "python_cpu_seconds": 2.15625,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "C",
+      "algorithm": "selective-pdm",
+      "trial": 1,
+      "full_process_seconds": 8.00035890000072,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "source_preparation_seconds": 8.289426499999536,
+      "archive_writes": 2,
+      "archive_bytes": 674679
+    },
+    {
+      "child_seconds": 1.869350500001019,
+      "imports_seconds": 0.32985139999800595,
+      "sdist_seconds": 1.2471351000021969,
+      "extract_seconds": 0.1958682000004046,
+      "wheel_seconds": 0.09649580000041169,
+      "python_cpu_seconds": 1.640625,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "Q",
+      "algorithm": "selective-pdm",
+      "trial": 1,
+      "full_process_seconds": 2.016565300000366,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "source_preparation_seconds": 6.2388236000006145,
+      "archive_writes": 2,
+      "archive_bytes": 674678
+    },
+    {
+      "child_seconds": 1.8399581000012404,
+      "imports_seconds": 0.323328099999344,
+      "sdist_seconds": 1.2224029999997583,
+      "extract_seconds": 0.19958720000067842,
+      "wheel_seconds": 0.09463980000145966,
+      "python_cpu_seconds": 1.59375,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "Q",
+      "algorithm": "selective-pdm",
+      "trial": 2,
+      "full_process_seconds": 1.9901893999995082,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "source_preparation_seconds": 6.008964399999968,
+      "archive_writes": 2,
+      "archive_bytes": 674680
+    },
+    {
+      "child_seconds": 8.352527099999861,
+      "imports_seconds": 0.34633019999819226,
+      "sdist_seconds": 7.205422399998497,
+      "extract_seconds": 0.2557939000034821,
+      "wheel_seconds": 0.5449805999996897,
+      "python_cpu_seconds": 2.15625,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "C",
+      "algorithm": "selective-pdm",
+      "trial": 2,
+      "full_process_seconds": 8.495372500001395,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "source_preparation_seconds": 8.604821800003265,
+      "archive_writes": 2,
+      "archive_bytes": 674679
+    },
+    {
+      "child_seconds": 8.291566500000044,
+      "imports_seconds": 0.3575330000021495,
+      "sdist_seconds": 7.129077599998709,
+      "extract_seconds": 0.2638779999979306,
+      "wheel_seconds": 0.5410779000012553,
+      "python_cpu_seconds": 2.0625,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "C",
+      "algorithm": "selective-pdm",
+      "trial": 3,
+      "full_process_seconds": 8.443098399999144,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "source_preparation_seconds": 8.638724600001296,
+      "archive_writes": 2,
+      "archive_bytes": 674681
+    },
+    {
+      "child_seconds": 1.7933322000026237,
+      "imports_seconds": 0.3142286000002059,
+      "sdist_seconds": 1.1912933999992674,
+      "extract_seconds": 0.19337180000002263,
+      "wheel_seconds": 0.09443840000312775,
+      "python_cpu_seconds": 1.46875,
+      "extracted_files": 64,
+      "archive_files": 1269,
+      "audit": null,
+      "volume": "Q",
+      "algorithm": "selective-pdm",
+      "trial": 3,
+      "full_process_seconds": 1.941267100002733,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "source_preparation_seconds": 6.0438821999996435,
+      "archive_writes": 2,
+      "archive_bytes": 674680
+    }
+  ],
+  "diagnostics": [],
+  "timing_boundary": "child spawn through exit; checkout and tool provisioning excluded",
+  "scan_attribution": "No scan trace; no Defender/MDE causal attribution.",
+  "cache_policy": "warm OS cache, new source/extraction/output/temp/cache directories per trial",
+  "cpu_scope": "child Python process_time only; Node CPU not included",
+  "reference": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\artifacts\\prepare-baseline",
+  "node": "C:\\Program Files\\nodejs\\node.EXE",
+  "roots": {
+    "C": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a",
+    "Q": "Q:\\fastapi\\Generated Files\\arm-build\\filesystem\\c-vs-q\\work\\copilot-2a73e36a"
+  },
+  "original_code_sha256": {
+    "experiment.py": "d7326f0f57179cc7387440e3924dcd91aebaa001c3155931172f425ac944287d",
+    "writer.cjs": "d01776cc14e1ecd5afacbd1d0ff0e7fd72624a7dc2705b50e136fbc1d9ac6b08",
+    "selective_inputs.py": "58833d0d38766519b62d28942c0f40ce7bd54dfce59af4a0936eb09c66cfae66"
+  },
+  "source_manifest_sha256": "943fd9bf0a02d0dfcc85faf7d3561adcd13b04a40578c301e3b3fdeb0b40f73e",
+  "source_inventory_files": 3390,
+  "bounded_resume": "Stopped after two complete pairs to reserve budget for simpler PDM cell; unfinished checkout retained, never reused.",
+  "summary": [
+    {
+      "volume": "C",
+      "algorithm": "pdm",
+      "n": 3,
+      "median_wall_seconds": 6.065385199999582,
+      "min_wall_seconds": 5.874200300000666,
+      "max_wall_seconds": 6.200938599999063,
+      "median_python_cpu_seconds": 4.328125,
+      "median_archive_bytes": 674668,
+      "extracted_files": 1269,
+      "strict_passes": 0
+    },
+    {
+      "volume": "C",
+      "algorithm": "node",
+      "n": 3,
+      "median_wall_seconds": 2.3605676000006497,
+      "min_wall_seconds": 2.275016899999173,
+      "max_wall_seconds": 2.3761586000000534,
+      "median_python_cpu_seconds": 0.8125,
+      "median_archive_bytes": 649907,
+      "extracted_files": 64,
+      "strict_passes": 3
+    },
+    {
+      "volume": "Q",
+      "algorithm": "pdm",
+      "n": 3,
+      "median_wall_seconds": 3.7882729999982985,
+      "min_wall_seconds": 3.762489499997173,
+      "max_wall_seconds": 3.9962034999989555,
+      "median_python_cpu_seconds": 3.109375,
+      "median_archive_bytes": 674669,
+      "extracted_files": 1269,
+      "strict_passes": 0
+    },
+    {
+      "volume": "Q",
+      "algorithm": "node",
+      "n": 3,
+      "median_wall_seconds": 1.5378392999991775,
+      "min_wall_seconds": 1.498367899999721,
+      "max_wall_seconds": 1.5640660999997635,
+      "median_python_cpu_seconds": 0.671875,
+      "median_archive_bytes": 649907,
+      "extracted_files": 64,
+      "strict_passes": 3
+    },
+    {
+      "volume": "C",
+      "algorithm": "selective-pdm",
+      "n": 3,
+      "median_wall_seconds": 8.443098399999144,
+      "min_wall_seconds": 8.00035890000072,
+      "max_wall_seconds": 8.495372500001395,
+      "median_python_cpu_seconds": 2.15625,
+      "median_archive_bytes": 674679,
+      "extracted_files": 64,
+      "strict_passes": 3
+    },
+    {
+      "volume": "Q",
+      "algorithm": "selective-pdm",
+      "n": 3,
+      "median_wall_seconds": 1.9901893999995082,
+      "min_wall_seconds": 1.941267100002733,
+      "max_wall_seconds": 2.016565300000366,
+      "median_python_cpu_seconds": 1.59375,
+      "median_archive_bytes": 674680,
+      "extracted_files": 64,
+      "strict_passes": 3
+    }
+  ],
+  "status": "complete",
+  "selective_pdm_code_sha256": "1dd21e86f9a7c93c307ae0e11dd482ff0e212d699a4863e918ecc1003803c2f2",
+  "functional_inventory": [
+    {
+      "volume": "C",
+      "label": "pdm-1",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 1269,
+      "archive_writes": 2,
+      "archive_bytes": 674667
+    },
+    {
+      "volume": "C",
+      "label": "node-1",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 8,
+      "retained_metadata_bytes": 66244,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\PKG-INFO",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 649907
+    },
+    {
+      "volume": "Q",
+      "label": "pdm-1",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 1269,
+      "archive_writes": 2,
+      "archive_bytes": 674669
+    },
+    {
+      "volume": "Q",
+      "label": "node-1",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 8,
+      "retained_metadata_bytes": 66244,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\PKG-INFO",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\node-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 649907
+    },
+    {
+      "volume": "Q",
+      "label": "node-2",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 8,
+      "retained_metadata_bytes": 66244,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\PKG-INFO",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 649907
+    },
+    {
+      "volume": "Q",
+      "label": "pdm-2",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 1269,
+      "archive_writes": 2,
+      "archive_bytes": 674670
+    },
+    {
+      "volume": "C",
+      "label": "node-2",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 8,
+      "retained_metadata_bytes": 66244,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\PKG-INFO",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\node-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 649907
+    },
+    {
+      "volume": "C",
+      "label": "pdm-2",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 1269,
+      "archive_writes": 2,
+      "archive_bytes": 674668
+    },
+    {
+      "volume": "C",
+      "label": "pdm-3-resume",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 1269,
+      "archive_writes": 2,
+      "archive_bytes": 674668
+    },
+    {
+      "volume": "C",
+      "label": "node-3-resume",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 8,
+      "retained_metadata_bytes": 66244,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\PKG-INFO",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 649907
+    },
+    {
+      "volume": "Q",
+      "label": "pdm-3-resume",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\pdm-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 1269,
+      "archive_writes": 2,
+      "archive_bytes": 674669
+    },
+    {
+      "volume": "Q",
+      "label": "node-3-resume",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 8,
+      "retained_metadata_bytes": 66244,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\PKG-INFO",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\node-3-resume\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 649907
+    },
+    {
+      "volume": "C",
+      "label": "selective-pdm-1",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 674679
+    },
+    {
+      "volume": "Q",
+      "label": "selective-pdm-1",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\selective-pdm-1\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 674678
+    },
+    {
+      "volume": "Q",
+      "label": "selective-pdm-2",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 674680
+    },
+    {
+      "volume": "C",
+      "label": "selective-pdm-2",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\selective-pdm-2\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 674679
+    },
+    {
+      "volume": "C",
+      "label": "selective-pdm-3",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 674681
+    },
+    {
+      "volume": "Q",
+      "label": "selective-pdm-3",
+      "wheel_exec_bits_match_mac": true,
+      "retained_metadata_files": 7,
+      "retained_metadata_bytes": 39291,
+      "metadata_relative_paths": [
+        "source\\.pdm-build\\.gitignore",
+        "source\\.pdm-build\\pyproject.toml",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\.gitignore",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\entry_points.txt",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\METADATA",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\WHEEL",
+        "outputs\\selective-pdm-3\\extracted\\fastapi-0.162.0\\.pdm-build\\fastapi-0.162.0.dist-info\\licenses\\LICENSE"
+      ],
+      "retained_temp_files": 0,
+      "retained_cache_files": 0,
+      "materialized_extracted_files": 64,
+      "archive_writes": 2,
+      "archive_bytes": 674680
+    }
+  ],
+  "wheel_exec_validation": "passed all completed trials",
+  "selector_ast_matches_original_overhead_selective": true,
+  "count_boundaries": {
+    "source_inventory": "3390 canonical files materialized per excluded checkout preparation; hashes checked in primary batch",
+    "selected_payloads": "1268 PDM selected archive inputs plus generated PKG-INFO; not filesystem read syscall tracing",
+    "extraction": "1269 regular files for full PDM versus 64 archive-derived files for selective variants",
+    "metadata": "Post-build retained .pdm-build files only; transient create/delete and OS scanner opens not observed",
+    "archive_writes": "2 completed archives; low-level write syscall count and bytes written by filesystem not observed",
+    "cpu": "Python process_time; Node and security scanner CPU are not captured"
+  },
+  "driver_copy_sha256": {
+    "execution-baseline.py": "dd7e1884fd51812f0b7905139d879300633b82804ec96599ffbb8bfb2dfa1ace",
+    "execution-experiment.py": "8e1ceaf8cd7f4f3e84c0dcafe0e401b728555ad92e00e116e4d0dc1c49470dbe",
+    "execution-selective_inputs.py": "58833d0d38766519b62d28942c0f40ce7bd54dfce59af4a0936eb09c66cfae66",
+    "execution-selective_pdm.py": "1dd21e86f9a7c93c307ae0e11dd482ff0e212d699a4863e918ecc1003803c2f2",
+    "execution-writer.cjs": "d01776cc14e1ecd5afacbd1d0ff0e7fd72624a7dc2705b50e136fbc1d9ac6b08"
+  },
+  "optional_scanner_cpu": {
+    "samples": [
+      {
+        "phase": "after",
+        "utc": "2026-10-29T04:58:36.8669985Z",
+        "status": "unknown",
+        "aggregate_cpu_seconds": null,
+        "scope": "Shared-host MsMpEng process CPU only; not attributable blocked-scan wall time."
+      },
+      {
+        "phase": "before",
+        "utc": "2026-10-29T04:57:39.7220697Z",
+        "status": "unknown",
+        "aggregate_cpu_seconds": null,
+        "scope": "Shared-host MsMpEng process CPU only; not attributable blocked-scan wall time."
+      }
+    ],
+    "scope": "Partial supplemental batch only; aggregate shared-host CPU, not per-trial scan attribution.",
+    "etw": "No ETW recording authorized or started."
+  },
+  "phase_medians": [
+    {
+      "volume": "C",
+      "algorithm": "pdm",
+      "imports_seconds": 0.33740299999772105,
+      "sdist_seconds": 1.9406111999996938,
+      "selection_extraction_seconds": 3.107865400001174,
+      "wheel_seconds": 0.5353861000003235
+    },
+    {
+      "volume": "C",
+      "algorithm": "node",
+      "imports_seconds": 0.3397229999973206,
+      "sdist_seconds": 1.1180552000005264,
+      "selection_extraction_seconds": 0.23041139999986626,
+      "wheel_seconds": 0.5332323000002361
+    },
+    {
+      "volume": "Q",
+      "algorithm": "pdm",
+      "imports_seconds": 0.3229594999975234,
+      "sdist_seconds": 1.1770686000018031,
+      "selection_extraction_seconds": 2.0551420000010694,
+      "wheel_seconds": 0.10425499999837484
+    },
+    {
+      "volume": "Q",
+      "algorithm": "node",
+      "imports_seconds": 0.32377469999846653,
+      "sdist_seconds": 0.7854723000018566,
+      "selection_extraction_seconds": 0.16822359999787295,
+      "wheel_seconds": 0.10133180000048014
+    },
+    {
+      "volume": "C",
+      "algorithm": "selective-pdm",
+      "imports_seconds": 0.34633019999819226,
+      "sdist_seconds": 7.129077599998709,
+      "selection_extraction_seconds": 0.2638779999979306,
+      "wheel_seconds": 0.5449805999996897
+    },
+    {
+      "volume": "Q",
+      "algorithm": "selective-pdm",
+      "imports_seconds": 0.323328099999344,
+      "sdist_seconds": 1.2224029999997583,
+      "selection_extraction_seconds": 0.1958682000004046,
+      "wheel_seconds": 0.09463980000145966
+    }
+  ],
+  "node_runtime": {
+    "version": "v24.21.0",
+    "arch": "arm64"
+  },
+  "node_runtime_command": [
+    "C:\\Program Files\\nodejs\\node.EXE",
+    "-p",
+    "JSON.stringify({version:process.version,arch:process.arch})"
+  ]
+}

@@ -1,0 +1,8 @@
+/source/
+**/extracted/
+**/__pycache__/
+**/.pdm-build/
+**/.venv/
+*.whl
+*.tar
+*.tar.gz

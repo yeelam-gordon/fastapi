@@ -1,0 +1,107 @@
+Controlled C/Q filesystem workload experiment
+
+Median full Python spawn-to-exit seconds (warm OS caches; fresh source/output/temp/cache).
+Volume | pipeline | n | seconds | Python CPU s | archive bytes | extracted | strict Mac
+------ | -------- | - | ------- | ------------ | ------------- | --------- | ----------
+C | pdm | 3 | 6.0654 | 4.3281 | 674668 | 1269 | 0/3
+C | node | 3 | 2.3606 | 0.8125 | 649907 | 64 | 3/3
+Q | pdm | 3 | 3.7883 | 3.1094 | 674669 | 1269 | 0/3
+Q | node | 3 | 1.5378 | 0.6719 | 649907 | 64 | 3/3
+C | selective-pdm | 3 | 8.4431 | 2.1562 | 674679 | 64 | 3/3
+Q | selective-pdm | 3 | 1.9902 | 1.5938 | 674680 | 64 | 3/3
+
+Median child phases: imports / sdist / selection+extraction / wheel (seconds).
+C pdm: 0.3374 / 1.9406 / 3.1079 / 0.5354
+C node: 0.3397 / 1.1181 / 0.2304 / 0.5332
+Q pdm: 0.3230 / 1.1771 / 2.0551 / 0.1043
+Q node: 0.3238 / 0.7855 / 0.1682 / 0.1013
+C selective-pdm: 0.3463 / 7.1291 / 0.2639 / 0.5450
+Q selective-pdm: 0.3233 / 1.2224 / 0.1959 / 0.0946
+
+Excluded preparation (not part of those build timings):
+C pdm median fresh source preparation 35.227s.
+C node median fresh source preparation 34.429s.
+Q pdm median fresh source preparation 7.255s.
+Q node median fresh source preparation 7.293s.
+C selective-pdm median fresh source preparation 8.605s.
+Q selective-pdm median fresh source preparation 6.044s.
+C one-time env/code/input/wheelhouse preparation 2.244s.
+Q one-time env/code/input/wheelhouse preparation 1.535s.
+
+Strict comparison includes every raw payload, wheel RECORD validation/raw bytes,
+full sdist modes and wheel executable bits. Ordinary PDM fails exactly five sdist
+executable modes (0755 -> 0644); this is an overall strict failure, not waived.
+Node and selective-PDM pass; selective-PDM uses official PDM TAR serialization,
+the unchanged archive-derived selector and a small Git-mode clean_tarinfo adapter.
+No project metadata, selected-member list or payload cache is reused.
+
+Functional workload:
+3390 canonical files per excluded source checkout; each build freshly selects
+1268 PDM archive inputs and generates PKG-INFO. Each completed sdist has 1269
+files, wheel 65. Full extraction materializes 1269; selective materializes 64
+(1205 fewer, 94.96%). Selection still enumerates all archive members and reads
+pyproject for configuration; PDM still inventories the source. It does NOT remove
+the initial sdist payload reads. All variants write two complete archives.
+Retained metadata/temp/cache inventories are in evidence.json; these are snapshots,
+not total file creates or scan events. Python CPU excludes Node/scanner CPU.
+
+Placement/provenance:
+C NTFS / Q ReFS per supplied read-only volume observation. Dev Drive trust and
+performance-mode state were not verified (queries denied); no protection changes.
+C native env, PDM/backend libraries, copied drivers, source/mode manifest, wheelhouse,
+cache/temp and outputs all reside in owned C workspace; base Python and Node also C.
+Q uses equivalent private env and algorithms, with the same C base Python/Node.
+Offline tooling restored from tooling.lock using existing uv; pdm-backend 2.5.0.
+Code hashes, exact argv/cwd, provisioning and per-trial checkout cost are recorded.
+Primary batch was bounded after two pairs; partial source-only third checkout
+is retained and never reused. Three final pairs per primary cell are completed.
+
+Inference limits:
+Absolute speedups and the C/Q interaction are local workload evidence only.
+No scan trace: no causal Defender/MDE attribution. NTFS/ReFS, device differences,
+OS cache warmth and background work are confounders. No cold-cache claim.
+Generic optimizations may also accelerate Mac: NO parity claim against frozen Mac.
+Mac artifacts are used as correctness oracle only, not optimized-Mac performance.
+High confidence: artifact checks and 1269->64 file-materialization reduction.
+Medium confidence: local warm-cache timing; low confidence: scanner attribution,
+CI transferability and any Windows-specific mechanism.
+Primary PDM/Node cells alternate algorithm order within each volume; the simpler
+PDM cells were a later three-pair supplement, so temporal confounding remains.
+Optional MsMpEng aggregate samples cover only the remaining supplemental interval.
+Unavailable process CPU is unknown, never zero; no paths/configuration/ETW collected.
+
+Commands (from Q:\fastapi):
+$p = "Generated Files\arm-build\tools\official-tool-environment\Scripts\python.exe"
+$r = "Generated Files\arm-build\filesystem\c-vs-q"
+& $p "$r\run.py"  # initial batch; deliberately stopped after two completed pairs
+& $p "$r\run.py" --resume --bounded
+& $p "$r\supplement.py"
+& $p "$r\finalize.py"
+Scripts refuse fresh-root collisions; do not rerun without selecting new owned roots.
+All original workers and existing measured environments remain unchanged.
+No subagents, CI, new tool downloads, AV exclusions or machine configuration changes.
+
+Decision: do not adopt a custom archive writer from this bounded experiment.
+Selective-PDM wins on Q but REGRESSES on C despite 1205 fewer extracted files.
+Its C sdist median is ~7.13s versus stock PDM ~1.94s, while Python CPU is lower
+overall; this is a concrete unexplained stall, not proof of scanner involvement.
+Node's extra benefit is ~0.45s on Q and ~6.08s on C here, not a universal small gain.
+The baseline has incorrect executable modes; the simpler PDM adapter corrects them,
+so baseline versus selective is not a pure extraction-only causal comparison.
+Next bounded hypothesis: compare mode-correct stock-PDM full versus selective
+extraction with the same writer and fresh input policy, and separately obtain an
+approved scan trace to investigate the C sdist stall. No extra matrix was run now.
+Apply the same pipeline to Mac before making any cross-OS parity claim.
+
+Computed local comparisons:
+C: baseline/selective 0.718x; baseline/Node 2.569x; Node advantage over selective 6.0825s (72.0%).
+Q: baseline/selective 1.903x; baseline/Node 2.463x; Node advantage over selective 0.4524s (22.7%).
+pdm: C-Q 2.2771s; C/Q 1.601x.
+selective-pdm: C-Q 6.4529s; C/Q 4.242x.
+node: C-Q 0.8227s; C/Q 1.535x.
+Descriptive C/Q interaction for selective-pdm: baseline C-Q gap minus optimized C-Q gap = -4.1758s; not an identified scanner effect.
+Descriptive C/Q interaction for node: baseline C-Q gap minus optimized C-Q gap = 1.4544s; not an identified scanner effect.
+
+Evidence: evidence.json, per-trial timings/selection/manifests and stdout/stderr;
+execution-* are exact instrumented code copies. work/ and binary outputs are ignored;
+C workspace is retained disposable execution data, not a published sensitive trace.

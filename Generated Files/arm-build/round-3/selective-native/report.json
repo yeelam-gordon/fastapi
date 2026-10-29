@@ -1,0 +1,259 @@
+{
+  "status": "passed",
+  "trials": [
+    {
+      "variant": "python",
+      "seconds": 1.9180869000010716,
+      "measured": false,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-0-python",
+        "python"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 1.1613267000029737,
+        "selective_extract": 0.1833426999983203,
+        "wheel": 0.11618719999751193
+      }
+    },
+    {
+      "variant": "native",
+      "seconds": 1.6668073000000732,
+      "measured": false,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-0-native",
+        "native"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9453625999994983,
+        "selective_extract": 0.1618166000007477,
+        "wheel": 0.10772840000208816
+      }
+    },
+    {
+      "variant": "native",
+      "seconds": 1.6167801000010513,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-1-native",
+        "native"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9154234999987239,
+        "selective_extract": 0.15962319999744068,
+        "wheel": 0.10704809999879217
+      }
+    },
+    {
+      "variant": "python",
+      "seconds": 1.6409641999998712,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-1-python",
+        "python"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9376307999991695,
+        "selective_extract": 0.1741173999980674,
+        "wheel": 0.10259629999927711
+      }
+    },
+    {
+      "variant": "python",
+      "seconds": 1.6705894000006083,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-2-python",
+        "python"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9405745000003662,
+        "selective_extract": 0.1799965999998676,
+        "wheel": 0.10719020000033197
+      }
+    },
+    {
+      "variant": "native",
+      "seconds": 1.6369104999976116,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-2-native",
+        "native"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9271585999995295,
+        "selective_extract": 0.16386740000234568,
+        "wheel": 0.10558900000251015
+      }
+    },
+    {
+      "variant": "native",
+      "seconds": 1.6362993999973696,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-3-native",
+        "native"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9313803000004555,
+        "selective_extract": 0.16241689999878872,
+        "wheel": 0.10682059999817284
+      }
+    },
+    {
+      "variant": "python",
+      "seconds": 1.6646471999993082,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-3-python",
+        "python"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9433744000016304,
+        "selective_extract": 0.17669580000074347,
+        "wheel": 0.10459389999959967
+      }
+    },
+    {
+      "variant": "python",
+      "seconds": 1.6360870000025898,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-4-python",
+        "python"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.912480200000573,
+        "selective_extract": 0.17512930000157212,
+        "wheel": 0.10479409999970812
+      }
+    },
+    {
+      "variant": "native",
+      "seconds": 1.640041899998323,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-4-native",
+        "native"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9346375999994052,
+        "selective_extract": 0.16414540000187117,
+        "wheel": 0.10821320000104606
+      }
+    },
+    {
+      "variant": "native",
+      "seconds": 1.634584299998096,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-5-native",
+        "native"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.928576600002998,
+        "selective_extract": 0.1636426000004576,
+        "wheel": 0.10866929999974673
+      }
+    },
+    {
+      "variant": "python",
+      "seconds": 1.6446145999980217,
+      "measured": true,
+      "returncode": 0,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-3\\selective-native\\trial-5-python",
+        "python"
+      ],
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9398987999993551,
+        "selective_extract": 0.16733229999954347,
+        "wheel": 0.10322989999986021
+      }
+    }
+  ],
+  "summary": {
+    "python": {
+      "median": 1.6446145999980217,
+      "min": 1.6360870000025898,
+      "max": 1.6705894000006083,
+      "count": 5
+    },
+    "native": {
+      "median": 1.6362993999973696,
+      "min": 1.6167801000010513,
+      "max": 1.640041899998323,
+      "count": 5
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "reference": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\artifacts\\prepare-baseline",
+  "verification": [
+    {
+      "label": "prepare",
+      "all_raw_member_bytes_and_full_sdist_modes_uid_gid_equal": true
+    },
+    {
+      "label": "trial-1",
+      "all_raw_member_bytes_and_full_sdist_modes_uid_gid_equal": true
+    },
+    {
+      "label": "trial-2",
+      "all_raw_member_bytes_and_full_sdist_modes_uid_gid_equal": true
+    },
+    {
+      "label": "trial-3",
+      "all_raw_member_bytes_and_full_sdist_modes_uid_gid_equal": true
+    },
+    {
+      "label": "trial-4",
+      "all_raw_member_bytes_and_full_sdist_modes_uid_gid_equal": true
+    },
+    {
+      "label": "trial-5",
+      "all_raw_member_bytes_and_full_sdist_modes_uid_gid_equal": true
+    },
+    {
+      "label": "diagnostic-4",
+      "all_raw_member_bytes_and_full_sdist_modes_uid_gid_equal": true
+    },
+    {
+      "label": "diagnostic-8",
+      "all_raw_member_bytes_and_full_sdist_modes_uid_gid_equal": true
+    }
+  ],
+  "selector_function_ast_identical_to_round_2": true,
+  "diagnostic_workers_exclude_benchmark_and_statistics": true,
+  "code_sha256": {
+    "writer.cjs": "d01776cc14e1ecd5afacbd1d0ff0e7fd72624a7dc2705b50e136fbc1d9ac6b08",
+    "experiment.py": "d7326f0f57179cc7387440e3924dcd91aebaa001c3155931172f425ac944287d",
+    "selective_inputs.py": "58833d0d38766519b62d28942c0f40ce7bd54dfce59af4a0936eb09c66cfae66",
+    "test_writer.py": "496faa733b8a745bcf6a2c411556cd67db38938e73b4c6566726e5f4500ca4ac",
+    "verify.py": "d99cd33d07dc7e9d6373d96fd1546ff9701b765036eb3d1be0c9fd44a38b2a69"
+  }
+}

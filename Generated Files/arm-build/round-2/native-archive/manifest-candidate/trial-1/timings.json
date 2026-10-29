@@ -1,0 +1,8 @@
+{
+  "label": "trial-1",
+  "seconds": 1.7606073999995715,
+  "sdist_seconds": 0.9158150000002934,
+  "extract_seconds": 0.737482499998805,
+  "wheel_seconds": 0.10730990000047314,
+  "diagnostic_stages": {}
+}

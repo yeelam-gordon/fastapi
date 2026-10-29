@@ -1,0 +1,99 @@
+Bounded C-drive stdlib I/O experiment (not a release adoption)
+
+Four cells use the SAME PDM 2.5 subclass, stdlib tarfile/PAX/gzip level 9.
+seq reads each input into bytes; thread overlaps fresh reads using three
+workers and a three-future window (approximately four live payload buffers).
+Both cells regenerate PDM selection/config/metadata on every build.
+The source checkout Git-mode manifest restores all executable sdist inputs
+in EVERY cell, including baseline. No custom format writer or foreign patch.
+
+variant | wall samples (s) | median wall | imports | sdist | extract | wheel
+------- | ---------------- | ----------- | ------- | ----- | ------- | -----
+seq-attrs | 3.3379, 3.2060, 3.3031 | 3.3031 | 0.3668 | 1.9695 | 0.2662 | 0.5275
+seq-noattrs | 3.2004, 3.1536, 3.2303 | 3.2004 | 0.3712 | 1.9309 | 0.2135 | 0.5035
+thread-attrs | 2.4257, 2.4247, 2.4445 | 2.4257 | 0.3709 | 1.1229 | 0.2592 | 0.5065
+thread-noattrs | 2.3885, 2.3457, 2.4021 | 2.3885 | 0.3676 | 1.1346 | 0.2150 | 0.5079
+
+Paired savings (baseline minus candidate; positive is faster):
+seq-attrs -> seq-noattrs: 0.1376, 0.0524, 0.0727; median 0.0727s
+thread-attrs -> thread-noattrs: 0.0372, 0.0790, 0.0424; median 0.0424s
+seq-attrs -> thread-attrs: 0.9123, 0.7813, 0.8586; median 0.8586s
+seq-noattrs -> thread-noattrs: 0.8119, 0.8080, 0.8283; median 0.8119s
+seq-attrs -> thread-noattrs: 0.9495, 0.8603, 0.9010; median 0.9010s
+
+Separate process audit events (instrumented, excluded from clean timings):
+seq-attrs: {"extract:open": 74, "extract:os.chmod": 64, "extract:os.utime": 64, "imports:open": 168, "sdist:open": 1286, "wheel:open": 89, "wheel:os.chmod": 1}
+seq-noattrs: {"extract:open": 74, "imports:open": 168, "sdist:open": 1286, "wheel:open": 89, "wheel:os.chmod": 1}
+thread-attrs: {"extract:open": 74, "extract:os.chmod": 64, "extract:os.utime": 64, "imports:open": 168, "sdist:open": 1286, "wheel:open": 89, "wheel:os.chmod": 1}
+thread-noattrs: {"extract:open": 74, "imports:open": 168, "sdist:open": 1286, "wheel:open": 89, "wheel:os.chmod": 1}
+Absent event keys are ZERO. Total opens are 1617 in every diagnostic;
+total chmod 65 -> 1 and utime 64 -> 0 when skipping temporary attributes.
+These are Python audit events, not kernel syscall counts or scanner counts.
+
+Proposal decision (bounded screen only):
+PREFETCH: retain as the meaningful small follow-up proposal, not adoption.
+Paired savings are positive in all three pairs with either attr setting;
+the sdist phase falls ~1.970 -> 1.123s with attrs held constant. The same
+1268 disk-backed sdist payloads are freshly read; PKG-INFO is freshly generated.
+NOATTRS: retain only the guarded disposable-0644-input optimization. It removes
+64 chmod + 64 utime audit events, with smaller but positive paired savings.
+COMBINED: median wall 3.3031 -> 2.3885s (27.7% less, 1.383x).
+Do not replace release tooling on these data alone. The 73-line ops.py core
+includes a private PDM build_artifact override: medium maintenance/API risk,
+pinned to PDM 2.5.0. Prefer a small supported/upstream hook over a framework
+or a format rewrite. Common portable options should also be screened on Mac.
+Confidence: high on this archive/permission validation and audited event
+difference; medium on the local warm speed benefit; unknown on cross-host
+or Mac benefit and the underlying file-wait/scanner mechanism.
+Normative sdist mode census: {"0o644": 1264, "0o755": 5}
+Normative wheel FULL mode census: {"0o100644": 64, "0o600": 1}
+
+Correctness: all 12 timed builds plus diagnostics validate against the retained
+Mac normative archives: exactly 1269 sdist members, 65 wheel members; complete
+member names/payload SHA256, sdist full permission modes and uid/gid/uname/gname/
+size, wheel full external_attr>>16 modes, raw wheel RECORD bytes and each RECORD
+hash/size. No executable-bit-only waiver. Timestamps/container byte equality
+are not required (wall-clock generated metadata); no optimized-Mac speed claim.
+Wheel inputs come ONLY from each completed sdist: fresh archive-derived selector
+and 64 materializations, no source fallback or payload/selection cache.
+Noattrs refuses any selected member not exactly regular 0644 BEFORE extracting.
+Both extract paths call public TarFile.extract(..., filter='data').
+
+Focused tests: tests.log; fresh reads/order, read-failure and early-close thread
+joining, extracted payload/mtime behavior, exec/private/read-only rejection,
+path traversal filter in both modes, malformed archive and selector config guards.
+
+Bootstrap/tool restore/copy: 3.011s (excluded).
+One source preparation + SHA verification: 46.497s (excluded).
+All benchmark source/libs/runtime/temp/output on C. Q only controller and
+post-timer logs/manifests. Fresh output and child process per build; imports,
+metadata, selection, all source reads, compression, extraction and wheel inside
+spawn-to-exit wall timer. One audited warmup precedes alternating/reversed
+four-cell orders; OS cache is warm. Three trials cannot completely balance
+four ordinal positions; all pairs reverse at least once. No profiler in
+measured children. The 12 clean children take ~34 seconds in total.
+
+Provenance: {"base": "C:\\Users\\yeelam\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-aarch64-none", "machine": "ARM64", "pdm": "2.5.0", "platform": "win-arm64", "version": "3.13.15 (main, Sep 29 2026, 08:22:55) [MSC v.1944 64 bit (ARM64)]"}
+base interpreter: C:\Users\yeelam\AppData\Roaming\uv\python\cpython-3.13.15-windows-aarch64-none\python.exe
+base executable SHA256: 383d0ff495b7a4903426037fa003f72963aaebd4f1aa3cd08a22895421c703bd
+python313.dll SHA256: 1eca9e2e85bb5ea49ad6452b2603272ff8245357bf98a41bdb96f35c1479511f
+venv launcher SHA256: 53909489119635230bbaad0c276f86df2dbef18346648aefa612212fa4692531
+Managed CPython 3.13.15 ARM64 (uv python find --managed-python). The published
+standalone catalogue maps this family to Windows PGO; this is not exact
+compiler-flag proof for the local bytes. Prior 5.014/6.275/3.300s samples used
+the older installed stock distribution; do NOT subtract these sample sets
+or attribute cross-distribution differences to this change or pure PGO.
+Code hashes: {"ops.py": "77111bb7a03647db640e2e45db366226452af152ddb529db945b6bec7a2de525", "selector.py": "2ab9c673161e560ac028d4c82a80f409b9e0deac7bc969c497714b268a11dbcb", "test_ops.py": "7349ea655c7781f6b39cb25cd300751eb3c5f6b47d6449ed44f5e9f608b5f30e", "worker.py": "53508453d4831bde647d1e7f1920b6a47622c3439a26cf557338232e8973f332"}
+Tool lock SHA256: b1a68ef06a6de2806a18593c7c248a3d6807fd4e2b06f75652268e0ff53f8694
+Source manifest SHA256: 943fd9bf0a02d0dfcc85faf7d3561adcd13b04a40578c301e3b3fdeb0b40f73e
+
+Limits: three warm local trials per cell, shared-host/cache/order noise; no
+scan count measurement or MDE/ETW trace, no scanner causal claim. Prefetch
+still performs the same payload opens and DOES NOT reduce ScanCount.
+Attribute skipping intentionally discards temporary chmod/utime only, not
+final artifact permissions. CPU is Python process_time (all its threads).
+No CI, Defender/UAC/trust/global settings changes, or base runtime installs.
+This is distinct from crutkas's source-only pip Windows Thread bytecode fix;
+build 1.6.1 pip --no-compile bypasses that code; no claim about that fix.
+Both proposals are portable in principle, including Mac where applicable,
+but were NOT benchmarked against an equivalently optimized live Mac pipeline.

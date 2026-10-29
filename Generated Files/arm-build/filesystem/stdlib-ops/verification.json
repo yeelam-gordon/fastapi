@@ -1,0 +1,22 @@
+{
+  "executed_source_hashes_match": {
+    "ops.py": true,
+    "selector.py": true,
+    "test_ops.py": true,
+    "worker.py": true
+  },
+  "all_artifacts_strict": true,
+  "clean_trials": 12,
+  "diagnostic_builds": 5,
+  "tests": 6,
+  "controller_and_validator_sha256": {
+    "ops.py": "77111bb7a03647db640e2e45db366226452af152ddb529db945b6bec7a2de525",
+    "run.py": "c60662940aece60d225aab8f218c134ec9d8415130b1ee9c79ff2fa0a88b5201",
+    "selector.py": "2ab9c673161e560ac028d4c82a80f409b9e0deac7bc969c497714b268a11dbcb",
+    "summarize.py": "6599f9bca60dc288735c7b24e7218fdfbd57abc47ce65d53545503a910211719",
+    "test_ops.py": "7349ea655c7781f6b39cb25cd300751eb3c5f6b47d6449ed44f5e9f608b5f30e",
+    "validate.py": "8bf2cbde136468292d576f12838cb36a56bf408825f724af4a6cb30a259ec004",
+    "worker.py": "53508453d4831bde647d1e7f1920b6a47622c3439a26cf557338232e8973f332"
+  },
+  "final_candidate_core_lines": 73
+}

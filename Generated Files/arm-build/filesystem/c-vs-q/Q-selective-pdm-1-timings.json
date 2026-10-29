@@ -1,0 +1,11 @@
+{
+  "child_seconds": 1.869350500001019,
+  "imports_seconds": 0.32985139999800595,
+  "sdist_seconds": 1.2471351000021969,
+  "extract_seconds": 0.1958682000004046,
+  "wheel_seconds": 0.09649580000041169,
+  "python_cpu_seconds": 1.640625,
+  "extracted_files": 64,
+  "archive_files": 1269,
+  "audit": null
+}

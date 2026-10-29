@@ -1,0 +1,25 @@
+[
+  {
+    "url": "https://docs.astral.sh/uv/concepts/build-backend/",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "url": "https://docs.astral.sh/uv/reference/settings/",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/astral-sh/uv/0.13.6/crates/uv-build-backend/src/metadata.rs",
+    "path": "snapshots\\metadata-0.13.6.rs",
+    "sha256": "24fb8ee11b0763dce4a1b6dbb673d105630a72af5c76fd059aaead16e4af17d1"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/astral-sh/uv/0.13.6/crates/uv-build-backend/src/source_dist.rs",
+    "path": "snapshots\\source-dist-0.13.6.rs",
+    "sha256": "6c89612f8d20076982d5b4bcd7566d09daed5bbe8b58c70113a6f3931c1f90b4"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/astral-sh/uv/0.13.6/crates/uv-build-backend/src/wheel.rs",
+    "path": "snapshots\\wheel-0.13.6.rs",
+    "sha256": "d90d4306dcb6be4ea520a290b446b8b7974f66d0370548afa5483988d29f5861"
+  }
+]

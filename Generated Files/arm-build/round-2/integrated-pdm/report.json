@@ -1,0 +1,122 @@
+{
+  "status": "passed",
+  "scope": "Full fresh process; complete native sdist, selective archive inputs, fresh PDM wheel",
+  "source_sha": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+  "driver_sha256": "b7310dc13797b8f9b6e315ba7610017e6643e7fc1b637ab65712c535adf6fd28",
+  "trials": [
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\trial-0"
+      ],
+      "returncode": 0,
+      "seconds": 1.9205354000005173,
+      "measured": false,
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 1.19023770000058,
+        "selective_extract": 0.18447770000057062,
+        "wheel": 0.1072879000003013
+      }
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\trial-1"
+      ],
+      "returncode": 0,
+      "seconds": 1.690261300000202,
+      "measured": true,
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.974873999999545,
+        "selective_extract": 0.17822630000046047,
+        "wheel": 0.10417339999912656
+      }
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\trial-2"
+      ],
+      "returncode": 0,
+      "seconds": 1.693231299997933,
+      "measured": true,
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9823615999994217,
+        "selective_extract": 0.17448359999980312,
+        "wheel": 0.10548710000148276
+      }
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\trial-3"
+      ],
+      "returncode": 0,
+      "seconds": 1.7004826000011235,
+      "measured": true,
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 0.9788054000018747,
+        "selective_extract": 0.17909980000331416,
+        "wheel": 0.10289479999846662
+      }
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\trial-4"
+      ],
+      "returncode": 0,
+      "seconds": 1.7772656999986793,
+      "measured": true,
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 1.0479082999991078,
+        "selective_extract": 0.17688660000203527,
+        "wheel": 0.11178669999935664
+      }
+    },
+    {
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\experiment.py",
+        "--worker",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\integrated-pdm\\trial-5"
+      ],
+      "returncode": 0,
+      "seconds": 1.7657455000007758,
+      "measured": true,
+      "strict_mac_equivalent": true,
+      "phases": {
+        "sdist": 1.0472890000019106,
+        "selective_extract": 0.1767651999980444,
+        "wheel": 0.10590959999899496
+      }
+    }
+  ],
+  "summary": {
+    "median_seconds": 1.7004826000011235,
+    "min_seconds": 1.690261300000202,
+    "max_seconds": 1.7772656999986793,
+    "count": 5
+  }
+}

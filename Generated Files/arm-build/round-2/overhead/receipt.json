@@ -1,0 +1,283 @@
+{
+  "scripts": {
+    "experiment.py": "d3b08095cafcc99c34c3d797029d5f03df8d6c5477e4e59180954505fd8d5182",
+    "selective-initial.py": "ae3a94eb53fef2892f122fb10c1ca802eed7e43717856a0732e0c2c5cd92d3c2",
+    "selective.py": "3ec13ff1e27080ff4127660536d3cf72957eb3395c2dff3c6a6e0343f2d924ae"
+  },
+  "reports": {
+    "run": {
+      "experiment_wall_seconds": 112.15803790000064,
+      "build_count": 36,
+      "all_equivalent": true,
+      "summary": {
+        "uv-official": {
+          "count": 5,
+          "median": 3.0062866999996913,
+          "min": 2.910908699999709,
+          "max": 3.537478199999896,
+          "all": [
+            3.0062866999996913,
+            2.9830993999985367,
+            3.2232618000016373,
+            3.537478199999896,
+            2.910908699999709
+          ]
+        },
+        "onepy-official-python": {
+          "count": 5,
+          "median": 4.00161079999998,
+          "min": 3.704042899998967,
+          "max": 4.007272000000739,
+          "all": [
+            4.001912499999889,
+            3.9133515000012267,
+            4.007272000000739,
+            4.00161079999998,
+            3.704042899998967
+          ]
+        },
+        "onepy-official-tar": {
+          "count": 5,
+          "median": 2.583454999999958,
+          "min": 2.5675257999992027,
+          "max": 2.6705326000010245,
+          "all": [
+            2.6705326000010245,
+            2.583454999999958,
+            2.5675257999992027,
+            2.6193903000003047,
+            2.5699752000000444
+          ]
+        },
+        "uv-official-no-logs": {
+          "count": 5,
+          "median": 3.1199692000009236,
+          "min": 2.9853332999991835,
+          "max": 3.1519291999993584,
+          "all": [
+            3.147306799999569,
+            3.1519291999993584,
+            3.0523653000000195,
+            3.1199692000009236,
+            2.9853332999991835
+          ]
+        },
+        "onepy-official-tar-no-logs": {
+          "count": 5,
+          "median": 2.5932969999994384,
+          "min": 2.536907699999574,
+          "max": 2.6398413999995682,
+          "all": [
+            2.536907699999574,
+            2.5932969999994384,
+            2.6092439999993076,
+            2.6398413999995682,
+            2.5878189000013663
+          ]
+        },
+        "onepy-sourcebuilt-tar-no-logs": {
+          "count": 5,
+          "median": 2.561131500000556,
+          "min": 2.4753516999990097,
+          "max": 2.6217331000007107,
+          "all": [
+            2.492771499999435,
+            2.4753516999990097,
+            2.561131500000556,
+            2.614809400000013,
+            2.6217331000007107
+          ]
+        }
+      },
+      "phase_medians": {
+        "onepy-official-python": {
+          "sdist": {
+            "wall": 1.3076263000002655,
+            "python_cpu": 1.1875
+          },
+          "extraction": {
+            "wall": 2.1408455000000686,
+            "python_cpu": 1.734375
+          },
+          "wheel": {
+            "wall": 0.11164830000052461,
+            "python_cpu": 0.09375
+          }
+        },
+        "onepy-official-tar": {
+          "sdist": {
+            "wall": 1.3244154000003618,
+            "python_cpu": 1.1875
+          },
+          "extraction": {
+            "wall": 0.7844108999997843,
+            "python_cpu": 0.0
+          },
+          "wheel": {
+            "wall": 0.1162041000006866,
+            "python_cpu": 0.09375
+          }
+        },
+        "onepy-official-tar-no-logs": {
+          "sdist": {
+            "wall": 1.3495425000000978,
+            "python_cpu": 1.21875
+          },
+          "extraction": {
+            "wall": 0.8162556999996013,
+            "python_cpu": 0.015625
+          },
+          "wheel": {
+            "wall": 0.11713909999889438,
+            "python_cpu": 0.09375
+          }
+        },
+        "onepy-sourcebuilt-tar-no-logs": {
+          "sdist": {
+            "wall": 1.3108391000005213,
+            "python_cpu": 1.203125
+          },
+          "extraction": {
+            "wall": 0.7589502000009816,
+            "python_cpu": 0.015625
+          },
+          "wheel": {
+            "wall": 0.11297840000042925,
+            "python_cpu": 0.078125
+          }
+        }
+      }
+    },
+    "selective-run": {
+      "experiment_wall_seconds": 34.39697479999995,
+      "build_count": 12,
+      "all_equivalent": true,
+      "summary": {
+        "full-tar": {
+          "median": 2.5195212999988144,
+          "min": 2.445030900000347,
+          "max": 2.5640600999995513,
+          "count": 5
+        },
+        "selective": {
+          "median": 2.868098999999347,
+          "min": 2.8206160999998247,
+          "max": 3.145461800000703,
+          "count": 5
+        }
+      },
+      "phase_medians": {
+        "full-tar": {
+          "sdist": {
+            "wall": 1.3029624999999214,
+            "python_cpu": 1.140625
+          },
+          "extraction": {
+            "wall": 0.7674781000005169,
+            "python_cpu": 0.015625
+          },
+          "wheel": {
+            "wall": 0.11422680000032415,
+            "python_cpu": 0.09375
+          }
+        },
+        "selective": {
+          "sdist": {
+            "wall": 1.3081728999986808,
+            "python_cpu": 1.1875
+          },
+          "selection_and_extraction": {
+            "wall": 1.1786031999999977,
+            "python_cpu": 1.015625
+          },
+          "wheel": {
+            "wall": 0.11695379999946454,
+            "python_cpu": 0.09375
+          }
+        }
+      },
+      "selection": {
+        "selected_files": 713,
+        "archive_files": 1269,
+        "packages": [
+          "fastapi",
+          "tests"
+        ],
+        "required_metadata_inputs": [
+          "LICENSE",
+          "README.md",
+          "fastapi/__init__.py",
+          "pyproject.toml"
+        ]
+      }
+    },
+    "selective-refined-run": {
+      "experiment_wall_seconds": 28.131035399999746,
+      "build_count": 12,
+      "all_equivalent": true,
+      "summary": {
+        "full-tar": {
+          "median": 2.540549800000008,
+          "min": 2.5077856999996584,
+          "max": 2.5660201000009693,
+          "count": 5
+        },
+        "selective": {
+          "median": 1.9536802000002353,
+          "min": 1.8644532000016625,
+          "max": 1.9980696000002354,
+          "count": 5
+        }
+      },
+      "phase_medians": {
+        "full-tar": {
+          "sdist": {
+            "wall": 1.3160779000008915,
+            "python_cpu": 1.140625
+          },
+          "extraction": {
+            "wall": 0.7846802000003663,
+            "python_cpu": 0.0
+          },
+          "wheel": {
+            "wall": 0.11402169999928446,
+            "python_cpu": 0.109375
+          }
+        },
+        "selective": {
+          "sdist": {
+            "wall": 1.3604794000002585,
+            "python_cpu": 1.203125
+          },
+          "selection_and_extraction": {
+            "wall": 0.19823059999907855,
+            "python_cpu": 0.171875
+          },
+          "wheel": {
+            "wall": 0.11665269999866723,
+            "python_cpu": 0.109375
+          }
+        }
+      },
+      "selection": {
+        "selected_files": 64,
+        "archive_files": 1269,
+        "packages": [
+          "fastapi",
+          "tests"
+        ],
+        "required_metadata_inputs": [
+          "LICENSE",
+          "README.md",
+          "fastapi/__init__.py",
+          "pyproject.toml"
+        ]
+      }
+    }
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "tar_path": "C:\\Windows\\System32\\tar.exe",
+  "tar_machine": "0xAA64 (ARM64)",
+  "reference_source_manifest_sha256": "943fd9bf0a02d0dfcc85faf7d3561adcd13b04a40578c301e3b3fdeb0b40f73e"
+}

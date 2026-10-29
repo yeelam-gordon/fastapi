@@ -1,0 +1,18 @@
+{
+  "imports_wall": 0.21787980000044627,
+  "backend_file": "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Lib\\site-packages\\pdm\\backend\\__init__.py",
+  "backend_version": "2.5.0",
+  "hooks": [],
+  "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:51:22) [MSC v.1944 64 bit (ARM64)]",
+  "cache_tag": "cpython-313",
+  "sys_path": [
+    "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead",
+    "C:\\Program Files\\Python313-arm64\\python313.zip",
+    "C:\\Program Files\\Python313-arm64\\DLLs",
+    "C:\\Program Files\\Python313-arm64\\Lib",
+    "C:\\Program Files\\Python313-arm64",
+    "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment",
+    "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Lib\\site-packages"
+  ],
+  "no_site": false
+}

@@ -1,0 +1,25 @@
+--- canonical
++++ disposable-static
+@@ -1,10 +1,10 @@
+ [build-system]
+-requires = ["pdm-backend"]
+-build-backend = "pdm.backend"
++requires = ["uv_build==0.13.6"]
++build-backend = "uv_build"
+ 
+ [project]
+ name = "fastapi"
+-dynamic = ["version"]
++version = "0.162.0"
+ description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
+ readme = "README.md"
+ license = "MIT"
+@@ -424,3 +424,8 @@
+ 
+ [tool.ty.terminal]
+ error-on-warning = true
++
++[tool.uv.build-backend]
++module-root = ""
++module-name = "fastapi"
++source-include = ["tests/**", "docs_src/**", "scripts/**", "docs/en/docs/img/favicon.png"]

@@ -1,5 +1,33 @@
 # FastAPI Windows ARM build optimization
 
+## Active continuation: round 2
+
+The user reaffirmed that the goal is Windows at least as fast as Mac, not merely a partial improvement. The current task is reopened. [INVESTIGATION-AND-PROPOSALS.md](../INVESTIGATION-AND-PROPOSALS.md) owns the ranked proposal table and acceptance loop.
+
+| Task | Dependencies | State | Acceptance |
+|---|---|---|---|
+| round2-overhead | existing canonical input and reference | selective proof done; import follow-up running | 1.954 s paired selective result; fresh imports still targeted |
+| round2-native-archive | existing canonical input and Mac reference | done | Strict Mac equivalence; mode gap closed; 2.223 s insufficient |
+| round2-native-backend | existing canonical input and reference | rejected after proof | 1.660 s but incompatible metadata/version behavior |
+| round2-integrate | accepted worker evidence | local proof done; optimization continues | 1.700 s median; all Mac contents and execute bits match |
+| round3-node-writer | round2-stage attribution | running | Replace stat/mtree/native-process overhead using existing ARM64 runtime; strict artifacts and timing |
+| round2-verify | round2-integrate | pending | Independent correctness/performance-readiness verdict |
+| round2-ci | round2-verify | gated | Only a locally justified, budgeted runner experiment; then inspect and loop |
+
+### Research update: prior art and competing causes
+
+The supplied prior branches were source-audited with pinned revisions and explicit original attribution in [PRIOR-WORK.md](../PRIOR-WORK.md). Their numerical table is not reproduced or mapped to an exact timer. HOBL separates legacy isolated build, modern build, setup and runtime; do not silently substitute one for another.
+
+| Task | State | Acceptance |
+|---|---|---|
+| standard-frontends-C | running | Standard isolated frontend controls on C:, actual installer call path and backend setup inside timer |
+| native-toolchain-provenance | running | Verified build defaults/artifact provenance, no compiler blame from missing flags |
+| prior-hobl / prior-bootstrap / prior-uvicorn | source audit done | Pinned sources, limits and credit; no foreign-patch performance claim |
+
+The user reaffirmed that expertise requires primary-source research and appropriate tools across interpreter, compiler/configuration, dependency, filesystem and ARM-optimization hypotheses—not a single assumed MDE cause.
+
+Historical round-one evidence below is retained, not an assertion that the overall goal is complete.
+
 ## Goal and acceptance
 
 The authoritative targets and acceptance principles are in [GOALS.md](../GOALS.md). Performance parity is a target, not an established result.
@@ -12,7 +40,7 @@ The authoritative performance-engineering persona and reasoning/measurement meth
 
 ## Execution graph
 
-Root owns transitions, integration and this workboard. Native parallel tasks; no durable runtime needed. Maximum useful active workers: 3 (repository audit, external research, later implementation or verification). No deadline was specified; tasks are bounded to independently useful investigations or implementation units, with at most two review/fix rounds before reporting unresolved issues.
+Root owns transitions, integration and this workboard. Native parallel tasks; no durable runtime needed. Target 2-3 independently useful active lanes, with a ceiling of 15. Each new investigation/proposal uses an owned branch/worktree. Serialize only real dependencies or interfering measurements. No deadline was specified; tasks are bounded to independently useful investigations or implementation units, with at most two review/fix rounds before reporting unresolved issues.
 
 | Task/revision | Dependencies | State | Acceptance | Output |
 |---|---|---|---|---|

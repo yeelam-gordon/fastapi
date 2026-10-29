@@ -1,0 +1,74 @@
+# Optimization loop: Windows ARM must match or beat Mac ARM
+
+**Status: active; the goal is not reached.** Partial speedups are evidence, not completion. Continue investigation, proposals, local proof and independent verification; spend additional fork CI capacity only after the readiness gate passes.
+
+## Acceptance target
+
+Keep the complete FastAPI source-distribution-to-wheel workload and accepted package semantics. The historical Mac reference is 0.730 s median, but the earlier cross-platform comparison was rejected. That number is only an initial screening reference—not a permanently frozen finish line. Evaluate applicable common optimizations on both platforms; compare best validated configurations and report their ratio. A new accepted comparison must use canonical input bytes and preserve all required executable modes.
+
+Local timing is a screening tool, not proof that the hosted runner meets parity. Physical-device parity remains a separate goal.
+
+## Investigation and proposal table
+
+**Current execution priority:** lock the workload boundary and measure standard isolated frontends (P13), complete toolchain provenance (P14), then rank only mechanisms on the timed path. Protected-C: evidence (P11) remains relevant. Complex packaging prototypes are diagnostic evidence, not adoption recommendations. IDs remain stable as evidence changes.
+
+| ID | Investigation and current evidence | Proposal to test | Local acceptance gate | Owner / state |
+|---|---|---|---|---|
+| P1 | One-process full native extraction: 2.541 s in paired local trials; Python extraction and log suppression did not help | Keep fresh-process orchestration; investigate expensive PDM imports rather than site initialization (only about 5 ms difference locally) | Include all imports and build work; no project metadata cache | `windows-critical-path` / ZIP-import follow-up running |
+| P2 | Native mtree preserves all Mac member contents and executable bits; full pipeline 2.277 s, improved to 2.223 s using source permission JSON | Retain mode-correct native serialization as a correctness building block, not a sufficient speed solution | Fresh metadata; strict Mac artifact equivalence; no mode waiver | `native-archive-probe` / correctness accepted; speed insufficient |
+| P3 | Bundled native backend: 1.660 s, unsupported existing dynamic version; altered metadata and extra sdist member | Reject this migration as a drop-in optimization; keep PDM metadata/selection | Exact compatibility differences retained; no fast-but-incompatible claim | `native-backend-probe` / rejected |
+| P4 | Same Git commit produced different archive newlines; canonical source correction now matches all member contents locally | Retain explicit canonical Git archive bytes and source fingerprint in every subsequent experiment | Independent source-byte checks; no cross-platform source conversion; no waived script-mode differences | Root / implemented; mode correction proved by P2 |
+| P5 | Compiler worker count cannot accelerate pure-Python packaging | Pursue parallel archive/file processing only if profiling and a prototype demonstrate benefit | Count all startup/work; do not omit source files or change formats; reject complexity without measured gain | Root / contingent on P1-P3 |
+| P6 | Archive-derived selection extracts 64/1269 files; complete sdist retained. Measured 1.954 s versus paired full-extraction 2.541 s | Keep bounded fail-closed selection; combine with P2 | All 60 initial/matrix builds passed same-host checks; configuration edge-case tests still needed | `windows-critical-path` / local improvement accepted |
+| P7 | Combined P2 + P6: **1.700 s** median, five trials; all artifacts strictly match the Mac reference, including executable bits | Use as the correct integrated baseline for the next loop | Preserve fresh metadata and full-process timing; not yet below 0.730 s | Root / integrated; speed target missed |
+| P8 | Native ARM64 Node writer reaches 1.454 s on Q:, with strict Mac equivalence and four format tests; still above historical Mac | Retain as a diagnostic; do not adopt custom archive-format code for a small shared gain | High maintenance cost; must beat simpler approaches materially on protected C: and evaluate Mac benefit | `node-archive-prototype` / proof complete; adoption gated |
+| P9 | Installed 1.973 s, source ZIP 2.008 s, precompiled ZIP 1.923 s; 18 artifact checks passed. About 2.5% gain is noisy and provisioning costs 0.176 s | Reject as an adopted optimization for now; avoid adding dependency-packaging complexity without a repeatable import benefit | No project metadata cache; tool identity/ABI and provisioning cost recorded | `windows-critical-path` / measured; insufficient evidence of value |
+| P10 | Native selective extraction: 1.636 s versus paired Python extraction 1.645 s; all artifacts correct | Reject the extra process/adapter complexity for a roughly 0.5% local gain | Small effect, shared-platform potential, no demonstrated meaningful advantage | Root / measured; rejected |
+| P11 | C: differs materially: Python full-extraction control 6.065 s, mode-correct selective PDM 8.443 s, Node/selective 2.361 s; Q: 3.788 / 1.990 / 1.538 s | Isolate the C: sdist regression with the same writer/source policy; measure the real uv frontend before recommending anything | These controls are not all the production uv pipeline; scan cause remains unknown; shared Mac benefit unmeasured | `protected-c-drive-experiment` / controlled follow-up running |
+| P12 | On C:, the wheel phase is about 0.53 s versus 0.10 s on Q:, even after reducing extraction to 64 files | Test supported `TarFile.extract(..., set_attrs=False)` only for disposable non-executable wheel inputs, preserving safe extraction and final artifact attributes | Hypothesis only: skip unnecessary temporary chmod/utime, not protection; require identical final payloads/modes and correct dynamic metadata | Root / proposed after current C: control |
+| P13 | HOBL separates `python -m build` and `uv build`; our previous fastest paths excluded isolation | Compare standard isolated pip-installer, uv-installer and uv-frontend paths on C:, preserving output/backend versions | Fresh backend environments remain timed; no custom packager or prior-fix authorship claim | `standard-frontend-controls` / measuring |
+| P14 | Published standalone ARM64 artifacts verified: Windows PGO; Mac PGO+LTO. Stock MSI-wrapper defaults are a different case | Do not rebuild on a blanket “unoptimized Windows” premise; collect exact runtime receipts and CPU-stage evidence | Windows `pgo` label does not mean no LTCG; SIMD and causal compiler effects remain unverified | `native-toolchain-audit` / source/artifact audit done; causal claim rejected |
+| P15 | Prior pip branch implements Windows-only threaded forced bytecode compilation | Reproduce the credited prior patch only if pip compilation is on the chosen timed path | Exact merge-base control, ordered errors/RECORD/cleanup, safe private environments; no reduced-scan claim from threads alone | Prior art / source-reviewed, not reproduced |
+| P16 | Prior ensurepip hardlink POC targets 3.12; installed 3.13 already has a different copy implementation | Validate applicability and staging boundaries before any adaptation | Count actual ensurepip calls inside the timer; real hardlink/fallback/read-only tests; Mac benefit also possible | Prior art / source-reviewed, not a 3.13 drop-in |
+| P17 | Prior Uvicorn changes alter Windows reload shutdown/dedup, not package building | Keep as credited runtime work for a later explicit reload metric | Do not mix reload gains into build/install; no ARM or MDE performance reproduced | Prior art / outside current package-build path |
+
+## Relative benefit and maintenance review
+
+| Proposal family | Likely macOS benefit | Windows-specific case to prove | Maintenance assessment |
+|---|---|---|---|
+| Fewer imports/processes and log suppression | Shared | Larger Windows startup cost, if measured | Low complexity, but measured log/site changes have insufficient value |
+| Selective archive extraction | Shared | Larger protected-Windows cost per newly materialized file/scan | Moderate, fail-closed configuration coverage required; preferred over custom format code |
+| Native/custom archive writer | Shared | Material reduction in Windows duplicate opens/stats/scans beyond the simpler extractor | High; do not adopt based only on Q: speed or the old Mac time |
+| Dependency ZIP/bytecode cache | Shared | Larger protected-Windows import/scan cost | Extra provisioning/ABI complexity; noisy gain does not justify adoption |
+| Avoid redundant staging, rewrites and copies | Shared in principle | Demonstrated Windows scan amplification on C: | Prefer the smallest standard-tool change supported by scan/workload evidence |
+
+Report both `seconds saved` and `R = Windows median / Mac median`. A shared speedup with unchanged or worse R is not parity progress, even if it is independently worthwhile.
+
+The C: matrix confirms that a Q: win is not sufficient: the selective control regressed on C: during **sdist creation**, not extraction. That comparison also includes a mode-correction adapter, so it does not isolate selection alone. No Defender scan trace was authorized; the native consent dialog timed out. The next control must remove those confounders before interpreting the scanner hypothesis or adopting the custom Node writer.
+
+## Competing hypotheses and research tooling
+
+| Hypothesis | Evidence/tool needed | Current assessment / next gate |
+|---|---|---|
+| Different timed workload | Pin benchmark scripts, exact commands and stage boundaries; inspect raw receipts | The separately supplied prior timing table is not source-matched or comparable to package-build seconds; HOBL exposes several distinct metrics |
+| Emulation or wrong architecture | PE machine headers, runtime architecture and native-extension inspection | Python, Node, uv, tar, Git launcher, `_hashlib` and Pydantic core inspected as ARM64; this does not prove every dependency or SIMD path |
+| Slower interpreter/toolchain build | CPython release scripts, actual binary provenance/build flags, CPU-bound stage measurements | Windows sysconfig leaves PGO flags unknown; native source/build configuration research is active, not an assumption of an unoptimized binary |
+| Compiler/project settings | Identify a compiled component on the critical path before inspecting its flags | FastAPI distribution packaging itself is pure Python; CPython/native dependencies may matter in other stages |
+| Filesystem/scanning | Matched C:/Q: operations and phase clocks; permitted WPR/Defender attribution | Location effect measured; MDE causality still unproven; no protection changes |
+| Slow or source-built dependency | Pinned dependency graph, wheel tags/PE headers, pip/uv install reports and build logs | Audit actual benchmark dependencies first; packaging and installation are different costs |
+| Missing ARM acceleration | Native library versions/build recipes plus representative CPU microdiagnostics | ARM64 execution is verified for selected tools, but PGO/SIMD quality remains separate and unproven |
+| Scheduling/concurrency | Parent/child CPU and wall time, process-local affinity, appropriate worker sweep | Do not assume 20 cores help serial packaging; prior pip thread changes require original attribution and source verification |
+
+Prior-art source audits are recorded in [PRIOR-WORK.md](PRIOR-WORK.md). None of these hypotheses is accepted solely because previous work or a RICE estimate suggests it.
+
+## Loop and CI readiness
+
+1. Workers return concrete scripts, raw measurements, failed cases and a confidence assessment.
+2. Update this table: accept, reject, refine or escalate each proposal with a reason. Do not equate an untested suggestion with an optimization.
+3. Integrate the simplest correct candidate and obtain independent verification. Repeat local experiments when a new finding justifies them.
+4. Dispatch a budgeted ARM CI experiment only after local tests, static checks, bootstrap/build smoke, canonical inputs and full artifact checks pass. Record the runner-only question beforehand.
+5. Inspect the resulting medians, ranges, correctness and setup costs. If Windows remains slower, update the table and continue; do not stop at an improvement percentage.
+
+The constraints are owned by [CIRCUMSTANCES.md](CIRCUMSTANCES.md). [arm-build/WORKBOARD.md](arm-build/WORKBOARD.md) owns task state. Raw second-round experiments live under `arm-build\round-2`.
+
+Before spending CI, screen a promising candidate serially and, where useful, with only four CPUs assigned to its **own process tree**. Native psutil affinity queries work on this host. This is a conservative capacity check, not an emulation of GitHub hardware, and must not alter other processes or shared-machine power/security settings.

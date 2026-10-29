@@ -1,0 +1,45 @@
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - pdm-backend
+> C:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\env\Scripts\python.exe -m pip --python
+  C:\fastapi-arm-build-lab\frontends-2a73e36a\c87512b2b70d\temp\build-env-
+  jglz6ep6\Scripts\python.exe install --ignore-installed --use-pep517 --no-
+  warn-script-location --no-compile --no-input -r C:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\temp\build-requirements-fheoe9jf.txt
+< Looking in links: c:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\wheelhouse
+< Processing C:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\wheelhouse\pdm_backend-2.5.0-py3-none-
+  any.whl (from -r C:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\temp\build-requirements-fheoe9jf.txt
+  (line 1))
+< Installing collected packages: pdm-backend
+< Successfully installed pdm-backend-2.5.0
+* Getting build dependencies for sdist...
+* Installed build dependency versions:
+  - pdm-backend==2.5.0
+* Building sdist...
+* Building wheel from sdist
+* Creating isolated environment: venv+pip...
+* Installing packages in isolated environment:
+  - pdm-backend
+> C:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\env\Scripts\python.exe -m pip --python
+  C:\fastapi-arm-build-lab\frontends-2a73e36a\c87512b2b70d\temp\build-env-
+  rnjr80vb\Scripts\python.exe install --ignore-installed --use-pep517 --no-
+  warn-script-location --no-compile --no-input -r C:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\temp\build-requirements-cya2agb4.txt
+< Looking in links: c:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\wheelhouse
+< Processing C:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\wheelhouse\pdm_backend-2.5.0-py3-none-
+  any.whl (from -r C:\fastapi-arm-build-
+  lab\frontends-2a73e36a\c87512b2b70d\temp\build-requirements-cya2agb4.txt
+  (line 1))
+< Installing collected packages: pdm-backend
+< Successfully installed pdm-backend-2.5.0
+* Getting build dependencies for wheel...
+* Installed build dependency versions:
+  - pdm-backend==2.5.0
+* Building wheel...

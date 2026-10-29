@@ -1,0 +1,7 @@
+{
+  "phase": "before",
+  "utc": "2026-10-29T04:57:39.7220697Z",
+  "status": "unknown",
+  "aggregate_cpu_seconds": null,
+  "scope": "Shared-host MsMpEng process CPU only; not attributable blocked-scan wall time."
+}

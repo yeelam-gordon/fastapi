@@ -1,0 +1,131 @@
+ROUND 2: local orchestration/extraction experiment
+Confidence: MEDIUM for the local improvement; LOW for Windows/Mac parity.
+No CI, nested agents, production changes, global configuration or shared-script
+edits. Only this worker's experiments ran serially. Other independent workers
+may have shared this host; no host exclusivity or workload attribution claimed.
+
+BEST VERIFIED RESULT
+One fresh official-environment Python process builds the COMPLETE sdist using
+PDM 2.5.0, selects wheel inputs FROM that completed archive, extracts them to a
+fresh owned directory, and invokes a fresh public PDM build_wheel hook there.
+Selection is computed inside each timed subprocess. No precomputed file list,
+prepared metadata or fallback to checkout files.
+
+Five alternating measured trials, after one preparation per alternative:
+  refined selective: median 1.953680 s, range 1.864453-1.998070 s
+  matched full tar:  median 2.540550 s, range 2.507786-2.566020 s
+  reduction: 23.10%; every pair favored selective extraction.
+The earlier uv median was 3.006287 s (35.01% higher-relative reduction from uv
+to selective), but it was a separate batch, NOT a directly paired comparison.
+These are local results, not a reproduction of the CI 2.679 s or Mac 0.730 s.
+Parity remains unestablished. The five cross-platform executable-mode script
+differences remain unresolved and are NOT waived.
+
+INITIAL ALTERNATIVES: FIVE ALTERNATING MEASURED TRIALS EACH
+Variant                                  Median s       Min-Max s
+uv no isolation, official environment     3.006287       2.910909-3.537478
+one Python, full Python tarfile           4.001611       3.704043-4.007272
+one Python, full native tar.exe           2.583455       2.567526-2.670533
+uv --no-build-logs                        3.119969       2.985333-3.151929
+one Python, tar.exe, suppressed logs      2.593297       2.536908-2.639841
+source-built PDM env, tar, suppressed     2.561132       2.475352-2.621733
+Neither log suppression nor installed-backend provenance showed a useful
+improvement in these small, noisy samples. Normal logs were redirected to owned
+files, not terminal-rendered; this is not a console-rendering benchmark.
+Native tar is C:\Windows\System32\tar.exe, PE machine 0xAA64 (ARM64),
+bsdtar 3.8.9 / libarchive 3.8.9. Its process startup is included.
+
+FAILED/REJECTED HYPOTHESES
+No build or equivalence failures in any of the 60 builds.
+An initial conservative selection retained both discovered packages fastapi
+and tests: 713/1269 files. It passed validation, but median 2.868099 s was
+slower than matched full-tar median 2.519521 s. Evidence retained unchanged in
+selective-run; executed script retained as selective-initial.py.
+Refinement follows PDM's explicit non-sdist source-includes exclusions, rather
+than hardcoding a test/docs skip list: only 64/1269 files are materialized.
+
+WHY THE SELECTION IS SOUND FOR THIS BOUNDED CONFIGURATION
+Installed PDM sources reviewed: base.py Builder._get_include_and_exclude,
+_collect_files/get_hooks; config.py BuildConfig; wheel.py get_files,
+_get_wheel_data/_write_dist_info; hooks/version/__init__.py; utils.py
+is_python_package. Current source commit:
+264cbad400c8336057a70b9b6a65bfdb4920321e.
+Selector reads pyproject.toml and the file inventory from the completed sdist.
+It discovers default top-level Python/stub packages from archive entries,
+retains root files and package contents, and applies configured source-includes.
+Required metadata inputs checked: pyproject.toml, README.md, LICENSE,
+fastapi/__init__.py (file-based dynamic version). Package/data files are kept.
+It rejects extra PDM build keys, custom hooks, installed hook entry points,
+src-layout, unsupported dynamic fields/version sources, wildcard source-only
+patterns and metadata inputs outside its selected set. No general-purpose
+packaging frontend is claimed. These rejection branches were inspected, not
+separately exercised as a unit-test suite in this bounded experiment.
+The extracted tree is the wheel hook's cwd; all materialized inputs originate
+from the sdist. Standard PDM generates wheel metadata anew.
+
+CORRECTNESS COVERAGE
+Every build validated with existing benchmark.artifact_manifest and
+compare_manifests against local-03-canonical/artifacts/prepare-baseline:
+65 normalized wheel members, complete valid RECORD hashes/sizes/coverage;
+1269 sdist file members, every file's content and executable-bit mask.
+Exactly one wheel plus one full sdist per artifact directory.
+60 builds total: 10 preparations and 50 measured builds.
+No line-ending or mode waivers, member removals from the sdist, compression
+change, backend substitution or production edits.
+Full manifests and build logs are retained per trial. Binary archives are
+retained locally but gitignored.
+
+TIMING AND DIAGNOSTICS
+Outer perf_counter spans Popen through process.wait; includes fresh interpreter
+startup, imports, metadata, sdist construction, archive inventory selection and
+extraction, wheel construction and output/log creation. Validation and snapshot
+copy are outside timed builds. Provisioning is excluded; caches/filesystem warm.
+No profiler was timed. Source copy is the same canonical immutable snapshot for
+all alternatives; builds mutate only the owned copy and owned extracted trees.
+All cache/temp locations are owned and on Q:, as are both given environments.
+A separate cache/env relocation matrix was not justified: no different-volume
+layout was present; environment cloning would add provisioning confounds.
+
+Median phase wall / Python CPU seconds (separate diagnostics):
+  initial full Python: sdist 1.307626/1.187500,
+    extraction 2.140846/1.734375, wheel 0.111648/0.093750
+  initial full tar: sdist 1.324415/1.187500,
+    extraction 0.784411/0.000000, wheel 0.116204/0.093750
+  refined selective: sdist 1.360479/1.203125,
+    inventory+selection+extraction 0.198231/0.171875,
+    wheel 0.116653/0.109375
+Phase medians do not sum exactly to outer median and exclude early interpreter
+startup/imports. Python CPU excludes tar subprocess. GetProcessTimes records
+the immediate launcher only; Windows venv redirector/uv descendant CPU is NOT
+included. Near-zero direct-launcher CPU must NOT be interpreted as build CPU.
+
+Experiment loop wall durations (include validation/reporting):
+  initial matrix 112.158038 s
+  conservative selective 34.396975 s
+  refined selective 28.131035 s
+Total measured-loop activity 174.686048 s; bounded task finished within eight
+minutes including investigation, coding and reporting.
+
+EXACT INVOCATIONS FROM Q:\fastapi (fresh output paths required)
+& 'Generated Files\arm-build\.venv\Scripts\python.exe' 'Generated Files\arm-build\round-2\overhead\experiment.py'
+& 'Generated Files\arm-build\.venv\Scripts\python.exe' 'Generated Files\arm-build\round-2\overhead\selective-initial.py'
+& 'Generated Files\arm-build\.venv\Scripts\python.exe' 'Generated Files\arm-build\round-2\overhead\selective.py'
+Actual child argv/cwd and raw wall durations: run\report.json,
+selective-run\report.json, selective-refined-run\report.json.
+Consolidated phase statistics, script hashes and source manifest hash:
+receipt.json. Initial script is unchanged; selective-initial.py is the exact
+executed first selective script saved before refinement.
+
+SCOPED IGNORES
+.gitignore excludes run/source/, every extracted/, .pdm-build/, cache/, temp/,
+__pycache__/, tool-environment/, .venv/, and *.tar, *.tar.gz, *.whl, *.zip.
+Scripts, JSON manifests/reports, text evidence and logs remain visible.
+git check-ignore verified owned source, extraction and archive examples.
+
+NEXT HYPOTHESIS
+The full unchanged PDM sdist itself now dominates (~1.36 s). Investigate its
+filesystem traversal/tar construction with untimed diagnostics, retaining all
+members/modes and without moving discovery outside benchmark timing. Further
+orchestration tweaks cannot plausibly bridge the Mac gap alone. Before adopting
+selective extraction, expand fail-closed configuration coverage and independently
+resolve cross-platform permission policy. No further matrix or CI dispatched.

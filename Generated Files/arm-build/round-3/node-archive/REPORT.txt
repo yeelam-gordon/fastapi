@@ -1,0 +1,97 @@
+Round 3: bounded ARM64 Node TAR writer experiment
+
+RESULT: artifact-correct complete pipeline; FAIL Mac 0.730 s parity target.
+Not a production backend recommendation.
+
+High confidence:
+- Node v24.21.0, process.arch arm64; pinned pdm-backend 2.5.0.
+- Final preparation, five fresh-process trials and two separate diagnostic builds
+  passed the existing benchmark validator against the normative Mac artifacts.
+- Additional raw verification: all 1269 SDist and 65 wheel member contents match,
+  including raw wheel RECORD. Full SDist modes, uid and gid also match Mac.
+  No content/mode waivers or extra RECORD normalization were needed.
+- Four focused tests pass: long ASCII/PAX/Unicode names, payloads, executable
+  modes, empty data, unsafe paths, duplicate entries, unsupported modes,
+  directory/missing/out-of-root sources, concurrency and malformed JSON.
+- Lean-worker follow-up: benchmark and statistics are absent from sys.modules
+  in both diagnostic workers. Coordinator validation imports occur only in the
+  parent. Required backend imports still occur inside the outer timed process.
+  selective_inputs.py copies only the original selective.select function plus
+  its required imports; verification proves the function AST is identical.
+
+Medium confidence (single local machine, five warm-file-cache trials):
+- Four-reader full fresh-process seconds:
+  1.442918, 1.473027, 1.486730, 1.447667, 1.454424.
+- Median 1.454424 s, range 1.442918-1.486730 s: 1.992x the Mac target.
+- Before import cleanup: 1.494697 s median (retained evidence-before-import-
+  cleanup.json). The net difference is ~40 ms, not the larger apparent shift
+  between interpreter/module startup and child import phases.
+- Median child imports 0.253989 s, SDist 0.779669 s,
+  archive-derived selection/extraction 0.172762 s, fresh wheel 0.104219 s.
+  These individual medians need not sum to the total median.
+- Separate 4-reader diagnostic: full process 1.510976 s; Node startup/IPC/IO/
+  archive/output 0.630608 s; internal lstat/read 0.254120 s,
+  TAR serialization 0.020370 s, gzip9 0.188825 s.
+- Separate 8-reader diagnostic: full process 1.418867 s; Node total 0.527662 s;
+  internal lstat/read 0.146143 s, TAR 0.021090 s, gzip9 0.189094 s.
+  This is ONE diagnostic, not a five-trial performance claim.
+- Diagnostic fresh PDM collection ~0.140 s, metadata generation 0.0088-0.0091 s,
+  permission-manifest reread 0.0049-0.0053 s, IPC manifest ~0.0031 s.
+- Gzip is ~13% of full time, not the dominant pipeline cost; even eliminating
+  it entirely cannot close the ~0.724 s target gap. No concatenated-member
+  parallel-gzip complexity or tool-ZIP import experiment was added.
+
+Low confidence:
+- Generalization to cold storage, other machines/projects, or production use.
+- Historical native 2.223 s was a different extraction configuration: do not
+  attribute its entire difference to this writer. No isolated speedup claim.
+
+Implementation and boundaries:
+- writer.cjs: 118 lines; built-in fs/path/zlib only. Ordered USTAR regular files,
+  PAX paths for long/Unicode names; uid/gid/mtime zero; modes 0644/0755; gzip9.
+  Reads bounded to 4 or 8 outstanding tasks (default libuv thread pool unchanged).
+  Buffers all payloads and the assembled TAR; not a streaming/general-purpose tool.
+- experiment.py: pinned SdistBuilder override; fresh PDM get_files/validation and
+  PKG-INFO each build. Reads source-manifest.json inside every timed build.
+  No precomputed package metadata, included-file lists or payload caches.
+  Python does not stat payloads or build mtree input. Node lstat/read rejects
+  nonregular members and symlink leaf files; unsafe archive names/out-of-root
+  source paths and duplicate entries fail closed, without archive-format fallback.
+  Assumes the supplied prepared checkout is trusted and not concurrently mutated;
+  this is not a hostile-filesystem sandbox.
+- Reuses the unchanged select function from round-2/overhead/selective.py in
+  local selective_inputs.py: select 64 wheel inputs from the completed SDist
+  itself; fresh WheelBuilder runs only in that extracted root.
+- Full timer surrounds Python process spawn through exit, including interpreter
+  startup/imports, PDM work, manifest IPC, Node startup/IO/compression, completed
+  SDist selection/extraction and wheel build. Source checkout copy, already
+  installed tools and post-build validation are outside, as in baseline.
+- Final recorded batch: one preparation + five trials + two diagnostics.
+  Preliminary batches preceded separating diagnostic clocks, disabling imported-
+  module bytecode writes, and the requested lean-worker follow-up; final receipts
+  replace them. Results are warm-cache, not a cold-start claim.
+- No subagents, CI, installs, global settings or production/shared-script edits.
+  All experiment writes are inside this directory. work/ and archive binaries
+  are scoped-ignored; text/JSON code and receipts remain visible.
+
+Files (all relative to this directory):
+  writer.cjs, experiment.py, selective_inputs.py, test_writer.py, verify.py,
+    .gitignore, REPORT.txt
+  evidence.json: runtime, commands, boundaries, samples, stages, parity flag
+  raw-verification.json: raw equality checks and code SHA256
+  evidence-before-import-cleanup.json: prior batch for import-overhead context
+  test-writer.log: focused test output
+  prepare-*, trial-1-* through trial-5-*, diagnostic-4-*, diagnostic-8-*:
+    manifests, archive-derived selection and timing JSON plus stdout/stderr logs
+  work/: ignored source copy, completed artifacts, extraction and fixture data
+
+Commands from Q:\fastapi (PowerShell):
+  $p = 'Generated Files\arm-build\tools\official-tool-environment\Scripts\python.exe'
+  $r = 'Generated Files\arm-build\round-3\node-archive'
+  & $p "$r\test_writer.py"
+  & $p "$r\verify.py"
+  & $p "$r\experiment.py"
+The experiment intentionally refuses existing per-build output directories.
+To repeat the batch, first remove ONLY these owned work/ children:
+prepare, trial-1, trial-2, trial-3, trial-4, trial-5, diagnostic-4, diagnostic-8.
+Keep work/source (checkout copy remains outside the measured boundary).

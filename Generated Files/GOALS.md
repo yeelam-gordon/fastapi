@@ -10,11 +10,15 @@ The project relationship, original circumstances, login-assistance rule and limi
 
 These are targets, not already achieved results. Missing Mac access must not prevent source research, actionable proposals, local validation or preparation of the real CI comparison.
 
+Continue the investigation/proposal/experiment loop until parity is established or a specific approval/access blocker requires user input. A partial speedup is not completion. The live ranked table is [INVESTIGATION-AND-PROPOSALS.md](INVESTIGATION-AND-PROPOSALS.md).
+
 ## Acceptance principles
 
 - Preserve FastAPI package contents and runtime behavior; do not omit work to win timings.
 - Identify the actual build bottleneck and demonstrate improvements with repeated measurements and artifact verification.
 - Compare explicit native ARM64 interpreters and documented hardware/software/cache conditions. Report build-only and setup-inclusive costs separately.
+- Apply common optimizations to macOS where appropriate; track Windows/Mac ratios as well as absolute savings. Beating only an old Mac configuration does not establish parity.
+- Prefer meaningful, maintainable improvements. Reject complexity whose measured value and compatibility assurance do not justify its review and upkeep.
 - Run the Windows/macOS CI comparison when authorized. Never claim a prepared workflow is an executed comparison.
 - State unmeasured outcomes, failures and blockers plainly.
 

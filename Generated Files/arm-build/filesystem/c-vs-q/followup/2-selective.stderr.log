@@ -1,0 +1,2 @@
+
+TIMING_JSON={"variant": "selective", "child_seconds": 3.1575645999982953, "imports_seconds": 0.3346574999995937, "sdist_seconds": 1.9995538999974087, "extraction_seconds": 0.24830680000013672, "wheel_seconds": 0.5750464000011561, "python_cpu_seconds": 1.9375, "archive_files": 1269, "extracted_files": 64}

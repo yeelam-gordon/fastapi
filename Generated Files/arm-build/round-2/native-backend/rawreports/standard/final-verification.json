@@ -1,0 +1,15 @@
+{
+  "copied_source_file_count": 3392,
+  "copied_source_differences": [
+    "pyproject.toml"
+  ],
+  "smoke_returncode": 0,
+  "smoke_stdout": "0.162.0 Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\rawreports\\standard\\static-05\\fastapi-0.162.0-py3-none-any.whl\\fastapi\\__init__.py True\n",
+  "smoke_stderr": "",
+  "probe_sha256": "ead12b355cdb2cd3d9a67bc5a78af942f732ac5348f8111426a438a9f94d0fe8",
+  "strict_all_trials_rejected": true,
+  "seconds_over_0_730": 2.274582465752371,
+  "scope": "Final standard/nonverbose five-trial proof; copied-source check performed before standard trials",
+  "canonical_pyproject_unchanged": true,
+  "all_five_standard_artifact_differences_equal": true
+}

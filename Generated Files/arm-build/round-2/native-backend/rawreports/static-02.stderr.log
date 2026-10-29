@@ -1,0 +1,1592 @@
+DEBUG uv 0.13.6 (329bf9448 2026-10-26 aarch64-pc-windows-msvc)
+DEBUG Project is contained in non-workspace project: Q:\fastapi
+DEBUG Found workspace root: Q:\fastapi\Generated Files\arm-build\round-2\native-backend\snapshots\source
+DEBUG Adding root workspace member: Q:\fastapi\Generated Files\arm-build\round-2\native-backend\snapshots\source
+DEBUG Checking for Python interpreter at path `Generated Files\arm-build\tools\official-tool-environment\Scripts\python.exe`
+DEBUG Using request connect timeout of 10s and read timeout of 30s
+DEBUG Using bundled `uv_build` backend for `Generated Files\arm-build\round-2\native-backend\snapshots\source`
+Building source distribution...
+DEBUG Found PEP 639 license declarations, using METADATA 2.4
+DEBUG License files match: LICENSE
+DEBUG Adding content files to source distribution
+DEBUG Source root: Generated Files\arm-build\round-2\native-backend\snapshots\source
+DEBUG Module path: fastapi
+DEBUG Source distribution includes: ["tests/**", "docs_src/**", "scripts/**", "docs/en/docs/img/favicon.png", "pyproject.toml", "fastapi/**", "README.md", "LICENSE"]
+DEBUG Source dist excludes: ["__pycache__", "*.pyc", "*.pyo"]
+DEBUG Adding directory: fastapi-0.162.0\
+DEBUG Adding to sdist: LICENSE
+DEBUG Adding to sdist: README.md
+DEBUG Adding to sdist: docs\en\docs\img\favicon.png
+DEBUG Adding directory: fastapi-0.162.0\docs
+DEBUG Adding directory: fastapi-0.162.0\docs\en
+DEBUG Adding directory: fastapi-0.162.0\docs\en\docs
+DEBUG Adding directory: fastapi-0.162.0\docs\en\docs\img
+DEBUG Adding to sdist: docs_src\additional_responses\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src
+DEBUG Adding directory: fastapi-0.162.0\docs_src\additional_responses
+DEBUG Adding to sdist: docs_src\additional_responses\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\additional_responses\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\additional_responses\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\additional_responses\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\additional_status_codes\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\additional_status_codes
+DEBUG Adding to sdist: docs_src\additional_status_codes\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\additional_status_codes\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\advanced_middleware\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\advanced_middleware
+DEBUG Adding to sdist: docs_src\advanced_middleware\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\advanced_middleware\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\advanced_middleware\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\app_testing\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\app_testing
+DEBUG Adding to sdist: docs_src\app_testing\app_a_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\app_testing\app_a_py310
+DEBUG Adding to sdist: docs_src\app_testing\app_a_py310\main.py
+DEBUG Adding to sdist: docs_src\app_testing\app_a_py310\test_main.py
+DEBUG Adding to sdist: docs_src\app_testing\app_b_an_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\app_testing\app_b_an_py310
+DEBUG Adding to sdist: docs_src\app_testing\app_b_an_py310\main.py
+DEBUG Adding to sdist: docs_src\app_testing\app_b_an_py310\test_main.py
+DEBUG Adding to sdist: docs_src\app_testing\app_b_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\app_testing\app_b_py310
+DEBUG Adding to sdist: docs_src\app_testing\app_b_py310\main.py
+DEBUG Adding to sdist: docs_src\app_testing\app_b_py310\test_main.py
+DEBUG Adding to sdist: docs_src\app_testing\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\app_testing\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\app_testing\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\app_testing\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\async_tests\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\async_tests
+DEBUG Adding to sdist: docs_src\async_tests\app_a_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\async_tests\app_a_py310
+DEBUG Adding to sdist: docs_src\async_tests\app_a_py310\main.py
+DEBUG Adding to sdist: docs_src\async_tests\app_a_py310\test_main.py
+DEBUG Adding to sdist: docs_src\authentication_error_status_code\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\authentication_error_status_code
+DEBUG Adding to sdist: docs_src\authentication_error_status_code\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\background_tasks\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\background_tasks
+DEBUG Adding to sdist: docs_src\background_tasks\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\background_tasks\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\background_tasks\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\behind_a_proxy\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\behind_a_proxy
+DEBUG Adding to sdist: docs_src\behind_a_proxy\tutorial001_01_py310.py
+DEBUG Adding to sdist: docs_src\behind_a_proxy\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\behind_a_proxy\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\behind_a_proxy\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\behind_a_proxy\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\bigger_applications\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\bigger_applications
+DEBUG Adding to sdist: docs_src\bigger_applications\app_an_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\bigger_applications\app_an_py310
+DEBUG Adding to sdist: docs_src\bigger_applications\app_an_py310\dependencies.py
+DEBUG Adding to sdist: docs_src\bigger_applications\app_an_py310\internal\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\bigger_applications\app_an_py310\internal
+DEBUG Adding to sdist: docs_src\bigger_applications\app_an_py310\internal\admin.py
+DEBUG Adding to sdist: docs_src\bigger_applications\app_an_py310\main.py
+DEBUG Adding to sdist: docs_src\bigger_applications\app_an_py310\routers\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\bigger_applications\app_an_py310\routers
+DEBUG Adding to sdist: docs_src\bigger_applications\app_an_py310\routers\items.py
+DEBUG Adding to sdist: docs_src\bigger_applications\app_an_py310\routers\users.py
+DEBUG Adding to sdist: docs_src\body\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\body
+DEBUG Adding to sdist: docs_src\body\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\body\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\body\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\body\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\body_fields\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\body_fields
+DEBUG Adding to sdist: docs_src\body_fields\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\body_fields\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\body_multiple_params
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial005_an_py310.py
+DEBUG Adding to sdist: docs_src\body_multiple_params\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\body_nested_models
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial007_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial008_py310.py
+DEBUG Adding to sdist: docs_src\body_nested_models\tutorial009_py310.py
+DEBUG Adding to sdist: docs_src\body_updates\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\body_updates
+DEBUG Adding to sdist: docs_src\body_updates\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\body_updates\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\conditional_openapi\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\conditional_openapi
+DEBUG Adding to sdist: docs_src\conditional_openapi\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\configure_swagger_ui\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\configure_swagger_ui
+DEBUG Adding to sdist: docs_src\configure_swagger_ui\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\configure_swagger_ui\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\configure_swagger_ui\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\cookie_param_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\cookie_param_models
+DEBUG Adding to sdist: docs_src\cookie_param_models\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\cookie_param_models\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\cookie_param_models\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\cookie_param_models\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\cookie_param_models\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\cookie_param_models\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\cookie_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\cookie_params
+DEBUG Adding to sdist: docs_src\cookie_params\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\cookie_params\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\cors\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\cors
+DEBUG Adding to sdist: docs_src\cors\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\custom_docs_ui\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\custom_docs_ui
+DEBUG Adding to sdist: docs_src\custom_docs_ui\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\custom_docs_ui\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\custom_request_and_route\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\custom_request_and_route
+DEBUG Adding to sdist: docs_src\custom_request_and_route\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\custom_request_and_route\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\custom_request_and_route\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\custom_request_and_route\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\custom_request_and_route\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\custom_response
+DEBUG Adding to sdist: docs_src\custom_response\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial001b_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial006b_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial006c_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial007_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial008_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial009_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial009b_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial009c_py310.py
+DEBUG Adding to sdist: docs_src\custom_response\tutorial010_py310.py
+DEBUG Adding to sdist: docs_src\dataclasses_\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\dataclasses_
+DEBUG Adding to sdist: docs_src\dataclasses_\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\dataclasses_\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\dataclasses_\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\debugging\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\debugging
+DEBUG Adding to sdist: docs_src\debugging\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\dependencies
+DEBUG Adding to sdist: docs_src\dependencies\tutorial001_02_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial005_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial006_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial007_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008b_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008b_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008c_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008c_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008d_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008d_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008e_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial008e_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial010_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial011_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial011_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial012_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial012_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial013_an_py310.py
+DEBUG Adding to sdist: docs_src\dependencies\tutorial014_an_py310.py
+DEBUG Adding to sdist: docs_src\dependency_testing\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\dependency_testing
+DEBUG Adding to sdist: docs_src\dependency_testing\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\dependency_testing\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\encoder\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\encoder
+DEBUG Adding to sdist: docs_src\encoder\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\events\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\events
+DEBUG Adding to sdist: docs_src\events\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\events\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\events\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\extending_openapi\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\extending_openapi
+DEBUG Adding to sdist: docs_src\extending_openapi\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\extra_data_types\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\extra_data_types
+DEBUG Adding to sdist: docs_src\extra_data_types\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\extra_data_types\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\extra_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\extra_models
+DEBUG Adding to sdist: docs_src\extra_models\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\extra_models\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\extra_models\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\extra_models\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\extra_models\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\first_steps\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\first_steps
+DEBUG Adding to sdist: docs_src\first_steps\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\first_steps\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\frontend\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\frontend
+DEBUG Adding to sdist: docs_src\frontend\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\frontend\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\frontend\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\frontend\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\frontend\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\frontend\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\generate_clients\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\generate_clients
+DEBUG Adding to sdist: docs_src\generate_clients\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\generate_clients\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\generate_clients\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\generate_clients\tutorial004.js
+DEBUG Adding to sdist: docs_src\generate_clients\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\graphql_\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\graphql_
+DEBUG Adding to sdist: docs_src\graphql_\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\handling_errors\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\handling_errors
+DEBUG Adding to sdist: docs_src\handling_errors\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\handling_errors\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\handling_errors\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\handling_errors\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\handling_errors\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\handling_errors\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\header_param_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\header_param_models
+DEBUG Adding to sdist: docs_src\header_param_models\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\header_param_models\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\header_param_models\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\header_param_models\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\header_param_models\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\header_param_models\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\header_param_models\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\header_param_models\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\header_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\header_params
+DEBUG Adding to sdist: docs_src\header_params\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\header_params\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\header_params\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\header_params\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\header_params\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\header_params\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\json_base64_bytes\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\json_base64_bytes
+DEBUG Adding to sdist: docs_src\json_base64_bytes\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\metadata\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\metadata
+DEBUG Adding to sdist: docs_src\metadata\tutorial001_1_py310.py
+DEBUG Adding to sdist: docs_src\metadata\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\metadata\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\metadata\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\metadata\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\middleware\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\middleware
+DEBUG Adding to sdist: docs_src\middleware\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\openapi_callbacks\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\openapi_callbacks
+DEBUG Adding to sdist: docs_src\openapi_callbacks\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\openapi_webhooks\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\openapi_webhooks
+DEBUG Adding to sdist: docs_src\openapi_webhooks\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\opentelemetry\tutorial001_py310.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\opentelemetry
+DEBUG Adding to sdist: docs_src\opentelemetry\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\opentelemetry\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_advanced_configuration\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\path_operation_advanced_configuration
+DEBUG Adding to sdist: docs_src\path_operation_advanced_configuration\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_advanced_configuration\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_advanced_configuration\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_advanced_configuration\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_advanced_configuration\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_advanced_configuration\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_advanced_configuration\tutorial007_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_configuration\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\path_operation_configuration
+DEBUG Adding to sdist: docs_src\path_operation_configuration\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_configuration\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_configuration\tutorial002b_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_configuration\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_configuration\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_configuration\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\path_operation_configuration\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\path_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\path_params
+DEBUG Adding to sdist: docs_src\path_params\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\path_params\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\path_params\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\path_params\tutorial003b_py310.py
+DEBUG Adding to sdist: docs_src\path_params\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\path_params\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\path_params_numeric_validations
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial005_an_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial006_an_py310.py
+DEBUG Adding to sdist: docs_src\path_params_numeric_validations\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\pydantic_v1_in_v2\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\pydantic_v1_in_v2
+DEBUG Adding to sdist: docs_src\pydantic_v1_in_v2\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\pydantic_v1_in_v2\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\pydantic_v1_in_v2\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\pydantic_v1_in_v2\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\python_types\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\python_types
+DEBUG Adding to sdist: docs_src\python_types\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial007_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial008_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial008b_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial009_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial010_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial011_py310.py
+DEBUG Adding to sdist: docs_src\python_types\tutorial013_py310.py
+DEBUG Adding to sdist: docs_src\query_param_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\query_param_models
+DEBUG Adding to sdist: docs_src\query_param_models\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\query_param_models\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\query_param_models\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\query_param_models\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\query_param_models\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\query_param_models\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\query_param_models\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\query_param_models\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\query_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\query_params
+DEBUG Adding to sdist: docs_src\query_params\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\query_params\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\query_params\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\query_params\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\query_params\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\query_params\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\query_params_str_validations
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial005_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial006_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial006c_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial006c_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial007_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial007_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial008_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial008_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial009_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial009_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial010_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial010_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial011_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial011_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial012_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial012_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial013_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial013_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial014_an_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial014_py310.py
+DEBUG Adding to sdist: docs_src\query_params_str_validations\tutorial015_an_py310.py
+DEBUG Adding to sdist: docs_src\request_files\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\request_files
+DEBUG Adding to sdist: docs_src\request_files\tutorial001_02_an_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial001_02_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial001_03_an_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial001_03_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\request_files\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\request_form_models
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial005_an_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial006_an_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial007_an_py310.py
+DEBUG Adding to sdist: docs_src\request_form_models\tutorial007_py310.py
+DEBUG Adding to sdist: docs_src\request_forms\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\request_forms
+DEBUG Adding to sdist: docs_src\request_forms\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\request_forms\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\request_forms\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\request_forms\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\request_forms_and_files\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\request_forms_and_files
+DEBUG Adding to sdist: docs_src\request_forms_and_files\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\request_forms_and_files\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\response_change_status_code\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\response_change_status_code
+DEBUG Adding to sdist: docs_src\response_change_status_code\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\response_cookies\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\response_cookies
+DEBUG Adding to sdist: docs_src\response_cookies\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\response_cookies\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\response_directly\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\response_directly
+DEBUG Adding to sdist: docs_src\response_directly\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\response_directly\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\response_headers\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\response_headers
+DEBUG Adding to sdist: docs_src\response_headers\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\response_headers\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\response_model\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\response_model
+DEBUG Adding to sdist: docs_src\response_model\tutorial001_01_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial003_01_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial003_02_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial003_03_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial003_04_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial003_05_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\response_model\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\response_status_code\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\response_status_code
+DEBUG Adding to sdist: docs_src\response_status_code\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\response_status_code\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\schema_extra_example\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\schema_extra_example
+DEBUG Adding to sdist: docs_src\schema_extra_example\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\schema_extra_example\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\schema_extra_example\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\schema_extra_example\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\schema_extra_example\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\schema_extra_example\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\schema_extra_example\tutorial005_an_py310.py
+DEBUG Adding to sdist: docs_src\schema_extra_example\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\security\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\security
+DEBUG Adding to sdist: docs_src\security\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial003_an_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial004_an_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial005_an_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial006_an_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial006_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial007_an_py310.py
+DEBUG Adding to sdist: docs_src\security\tutorial007_py310.py
+DEBUG Adding to sdist: docs_src\separate_openapi_schemas\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\separate_openapi_schemas
+DEBUG Adding to sdist: docs_src\separate_openapi_schemas\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\separate_openapi_schemas\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\server_sent_events\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\server_sent_events
+DEBUG Adding to sdist: docs_src\server_sent_events\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\server_sent_events\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\server_sent_events\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\server_sent_events\tutorial004_py310.py
+DEBUG Adding to sdist: docs_src\server_sent_events\tutorial005_py310.py
+DEBUG Adding to sdist: docs_src\settings\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\settings
+DEBUG Adding to sdist: docs_src\settings\app01_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\settings\app01_py310
+DEBUG Adding to sdist: docs_src\settings\app01_py310\config.py
+DEBUG Adding to sdist: docs_src\settings\app01_py310\main.py
+DEBUG Adding to sdist: docs_src\settings\app02_an_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\settings\app02_an_py310
+DEBUG Adding to sdist: docs_src\settings\app02_an_py310\config.py
+DEBUG Adding to sdist: docs_src\settings\app02_an_py310\main.py
+DEBUG Adding to sdist: docs_src\settings\app02_an_py310\test_main.py
+DEBUG Adding to sdist: docs_src\settings\app02_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\settings\app02_py310
+DEBUG Adding to sdist: docs_src\settings\app02_py310\config.py
+DEBUG Adding to sdist: docs_src\settings\app02_py310\main.py
+DEBUG Adding to sdist: docs_src\settings\app02_py310\test_main.py
+DEBUG Adding to sdist: docs_src\settings\app03_an_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\settings\app03_an_py310
+DEBUG Adding to sdist: docs_src\settings\app03_an_py310\config.py
+DEBUG Adding to sdist: docs_src\settings\app03_an_py310\main.py
+DEBUG Adding to sdist: docs_src\settings\app03_py310\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\settings\app03_py310
+DEBUG Adding to sdist: docs_src\settings\app03_py310\config.py
+DEBUG Adding to sdist: docs_src\settings\app03_py310\main.py
+DEBUG Adding to sdist: docs_src\settings\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\sql_databases\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\sql_databases
+DEBUG Adding to sdist: docs_src\sql_databases\tutorial001_an_py310.py
+DEBUG Adding to sdist: docs_src\sql_databases\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\sql_databases\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\sql_databases\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\static_files\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\static_files
+DEBUG Adding to sdist: docs_src\static_files\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\stream_data\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\stream_data
+DEBUG Adding to sdist: docs_src\stream_data\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\stream_data\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\stream_json_lines\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\stream_json_lines
+DEBUG Adding to sdist: docs_src\stream_json_lines\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\strict_content_type\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\strict_content_type
+DEBUG Adding to sdist: docs_src\strict_content_type\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\sub_applications\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\sub_applications
+DEBUG Adding to sdist: docs_src\sub_applications\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\templates\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\templates
+DEBUG Adding to sdist: docs_src\templates\static\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\templates\static
+DEBUG Adding to sdist: docs_src\templates\static\styles.css
+DEBUG Adding to sdist: docs_src\templates\templates\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\templates\templates
+DEBUG Adding to sdist: docs_src\templates\templates\item.html
+DEBUG Adding to sdist: docs_src\templates\templates\item_path.html
+DEBUG Adding to sdist: docs_src\templates\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\templates\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\using_request_directly\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\using_request_directly
+DEBUG Adding to sdist: docs_src\using_request_directly\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\websockets_\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\websockets_
+DEBUG Adding to sdist: docs_src\websockets_\tutorial001_py310.py
+DEBUG Adding to sdist: docs_src\websockets_\tutorial002_an_py310.py
+DEBUG Adding to sdist: docs_src\websockets_\tutorial002_py310.py
+DEBUG Adding to sdist: docs_src\websockets_\tutorial003_py310.py
+DEBUG Adding to sdist: docs_src\wsgi\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\docs_src\wsgi
+DEBUG Adding to sdist: docs_src\wsgi\tutorial001_py310.py
+DEBUG Adding to sdist: fastapi\.agents\skills\fastapi\SKILL.md
+DEBUG Adding directory: fastapi-0.162.0\fastapi
+DEBUG Adding directory: fastapi-0.162.0\fastapi\.agents
+DEBUG Adding directory: fastapi-0.162.0\fastapi\.agents\skills
+DEBUG Adding directory: fastapi-0.162.0\fastapi\.agents\skills\fastapi
+DEBUG Adding to sdist: fastapi\.agents\skills\fastapi\references\dependencies.md
+DEBUG Adding directory: fastapi-0.162.0\fastapi\.agents\skills\fastapi\references
+DEBUG Adding to sdist: fastapi\.agents\skills\fastapi\references\other-tools.md
+DEBUG Adding to sdist: fastapi\.agents\skills\fastapi\references\path-operations.md
+DEBUG Adding to sdist: fastapi\.agents\skills\fastapi\references\pydantic.md
+DEBUG Adding to sdist: fastapi\.agents\skills\fastapi\references\responses.md
+DEBUG Adding to sdist: fastapi\.agents\skills\fastapi\references\streaming.md
+DEBUG Adding to sdist: fastapi\__init__.py
+DEBUG Adding to sdist: fastapi\__main__.py
+DEBUG Adding to sdist: fastapi\_compat\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\fastapi\_compat
+DEBUG Adding to sdist: fastapi\_compat\shared.py
+DEBUG Adding to sdist: fastapi\_compat\v2.py
+DEBUG Adding to sdist: fastapi\applications.py
+DEBUG Adding to sdist: fastapi\background.py
+DEBUG Adding to sdist: fastapi\cli.py
+DEBUG Adding to sdist: fastapi\concurrency.py
+DEBUG Adding to sdist: fastapi\datastructures.py
+DEBUG Adding to sdist: fastapi\dependencies\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\fastapi\dependencies
+DEBUG Adding to sdist: fastapi\dependencies\models.py
+DEBUG Adding to sdist: fastapi\dependencies\utils.py
+DEBUG Adding to sdist: fastapi\encoders.py
+DEBUG Adding to sdist: fastapi\exception_handlers.py
+DEBUG Adding to sdist: fastapi\exceptions.py
+DEBUG Adding to sdist: fastapi\logger.py
+DEBUG Adding to sdist: fastapi\middleware\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\fastapi\middleware
+DEBUG Adding to sdist: fastapi\middleware\asyncexitstack.py
+DEBUG Adding to sdist: fastapi\middleware\cors.py
+DEBUG Adding to sdist: fastapi\middleware\gzip.py
+DEBUG Adding to sdist: fastapi\middleware\httpsredirect.py
+DEBUG Adding to sdist: fastapi\middleware\trustedhost.py
+DEBUG Adding to sdist: fastapi\middleware\wsgi.py
+DEBUG Adding to sdist: fastapi\openapi\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\fastapi\openapi
+DEBUG Adding to sdist: fastapi\openapi\constants.py
+DEBUG Adding to sdist: fastapi\openapi\docs.py
+DEBUG Adding to sdist: fastapi\openapi\models.py
+DEBUG Adding to sdist: fastapi\openapi\utils.py
+DEBUG Adding to sdist: fastapi\param_functions.py
+DEBUG Adding to sdist: fastapi\params.py
+DEBUG Adding to sdist: fastapi\py.typed
+DEBUG Adding to sdist: fastapi\requests.py
+DEBUG Adding to sdist: fastapi\responses.py
+DEBUG Adding to sdist: fastapi\routing.py
+DEBUG Adding to sdist: fastapi\security\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\fastapi\security
+DEBUG Adding to sdist: fastapi\security\api_key.py
+DEBUG Adding to sdist: fastapi\security\base.py
+DEBUG Adding to sdist: fastapi\security\http.py
+DEBUG Adding to sdist: fastapi\security\oauth2.py
+DEBUG Adding to sdist: fastapi\security\open_id_connect_url.py
+DEBUG Adding to sdist: fastapi\security\utils.py
+DEBUG Adding to sdist: fastapi\sse.py
+DEBUG Adding to sdist: fastapi\staticfiles.py
+DEBUG Adding to sdist: fastapi\telemetry\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\fastapi\telemetry
+DEBUG Adding to sdist: fastapi\telemetry\_api.py
+DEBUG Adding to sdist: fastapi\telemetry\_asgi.py
+DEBUG Adding to sdist: fastapi\telemetry\_runtime.py
+DEBUG Adding to sdist: fastapi\templating.py
+DEBUG Adding to sdist: fastapi\testclient.py
+DEBUG Adding to sdist: fastapi\types.py
+DEBUG Adding to sdist: fastapi\utils.py
+DEBUG Adding to sdist: fastapi\websockets.py
+DEBUG Adding to sdist: scripts\add_latest_release_date.py
+DEBUG Adding directory: fastapi-0.162.0\scripts
+DEBUG Adding to sdist: scripts\deploy_docs_status.py
+DEBUG Adding to sdist: scripts\doc_parsing_utils.py
+DEBUG Adding to sdist: scripts\docs.py
+DEBUG Adding to sdist: scripts\format.sh
+DEBUG Adding to sdist: scripts\general-llm-prompt.md
+DEBUG Adding to sdist: scripts\lint.sh
+DEBUG Adding to sdist: scripts\playwright\cookie_param_models\image01.py
+DEBUG Adding directory: fastapi-0.162.0\scripts\playwright
+DEBUG Adding directory: fastapi-0.162.0\scripts\playwright\cookie_param_models
+DEBUG Adding to sdist: scripts\playwright\header_param_models\image01.py
+DEBUG Adding directory: fastapi-0.162.0\scripts\playwright\header_param_models
+DEBUG Adding to sdist: scripts\playwright\json_base64_bytes\image01.py
+DEBUG Adding directory: fastapi-0.162.0\scripts\playwright\json_base64_bytes
+DEBUG Adding to sdist: scripts\playwright\query_param_models\image01.py
+DEBUG Adding directory: fastapi-0.162.0\scripts\playwright\query_param_models
+DEBUG Adding to sdist: scripts\playwright\request_form_models\image01.py
+DEBUG Adding directory: fastapi-0.162.0\scripts\playwright\request_form_models
+DEBUG Adding to sdist: scripts\playwright\separate_openapi_schemas\image01.py
+DEBUG Adding directory: fastapi-0.162.0\scripts\playwright\separate_openapi_schemas
+DEBUG Adding to sdist: scripts\playwright\separate_openapi_schemas\image02.py
+DEBUG Adding to sdist: scripts\playwright\separate_openapi_schemas\image03.py
+DEBUG Adding to sdist: scripts\playwright\separate_openapi_schemas\image04.py
+DEBUG Adding to sdist: scripts\playwright\separate_openapi_schemas\image05.py
+DEBUG Adding to sdist: scripts\playwright\sql_databases\image01.py
+DEBUG Adding directory: fastapi-0.162.0\scripts\playwright\sql_databases
+DEBUG Adding to sdist: scripts\playwright\sql_databases\image02.py
+DEBUG Adding to sdist: scripts\prepare_release.py
+DEBUG Adding to sdist: scripts\sponsors.py
+DEBUG Adding to sdist: scripts\test-cov-html.sh
+DEBUG Adding to sdist: scripts\test-cov.sh
+DEBUG Adding to sdist: scripts\test.sh
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\conftest.py
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\en_doc.md
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_code_blocks
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_code_blocks\data
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\translated_doc_lines_number_gt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\translated_doc_lines_number_lt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\translated_doc_mermaid_not_translated.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\translated_doc_mermaid_translated.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\translated_doc_number_gt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\translated_doc_number_lt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\translated_doc_wrong_lang_code.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\data\translated_doc_wrong_lang_code_2.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\test_code_blocks_lines_number_mismatch.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\test_code_blocks_mermaid.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\test_code_blocks_number_mismatch.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_blocks\test_code_blocks_wrong_lang_code.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_includes\data\en_doc.md
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_code_includes
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_code_includes\data
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_includes\data\translated_doc_number_gt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_includes\data\translated_doc_number_lt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_code_includes\test_number_mismatch.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_complex_doc\data\en_doc.md
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_complex_doc
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_complex_doc\data
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_complex_doc\data\translated_doc.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_complex_doc\data\translated_doc_expected.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_complex_doc\test_compex_doc.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_header_permalinks\data\en_doc.md
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_header_permalinks
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_header_permalinks\data
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_header_permalinks\data\translated_doc_level_mismatch_1.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_header_permalinks\data\translated_doc_level_mismatch_2.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_header_permalinks\data\translated_doc_number_gt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_header_permalinks\data\translated_doc_number_lt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_header_permalinks\test_header_level_mismatch.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_header_permalinks\test_header_number_mismatch.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_html_links\data\en_doc.md
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_html_links
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_html_links\data
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_html_links\data\translated_doc_number_gt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_html_links\data\translated_doc_number_lt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_html_links\test_html_links_number_mismatch.py
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_markdown_links\data\en_doc.md
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_markdown_links
+DEBUG Adding directory: fastapi-0.162.0\scripts\tests\test_translation_fixer\test_markdown_links\data
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_markdown_links\data\translated_doc.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_markdown_links\data\translated_doc_number_gt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_markdown_links\data\translated_doc_number_lt.md
+DEBUG Adding to sdist: scripts\tests\test_translation_fixer\test_markdown_links\test_mkd_links_number_mismatch.py
+DEBUG Adding to sdist: scripts\topic_repos.py
+DEBUG Adding to sdist: scripts\translate.py
+DEBUG Adding to sdist: scripts\translation_fixer.py
+DEBUG Adding to sdist: scripts\translation_git.py
+DEBUG Adding to sdist: tests\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests
+DEBUG Adding to sdist: tests\benchmarks\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\benchmarks
+DEBUG Adding to sdist: tests\benchmarks\test_general_performance.py
+DEBUG Adding to sdist: tests\benchmarks\test_openapi.py
+DEBUG Adding to sdist: tests\benchmarks\utils.py
+DEBUG Adding to sdist: tests\forward_reference_type.py
+DEBUG Adding to sdist: tests\main.py
+DEBUG Adding to sdist: tests\memory_benchmarks\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\memory_benchmarks
+DEBUG Adding to sdist: tests\memory_benchmarks\test_dependency_graph.py
+DEBUG Adding to sdist: tests\memory_benchmarks\test_openapi.py
+DEBUG Adding to sdist: tests\memory_benchmarks\test_route_dependency_graph.py
+DEBUG Adding to sdist: tests\test_additional_properties.py
+DEBUG Adding to sdist: tests\test_additional_properties_bool.py
+DEBUG Adding to sdist: tests\test_additional_response_extra.py
+DEBUG Adding to sdist: tests\test_additional_responses_bad.py
+DEBUG Adding to sdist: tests\test_additional_responses_custom_model_in_callback.py
+DEBUG Adding to sdist: tests\test_additional_responses_custom_validationerror.py
+DEBUG Adding to sdist: tests\test_additional_responses_default_validationerror.py
+DEBUG Adding to sdist: tests\test_additional_responses_response_class.py
+DEBUG Adding to sdist: tests\test_additional_responses_router.py
+DEBUG Adding to sdist: tests\test_additional_responses_union_duplicate_anyof.py
+DEBUG Adding to sdist: tests\test_allow_inf_nan_in_enforcing.py
+DEBUG Adding to sdist: tests\test_ambiguous_params.py
+DEBUG Adding to sdist: tests\test_annotated.py
+DEBUG Adding to sdist: tests\test_application.py
+DEBUG Adding to sdist: tests\test_arbitrary_types.py
+DEBUG Adding to sdist: tests\test_body_alias_choices.py
+DEBUG Adding to sdist: tests\test_callable_endpoint.py
+DEBUG Adding to sdist: tests\test_compat.py
+DEBUG Adding to sdist: tests\test_computed_fields.py
+DEBUG Adding to sdist: tests\test_custom_middleware_exception.py
+DEBUG Adding to sdist: tests\test_custom_route_class.py
+DEBUG Adding to sdist: tests\test_custom_schema_fields.py
+DEBUG Adding to sdist: tests\test_custom_swagger_ui_redirect.py
+DEBUG Adding to sdist: tests\test_datastructures.py
+DEBUG Adding to sdist: tests\test_datetime_custom_encoder.py
+DEBUG Adding to sdist: tests\test_default_response_class.py
+DEBUG Adding to sdist: tests\test_default_response_class_router.py
+DEBUG Adding to sdist: tests\test_dependencies_utils.py
+DEBUG Adding to sdist: tests\test_dependency_after_yield_raise.py
+DEBUG Adding to sdist: tests\test_dependency_after_yield_streaming.py
+DEBUG Adding to sdist: tests\test_dependency_after_yield_websockets.py
+DEBUG Adding to sdist: tests\test_dependency_cache.py
+DEBUG Adding to sdist: tests\test_dependency_class.py
+DEBUG Adding to sdist: tests\test_dependency_contextmanager.py
+DEBUG Adding to sdist: tests\test_dependency_contextvars.py
+DEBUG Adding to sdist: tests\test_dependency_duplicates.py
+DEBUG Adding to sdist: tests\test_dependency_models.py
+DEBUG Adding to sdist: tests\test_dependency_overrides.py
+DEBUG Adding to sdist: tests\test_dependency_paramless.py
+DEBUG Adding to sdist: tests\test_dependency_partial.py
+DEBUG Adding to sdist: tests\test_dependency_pep695.py
+DEBUG Adding to sdist: tests\test_dependency_security_overrides.py
+DEBUG Adding to sdist: tests\test_dependency_wrapped.py
+DEBUG Adding to sdist: tests\test_dependency_yield_except_httpexception.py
+DEBUG Adding to sdist: tests\test_dependency_yield_scope.py
+DEBUG Adding to sdist: tests\test_dependency_yield_scope_websockets.py
+DEBUG Adding to sdist: tests\test_depends_hashable.py
+DEBUG Adding to sdist: tests\test_deprecated_responses.py
+DEBUG Adding to sdist: tests\test_dump_json_fast_path.py
+DEBUG Adding to sdist: tests\test_duplicate_models_openapi.py
+DEBUG Adding to sdist: tests\test_empty_router.py
+DEBUG Adding to sdist: tests\test_enforce_once_required_parameter.py
+DEBUG Adding to sdist: tests\test_exception_handlers.py
+DEBUG Adding to sdist: tests\test_extra_routes.py
+DEBUG Adding to sdist: tests\test_fastapi_cli.py
+DEBUG Adding to sdist: tests\test_file_and_form_order_issue_9116.py
+DEBUG Adding to sdist: tests\test_filter_pydantic_sub_model_pv2.py
+DEBUG Adding to sdist: tests\test_form_default.py
+DEBUG Adding to sdist: tests\test_forms_from_non_typing_sequences.py
+DEBUG Adding to sdist: tests\test_forms_multiple_models.py
+DEBUG Adding to sdist: tests\test_forms_multiple_unions.py
+DEBUG Adding to sdist: tests\test_forms_optional_models.py
+DEBUG Adding to sdist: tests\test_forms_optional_unions.py
+DEBUG Adding to sdist: tests\test_forms_single_model.py
+DEBUG Adding to sdist: tests\test_forms_single_param.py
+DEBUG Adding to sdist: tests\test_frontend.py
+DEBUG Adding to sdist: tests\test_generate_unique_id_function.py
+DEBUG Adding to sdist: tests\test_generic_parameterless_depends.py
+DEBUG Adding to sdist: tests\test_get_model_definitions_formfeed_escape.py
+DEBUG Adding to sdist: tests\test_get_request_body.py
+DEBUG Adding to sdist: tests\test_header_cookie_alias_choices.py
+DEBUG Adding to sdist: tests\test_header_cookie_optional_models.py
+DEBUG Adding to sdist: tests\test_http_connection_injection.py
+DEBUG Adding to sdist: tests\test_include_route.py
+DEBUG Adding to sdist: tests\test_include_router_defaults_overrides.py
+DEBUG Adding to sdist: tests\test_infer_param_optionality.py
+DEBUG Adding to sdist: tests\test_inherited_custom_class.py
+DEBUG Adding to sdist: tests\test_invalid_path_param.py
+DEBUG Adding to sdist: tests\test_invalid_sequence_param.py
+DEBUG Adding to sdist: tests\test_json_type.py
+DEBUG Adding to sdist: tests\test_jsonable_encoder.py
+DEBUG Adding to sdist: tests\test_list_bytes_file_order_preserved_issue_14811.py
+DEBUG Adding to sdist: tests\test_local_docs.py
+DEBUG Adding to sdist: tests\test_modules_same_name_body\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_modules_same_name_body
+DEBUG Adding to sdist: tests\test_modules_same_name_body\app\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_modules_same_name_body\app
+DEBUG Adding to sdist: tests\test_modules_same_name_body\app\a.py
+DEBUG Adding to sdist: tests\test_modules_same_name_body\app\b.py
+DEBUG Adding to sdist: tests\test_modules_same_name_body\app\main.py
+DEBUG Adding to sdist: tests\test_modules_same_name_body\test_main.py
+DEBUG Adding to sdist: tests\test_multi_body_errors.py
+DEBUG Adding to sdist: tests\test_multi_query_errors.py
+DEBUG Adding to sdist: tests\test_multipart_installation.py
+DEBUG Adding to sdist: tests\test_multiple_parameter_models.py
+DEBUG Adding to sdist: tests\test_nested_annotated_in_sequence.py
+DEBUG Adding to sdist: tests\test_no_schema_split.py
+DEBUG Adding to sdist: tests\test_no_swagger_ui_redirect.py
+DEBUG Adding to sdist: tests\test_openapi_cache_root_path.py
+DEBUG Adding to sdist: tests\test_openapi_examples.py
+DEBUG Adding to sdist: tests\test_openapi_model_description_trim_on_formfeed.py
+DEBUG Adding to sdist: tests\test_openapi_query_parameter_extension.py
+DEBUG Adding to sdist: tests\test_openapi_route_extensions.py
+DEBUG Adding to sdist: tests\test_openapi_schema_type.py
+DEBUG Adding to sdist: tests\test_openapi_separate_input_output_schemas.py
+DEBUG Adding to sdist: tests\test_openapi_servers.py
+DEBUG Adding to sdist: tests\test_operations_signatures.py
+DEBUG Adding to sdist: tests\test_optional_file_list.py
+DEBUG Adding to sdist: tests\test_orjson_response_class.py
+DEBUG Adding to sdist: tests\test_param_class.py
+DEBUG Adding to sdist: tests\test_param_in_path_and_dependency.py
+DEBUG Adding to sdist: tests\test_param_include_in_schema.py
+DEBUG Adding to sdist: tests\test_params_repr.py
+DEBUG Adding to sdist: tests\test_path.py
+DEBUG Adding to sdist: tests\test_path_alias_choices.py
+DEBUG Adding to sdist: tests\test_prepare_release.py
+DEBUG Adding to sdist: tests\test_put_no_body.py
+DEBUG Adding to sdist: tests\test_pydantic_v1_error.py
+DEBUG Adding to sdist: tests\test_pydanticv2_dataclasses_uuid_stringified_annotations.py
+DEBUG Adding to sdist: tests\test_query.py
+DEBUG Adding to sdist: tests\test_query_alias_choices.py
+DEBUG Adding to sdist: tests\test_query_cookie_header_model_extra_params.py
+DEBUG Adding to sdist: tests\test_query_optional_models.py
+DEBUG Adding to sdist: tests\test_read_with_orm_mode.py
+DEBUG Adding to sdist: tests\test_regex_deprecated_body.py
+DEBUG Adding to sdist: tests\test_regex_deprecated_params.py
+DEBUG Adding to sdist: tests\test_repeated_cookie_headers.py
+DEBUG Adding to sdist: tests\test_repeated_dependency_schema.py
+DEBUG Adding to sdist: tests\test_repeated_parameter_alias.py
+DEBUG Adding to sdist: tests\test_request_body_parameters_media_type.py
+DEBUG Adding to sdist: tests\test_request_param_model_by_alias.py
+DEBUG Adding to sdist: tests\test_request_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_request_params
+DEBUG Adding to sdist: tests\test_request_params\test_body\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_request_params\test_body
+DEBUG Adding to sdist: tests\test_request_params\test_body\test_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_body\test_nullable_and_defaults.py
+DEBUG Adding to sdist: tests\test_request_params\test_body\test_optional_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_body\test_optional_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_body\test_required_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_body\utils.py
+DEBUG Adding to sdist: tests\test_request_params\test_cookie\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_request_params\test_cookie
+DEBUG Adding to sdist: tests\test_request_params\test_cookie\test_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_cookie\test_optional_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_cookie\test_optional_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_cookie\test_required_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_default_validation.py
+DEBUG Adding to sdist: tests\test_request_params\test_field_metadata.py
+DEBUG Adding to sdist: tests\test_request_params\test_field_options.py
+DEBUG Adding to sdist: tests\test_request_params\test_file\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_request_params\test_file
+DEBUG Adding to sdist: tests\test_request_params\test_file\test_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_file\test_nullable_and_defaults.py
+DEBUG Adding to sdist: tests\test_request_params\test_file\test_optional.py
+DEBUG Adding to sdist: tests\test_request_params\test_file\test_optional_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_file\test_required.py
+DEBUG Adding to sdist: tests\test_request_params\test_file\utils.py
+DEBUG Adding to sdist: tests\test_request_params\test_form\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_request_params\test_form
+DEBUG Adding to sdist: tests\test_request_params\test_form\test_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_form\test_nullable_and_defaults.py
+DEBUG Adding to sdist: tests\test_request_params\test_form\test_optional_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_form\test_optional_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_form\test_required_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_form\utils.py
+DEBUG Adding to sdist: tests\test_request_params\test_header\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_request_params\test_header
+DEBUG Adding to sdist: tests\test_request_params\test_header\test_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_header\test_nullable_and_defaults.py
+DEBUG Adding to sdist: tests\test_request_params\test_header\test_optional_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_header\test_optional_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_header\test_required_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_nullable_and_defaults.py
+DEBUG Adding to sdist: tests\test_request_params\test_path\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_request_params\test_path
+DEBUG Adding to sdist: tests\test_request_params\test_path\test_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_path\test_optional_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_path\test_optional_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_path\test_required_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_query\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_request_params\test_query
+DEBUG Adding to sdist: tests\test_request_params\test_query\test_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_query\test_optional_list.py
+DEBUG Adding to sdist: tests\test_request_params\test_query\test_optional_str.py
+DEBUG Adding to sdist: tests\test_request_params\test_query\test_required_str.py
+DEBUG Adding to sdist: tests\test_required_noneable.py
+DEBUG Adding to sdist: tests\test_response_by_alias.py
+DEBUG Adding to sdist: tests\test_response_change_status_code.py
+DEBUG Adding to sdist: tests\test_response_class_no_mediatype.py
+DEBUG Adding to sdist: tests\test_response_code_no_body.py
+DEBUG Adding to sdist: tests\test_response_dependency.py
+DEBUG Adding to sdist: tests\test_response_model_as_return_annotation.py
+DEBUG Adding to sdist: tests\test_response_model_data_filter.py
+DEBUG Adding to sdist: tests\test_response_model_data_filter_no_inheritance.py
+DEBUG Adding to sdist: tests\test_response_model_default_factory.py
+DEBUG Adding to sdist: tests\test_response_model_include_exclude.py
+DEBUG Adding to sdist: tests\test_response_model_invalid.py
+DEBUG Adding to sdist: tests\test_response_model_sub_types.py
+DEBUG Adding to sdist: tests\test_response_set_response_code_empty.py
+DEBUG Adding to sdist: tests\test_return_none_stringified_annotations.py
+DEBUG Adding to sdist: tests\test_route_handler_wrapping.py
+DEBUG Adding to sdist: tests\test_route_scope.py
+DEBUG Adding to sdist: tests\test_router_circular_import.py
+DEBUG Adding to sdist: tests\test_router_events.py
+DEBUG Adding to sdist: tests\test_router_include_context.py
+DEBUG Adding to sdist: tests\test_router_prefix_with_template.py
+DEBUG Adding to sdist: tests\test_router_redirect_slashes.py
+DEBUG Adding to sdist: tests\test_schema_compat_pydantic_v2.py
+DEBUG Adding to sdist: tests\test_schema_extra_examples.py
+DEBUG Adding to sdist: tests\test_schema_ref_pydantic_v2.py
+DEBUG Adding to sdist: tests\test_security_api_key_cookie.py
+DEBUG Adding to sdist: tests\test_security_api_key_cookie_description.py
+DEBUG Adding to sdist: tests\test_security_api_key_cookie_optional.py
+DEBUG Adding to sdist: tests\test_security_api_key_header.py
+DEBUG Adding to sdist: tests\test_security_api_key_header_description.py
+DEBUG Adding to sdist: tests\test_security_api_key_header_optional.py
+DEBUG Adding to sdist: tests\test_security_api_key_query.py
+DEBUG Adding to sdist: tests\test_security_api_key_query_description.py
+DEBUG Adding to sdist: tests\test_security_api_key_query_optional.py
+DEBUG Adding to sdist: tests\test_security_http_base.py
+DEBUG Adding to sdist: tests\test_security_http_base_description.py
+DEBUG Adding to sdist: tests\test_security_http_base_optional.py
+DEBUG Adding to sdist: tests\test_security_http_basic_optional.py
+DEBUG Adding to sdist: tests\test_security_http_basic_realm.py
+DEBUG Adding to sdist: tests\test_security_http_basic_realm_description.py
+DEBUG Adding to sdist: tests\test_security_http_bearer.py
+DEBUG Adding to sdist: tests\test_security_http_bearer_description.py
+DEBUG Adding to sdist: tests\test_security_http_bearer_optional.py
+DEBUG Adding to sdist: tests\test_security_http_digest.py
+DEBUG Adding to sdist: tests\test_security_http_digest_description.py
+DEBUG Adding to sdist: tests\test_security_http_digest_optional.py
+DEBUG Adding to sdist: tests\test_security_oauth2.py
+DEBUG Adding to sdist: tests\test_security_oauth2_authorization_code_bearer.py
+DEBUG Adding to sdist: tests\test_security_oauth2_authorization_code_bearer_description.py
+DEBUG Adding to sdist: tests\test_security_oauth2_authorization_code_bearer_scopes_openapi.py
+DEBUG Adding to sdist: tests\test_security_oauth2_authorization_code_bearer_scopes_openapi_simple.py
+DEBUG Adding to sdist: tests\test_security_oauth2_optional.py
+DEBUG Adding to sdist: tests\test_security_oauth2_optional_description.py
+DEBUG Adding to sdist: tests\test_security_oauth2_password_bearer_optional.py
+DEBUG Adding to sdist: tests\test_security_oauth2_password_bearer_optional_description.py
+DEBUG Adding to sdist: tests\test_security_openid_connect.py
+DEBUG Adding to sdist: tests\test_security_openid_connect_description.py
+DEBUG Adding to sdist: tests\test_security_openid_connect_optional.py
+DEBUG Adding to sdist: tests\test_security_scopes.py
+DEBUG Adding to sdist: tests\test_security_scopes_dont_propagate.py
+DEBUG Adding to sdist: tests\test_security_scopes_sub_dependency.py
+DEBUG Adding to sdist: tests\test_security_websockets.py
+DEBUG Adding to sdist: tests\test_serialize_response.py
+DEBUG Adding to sdist: tests\test_serialize_response_dataclass.py
+DEBUG Adding to sdist: tests\test_serialize_response_model.py
+DEBUG Adding to sdist: tests\test_skip_defaults.py
+DEBUG Adding to sdist: tests\test_sse.py
+DEBUG Adding to sdist: tests\test_starlette_exception.py
+DEBUG Adding to sdist: tests\test_starlette_urlconvertors.py
+DEBUG Adding to sdist: tests\test_stream_bare_type.py
+DEBUG Adding to sdist: tests\test_stream_cancellation.py
+DEBUG Adding to sdist: tests\test_stream_json_validation_error.py
+DEBUG Adding to sdist: tests\test_stream_non_finite_floats.py
+DEBUG Adding to sdist: tests\test_stream_status_code.py
+DEBUG Adding to sdist: tests\test_strict_content_type_app_level.py
+DEBUG Adding to sdist: tests\test_strict_content_type_nested.py
+DEBUG Adding to sdist: tests\test_strict_content_type_router_level.py
+DEBUG Adding to sdist: tests\test_stringified_annotation_dependency.py
+DEBUG Adding to sdist: tests\test_stringified_annotation_dependency_py314.py
+DEBUG Adding to sdist: tests\test_stringified_annotations_simple.py
+DEBUG Adding to sdist: tests\test_sub_callbacks.py
+DEBUG Adding to sdist: tests\test_swagger_ui_escape.py
+DEBUG Adding to sdist: tests\test_swagger_ui_init_oauth.py
+DEBUG Adding to sdist: tests\test_telemetry\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_telemetry
+DEBUG Adding to sdist: tests\test_telemetry\_otlp.py
+DEBUG Adding to sdist: tests\test_telemetry\_subprocess.py
+DEBUG Adding to sdist: tests\test_telemetry\conftest.py
+DEBUG Adding to sdist: tests\test_telemetry\test_background.py
+DEBUG Adding to sdist: tests\test_telemetry\test_data.py
+DEBUG Adding to sdist: tests\test_telemetry\test_environment_integrations.py
+DEBUG Adding to sdist: tests\test_telemetry\test_exceptions.py
+DEBUG Adding to sdist: tests\test_telemetry\test_http.py
+DEBUG Adding to sdist: tests\test_telemetry\test_integrations.py
+DEBUG Adding to sdist: tests\test_telemetry\test_native_integrations.py
+DEBUG Adding to sdist: tests\test_telemetry\test_operations.py
+DEBUG Adding to sdist: tests\test_telemetry\test_runtime.py
+DEBUG Adding to sdist: tests\test_telemetry\test_semantic_conventions.py
+DEBUG Adding to sdist: tests\test_telemetry\test_tracer.py
+DEBUG Adding to sdist: tests\test_telemetry\test_websockets.py
+DEBUG Adding to sdist: tests\test_top_level_security_scheme_in_openapi.py
+DEBUG Adding to sdist: tests\test_translate.py
+DEBUG Adding to sdist: tests\test_tuples.py
+DEBUG Adding to sdist: tests\test_tutorial\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial
+DEBUG Adding to sdist: tests\test_tutorial\test_additional_responses\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_additional_responses
+DEBUG Adding to sdist: tests\test_tutorial\test_additional_responses\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_additional_responses\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_additional_responses\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_additional_responses\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_additional_status_codes\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_additional_status_codes
+DEBUG Adding to sdist: tests\test_tutorial\test_additional_status_codes\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_advanced_middleware\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_advanced_middleware
+DEBUG Adding to sdist: tests\test_tutorial\test_advanced_middleware\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_advanced_middleware\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_advanced_middleware\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_async_tests\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_async_tests
+DEBUG Adding to sdist: tests\test_tutorial\test_async_tests\test_main_a.py
+DEBUG Adding to sdist: tests\test_tutorial\test_authentication_error_status_code\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_authentication_error_status_code
+DEBUG Adding to sdist: tests\test_tutorial\test_authentication_error_status_code\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_background_tasks\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_background_tasks
+DEBUG Adding to sdist: tests\test_tutorial\test_background_tasks\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_background_tasks\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_behind_a_proxy\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_behind_a_proxy
+DEBUG Adding to sdist: tests\test_tutorial\test_behind_a_proxy\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_behind_a_proxy\test_tutorial001_01.py
+DEBUG Adding to sdist: tests\test_tutorial\test_behind_a_proxy\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_behind_a_proxy\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_behind_a_proxy\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_bigger_applications\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_bigger_applications
+DEBUG Adding to sdist: tests\test_tutorial\test_bigger_applications\test_main.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_body
+DEBUG Adding to sdist: tests\test_tutorial\test_body\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_fields\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_body_fields
+DEBUG Adding to sdist: tests\test_tutorial\test_body_fields\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_multiple_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_body_multiple_params
+DEBUG Adding to sdist: tests\test_tutorial\test_body_multiple_params\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_multiple_params\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_multiple_params\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_multiple_params\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_multiple_params\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_nested_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_body_nested_models
+DEBUG Adding to sdist: tests\test_tutorial\test_body_nested_models\test_tutorial001_tutorial002_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_nested_models\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_nested_models\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_nested_models\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_nested_models\test_tutorial007.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_nested_models\test_tutorial008.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_nested_models\test_tutorial009.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_updates\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_body_updates
+DEBUG Adding to sdist: tests\test_tutorial\test_body_updates\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_body_updates\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_conditional_openapi\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_conditional_openapi
+DEBUG Adding to sdist: tests\test_tutorial\test_conditional_openapi\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_configure_swagger_ui\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_configure_swagger_ui
+DEBUG Adding to sdist: tests\test_tutorial\test_configure_swagger_ui\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_configure_swagger_ui\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_configure_swagger_ui\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_cookie_param_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_cookie_param_models
+DEBUG Adding to sdist: tests\test_tutorial\test_cookie_param_models\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_cookie_param_models\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_cookie_param_models\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_cookie_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_cookie_params
+DEBUG Adding to sdist: tests\test_tutorial\test_cookie_params\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_cors\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_cors
+DEBUG Adding to sdist: tests\test_tutorial\test_cors\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_docs_ui\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_custom_docs_ui
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_docs_ui\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_docs_ui\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_request_and_route\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_custom_request_and_route
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_request_and_route\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_request_and_route\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_request_and_route\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_custom_response
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial001b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial002_tutorial003_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial006b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial006c.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial007.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial008.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial009.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial009b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial009c.py
+DEBUG Adding to sdist: tests\test_tutorial\test_custom_response\test_tutorial010.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dataclasses\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_dataclasses
+DEBUG Adding to sdist: tests\test_tutorial\test_dataclasses\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dataclasses\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dataclasses\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_debugging\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_debugging
+DEBUG Adding to sdist: tests\test_tutorial\test_debugging\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_dependencies
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial001_tutorial001_02.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial002_tutorial003_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial007.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial008.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial008b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial008c.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial008d.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial008e.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial010.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial011.py
+DEBUG Adding to sdist: tests\test_tutorial\test_dependencies\test_tutorial012.py
+DEBUG Adding to sdist: tests\test_tutorial\test_encoder\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_encoder
+DEBUG Adding to sdist: tests\test_tutorial\test_encoder\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_events\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_events
+DEBUG Adding to sdist: tests\test_tutorial\test_events\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_events\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_events\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_extending_openapi\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_extending_openapi
+DEBUG Adding to sdist: tests\test_tutorial\test_extending_openapi\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_extra_data_types\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_extra_data_types
+DEBUG Adding to sdist: tests\test_tutorial\test_extra_data_types\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_extra_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_extra_models
+DEBUG Adding to sdist: tests\test_tutorial\test_extra_models\test_tutorial001_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_extra_models\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_extra_models\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_extra_models\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_first_steps\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_first_steps
+DEBUG Adding to sdist: tests\test_tutorial\test_first_steps\test_tutorial001_tutorial002_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_generate_clients\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_generate_clients
+DEBUG Adding to sdist: tests\test_tutorial\test_generate_clients\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_generate_clients\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_generate_clients\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_generate_clients\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_graphql\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_graphql
+DEBUG Adding to sdist: tests\test_tutorial\test_graphql\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_handling_errors\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_handling_errors
+DEBUG Adding to sdist: tests\test_tutorial\test_handling_errors\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_handling_errors\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_handling_errors\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_handling_errors\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_handling_errors\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_handling_errors\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_header_param_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_header_param_models
+DEBUG Adding to sdist: tests\test_tutorial\test_header_param_models\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_header_param_models\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_header_param_models\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_header_param_models\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_header_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_header_params
+DEBUG Adding to sdist: tests\test_tutorial\test_header_params\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_header_params\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_header_params\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_json_base64_bytes\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_json_base64_bytes
+DEBUG Adding to sdist: tests\test_tutorial\test_json_base64_bytes\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_metadata\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_metadata
+DEBUG Adding to sdist: tests\test_tutorial\test_metadata\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_metadata\test_tutorial001_1.py
+DEBUG Adding to sdist: tests\test_tutorial\test_metadata\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_metadata\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_metadata\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_middleware\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_middleware
+DEBUG Adding to sdist: tests\test_tutorial\test_middleware\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_openapi_callbacks\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_openapi_callbacks
+DEBUG Adding to sdist: tests\test_tutorial\test_openapi_callbacks\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_openapi_webhooks\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_openapi_webhooks
+DEBUG Adding to sdist: tests\test_tutorial\test_openapi_webhooks\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_opentelemetry\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_opentelemetry
+DEBUG Adding to sdist: tests\test_tutorial\test_opentelemetry\conftest.py
+DEBUG Adding to sdist: tests\test_tutorial\test_opentelemetry\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_opentelemetry\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_opentelemetry\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_advanced_configurations\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_path_operation_advanced_configurations
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_advanced_configurations\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_advanced_configurations\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_advanced_configurations\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_advanced_configurations\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_advanced_configurations\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_advanced_configurations\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_advanced_configurations\test_tutorial007.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_configurations\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_path_operation_configurations
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_configurations\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_configurations\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_configurations\test_tutorial002b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_configurations\test_tutorial003_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_configurations\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_operation_configurations\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_path_params
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params\test_tutorial003b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params_numeric_validations\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_path_params_numeric_validations
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params_numeric_validations\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params_numeric_validations\test_tutorial002_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params_numeric_validations\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params_numeric_validations\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_path_params_numeric_validations\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_python_types
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial001_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial007.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial008.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial008b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial009_tutorial009b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial010.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial011.py
+DEBUG Adding to sdist: tests\test_tutorial\test_python_types\test_tutorial013.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_param_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_query_param_models
+DEBUG Adding to sdist: tests\test_tutorial\test_query_param_models\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_param_models\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_param_models\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_param_models\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_query_params
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_query_params_str_validations
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial006c.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial007.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial008.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial009.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial010.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial011.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial012.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial013.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial014.py
+DEBUG Adding to sdist: tests\test_tutorial\test_query_params_str_validations\test_tutorial015.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_files\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_request_files
+DEBUG Adding to sdist: tests\test_tutorial\test_request_files\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_files\test_tutorial001_02.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_files\test_tutorial001_03.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_files\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_files\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_form_models\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_request_form_models
+DEBUG Adding to sdist: tests\test_tutorial\test_request_form_models\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_form_models\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_form_models\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_form_models\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_form_models\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_form_models\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_form_models\test_tutorial007.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_forms\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_request_forms
+DEBUG Adding to sdist: tests\test_tutorial\test_request_forms\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_forms\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_request_forms_and_files\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_request_forms_and_files
+DEBUG Adding to sdist: tests\test_tutorial\test_request_forms_and_files\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_change_status_code\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_response_change_status_code
+DEBUG Adding to sdist: tests\test_tutorial\test_response_change_status_code\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_cookies\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_response_cookies
+DEBUG Adding to sdist: tests\test_tutorial\test_response_cookies\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_cookies\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_directly\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_response_directly
+DEBUG Adding to sdist: tests\test_tutorial\test_response_directly\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_directly\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_headers\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_response_headers
+DEBUG Adding to sdist: tests\test_tutorial\test_response_headers\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_headers\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_response_model
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial001_tutorial001_01.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial003_01.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial003_02.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial003_03.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial003_04.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial003_05.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_model\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_response_status_code\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_response_status_code
+DEBUG Adding to sdist: tests\test_tutorial\test_response_status_code\test_tutorial001_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_schema_extra_example\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_schema_extra_example
+DEBUG Adding to sdist: tests\test_tutorial\test_schema_extra_example\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_schema_extra_example\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_schema_extra_example\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_schema_extra_example\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_schema_extra_example\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_security\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_security
+DEBUG Adding to sdist: tests\test_tutorial\test_security\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_security\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_security\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_security\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_security\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_security\test_tutorial006.py
+DEBUG Adding to sdist: tests\test_tutorial\test_security\test_tutorial007.py
+DEBUG Adding to sdist: tests\test_tutorial\test_separate_openapi_schemas\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_separate_openapi_schemas
+DEBUG Adding to sdist: tests\test_tutorial\test_separate_openapi_schemas\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_separate_openapi_schemas\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_server_sent_events\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_server_sent_events
+DEBUG Adding to sdist: tests\test_tutorial\test_server_sent_events\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_server_sent_events\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_server_sent_events\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_server_sent_events\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_server_sent_events\test_tutorial005.py
+DEBUG Adding to sdist: tests\test_tutorial\test_settings\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_settings
+DEBUG Adding to sdist: tests\test_tutorial\test_settings\test_app01.py
+DEBUG Adding to sdist: tests\test_tutorial\test_settings\test_app02.py
+DEBUG Adding to sdist: tests\test_tutorial\test_settings\test_app03.py
+DEBUG Adding to sdist: tests\test_tutorial\test_settings\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_sql_databases\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_sql_databases
+DEBUG Adding to sdist: tests\test_tutorial\test_sql_databases\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_sql_databases\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_static_files\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_static_files
+DEBUG Adding to sdist: tests\test_tutorial\test_static_files\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_stream_data\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_stream_data
+DEBUG Adding to sdist: tests\test_tutorial\test_stream_data\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_stream_data\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_stream_json_lines\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_stream_json_lines
+DEBUG Adding to sdist: tests\test_tutorial\test_stream_json_lines\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_strict_content_type\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_strict_content_type
+DEBUG Adding to sdist: tests\test_tutorial\test_strict_content_type\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_sub_applications\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_sub_applications
+DEBUG Adding to sdist: tests\test_tutorial\test_sub_applications\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_templates\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_templates
+DEBUG Adding to sdist: tests\test_tutorial\test_templates\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_templates\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_testing\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_testing
+DEBUG Adding to sdist: tests\test_tutorial\test_testing\test_main_a.py
+DEBUG Adding to sdist: tests\test_tutorial\test_testing\test_main_b.py
+DEBUG Adding to sdist: tests\test_tutorial\test_testing\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_testing\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_testing\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_testing\test_tutorial004.py
+DEBUG Adding to sdist: tests\test_tutorial\test_testing_dependencies\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_testing_dependencies
+DEBUG Adding to sdist: tests\test_tutorial\test_testing_dependencies\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_using_request_directly\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_using_request_directly
+DEBUG Adding to sdist: tests\test_tutorial\test_using_request_directly\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_websockets\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_websockets
+DEBUG Adding to sdist: tests\test_tutorial\test_websockets\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_tutorial\test_websockets\test_tutorial002.py
+DEBUG Adding to sdist: tests\test_tutorial\test_websockets\test_tutorial003.py
+DEBUG Adding to sdist: tests\test_tutorial\test_wsgi\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_tutorial\test_wsgi
+DEBUG Adding to sdist: tests\test_tutorial\test_wsgi\test_tutorial001.py
+DEBUG Adding to sdist: tests\test_typing_python39.py
+DEBUG Adding to sdist: tests\test_union_body.py
+DEBUG Adding to sdist: tests\test_union_body_discriminator.py
+DEBUG Adding to sdist: tests\test_union_body_discriminator_annotated.py
+DEBUG Adding to sdist: tests\test_union_form_normalization.py
+DEBUG Adding to sdist: tests\test_union_forms.py
+DEBUG Adding to sdist: tests\test_union_inherited_body.py
+DEBUG Adding to sdist: tests\test_upload_file_read_position.py
+DEBUG Adding to sdist: tests\test_validate_response.py
+DEBUG Adding to sdist: tests\test_validate_response_dataclass.py
+DEBUG Adding to sdist: tests\test_validate_response_recursive\__init__.py
+DEBUG Adding directory: fastapi-0.162.0\tests\test_validate_response_recursive
+DEBUG Adding to sdist: tests\test_validate_response_recursive\app.py
+DEBUG Adding to sdist: tests\test_validate_response_recursive\test_validate_response_recursive.py
+DEBUG Adding to sdist: tests\test_validation_error_context.py
+DEBUG Adding to sdist: tests\test_webhooks_security.py
+DEBUG Adding to sdist: tests\test_wrapped_method_forward_reference.py
+DEBUG Adding to sdist: tests\test_ws_dependencies.py
+DEBUG Adding to sdist: tests\test_ws_router.py
+DEBUG Adding to sdist: tests\utils.py
+DEBUG Visited 1492 files for source dist build
+Building wheel from source distribution...
+DEBUG Writing wheel at `Generated Files\arm-build\round-2\native-backend\rawreports\static-02\fastapi-0.162.0-py3-none-any.whl`
+DEBUG Wheel excludes: ["__pycache__", "*.pyc", "*.pyo"]
+DEBUG Adding content files to wheel
+DEBUG Source root: Generated Files\arm-build\round-2\native-backend\cache\static-02\sdists-v10\.tmpHCKQ00\fastapi-0.162.0
+DEBUG Module path: fastapi
+DEBUG Adding to wheel: fastapi\.agents\skills\fastapi\SKILL.md
+DEBUG Adding directory: fastapi
+DEBUG Adding directory: fastapi\.agents
+DEBUG Adding directory: fastapi\.agents\skills
+DEBUG Adding directory: fastapi\.agents\skills\fastapi
+DEBUG Adding to wheel: fastapi\.agents\skills\fastapi\references\dependencies.md
+DEBUG Adding directory: fastapi\.agents\skills\fastapi\references
+DEBUG Adding to wheel: fastapi\.agents\skills\fastapi\references\other-tools.md
+DEBUG Adding to wheel: fastapi\.agents\skills\fastapi\references\path-operations.md
+DEBUG Adding to wheel: fastapi\.agents\skills\fastapi\references\pydantic.md
+DEBUG Adding to wheel: fastapi\.agents\skills\fastapi\references\responses.md
+DEBUG Adding to wheel: fastapi\.agents\skills\fastapi\references\streaming.md
+DEBUG Adding to wheel: fastapi\__init__.py
+DEBUG Adding to wheel: fastapi\__main__.py
+DEBUG Adding to wheel: fastapi\_compat\__init__.py
+DEBUG Adding directory: fastapi\_compat
+DEBUG Adding to wheel: fastapi\_compat\shared.py
+DEBUG Adding to wheel: fastapi\_compat\v2.py
+DEBUG Adding to wheel: fastapi\applications.py
+DEBUG Adding to wheel: fastapi\background.py
+DEBUG Adding to wheel: fastapi\cli.py
+DEBUG Adding to wheel: fastapi\concurrency.py
+DEBUG Adding to wheel: fastapi\datastructures.py
+DEBUG Adding to wheel: fastapi\dependencies\__init__.py
+DEBUG Adding directory: fastapi\dependencies
+DEBUG Adding to wheel: fastapi\dependencies\models.py
+DEBUG Adding to wheel: fastapi\dependencies\utils.py
+DEBUG Adding to wheel: fastapi\encoders.py
+DEBUG Adding to wheel: fastapi\exception_handlers.py
+DEBUG Adding to wheel: fastapi\exceptions.py
+DEBUG Adding to wheel: fastapi\logger.py
+DEBUG Adding to wheel: fastapi\middleware\__init__.py
+DEBUG Adding directory: fastapi\middleware
+DEBUG Adding to wheel: fastapi\middleware\asyncexitstack.py
+DEBUG Adding to wheel: fastapi\middleware\cors.py
+DEBUG Adding to wheel: fastapi\middleware\gzip.py
+DEBUG Adding to wheel: fastapi\middleware\httpsredirect.py
+DEBUG Adding to wheel: fastapi\middleware\trustedhost.py
+DEBUG Adding to wheel: fastapi\middleware\wsgi.py
+DEBUG Adding to wheel: fastapi\openapi\__init__.py
+DEBUG Adding directory: fastapi\openapi
+DEBUG Adding to wheel: fastapi\openapi\constants.py
+DEBUG Adding to wheel: fastapi\openapi\docs.py
+DEBUG Adding to wheel: fastapi\openapi\models.py
+DEBUG Adding to wheel: fastapi\openapi\utils.py
+DEBUG Adding to wheel: fastapi\param_functions.py
+DEBUG Adding to wheel: fastapi\params.py
+DEBUG Adding to wheel: fastapi\py.typed
+DEBUG Adding to wheel: fastapi\requests.py
+DEBUG Adding to wheel: fastapi\responses.py
+DEBUG Adding to wheel: fastapi\routing.py
+DEBUG Adding to wheel: fastapi\security\__init__.py
+DEBUG Adding directory: fastapi\security
+DEBUG Adding to wheel: fastapi\security\api_key.py
+DEBUG Adding to wheel: fastapi\security\base.py
+DEBUG Adding to wheel: fastapi\security\http.py
+DEBUG Adding to wheel: fastapi\security\oauth2.py
+DEBUG Adding to wheel: fastapi\security\open_id_connect_url.py
+DEBUG Adding to wheel: fastapi\security\utils.py
+DEBUG Adding to wheel: fastapi\sse.py
+DEBUG Adding to wheel: fastapi\staticfiles.py
+DEBUG Adding to wheel: fastapi\telemetry\__init__.py
+DEBUG Adding directory: fastapi\telemetry
+DEBUG Adding to wheel: fastapi\telemetry\_api.py
+DEBUG Adding to wheel: fastapi\telemetry\_asgi.py
+DEBUG Adding to wheel: fastapi\telemetry\_runtime.py
+DEBUG Adding to wheel: fastapi\templating.py
+DEBUG Adding to wheel: fastapi\testclient.py
+DEBUG Adding to wheel: fastapi\types.py
+DEBUG Adding to wheel: fastapi\utils.py
+DEBUG Adding to wheel: fastapi\websockets.py
+DEBUG Visited 71 files for wheel build
+DEBUG Found PEP 639 license declarations, using METADATA 2.4
+DEBUG License files match: LICENSE
+DEBUG Adding license files
+DEBUG Adding directory: fastapi-0.162.0.dist-info/licenses/
+DEBUG Adding metadata files to wheel
+Successfully built Generated Files\arm-build\round-2\native-backend\rawreports\static-02\fastapi-0.162.0.tar.gz
+Successfully built Generated Files\arm-build\round-2\native-backend\rawreports\static-02\fastapi-0.162.0-py3-none-any.whl

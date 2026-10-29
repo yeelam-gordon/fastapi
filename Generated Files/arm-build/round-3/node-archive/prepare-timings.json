@@ -1,0 +1,9 @@
+{
+  "label": "prepare",
+  "workers": 4,
+  "child_seconds": 1.341192800002318,
+  "imports_seconds": 0.2595428999993601,
+  "sdist_seconds": 0.8068912000017008,
+  "select_extract_seconds": 0.17312630000014906,
+  "wheel_seconds": 0.10163240000110818
+}

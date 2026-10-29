@@ -1,0 +1,10 @@
+{
+  "python_cpu_seconds": 0.8125,
+  "label": "node-2",
+  "workers": 4,
+  "child_seconds": 2.2172274999975343,
+  "imports_seconds": 0.3397229999973206,
+  "sdist_seconds": 1.1180552000005264,
+  "select_extract_seconds": 0.23041139999986626,
+  "wheel_seconds": 0.5290378999998211
+}

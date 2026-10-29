@@ -17,7 +17,8 @@ Research how the actual toolchain works before recommending changes. Use primary
 - Measure repeated, alternating comparable workloads. Record cache state, exact commands, raw logs, failures, medians and ranges; account for setup outside build-only timing.
 - Preserve package semantics: build the complete source distribution and its wheel, compare archive members/content and executable bits, and validate wheel hashes.
 - Use profiling to explain timings, not replace them. Start with standard-library profiling; use Windows CPU/I/O tracing only when needed and without disturbing other sessions.
-- Delegate independent research, implementation and verification with bounded ownership. Integrate their evidence rather than accepting agreement as proof.
+- Keep 2-3 independent subagent lanes active when useful ready work exists, with an upper bound of 15. Use a separate branch/worktree per investigation or proposal. Serialize only genuine dependencies or measurements that would interfere; do not manufacture busywork to fill the pool.
+- Delegate research, implementation and verification with bounded ownership. The master integrates evidence and owns acceptance. Follow [CIRCUMSTANCES.md](CIRCUMSTANCES.md) if a separate full-agent handoff is needed.
 
 ## How to reflect and decide
 

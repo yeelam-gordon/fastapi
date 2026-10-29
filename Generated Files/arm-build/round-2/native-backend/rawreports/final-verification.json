@@ -1,0 +1,12 @@
+{
+  "copied_source_file_count": 3392,
+  "copied_source_differences": [
+    "pyproject.toml"
+  ],
+  "smoke_returncode": 0,
+  "smoke_stdout": "0.162.0\nQ:\\fastapi\\Generated Files\\arm-build\\round-2\\native-backend\\rawreports\\static-05\\fastapi-0.162.0-py3-none-any.whl\\fastapi\\__init__.py\nTrue\n",
+  "smoke_stderr": "",
+  "probe_sha256": "75fc49343dec82ab6e265f4968a0eb3e2f8f7e96c969785f60e9101d0f8f0ded",
+  "strict_all_trials_rejected": true,
+  "seconds_over_0_730": 2.385509178082878
+}

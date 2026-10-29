@@ -1,0 +1,1603 @@
+{
+  "status": "passed",
+  "started_utc": "2026-10-29T04:29:00Z",
+  "script_sha256": "d3b08095cafcc99c34c3d797029d5f03df8d6c5477e4e59180954505fd8d5182",
+  "source_commit": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+  "host": "Windows-11-10.0.26200-SP0",
+  "machine": "ARM64",
+  "cpus": 16,
+  "reference": "Q:\\fastapi\\Generated Files\\arm-build\\results\\local-03-canonical\\artifacts\\prepare-baseline",
+  "policy": "Full fresh subprocess wall includes interpreter/import/metadata/sdist/extraction/wheel/logs. Source snapshot copy, validation and provisioning excluded. Warm local filesystem; offline; owned same-Q cache/temp; no global changes.",
+  "concurrency_limit": "Only this worker serial; other workers may run independent experiments on the same host.",
+  "cpu_scope": "GetProcessTimes of immediate child only: uv excludes backend descendants; direct excludes tar child. Not total process-tree CPU.",
+  "trials": [
+    {
+      "variant": "uv-official",
+      "iteration": 0,
+      "measured": false,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\00-uv-official\\artifacts"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.702903700001116,
+      "immediate_child_cpu_seconds": 0.796875,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      }
+    },
+    {
+      "variant": "onepy-official-python",
+      "iteration": 0,
+      "measured": false,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\00-onepy-official-python",
+        "python",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 4.011797999999544,
+      "immediate_child_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      },
+      "phases": {
+        "startup_imports_wall": 0.006665299999440322,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3442560999992565,
+          "python_cpu": 1.171875
+        },
+        "extraction": {
+          "wall": 2.2083259000010003,
+          "python_cpu": 1.8125
+        },
+        "wheel": {
+          "wall": 0.11883680000028107,
+          "python_cpu": 0.078125
+        },
+        "child_wall_after_initial_imports": 3.7238010999990365,
+        "child_python_cpu": 3.09375
+      }
+    },
+    {
+      "variant": "onepy-official-tar",
+      "iteration": 0,
+      "measured": false,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\00-onepy-official-tar",
+        "tar",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.5114205999998376,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      },
+      "phases": {
+        "startup_imports_wall": 0.006865500001367764,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.303698699999586,
+          "python_cpu": 1.09375
+        },
+        "extraction": {
+          "wall": 0.7468595000009373,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11112219999995432,
+          "python_cpu": 0.09375
+        },
+        "child_wall_after_initial_imports": 2.2149641000014526,
+        "child_python_cpu": 1.21875
+      }
+    },
+    {
+      "variant": "uv-official-no-logs",
+      "iteration": 0,
+      "measured": false,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\00-uv-official-no-logs\\artifacts",
+        "--no-build-logs"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.0095731999990676,
+      "immediate_child_cpu_seconds": 0.84375,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      }
+    },
+    {
+      "variant": "onepy-official-tar-no-logs",
+      "iteration": 0,
+      "measured": false,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\00-onepy-official-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.524863299999197,
+      "immediate_child_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525757
+      },
+      "phases": {
+        "startup_imports_wall": 0.007547999999587773,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3339052999999694,
+          "python_cpu": 1.203125
+        },
+        "extraction": {
+          "wall": 0.7364907999999559,
+          "python_cpu": 0.015625
+        },
+        "wheel": {
+          "wall": 0.11332709999987856,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 2.2427153999997245,
+        "child_python_cpu": 1.375
+      }
+    },
+    {
+      "variant": "onepy-sourcebuilt-tar-no-logs",
+      "iteration": 0,
+      "measured": false,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\00-onepy-sourcebuilt-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.49705559999893,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      },
+      "phases": {
+        "startup_imports_wall": 0.006556000000273343,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.2742288999997982,
+          "python_cpu": 1.109375
+        },
+        "extraction": {
+          "wall": 0.775667899999462,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.109327400001348,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 2.2098612999998295,
+        "child_python_cpu": 1.25
+      }
+    },
+    {
+      "variant": "onepy-sourcebuilt-tar-no-logs",
+      "iteration": 1,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\01-onepy-sourcebuilt-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.492771499999435,
+      "immediate_child_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525752
+      },
+      "phases": {
+        "startup_imports_wall": 0.006806800000049407,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.2856247999989137,
+          "python_cpu": 1.1875
+        },
+        "extraction": {
+          "wall": 0.7586055000010674,
+          "python_cpu": 0.015625
+        },
+        "wheel": {
+          "wall": 0.10960800000066229,
+          "python_cpu": 0.09375
+        },
+        "child_wall_after_initial_imports": 2.2081405999997514,
+        "child_python_cpu": 1.328125
+      }
+    },
+    {
+      "variant": "onepy-official-tar-no-logs",
+      "iteration": 1,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\01-onepy-official-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.536907699999574,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525752
+      },
+      "phases": {
+        "startup_imports_wall": 0.0068465000003925525,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3495425000000978,
+          "python_cpu": 1.28125
+        },
+        "extraction": {
+          "wall": 0.7324204000015015,
+          "python_cpu": 0.015625
+        },
+        "wheel": {
+          "wall": 0.11136509999960253,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 2.245946400000321,
+        "child_python_cpu": 1.421875
+      }
+    },
+    {
+      "variant": "uv-official-no-logs",
+      "iteration": 1,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\01-uv-official-no-logs\\artifacts",
+        "--no-build-logs"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.147306799999569,
+      "immediate_child_cpu_seconds": 0.703125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      }
+    },
+    {
+      "variant": "onepy-official-tar",
+      "iteration": 1,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\01-onepy-official-tar",
+        "tar",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.6705326000010245,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      },
+      "phases": {
+        "startup_imports_wall": 0.008096199999272358,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.342415199998868,
+          "python_cpu": 1.234375
+        },
+        "extraction": {
+          "wall": 0.8059948999998596,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.12276769999880344,
+          "python_cpu": 0.09375
+        },
+        "child_wall_after_initial_imports": 2.3358073999988846,
+        "child_python_cpu": 1.375
+      }
+    },
+    {
+      "variant": "onepy-official-python",
+      "iteration": 1,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\01-onepy-official-python",
+        "python",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 4.001912499999889,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      },
+      "phases": {
+        "startup_imports_wall": 0.007481599999664468,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3769824000009976,
+          "python_cpu": 1.1875
+        },
+        "extraction": {
+          "wall": 2.1408455000000686,
+          "python_cpu": 1.71875
+        },
+        "wheel": {
+          "wall": 0.11018030000013823,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 3.6889854000000923,
+        "child_python_cpu": 3.03125
+      }
+    },
+    {
+      "variant": "uv-official",
+      "iteration": 1,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\01-uv-official\\artifacts"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.0062866999996913,
+      "immediate_child_cpu_seconds": 0.71875,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      }
+    },
+    {
+      "variant": "uv-official",
+      "iteration": 2,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\02-uv-official\\artifacts"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.9830993999985367,
+      "immediate_child_cpu_seconds": 0.734375,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      }
+    },
+    {
+      "variant": "onepy-official-python",
+      "iteration": 2,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\02-onepy-official-python",
+        "python",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.9133515000012267,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      },
+      "phases": {
+        "startup_imports_wall": 0.006772999999157037,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.2758401000010053,
+          "python_cpu": 1.203125
+        },
+        "extraction": {
+          "wall": 2.1648064000000886,
+          "python_cpu": 1.890625
+        },
+        "wheel": {
+          "wall": 0.1214429999999993,
+          "python_cpu": 0.125
+        },
+        "child_wall_after_initial_imports": 3.6150517999994918,
+        "child_python_cpu": 3.265625
+      }
+    },
+    {
+      "variant": "onepy-official-tar",
+      "iteration": 2,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\02-onepy-official-tar",
+        "tar",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.583454999999958,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      },
+      "phases": {
+        "startup_imports_wall": 0.007566500000393717,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3244154000003618,
+          "python_cpu": 1.15625
+        },
+        "extraction": {
+          "wall": 0.7720779000010225,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.1116784000005282,
+          "python_cpu": 0.078125
+        },
+        "child_wall_after_initial_imports": 2.2656740000002173,
+        "child_python_cpu": 1.28125
+      }
+    },
+    {
+      "variant": "uv-official-no-logs",
+      "iteration": 2,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\02-uv-official-no-logs\\artifacts",
+        "--no-build-logs"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.1519291999993584,
+      "immediate_child_cpu_seconds": 0.796875,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      }
+    },
+    {
+      "variant": "onepy-official-tar-no-logs",
+      "iteration": 2,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\02-onepy-official-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.5932969999994384,
+      "immediate_child_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525752
+      },
+      "phases": {
+        "startup_imports_wall": 0.006920199999512988,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3072544999995444,
+          "python_cpu": 1.21875
+        },
+        "extraction": {
+          "wall": 0.8188342000012199,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11713909999889438,
+          "python_cpu": 0.125
+        },
+        "child_wall_after_initial_imports": 2.2990356999998767,
+        "child_python_cpu": 1.390625
+      }
+    },
+    {
+      "variant": "onepy-sourcebuilt-tar-no-logs",
+      "iteration": 2,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\02-onepy-sourcebuilt-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.4753516999990097,
+      "immediate_child_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      },
+      "phases": {
+        "startup_imports_wall": 0.006248199999390636,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.2989041000000725,
+          "python_cpu": 1.234375
+        },
+        "extraction": {
+          "wall": 0.734204200000022,
+          "python_cpu": 0.015625
+        },
+        "wheel": {
+          "wall": 0.11056710000048042,
+          "python_cpu": 0.078125
+        },
+        "child_wall_after_initial_imports": 2.193384700000024,
+        "child_python_cpu": 1.359375
+      }
+    },
+    {
+      "variant": "onepy-sourcebuilt-tar-no-logs",
+      "iteration": 3,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\03-onepy-sourcebuilt-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.561131500000556,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      },
+      "phases": {
+        "startup_imports_wall": 0.006085900000471156,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3108391000005213,
+          "python_cpu": 1.15625
+        },
+        "extraction": {
+          "wall": 0.8165500000013708,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11297840000042925,
+          "python_cpu": 0.078125
+        },
+        "child_wall_after_initial_imports": 2.2893538999996963,
+        "child_python_cpu": 1.265625
+      }
+    },
+    {
+      "variant": "onepy-official-tar-no-logs",
+      "iteration": 3,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\03-onepy-official-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.6092439999993076,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      },
+      "phases": {
+        "startup_imports_wall": 0.006590900000446709,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3705527000001894,
+          "python_cpu": 1.25
+        },
+        "extraction": {
+          "wall": 0.7930836999985331,
+          "python_cpu": 0.03125
+        },
+        "wheel": {
+          "wall": 0.11245710000002873,
+          "python_cpu": 0.078125
+        },
+        "child_wall_after_initial_imports": 2.3304428000010375,
+        "child_python_cpu": 1.375
+      }
+    },
+    {
+      "variant": "uv-official-no-logs",
+      "iteration": 3,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\03-uv-official-no-logs\\artifacts",
+        "--no-build-logs"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.0523653000000195,
+      "immediate_child_cpu_seconds": 0.75,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525758
+      }
+    },
+    {
+      "variant": "onepy-official-tar",
+      "iteration": 3,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\03-onepy-official-tar",
+        "tar",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.5675257999992027,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      },
+      "phases": {
+        "startup_imports_wall": 0.006478499999502674,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3048472000009497,
+          "python_cpu": 1.1875
+        },
+        "extraction": {
+          "wall": 0.8056612999989738,
+          "python_cpu": 0.015625
+        },
+        "wheel": {
+          "wall": 0.1165235999997094,
+          "python_cpu": 0.125
+        },
+        "child_wall_after_initial_imports": 2.279767100000754,
+        "child_python_cpu": 1.34375
+      }
+    },
+    {
+      "variant": "onepy-official-python",
+      "iteration": 3,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\03-onepy-official-python",
+        "python",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 4.007272000000739,
+      "immediate_child_cpu_seconds": 0.0,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      },
+      "phases": {
+        "startup_imports_wall": 0.006684800000584801,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3076263000002655,
+          "python_cpu": 1.21875
+        },
+        "extraction": {
+          "wall": 2.2376617999998416,
+          "python_cpu": 1.828125
+        },
+        "wheel": {
+          "wall": 0.11690019999878132,
+          "python_cpu": 0.0625
+        },
+        "child_wall_after_initial_imports": 3.716542300000583,
+        "child_python_cpu": 3.140625
+      }
+    },
+    {
+      "variant": "uv-official",
+      "iteration": 3,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\03-uv-official\\artifacts"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.2232618000016373,
+      "immediate_child_cpu_seconds": 0.703125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525753
+      }
+    },
+    {
+      "variant": "uv-official",
+      "iteration": 4,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\04-uv-official\\artifacts"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.537478199999896,
+      "immediate_child_cpu_seconds": 0.671875,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      }
+    },
+    {
+      "variant": "onepy-official-python",
+      "iteration": 4,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\04-onepy-official-python",
+        "python",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 4.00161079999998,
+      "immediate_child_cpu_seconds": 0.046875,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      },
+      "phases": {
+        "startup_imports_wall": 0.007030200000372133,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.411293700000897,
+          "python_cpu": 1.1875
+        },
+        "extraction": {
+          "wall": 2.1210169999994832,
+          "python_cpu": 1.734375
+        },
+        "wheel": {
+          "wall": 0.11164830000052461,
+          "python_cpu": 0.078125
+        },
+        "child_wall_after_initial_imports": 3.70136199999979,
+        "child_python_cpu": 3.046875
+      }
+    },
+    {
+      "variant": "onepy-official-tar",
+      "iteration": 4,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\04-onepy-official-tar",
+        "tar",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.6193903000003047,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      },
+      "phases": {
+        "startup_imports_wall": 0.0073207999994338024,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3544504000001325,
+          "python_cpu": 1.21875
+        },
+        "extraction": {
+          "wall": 0.7844108999997843,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11512419999962731,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 2.3129707999996754,
+        "child_python_cpu": 1.375
+      }
+    },
+    {
+      "variant": "uv-official-no-logs",
+      "iteration": 4,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\04-uv-official-no-logs\\artifacts",
+        "--no-build-logs"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.1199692000009236,
+      "immediate_child_cpu_seconds": 0.6875,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      }
+    },
+    {
+      "variant": "onepy-official-tar-no-logs",
+      "iteration": 4,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\04-onepy-official-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.6398413999995682,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      },
+      "phases": {
+        "startup_imports_wall": 0.0067799999997077975,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3526359000006778,
+          "python_cpu": 1.203125
+        },
+        "extraction": {
+          "wall": 0.8204231999989133,
+          "python_cpu": 0.015625
+        },
+        "wheel": {
+          "wall": 0.12650530000064464,
+          "python_cpu": 0.0625
+        },
+        "child_wall_after_initial_imports": 2.353243300000031,
+        "child_python_cpu": 1.328125
+      }
+    },
+    {
+      "variant": "onepy-sourcebuilt-tar-no-logs",
+      "iteration": 4,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\04-onepy-sourcebuilt-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.614809400000013,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      },
+      "phases": {
+        "startup_imports_wall": 0.007166299999880721,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3793617999999697,
+          "python_cpu": 1.203125
+        },
+        "extraction": {
+          "wall": 0.7589502000009816,
+          "python_cpu": 0.015625
+        },
+        "wheel": {
+          "wall": 0.11535110000113491,
+          "python_cpu": 0.09375
+        },
+        "child_wall_after_initial_imports": 2.309874700000364,
+        "child_python_cpu": 1.359375
+      }
+    },
+    {
+      "variant": "onepy-sourcebuilt-tar-no-logs",
+      "iteration": 5,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\05-onepy-sourcebuilt-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.6217331000007107,
+      "immediate_child_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      },
+      "phases": {
+        "startup_imports_wall": 0.0070446999998239335,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.370992699999988,
+          "python_cpu": 1.265625
+        },
+        "extraction": {
+          "wall": 0.7872846999998728,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11321660000066913,
+          "python_cpu": 0.0625
+        },
+        "child_wall_after_initial_imports": 2.3268063999985316,
+        "child_python_cpu": 1.390625
+      }
+    },
+    {
+      "variant": "onepy-official-tar-no-logs",
+      "iteration": 5,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\05-onepy-official-tar-no-logs",
+        "tar",
+        "yes"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.5878189000013663,
+      "immediate_child_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      },
+      "phases": {
+        "startup_imports_wall": 0.006502199999886216,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.305506400000013,
+          "python_cpu": 1.09375
+        },
+        "extraction": {
+          "wall": 0.8162556999996013,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11969919999864942,
+          "python_cpu": 0.09375
+        },
+        "child_wall_after_initial_imports": 2.2952525000000605,
+        "child_python_cpu": 1.234375
+      }
+    },
+    {
+      "variant": "uv-official-no-logs",
+      "iteration": 5,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\05-uv-official-no-logs\\artifacts",
+        "--no-build-logs"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.9853332999991835,
+      "immediate_child_cpu_seconds": 0.765625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525755
+      }
+    },
+    {
+      "variant": "onepy-official-tar",
+      "iteration": 5,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\05-onepy-official-tar",
+        "tar",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.5699752000000444,
+      "immediate_child_cpu_seconds": 0.0,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525756
+      },
+      "phases": {
+        "startup_imports_wall": 0.007136600001103943,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3185835000003863,
+          "python_cpu": 1.1875
+        },
+        "extraction": {
+          "wall": 0.7724440999991202,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.1162041000006866,
+          "python_cpu": 0.09375
+        },
+        "child_wall_after_initial_imports": 2.2653551000003063,
+        "child_python_cpu": 1.296875
+      }
+    },
+    {
+      "variant": "onepy-official-python",
+      "iteration": 5,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\05-onepy-official-python",
+        "python",
+        "no"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 3.704042899998967,
+      "immediate_child_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      },
+      "phases": {
+        "startup_imports_wall": 0.006488000000899774,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.2540946000008262,
+          "python_cpu": 1.15625
+        },
+        "extraction": {
+          "wall": 2.0035502999999153,
+          "python_cpu": 1.5625
+        },
+        "wheel": {
+          "wall": 0.10707900000124937,
+          "python_cpu": 0.09375
+        },
+        "child_wall_after_initial_imports": 3.4166377000001376,
+        "child_python_cpu": 2.84375
+      }
+    },
+    {
+      "variant": "uv-official",
+      "iteration": 5,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\uv.exe",
+        "build",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "--python",
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "--no-build-isolation",
+        "--no-managed-python",
+        "--no-python-downloads",
+        "--no-config",
+        "--offline",
+        "--no-create-gitignore",
+        "--cache-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\cache",
+        "--out-dir",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\05-uv-official\\artifacts"
+      ],
+      "cwd": "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+      "returncode": 0,
+      "wall_seconds": 2.910908699999709,
+      "immediate_child_cpu_seconds": 0.71875,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "archive_bytes": {
+        "fastapi-0.162.0-py3-none-any.whl": 148912,
+        "fastapi-0.162.0.tar.gz": 525754
+      }
+    }
+  ],
+  "failures": [],
+  "summary": {
+    "uv-official": {
+      "count": 5,
+      "median": 3.0062866999996913,
+      "min": 2.910908699999709,
+      "max": 3.537478199999896,
+      "all": [
+        3.0062866999996913,
+        2.9830993999985367,
+        3.2232618000016373,
+        3.537478199999896,
+        2.910908699999709
+      ]
+    },
+    "onepy-official-python": {
+      "count": 5,
+      "median": 4.00161079999998,
+      "min": 3.704042899998967,
+      "max": 4.007272000000739,
+      "all": [
+        4.001912499999889,
+        3.9133515000012267,
+        4.007272000000739,
+        4.00161079999998,
+        3.704042899998967
+      ]
+    },
+    "onepy-official-tar": {
+      "count": 5,
+      "median": 2.583454999999958,
+      "min": 2.5675257999992027,
+      "max": 2.6705326000010245,
+      "all": [
+        2.6705326000010245,
+        2.583454999999958,
+        2.5675257999992027,
+        2.6193903000003047,
+        2.5699752000000444
+      ]
+    },
+    "uv-official-no-logs": {
+      "count": 5,
+      "median": 3.1199692000009236,
+      "min": 2.9853332999991835,
+      "max": 3.1519291999993584,
+      "all": [
+        3.147306799999569,
+        3.1519291999993584,
+        3.0523653000000195,
+        3.1199692000009236,
+        2.9853332999991835
+      ]
+    },
+    "onepy-official-tar-no-logs": {
+      "count": 5,
+      "median": 2.5932969999994384,
+      "min": 2.536907699999574,
+      "max": 2.6398413999995682,
+      "all": [
+        2.536907699999574,
+        2.5932969999994384,
+        2.6092439999993076,
+        2.6398413999995682,
+        2.5878189000013663
+      ]
+    },
+    "onepy-sourcebuilt-tar-no-logs": {
+      "count": 5,
+      "median": 2.561131500000556,
+      "min": 2.4753516999990097,
+      "max": 2.6217331000007107,
+      "all": [
+        2.492771499999435,
+        2.4753516999990097,
+        2.561131500000556,
+        2.614809400000013,
+        2.6217331000007107
+      ]
+    }
+  },
+  "experiment_wall_seconds": 112.15803790000064
+}

@@ -1,0 +1,1615 @@
+{
+  "status": "complete",
+  "trials": [
+    {
+      "label": "1-uv",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\uv.exe",
+        "build",
+        "--no-build-isolation",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-config",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\1-uv\\artifacts"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 5.981314799999382,
+      "returncode": 0,
+      "launcher_cpu_seconds": 1.5,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "1-uv.stdout.log",
+      "stderr": "1-uv.stderr.log",
+      "variant": "uv",
+      "iteration": 1,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674670
+    },
+    {
+      "label": "1-full",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "full",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\1-full"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 6.211310200000298,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.0,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "1-full.stdout.log",
+      "stderr": "1-full.stderr.log",
+      "variant": "full",
+      "iteration": 1,
+      "child_seconds": 6.0665246000025945,
+      "imports_seconds": 0.344979700003023,
+      "sdist_seconds": 2.0071368999997503,
+      "extraction_seconds": 3.081222799999523,
+      "wheel_seconds": 0.6331852000002982,
+      "python_cpu_seconds": 4.546875,
+      "archive_files": 1269,
+      "extracted_files": 1269,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674679
+    },
+    {
+      "label": "1-selective",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "selective",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\1-selective"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 3.248490199999651,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.015625,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "1-selective.stdout.log",
+      "stderr": "1-selective.stderr.log",
+      "variant": "selective",
+      "iteration": 1,
+      "child_seconds": 3.1025344999980007,
+      "imports_seconds": 0.3693206999996619,
+      "sdist_seconds": 1.9927449999995588,
+      "extraction_seconds": 0.26121820000116713,
+      "wheel_seconds": 0.4792505999976129,
+      "python_cpu_seconds": 1.953125,
+      "archive_files": 1269,
+      "extracted_files": 64,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674679
+    },
+    {
+      "label": "2-uv",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\uv.exe",
+        "build",
+        "--no-build-isolation",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-config",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\2-uv\\artifacts"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 4.655656800001452,
+      "returncode": 0,
+      "launcher_cpu_seconds": 1.484375,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "2-uv.stdout.log",
+      "stderr": "2-uv.stderr.log",
+      "variant": "uv",
+      "iteration": 2,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674668
+    },
+    {
+      "label": "2-selective",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "selective",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\2-selective"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 3.300382900000841,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.03125,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "2-selective.stdout.log",
+      "stderr": "2-selective.stderr.log",
+      "variant": "selective",
+      "iteration": 2,
+      "child_seconds": 3.1575645999982953,
+      "imports_seconds": 0.3346574999995937,
+      "sdist_seconds": 1.9995538999974087,
+      "extraction_seconds": 0.24830680000013672,
+      "wheel_seconds": 0.5750464000011561,
+      "python_cpu_seconds": 1.9375,
+      "archive_files": 1269,
+      "extracted_files": 64,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674679
+    },
+    {
+      "label": "2-full",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "full",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\2-full"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 6.275076699999772,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.015625,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "2-full.stdout.log",
+      "stderr": "2-full.stderr.log",
+      "variant": "full",
+      "iteration": 2,
+      "child_seconds": 6.127348399997572,
+      "imports_seconds": 0.3502762999996776,
+      "sdist_seconds": 2.067342700000154,
+      "extraction_seconds": 3.190356099999917,
+      "wheel_seconds": 0.5193732999978238,
+      "python_cpu_seconds": 4.4375,
+      "archive_files": 1269,
+      "extracted_files": 1269,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674679
+    },
+    {
+      "label": "3-uv",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\uv.exe",
+        "build",
+        "--no-build-isolation",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-config",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\3-uv\\artifacts"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 5.013572600000771,
+      "returncode": 0,
+      "launcher_cpu_seconds": 1.53125,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "3-uv.stdout.log",
+      "stderr": "3-uv.stderr.log",
+      "variant": "uv",
+      "iteration": 3,
+      "validation": {
+        "strict_pass": false,
+        "differences": [
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/lint.sh",
+            "expected": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "e57c19a834c9f81e4b1ef49425e8604e1afb2de3777f9a9bb74334d2bb544382",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test.sh",
+            "expected": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "92e8fb04ed92c89dcba54e1d5f3781c1aeae887df7f34f55c6896fa877644b3d",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/format.sh",
+            "expected": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "8b0f7c0232c5819e70032d3a3d29699c79ad216809102187a7a5df46474cde3e",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov-html.sh",
+            "expected": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "dea54f3f1b9538b3bcba90c7fc3f838a1e102fef6afab807e7285ffdcc7343b1",
+              "exec": false,
+              "mode": 420
+            }
+          },
+          {
+            "kind": "sdist",
+            "name": "fastapi-0.162.0/scripts/test-cov.sh",
+            "expected": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": true,
+              "mode": 493
+            },
+            "actual": {
+              "sha256": "6f278d510e10ca432f7228df3bdd17bb6b44ce601e1fa21ea960c01335a32692",
+              "exec": false,
+              "mode": 420
+            }
+          }
+        ],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674670
+    },
+    {
+      "label": "3-full",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "full",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\3-full"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 6.3568126000027405,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.03125,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "3-full.stdout.log",
+      "stderr": "3-full.stderr.log",
+      "variant": "full",
+      "iteration": 3,
+      "child_seconds": 6.204222300002584,
+      "imports_seconds": 0.3648280000015802,
+      "sdist_seconds": 2.040307200000825,
+      "extraction_seconds": 3.1930329999995593,
+      "wheel_seconds": 0.6060541000006197,
+      "python_cpu_seconds": 4.59375,
+      "archive_files": 1269,
+      "extracted_files": 1269,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674681
+    },
+    {
+      "label": "3-selective",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "selective",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\3-selective"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 3.3281192000031297,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.015625,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "3-selective.stdout.log",
+      "stderr": "3-selective.stderr.log",
+      "variant": "selective",
+      "iteration": 3,
+      "child_seconds": 3.180610900002648,
+      "imports_seconds": 0.35292910000134725,
+      "sdist_seconds": 2.073926599998231,
+      "extraction_seconds": 0.2582382000000507,
+      "wheel_seconds": 0.49551700000301935,
+      "python_cpu_seconds": 2.03125,
+      "archive_files": 1269,
+      "extracted_files": 64,
+      "validation": {
+        "strict_pass": true,
+        "differences": [],
+        "members": {
+          "sdist": 1269,
+          "wheel": 65
+        },
+        "raw_record_validated": true
+      },
+      "wheel_exec_match": true,
+      "archive_bytes": 674679
+    }
+  ],
+  "commands": [
+    {
+      "label": "uv-version",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\uv.exe",
+        "--version"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 0.29062730000077863,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.015625,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "uv-version.stdout.log",
+      "stderr": "uv-version.stderr.log"
+    },
+    {
+      "label": "1-uv",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\uv.exe",
+        "build",
+        "--no-build-isolation",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-config",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\1-uv\\artifacts"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 5.981314799999382,
+      "returncode": 0,
+      "launcher_cpu_seconds": 1.5,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "1-uv.stdout.log",
+      "stderr": "1-uv.stderr.log"
+    },
+    {
+      "label": "1-full",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "full",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\1-full"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 6.211310200000298,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.0,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "1-full.stdout.log",
+      "stderr": "1-full.stderr.log"
+    },
+    {
+      "label": "1-selective",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "selective",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\1-selective"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 3.248490199999651,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.015625,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "1-selective.stdout.log",
+      "stderr": "1-selective.stderr.log"
+    },
+    {
+      "label": "2-uv",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\uv.exe",
+        "build",
+        "--no-build-isolation",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-config",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\2-uv\\artifacts"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 4.655656800001452,
+      "returncode": 0,
+      "launcher_cpu_seconds": 1.484375,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "2-uv.stdout.log",
+      "stderr": "2-uv.stderr.log"
+    },
+    {
+      "label": "2-selective",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "selective",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\2-selective"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 3.300382900000841,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.03125,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "2-selective.stdout.log",
+      "stderr": "2-selective.stderr.log"
+    },
+    {
+      "label": "2-full",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "full",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\2-full"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 6.275076699999772,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.015625,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "2-full.stdout.log",
+      "stderr": "2-full.stderr.log"
+    },
+    {
+      "label": "3-uv",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\uv.exe",
+        "build",
+        "--no-build-isolation",
+        "--python",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "--offline",
+        "--no-config",
+        "--out-dir",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\3-uv\\artifacts"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 5.013572600000771,
+      "returncode": 0,
+      "launcher_cpu_seconds": 1.53125,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "3-uv.stdout.log",
+      "stderr": "3-uv.stderr.log"
+    },
+    {
+      "label": "3-full",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "full",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\3-full"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 6.3568126000027405,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.03125,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "3-full.stdout.log",
+      "stderr": "3-full.stderr.log"
+    },
+    {
+      "label": "3-selective",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "selective",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\3-selective"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 3.3281192000031297,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.015625,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "3-selective.stdout.log",
+      "stderr": "3-selective.stderr.log"
+    },
+    {
+      "label": "profile-sdist-only",
+      "argv": [
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "profile",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\inputs\\source-manifest.json",
+        "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\outputs\\profile-sdist-only"
+      ],
+      "cwd": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+      "full_process_seconds": 2.8668125000003783,
+      "returncode": 0,
+      "launcher_cpu_seconds": 0.0,
+      "cpu_scope": "immediate launched process only; uv backend descendants excluded",
+      "stdout": "profile-sdist-only.stdout.log",
+      "stderr": "profile-sdist-only.stderr.log"
+    }
+  ],
+  "boundary": "spawn through child exit; stdout/stderr captured in memory and published after timer",
+  "source_policy": "ONE new canonical checkout reused for all builds; PDM cleans and regenerates metadata each build",
+  "profile_policy": "one separately profiled sdist-only build; not a clean timing sample",
+  "protection_policy": "no ETW, exclusions, protection/global changes or CI",
+  "source": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\source",
+  "python": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Scripts\\python.exe",
+  "canonical_commit": "264cbad400c8336057a70b9b6a65bfdb4920321e",
+  "source_inventory_files": 3390,
+  "source_preparation_seconds": 47.96174040000187,
+  "mode_manifest_sha256": "943fd9bf0a02d0dfcc85faf7d3561adcd13b04a40578c301e3b3fdeb0b40f73e",
+  "worker_sha256": "7e58996774b868b5bbe49c4ecb30ebdfd1c287ab9a47d1d37ecc2ac01b0243d6",
+  "selector_sha256": "58833d0d38766519b62d28942c0f40ce7bd54dfce59af4a0936eb09c66cfae66",
+  "controlled_environment": {
+    "TEMP": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\temp",
+    "TMP": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\temp",
+    "LOCALAPPDATA": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\cache",
+    "XDG_CACHE_HOME": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\cache",
+    "PDM_CACHE_DIR": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\cache",
+    "UV_CACHE_DIR": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\cache",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "profile": {
+    "scope": "UNTIMED cProfile of canonical-mode stock-PDM sdist only",
+    "profiled_total_seconds": 2.3381235000000005,
+    "top40_cumulative": [
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\base.py",
+        "line": 203,
+        "function": "build",
+        "primitive_calls": 1,
+        "calls": 1,
+        "tottime_seconds": 0.0002234,
+        "cumtime_seconds": 2.3161716
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\sdist.py",
+        "line": 98,
+        "function": "build_artifact",
+        "primitive_calls": 1,
+        "calls": 1,
+        "tottime_seconds": 0.018712,
+        "cumtime_seconds": 2.012872
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 529,
+        "function": "open",
+        "primitive_calls": 1281,
+        "calls": 1281,
+        "tottime_seconds": 0.0025292,
+        "cumtime_seconds": 0.9471221000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _io.open>",
+        "primitive_calls": 1284,
+        "calls": 1284,
+        "tottime_seconds": 0.9444961000000001,
+        "cumtime_seconds": 0.9461022
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 2333,
+        "function": "addfile",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.0125205,
+        "cumtime_seconds": 0.5818275
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 237,
+        "function": "copyfileobj",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.004681800000000001,
+        "cumtime_seconds": 0.3032114
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\sdist.py",
+        "line": 58,
+        "function": "get_files",
+        "primitive_calls": 1,
+        "calls": 1,
+        "tottime_seconds": 0.0003267,
+        "cumtime_seconds": 0.29993050000000004
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\base.py",
+        "line": 189,
+        "function": "get_files",
+        "primitive_calls": 1,
+        "calls": 1,
+        "tottime_seconds": 2.1400000000000002e-05,
+        "cumtime_seconds": 0.2818932
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\base.py",
+        "line": 234,
+        "function": "_collect_files",
+        "primitive_calls": 1,
+        "calls": 1,
+        "tottime_seconds": 0.0069519000000000004,
+        "cumtime_seconds": 0.28175340000000004
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\gzip.py",
+        "line": 309,
+        "function": "write",
+        "primitive_calls": 3542,
+        "calls": 3542,
+        "tottime_seconds": 0.0049678000000000005,
+        "cumtime_seconds": 0.2781563
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'write' of '_io.BufferedWriter' objects>",
+        "primitive_calls": 3708,
+        "calls": 3938,
+        "tottime_seconds": 0.006436300000000001,
+        "cumtime_seconds": 0.2705965
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\gzip.py",
+        "line": 134,
+        "function": "write",
+        "primitive_calls": 231,
+        "calls": 231,
+        "tottime_seconds": 0.0005363000000000001,
+        "cumtime_seconds": 0.26628850000000004
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\gzip.py",
+        "line": 320,
+        "function": "_write_raw",
+        "primitive_calls": 231,
+        "calls": 231,
+        "tottime_seconds": 0.0016693,
+        "cumtime_seconds": 0.2657522
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'compress' of 'zlib.Compress' objects>",
+        "primitive_calls": 231,
+        "calls": 231,
+        "tottime_seconds": 0.2585277,
+        "cumtime_seconds": 0.2585277
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 365,
+        "function": "relative_to",
+        "primitive_calls": 2535,
+        "calls": 2535,
+        "tottime_seconds": 0.0194688,
+        "cumtime_seconds": 0.2236119
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 2139,
+        "function": "gettarinfo",
+        "primitive_calls": 1268,
+        "calls": 1268,
+        "tottime_seconds": 0.0105681,
+        "cumtime_seconds": 0.1637599
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method nt.lstat>",
+        "primitive_calls": 1271,
+        "calls": 1271,
+        "tottime_seconds": 0.14755110000000002,
+        "cumtime_seconds": 0.1485148
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 1061,
+        "function": "tobuf",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.0036958000000000004,
+        "cumtime_seconds": 0.14692570000000002
+      },
+      {
+        "file": "<frozen _collections_abc>",
+        "line": 1041,
+        "function": "__contains__",
+        "primitive_calls": 2535,
+        "calls": 2535,
+        "tottime_seconds": 0.0127285,
+        "cumtime_seconds": 0.1442745
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 1105,
+        "function": "create_pax_header",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.018776400000000002,
+        "cumtime_seconds": 0.1398797
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\base.py",
+        "line": 336,
+        "function": "_show_add_file",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.0038341000000000004,
+        "cumtime_seconds": 0.1393731
+      },
+      {
+        "file": "<frozen _collections_abc>",
+        "line": 1031,
+        "function": "__iter__",
+        "primitive_calls": 10729,
+        "calls": 10729,
+        "tottime_seconds": 0.0077894,
+        "cumtime_seconds": 0.10117010000000001
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 1185,
+        "function": "_create_header",
+        "primitive_calls": 2537,
+        "calls": 2537,
+        "tottime_seconds": 0.0276429,
+        "cumtime_seconds": 0.0978196
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_abc.py",
+        "line": 476,
+        "function": "is_file",
+        "primitive_calls": 1488,
+        "calls": 1488,
+        "tottime_seconds": 0.0022443000000000003,
+        "cumtime_seconds": 0.0936146
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 44,
+        "function": "__getitem__",
+        "primitive_calls": 8195,
+        "calls": 8195,
+        "tottime_seconds": 0.012988900000000001,
+        "cumtime_seconds": 0.09338070000000001
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\copy.py",
+        "line": 62,
+        "function": "copy",
+        "primitive_calls": 2576,
+        "calls": 2576,
+        "tottime_seconds": 0.0185989,
+        "cumtime_seconds": 0.09238210000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method nt.stat>",
+        "primitive_calls": 1513,
+        "calls": 1513,
+        "tottime_seconds": 0.0904649,
+        "cumtime_seconds": 0.0917916
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 510,
+        "function": "stat",
+        "primitive_calls": 1498,
+        "calls": 1498,
+        "tottime_seconds": 0.0009383000000000001,
+        "cumtime_seconds": 0.091673
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'read' of '_io.BufferedReader' objects>",
+        "primitive_calls": 1188,
+        "calls": 1188,
+        "tottime_seconds": 0.08805320000000001,
+        "cumtime_seconds": 0.08805320000000001
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 245,
+        "function": "_from_parsed_parts",
+        "primitive_calls": 10728,
+        "calls": 10728,
+        "tottime_seconds": 0.009752100000000001,
+        "cumtime_seconds": 0.08568010000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_io._IOBase' objects>",
+        "primitive_calls": 1279,
+        "calls": 1279,
+        "tottime_seconds": 0.082308,
+        "cumtime_seconds": 0.082308
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 1254,
+        "function": "_create_pax_generic_header",
+        "primitive_calls": 1268,
+        "calls": 1268,
+        "tottime_seconds": 0.0118101,
+        "cumtime_seconds": 0.0752275
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 252,
+        "function": "_from_parsed_string",
+        "primitive_calls": 12209,
+        "calls": 12209,
+        "tottime_seconds": 0.0056905,
+        "cumtime_seconds": 0.0679097
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_abc.py",
+        "line": 130,
+        "function": "with_segments",
+        "primitive_calls": 12240,
+        "calls": 12240,
+        "tottime_seconds": 0.014344500000000001,
+        "cumtime_seconds": 0.06256010000000001
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "line": 22,
+        "function": "canonical_clean_tarinfo",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.004423600000000001,
+        "cumtime_seconds": 0.0609089
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\sdist.py",
+        "line": 21,
+        "function": "clean_tarinfo",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.0040755,
+        "cumtime_seconds": 0.0554899
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\glob.py",
+        "line": 498,
+        "function": "select_recursive",
+        "primitive_calls": 1483,
+        "calls": 1483,
+        "tottime_seconds": 0.0011241,
+        "cumtime_seconds": 0.053012300000000005
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\glob.py",
+        "line": 507,
+        "function": "select_recursive_step",
+        "primitive_calls": 1336,
+        "calls": 1336,
+        "tottime_seconds": 0.011069,
+        "cumtime_seconds": 0.0503508
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 498,
+        "function": "__init__",
+        "primitive_calls": 12256,
+        "calls": 12256,
+        "tottime_seconds": 0.0144411,
+        "cumtime_seconds": 0.039792
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 193,
+        "function": "__eq__",
+        "primitive_calls": 10731,
+        "calls": 10731,
+        "tottime_seconds": 0.0087366,
+        "cumtime_seconds": 0.0393225
+      }
+    ],
+    "top40_tottime": [
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _io.open>",
+        "primitive_calls": 1284,
+        "calls": 1284,
+        "tottime_seconds": 0.9444961000000001,
+        "cumtime_seconds": 0.9461022
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'compress' of 'zlib.Compress' objects>",
+        "primitive_calls": 231,
+        "calls": 231,
+        "tottime_seconds": 0.2585277,
+        "cumtime_seconds": 0.2585277
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method nt.lstat>",
+        "primitive_calls": 1271,
+        "calls": 1271,
+        "tottime_seconds": 0.14755110000000002,
+        "cumtime_seconds": 0.1485148
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method nt.stat>",
+        "primitive_calls": 1513,
+        "calls": 1513,
+        "tottime_seconds": 0.0904649,
+        "cumtime_seconds": 0.0917916
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'read' of '_io.BufferedReader' objects>",
+        "primitive_calls": 1188,
+        "calls": 1188,
+        "tottime_seconds": 0.08805320000000001,
+        "cumtime_seconds": 0.08805320000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_io._IOBase' objects>",
+        "primitive_calls": 1279,
+        "calls": 1279,
+        "tottime_seconds": 0.082308,
+        "cumtime_seconds": 0.082308
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__reduce_ex__' of 'object' objects>",
+        "primitive_calls": 2576,
+        "calls": 2576,
+        "tottime_seconds": 0.0289516,
+        "cumtime_seconds": 0.029460300000000002
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 1185,
+        "function": "_create_header",
+        "primitive_calls": 2537,
+        "calls": 2537,
+        "tottime_seconds": 0.0276429,
+        "cumtime_seconds": 0.0978196
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method nt.scandir>",
+        "primitive_calls": 439,
+        "calls": 439,
+        "tottime_seconds": 0.0268393,
+        "cumtime_seconds": 0.0268393
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 174,
+        "function": "_str_normcase",
+        "primitive_calls": 21459,
+        "calls": 21459,
+        "tottime_seconds": 0.024862000000000002,
+        "cumtime_seconds": 0.0290801
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\copy.py",
+        "line": 248,
+        "function": "_reconstruct",
+        "primitive_calls": 2576,
+        "calls": 2576,
+        "tottime_seconds": 0.0195181,
+        "cumtime_seconds": 0.0365064
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 365,
+        "function": "relative_to",
+        "primitive_calls": 2535,
+        "calls": 2535,
+        "tottime_seconds": 0.0194688,
+        "cumtime_seconds": 0.2236119
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 1105,
+        "function": "create_pax_header",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.018776400000000002,
+        "cumtime_seconds": 0.1398797
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\sdist.py",
+        "line": 98,
+        "function": "build_artifact",
+        "primitive_calls": 1,
+        "calls": 1,
+        "tottime_seconds": 0.018712,
+        "cumtime_seconds": 2.012872
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\copy.py",
+        "line": 62,
+        "function": "copy",
+        "primitive_calls": 2576,
+        "calls": 2576,
+        "tottime_seconds": 0.0185989,
+        "cumtime_seconds": 0.09238210000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.len>",
+        "primitive_calls": 60729,
+        "calls": 77145,
+        "tottime_seconds": 0.0163984,
+        "cumtime_seconds": 0.0206951
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 117,
+        "function": "__init__",
+        "primitive_calls": 12262,
+        "calls": 12262,
+        "tottime_seconds": 0.0161372,
+        "cumtime_seconds": 0.025367300000000002
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 194,
+        "function": "itn",
+        "primitive_calls": 12685,
+        "calls": 12685,
+        "tottime_seconds": 0.0146523,
+        "cumtime_seconds": 0.0146523
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 498,
+        "function": "__init__",
+        "primitive_calls": 12256,
+        "calls": 12256,
+        "tottime_seconds": 0.0144411,
+        "cumtime_seconds": 0.039792
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_abc.py",
+        "line": 130,
+        "function": "with_segments",
+        "primitive_calls": 12240,
+        "calls": 12240,
+        "tottime_seconds": 0.014344500000000001,
+        "cumtime_seconds": 0.06256010000000001
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\glob.py",
+        "line": 451,
+        "function": "select_wildcard",
+        "primitive_calls": 1698,
+        "calls": 1698,
+        "tottime_seconds": 0.0131976,
+        "cumtime_seconds": 0.0296233
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 158,
+        "function": "stn",
+        "primitive_calls": 17759,
+        "calls": 17759,
+        "tottime_seconds": 0.0131836,
+        "cumtime_seconds": 0.0186609
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "primitive_calls": 67547,
+        "calls": 67547,
+        "tottime_seconds": 0.0131634,
+        "cumtime_seconds": 0.013406900000000001
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 44,
+        "function": "__getitem__",
+        "primitive_calls": 8195,
+        "calls": 8195,
+        "tottime_seconds": 0.012988900000000001,
+        "cumtime_seconds": 0.09338070000000001
+      },
+      {
+        "file": "<frozen _collections_abc>",
+        "line": 1041,
+        "function": "__contains__",
+        "primitive_calls": 2535,
+        "calls": 2535,
+        "tottime_seconds": 0.0127285,
+        "cumtime_seconds": 0.1442745
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 2333,
+        "function": "addfile",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.0125205,
+        "cumtime_seconds": 0.5818275
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 1254,
+        "function": "_create_pax_generic_header",
+        "primitive_calls": 1268,
+        "calls": 1268,
+        "tottime_seconds": 0.0118101,
+        "cumtime_seconds": 0.0752275
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\glob.py",
+        "line": 507,
+        "function": "select_recursive_step",
+        "primitive_calls": 1336,
+        "calls": 1336,
+        "tottime_seconds": 0.011069,
+        "cumtime_seconds": 0.0503508
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 2139,
+        "function": "gettarinfo",
+        "primitive_calls": 1268,
+        "calls": 1268,
+        "tottime_seconds": 0.0105681,
+        "cumtime_seconds": 0.1637599
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.sum>",
+        "primitive_calls": 5074,
+        "calls": 5074,
+        "tottime_seconds": 0.0100741,
+        "cumtime_seconds": 0.0100741
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 245,
+        "function": "_from_parsed_parts",
+        "primitive_calls": 10728,
+        "calls": 10728,
+        "tottime_seconds": 0.009752100000000001,
+        "cumtime_seconds": 0.08568010000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.print>",
+        "primitive_calls": 1269,
+        "calls": 1269,
+        "tottime_seconds": 0.009565800000000001,
+        "cumtime_seconds": 0.0141677
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 237,
+        "function": "_format_parsed_parts",
+        "primitive_calls": 10770,
+        "calls": 10770,
+        "tottime_seconds": 0.009042300000000001,
+        "cumtime_seconds": 0.0162808
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _struct.unpack_from>",
+        "primitive_calls": 5074,
+        "calls": 5074,
+        "tottime_seconds": 0.0088042,
+        "cumtime_seconds": 0.0088042
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\pathlib\\_local.py",
+        "line": 193,
+        "function": "__eq__",
+        "primitive_calls": 10731,
+        "calls": 10731,
+        "tottime_seconds": 0.0087366,
+        "cumtime_seconds": 0.0393225
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'get' of 'dict' objects>",
+        "primitive_calls": 38346,
+        "calls": 38346,
+        "tottime_seconds": 0.008662900000000001,
+        "cumtime_seconds": 0.008662900000000001
+      },
+      {
+        "file": "<frozen _collections_abc>",
+        "line": 1031,
+        "function": "__iter__",
+        "primitive_calls": 10729,
+        "calls": 10729,
+        "tottime_seconds": 0.0077894,
+        "cumtime_seconds": 0.10117010000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "primitive_calls": 45780,
+        "calls": 45780,
+        "tottime_seconds": 0.007782900000000001,
+        "cumtime_seconds": 0.007782900000000001
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\base.py",
+        "line": 234,
+        "function": "_collect_files",
+        "primitive_calls": 1,
+        "calls": 1,
+        "tottime_seconds": 0.0069519000000000004,
+        "cumtime_seconds": 0.28175340000000004
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'encode' of 'str' objects>",
+        "primitive_calls": 26974,
+        "calls": 26974,
+        "tottime_seconds": 0.006697600000000001,
+        "cumtime_seconds": 0.006697600000000001
+      }
+    ],
+    "excluded_from_clean_trials": true,
+    "strict_sdist_validation": "passed all raw payloads and full modes",
+    "adapter_functions": [
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\followup-shared-checkout\\code\\worker.py",
+        "line": 22,
+        "function": "canonical_clean_tarinfo",
+        "calls": 1269,
+        "tottime_seconds": 0.004423600000000001,
+        "cumtime_seconds": 0.0609089
+      },
+      {
+        "file": "C:\\fastapi-arm-build-lab\\copilot-2a73e36a\\env\\Lib\\site-packages\\pdm\\backend\\sdist.py",
+        "line": 21,
+        "function": "clean_tarinfo",
+        "calls": 1269,
+        "tottime_seconds": 0.0040755,
+        "cumtime_seconds": 0.0554899
+      },
+      {
+        "file": "C:\\Program Files\\Python313-arm64\\Lib\\tarfile.py",
+        "line": 2139,
+        "function": "gettarinfo",
+        "calls": 1268,
+        "tottime_seconds": 0.0105681,
+        "cumtime_seconds": 0.1637599
+      }
+    ]
+  },
+  "summary": [
+    {
+      "variant": "uv",
+      "n": 3,
+      "median_wall_seconds": 5.013572600000771,
+      "range_seconds": [
+        4.655656800001452,
+        5.981314799999382
+      ],
+      "strict_passes": 0
+    },
+    {
+      "variant": "full",
+      "n": 3,
+      "median_wall_seconds": 6.275076699999772,
+      "range_seconds": [
+        6.211310200000298,
+        6.3568126000027405
+      ],
+      "strict_passes": 3,
+      "phase_medians": {
+        "imports_seconds": 0.3502762999996776,
+        "sdist_seconds": 2.040307200000825,
+        "extraction_seconds": 3.190356099999917,
+        "wheel_seconds": 0.6060541000006197,
+        "python_cpu_seconds": 4.546875
+      }
+    },
+    {
+      "variant": "selective",
+      "n": 3,
+      "median_wall_seconds": 3.300382900000841,
+      "range_seconds": [
+        3.248490199999651,
+        3.3281192000031297
+      ],
+      "strict_passes": 3,
+      "phase_medians": {
+        "imports_seconds": 0.35292910000134725,
+        "sdist_seconds": 1.9995538999974087,
+        "extraction_seconds": 0.2582382000000507,
+        "wheel_seconds": 0.49551700000301935,
+        "python_cpu_seconds": 1.953125
+      }
+    }
+  ],
+  "backend_bytecode_condition": {
+    "observed_utc": "2026-10-29T05:12:57.580193+00:00",
+    "observation_boundary": "after complete timed matrix; no pre-trial bytecode census was taken",
+    "pdm_pyc_count": 0,
+    "pdm_pyc_bytes": 0,
+    "policy": "PYTHONDONTWRITEBYTECODE=1 in all trials; direct workers additionally set sys.dont_write_bytecode=True",
+    "caveat": "The flag prevents writes, not loading existing bytecode. This is not assumed to model prepared CI backend bytecode.",
+    "compileall": "not run; no mid-trial environment mutation or additional matrix"
+  },
+  "paired_deltas": [
+    {
+      "iteration": 1,
+      "full_minus_selective_seconds": 2.9628200000006473,
+      "sdist_full_minus_selective_seconds": 0.014391900000191526
+    },
+    {
+      "iteration": 2,
+      "full_minus_selective_seconds": 2.9746937999989314,
+      "sdist_full_minus_selective_seconds": 0.06778880000274512
+    },
+    {
+      "iteration": 3,
+      "full_minus_selective_seconds": 3.028693399999611,
+      "sdist_full_minus_selective_seconds": -0.03361939999740571
+    }
+  ],
+  "interpretation": {
+    "extraction_reduction": "1269 to 64 regular files, 1205 fewer (94.96%)",
+    "prior_stall": "Not reproduced: identical corrected writer is ~2.0s for both full and selective, versus historical selective ~7.13s.",
+    "attribution": "Same writer and shared checkout isolate extraction strategy locally; no Defender/MDE causal attribution or Mac parity claim.",
+    "next_small_proposal": "Screen this smaller mode-correct selective pipeline through the actual uv release frontend before considering any custom Node TAR writer."
+  }
+}

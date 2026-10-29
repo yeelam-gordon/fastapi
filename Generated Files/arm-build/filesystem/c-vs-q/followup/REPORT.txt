@@ -1,0 +1,82 @@
+Shared-checkout C: follow-up (no CI / protection changes / ETW)
+
+Prepared exactly one canonical 3390-file checkout once: 47.962s.
+This preparation and code/uv copy are excluded from build timings; the same source,
+C native env, pinned PDM 2.5.0, runtime temp/cache and mode manifest serve every trial.
+Each build uses a fresh output directory and fresh PDM metadata. Historical evidence
+was not modified. Child logs are captured in memory and published after timing.
+
+Pipeline | n | median spawn-to-exit seconds | range | strict Mac
+-------- | - | --------------------------- | ----- | ----------
+uv | 3 | 5.0136 | 4.6557-5.9813 | 0/3
+full | 3 | 6.2751 | 6.2113-6.3568 | 3/3
+selective | 3 | 3.3004 | 3.2485-3.3281 | 3/3
+
+uv is the REAL release frontend: uv build --no-build-isolation --python <Cenv>
+--offline --no-config --out-dir <fresh C output>, run from the single C checkout.
+It builds both sdist and wheel-from-sdist. All three builds complete and validate
+every payload and wheel RECORD (including raw bytes) and wheel exec bits, but all
+FAIL overall strict correctness: the same five sdist scripts lose 0755 -> 0644.
+Those five failures are not waived. Full/selective corrected workers pass 3/3 each.
+
+Identical corrected stock-PDM writer; only extraction strategy varies.
+Three pairs alternate full/selective, selective/full, full/selective; uv precedes
+each pair. No project metadata, selection list or payload cache is reused.
+full: imports 0.3503s; sdist 2.0403s; extraction 3.1904s; wheel 0.6061s; Python CPU 4.5469s.
+selective: imports 0.3529s; sdist 1.9996s; extraction 0.2582s; wheel 0.4955s; Python CPU 1.9531s.
+Corrected full -> selective: 2.9747s less wall time (1.901x).
+Paired full-minus-selective deltas: 2.9628s, 2.9747s, 3.0287s.
+Extraction drops 1269 -> 64 files (1205 fewer, 94.96%); all 1269 sdist members
+are still enumerated and the same source payloads still feed the same stock writer.
+
+Prior 7.129s C sdist stall is NOT reproduced: both corrected-writer variants now
+spend ~2.0s in sdist. Thus the old 8.443s result was not an intrinsic selective-
+extraction cost; reused source, temporal/cache/host conditions remain confounders.
+This follow-up does not establish which changed condition removed that stall.
+
+One separately profiled sdist only: 2.3381s
+(instrumented diagnostic, NEVER treated as a clean benchmark sample).
+Top 40 cumulative and total time: PROFILE-top40.txt and evidence.json.
+Largest self-time functions:
+  <built-in method _io.open>: 1284 calls; self 0.9445s; cumulative 0.9461s.
+  <method 'compress' of 'zlib.Compress' objects>: 231 calls; self 0.2585s; cumulative 0.2585s.
+  <built-in method nt.lstat>: 1271 calls; self 0.1476s; cumulative 0.1485s.
+  <built-in method nt.stat>: 1513 calls; self 0.0905s; cumulative 0.0918s.
+  <method 'read' of '_io.BufferedReader' objects>: 1188 calls; self 0.0881s; cumulative 0.0881s.
+  <method '__exit__' of '_io._IOBase' objects>: 1279 calls; self 0.0823s; cumulative 0.0823s.
+  <method '__reduce_ex__' of 'object' objects>: 2576 calls; self 0.0290s; cumulative 0.0295s.
+  _create_header: 2537 calls; self 0.0276s; cumulative 0.0978s.
+Adapter/stat helper costs:
+  canonical_clean_tarinfo: 1269 calls; self 0.0044s; cumulative 0.0609s.
+  clean_tarinfo: 1269 calls; self 0.0041s; cumulative 0.0555s.
+  gettarinfo: 1268 calls; self 0.0106s; cumulative 0.1638s.
+The current sdist profile localizes cost mainly to many file opens, compression
+and filesystem metadata operations, not expensive mode-adapter Python computation.
+cProfile includes wait inside calls but cannot identify security-scanner ownership.
+Because the earlier 7.13s stall did not recur, this does not retrospectively localize
+the missing ~5s. No system trace was authorized or started.
+
+Backend bytecode census AFTER matrix: 0 PDM .pyc files, 0 bytes.
+No before-trial census exists. PYTHONDONTWRITEBYTECODE=1 was constant; direct
+workers also set sys.dont_write_bytecode=True. Existing pyc can still be read;
+do not equate these import timings to CI prepared with backend bytecode.
+No compileall screen was added and no environment was mutated mid-trial.
+
+Decision / next SMALL proposal:
+Prefer screening the smaller, mode-correct selective PDM pipeline through uv's
+actual release frontend before maintaining a custom Node TAR writer. Keep PDM
+metadata fresh. Separately provision/report backend bytecode if matching warmed
+CI imports becomes the next target; do not merge that change into extraction proof.
+No Windows-specific scanner causation or optimized-Mac parity is claimed.
+
+Commands from Q:\fastapi:
+$p = "Generated Files\arm-build\tools\official-tool-environment\Scripts\python.exe"
+$r = "Generated Files\arm-build\filesystem\c-vs-q\followup"
+& $p "$r\run_followup.py"  # refuses existing workspace; preserve it
+& $p "$r\summarize.py"
+Exact child argv/cwd, environment overrides, timings, manifests and raw logs:
+evidence.json, *-manifest.json, *.stdout.log, *.stderr.log.
+execution-worker.py and receipt hash identify the exact executed worker;
+worker.py differs only by removing an unused import after measurement.
+High confidence: strict artifacts and local extraction comparison; medium:
+three-pair warm repeated-job timing; unknown: historical stall/scanner mechanism.

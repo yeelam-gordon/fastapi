@@ -1,0 +1,77 @@
+usage: python -m build [-h] [--version] [--quiet | --verbose] [--outdir PATH]
+                       [--sdist-extract-dir PATH] [--sdist] [--wheel]
+                       [--metadata] [--report PATH]
+                       [--config-setting KEY=[VALUE] |
+                       --config-json JSON_STRING] [--installer {pip,uv} |
+                       --no-isolation] [--env-dir PATH]
+                       [--dependency-constraints-txt PATH]
+                       [--skip-dependency-check]
+                       [srcdir]
+
+    A simple, correct Python build frontend.
+
+    By default, a source distribution (sdist) is built from the project root
+    and a binary distribution (wheel) is built from the sdist.
+    If this is undesirable, you can pass `--sdist` and/or `--wheel`
+    to build distributions independently of each other.
+
+positional arguments:
+  srcdir                source directory, .tar.gz source distribution, or
+                        (with --metadata) a .whl to read metadata from
+                        (defaults to the current working directory)
+
+global options:
+  -h, --help            show this help message and exit
+  --version, -V         show program's version number and exit
+  --quiet, -q           reduce verbosity
+  --verbose, -v         increase verbosity
+
+build options:
+  --outdir, -o PATH     output directory (defaults to {srcdir}\dist). Cannot
+                        be used together with ``--metadata``
+  --sdist-extract-dir PATH
+                        extract the intermediate sdist to PATH (created if
+                        missing and kept afterwards) instead of a random
+                        temporary directory; reusing it across rebuilds gives
+                        compiler caches such as ccache/sccache a stable source
+                        path. Only affects the default (via-sdist) build and
+                        building a wheel from an sdist
+  --sdist, -s           build a source distribution (disables the default
+                        behavior)
+  --wheel, -w           build a wheel (disables the default behavior)
+  --metadata            print out a wheel's metadata in JSON format, building
+                        it first unless the source argument is already a .whl.
+                        Cannot be used in conjunction with ``--sdist`` or
+                        ``--wheel``
+  --report PATH         write a machine-readable JSON report of the built
+                        artifacts (name, path, kind, size and SHA-256 hash) to
+                        this path. Cannot be used together with ``--metadata``
+  --config-setting, -C KEY=[VALUE]
+                        settings to pass to the backend. Multiple settings can
+                        be provided. Settings beginning with a hyphen will
+                        erroneously be interpreted as options to build if
+                        separated by a space; use ``--config-setting=--my-
+                        setting -C--my-other-setting`` instead. A setting
+                        passed without ``=VALUE`` is given an empty value, but
+                        this form is not supported by pip; write ``KEY=``
+                        instead for compatibility
+  --config-json JSON_STRING
+                        settings to pass to the backend as a JSON object. This
+                        is an alternative to ``--config-setting`` that allows
+                        complex nested structures. Cannot be used together
+                        with ``--config-setting``
+
+installation options:
+  --installer {pip,uv}  Python package installer to use (defaults to pip)
+  --no-isolation, -n    disable building the project in an isolated virtual
+                        environment. Build dependencies must be installed
+                        separately when this option is used
+  --env-dir PATH        create the isolated build environment at this location
+                        instead of a temporary directory. The location must be
+                        empty; it is removed on success and kept on failure so
+                        it can be inspected
+  --dependency-constraints-txt PATH
+                        constrain build dependencies using a constraints.txt
+                        when installing dependencies
+  --skip-dependency-check, -x
+                        do not check that build dependencies are installed

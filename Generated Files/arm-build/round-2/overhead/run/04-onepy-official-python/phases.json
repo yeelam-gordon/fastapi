@@ -1,0 +1,18 @@
+{
+  "startup_imports_wall": 0.007030200000372133,
+  "backend": "2.5.0",
+  "sdist": {
+    "wall": 1.411293700000897,
+    "python_cpu": 1.1875
+  },
+  "extraction": {
+    "wall": 2.1210169999994832,
+    "python_cpu": 1.734375
+  },
+  "wheel": {
+    "wall": 0.11164830000052461,
+    "python_cpu": 0.078125
+  },
+  "child_wall_after_initial_imports": 3.70136199999979,
+  "child_python_cpu": 3.046875
+}

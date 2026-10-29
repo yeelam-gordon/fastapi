@@ -1,0 +1,8 @@
+Building source distribution...
+error: Failed to build `Q:\fastapi\Generated Files\arm-build\round-2\native-backend\snapshots\source`
+  cause: Invalid metadata format in: Generated Files\arm-build\round-2\native-backend\snapshots\source\pyproject.toml
+  cause: TOML parse error at line 5, column 1
+           |
+         5 | [project]
+           | ^^^^^^^^^
+         missing field `version`

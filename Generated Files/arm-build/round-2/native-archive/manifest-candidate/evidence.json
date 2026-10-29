@@ -1,0 +1,152 @@
+{
+  "diagnostics_are_untimed": true,
+  "diagnostics": [
+    {
+      "label": "diagnostic-archive",
+      "seconds": 1.8612620000003517,
+      "sdist_seconds": 0.9914710000011837,
+      "extract_seconds": 0.7652873999995791,
+      "wheel_seconds": 0.10450359999958891,
+      "diagnostic_stages": {
+        "pdm_initialize": 0.0006405999993148725,
+        "fresh_pdm_collect_and_validate": 0.1464759000009508,
+        "permission_input_parse": 0.08536410000124306,
+        "fresh_pkg_info_generation": 0.009156100000836886,
+        "stat_path_and_mtree_generation": 0.2284691999993811,
+        "native_gzip_writer_pipe": 0.5086490999983653,
+        "compressed_output_write": 0.0008751999994274229
+      }
+    },
+    {
+      "label": "diagnostic-json",
+      "seconds": 1.8006232000007003,
+      "sdist_seconds": 0.9301285999990796,
+      "extract_seconds": 0.7745625000006839,
+      "wheel_seconds": 0.09593210000093677,
+      "diagnostic_stages": {
+        "pdm_initialize": 0.00042349999966972973,
+        "fresh_pdm_collect_and_validate": 0.13943579999977374,
+        "permission_input_parse": 0.004299000000173692,
+        "fresh_pkg_info_generation": 0.00417369999922812,
+        "stat_path_and_mtree_generation": 0.23557869999967807,
+        "native_gzip_writer_pipe": 0.5359872999997606,
+        "compressed_output_write": 0.0009599000004527625
+      }
+    }
+  ],
+  "trials": [
+    {
+      "label": "trial-1",
+      "seconds": 1.7606073999995715,
+      "sdist_seconds": 0.9158150000002934,
+      "extract_seconds": 0.737482499998805,
+      "wheel_seconds": 0.10730990000047314,
+      "diagnostic_stages": {},
+      "full_process_seconds": 2.1733182999996643
+    },
+    {
+      "label": "trial-2",
+      "seconds": 1.8312870000008843,
+      "sdist_seconds": 0.9549884999996721,
+      "extract_seconds": 0.7681922000010672,
+      "wheel_seconds": 0.10810630000014498,
+      "diagnostic_stages": {},
+      "full_process_seconds": 2.2522406000007322
+    },
+    {
+      "label": "trial-3",
+      "seconds": 1.850603000000774,
+      "sdist_seconds": 0.9261167000004207,
+      "extract_seconds": 0.8109203999993042,
+      "wheel_seconds": 0.11356590000104916,
+      "diagnostic_stages": {},
+      "full_process_seconds": 2.293222300000707
+    },
+    {
+      "label": "trial-4",
+      "seconds": 1.761243300001297,
+      "sdist_seconds": 0.9353716000005079,
+      "extract_seconds": 0.7236849000000802,
+      "wheel_seconds": 0.1021868000007089,
+      "diagnostic_stages": {},
+      "full_process_seconds": 2.19623540000066
+    },
+    {
+      "label": "trial-5",
+      "seconds": 1.8108480999999301,
+      "sdist_seconds": 0.9169751000008546,
+      "extract_seconds": 0.785618699999759,
+      "wheel_seconds": 0.10825429999931657,
+      "diagnostic_stages": {},
+      "full_process_seconds": 2.223093600001448
+    }
+  ],
+  "permission_proof": {
+    "all_git_modes_equal": true,
+    "files": 3390,
+    "source_manifest_sha256": "943fd9bf0a02d0dfcc85faf7d3561adcd13b04a40578c301e3b3fdeb0b40f73e"
+  },
+  "untimed_writer_controls": [
+    {
+      "args": [
+        "--version"
+      ],
+      "seconds": 0.02142900000035297,
+      "output_bytes": 118
+    },
+    {
+      "args": [
+        "-cf",
+        "-",
+        "--format=pax",
+        "@Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-archive\\source\\.pdm-build\\archive.mtree"
+      ],
+      "seconds": 0.4570695999991585,
+      "output_bytes": 5713920
+    },
+    {
+      "args": [
+        "-czf",
+        "-",
+        "--format=pax",
+        "--options=gzip:compression-level=1",
+        "@Q:\\fastapi\\Generated Files\\arm-build\\round-2\\native-archive\\source\\.pdm-build\\archive.mtree"
+      ],
+      "seconds": 0.4669176999996125,
+      "output_bytes": 706560
+    }
+  ],
+  "medians": {
+    "full_process_seconds": 2.223093600001448,
+    "seconds": 1.8108480999999301,
+    "sdist_seconds": 0.9261167000004207,
+    "extract_seconds": 0.7681922000010672,
+    "wheel_seconds": 0.10810630000014498
+  },
+  "strict_validation": "passed: both diagnostic builds and five full-process candidate builds",
+  "command": "& \"Generated Files\\arm-build\\.venv\\Scripts\\python.exe\" \"Generated Files\\arm-build\\round-2\\native-archive\\manifest_candidate.py\"",
+  "candidate": "Read/parse already-prepared canonical source-manifest.json within each timed build; use only Git modes. PDM metadata, selection, generated pyproject and PKG-INFO remain freshly generated. No payload/file-list reuse. Original prototype.py and original evidence.json untouched.",
+  "measurement_scope": "Only two untimed diagnostic builds include substage instrumentation; five measured builds have diagnostic=False and empty diagnostic_stages. Full-process timer includes worker launch/imports and complete sdist -> full native extraction -> PDM wheel-from-extracted-sdist. No selective extraction. Strict validators are outside timing.",
+  "comparisons": {
+    "permission_parse_saved_seconds": 0.08106510000106937,
+    "old_full_process_median": 2.2774187000013626,
+    "new_full_process_median": 2.223093600001448,
+    "full_process_delta_seconds": -0.05432509999991453,
+    "old_sdist_median": 0.9983080000001792,
+    "new_sdist_median": 0.9261167000004207
+  },
+  "writer_bottleneck": "Fresh JSON diagnostic: native gzip writer 0.536s, path.stat/resolve/mtree generation 0.236s, PDM collect+validation 0.139s. Archive permission parsing costs 0.085s versus JSON 0.0043s. Untimed controls: uncompressed native tar 0.457s, gzip level 1 0.467s, --version process 0.021s. Thus compression is not the dominant cost: mtree parsing, source stat/open/read, tar serialization, process/pipe transport dominate native-writer cost collectively. Single controls do not isolate each individual filesystem/serialization cost. No claim that all 0.457s is IO.",
+  "node_proposal": {
+    "available": "Existing C:\\Program Files\\nodejs\\node.exe v24.21.0, process.arch arm64, bundled zlib 1.3.2.1-motley-8002e91; no installs required.",
+    "feasible": "Builtin fs/promises + zlib.createGzip can replace the native subprocess/mtree stage as an alternative Node child, consuming a freshly PDM-generated per-build map of member names, canonical Git modes and fresh metadata paths. Bound concurrent reads; retain sorted member emission and backpressure. Do not retain source payloads/file selections between builds.",
+    "missing_builtin": "Node has no builtin tar writer. Need audited USTAR/PAX header/checksum/padding handling, long UTF-8 paths, reproducible metadata, sizes/races and error cleanup. A production-quality generic implementation plus strict mode/RECORD tests exceeds ~200-line disposable scope; proposal only.",
+    "benefit_limits": "Could avoid Python stat/resolve/mtree overhead and exploit bounded concurrent reads; Node startup still exists. gzip is already native in current tar, so switching zlib alone unlikely to materially change results. Filesystem overhead/concurrency gains unmeasured; do not promise .730s. Extraction belongs to Worker1 and is unchanged here."
+  },
+  "confidence": {
+    "high": "3390 exact canonical Git mode values equal; both diagnostics and all five candidate builds strict-Mac equivalent, including executable scripts and wheel RECORD.",
+    "medium": "Small diagnostic samples and five unpaired warm process trials: measured modest improvement, not controlled causal end-to-end attribution. Writer controls support non-compression bottleneck at aggregate level.",
+    "low": "Projected Node concurrency benefit: no Node serializer implemented or benchmarked."
+  },
+  "housekeeping": "Inherited scoped .gitignore excludes source/, **/extracted/, caches/environments, *.whl/*.tar/*.tar.gz. Scripts/JSON/logs visible. Original evidence retained. No CI, tool installations, production/shared source or configuration changes.",
+  "prototype_sha256": "ff71676bde43bb573abf4a3bb64784fdc97eb793d698e3b54d7df3b13a68afd5"
+}

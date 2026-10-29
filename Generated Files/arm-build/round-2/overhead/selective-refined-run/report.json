@@ -1,0 +1,980 @@
+{
+  "trials": [
+    {
+      "variant": "full-tar",
+      "iteration": 0,
+      "measured": false,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\00-full-tar",
+        "tar",
+        "yes"
+      ],
+      "wall_seconds": 2.4086516999996093,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "startup_imports_wall": 0.0063689999988127965,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.241959400000269,
+          "python_cpu": 1.125
+        },
+        "extraction": {
+          "wall": 0.738005000001067,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11349960000006831,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 2.141828499999974,
+        "child_python_cpu": 1.265625
+      }
+    },
+    {
+      "variant": "selective",
+      "iteration": 0,
+      "measured": false,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\00-selective"
+      ],
+      "wall_seconds": 1.8447108000000298,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.0,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "sdist": {
+          "wall": 1.2890397000010125,
+          "python_cpu": 1.234375
+        },
+        "selection_and_extraction": {
+          "wall": 0.18881060000057914,
+          "python_cpu": 0.1875
+        },
+        "wheel": {
+          "wall": 0.11220030000004044,
+          "python_cpu": 0.109375
+        }
+      },
+      "selection": {
+        "archive_files": 1269,
+        "selected_files": 64,
+        "packages": [
+          "fastapi",
+          "tests"
+        ],
+        "source_only": [
+          "tests",
+          "docs_src",
+          "scripts",
+          "docs/en/docs/img/favicon.png"
+        ],
+        "required_metadata_inputs": [
+          "LICENSE",
+          "README.md",
+          "fastapi/__init__.py",
+          "pyproject.toml"
+        ],
+        "selected": [
+          "LICENSE",
+          "PKG-INFO",
+          "README.md",
+          "fastapi/.agents/skills/fastapi/SKILL.md",
+          "fastapi/.agents/skills/fastapi/references/dependencies.md",
+          "fastapi/.agents/skills/fastapi/references/other-tools.md",
+          "fastapi/.agents/skills/fastapi/references/path-operations.md",
+          "fastapi/.agents/skills/fastapi/references/pydantic.md",
+          "fastapi/.agents/skills/fastapi/references/responses.md",
+          "fastapi/.agents/skills/fastapi/references/streaming.md",
+          "fastapi/__init__.py",
+          "fastapi/__main__.py",
+          "fastapi/_compat/__init__.py",
+          "fastapi/_compat/shared.py",
+          "fastapi/_compat/v2.py",
+          "fastapi/applications.py",
+          "fastapi/background.py",
+          "fastapi/cli.py",
+          "fastapi/concurrency.py",
+          "fastapi/datastructures.py",
+          "fastapi/dependencies/__init__.py",
+          "fastapi/dependencies/models.py",
+          "fastapi/dependencies/utils.py",
+          "fastapi/encoders.py",
+          "fastapi/exception_handlers.py",
+          "fastapi/exceptions.py",
+          "fastapi/logger.py",
+          "fastapi/middleware/__init__.py",
+          "fastapi/middleware/asyncexitstack.py",
+          "fastapi/middleware/cors.py",
+          "fastapi/middleware/gzip.py",
+          "fastapi/middleware/httpsredirect.py",
+          "fastapi/middleware/trustedhost.py",
+          "fastapi/middleware/wsgi.py",
+          "fastapi/openapi/__init__.py",
+          "fastapi/openapi/constants.py",
+          "fastapi/openapi/docs.py",
+          "fastapi/openapi/models.py",
+          "fastapi/openapi/utils.py",
+          "fastapi/param_functions.py",
+          "fastapi/params.py",
+          "fastapi/py.typed",
+          "fastapi/requests.py",
+          "fastapi/responses.py",
+          "fastapi/routing.py",
+          "fastapi/security/__init__.py",
+          "fastapi/security/api_key.py",
+          "fastapi/security/base.py",
+          "fastapi/security/http.py",
+          "fastapi/security/oauth2.py",
+          "fastapi/security/open_id_connect_url.py",
+          "fastapi/security/utils.py",
+          "fastapi/sse.py",
+          "fastapi/staticfiles.py",
+          "fastapi/telemetry/__init__.py",
+          "fastapi/telemetry/_api.py",
+          "fastapi/telemetry/_asgi.py",
+          "fastapi/telemetry/_runtime.py",
+          "fastapi/templating.py",
+          "fastapi/testclient.py",
+          "fastapi/types.py",
+          "fastapi/utils.py",
+          "fastapi/websockets.py",
+          "pyproject.toml"
+        ]
+      }
+    },
+    {
+      "variant": "selective",
+      "iteration": 1,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\01-selective"
+      ],
+      "wall_seconds": 1.8644532000016625,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "sdist": {
+          "wall": 1.291861699999572,
+          "python_cpu": 1.203125
+        },
+        "selection_and_extraction": {
+          "wall": 0.19185280000056082,
+          "python_cpu": 0.171875
+        },
+        "wheel": {
+          "wall": 0.11289819999910833,
+          "python_cpu": 0.109375
+        }
+      },
+      "selection": {
+        "archive_files": 1269,
+        "selected_files": 64,
+        "packages": [
+          "fastapi",
+          "tests"
+        ],
+        "source_only": [
+          "tests",
+          "docs_src",
+          "scripts",
+          "docs/en/docs/img/favicon.png"
+        ],
+        "required_metadata_inputs": [
+          "LICENSE",
+          "README.md",
+          "fastapi/__init__.py",
+          "pyproject.toml"
+        ],
+        "selected": [
+          "LICENSE",
+          "PKG-INFO",
+          "README.md",
+          "fastapi/.agents/skills/fastapi/SKILL.md",
+          "fastapi/.agents/skills/fastapi/references/dependencies.md",
+          "fastapi/.agents/skills/fastapi/references/other-tools.md",
+          "fastapi/.agents/skills/fastapi/references/path-operations.md",
+          "fastapi/.agents/skills/fastapi/references/pydantic.md",
+          "fastapi/.agents/skills/fastapi/references/responses.md",
+          "fastapi/.agents/skills/fastapi/references/streaming.md",
+          "fastapi/__init__.py",
+          "fastapi/__main__.py",
+          "fastapi/_compat/__init__.py",
+          "fastapi/_compat/shared.py",
+          "fastapi/_compat/v2.py",
+          "fastapi/applications.py",
+          "fastapi/background.py",
+          "fastapi/cli.py",
+          "fastapi/concurrency.py",
+          "fastapi/datastructures.py",
+          "fastapi/dependencies/__init__.py",
+          "fastapi/dependencies/models.py",
+          "fastapi/dependencies/utils.py",
+          "fastapi/encoders.py",
+          "fastapi/exception_handlers.py",
+          "fastapi/exceptions.py",
+          "fastapi/logger.py",
+          "fastapi/middleware/__init__.py",
+          "fastapi/middleware/asyncexitstack.py",
+          "fastapi/middleware/cors.py",
+          "fastapi/middleware/gzip.py",
+          "fastapi/middleware/httpsredirect.py",
+          "fastapi/middleware/trustedhost.py",
+          "fastapi/middleware/wsgi.py",
+          "fastapi/openapi/__init__.py",
+          "fastapi/openapi/constants.py",
+          "fastapi/openapi/docs.py",
+          "fastapi/openapi/models.py",
+          "fastapi/openapi/utils.py",
+          "fastapi/param_functions.py",
+          "fastapi/params.py",
+          "fastapi/py.typed",
+          "fastapi/requests.py",
+          "fastapi/responses.py",
+          "fastapi/routing.py",
+          "fastapi/security/__init__.py",
+          "fastapi/security/api_key.py",
+          "fastapi/security/base.py",
+          "fastapi/security/http.py",
+          "fastapi/security/oauth2.py",
+          "fastapi/security/open_id_connect_url.py",
+          "fastapi/security/utils.py",
+          "fastapi/sse.py",
+          "fastapi/staticfiles.py",
+          "fastapi/telemetry/__init__.py",
+          "fastapi/telemetry/_api.py",
+          "fastapi/telemetry/_asgi.py",
+          "fastapi/telemetry/_runtime.py",
+          "fastapi/templating.py",
+          "fastapi/testclient.py",
+          "fastapi/types.py",
+          "fastapi/utils.py",
+          "fastapi/websockets.py",
+          "pyproject.toml"
+        ]
+      }
+    },
+    {
+      "variant": "full-tar",
+      "iteration": 1,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\01-full-tar",
+        "tar",
+        "yes"
+      ],
+      "wall_seconds": 2.5077856999996584,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "startup_imports_wall": 0.006448899999668356,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3000234000010096,
+          "python_cpu": 1.125
+        },
+        "extraction": {
+          "wall": 0.7620954999983951,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11151739999877464,
+          "python_cpu": 0.078125
+        },
+        "child_wall_after_initial_imports": 2.224525999999969,
+        "child_python_cpu": 1.21875
+      }
+    },
+    {
+      "variant": "full-tar",
+      "iteration": 2,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\02-full-tar",
+        "tar",
+        "yes"
+      ],
+      "wall_seconds": 2.558279599999878,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "startup_imports_wall": 0.006655000001046574,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3210744000007253,
+          "python_cpu": 1.140625
+        },
+        "extraction": {
+          "wall": 0.7876529000004666,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11492449999968812,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 2.2769158000010066,
+        "child_python_cpu": 1.28125
+      }
+    },
+    {
+      "variant": "selective",
+      "iteration": 2,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\02-selective"
+      ],
+      "wall_seconds": 1.9741842999992514,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "sdist": {
+          "wall": 1.3794592000012926,
+          "python_cpu": 1.28125
+        },
+        "selection_and_extraction": {
+          "wall": 0.19823059999907855,
+          "python_cpu": 0.171875
+        },
+        "wheel": {
+          "wall": 0.11528929999985849,
+          "python_cpu": 0.109375
+        }
+      },
+      "selection": {
+        "archive_files": 1269,
+        "selected_files": 64,
+        "packages": [
+          "fastapi",
+          "tests"
+        ],
+        "source_only": [
+          "tests",
+          "docs_src",
+          "scripts",
+          "docs/en/docs/img/favicon.png"
+        ],
+        "required_metadata_inputs": [
+          "LICENSE",
+          "README.md",
+          "fastapi/__init__.py",
+          "pyproject.toml"
+        ],
+        "selected": [
+          "LICENSE",
+          "PKG-INFO",
+          "README.md",
+          "fastapi/.agents/skills/fastapi/SKILL.md",
+          "fastapi/.agents/skills/fastapi/references/dependencies.md",
+          "fastapi/.agents/skills/fastapi/references/other-tools.md",
+          "fastapi/.agents/skills/fastapi/references/path-operations.md",
+          "fastapi/.agents/skills/fastapi/references/pydantic.md",
+          "fastapi/.agents/skills/fastapi/references/responses.md",
+          "fastapi/.agents/skills/fastapi/references/streaming.md",
+          "fastapi/__init__.py",
+          "fastapi/__main__.py",
+          "fastapi/_compat/__init__.py",
+          "fastapi/_compat/shared.py",
+          "fastapi/_compat/v2.py",
+          "fastapi/applications.py",
+          "fastapi/background.py",
+          "fastapi/cli.py",
+          "fastapi/concurrency.py",
+          "fastapi/datastructures.py",
+          "fastapi/dependencies/__init__.py",
+          "fastapi/dependencies/models.py",
+          "fastapi/dependencies/utils.py",
+          "fastapi/encoders.py",
+          "fastapi/exception_handlers.py",
+          "fastapi/exceptions.py",
+          "fastapi/logger.py",
+          "fastapi/middleware/__init__.py",
+          "fastapi/middleware/asyncexitstack.py",
+          "fastapi/middleware/cors.py",
+          "fastapi/middleware/gzip.py",
+          "fastapi/middleware/httpsredirect.py",
+          "fastapi/middleware/trustedhost.py",
+          "fastapi/middleware/wsgi.py",
+          "fastapi/openapi/__init__.py",
+          "fastapi/openapi/constants.py",
+          "fastapi/openapi/docs.py",
+          "fastapi/openapi/models.py",
+          "fastapi/openapi/utils.py",
+          "fastapi/param_functions.py",
+          "fastapi/params.py",
+          "fastapi/py.typed",
+          "fastapi/requests.py",
+          "fastapi/responses.py",
+          "fastapi/routing.py",
+          "fastapi/security/__init__.py",
+          "fastapi/security/api_key.py",
+          "fastapi/security/base.py",
+          "fastapi/security/http.py",
+          "fastapi/security/oauth2.py",
+          "fastapi/security/open_id_connect_url.py",
+          "fastapi/security/utils.py",
+          "fastapi/sse.py",
+          "fastapi/staticfiles.py",
+          "fastapi/telemetry/__init__.py",
+          "fastapi/telemetry/_api.py",
+          "fastapi/telemetry/_asgi.py",
+          "fastapi/telemetry/_runtime.py",
+          "fastapi/templating.py",
+          "fastapi/testclient.py",
+          "fastapi/types.py",
+          "fastapi/utils.py",
+          "fastapi/websockets.py",
+          "pyproject.toml"
+        ]
+      }
+    },
+    {
+      "variant": "selective",
+      "iteration": 3,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\03-selective"
+      ],
+      "wall_seconds": 1.9536802000002353,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "sdist": {
+          "wall": 1.3604794000002585,
+          "python_cpu": 1.203125
+        },
+        "selection_and_extraction": {
+          "wall": 0.1994087999992189,
+          "python_cpu": 0.203125
+        },
+        "wheel": {
+          "wall": 0.11719640000046638,
+          "python_cpu": 0.078125
+        }
+      },
+      "selection": {
+        "archive_files": 1269,
+        "selected_files": 64,
+        "packages": [
+          "fastapi",
+          "tests"
+        ],
+        "source_only": [
+          "tests",
+          "docs_src",
+          "scripts",
+          "docs/en/docs/img/favicon.png"
+        ],
+        "required_metadata_inputs": [
+          "LICENSE",
+          "README.md",
+          "fastapi/__init__.py",
+          "pyproject.toml"
+        ],
+        "selected": [
+          "LICENSE",
+          "PKG-INFO",
+          "README.md",
+          "fastapi/.agents/skills/fastapi/SKILL.md",
+          "fastapi/.agents/skills/fastapi/references/dependencies.md",
+          "fastapi/.agents/skills/fastapi/references/other-tools.md",
+          "fastapi/.agents/skills/fastapi/references/path-operations.md",
+          "fastapi/.agents/skills/fastapi/references/pydantic.md",
+          "fastapi/.agents/skills/fastapi/references/responses.md",
+          "fastapi/.agents/skills/fastapi/references/streaming.md",
+          "fastapi/__init__.py",
+          "fastapi/__main__.py",
+          "fastapi/_compat/__init__.py",
+          "fastapi/_compat/shared.py",
+          "fastapi/_compat/v2.py",
+          "fastapi/applications.py",
+          "fastapi/background.py",
+          "fastapi/cli.py",
+          "fastapi/concurrency.py",
+          "fastapi/datastructures.py",
+          "fastapi/dependencies/__init__.py",
+          "fastapi/dependencies/models.py",
+          "fastapi/dependencies/utils.py",
+          "fastapi/encoders.py",
+          "fastapi/exception_handlers.py",
+          "fastapi/exceptions.py",
+          "fastapi/logger.py",
+          "fastapi/middleware/__init__.py",
+          "fastapi/middleware/asyncexitstack.py",
+          "fastapi/middleware/cors.py",
+          "fastapi/middleware/gzip.py",
+          "fastapi/middleware/httpsredirect.py",
+          "fastapi/middleware/trustedhost.py",
+          "fastapi/middleware/wsgi.py",
+          "fastapi/openapi/__init__.py",
+          "fastapi/openapi/constants.py",
+          "fastapi/openapi/docs.py",
+          "fastapi/openapi/models.py",
+          "fastapi/openapi/utils.py",
+          "fastapi/param_functions.py",
+          "fastapi/params.py",
+          "fastapi/py.typed",
+          "fastapi/requests.py",
+          "fastapi/responses.py",
+          "fastapi/routing.py",
+          "fastapi/security/__init__.py",
+          "fastapi/security/api_key.py",
+          "fastapi/security/base.py",
+          "fastapi/security/http.py",
+          "fastapi/security/oauth2.py",
+          "fastapi/security/open_id_connect_url.py",
+          "fastapi/security/utils.py",
+          "fastapi/sse.py",
+          "fastapi/staticfiles.py",
+          "fastapi/telemetry/__init__.py",
+          "fastapi/telemetry/_api.py",
+          "fastapi/telemetry/_asgi.py",
+          "fastapi/telemetry/_runtime.py",
+          "fastapi/templating.py",
+          "fastapi/testclient.py",
+          "fastapi/types.py",
+          "fastapi/utils.py",
+          "fastapi/websockets.py",
+          "pyproject.toml"
+        ]
+      }
+    },
+    {
+      "variant": "full-tar",
+      "iteration": 3,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\03-full-tar",
+        "tar",
+        "yes"
+      ],
+      "wall_seconds": 2.540549800000008,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.0,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "startup_imports_wall": 0.006170700000438956,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3160779000008915,
+          "python_cpu": 1.0625
+        },
+        "extraction": {
+          "wall": 0.7741063000012218,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11379510000006121,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 2.2560071000007156,
+        "child_python_cpu": 1.203125
+      }
+    },
+    {
+      "variant": "full-tar",
+      "iteration": 4,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\04-full-tar",
+        "tar",
+        "yes"
+      ],
+      "wall_seconds": 2.5660201000009693,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "startup_imports_wall": 0.008448599999610451,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.3198176999994757,
+          "python_cpu": 1.21875
+        },
+        "extraction": {
+          "wall": 0.7846802000003663,
+          "python_cpu": 0.015625
+        },
+        "wheel": {
+          "wall": 0.11402169999928446,
+          "python_cpu": 0.109375
+        },
+        "child_wall_after_initial_imports": 2.2731841999993776,
+        "child_python_cpu": 1.390625
+      }
+    },
+    {
+      "variant": "selective",
+      "iteration": 4,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\04-selective"
+      ],
+      "wall_seconds": 1.9980696000002354,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "sdist": {
+          "wall": 1.362549499999659,
+          "python_cpu": 1.125
+        },
+        "selection_and_extraction": {
+          "wall": 0.22198949999983597,
+          "python_cpu": 0.21875
+        },
+        "wheel": {
+          "wall": 0.12775999999939813,
+          "python_cpu": 0.125
+        }
+      },
+      "selection": {
+        "archive_files": 1269,
+        "selected_files": 64,
+        "packages": [
+          "fastapi",
+          "tests"
+        ],
+        "source_only": [
+          "tests",
+          "docs_src",
+          "scripts",
+          "docs/en/docs/img/favicon.png"
+        ],
+        "required_metadata_inputs": [
+          "LICENSE",
+          "README.md",
+          "fastapi/__init__.py",
+          "pyproject.toml"
+        ],
+        "selected": [
+          "LICENSE",
+          "PKG-INFO",
+          "README.md",
+          "fastapi/.agents/skills/fastapi/SKILL.md",
+          "fastapi/.agents/skills/fastapi/references/dependencies.md",
+          "fastapi/.agents/skills/fastapi/references/other-tools.md",
+          "fastapi/.agents/skills/fastapi/references/path-operations.md",
+          "fastapi/.agents/skills/fastapi/references/pydantic.md",
+          "fastapi/.agents/skills/fastapi/references/responses.md",
+          "fastapi/.agents/skills/fastapi/references/streaming.md",
+          "fastapi/__init__.py",
+          "fastapi/__main__.py",
+          "fastapi/_compat/__init__.py",
+          "fastapi/_compat/shared.py",
+          "fastapi/_compat/v2.py",
+          "fastapi/applications.py",
+          "fastapi/background.py",
+          "fastapi/cli.py",
+          "fastapi/concurrency.py",
+          "fastapi/datastructures.py",
+          "fastapi/dependencies/__init__.py",
+          "fastapi/dependencies/models.py",
+          "fastapi/dependencies/utils.py",
+          "fastapi/encoders.py",
+          "fastapi/exception_handlers.py",
+          "fastapi/exceptions.py",
+          "fastapi/logger.py",
+          "fastapi/middleware/__init__.py",
+          "fastapi/middleware/asyncexitstack.py",
+          "fastapi/middleware/cors.py",
+          "fastapi/middleware/gzip.py",
+          "fastapi/middleware/httpsredirect.py",
+          "fastapi/middleware/trustedhost.py",
+          "fastapi/middleware/wsgi.py",
+          "fastapi/openapi/__init__.py",
+          "fastapi/openapi/constants.py",
+          "fastapi/openapi/docs.py",
+          "fastapi/openapi/models.py",
+          "fastapi/openapi/utils.py",
+          "fastapi/param_functions.py",
+          "fastapi/params.py",
+          "fastapi/py.typed",
+          "fastapi/requests.py",
+          "fastapi/responses.py",
+          "fastapi/routing.py",
+          "fastapi/security/__init__.py",
+          "fastapi/security/api_key.py",
+          "fastapi/security/base.py",
+          "fastapi/security/http.py",
+          "fastapi/security/oauth2.py",
+          "fastapi/security/open_id_connect_url.py",
+          "fastapi/security/utils.py",
+          "fastapi/sse.py",
+          "fastapi/staticfiles.py",
+          "fastapi/telemetry/__init__.py",
+          "fastapi/telemetry/_api.py",
+          "fastapi/telemetry/_asgi.py",
+          "fastapi/telemetry/_runtime.py",
+          "fastapi/templating.py",
+          "fastapi/testclient.py",
+          "fastapi/types.py",
+          "fastapi/utils.py",
+          "fastapi/websockets.py",
+          "pyproject.toml"
+        ]
+      }
+    },
+    {
+      "variant": "selective",
+      "iteration": 5,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\05-selective"
+      ],
+      "wall_seconds": 1.9212186000004294,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.015625,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "sdist": {
+          "wall": 1.3275719000012032,
+          "python_cpu": 1.21875
+        },
+        "selection_and_extraction": {
+          "wall": 0.1971745999999257,
+          "python_cpu": 0.171875
+        },
+        "wheel": {
+          "wall": 0.11665269999866723,
+          "python_cpu": 0.125
+        }
+      },
+      "selection": {
+        "archive_files": 1269,
+        "selected_files": 64,
+        "packages": [
+          "fastapi",
+          "tests"
+        ],
+        "source_only": [
+          "tests",
+          "docs_src",
+          "scripts",
+          "docs/en/docs/img/favicon.png"
+        ],
+        "required_metadata_inputs": [
+          "LICENSE",
+          "README.md",
+          "fastapi/__init__.py",
+          "pyproject.toml"
+        ],
+        "selected": [
+          "LICENSE",
+          "PKG-INFO",
+          "README.md",
+          "fastapi/.agents/skills/fastapi/SKILL.md",
+          "fastapi/.agents/skills/fastapi/references/dependencies.md",
+          "fastapi/.agents/skills/fastapi/references/other-tools.md",
+          "fastapi/.agents/skills/fastapi/references/path-operations.md",
+          "fastapi/.agents/skills/fastapi/references/pydantic.md",
+          "fastapi/.agents/skills/fastapi/references/responses.md",
+          "fastapi/.agents/skills/fastapi/references/streaming.md",
+          "fastapi/__init__.py",
+          "fastapi/__main__.py",
+          "fastapi/_compat/__init__.py",
+          "fastapi/_compat/shared.py",
+          "fastapi/_compat/v2.py",
+          "fastapi/applications.py",
+          "fastapi/background.py",
+          "fastapi/cli.py",
+          "fastapi/concurrency.py",
+          "fastapi/datastructures.py",
+          "fastapi/dependencies/__init__.py",
+          "fastapi/dependencies/models.py",
+          "fastapi/dependencies/utils.py",
+          "fastapi/encoders.py",
+          "fastapi/exception_handlers.py",
+          "fastapi/exceptions.py",
+          "fastapi/logger.py",
+          "fastapi/middleware/__init__.py",
+          "fastapi/middleware/asyncexitstack.py",
+          "fastapi/middleware/cors.py",
+          "fastapi/middleware/gzip.py",
+          "fastapi/middleware/httpsredirect.py",
+          "fastapi/middleware/trustedhost.py",
+          "fastapi/middleware/wsgi.py",
+          "fastapi/openapi/__init__.py",
+          "fastapi/openapi/constants.py",
+          "fastapi/openapi/docs.py",
+          "fastapi/openapi/models.py",
+          "fastapi/openapi/utils.py",
+          "fastapi/param_functions.py",
+          "fastapi/params.py",
+          "fastapi/py.typed",
+          "fastapi/requests.py",
+          "fastapi/responses.py",
+          "fastapi/routing.py",
+          "fastapi/security/__init__.py",
+          "fastapi/security/api_key.py",
+          "fastapi/security/base.py",
+          "fastapi/security/http.py",
+          "fastapi/security/oauth2.py",
+          "fastapi/security/open_id_connect_url.py",
+          "fastapi/security/utils.py",
+          "fastapi/sse.py",
+          "fastapi/staticfiles.py",
+          "fastapi/telemetry/__init__.py",
+          "fastapi/telemetry/_api.py",
+          "fastapi/telemetry/_asgi.py",
+          "fastapi/telemetry/_runtime.py",
+          "fastapi/templating.py",
+          "fastapi/testclient.py",
+          "fastapi/types.py",
+          "fastapi/utils.py",
+          "fastapi/websockets.py",
+          "pyproject.toml"
+        ]
+      }
+    },
+    {
+      "variant": "full-tar",
+      "iteration": 5,
+      "measured": true,
+      "argv": [
+        "Q:\\fastapi\\Generated Files\\arm-build\\tools\\official-tool-environment\\Scripts\\python.exe",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\experiment.py",
+        "child",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\run\\source",
+        "Q:\\fastapi\\Generated Files\\arm-build\\round-2\\overhead\\selective-refined-run\\05-full-tar",
+        "tar",
+        "yes"
+      ],
+      "wall_seconds": 2.5344711000016105,
+      "returncode": 0,
+      "immediate_launcher_cpu_seconds": 0.03125,
+      "equivalent": true,
+      "coverage": {
+        "fastapi-0.162.0-py3-none-any.whl": 65,
+        "fastapi-0.162.0.tar.gz": 1269
+      },
+      "phases": {
+        "startup_imports_wall": 0.00627129999884346,
+        "backend": "2.5.0",
+        "sdist": {
+          "wall": 1.2936371999985568,
+          "python_cpu": 1.1875
+        },
+        "extraction": {
+          "wall": 0.7932863000005455,
+          "python_cpu": 0.0
+        },
+        "wheel": {
+          "wall": 0.11500409999825933,
+          "python_cpu": 0.09375
+        },
+        "child_wall_after_initial_imports": 2.252006099999562,
+        "child_python_cpu": 1.3125
+      }
+    }
+  ],
+  "summary": {
+    "full-tar": {
+      "median": 2.540549800000008,
+      "min": 2.5077856999996584,
+      "max": 2.5660201000009693,
+      "count": 5
+    },
+    "selective": {
+      "median": 1.9536802000002353,
+      "min": 1.8644532000016625,
+      "max": 1.9980696000002354,
+      "count": 5
+    }
+  },
+  "experiment_wall_seconds": 28.131035399999746,
+  "status": "passed"
+}
