@@ -43,14 +43,15 @@ screenshot has not yet been mapped to an exact timer/revision. Do not assign
 its duration to one of these metrics without provenance, or claim a package-only
 speedup solved a broader row.
 
-The original build-first goal is retained. Before spending the next CI
-allocation, establish whether its package component is the intended target
-or whether the dashboard's broader workload must be reproduced. The user
-clarification dialog was unavailable; public metric-definition tracing can
-continue without spending CI or publishing unclassified supplied values.
+The original explicit build-first goal is retained. An unidentified dashboard
+row is excluded from claims; it does not silently replace that known workload.
+The user clarification dialog was unavailable, so no broader row/aggregate
+target is assumed. The already validated package-build analysis can proceed
+under its original bounded allocation without claiming to reproduce that row.
 
 That public trace is now complete in
 `arm-build\benchmark-row-scope\ROW-DEFINITION.md`: HOBL preserves several metrics,
 but the matching dashboard row selector/renderer was not established.
 The remaining input is the dashboard/report URL or FastAPI hyperlink target,
-or its exact exported field and revision. No additional CI allocation was used.
+or its exact exported field and revision. No additional CI allocation was used
+to search for the renderer.

@@ -68,5 +68,7 @@ Package creation can take seconds without explaining an aggregate row.
 FastAPI hyperlink target), or the row's exact exported field/selector plus
 producer/renderer revisions and aggregation/percentage definition. A value-free
 schema or renderer source suffices; no private measurements or image upload are
-needed. Until that mapping is established, retain build-first scope and the
-current CI hold. No optimization proposal or workflow retargeting follows.
+needed. Until that mapping is established, retain the original explicit
+build-first scope and exclude the dashboard row from claims. The already
+validated package-build diagnostic allocation is separate; no aggregate
+reproduction, optimization proposal or workflow retargeting follows.

@@ -18,15 +18,18 @@ identities and explicit native-coverage gaps. Its instrumented data is never
 performance-eligible. Local integrated validation and all four reviewed handoff
 fixes passed their bounded gates. `diagnostics\READINESS.md` records approval
 for one two-job analysis allocation; no new run has yet been dispatched.
-Dispatch is currently held while the user-shared dashboard metric is mapped to
-its actual command/aggregate, to avoid measuring a smaller workload and claiming
-it explains the full row. The original build-first goal is unchanged.
+The original explicit build-first workload remains the analysis target.
+The unidentified dashboard row is excluded from claims, not silently replaced
+by package-only results; its separate clarification is not a reason to abandon
+the already requested and validated package-build diagnosis.
 `MEASUREMENT-BOUNDARIES.md` explains repository preparation, package creation,
 aggregate benchmark metrics and the previously confusing word "window".
 The bounded public row-definition trace is complete in
 `benchmark-row-scope\ROW-DEFINITION.md`: multiple fields/aggregate revisions
-exist, but the screenshot's renderer/selector remains unidentified. Await its
-URL/hyperlink target or exact field/revision before using the held allocation.
+exist, but the screenshot's renderer/selector remains unidentified. Its
+URL/hyperlink target or exact field/revision is needed before claiming results
+for that row. One bounded analysis allocation may use the known build-first
+scope; no aggregate benchmark reproduction is claimed.
 See `diagnostics\ANALYSIS-PLAN.md` and `CONTRACT.md`.
 
 Optimization followups are paused. P25's completed 2.79% local full-build
