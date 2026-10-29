@@ -4,6 +4,7 @@ import importlib.util
 import json
 import os
 import shutil
+import stat
 import subprocess
 import sys
 import unittest
@@ -30,7 +31,13 @@ class CollectorTests(unittest.TestCase):
         self.upload.mkdir()
 
     def tearDown(self):
-        shutil.rmtree(self.root)
+        def remove_readonly(function, path, error):
+            if not isinstance(error, PermissionError):
+                raise error
+            Path(path).chmod(stat.S_IREAD | stat.S_IWRITE)
+            function(path)
+
+        shutil.rmtree(self.root, onexc=remove_readonly)
 
     def receipt(self, role, number=1, **changes):
         pid = str(number)
@@ -208,6 +215,21 @@ class CollectorTests(unittest.TestCase):
             capture_output=True,
             text=True,
         ).stdout.strip()
+        source_repository = os.environ.get("DIAG_SOURCE", repository)
+        source_revision = subprocess.run(
+            [
+                "git",
+                "-C",
+                source_repository,
+                "rev-parse",
+                "--verify",
+                collect.SOURCE + "^{commit}",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        self.assertEqual(source_revision, collect.SOURCE)
         source = self.root / "package-source"
         subprocess.run(
             [
@@ -215,14 +237,21 @@ class CollectorTests(unittest.TestCase):
                 "clone",
                 "--quiet",
                 "--shared",
+                "--no-hardlinks",
                 "--no-checkout",
-                repository,
+                source_repository,
                 str(source),
             ],
             check=True,
             capture_output=True,
             timeout=60,
         )
+        for key, value in (("core.autocrlf", "false"), ("core.longpaths", "true")):
+            subprocess.run(
+                ["git", "-C", str(source), "config", key, value],
+                check=True,
+                capture_output=True,
+            )
         subprocess.run(
             [
                 "git",

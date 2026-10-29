@@ -1,0 +1,26 @@
+{
+  "build_samples_replaced": 0,
+  "delta": "test_collect.py only; no runtime collector/platform/workflow changes",
+  "failed_preflights_retained": [
+    "logs/integrated-tests.log",
+    "logs/integrated-tests-shallow-fixed.log"
+  ],
+  "integrated_tests": {
+    "command": "python -B -m unittest discover -s <shallow-tools>\\Generated Files\\arm-build\\diagnostics -p test_*.py",
+    "count": 28,
+    "log": "C:\\fastapi-arm-build-lab\\diagnostics-final-11f2ff73\\logs\\integrated-tests-shallow-final.log",
+    "sha256": "9bbb82412e4920f55ec20f7da64ff35be45a8933fa3994ce7540b2a31b51731e",
+    "status": "passed"
+  },
+  "performance_eligible": false,
+  "raw_root": "C:\\fastapi-arm-build-lab\\diagnostics-final-11f2ff73",
+  "root_snapshot": "11f2ff73651c7869ee8d9de14dfe45b39c70afde",
+  "runtime_attempt": "attempt-001 uses original immutable collector11f; test-only delta is isolated to separate shallow-regression-tools",
+  "schema": 1,
+  "source_repository": "DIAG_SOURCE points at separate pristine source79 Git checkout; original ref validated before fixture cloning",
+  "status": "passed",
+  "test_sha256": "edd4d1c9638620b82c65028b3ad1be0661ecd6d197363df47b1ca8c71afbc49a",
+  "tools_repository": "actual shallow Git checkout of frozen code; source79 commit absent both before and after tests",
+  "tools_used_for": "git show HEAD: independent validator, manifest and ownership helper only",
+  "windows_fixture": "local core.autocrlf=false/core.longpaths=true; no-hardlinks clone; readonly-pack cleanup restricted to owned test directory"
+}
