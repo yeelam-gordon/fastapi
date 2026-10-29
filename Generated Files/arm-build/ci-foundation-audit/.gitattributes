@@ -1,0 +1,6 @@
+workflow-console.log -text -whitespace
+*.json text eol=lf
+*.csv text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+run-api-receipt.json -text

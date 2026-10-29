@@ -1,0 +1,4624 @@
+{
+  "commands": {
+    "windows": [
+      {
+        "phase": "uv-version",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "--version"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\000-uv-version.stdout.log",
+            "bytes": 57,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\000-uv-version.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "uv-help",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "--help"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\001-uv-help.stdout.log",
+            "bytes": 8537,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\001-uv-help.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "git-head",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\002-git-head.stdout.log",
+            "bytes": 41,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\002-git-head.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "git-status",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\003-git-status.stdout.log",
+            "bytes": 93,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\003-git-status.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "source-snapshot",
+        "argv": [
+          "git",
+          "archive",
+          "--format=tar",
+          "--output=C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source.tar",
+          "264cbad400c8336057a70b9b6a65bfdb4920321e"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\004-source-snapshot.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\004-source-snapshot.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "prepare-baseline",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\prepare-baseline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\005-prepare-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\005-prepare-baseline.stderr.log",
+            "bytes": 146250,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "prepare-candidate",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\prepare-candidate",
+          "--no-build-isolation"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\006-prepare-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\006-prepare-candidate.stderr.log",
+            "bytes": 146252,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-01-baseline",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-01-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\007-repeat-01-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\007-repeat-01-baseline.stderr.log",
+            "bytes": 146254,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-01-candidate",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-01-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\008-repeat-01-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\008-repeat-01-candidate.stderr.log",
+            "bytes": 146256,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-02-candidate",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-02-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\009-repeat-02-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\009-repeat-02-candidate.stderr.log",
+            "bytes": 146256,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-02-baseline",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-02-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\010-repeat-02-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\010-repeat-02-baseline.stderr.log",
+            "bytes": 146254,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-03-baseline",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-03-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\011-repeat-03-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\011-repeat-03-baseline.stderr.log",
+            "bytes": 146254,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-03-candidate",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-03-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\012-repeat-03-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\012-repeat-03-candidate.stderr.log",
+            "bytes": 146256,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-04-candidate",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-04-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\013-repeat-04-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\013-repeat-04-candidate.stderr.log",
+            "bytes": 146256,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-04-baseline",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-04-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\014-repeat-04-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\014-repeat-04-baseline.stderr.log",
+            "bytes": 146254,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-05-baseline",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-05-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\015-repeat-05-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\015-repeat-05-baseline.stderr.log",
+            "bytes": 146254,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-05-candidate",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-05-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\016-repeat-05-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\016-repeat-05-candidate.stderr.log",
+            "bytes": 146256,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-06-candidate",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-06-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\017-repeat-06-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\017-repeat-06-candidate.stderr.log",
+            "bytes": 146256,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-06-baseline",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-06-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\018-repeat-06-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\018-repeat-06-baseline.stderr.log",
+            "bytes": 146254,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-07-baseline",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-07-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\019-repeat-07-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\019-repeat-07-baseline.stderr.log",
+            "bytes": 146254,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-07-candidate",
+        "argv": [
+          "C:\\hostedtoolcache\\windows\\uv\\0.13.6\\aarch64\\uv.exe",
+          "build",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source",
+          "--python",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\build-constraints.txt",
+          "--cache-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\artifacts\\repeat-07-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\020-repeat-07-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\020-repeat-07-candidate.stderr.log",
+            "bytes": 146256,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "diagnostic-importtime-UNMEASURED",
+        "argv": [
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.venv\\Scripts\\python.exe",
+          "-X",
+          "importtime",
+          "-m",
+          "build",
+          "--no-isolation",
+          "--outdir",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\diagnostic",
+          "C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\results\\ci\\source"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\021-diagnostic-importtime-UNMEASURED.stdout.log",
+            "bytes": 147325,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\021-diagnostic-importtime-UNMEASURED.stderr.log",
+            "bytes": 12693,
+            "import_rows": 219,
+            "markers": [
+              "* Getting build dependencies for sdist...",
+              "* Building sdist...",
+              "* Building wheel from sdist",
+              "* Getting build dependencies for wheel...",
+              "* Building wheel..."
+            ],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      }
+    ],
+    "macos": [
+      {
+        "phase": "uv-version",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "--version"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\000-uv-version.stdout.log",
+            "bytes": 54,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\000-uv-version.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "uv-help",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "--help"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\001-uv-help.stdout.log",
+            "bytes": 8533,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\001-uv-help.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "git-head",
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\002-git-head.stdout.log",
+            "bytes": 41,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\002-git-head.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "git-status",
+        "argv": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\003-git-status.stdout.log",
+            "bytes": 93,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\003-git-status.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "source-snapshot",
+        "argv": [
+          "git",
+          "archive",
+          "--format=tar",
+          "--output=/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source.tar",
+          "264cbad400c8336057a70b9b6a65bfdb4920321e"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\004-source-snapshot.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\004-source-snapshot.stderr.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "prepare-baseline",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/prepare-baseline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\005-prepare-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\005-prepare-baseline.stderr.log",
+            "bytes": 146278,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "prepare-candidate",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/prepare-candidate",
+          "--no-build-isolation"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\006-prepare-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\006-prepare-candidate.stderr.log",
+            "bytes": 146280,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-01-baseline",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-01-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\007-repeat-01-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\007-repeat-01-baseline.stderr.log",
+            "bytes": 146282,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-01-candidate",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-01-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\008-repeat-01-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\008-repeat-01-candidate.stderr.log",
+            "bytes": 146284,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-02-candidate",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-02-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\009-repeat-02-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\009-repeat-02-candidate.stderr.log",
+            "bytes": 146284,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-02-baseline",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-02-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\010-repeat-02-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\010-repeat-02-baseline.stderr.log",
+            "bytes": 146282,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-03-baseline",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-03-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\011-repeat-03-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\011-repeat-03-baseline.stderr.log",
+            "bytes": 146282,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-03-candidate",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-03-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\012-repeat-03-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\012-repeat-03-candidate.stderr.log",
+            "bytes": 146284,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-04-candidate",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-04-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\013-repeat-04-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\013-repeat-04-candidate.stderr.log",
+            "bytes": 146284,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-04-baseline",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-04-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\014-repeat-04-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\014-repeat-04-baseline.stderr.log",
+            "bytes": 146282,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-05-baseline",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-05-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\015-repeat-05-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\015-repeat-05-baseline.stderr.log",
+            "bytes": 146282,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-05-candidate",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-05-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\016-repeat-05-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\016-repeat-05-candidate.stderr.log",
+            "bytes": 146284,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-06-candidate",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-06-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\017-repeat-06-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\017-repeat-06-candidate.stderr.log",
+            "bytes": 146284,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-06-baseline",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-06-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\018-repeat-06-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\018-repeat-06-baseline.stderr.log",
+            "bytes": 146282,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-07-baseline",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-07-baseline",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\019-repeat-07-baseline.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\019-repeat-07-baseline.stderr.log",
+            "bytes": 146282,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "repeat-07-candidate",
+        "argv": [
+          "/Users/runner/hostedtoolcache/uv/0.13.6/aarch64/uv",
+          "build",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source",
+          "--python",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "--no-managed-python",
+          "--no-python-downloads",
+          "--no-config",
+          "--build-constraints",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/build-constraints.txt",
+          "--cache-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/cache",
+          "--no-create-gitignore",
+          "--out-dir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/artifacts/repeat-07-candidate",
+          "--no-build-isolation",
+          "--offline"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\020-repeat-07-candidate.stdout.log",
+            "bytes": 0,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\020-repeat-07-candidate.stderr.log",
+            "bytes": 146284,
+            "import_rows": 0,
+            "markers": [
+              "Building source distribution...",
+              "Building wheel from source distribution..."
+            ],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          }
+        }
+      },
+      {
+        "phase": "diagnostic-importtime-UNMEASURED",
+        "argv": [
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.venv/bin/python",
+          "-X",
+          "importtime",
+          "-m",
+          "build",
+          "--no-isolation",
+          "--outdir",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/diagnostic",
+          "/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results/ci/source"
+        ],
+        "logs": {
+          "stdout": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\021-diagnostic-importtime-UNMEASURED.stdout.log",
+            "bytes": 145990,
+            "import_rows": 0,
+            "markers": [],
+            "adding_lines": 1334,
+            "per_line_timestamps": false
+          },
+          "stderr": {
+            "path": "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\021-diagnostic-importtime-UNMEASURED.stderr.log",
+            "bytes": 12168,
+            "import_rows": 209,
+            "markers": [
+              "* Getting build dependencies for sdist...",
+              "* Building sdist...",
+              "* Building wheel from sdist",
+              "* Getting build dependencies for wheel...",
+              "* Building wheel..."
+            ],
+            "adding_lines": 0,
+            "per_line_timestamps": false
+          }
+        }
+      }
+    ]
+  },
+  "console_groups": {
+    "windows": {
+      "Runner Image Provisioner": [
+        {
+          "seconds": 0.000453,
+          "lines": [
+            282,
+            290
+          ]
+        }
+      ],
+      "Operating System": [
+        {
+          "seconds": 0.000187,
+          "lines": [
+            291,
+            295
+          ]
+        }
+      ],
+      "Runner Image": [
+        {
+          "seconds": 0.000518,
+          "lines": [
+            296,
+            301
+          ]
+        }
+      ],
+      "GITHUB_TOKEN Permissions": [
+        {
+          "seconds": 0.000323,
+          "lines": [
+            302,
+            305
+          ]
+        }
+      ],
+      "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1": [
+        {
+          "seconds": 0.00258,
+          "lines": [
+            315,
+            331
+          ]
+        }
+      ],
+      "Getting Git version info": [
+        {
+          "seconds": 0.546544,
+          "lines": [
+            333,
+            337
+          ]
+        }
+      ],
+      "Determining repository object format": [
+        {
+          "seconds": 0.000154,
+          "lines": [
+            342,
+            343
+          ]
+        }
+      ],
+      "Initializing the repository": [
+        {
+          "seconds": 0.191796,
+          "lines": [
+            344,
+            348
+          ]
+        }
+      ],
+      "Disabling automatic garbage collection": [
+        {
+          "seconds": 0.052359,
+          "lines": [
+            349,
+            351
+          ]
+        }
+      ],
+      "Setting up auth": [
+        {
+          "seconds": 5.182392,
+          "lines": [
+            352,
+            367
+          ]
+        }
+      ],
+      "Fetching the repository": [
+        {
+          "seconds": 2.723206,
+          "lines": [
+            368,
+            376
+          ]
+        }
+      ],
+      "Determining the checkout info": [
+        {
+          "seconds": 3.7e-05,
+          "lines": [
+            377,
+            378
+          ]
+        }
+      ],
+      "Checking out the ref": [
+        {
+          "seconds": 5.643389,
+          "lines": [
+            381,
+            468
+          ]
+        }
+      ],
+      "Removing auth": [
+        {
+          "seconds": 4.368089,
+          "lines": [
+            471,
+            498
+          ]
+        }
+      ],
+      "Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7": [
+        {
+          "seconds": 0.001594,
+          "lines": [
+            499,
+            525
+          ]
+        }
+      ],
+      "Run node \"Generated Files/arm-build/setup_python.cjs\"": [
+        {
+          "seconds": 0.007738,
+          "lines": [
+            536,
+            543
+          ]
+        }
+      ],
+      "Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9": [
+        {
+          "seconds": 0.0003,
+          "lines": [
+            544,
+            557
+          ]
+        },
+        {
+          "seconds": 0.000369,
+          "lines": [
+            578,
+            592
+          ]
+        },
+        {
+          "seconds": 0.000623,
+          "lines": [
+            646,
+            668
+          ]
+        }
+      ],
+      "Run python \"Generated Files/arm-build/ci_prepare.py\"": [
+        {
+          "seconds": 0.006069,
+          "lines": [
+            570,
+            577
+          ]
+        }
+      ],
+      "Run python \"Generated Files/arm-build/test_benchmark.py\"": [
+        {
+          "seconds": 0.005677,
+          "lines": [
+            607,
+            614
+          ]
+        }
+      ],
+      "Run python \"Generated Files/arm-build/benchmark.py\" --uv uv --repeats 7 --output \"Generated Files/arm-build/results/ci\" --importtime": [
+        {
+          "seconds": 0.006123,
+          "lines": [
+            622,
+            629
+          ]
+        }
+      ],
+      "Run python \"Generated Files/arm-build/ci_prepare.py\" --smoke": [
+        {
+          "seconds": 0.005872,
+          "lines": [
+            630,
+            637
+          ]
+        }
+      ],
+      "Run python -m ruff check \"Generated Files/arm-build/benchmark.py\" \"Generated Files/arm-build/test_benchmark.py\" \"Generated Files/arm-build/ci_prepare.py\" --output-format github": [
+        {
+          "seconds": 0.005763,
+          "lines": [
+            638,
+            645
+          ]
+        }
+      ]
+    },
+    "macos": {
+      "Runner Image Provisioner": [
+        {
+          "seconds": 0.000312,
+          "lines": [
+            2,
+            9
+          ]
+        }
+      ],
+      "Operating System": [
+        {
+          "seconds": 0.000152,
+          "lines": [
+            10,
+            14
+          ]
+        }
+      ],
+      "Runner Image": [
+        {
+          "seconds": 0.000339,
+          "lines": [
+            15,
+            20
+          ]
+        }
+      ],
+      "GITHUB_TOKEN Permissions": [
+        {
+          "seconds": 0.0002,
+          "lines": [
+            21,
+            24
+          ]
+        }
+      ],
+      "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1": [
+        {
+          "seconds": 0.001539,
+          "lines": [
+            34,
+            50
+          ]
+        }
+      ],
+      "Getting Git version info": [
+        {
+          "seconds": 0.057002,
+          "lines": [
+            52,
+            56
+          ]
+        }
+      ],
+      "Determining repository object format": [
+        {
+          "seconds": 0.000192,
+          "lines": [
+            62,
+            63
+          ]
+        }
+      ],
+      "Initializing the repository": [
+        {
+          "seconds": 0.03769,
+          "lines": [
+            64,
+            81
+          ]
+        }
+      ],
+      "Disabling automatic garbage collection": [
+        {
+          "seconds": 0.010887,
+          "lines": [
+            82,
+            84
+          ]
+        }
+      ],
+      "Setting up auth": [
+        {
+          "seconds": 0.294584,
+          "lines": [
+            85,
+            100
+          ]
+        }
+      ],
+      "Fetching the repository": [
+        {
+          "seconds": 2.09925,
+          "lines": [
+            101,
+            109
+          ]
+        }
+      ],
+      "Determining the checkout info": [
+        {
+          "seconds": 3.4e-05,
+          "lines": [
+            110,
+            111
+          ]
+        }
+      ],
+      "Checking out the ref": [
+        {
+          "seconds": 0.414884,
+          "lines": [
+            114,
+            118
+          ]
+        }
+      ],
+      "Removing auth": [
+        {
+          "seconds": 0.24655,
+          "lines": [
+            121,
+            148
+          ]
+        }
+      ],
+      "Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7": [
+        {
+          "seconds": 0.001609,
+          "lines": [
+            149,
+            175
+          ]
+        }
+      ],
+      "Run node \"Generated Files/arm-build/setup_python.cjs\"": [
+        {
+          "seconds": 0.005205,
+          "lines": [
+            184,
+            189
+          ]
+        }
+      ],
+      "Run python \"Generated Files/arm-build/ci_prepare.py\"": [
+        {
+          "seconds": 0.003192,
+          "lines": [
+            190,
+            195
+          ]
+        }
+      ],
+      "Run python \"Generated Files/arm-build/test_benchmark.py\"": [
+        {
+          "seconds": 0.003266,
+          "lines": [
+            196,
+            201
+          ]
+        }
+      ],
+      "Run python \"Generated Files/arm-build/benchmark.py\" --uv uv --repeats 7 --output \"Generated Files/arm-build/results/ci\" --importtime": [
+        {
+          "seconds": 0.003881,
+          "lines": [
+            209,
+            214
+          ]
+        }
+      ],
+      "Run python \"Generated Files/arm-build/ci_prepare.py\" --smoke": [
+        {
+          "seconds": 0.008063,
+          "lines": [
+            215,
+            220
+          ]
+        }
+      ],
+      "Run python -m ruff check \"Generated Files/arm-build/benchmark.py\" \"Generated Files/arm-build/test_benchmark.py\" \"Generated Files/arm-build/ci_prepare.py\" --output-format github": [
+        {
+          "seconds": 0.003415,
+          "lines": [
+            221,
+            226
+          ]
+        }
+      ],
+      "Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9": [
+        {
+          "seconds": 0.000561,
+          "lines": [
+            227,
+            247
+          ]
+        }
+      ]
+    }
+  },
+  "unique_parent_import_rows": {
+    "windows": {
+      "winreg": {
+        "module": "winreg",
+        "self_us": 122,
+        "cumulative_us": 122,
+        "indent": 1
+      },
+      "_io": {
+        "module": "_io",
+        "self_us": 184,
+        "cumulative_us": 184,
+        "indent": 3
+      },
+      "marshal": {
+        "module": "marshal",
+        "self_us": 46,
+        "cumulative_us": 46,
+        "indent": 3
+      },
+      "nt": {
+        "module": "nt",
+        "self_us": 225,
+        "cumulative_us": 225,
+        "indent": 3
+      },
+      "_frozen_importlib_external": {
+        "module": "_frozen_importlib_external",
+        "self_us": 676,
+        "cumulative_us": 1130,
+        "indent": 1
+      },
+      "time": {
+        "module": "time",
+        "self_us": 83,
+        "cumulative_us": 83,
+        "indent": 3
+      },
+      "zipimport": {
+        "module": "zipimport",
+        "self_us": 268,
+        "cumulative_us": 351,
+        "indent": 1
+      },
+      "_codecs": {
+        "module": "_codecs",
+        "self_us": 63,
+        "cumulative_us": 63,
+        "indent": 5
+      },
+      "codecs": {
+        "module": "codecs",
+        "self_us": 555,
+        "cumulative_us": 618,
+        "indent": 3
+      },
+      "encodings.aliases": {
+        "module": "encodings.aliases",
+        "self_us": 881,
+        "cumulative_us": 881,
+        "indent": 3
+      },
+      "encodings": {
+        "module": "encodings",
+        "self_us": 3838,
+        "cumulative_us": 5337,
+        "indent": 1
+      },
+      "encodings.utf_8": {
+        "module": "encodings.utf_8",
+        "self_us": 419,
+        "cumulative_us": 419,
+        "indent": 1
+      },
+      "encodings.cp1252": {
+        "module": "encodings.cp1252",
+        "self_us": 428,
+        "cumulative_us": 428,
+        "indent": 1
+      },
+      "_signal": {
+        "module": "_signal",
+        "self_us": 57,
+        "cumulative_us": 57,
+        "indent": 1
+      },
+      "_abc": {
+        "module": "_abc",
+        "self_us": 35,
+        "cumulative_us": 35,
+        "indent": 5
+      },
+      "abc": {
+        "module": "abc",
+        "self_us": 172,
+        "cumulative_us": 207,
+        "indent": 3
+      },
+      "io": {
+        "module": "io",
+        "self_us": 278,
+        "cumulative_us": 485,
+        "indent": 1
+      },
+      "_stat": {
+        "module": "_stat",
+        "self_us": 64,
+        "cumulative_us": 64,
+        "indent": 7
+      },
+      "stat": {
+        "module": "stat",
+        "self_us": 127,
+        "cumulative_us": 191,
+        "indent": 5
+      },
+      "_collections_abc": {
+        "module": "_collections_abc",
+        "self_us": 835,
+        "cumulative_us": 835,
+        "indent": 5
+      },
+      "genericpath": {
+        "module": "genericpath",
+        "self_us": 95,
+        "cumulative_us": 95,
+        "indent": 7
+      },
+      "_winapi": {
+        "module": "_winapi",
+        "self_us": 88,
+        "cumulative_us": 88,
+        "indent": 7
+      },
+      "ntpath": {
+        "module": "ntpath",
+        "self_us": 268,
+        "cumulative_us": 451,
+        "indent": 5
+      },
+      "os": {
+        "module": "os",
+        "self_us": 615,
+        "cumulative_us": 2089,
+        "indent": 3
+      },
+      "_sitebuiltins": {
+        "module": "_sitebuiltins",
+        "self_us": 109,
+        "cumulative_us": 109,
+        "indent": 3
+      },
+      "errno": {
+        "module": "errno",
+        "self_us": 66,
+        "cumulative_us": 66,
+        "indent": 3
+      },
+      "sitecustomize": {
+        "module": "sitecustomize",
+        "self_us": 715,
+        "cumulative_us": 715,
+        "indent": 3
+      },
+      "site": {
+        "module": "site",
+        "self_us": 961,
+        "cumulative_us": 3940,
+        "indent": 1
+      },
+      "importlib": {
+        "module": "importlib",
+        "self_us": 673,
+        "cumulative_us": 673,
+        "indent": 5
+      },
+      "importlib.machinery": {
+        "module": "importlib.machinery",
+        "self_us": 79,
+        "cumulative_us": 752,
+        "indent": 3
+      },
+      "importlib._abc": {
+        "module": "importlib._abc",
+        "self_us": 547,
+        "cumulative_us": 547,
+        "indent": 5
+      },
+      "types": {
+        "module": "types",
+        "self_us": 576,
+        "cumulative_us": 576,
+        "indent": 5
+      },
+      "importlib.util": {
+        "module": "importlib.util",
+        "self_us": 189,
+        "cumulative_us": 1312,
+        "indent": 3
+      },
+      "runpy": {
+        "module": "runpy",
+        "self_us": 194,
+        "cumulative_us": 2256,
+        "indent": 1
+      },
+      "__future__": {
+        "module": "__future__",
+        "self_us": 475,
+        "cumulative_us": 475,
+        "indent": 3
+      },
+      "itertools": {
+        "module": "itertools",
+        "self_us": 130,
+        "cumulative_us": 130,
+        "indent": 9
+      },
+      "keyword": {
+        "module": "keyword",
+        "self_us": 472,
+        "cumulative_us": 472,
+        "indent": 9
+      },
+      "_operator": {
+        "module": "_operator",
+        "self_us": 80,
+        "cumulative_us": 80,
+        "indent": 11
+      },
+      "operator": {
+        "module": "operator",
+        "self_us": 577,
+        "cumulative_us": 657,
+        "indent": 9
+      },
+      "reprlib": {
+        "module": "reprlib",
+        "self_us": 499,
+        "cumulative_us": 499,
+        "indent": 9
+      },
+      "_collections": {
+        "module": "_collections",
+        "self_us": 75,
+        "cumulative_us": 75,
+        "indent": 9
+      },
+      "collections": {
+        "module": "collections",
+        "self_us": 1141,
+        "cumulative_us": 2971,
+        "indent": 7
+      },
+      "_functools": {
+        "module": "_functools",
+        "self_us": 73,
+        "cumulative_us": 73,
+        "indent": 9
+      },
+      "functools": {
+        "module": "functools",
+        "self_us": 889,
+        "cumulative_us": 961,
+        "indent": 7
+      },
+      "contextlib": {
+        "module": "contextlib",
+        "self_us": 843,
+        "cumulative_us": 4774,
+        "indent": 5
+      },
+      "_heapq": {
+        "module": "_heapq",
+        "self_us": 66,
+        "cumulative_us": 66,
+        "indent": 9
+      },
+      "heapq": {
+        "module": "heapq",
+        "self_us": 786,
+        "cumulative_us": 851,
+        "indent": 7
+      },
+      "enum": {
+        "module": "enum",
+        "self_us": 1463,
+        "cumulative_us": 1463,
+        "indent": 9
+      },
+      "_sre": {
+        "module": "_sre",
+        "self_us": 85,
+        "cumulative_us": 85,
+        "indent": 11
+      },
+      "re._constants": {
+        "module": "re._constants",
+        "self_us": 515,
+        "cumulative_us": 515,
+        "indent": 13
+      },
+      "re._parser": {
+        "module": "re._parser",
+        "self_us": 626,
+        "cumulative_us": 1140,
+        "indent": 11
+      },
+      "re._casefix": {
+        "module": "re._casefix",
+        "self_us": 347,
+        "cumulative_us": 347,
+        "indent": 11
+      },
+      "re._compiler": {
+        "module": "re._compiler",
+        "self_us": 790,
+        "cumulative_us": 2361,
+        "indent": 9
+      },
+      "copyreg": {
+        "module": "copyreg",
+        "self_us": 503,
+        "cumulative_us": 503,
+        "indent": 9
+      },
+      "re": {
+        "module": "re",
+        "self_us": 960,
+        "cumulative_us": 5285,
+        "indent": 7
+      },
+      "difflib": {
+        "module": "difflib",
+        "self_us": 946,
+        "cumulative_us": 7082,
+        "indent": 5
+      },
+      "_locale": {
+        "module": "_locale",
+        "self_us": 71,
+        "cumulative_us": 71,
+        "indent": 9
+      },
+      "locale": {
+        "module": "locale",
+        "self_us": 1128,
+        "cumulative_us": 1199,
+        "indent": 7
+      },
+      "signal": {
+        "module": "signal",
+        "self_us": 635,
+        "cumulative_us": 635,
+        "indent": 7
+      },
+      "warnings": {
+        "module": "warnings",
+        "self_us": 699,
+        "cumulative_us": 699,
+        "indent": 9
+      },
+      "_weakrefset": {
+        "module": "_weakrefset",
+        "self_us": 514,
+        "cumulative_us": 514,
+        "indent": 9
+      },
+      "threading": {
+        "module": "threading",
+        "self_us": 1115,
+        "cumulative_us": 2327,
+        "indent": 7
+      },
+      "fcntl": {
+        "module": "fcntl",
+        "self_us": 414,
+        "cumulative_us": 414,
+        "indent": 7
+      },
+      "msvcrt": {
+        "module": "msvcrt",
+        "self_us": 57,
+        "cumulative_us": 57,
+        "indent": 7
+      },
+      "subprocess": {
+        "module": "subprocess",
+        "self_us": 1093,
+        "cumulative_us": 5723,
+        "indent": 5
+      },
+      "binascii": {
+        "module": "binascii",
+        "self_us": 92,
+        "cumulative_us": 92,
+        "indent": 7
+      },
+      "posixpath": {
+        "module": "posixpath",
+        "self_us": 208,
+        "cumulative_us": 836,
+        "indent": 11
+      },
+      "fnmatch": {
+        "module": "fnmatch",
+        "self_us": 528,
+        "cumulative_us": 1364,
+        "indent": 9
+      },
+      "zlib": {
+        "module": "zlib",
+        "self_us": 128,
+        "cumulative_us": 128,
+        "indent": 9
+      },
+      "_compression": {
+        "module": "_compression",
+        "self_us": 564,
+        "cumulative_us": 564,
+        "indent": 11
+      },
+      "_bz2": {
+        "module": "_bz2",
+        "self_us": 1613,
+        "cumulative_us": 1613,
+        "indent": 11
+      },
+      "bz2": {
+        "module": "bz2",
+        "self_us": 587,
+        "cumulative_us": 2763,
+        "indent": 9
+      },
+      "_lzma": {
+        "module": "_lzma",
+        "self_us": 813,
+        "cumulative_us": 813,
+        "indent": 11
+      },
+      "lzma": {
+        "module": "lzma",
+        "self_us": 563,
+        "cumulative_us": 1375,
+        "indent": 9
+      },
+      "shutil": {
+        "module": "shutil",
+        "self_us": 992,
+        "cumulative_us": 6620,
+        "indent": 7
+      },
+      "_struct": {
+        "module": "_struct",
+        "self_us": 73,
+        "cumulative_us": 73,
+        "indent": 9
+      },
+      "struct": {
+        "module": "struct",
+        "self_us": 501,
+        "cumulative_us": 574,
+        "indent": 7
+      },
+      "glob": {
+        "module": "glob",
+        "self_us": 779,
+        "cumulative_us": 779,
+        "indent": 13
+      },
+      "pathlib._abc": {
+        "module": "pathlib._abc",
+        "self_us": 857,
+        "cumulative_us": 1636,
+        "indent": 11
+      },
+      "pathlib._local": {
+        "module": "pathlib._local",
+        "self_us": 767,
+        "cumulative_us": 1409,
+        "indent": 11
+      },
+      "pathlib": {
+        "module": "pathlib",
+        "self_us": 529,
+        "cumulative_us": 3573,
+        "indent": 9
+      },
+      "zipfile._path.glob": {
+        "module": "zipfile._path.glob",
+        "self_us": 633,
+        "cumulative_us": 633,
+        "indent": 9
+      },
+      "zipfile._path": {
+        "module": "zipfile._path",
+        "self_us": 928,
+        "cumulative_us": 5132,
+        "indent": 7
+      },
+      "zipfile": {
+        "module": "zipfile",
+        "self_us": 1514,
+        "cumulative_us": 13930,
+        "indent": 5
+      },
+      "_typing": {
+        "module": "_typing",
+        "self_us": 48,
+        "cumulative_us": 48,
+        "indent": 9
+      },
+      "typing": {
+        "module": "typing",
+        "self_us": 2489,
+        "cumulative_us": 2537,
+        "indent": 7
+      },
+      "_json": {
+        "module": "_json",
+        "self_us": 66,
+        "cumulative_us": 66,
+        "indent": 15
+      },
+      "json.scanner": {
+        "module": "json.scanner",
+        "self_us": 593,
+        "cumulative_us": 659,
+        "indent": 13
+      },
+      "json.decoder": {
+        "module": "json.decoder",
+        "self_us": 837,
+        "cumulative_us": 1495,
+        "indent": 11
+      },
+      "json.encoder": {
+        "module": "json.encoder",
+        "self_us": 601,
+        "cumulative_us": 601,
+        "indent": 11
+      },
+      "json": {
+        "module": "json",
+        "self_us": 631,
+        "cumulative_us": 2726,
+        "indent": 9
+      },
+      "math": {
+        "module": "math",
+        "self_us": 75,
+        "cumulative_us": 75,
+        "indent": 13
+      },
+      "_bisect": {
+        "module": "_bisect",
+        "self_us": 45,
+        "cumulative_us": 45,
+        "indent": 15
+      },
+      "bisect": {
+        "module": "bisect",
+        "self_us": 437,
+        "cumulative_us": 481,
+        "indent": 13
+      },
+      "_random": {
+        "module": "_random",
+        "self_us": 32,
+        "cumulative_us": 32,
+        "indent": 13
+      },
+      "random": {
+        "module": "random",
+        "self_us": 725,
+        "cumulative_us": 1311,
+        "indent": 11
+      },
+      "weakref": {
+        "module": "weakref",
+        "self_us": 876,
+        "cumulative_us": 876,
+        "indent": 11
+      },
+      "tempfile": {
+        "module": "tempfile",
+        "self_us": 762,
+        "cumulative_us": 2948,
+        "indent": 9
+      },
+      "_ast": {
+        "module": "_ast",
+        "self_us": 92,
+        "cumulative_us": 92,
+        "indent": 19
+      },
+      "ast": {
+        "module": "ast",
+        "self_us": 1481,
+        "cumulative_us": 1573,
+        "indent": 17
+      },
+      "_opcode": {
+        "module": "_opcode",
+        "self_us": 61,
+        "cumulative_us": 61,
+        "indent": 21
+      },
+      "_opcode_metadata": {
+        "module": "_opcode_metadata",
+        "self_us": 532,
+        "cumulative_us": 532,
+        "indent": 21
+      },
+      "opcode": {
+        "module": "opcode",
+        "self_us": 645,
+        "cumulative_us": 1238,
+        "indent": 19
+      },
+      "dis": {
+        "module": "dis",
+        "self_us": 1172,
+        "cumulative_us": 2410,
+        "indent": 17
+      },
+      "linecache": {
+        "module": "linecache",
+        "self_us": 538,
+        "cumulative_us": 538,
+        "indent": 17
+      },
+      "token": {
+        "module": "token",
+        "self_us": 496,
+        "cumulative_us": 496,
+        "indent": 19
+      },
+      "_tokenize": {
+        "module": "_tokenize",
+        "self_us": 57,
+        "cumulative_us": 57,
+        "indent": 19
+      },
+      "tokenize": {
+        "module": "tokenize",
+        "self_us": 1360,
+        "cumulative_us": 1912,
+        "indent": 17
+      },
+      "inspect": {
+        "module": "inspect",
+        "self_us": 2147,
+        "cumulative_us": 8578,
+        "indent": 15
+      },
+      "importlib.resources.abc": {
+        "module": "importlib.resources.abc",
+        "self_us": 735,
+        "cumulative_us": 735,
+        "indent": 15
+      },
+      "importlib.resources._common": {
+        "module": "importlib.resources._common",
+        "self_us": 802,
+        "cumulative_us": 10114,
+        "indent": 13
+      },
+      "importlib.resources._functional": {
+        "module": "importlib.resources._functional",
+        "self_us": 405,
+        "cumulative_us": 405,
+        "indent": 13
+      },
+      "importlib.resources": {
+        "module": "importlib.resources",
+        "self_us": 543,
+        "cumulative_us": 11061,
+        "indent": 11
+      },
+      "pyproject_hooks._in_process": {
+        "module": "pyproject_hooks._in_process",
+        "self_us": 1444,
+        "cumulative_us": 12504,
+        "indent": 9
+      },
+      "pyproject_hooks._impl": {
+        "module": "pyproject_hooks._impl",
+        "self_us": 3432,
+        "cumulative_us": 21610,
+        "indent": 7
+      },
+      "pyproject_hooks": {
+        "module": "pyproject_hooks",
+        "self_us": 4075,
+        "cumulative_us": 28220,
+        "indent": 5
+      },
+      "_contextvars": {
+        "module": "_contextvars",
+        "self_us": 46,
+        "cumulative_us": 46,
+        "indent": 9
+      },
+      "contextvars": {
+        "module": "contextvars",
+        "self_us": 522,
+        "cumulative_us": 568,
+        "indent": 7
+      },
+      "textwrap": {
+        "module": "textwrap",
+        "self_us": 1309,
+        "cumulative_us": 1309,
+        "indent": 11
+      },
+      "_colorize": {
+        "module": "_colorize",
+        "self_us": 524,
+        "cumulative_us": 524,
+        "indent": 11
+      },
+      "traceback": {
+        "module": "traceback",
+        "self_us": 1034,
+        "cumulative_us": 2866,
+        "indent": 9
+      },
+      "_string": {
+        "module": "_string",
+        "self_us": 45,
+        "cumulative_us": 45,
+        "indent": 11
+      },
+      "string": {
+        "module": "string",
+        "self_us": 818,
+        "cumulative_us": 863,
+        "indent": 9
+      },
+      "atexit": {
+        "module": "atexit",
+        "self_us": 44,
+        "cumulative_us": 44,
+        "indent": 9
+      },
+      "logging": {
+        "module": "logging",
+        "self_us": 2160,
+        "cumulative_us": 5931,
+        "indent": 7
+      },
+      "build._ctx": {
+        "module": "build._ctx",
+        "self_us": 4197,
+        "cumulative_us": 10695,
+        "indent": 5
+      },
+      "_wmi": {
+        "module": "_wmi",
+        "self_us": 2528,
+        "cumulative_us": 2528,
+        "indent": 9
+      },
+      "platform": {
+        "module": "platform",
+        "self_us": 1037,
+        "cumulative_us": 3565,
+        "indent": 7
+      },
+      "sysconfig": {
+        "module": "sysconfig",
+        "self_us": 1341,
+        "cumulative_us": 1341,
+        "indent": 7
+      },
+      "packaging": {
+        "module": "packaging",
+        "self_us": 1635,
+        "cumulative_us": 1635,
+        "indent": 9
+      },
+      "copy": {
+        "module": "copy",
+        "self_us": 3050,
+        "cumulative_us": 3050,
+        "indent": 15
+      },
+      "dataclasses": {
+        "module": "dataclasses",
+        "self_us": 920,
+        "cumulative_us": 3970,
+        "indent": 13
+      },
+      "packaging.version": {
+        "module": "packaging.version",
+        "self_us": 7990,
+        "cumulative_us": 7990,
+        "indent": 17
+      },
+      "packaging._ranges": {
+        "module": "packaging._ranges",
+        "self_us": 5387,
+        "cumulative_us": 13377,
+        "indent": 15
+      },
+      "packaging._elffile": {
+        "module": "packaging._elffile",
+        "self_us": 2055,
+        "cumulative_us": 2055,
+        "indent": 21
+      },
+      "packaging._manylinux": {
+        "module": "packaging._manylinux",
+        "self_us": 2545,
+        "cumulative_us": 4599,
+        "indent": 19
+      },
+      "packaging._musllinux": {
+        "module": "packaging._musllinux",
+        "self_us": 1839,
+        "cumulative_us": 1839,
+        "indent": 19
+      },
+      "packaging.tags": {
+        "module": "packaging.tags",
+        "self_us": 6859,
+        "cumulative_us": 13296,
+        "indent": 17
+      },
+      "packaging.utils": {
+        "module": "packaging.utils",
+        "self_us": 2691,
+        "cumulative_us": 15986,
+        "indent": 15
+      },
+      "packaging.specifiers": {
+        "module": "packaging.specifiers",
+        "self_us": 8539,
+        "cumulative_us": 37901,
+        "indent": 13
+      },
+      "packaging._tokenizer": {
+        "module": "packaging._tokenizer",
+        "self_us": 4911,
+        "cumulative_us": 46781,
+        "indent": 11
+      },
+      "packaging._parser": {
+        "module": "packaging._parser",
+        "self_us": 5937,
+        "cumulative_us": 52717,
+        "indent": 9
+      },
+      "packaging.markers": {
+        "module": "packaging.markers",
+        "self_us": 4129,
+        "cumulative_us": 4129,
+        "indent": 9
+      },
+      "packaging.requirements": {
+        "module": "packaging.requirements",
+        "self_us": 2474,
+        "cumulative_us": 60953,
+        "indent": 7
+      },
+      "build._compat": {
+        "module": "build._compat",
+        "self_us": 1296,
+        "cumulative_us": 1296,
+        "indent": 9
+      },
+      "email": {
+        "module": "email",
+        "self_us": 526,
+        "cumulative_us": 526,
+        "indent": 11
+      },
+      "importlib.metadata._meta": {
+        "module": "importlib.metadata._meta",
+        "self_us": 620,
+        "cumulative_us": 620,
+        "indent": 11
+      },
+      "importlib.metadata._collections": {
+        "module": "importlib.metadata._collections",
+        "self_us": 461,
+        "cumulative_us": 461,
+        "indent": 11
+      },
+      "importlib.metadata._functools": {
+        "module": "importlib.metadata._functools",
+        "self_us": 361,
+        "cumulative_us": 361,
+        "indent": 11
+      },
+      "importlib.metadata._itertools": {
+        "module": "importlib.metadata._itertools",
+        "self_us": 303,
+        "cumulative_us": 303,
+        "indent": 11
+      },
+      "importlib.abc": {
+        "module": "importlib.abc",
+        "self_us": 548,
+        "cumulative_us": 548,
+        "indent": 11
+      },
+      "importlib.metadata": {
+        "module": "importlib.metadata",
+        "self_us": 1368,
+        "cumulative_us": 4185,
+        "indent": 9
+      },
+      "build._compat.importlib": {
+        "module": "build._compat.importlib",
+        "self_us": 1440,
+        "cumulative_us": 6919,
+        "indent": 7
+      },
+      "build._exceptions": {
+        "module": "build._exceptions",
+        "self_us": 1467,
+        "cumulative_us": 1467,
+        "indent": 7
+      },
+      "build._util": {
+        "module": "build._util",
+        "self_us": 1651,
+        "cumulative_us": 1651,
+        "indent": 7
+      },
+      "build.env": {
+        "module": "build.env",
+        "self_us": 4767,
+        "cumulative_us": 80661,
+        "indent": 5
+      },
+      "_datetime": {
+        "module": "_datetime",
+        "self_us": 131,
+        "cumulative_us": 131,
+        "indent": 15
+      },
+      "datetime": {
+        "module": "datetime",
+        "self_us": 415,
+        "cumulative_us": 546,
+        "indent": 13
+      },
+      "tomllib._types": {
+        "module": "tomllib._types",
+        "self_us": 367,
+        "cumulative_us": 367,
+        "indent": 13
+      },
+      "tomllib._re": {
+        "module": "tomllib._re",
+        "self_us": 1415,
+        "cumulative_us": 2327,
+        "indent": 11
+      },
+      "tomllib._parser": {
+        "module": "tomllib._parser",
+        "self_us": 952,
+        "cumulative_us": 3279,
+        "indent": 9
+      },
+      "tomllib": {
+        "module": "tomllib",
+        "self_us": 582,
+        "cumulative_us": 3861,
+        "indent": 7
+      },
+      "build._compat.tomllib": {
+        "module": "build._compat.tomllib",
+        "self_us": 3156,
+        "cumulative_us": 7016,
+        "indent": 5
+      },
+      "build._builder": {
+        "module": "build._builder",
+        "self_us": 4492,
+        "cumulative_us": 162590,
+        "indent": 3
+      },
+      "build._types": {
+        "module": "build._types",
+        "self_us": 1321,
+        "cumulative_us": 1321,
+        "indent": 3
+      },
+      "build": {
+        "module": "build",
+        "self_us": 2756,
+        "cumulative_us": 167140,
+        "indent": 1
+      },
+      "gettext": {
+        "module": "gettext",
+        "self_us": 963,
+        "cumulative_us": 963,
+        "indent": 3
+      },
+      "argparse": {
+        "module": "argparse",
+        "self_us": 1172,
+        "cumulative_us": 2135,
+        "indent": 1
+      },
+      "_hashlib": {
+        "module": "_hashlib",
+        "self_us": 4425,
+        "cumulative_us": 4425,
+        "indent": 3
+      },
+      "_blake2": {
+        "module": "_blake2",
+        "self_us": 65,
+        "cumulative_us": 65,
+        "indent": 3
+      },
+      "hashlib": {
+        "module": "hashlib",
+        "self_us": 624,
+        "cumulative_us": 5113,
+        "indent": 1
+      },
+      "tarfile": {
+        "module": "tarfile",
+        "self_us": 1664,
+        "cumulative_us": 2299,
+        "indent": 1
+      },
+      "build._compat.tarfile": {
+        "module": "build._compat.tarfile",
+        "self_us": 1561,
+        "cumulative_us": 1561,
+        "indent": 1
+      },
+      "_socket": {
+        "module": "_socket",
+        "self_us": 2065,
+        "cumulative_us": 2065,
+        "indent": 3
+      },
+      "select": {
+        "module": "select",
+        "self_us": 733,
+        "cumulative_us": 733,
+        "indent": 5
+      },
+      "selectors": {
+        "module": "selectors",
+        "self_us": 825,
+        "cumulative_us": 1558,
+        "indent": 3
+      },
+      "socket": {
+        "module": "socket",
+        "self_us": 1292,
+        "cumulative_us": 4915,
+        "indent": 1
+      },
+      "colorama.ansi": {
+        "module": "colorama.ansi",
+        "self_us": 1834,
+        "cumulative_us": 1834,
+        "indent": 7
+      },
+      "_ctypes": {
+        "module": "_ctypes",
+        "self_us": 1463,
+        "cumulative_us": 1463,
+        "indent": 13
+      },
+      "ctypes._endian": {
+        "module": "ctypes._endian",
+        "self_us": 729,
+        "cumulative_us": 729,
+        "indent": 13
+      },
+      "ctypes": {
+        "module": "ctypes",
+        "self_us": 1247,
+        "cumulative_us": 3438,
+        "indent": 11
+      },
+      "ctypes.wintypes": {
+        "module": "ctypes.wintypes",
+        "self_us": 1112,
+        "cumulative_us": 1112,
+        "indent": 11
+      },
+      "colorama.win32": {
+        "module": "colorama.win32",
+        "self_us": 2291,
+        "cumulative_us": 6840,
+        "indent": 9
+      },
+      "colorama.winterm": {
+        "module": "colorama.winterm",
+        "self_us": 2276,
+        "cumulative_us": 9116,
+        "indent": 7
+      },
+      "colorama.ansitowin32": {
+        "module": "colorama.ansitowin32",
+        "self_us": 5316,
+        "cumulative_us": 16265,
+        "indent": 5
+      },
+      "colorama.initialise": {
+        "module": "colorama.initialise",
+        "self_us": 1965,
+        "cumulative_us": 18230,
+        "indent": 3
+      },
+      "colorama": {
+        "module": "colorama",
+        "self_us": 1865,
+        "cumulative_us": 20094,
+        "indent": 1
+      },
+      "importlib.resources._adapters": {
+        "module": "importlib.resources._adapters",
+        "self_us": 642,
+        "cumulative_us": 642,
+        "indent": 1
+      },
+      "importlib.resources._itertools": {
+        "module": "importlib.resources._itertools",
+        "self_us": 382,
+        "cumulative_us": 382,
+        "indent": 5
+      },
+      "importlib.resources.readers": {
+        "module": "importlib.resources.readers",
+        "self_us": 568,
+        "cumulative_us": 949,
+        "indent": 3
+      },
+      "importlib.readers": {
+        "module": "importlib.readers",
+        "self_us": 394,
+        "cumulative_us": 1342,
+        "indent": 1
+      },
+      "quopri": {
+        "module": "quopri",
+        "self_us": 479,
+        "cumulative_us": 479,
+        "indent": 5
+      },
+      "urllib": {
+        "module": "urllib",
+        "self_us": 496,
+        "cumulative_us": 496,
+        "indent": 9
+      },
+      "ipaddress": {
+        "module": "ipaddress",
+        "self_us": 1670,
+        "cumulative_us": 1670,
+        "indent": 9
+      },
+      "urllib.parse": {
+        "module": "urllib.parse",
+        "self_us": 1363,
+        "cumulative_us": 3528,
+        "indent": 7
+      },
+      "email._parseaddr": {
+        "module": "email._parseaddr",
+        "self_us": 543,
+        "cumulative_us": 543,
+        "indent": 7
+      },
+      "email.utils": {
+        "module": "email.utils",
+        "self_us": 677,
+        "cumulative_us": 4748,
+        "indent": 5
+      },
+      "email.errors": {
+        "module": "email.errors",
+        "self_us": 633,
+        "cumulative_us": 633,
+        "indent": 5
+      },
+      "email.quoprimime": {
+        "module": "email.quoprimime",
+        "self_us": 530,
+        "cumulative_us": 530,
+        "indent": 9
+      },
+      "base64": {
+        "module": "base64",
+        "self_us": 538,
+        "cumulative_us": 538,
+        "indent": 11
+      },
+      "email.base64mime": {
+        "module": "email.base64mime",
+        "self_us": 365,
+        "cumulative_us": 902,
+        "indent": 9
+      },
+      "email.encoders": {
+        "module": "email.encoders",
+        "self_us": 357,
+        "cumulative_us": 357,
+        "indent": 11
+      },
+      "email.charset": {
+        "module": "email.charset",
+        "self_us": 491,
+        "cumulative_us": 847,
+        "indent": 9
+      },
+      "email.header": {
+        "module": "email.header",
+        "self_us": 792,
+        "cumulative_us": 3070,
+        "indent": 7
+      },
+      "email._policybase": {
+        "module": "email._policybase",
+        "self_us": 513,
+        "cumulative_us": 3583,
+        "indent": 5
+      },
+      "email._encoded_words": {
+        "module": "email._encoded_words",
+        "self_us": 501,
+        "cumulative_us": 501,
+        "indent": 5
+      },
+      "email.iterators": {
+        "module": "email.iterators",
+        "self_us": 355,
+        "cumulative_us": 355,
+        "indent": 5
+      },
+      "email.message": {
+        "module": "email.message",
+        "self_us": 1054,
+        "cumulative_us": 11350,
+        "indent": 3
+      },
+      "importlib.metadata._text": {
+        "module": "importlib.metadata._text",
+        "self_us": 378,
+        "cumulative_us": 378,
+        "indent": 3
+      },
+      "importlib.metadata._adapters": {
+        "module": "importlib.metadata._adapters",
+        "self_us": 532,
+        "cumulative_us": 12259,
+        "indent": 1
+      },
+      "email.feedparser": {
+        "module": "email.feedparser",
+        "self_us": 733,
+        "cumulative_us": 733,
+        "indent": 3
+      },
+      "email.parser": {
+        "module": "email.parser",
+        "self_us": 406,
+        "cumulative_us": 1139,
+        "indent": 1
+      },
+      "gzip": {
+        "module": "gzip",
+        "self_us": 1038,
+        "cumulative_us": 1038,
+        "indent": 1
+      }
+    },
+    "macos": {
+      "_io": {
+        "module": "_io",
+        "self_us": 100,
+        "cumulative_us": 100,
+        "indent": 3
+      },
+      "marshal": {
+        "module": "marshal",
+        "self_us": 22,
+        "cumulative_us": 22,
+        "indent": 3
+      },
+      "posix": {
+        "module": "posix",
+        "self_us": 138,
+        "cumulative_us": 138,
+        "indent": 3
+      },
+      "_frozen_importlib_external": {
+        "module": "_frozen_importlib_external",
+        "self_us": 354,
+        "cumulative_us": 613,
+        "indent": 1
+      },
+      "time": {
+        "module": "time",
+        "self_us": 464,
+        "cumulative_us": 464,
+        "indent": 3
+      },
+      "zipimport": {
+        "module": "zipimport",
+        "self_us": 125,
+        "cumulative_us": 588,
+        "indent": 1
+      },
+      "_codecs": {
+        "module": "_codecs",
+        "self_us": 24,
+        "cumulative_us": 24,
+        "indent": 5
+      },
+      "codecs": {
+        "module": "codecs",
+        "self_us": 283,
+        "cumulative_us": 306,
+        "indent": 3
+      },
+      "encodings.aliases": {
+        "module": "encodings.aliases",
+        "self_us": 263,
+        "cumulative_us": 263,
+        "indent": 3
+      },
+      "encodings": {
+        "module": "encodings",
+        "self_us": 342,
+        "cumulative_us": 910,
+        "indent": 1
+      },
+      "encodings.utf_8": {
+        "module": "encodings.utf_8",
+        "self_us": 98,
+        "cumulative_us": 98,
+        "indent": 1
+      },
+      "_signal": {
+        "module": "_signal",
+        "self_us": 41,
+        "cumulative_us": 41,
+        "indent": 1
+      },
+      "_abc": {
+        "module": "_abc",
+        "self_us": 15,
+        "cumulative_us": 15,
+        "indent": 5
+      },
+      "abc": {
+        "module": "abc",
+        "self_us": 84,
+        "cumulative_us": 98,
+        "indent": 3
+      },
+      "io": {
+        "module": "io",
+        "self_us": 88,
+        "cumulative_us": 185,
+        "indent": 1
+      },
+      "_stat": {
+        "module": "_stat",
+        "self_us": 24,
+        "cumulative_us": 24,
+        "indent": 7
+      },
+      "stat": {
+        "module": "stat",
+        "self_us": 50,
+        "cumulative_us": 74,
+        "indent": 5
+      },
+      "_collections_abc": {
+        "module": "_collections_abc",
+        "self_us": 439,
+        "cumulative_us": 439,
+        "indent": 5
+      },
+      "errno": {
+        "module": "errno",
+        "self_us": 30,
+        "cumulative_us": 30,
+        "indent": 7
+      },
+      "genericpath": {
+        "module": "genericpath",
+        "self_us": 46,
+        "cumulative_us": 46,
+        "indent": 7
+      },
+      "posixpath": {
+        "module": "posixpath",
+        "self_us": 76,
+        "cumulative_us": 151,
+        "indent": 5
+      },
+      "os": {
+        "module": "os",
+        "self_us": 279,
+        "cumulative_us": 941,
+        "indent": 3
+      },
+      "_sitebuiltins": {
+        "module": "_sitebuiltins",
+        "self_us": 47,
+        "cumulative_us": 47,
+        "indent": 3
+      },
+      "sitecustomize": {
+        "module": "sitecustomize",
+        "self_us": 94,
+        "cumulative_us": 94,
+        "indent": 3
+      },
+      "site": {
+        "module": "site",
+        "self_us": 279,
+        "cumulative_us": 1359,
+        "indent": 1
+      },
+      "importlib": {
+        "module": "importlib",
+        "self_us": 267,
+        "cumulative_us": 267,
+        "indent": 5
+      },
+      "importlib.machinery": {
+        "module": "importlib.machinery",
+        "self_us": 33,
+        "cumulative_us": 300,
+        "indent": 3
+      },
+      "importlib._abc": {
+        "module": "importlib._abc",
+        "self_us": 108,
+        "cumulative_us": 108,
+        "indent": 5
+      },
+      "types": {
+        "module": "types",
+        "self_us": 143,
+        "cumulative_us": 143,
+        "indent": 5
+      },
+      "importlib.util": {
+        "module": "importlib.util",
+        "self_us": 85,
+        "cumulative_us": 335,
+        "indent": 3
+      },
+      "runpy": {
+        "module": "runpy",
+        "self_us": 83,
+        "cumulative_us": 717,
+        "indent": 1
+      },
+      "__future__": {
+        "module": "__future__",
+        "self_us": 108,
+        "cumulative_us": 108,
+        "indent": 3
+      },
+      "itertools": {
+        "module": "itertools",
+        "self_us": 62,
+        "cumulative_us": 62,
+        "indent": 9
+      },
+      "keyword": {
+        "module": "keyword",
+        "self_us": 80,
+        "cumulative_us": 80,
+        "indent": 9
+      },
+      "_operator": {
+        "module": "_operator",
+        "self_us": 34,
+        "cumulative_us": 34,
+        "indent": 11
+      },
+      "operator": {
+        "module": "operator",
+        "self_us": 151,
+        "cumulative_us": 185,
+        "indent": 9
+      },
+      "reprlib": {
+        "module": "reprlib",
+        "self_us": 102,
+        "cumulative_us": 102,
+        "indent": 9
+      },
+      "_collections": {
+        "module": "_collections",
+        "self_us": 31,
+        "cumulative_us": 31,
+        "indent": 9
+      },
+      "collections": {
+        "module": "collections",
+        "self_us": 433,
+        "cumulative_us": 891,
+        "indent": 7
+      },
+      "_functools": {
+        "module": "_functools",
+        "self_us": 27,
+        "cumulative_us": 27,
+        "indent": 9
+      },
+      "functools": {
+        "module": "functools",
+        "self_us": 324,
+        "cumulative_us": 351,
+        "indent": 7
+      },
+      "contextlib": {
+        "module": "contextlib",
+        "self_us": 354,
+        "cumulative_us": 1595,
+        "indent": 5
+      },
+      "_heapq": {
+        "module": "_heapq",
+        "self_us": 24,
+        "cumulative_us": 24,
+        "indent": 9
+      },
+      "heapq": {
+        "module": "heapq",
+        "self_us": 118,
+        "cumulative_us": 141,
+        "indent": 7
+      },
+      "enum": {
+        "module": "enum",
+        "self_us": 662,
+        "cumulative_us": 662,
+        "indent": 9
+      },
+      "_sre": {
+        "module": "_sre",
+        "self_us": 45,
+        "cumulative_us": 45,
+        "indent": 11
+      },
+      "re._constants": {
+        "module": "re._constants",
+        "self_us": 133,
+        "cumulative_us": 133,
+        "indent": 13
+      },
+      "re._parser": {
+        "module": "re._parser",
+        "self_us": 193,
+        "cumulative_us": 325,
+        "indent": 11
+      },
+      "re._casefix": {
+        "module": "re._casefix",
+        "self_us": 61,
+        "cumulative_us": 61,
+        "indent": 11
+      },
+      "re._compiler": {
+        "module": "re._compiler",
+        "self_us": 200,
+        "cumulative_us": 630,
+        "indent": 9
+      },
+      "copyreg": {
+        "module": "copyreg",
+        "self_us": 88,
+        "cumulative_us": 88,
+        "indent": 9
+      },
+      "re": {
+        "module": "re",
+        "self_us": 414,
+        "cumulative_us": 1792,
+        "indent": 7
+      },
+      "difflib": {
+        "module": "difflib",
+        "self_us": 891,
+        "cumulative_us": 2823,
+        "indent": 5
+      },
+      "_locale": {
+        "module": "_locale",
+        "self_us": 38,
+        "cumulative_us": 38,
+        "indent": 9
+      },
+      "locale": {
+        "module": "locale",
+        "self_us": 441,
+        "cumulative_us": 478,
+        "indent": 7
+      },
+      "signal": {
+        "module": "signal",
+        "self_us": 267,
+        "cumulative_us": 267,
+        "indent": 7
+      },
+      "warnings": {
+        "module": "warnings",
+        "self_us": 200,
+        "cumulative_us": 200,
+        "indent": 9
+      },
+      "_weakrefset": {
+        "module": "_weakrefset",
+        "self_us": 126,
+        "cumulative_us": 126,
+        "indent": 9
+      },
+      "threading": {
+        "module": "threading",
+        "self_us": 498,
+        "cumulative_us": 822,
+        "indent": 7
+      },
+      "fcntl": {
+        "module": "fcntl",
+        "self_us": 31,
+        "cumulative_us": 31,
+        "indent": 7
+      },
+      "msvcrt": {
+        "module": "msvcrt",
+        "self_us": 41,
+        "cumulative_us": 41,
+        "indent": 7
+      },
+      "_posixsubprocess": {
+        "module": "_posixsubprocess",
+        "self_us": 19,
+        "cumulative_us": 19,
+        "indent": 7
+      },
+      "select": {
+        "module": "select",
+        "self_us": 48,
+        "cumulative_us": 48,
+        "indent": 7
+      },
+      "math": {
+        "module": "math",
+        "self_us": 41,
+        "cumulative_us": 41,
+        "indent": 9
+      },
+      "selectors": {
+        "module": "selectors",
+        "self_us": 290,
+        "cumulative_us": 331,
+        "indent": 7
+      },
+      "subprocess": {
+        "module": "subprocess",
+        "self_us": 393,
+        "cumulative_us": 2426,
+        "indent": 5
+      },
+      "binascii": {
+        "module": "binascii",
+        "self_us": 37,
+        "cumulative_us": 37,
+        "indent": 7
+      },
+      "fnmatch": {
+        "module": "fnmatch",
+        "self_us": 81,
+        "cumulative_us": 81,
+        "indent": 9
+      },
+      "zlib": {
+        "module": "zlib",
+        "self_us": 36,
+        "cumulative_us": 36,
+        "indent": 9
+      },
+      "_compression": {
+        "module": "_compression",
+        "self_us": 99,
+        "cumulative_us": 99,
+        "indent": 11
+      },
+      "_bz2": {
+        "module": "_bz2",
+        "self_us": 14,
+        "cumulative_us": 14,
+        "indent": 11
+      },
+      "bz2": {
+        "module": "bz2",
+        "self_us": 114,
+        "cumulative_us": 225,
+        "indent": 9
+      },
+      "_lzma": {
+        "module": "_lzma",
+        "self_us": 31,
+        "cumulative_us": 31,
+        "indent": 11
+      },
+      "lzma": {
+        "module": "lzma",
+        "self_us": 121,
+        "cumulative_us": 152,
+        "indent": 9
+      },
+      "shutil": {
+        "module": "shutil",
+        "self_us": 445,
+        "cumulative_us": 938,
+        "indent": 7
+      },
+      "_struct": {
+        "module": "_struct",
+        "self_us": 31,
+        "cumulative_us": 31,
+        "indent": 9
+      },
+      "struct": {
+        "module": "struct",
+        "self_us": 74,
+        "cumulative_us": 104,
+        "indent": 7
+      },
+      "glob": {
+        "module": "glob",
+        "self_us": 248,
+        "cumulative_us": 248,
+        "indent": 13
+      },
+      "pathlib._abc": {
+        "module": "pathlib._abc",
+        "self_us": 304,
+        "cumulative_us": 551,
+        "indent": 11
+      },
+      "_winapi": {
+        "module": "_winapi",
+        "self_us": 37,
+        "cumulative_us": 37,
+        "indent": 15
+      },
+      "ntpath": {
+        "module": "ntpath",
+        "self_us": 141,
+        "cumulative_us": 338,
+        "indent": 13
+      },
+      "pwd": {
+        "module": "pwd",
+        "self_us": 24,
+        "cumulative_us": 24,
+        "indent": 13
+      },
+      "grp": {
+        "module": "grp",
+        "self_us": 15,
+        "cumulative_us": 15,
+        "indent": 13
+      },
+      "pathlib._local": {
+        "module": "pathlib._local",
+        "self_us": 273,
+        "cumulative_us": 649,
+        "indent": 11
+      },
+      "pathlib": {
+        "module": "pathlib",
+        "self_us": 110,
+        "cumulative_us": 1309,
+        "indent": 9
+      },
+      "zipfile._path.glob": {
+        "module": "zipfile._path.glob",
+        "self_us": 123,
+        "cumulative_us": 123,
+        "indent": 9
+      },
+      "zipfile._path": {
+        "module": "zipfile._path",
+        "self_us": 333,
+        "cumulative_us": 1764,
+        "indent": 7
+      },
+      "zipfile": {
+        "module": "zipfile",
+        "self_us": 455,
+        "cumulative_us": 3296,
+        "indent": 5
+      },
+      "_typing": {
+        "module": "_typing",
+        "self_us": 17,
+        "cumulative_us": 17,
+        "indent": 9
+      },
+      "typing": {
+        "module": "typing",
+        "self_us": 1192,
+        "cumulative_us": 1209,
+        "indent": 7
+      },
+      "_json": {
+        "module": "_json",
+        "self_us": 23,
+        "cumulative_us": 23,
+        "indent": 15
+      },
+      "json.scanner": {
+        "module": "json.scanner",
+        "self_us": 193,
+        "cumulative_us": 216,
+        "indent": 13
+      },
+      "json.decoder": {
+        "module": "json.decoder",
+        "self_us": 249,
+        "cumulative_us": 465,
+        "indent": 11
+      },
+      "json.encoder": {
+        "module": "json.encoder",
+        "self_us": 200,
+        "cumulative_us": 200,
+        "indent": 11
+      },
+      "json": {
+        "module": "json",
+        "self_us": 141,
+        "cumulative_us": 804,
+        "indent": 9
+      },
+      "_bisect": {
+        "module": "_bisect",
+        "self_us": 16,
+        "cumulative_us": 16,
+        "indent": 15
+      },
+      "bisect": {
+        "module": "bisect",
+        "self_us": 67,
+        "cumulative_us": 83,
+        "indent": 13
+      },
+      "_random": {
+        "module": "_random",
+        "self_us": 14,
+        "cumulative_us": 14,
+        "indent": 13
+      },
+      "random": {
+        "module": "random",
+        "self_us": 210,
+        "cumulative_us": 306,
+        "indent": 11
+      },
+      "weakref": {
+        "module": "weakref",
+        "self_us": 339,
+        "cumulative_us": 339,
+        "indent": 11
+      },
+      "tempfile": {
+        "module": "tempfile",
+        "self_us": 223,
+        "cumulative_us": 867,
+        "indent": 9
+      },
+      "_ast": {
+        "module": "_ast",
+        "self_us": 39,
+        "cumulative_us": 39,
+        "indent": 19
+      },
+      "ast": {
+        "module": "ast",
+        "self_us": 587,
+        "cumulative_us": 625,
+        "indent": 17
+      },
+      "_opcode": {
+        "module": "_opcode",
+        "self_us": 18,
+        "cumulative_us": 18,
+        "indent": 21
+      },
+      "_opcode_metadata": {
+        "module": "_opcode_metadata",
+        "self_us": 108,
+        "cumulative_us": 108,
+        "indent": 21
+      },
+      "opcode": {
+        "module": "opcode",
+        "self_us": 160,
+        "cumulative_us": 286,
+        "indent": 19
+      },
+      "dis": {
+        "module": "dis",
+        "self_us": 465,
+        "cumulative_us": 750,
+        "indent": 17
+      },
+      "linecache": {
+        "module": "linecache",
+        "self_us": 218,
+        "cumulative_us": 218,
+        "indent": 17
+      },
+      "token": {
+        "module": "token",
+        "self_us": 87,
+        "cumulative_us": 87,
+        "indent": 19
+      },
+      "_tokenize": {
+        "module": "_tokenize",
+        "self_us": 16,
+        "cumulative_us": 16,
+        "indent": 19
+      },
+      "tokenize": {
+        "module": "tokenize",
+        "self_us": 489,
+        "cumulative_us": 591,
+        "indent": 17
+      },
+      "inspect": {
+        "module": "inspect",
+        "self_us": 981,
+        "cumulative_us": 3163,
+        "indent": 15
+      },
+      "importlib.resources.abc": {
+        "module": "importlib.resources.abc",
+        "self_us": 216,
+        "cumulative_us": 216,
+        "indent": 15
+      },
+      "importlib.resources._common": {
+        "module": "importlib.resources._common",
+        "self_us": 226,
+        "cumulative_us": 3604,
+        "indent": 13
+      },
+      "importlib.resources._functional": {
+        "module": "importlib.resources._functional",
+        "self_us": 76,
+        "cumulative_us": 76,
+        "indent": 13
+      },
+      "importlib.resources": {
+        "module": "importlib.resources",
+        "self_us": 98,
+        "cumulative_us": 3777,
+        "indent": 11
+      },
+      "pyproject_hooks._in_process": {
+        "module": "pyproject_hooks._in_process",
+        "self_us": 447,
+        "cumulative_us": 4223,
+        "indent": 9
+      },
+      "pyproject_hooks._impl": {
+        "module": "pyproject_hooks._impl",
+        "self_us": 1951,
+        "cumulative_us": 7844,
+        "indent": 7
+      },
+      "pyproject_hooks": {
+        "module": "pyproject_hooks",
+        "self_us": 784,
+        "cumulative_us": 9836,
+        "indent": 5
+      },
+      "_contextvars": {
+        "module": "_contextvars",
+        "self_us": 19,
+        "cumulative_us": 19,
+        "indent": 9
+      },
+      "contextvars": {
+        "module": "contextvars",
+        "self_us": 421,
+        "cumulative_us": 439,
+        "indent": 7
+      },
+      "textwrap": {
+        "module": "textwrap",
+        "self_us": 624,
+        "cumulative_us": 624,
+        "indent": 11
+      },
+      "_colorize": {
+        "module": "_colorize",
+        "self_us": 162,
+        "cumulative_us": 162,
+        "indent": 11
+      },
+      "traceback": {
+        "module": "traceback",
+        "self_us": 358,
+        "cumulative_us": 1143,
+        "indent": 9
+      },
+      "_string": {
+        "module": "_string",
+        "self_us": 17,
+        "cumulative_us": 17,
+        "indent": 11
+      },
+      "string": {
+        "module": "string",
+        "self_us": 310,
+        "cumulative_us": 326,
+        "indent": 9
+      },
+      "atexit": {
+        "module": "atexit",
+        "self_us": 19,
+        "cumulative_us": 19,
+        "indent": 9
+      },
+      "logging": {
+        "module": "logging",
+        "self_us": 847,
+        "cumulative_us": 2333,
+        "indent": 7
+      },
+      "build._ctx": {
+        "module": "build._ctx",
+        "self_us": 753,
+        "cumulative_us": 3525,
+        "indent": 5
+      },
+      "_wmi": {
+        "module": "_wmi",
+        "self_us": 38,
+        "cumulative_us": 38,
+        "indent": 9
+      },
+      "platform": {
+        "module": "platform",
+        "self_us": 401,
+        "cumulative_us": 438,
+        "indent": 7
+      },
+      "sysconfig": {
+        "module": "sysconfig",
+        "self_us": 241,
+        "cumulative_us": 241,
+        "indent": 7
+      },
+      "packaging": {
+        "module": "packaging",
+        "self_us": 657,
+        "cumulative_us": 657,
+        "indent": 9
+      },
+      "copy": {
+        "module": "copy",
+        "self_us": 116,
+        "cumulative_us": 116,
+        "indent": 15
+      },
+      "dataclasses": {
+        "module": "dataclasses",
+        "self_us": 364,
+        "cumulative_us": 480,
+        "indent": 13
+      },
+      "packaging.version": {
+        "module": "packaging.version",
+        "self_us": 4498,
+        "cumulative_us": 4498,
+        "indent": 17
+      },
+      "packaging._ranges": {
+        "module": "packaging._ranges",
+        "self_us": 3012,
+        "cumulative_us": 7509,
+        "indent": 15
+      },
+      "packaging._elffile": {
+        "module": "packaging._elffile",
+        "self_us": 1160,
+        "cumulative_us": 1160,
+        "indent": 21
+      },
+      "packaging._manylinux": {
+        "module": "packaging._manylinux",
+        "self_us": 1532,
+        "cumulative_us": 2691,
+        "indent": 19
+      },
+      "packaging._musllinux": {
+        "module": "packaging._musllinux",
+        "self_us": 757,
+        "cumulative_us": 757,
+        "indent": 19
+      },
+      "packaging.tags": {
+        "module": "packaging.tags",
+        "self_us": 3591,
+        "cumulative_us": 7039,
+        "indent": 17
+      },
+      "packaging.utils": {
+        "module": "packaging.utils",
+        "self_us": 1291,
+        "cumulative_us": 8329,
+        "indent": 15
+      },
+      "packaging.specifiers": {
+        "module": "packaging.specifiers",
+        "self_us": 5288,
+        "cumulative_us": 21125,
+        "indent": 13
+      },
+      "packaging._tokenizer": {
+        "module": "packaging._tokenizer",
+        "self_us": 2872,
+        "cumulative_us": 24477,
+        "indent": 11
+      },
+      "packaging._parser": {
+        "module": "packaging._parser",
+        "self_us": 3193,
+        "cumulative_us": 27669,
+        "indent": 9
+      },
+      "packaging.markers": {
+        "module": "packaging.markers",
+        "self_us": 2237,
+        "cumulative_us": 2237,
+        "indent": 9
+      },
+      "packaging.requirements": {
+        "module": "packaging.requirements",
+        "self_us": 1190,
+        "cumulative_us": 31752,
+        "indent": 7
+      },
+      "build._compat": {
+        "module": "build._compat",
+        "self_us": 282,
+        "cumulative_us": 282,
+        "indent": 9
+      },
+      "email": {
+        "module": "email",
+        "self_us": 84,
+        "cumulative_us": 84,
+        "indent": 11
+      },
+      "importlib.metadata._meta": {
+        "module": "importlib.metadata._meta",
+        "self_us": 163,
+        "cumulative_us": 163,
+        "indent": 11
+      },
+      "importlib.metadata._collections": {
+        "module": "importlib.metadata._collections",
+        "self_us": 128,
+        "cumulative_us": 128,
+        "indent": 11
+      },
+      "importlib.metadata._functools": {
+        "module": "importlib.metadata._functools",
+        "self_us": 58,
+        "cumulative_us": 58,
+        "indent": 11
+      },
+      "importlib.metadata._itertools": {
+        "module": "importlib.metadata._itertools",
+        "self_us": 53,
+        "cumulative_us": 53,
+        "indent": 11
+      },
+      "importlib.abc": {
+        "module": "importlib.abc",
+        "self_us": 185,
+        "cumulative_us": 185,
+        "indent": 11
+      },
+      "importlib.metadata": {
+        "module": "importlib.metadata",
+        "self_us": 559,
+        "cumulative_us": 1227,
+        "indent": 9
+      },
+      "build._compat.importlib": {
+        "module": "build._compat.importlib",
+        "self_us": 638,
+        "cumulative_us": 2146,
+        "indent": 7
+      },
+      "build._exceptions": {
+        "module": "build._exceptions",
+        "self_us": 708,
+        "cumulative_us": 708,
+        "indent": 7
+      },
+      "build._util": {
+        "module": "build._util",
+        "self_us": 677,
+        "cumulative_us": 677,
+        "indent": 7
+      },
+      "build.env": {
+        "module": "build.env",
+        "self_us": 2695,
+        "cumulative_us": 38654,
+        "indent": 5
+      },
+      "_datetime": {
+        "module": "_datetime",
+        "self_us": 235,
+        "cumulative_us": 235,
+        "indent": 15
+      },
+      "datetime": {
+        "module": "datetime",
+        "self_us": 70,
+        "cumulative_us": 304,
+        "indent": 13
+      },
+      "tomllib._types": {
+        "module": "tomllib._types",
+        "self_us": 89,
+        "cumulative_us": 89,
+        "indent": 13
+      },
+      "tomllib._re": {
+        "module": "tomllib._re",
+        "self_us": 526,
+        "cumulative_us": 918,
+        "indent": 11
+      },
+      "tomllib._parser": {
+        "module": "tomllib._parser",
+        "self_us": 407,
+        "cumulative_us": 1325,
+        "indent": 9
+      },
+      "tomllib": {
+        "module": "tomllib",
+        "self_us": 116,
+        "cumulative_us": 1440,
+        "indent": 7
+      },
+      "build._compat.tomllib": {
+        "module": "build._compat.tomllib",
+        "self_us": 356,
+        "cumulative_us": 1795,
+        "indent": 5
+      },
+      "build._builder": {
+        "module": "build._builder",
+        "self_us": 2444,
+        "cumulative_us": 66390,
+        "indent": 3
+      },
+      "build._types": {
+        "module": "build._types",
+        "self_us": 560,
+        "cumulative_us": 560,
+        "indent": 3
+      },
+      "build": {
+        "module": "build",
+        "self_us": 1436,
+        "cumulative_us": 68493,
+        "indent": 1
+      },
+      "gettext": {
+        "module": "gettext",
+        "self_us": 404,
+        "cumulative_us": 404,
+        "indent": 3
+      },
+      "argparse": {
+        "module": "argparse",
+        "self_us": 579,
+        "cumulative_us": 983,
+        "indent": 1
+      },
+      "_hashlib": {
+        "module": "_hashlib",
+        "self_us": 848,
+        "cumulative_us": 848,
+        "indent": 3
+      },
+      "_blake2": {
+        "module": "_blake2",
+        "self_us": 28,
+        "cumulative_us": 28,
+        "indent": 3
+      },
+      "hashlib": {
+        "module": "hashlib",
+        "self_us": 142,
+        "cumulative_us": 1016,
+        "indent": 1
+      },
+      "tarfile": {
+        "module": "tarfile",
+        "self_us": 720,
+        "cumulative_us": 720,
+        "indent": 1
+      },
+      "build._compat.tarfile": {
+        "module": "build._compat.tarfile",
+        "self_us": 581,
+        "cumulative_us": 581,
+        "indent": 1
+      },
+      "importlib.resources._adapters": {
+        "module": "importlib.resources._adapters",
+        "self_us": 1196,
+        "cumulative_us": 1196,
+        "indent": 1
+      },
+      "importlib.resources._itertools": {
+        "module": "importlib.resources._itertools",
+        "self_us": 502,
+        "cumulative_us": 502,
+        "indent": 5
+      },
+      "importlib.resources.readers": {
+        "module": "importlib.resources.readers",
+        "self_us": 1319,
+        "cumulative_us": 1821,
+        "indent": 3
+      },
+      "importlib.readers": {
+        "module": "importlib.readers",
+        "self_us": 516,
+        "cumulative_us": 2337,
+        "indent": 1
+      },
+      "quopri": {
+        "module": "quopri",
+        "self_us": 119,
+        "cumulative_us": 119,
+        "indent": 5
+      },
+      "urllib": {
+        "module": "urllib",
+        "self_us": 82,
+        "cumulative_us": 82,
+        "indent": 9
+      },
+      "ipaddress": {
+        "module": "ipaddress",
+        "self_us": 970,
+        "cumulative_us": 970,
+        "indent": 9
+      },
+      "urllib.parse": {
+        "module": "urllib.parse",
+        "self_us": 695,
+        "cumulative_us": 1747,
+        "indent": 7
+      },
+      "email._parseaddr": {
+        "module": "email._parseaddr",
+        "self_us": 206,
+        "cumulative_us": 206,
+        "indent": 7
+      },
+      "email.utils": {
+        "module": "email.utils",
+        "self_us": 285,
+        "cumulative_us": 2237,
+        "indent": 5
+      },
+      "email.errors": {
+        "module": "email.errors",
+        "self_us": 285,
+        "cumulative_us": 285,
+        "indent": 5
+      },
+      "email.quoprimime": {
+        "module": "email.quoprimime",
+        "self_us": 135,
+        "cumulative_us": 135,
+        "indent": 9
+      },
+      "base64": {
+        "module": "base64",
+        "self_us": 161,
+        "cumulative_us": 161,
+        "indent": 11
+      },
+      "email.base64mime": {
+        "module": "email.base64mime",
+        "self_us": 80,
+        "cumulative_us": 240,
+        "indent": 9
+      },
+      "email.encoders": {
+        "module": "email.encoders",
+        "self_us": 65,
+        "cumulative_us": 65,
+        "indent": 11
+      },
+      "email.charset": {
+        "module": "email.charset",
+        "self_us": 121,
+        "cumulative_us": 186,
+        "indent": 9
+      },
+      "email.header": {
+        "module": "email.header",
+        "self_us": 342,
+        "cumulative_us": 901,
+        "indent": 7
+      },
+      "email._policybase": {
+        "module": "email._policybase",
+        "self_us": 188,
+        "cumulative_us": 1089,
+        "indent": 5
+      },
+      "email._encoded_words": {
+        "module": "email._encoded_words",
+        "self_us": 155,
+        "cumulative_us": 155,
+        "indent": 5
+      },
+      "email.iterators": {
+        "module": "email.iterators",
+        "self_us": 74,
+        "cumulative_us": 74,
+        "indent": 5
+      },
+      "email.message": {
+        "module": "email.message",
+        "self_us": 413,
+        "cumulative_us": 4368,
+        "indent": 3
+      },
+      "importlib.metadata._text": {
+        "module": "importlib.metadata._text",
+        "self_us": 101,
+        "cumulative_us": 101,
+        "indent": 3
+      },
+      "importlib.metadata._adapters": {
+        "module": "importlib.metadata._adapters",
+        "self_us": 252,
+        "cumulative_us": 4720,
+        "indent": 1
+      },
+      "email.feedparser": {
+        "module": "email.feedparser",
+        "self_us": 314,
+        "cumulative_us": 314,
+        "indent": 3
+      },
+      "email.parser": {
+        "module": "email.parser",
+        "self_us": 114,
+        "cumulative_us": 427,
+        "indent": 1
+      },
+      "gzip": {
+        "module": "gzip",
+        "self_us": 719,
+        "cumulative_us": 719,
+        "indent": 1
+      }
+    }
+  },
+  "repeated_modules_excluded_from_pairing": {
+    "windows": {
+      "posix": 2,
+      "pwd": 2,
+      "grp": 2
+    },
+    "macos": {
+      "nt": 7
+    }
+  }
+}

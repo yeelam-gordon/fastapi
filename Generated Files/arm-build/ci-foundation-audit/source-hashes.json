@@ -1,0 +1,502 @@
+{
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\report.json": {
+    "sha256": "3c3f52352d4c461ed7315da72341be18caa2ba9e1cc7f31be30150cacdd368ef",
+    "bytes": 34507
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\report.json": {
+    "sha256": "a70a6139a8a1fd822051d0c0bb6636340403d9bc79c35525ef574a2b49de6bed",
+    "bytes": 33848
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\jobs.json": {
+    "sha256": "d0aced0545b360c58e8018db9e3a4856324fcf28ca689a91f7c1a93976e2d4cf",
+    "bytes": 4830
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\comparison-r2.json": {
+    "sha256": "4b28d0ef9ccb63f4267804ef99800ed4f6e9d26f7ee713c3b91247983154350f",
+    "bytes": 11669
+  },
+  "Q:\\fastapi\\Generated Files\\worktrees\\ci-foundation-audit\\Generated Files\\arm-build\\ci-foundation-audit\\run-api-receipt.json": {
+    "sha256": "68b8d35392a70a97c19d8320bd14a2c450f752e2c87615bf36d02489651f816a",
+    "bytes": 230
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\CI.md": {
+    "sha256": "38e51f551c2e8bd9ee4186e1061a373f62a0db1c22d4ecbcf76aad38e89f517f",
+    "bytes": 5641
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\FINDINGS.md": {
+    "sha256": "ace9193a95836a3c4af766a64f7e005fdbbbf9a978d1e3ccbfb53be168ee2931",
+    "bytes": 16468
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\harness.py": {
+    "sha256": "abdce336537f6670eceddc61ed15b5f086a8a0269a65c35f8152296403891bfd",
+    "bytes": 21061
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\build-constraints.txt": {
+    "sha256": "ffe28d2e058045f92cd849120a1b04092e0165a8cb8a27e1c3bf7cc8cb601572",
+    "bytes": 134
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\harness.py": {
+    "sha256": "37051c2fbd9be6cbe4ac82495174d5b8be3add9dd60b8287a536dda6d12bff3b",
+    "bytes": 20533
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\build-constraints.txt": {
+    "sha256": "a7e01736cb9d0083b6459db69d628a855184613dacc6592213cf06b2abcab5a3",
+    "bytes": 110
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\python-setup.json": {
+    "sha256": "1706331f10f3ce129eb46bcaa90868dc7bb777b9cad22c2323e6d6dfcb8f68f0",
+    "bytes": 1681
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\provision.json": {
+    "sha256": "3758a47b2cd80025a731fbf9277272d286cedc44a184a2ae7e3c2b08b0c721b0",
+    "bytes": 1697
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\smoke.json": {
+    "sha256": "77e9943c960a1a6a1f71636a37ecb1a49b2a9cf3db0e60850c1b5f109dcfd31b",
+    "bytes": 1607
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\python-setup.json": {
+    "sha256": "ce7ff8836888812273c603e8b4e9bbda069aabe70a2c9ad0aa18155b0d2a0c56",
+    "bytes": 1688
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\provision.json": {
+    "sha256": "f7ae27337b8b0b9bc26c08e91f73f4e1a8ed902b3f158bb5a53adc73f6e15f4c",
+    "bytes": 1041
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\smoke.json": {
+    "sha256": "551c0dc58a464e6d6f50e0a0d2cd7afbde054d6f94f8d380e87597607923690d",
+    "bytes": 1573
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\000-uv-version.stdout.log": {
+    "sha256": "6aef7d71bc8bb49c8c6161f7fc997afac355596d11a667fd9254121524f07171",
+    "bytes": 57
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\000-uv-version.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\001-uv-help.stdout.log": {
+    "sha256": "ae6a1c740c70dcf888352693b9e6acf332c0e20424e2ca27dc23559cdfde3294",
+    "bytes": 8537
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\001-uv-help.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\002-git-head.stdout.log": {
+    "sha256": "adff464db7bb4607cd5e72a7c5010ff51b681f8ee177fe1ddf5b62cbd418ba1c",
+    "bytes": 41
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\002-git-head.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\003-git-status.stdout.log": {
+    "sha256": "b596d493bbad1d8a2dc01fc9f355b4714a4619c8e407d59e2cfa2edff7366286",
+    "bytes": 93
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\003-git-status.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\004-source-snapshot.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\004-source-snapshot.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\005-prepare-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\005-prepare-baseline.stderr.log": {
+    "sha256": "d0eaeed25b2dd3f599cd896755be512f602c2ba78ca80054e99fcad0de69d2c6",
+    "bytes": 146250
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\006-prepare-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\006-prepare-candidate.stderr.log": {
+    "sha256": "1ac62f471d7dd2fa67832e8a915acb2cf682d55558b2646ac1f033390ae293d0",
+    "bytes": 146252
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\007-repeat-01-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\007-repeat-01-baseline.stderr.log": {
+    "sha256": "c1a1b512d5d3055f158eca579f3a508997269802d133b3832d400af1e4960eed",
+    "bytes": 146254
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\008-repeat-01-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\008-repeat-01-candidate.stderr.log": {
+    "sha256": "9c005154367d9260efed5b1f1072a3571bda3096e2a9c0e3aee52208e86dd44e",
+    "bytes": 146256
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\009-repeat-02-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\009-repeat-02-candidate.stderr.log": {
+    "sha256": "9cb65017c82ba8231c1d33adec6df257e88f64837c9b47d9606b5ff0db64efce",
+    "bytes": 146256
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\010-repeat-02-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\010-repeat-02-baseline.stderr.log": {
+    "sha256": "91c008e9ba05db970b98b5067396d6c44bfa2adbe76e94a0e8bbb81d6c92a92a",
+    "bytes": 146254
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\011-repeat-03-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\011-repeat-03-baseline.stderr.log": {
+    "sha256": "54334a047393bfdc2988fc6efc061ce7e5ed671615f4ba49b0a58b3d44b8cc33",
+    "bytes": 146254
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\012-repeat-03-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\012-repeat-03-candidate.stderr.log": {
+    "sha256": "a7d520531eb950acc196a5de1d18622cc991be8061ba2e79921b46fd4ecc7e7a",
+    "bytes": 146256
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\013-repeat-04-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\013-repeat-04-candidate.stderr.log": {
+    "sha256": "0098f6d581e0044974aeee847c5bd2978b2377e4d1f5f4061f3f80dbb0241a91",
+    "bytes": 146256
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\014-repeat-04-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\014-repeat-04-baseline.stderr.log": {
+    "sha256": "8ffbb53383974476b3050cc6e8d728248f6d4fc86e238321b8d05a94b9f67497",
+    "bytes": 146254
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\015-repeat-05-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\015-repeat-05-baseline.stderr.log": {
+    "sha256": "c28eb5516c2fad317bb91625690d1fb8f4397298f96c55447d2177297a779c03",
+    "bytes": 146254
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\016-repeat-05-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\016-repeat-05-candidate.stderr.log": {
+    "sha256": "53b56793b7626f3c7135fbc9d01931a05a71f371f8c4c558f817600fef1081ef",
+    "bytes": 146256
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\017-repeat-06-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\017-repeat-06-candidate.stderr.log": {
+    "sha256": "3fdbaa674786a1152ce647020be77e78abe70b9137d81c63a0f0548ca91af762",
+    "bytes": 146256
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\018-repeat-06-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\018-repeat-06-baseline.stderr.log": {
+    "sha256": "5f68436a3fea1a2ac3ec22f5502de2137abe90e8aa1e838ce65ec68e75180d85",
+    "bytes": 146254
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\019-repeat-07-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\019-repeat-07-baseline.stderr.log": {
+    "sha256": "41b7605c49d22033bd1d3b340f8aa75676199517744b3fe875179d4e3f620aa0",
+    "bytes": 146254
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\020-repeat-07-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\020-repeat-07-candidate.stderr.log": {
+    "sha256": "898b166f513b8251e03b0f135c1f5153059fabce74cbed99b67a0fb9c7f764dc",
+    "bytes": 146256
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\021-diagnostic-importtime-UNMEASURED.stdout.log": {
+    "sha256": "c1102860cdb5b9b96e004d8761f505b121421f5c2dfa809a4f6d22ce12a0fbf0",
+    "bytes": 147325
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\ci\\logs\\021-diagnostic-importtime-UNMEASURED.stderr.log": {
+    "sha256": "4aab4a4ac058fcf2a818b748828931aa88cc72143f0f2d7fb7e3c9693680a446",
+    "bytes": 12693
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\artifact-smoke.log": {
+    "sha256": "a7ddaecfa518ee03d7599c74ea89148f221a2360f8d3ca662bf2623c0e43c90f",
+    "bytes": 370
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\create-build-environment.log": {
+    "sha256": "d63b3405250d84715aad0f6df7260e552094aee3cb104d71aeaace812345cf26",
+    "bytes": 244
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\dependency-check.log": {
+    "sha256": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf",
+    "bytes": 31
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\download-wheelhouse.log": {
+    "sha256": "6ab1560228adc1a901fc7230a7dc9031b77ec6db9384a2e76f39b69c81b86863",
+    "bytes": 6997
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\find-python.log": {
+    "sha256": "ac64ab5016e1b57daa43e331a79873a0b40547ca32b8b392db378a463e2568a8",
+    "bytes": 73
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\install-artifact.log": {
+    "sha256": "e8caf7269698772fc5a41009a8aae8c8d056ab020e1b274ec27b2ba8d7250b61",
+    "bytes": 305
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\install-python.log": {
+    "sha256": "9c2c730e46840d963b8757a82cb07f5c7f05d24787903663fc8eea68c71d51f8",
+    "bytes": 413
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\install-tools.log": {
+    "sha256": "0553d862d11f7a5651ca3fc476a4cdf51f2e6406c6bef3f17c0958aace34635d",
+    "bytes": 391
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\probe-python.log": {
+    "sha256": "4e9fe02048059af873589a15e14bf9ef613600bcfb513be28530bd29c1e84bd4",
+    "bytes": 224
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\windows\\bootstrap\\smoke-dependencies.log": {
+    "sha256": "504273c4c50d79ab56c1567b55e6b111e8cb196a0204cc6efc21cbc819f39853",
+    "bytes": 653
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\000-uv-version.stdout.log": {
+    "sha256": "3bba3f403347623037fd861bd5e8acab28c188fb0d8e6ea88d69e7c1ac53b997",
+    "bytes": 54
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\000-uv-version.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\001-uv-help.stdout.log": {
+    "sha256": "5e5adfeb035b2e393f3d8e73373556c37362c4c15c7fe7b857561d5739f05f16",
+    "bytes": 8533
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\001-uv-help.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\002-git-head.stdout.log": {
+    "sha256": "adff464db7bb4607cd5e72a7c5010ff51b681f8ee177fe1ddf5b62cbd418ba1c",
+    "bytes": 41
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\002-git-head.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\003-git-status.stdout.log": {
+    "sha256": "b596d493bbad1d8a2dc01fc9f355b4714a4619c8e407d59e2cfa2edff7366286",
+    "bytes": 93
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\003-git-status.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\004-source-snapshot.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\004-source-snapshot.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\005-prepare-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\005-prepare-baseline.stderr.log": {
+    "sha256": "eca31a9e437eb3e27a8c5e77b9e06007a833afe084492846e344993be9b6be18",
+    "bytes": 146278
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\006-prepare-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\006-prepare-candidate.stderr.log": {
+    "sha256": "f8b503610515a42080794aff5fa724a2e2503000474b4db4b4ee8e0c1bddce10",
+    "bytes": 146280
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\007-repeat-01-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\007-repeat-01-baseline.stderr.log": {
+    "sha256": "5cb3c52a76b27662225944392e9ea25a1f3a05bca7c2ac7bae837ee5bfb15030",
+    "bytes": 146282
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\008-repeat-01-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\008-repeat-01-candidate.stderr.log": {
+    "sha256": "7acfa65f0b0c1d3fae39fee6766b0614cf7595dc2047917d338e5764e9f663fe",
+    "bytes": 146284
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\009-repeat-02-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\009-repeat-02-candidate.stderr.log": {
+    "sha256": "a30915e5c4c4fc6ad08e08ca04295d3f1cab53c9da339ed2e5c05b1c3894add1",
+    "bytes": 146284
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\010-repeat-02-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\010-repeat-02-baseline.stderr.log": {
+    "sha256": "98b6f647611f8d7e22b84420d22296c62ad1736e7986bea079c989436fa7ba98",
+    "bytes": 146282
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\011-repeat-03-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\011-repeat-03-baseline.stderr.log": {
+    "sha256": "8159f2a5c05fbbebe6628fa8f73c1fb163b5942de54c099205ec1e5d43047e7c",
+    "bytes": 146282
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\012-repeat-03-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\012-repeat-03-candidate.stderr.log": {
+    "sha256": "6d8b6fa8bb841f6c98e5e4c9e50672efefc87f9febab6524a91a89699a729be3",
+    "bytes": 146284
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\013-repeat-04-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\013-repeat-04-candidate.stderr.log": {
+    "sha256": "3cbed8f54eb3944dfe987a9ee3fb058b485f9c6e6fde84952765ebb13958b61e",
+    "bytes": 146284
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\014-repeat-04-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\014-repeat-04-baseline.stderr.log": {
+    "sha256": "f03465c86b2996dbc4007e6a204e82963d697b12c01405b950a651c7c4dc8b9d",
+    "bytes": 146282
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\015-repeat-05-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\015-repeat-05-baseline.stderr.log": {
+    "sha256": "cd18381b7c9d88b970bfd23d23ec24d2dd9fabda0a807ef8fa54adf4c695c36a",
+    "bytes": 146282
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\016-repeat-05-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\016-repeat-05-candidate.stderr.log": {
+    "sha256": "a09cf726a570f2e81630ec3201dbbb3ebad4e2bb720e2df35254db20018e89f7",
+    "bytes": 146284
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\017-repeat-06-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\017-repeat-06-candidate.stderr.log": {
+    "sha256": "d8ccbaad8fef5cfef589e77f0f51538cda7c5cbee0c872e431650236192f18ab",
+    "bytes": 146284
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\018-repeat-06-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\018-repeat-06-baseline.stderr.log": {
+    "sha256": "cd287ad3ff87d70af5b4d8da4071911b955d67946655997ad7cf3eaf53611cb0",
+    "bytes": 146282
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\019-repeat-07-baseline.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\019-repeat-07-baseline.stderr.log": {
+    "sha256": "783c8318556219e57d21e056c1eede0f1aea02c2d901216b4558a00b793035bf",
+    "bytes": 146282
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\020-repeat-07-candidate.stdout.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\020-repeat-07-candidate.stderr.log": {
+    "sha256": "30d67c6b233589807eed92bd9a9bb8c5a5cf688789e8a8f84d7bb12d7384543f",
+    "bytes": 146284
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\021-diagnostic-importtime-UNMEASURED.stdout.log": {
+    "sha256": "9c67c0082e460bac0033ba76f696dc6e6809d48e334414b4796e6528cb3d7a43",
+    "bytes": 145990
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\ci\\logs\\021-diagnostic-importtime-UNMEASURED.stderr.log": {
+    "sha256": "6574a5256e35980c2e7988d557c2d4898f7cb8b81aa7b86a786ab49556efa1bf",
+    "bytes": 12168
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\artifact-smoke.log": {
+    "sha256": "d347d872e353b2712a3d5050a46615f24e63fdbce9e3f0eaba39edee9f21b631",
+    "bytes": 417
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\create-build-environment.log": {
+    "sha256": "d00d0a17724b2b51265f934abb7516108bcf7f81589e4783981e688cd120321f",
+    "bytes": 261
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\dependency-check.log": {
+    "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+    "bytes": 30
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\find-python.log": {
+    "sha256": "72836b6c08734147607c4680f4f30bd3060715acd193571c706f32c35cdc9d59",
+    "bytes": 89
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\install-artifact.log": {
+    "sha256": "e0cafcb0b3cd357d59125d630be180dbb393e7d3d9bbf45219cfa4abc2b6ea16",
+    "bytes": 316
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\install-python.log": {
+    "sha256": "0c68996742e4067f70de0b320787268570373cb25c7cb6039104d3ec0d1dd02d",
+    "bytes": 211
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\install-tools.log": {
+    "sha256": "7c8fbd11e7f5aa3f4c5cec5e6fb1e1af424da44b222f2015ecf7b23c09f6b282",
+    "bytes": 371
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\probe-python.log": {
+    "sha256": "3894babcd0602c0330eafcef7ef918086c058e56b2b0df4e3336a2fb52a5c859",
+    "bytes": 217
+  },
+  "Q:\\fastapi\\Generated Files\\arm-build\\results\\ci-40814588064\\macos\\bootstrap\\smoke-dependencies.log": {
+    "sha256": "dff97a6196d350a928e74fe6861a9ac728a535bbbbe893ab53a79f378a8ed32a",
+    "bytes": 651
+  },
+  "Q:\\fastapi\\Generated Files\\worktrees\\ci-foundation-audit\\Generated Files\\arm-build\\ci-foundation-audit\\workflow-console.log": {
+    "sha256": "00e379f133cb5e6a61cb97f4fe4e550bbafe61abdcba16c58ee960da52834a66",
+    "bytes": 75812
+  }
+}

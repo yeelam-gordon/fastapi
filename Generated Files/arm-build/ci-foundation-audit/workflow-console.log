@@ -1,0 +1,700 @@
+macos-15	UNKNOWN STEP	﻿2026-10-29T03:52:42.1171540Z Current runner version: '2.338.0'
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1186900Z ##[group]Runner Image Provisioner
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1187430Z Hosted Compute Agent
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1187800Z Version: 20260828.587
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1188230Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1188710Z Build Date: 2026-08-28T16:44:25Z
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1189170Z Worker ID: {81ff317a-2e58-4411-86c5-db66324185d2}
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1189630Z Azure Region: westus
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1190020Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1190870Z ##[group]Operating System
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1191260Z macOS
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1191720Z 15.7.9
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1192050Z 24G830
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1192390Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1192740Z ##[group]Runner Image
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1193130Z Image: macos-15-arm64
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1193510Z Version: 20260907.0337.1
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1194350Z Included Software: https://github.com/actions/runner-images/blob/macos-15-arm64/20260907.0337/images/macos/macos-15-arm64-Readme.md
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1195420Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-15-arm64%2F20260907.0337
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1196130Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1196900Z ##[group]GITHUB_TOKEN Permissions
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1198090Z Contents: read
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1198520Z Metadata: read
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1198900Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1200610Z Secret source: Actions
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1201250Z Cache mode: write
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1201970Z Prepare workflow directory
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1419580Z Prepare all required actions
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.1453810Z Getting action download info
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.3941520Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+macos-15	UNKNOWN STEP	2026-10-29T03:52:42.5837690Z Download action repository 'astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7' (SHA:c18668ad3cf93ea998bef934396af7bb5c839dc7)
+macos-15	UNKNOWN STEP	2026-10-29T03:52:43.4651990Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.3414800Z Complete job name: macos-15
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4024050Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4025170Z with:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4025710Z   persist-credentials: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4026350Z   repository: yeelam-gordon/fastapi
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4032100Z   token: ***
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4032630Z   ssh-strict: true
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4033170Z   ssh-user: git
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4033720Z   clean: true
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4034390Z   sparse-checkout-cone-mode: true
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4035130Z   fetch-depth: 1
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4035720Z   fetch-tags: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4036250Z   show-progress: true
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4036830Z   lfs: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4037420Z   submodules: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4037970Z   set-safe-directory: true
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4038590Z   allow-unsafe-pr-checkout: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.4039440Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7329110Z Syncing repository: yeelam-gordon/fastapi
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7330460Z ##[group]Getting Git version info
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7330820Z Working directory is '/Users/runner/work/fastapi/fastapi'
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7331530Z [command]/opt/homebrew/bin/git version
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7878620Z git version 2.55.0
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7900480Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7907580Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/f45f92eb-e0df-4fb3-90e2-aab6bc2e9d77/.gitconfig'
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7918410Z Temporarily overriding HOME='/Users/runner/work/_temp/f45f92eb-e0df-4fb3-90e2-aab6bc2e9d77' before making global git config changes
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7920260Z Adding repository directory to the temporary git global config as a safe directory
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.7923780Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/fastapi/fastapi
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8071360Z Deleting the contents of '/Users/runner/work/fastapi/fastapi'
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8076210Z ##[group]Determining repository object format
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8078130Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8078580Z ##[group]Initializing the repository
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8083450Z [command]/opt/homebrew/bin/git init /Users/runner/work/fastapi/fastapi
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8348200Z hint: Using 'master' as the name for the initial branch. This default branch name
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8348850Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8349450Z hint: to use in all of your new repositories, which will suppress this warning,
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8349960Z hint: call:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8350160Z hint:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8350480Z hint: 	git config --global init.defaultBranch <name>
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8350750Z hint:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8351070Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8351570Z hint: 'development'. The just-created branch can be renamed via this command:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8351950Z hint:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8352140Z hint: 	git branch -m <name>
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8352380Z hint:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8352710Z hint: Disable this message with "git config set advice.defaultBranchName false"
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8368530Z Initialized empty Git repository in /Users/runner/work/fastapi/fastapi/.git/
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8376880Z [command]/opt/homebrew/bin/git remote add origin https://github.com/yeelam-gordon/fastapi
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8455480Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8456760Z ##[group]Disabling automatic garbage collection
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8457990Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8565630Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8567050Z ##[group]Setting up auth
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8567690Z Removing SSH command configuration
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8572820Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.8650240Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.9662450Z Removing HTTP extra header
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.9665830Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+macos-15	UNKNOWN STEP	2026-10-29T03:52:44.9744560Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.0482450Z Removing includeIf entries pointing to credentials config files
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.0485340Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.0546850Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.1256150Z [command]/opt/homebrew/bin/git config --file /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.1308720Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git.path /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.1372610Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.1419570Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.1467580Z [command]/opt/homebrew/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.1512890Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.1513240Z ##[group]Fetching the repository
+macos-15	UNKNOWN STEP	2026-10-29T03:52:45.1517640Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +264cbad400c8336057a70b9b6a65bfdb4920321e:refs/remotes/origin/perf/windows-arm-build-experiment
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2380170Z From https://github.com/yeelam-gordon/fastapi
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2380820Z  * [new ref]         264cbad400c8336057a70b9b6a65bfdb4920321e -> origin/perf/windows-arm-build-experiment
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2385330Z [command]/opt/homebrew/bin/git branch --list --remote origin/perf/windows-arm-build-experiment
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2452520Z   origin/perf/windows-arm-build-experiment
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2457010Z [command]/opt/homebrew/bin/git rev-parse refs/remotes/origin/perf/windows-arm-build-experiment
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2504390Z 264cbad400c8336057a70b9b6a65bfdb4920321e
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2505740Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2506140Z ##[group]Determining the checkout info
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2506480Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2509130Z [command]/opt/homebrew/bin/git sparse-checkout disable
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2577780Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2627530Z ##[group]Checking out the ref
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.2630380Z [command]/opt/homebrew/bin/git checkout --progress --force -B perf/windows-arm-build-experiment refs/remotes/origin/perf/windows-arm-build-experiment
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.6765310Z Switched to a new branch 'perf/windows-arm-build-experiment'
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.6771970Z branch 'perf/windows-arm-build-experiment' set up to track 'origin/perf/windows-arm-build-experiment'.
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.6776370Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.6880010Z [command]/opt/homebrew/bin/git log -1 --format=%H
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.6957440Z 264cbad400c8336057a70b9b6a65bfdb4920321e
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.6962540Z ##[group]Removing auth
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.6962880Z Removing SSH command configuration
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.6965980Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.7026700Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.7764820Z Removing HTTP extra header
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.7767110Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.7815240Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8417680Z Removing includeIf entries pointing to credentials config files
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8421910Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8463270Z includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8464080Z includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8465920Z includeif.gitdir:/github/workspace/.git.path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8466370Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8468920Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8516200Z /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8522240Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git.path \/Users\/runner\/work\/_temp\/git\-credentials\-de70f7c8\-bc79\-4f6e\-aefe\-dcf8ae982d15\.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8573580Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8616380Z /Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8625110Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/Users/runner/work/fastapi/fastapi/.git/worktrees/*.path \/Users\/runner\/work\/_temp\/git\-credentials\-de70f7c8\-bc79\-4f6e\-aefe\-dcf8ae982d15\.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8677540Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8719410Z /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8723000Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-de70f7c8\-bc79\-4f6e\-aefe\-dcf8ae982d15\.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8769170Z [command]/opt/homebrew/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8809100Z /github/runner_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8813400Z [command]/opt/homebrew/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-de70f7c8\-bc79\-4f6e\-aefe\-dcf8ae982d15\.config
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.8859760Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9418710Z Removing credentials config '/Users/runner/work/_temp/git-credentials-de70f7c8-bc79-4f6e-aefe-dcf8ae982d15.config'
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9428040Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9600690Z ##[group]Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9611570Z with:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9611710Z   version: 0.13.6
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9611850Z   enable-cache: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9612010Z   activate-environment: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9612180Z   no-project: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9612470Z   working-directory: /Users/runner/work/fastapi/fastapi
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9614260Z   github-token: ***
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9614670Z   cache-dependency-glob: **/*requirements*.txt
+macos-15	UNKNOWN STEP	**/*requirements*.in
+macos-15	UNKNOWN STEP	**/*constraints*.txt
+macos-15	UNKNOWN STEP	**/*constraints*.in
+macos-15	UNKNOWN STEP	**/pyproject.toml
+macos-15	UNKNOWN STEP	**/uv.lock
+macos-15	UNKNOWN STEP	**/*.py.lock
+macos-15	UNKNOWN STEP	
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9615130Z   restore-cache: true
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9615280Z   save-cache: auto
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9615420Z   prune-cache: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9615560Z   cache-python: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9615720Z   ignore-nothing-to-cache: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9615910Z   ignore-empty-workdir: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9616120Z   download-from-astral-mirror: true
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9616320Z   add-problem-matchers: true
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9616480Z   quiet: false
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9616620Z   resolution-strategy: highest
+macos-15	UNKNOWN STEP	2026-10-29T03:52:47.9616780Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:48.1045860Z Fetching manifest data from https://raw.githubusercontent.com/astral-sh/versions/main/v1/uv.ndjson ...
+macos-15	UNKNOWN STEP	2026-10-29T03:52:48.1574300Z Downloading uv from "https://releases.astral.sh/github/uv/releases/download/0.13.6/uv-aarch64-apple-darwin.tar.gz" ...
+macos-15	UNKNOWN STEP	2026-10-29T03:52:48.3247820Z [command]/usr/bin/tar xz -C /Users/runner/work/_temp/c44d7388-6b2f-440f-a927-53d996f8e27e -f /Users/runner/work/_temp/6aad9c66-be43-432e-95d9-213d708af574
+macos-15	UNKNOWN STEP	2026-10-29T03:52:48.4208530Z Added /Users/runner/.local/bin to the path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:48.4211460Z Added /Users/runner/hostedtoolcache/uv/0.13.6/aarch64 to the path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:48.4215860Z Set UV_PYTHON_INSTALL_DIR to /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:52:48.4216440Z Added /Users/runner/work/_temp/uv-python-dir to the path
+macos-15	UNKNOWN STEP	2026-10-29T03:52:48.4237150Z Successfully installed uv version 0.13.6
+macos-15	UNKNOWN STEP	2026-10-29T03:52:49.0097130Z ##[group]Run node "Generated Files/arm-build/setup_python.cjs"
+macos-15	UNKNOWN STEP	2026-10-29T03:52:49.0097620Z ^[[36;1mnode "Generated Files/arm-build/setup_python.cjs"^[[0m
+macos-15	UNKNOWN STEP	2026-10-29T03:52:49.0148160Z shell: /bin/bash -e {0}
+macos-15	UNKNOWN STEP	2026-10-29T03:52:49.0148670Z env:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:49.0148900Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:52:49.0149180Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:51.0943580Z ##[group]Run python "Generated Files/arm-build/ci_prepare.py"
+macos-15	UNKNOWN STEP	2026-10-29T03:52:51.0943950Z ^[[36;1mpython "Generated Files/arm-build/ci_prepare.py"^[[0m
+macos-15	UNKNOWN STEP	2026-10-29T03:52:51.0974870Z shell: /bin/bash -e {0}
+macos-15	UNKNOWN STEP	2026-10-29T03:52:51.0975040Z env:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:51.0975250Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:52:51.0975500Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.3510550Z ##[group]Run python "Generated Files/arm-build/test_benchmark.py"
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.3510940Z ^[[36;1mpython "Generated Files/arm-build/test_benchmark.py"^[[0m
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.3542570Z shell: /bin/bash -e {0}
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.3542750Z env:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.3542950Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.3543210Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6011750Z .ValueError: uv executable not found: missing
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6018940Z [Errno 17] File exists: '/Users/runner/work/fastapi/fastapi/Generated Files/arm-build/.test-benchmark-321673f0fc0b477db81389aad5d4d549/results'
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6204360Z ...........
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6204690Z ----------------------------------------------------------------------
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6205040Z Ran 12 tests in 0.053s
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6205160Z 
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6205230Z OK
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6362090Z ##[group]Run python "Generated Files/arm-build/benchmark.py" --uv uv --repeats 7 --output "Generated Files/arm-build/results/ci" --importtime
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6362910Z ^[[36;1mpython "Generated Files/arm-build/benchmark.py" --uv uv --repeats 7 --output "Generated Files/arm-build/results/ci" --importtime^[[0m
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6400100Z shell: /bin/bash -e {0}
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6400340Z env:
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6400630Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:52:52.6400900Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:53:10.0536590Z ##[group]Run python "Generated Files/arm-build/ci_prepare.py" --smoke
+macos-15	UNKNOWN STEP	2026-10-29T03:53:10.0537910Z ^[[36;1mpython "Generated Files/arm-build/ci_prepare.py" --smoke^[[0m
+macos-15	UNKNOWN STEP	2026-10-29T03:53:10.0616340Z shell: /bin/bash -e {0}
+macos-15	UNKNOWN STEP	2026-10-29T03:53:10.0616530Z env:
+macos-15	UNKNOWN STEP	2026-10-29T03:53:10.0616810Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:53:10.0617220Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.0691020Z ##[group]Run python -m ruff check "Generated Files/arm-build/benchmark.py" "Generated Files/arm-build/test_benchmark.py" "Generated Files/arm-build/ci_prepare.py" --output-format github
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.0692110Z ^[[36;1mpython -m ruff check "Generated Files/arm-build/benchmark.py" "Generated Files/arm-build/test_benchmark.py" "Generated Files/arm-build/ci_prepare.py" --output-format github^[[0m
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.0724320Z shell: /bin/bash -e {0}
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.0724540Z env:
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.0724830Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.0725170Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1973600Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1974060Z with:
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1974340Z   name: arm-build-macos-15
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1975630Z   path: Generated Files/arm-build/results/ci/report.json
+macos-15	UNKNOWN STEP	Generated Files/arm-build/results/ci/harness.py
+macos-15	UNKNOWN STEP	Generated Files/arm-build/results/ci/logs
+macos-15	UNKNOWN STEP	Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+macos-15	UNKNOWN STEP	Generated Files/arm-build/results/ci/build-constraints.txt
+macos-15	UNKNOWN STEP	Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+macos-15	UNKNOWN STEP	Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+macos-15	UNKNOWN STEP	Generated Files/arm-build/results/bootstrap
+macos-15	UNKNOWN STEP	
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1977060Z   if-no-files-found: error
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1977310Z   retention-days: 14
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1977540Z   compression-level: 6
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1977830Z   overwrite: false
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1978000Z   include-hidden-files: false
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1978250Z   archive: true
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1978750Z env:
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1978950Z   UV_PYTHON_INSTALL_DIR: /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.1979210Z ##[endgroup]
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.3544160Z Multiple search paths detected. Calculating the least common ancestor of all paths
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.3545830Z The least common ancestor is /Users/runner/work/fastapi/fastapi/Generated Files/arm-build/results. This will be the root directory of the artifact
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.3546660Z With the provided path, there will be 78 files uploaded
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.3548860Z Artifact name is valid!
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.3549340Z Root directory input is valid!
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.5713440Z Uploading artifact: arm-build-macos-15.zip
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.5737430Z Beginning upload of artifact content to blob storage
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.7974200Z Uploaded bytes 1738988
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.8120700Z Finished uploading artifact content to blob storage!
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.8122160Z SHA256 digest of uploaded artifact is f6a8d30ea7a304cd45d00d5bc7f12f45d4040a975631c53e36d86ae43dafa31c
+macos-15	UNKNOWN STEP	2026-10-29T03:53:11.8122810Z Finalizing artifact upload
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.2795510Z Artifact arm-build-macos-15 successfully finalized. Artifact ID 12872120783
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.2796320Z Artifact arm-build-macos-15 has been successfully uploaded! Final size is 1738988 bytes. Artifact ID is 12872120783
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.3044540Z Artifact download URL: https://github.com/yeelam-gordon/fastapi/actions/runs/40814588064/artifacts/12872120783
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.3268430Z Post job cleanup.
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.4295270Z UV_PYTHON_INSTALL_DIR is already set to /Users/runner/work/_temp/uv-python-dir
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.4545200Z Post job cleanup.
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5550970Z [command]/opt/homebrew/bin/git version
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5572330Z git version 2.55.0
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5588560Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/93dfef72-86a3-4b68-8305-cd64e1ada5f7/.gitconfig'
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5595330Z Temporarily overriding HOME='/Users/runner/work/_temp/93dfef72-86a3-4b68-8305-cd64e1ada5f7' before making global git config changes
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5596010Z Adding repository directory to the temporary git global config as a safe directory
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5598010Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/fastapi/fastapi
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5659310Z Removing SSH command configuration
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5663710Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.5751360Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.6647110Z Removing HTTP extra header
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.6647670Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.6684740Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.7358420Z Removing includeIf entries pointing to credentials config files
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.7362180Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.7408710Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+macos-15	UNKNOWN STEP	2026-10-29T03:53:12.8042960Z Cleaning up orphan processes
+windows-11-arm	UNKNOWN STEP	﻿2026-10-29T03:52:42.4432995Z Current runner version: '2.338.0'
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4466210Z ##[group]Runner Image Provisioner
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4467101Z Hosted Compute Agent
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4467603Z Version: 20261021.618
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4468104Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4468715Z Build Date: 2026-10-21T00:45:21Z
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4469288Z Worker ID: {7a71ab91-a726-4004-81f3-d7ce3fc2aee7}
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4469871Z Region: northcentralus
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4470323Z Cloud: Azure
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4470740Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4472306Z ##[group]Operating System
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4472828Z Microsoft Windows 11
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4473358Z 10.0.26200
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4473767Z Enterprise
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4474174Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4474594Z ##[group]Runner Image
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4475263Z Image: windows-11-vs2026-arm64
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4475806Z Version: 20261025.196.1
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4477418Z Included Software: https://github.com/actions/runner-images/blob/win11-vs2026-arm64/20261025.196/images/windows/Windows11-VS2026-Arm64-Readme.md
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4478934Z Image Release: https://github.com/actions/runner-images/releases/tag/win11-vs2026-arm64%2F20261025.196
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4479779Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4480785Z ##[group]GITHUB_TOKEN Permissions
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4483054Z Contents: read
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4483532Z Metadata: read
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4484014Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4486411Z Secret source: Actions
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4487158Z Cache mode: write
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4487875Z Prepare workflow directory
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4900861Z Prepare all required actions
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.4954936Z Getting action download info
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:42.7130903Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:43.0130103Z Download action repository 'astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7' (SHA:c18668ad3cf93ea998bef934396af7bb5c839dc7)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:43.7123219Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.0737248Z Complete job name: windows-11-arm
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2848586Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2850469Z with:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2851076Z   persist-credentials: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2851690Z   repository: yeelam-gordon/fastapi
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2866836Z   token: ***
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2867572Z   ssh-strict: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2868085Z   ssh-user: git
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2868563Z   clean: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2869078Z   sparse-checkout-cone-mode: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2869667Z   fetch-depth: 1
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2870174Z   fetch-tags: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2870702Z   show-progress: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2871226Z   lfs: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2871781Z   submodules: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2872304Z   set-safe-directory: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2872889Z   allow-unsafe-pr-checkout: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.2874386Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.5459856Z Syncing repository: yeelam-gordon/fastapi
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.5462607Z ##[group]Getting Git version info
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.5463382Z Working directory is 'C:\a\fastapi\fastapi'
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:44.6737892Z [command]"C:\Program Files\Git\bin\git.exe" version
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.0866414Z git version 2.56.0.windows.3
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.0928040Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.0972456Z Temporarily overriding HOME='C:\a\_temp\12d741f5-4501-400f-a14d-900d307d9c90' before making global git config changes
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.0974981Z Adding repository directory to the temporary git global config as a safe directory
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.0982388Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory C:\a\fastapi\fastapi
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.1735284Z Deleting the contents of 'C:\a\fastapi\fastapi'
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.1743169Z ##[group]Determining repository object format
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.1744705Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.1745857Z ##[group]Initializing the repository
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.1754579Z [command]"C:\Program Files\Git\bin\git.exe" init C:\a\fastapi\fastapi
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.2944376Z Initialized empty Git repository in C:/a/fastapi/fastapi/.git/
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.3006599Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/yeelam-gordon/fastapi
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.3663819Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.3665471Z ##[group]Disabling automatic garbage collection
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.3666925Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.4189063Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.4190371Z ##[group]Setting up auth
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.4192637Z Removing SSH command configuration
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.4198898Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:45.4734759Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:47.7671292Z Removing HTTP extra header
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:47.7673647Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:47.8178983Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:49.0568108Z Removing includeIf entries pointing to credentials config files
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:49.0579079Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:49.1101710Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:50.3294644Z [command]"C:\Program Files\Git\bin\git.exe" config --file C:\a\_temp\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:50.3836309Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git.path C:\a\_temp\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:50.4380956Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C:\a\_temp\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:50.4918445Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:50.5473992Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:50.6014294Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:50.6014764Z ##[group]Fetching the repository
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:50.6027352Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +264cbad400c8336057a70b9b6a65bfdb4920321e:refs/remotes/origin/perf/windows-arm-build-experiment
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.2035780Z From https://github.com/yeelam-gordon/fastapi
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.2039050Z  * [new ref]         264cbad400c8336057a70b9b6a65bfdb4920321e -> origin/perf/windows-arm-build-experiment
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.2104903Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/perf/windows-arm-build-experiment
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.2625840Z   origin/perf/windows-arm-build-experiment
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.2684864Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/perf/windows-arm-build-experiment
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.3197468Z 264cbad400c8336057a70b9b6a65bfdb4920321e
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.3246824Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.3247256Z ##[group]Determining the checkout info
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.3247623Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.3256669Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.3942635Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.4468768Z ##[group]Checking out the ref
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:53.4479023Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B perf/windows-arm-build-experiment refs/remotes/origin/perf/windows-arm-build-experiment
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:54.5471994Z Updating files:  23% (806/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:54.6110245Z Updating files:  24% (814/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:54.6802214Z Updating files:  25% (848/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.4586127Z Updating files:  26% (882/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.5072201Z Updating files:  27% (916/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.5553141Z Updating files:  28% (950/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.5802409Z Updating files:  28% (954/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.6059380Z Updating files:  29% (984/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.6306095Z Updating files:  30% (1017/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.6549935Z Updating files:  31% (1051/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.6927253Z Updating files:  32% (1085/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.7298374Z Updating files:  33% (1119/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.7610955Z Updating files:  34% (1153/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.7934703Z Updating files:  35% (1187/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.8240636Z Updating files:  36% (1221/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.8541362Z Updating files:  37% (1255/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.9030585Z Updating files:  38% (1289/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.9373108Z Updating files:  39% (1323/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:55.9815372Z Updating files:  40% (1356/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.0138978Z Updating files:  41% (1390/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.0449939Z Updating files:  42% (1424/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.0740194Z Updating files:  43% (1458/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.1067983Z Updating files:  44% (1492/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.1365592Z Updating files:  45% (1526/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.1697820Z Updating files:  46% (1560/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.2021041Z Updating files:  47% (1594/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.2352465Z Updating files:  48% (1628/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.2645210Z Updating files:  49% (1662/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.3498641Z Updating files:  50% (1695/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.3864709Z Updating files:  51% (1729/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:56.4447709Z Updating files:  52% (1763/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.4321200Z Updating files:  53% (1797/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.4699381Z Updating files:  53% (1820/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.5492817Z Updating files:  54% (1831/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.5562830Z Updating files:  55% (1865/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.6615552Z Updating files:  55% (1868/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.7304199Z Updating files:  56% (1899/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.7824998Z Updating files:  57% (1933/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.8491036Z Updating files:  58% (1967/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.9567337Z Updating files:  59% (2001/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:57.9948388Z Updating files:  60% (2034/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.0474137Z Updating files:  61% (2068/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.1142118Z Updating files:  62% (2102/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.1641025Z Updating files:  63% (2136/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.1944705Z Updating files:  64% (2170/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.2310291Z Updating files:  65% (2204/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.2649338Z Updating files:  66% (2238/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.2989765Z Updating files:  67% (2272/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.3254865Z Updating files:  68% (2306/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.3568799Z Updating files:  69% (2340/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.3791757Z Updating files:  70% (2373/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.3988176Z Updating files:  71% (2407/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.4146645Z Updating files:  72% (2441/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.4408969Z Updating files:  73% (2475/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.4634441Z Updating files:  74% (2509/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.4863733Z Updating files:  75% (2543/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.5140358Z Updating files:  76% (2577/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.5367467Z Updating files:  77% (2611/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.5614065Z Updating files:  78% (2645/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.5623731Z Updating files:  78% (2677/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.5869143Z Updating files:  79% (2679/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.6121797Z Updating files:  80% (2712/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.6340002Z Updating files:  81% (2746/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.6612505Z Updating files:  82% (2780/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.6794480Z Updating files:  83% (2814/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.6947780Z Updating files:  84% (2848/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.7223420Z Updating files:  85% (2882/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.7429745Z Updating files:  86% (2916/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.7594631Z Updating files:  87% (2950/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.7777568Z Updating files:  88% (2984/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.8068965Z Updating files:  89% (3018/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.8307244Z Updating files:  90% (3051/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.8588326Z Updating files:  91% (3085/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.8805425Z Updating files:  92% (3119/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.9079337Z Updating files:  93% (3153/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.9332848Z Updating files:  94% (3187/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.9629716Z Updating files:  95% (3221/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:58.9847546Z Updating files:  96% (3255/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.0100401Z Updating files:  97% (3289/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.0379969Z Updating files:  98% (3323/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.0564407Z Updating files:  99% (3357/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.0564689Z Updating files: 100% (3390/3390)
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.0564918Z Updating files: 100% (3390/3390), done.
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.0779094Z Switched to a new branch 'perf/windows-arm-build-experiment'
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.0818292Z branch 'perf/windows-arm-build-experiment' set up to track 'origin/perf/windows-arm-build-experiment'.
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.0902654Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.1571678Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.2050903Z 264cbad400c8336057a70b9b6a65bfdb4920321e
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.2108005Z ##[group]Removing auth
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.2108274Z Removing SSH command configuration
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.2117945Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:52:59.2615699Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:00.5372706Z Removing HTTP extra header
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:00.5380892Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:00.5872750Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.8340002Z Removing includeIf entries pointing to credentials config files
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.8348565Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.8784002Z includeif.gitdir:C:/a/fastapi/fastapi/.git.path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.8784451Z includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.8784802Z includeif.gitdir:/github/workspace/.git.path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.8785120Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.8846256Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git.path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.9322683Z C:\a\_temp\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.9383665Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git.path C\:\\a\\_temp\\git\-credentials\-510d415a\-babf\-4655\-ab87\-6b9919e4e420\.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:01.9956979Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.0419919Z C:\a\_temp\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.0480226Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:C:/a/fastapi/fastapi/.git/worktrees/*.path C\:\\a\\_temp\\git\-credentials\-510d415a\-babf\-4655\-ab87\-6b9919e4e420\.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.1053291Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.1506174Z /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.1561697Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-510d415a\-babf\-4655\-ab87\-6b9919e4e420\.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.2086928Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.2551755Z /github/runner_temp/git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.2608431Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-510d415a\-babf\-4655\-ab87\-6b9919e4e420\.config
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:02.3146515Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.5768143Z Removing credentials config 'C:\a\_temp\git-credentials-510d415a-babf-4655-ab87-6b9919e4e420.config'
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.5788891Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6310624Z ##[group]Run astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6311180Z with:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6311350Z   version: 0.13.6
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6311520Z   enable-cache: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6311713Z   activate-environment: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6311929Z   no-project: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6312121Z   working-directory: C:\a\fastapi\fastapi
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6314624Z   github-token: ***
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6315142Z   cache-dependency-glob: **/*requirements*.txt
+windows-11-arm	UNKNOWN STEP	**/*requirements*.in
+windows-11-arm	UNKNOWN STEP	**/*constraints*.txt
+windows-11-arm	UNKNOWN STEP	**/*constraints*.in
+windows-11-arm	UNKNOWN STEP	**/pyproject.toml
+windows-11-arm	UNKNOWN STEP	**/uv.lock
+windows-11-arm	UNKNOWN STEP	**/*.py.lock
+windows-11-arm	UNKNOWN STEP	
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6315724Z   restore-cache: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6324469Z   save-cache: auto
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6324818Z   prune-cache: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6325003Z   cache-python: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6325200Z   ignore-nothing-to-cache: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6325467Z   ignore-empty-workdir: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6325740Z   download-from-astral-mirror: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6325978Z   add-problem-matchers: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6326177Z   quiet: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6326351Z   resolution-strategy: highest
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.6326560Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.9288431Z Fetching manifest data from https://raw.githubusercontent.com/astral-sh/versions/main/v1/uv.ndjson ...
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:03.9909492Z Downloading uv from "https://releases.astral.sh/github/uv/releases/download/0.13.6/uv-aarch64-pc-windows-msvc.zip" ...
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:04.6951034Z [command]C:\Windows\system32\tar.exe x -C C:\a\_temp\9380f3ce-b597-4f61-a961-a0ed415e13ed -f C:\a\_temp\0a50d2b6-05a1-4d2d-a439-aac794179112
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:04.8970319Z Set UV_TOOL_BIN_DIR to C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:04.8975336Z Added C:\a\_temp\uv-tool-bin-dir to the path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:04.8991187Z Added C:\hostedtoolcache\windows\uv\0.13.6\aarch64 to the path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:04.8995439Z Set UV_TOOL_DIR to C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:04.8999494Z Set UV_PYTHON_INSTALL_DIR to C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:04.9003618Z Added C:\a\_temp\uv-python-dir to the path
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:04.9027208Z Successfully installed uv version 0.13.6
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:07.4078231Z ##[group]Run node "Generated Files/arm-build/setup_python.cjs"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:07.4078947Z ^[[36;1mnode "Generated Files/arm-build/setup_python.cjs"^[[0m
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:07.4154283Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:07.4154640Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:07.4154839Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:07.4155098Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:07.4155363Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:07.4155616Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5338854Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5339376Z with:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5339548Z   name: experiment-locks
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5339762Z   path: Generated Files/arm-build/*.lock
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5340010Z   if-no-files-found: error
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5340211Z   compression-level: 6
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5340392Z   overwrite: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5340572Z   include-hidden-files: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5340775Z   archive: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5340931Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5341102Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5341355Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5341608Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.5341859Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.8090916Z With the provided path, there will be 2 files uploaded
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.8096194Z Artifact name is valid!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:15.8098882Z Root directory input is valid!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.0808581Z Uploading artifact: experiment-locks.zip
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.0847254Z Beginning upload of artifact content to blob storage
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.2190981Z Uploaded bytes 9452
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.2483607Z Finished uploading artifact content to blob storage!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.2486276Z SHA256 digest of uploaded artifact is 314f617282986f7084959eae3e02258f7bb164b0af6369e420aa977fef34a688
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.2486742Z Finalizing artifact upload
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7046829Z Artifact experiment-locks successfully finalized. Artifact ID 12872220470
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7047461Z Artifact experiment-locks has been successfully uploaded! Final size is 9452 bytes. Artifact ID is 12872220470
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7061592Z Artifact download URL: https://github.com/yeelam-gordon/fastapi/actions/runs/40814588064/artifacts/12872220470
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7461534Z ##[group]Run python "Generated Files/arm-build/ci_prepare.py"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7462117Z ^[[36;1mpython "Generated Files/arm-build/ci_prepare.py"^[[0m
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7520868Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7521233Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7521429Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7521696Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7521960Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:16.7522222Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1631719Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1632227Z with:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1632408Z   name: windows-arm-wheelhouse
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1632648Z   path: Generated Files/arm-build/wheelhouse
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1632908Z   if-no-files-found: error
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1633105Z   retention-days: 7
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1633293Z   compression-level: 6
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1633478Z   overwrite: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1633667Z   include-hidden-files: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1633871Z   archive: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1634031Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1634207Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1634880Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1635149Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.1635402Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.4393337Z With the provided path, there will be 27 files uploaded
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.4399382Z Artifact name is valid!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.4402157Z Root directory input is valid!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.7019824Z Uploading artifact: windows-arm-wheelhouse.zip
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:26.7055994Z Beginning upload of artifact content to blob storage
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:27.4079667Z Uploaded bytes 8388608
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:27.8788359Z Uploaded bytes 16777216
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:27.9540473Z Uploaded bytes 17104951
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:27.9854496Z Finished uploading artifact content to blob storage!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:27.9857752Z SHA256 digest of uploaded artifact is 3542626359e90228bfc9667f404e12fff338f78a5e76d89f51959ecf5f52a971
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:27.9860452Z Finalizing artifact upload
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4528218Z Artifact windows-arm-wheelhouse successfully finalized. Artifact ID 12871931596
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4529556Z Artifact windows-arm-wheelhouse has been successfully uploaded! Final size is 17104951 bytes. Artifact ID is 12871931596
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4542731Z Artifact download URL: https://github.com/yeelam-gordon/fastapi/actions/runs/40814588064/artifacts/12871931596
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4902534Z ##[group]Run python "Generated Files/arm-build/test_benchmark.py"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4903138Z ^[[36;1mpython "Generated Files/arm-build/test_benchmark.py"^[[0m
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4957957Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4958293Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4958495Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4958765Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4959037Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:28.4959305Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.2498941Z .ValueError: uv executable not found: missing
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.2513667Z [WinError 183] Cannot create a file when that file already exists: 'C:\\a\\fastapi\\fastapi\\Generated Files\\arm-build\\.test-benchmark-6c6fb41f17d044bba015261e1ea91cb8\\results'
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.2982676Z ...........
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.2983015Z ----------------------------------------------------------------------
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.2983466Z Ran 12 tests in 0.181s
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.2983597Z 
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.2983669Z OK
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.4608445Z ##[group]Run python "Generated Files/arm-build/benchmark.py" --uv uv --repeats 7 --output "Generated Files/arm-build/results/ci" --importtime
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.4609746Z ^[[36;1mpython "Generated Files/arm-build/benchmark.py" --uv uv --repeats 7 --output "Generated Files/arm-build/results/ci" --importtime^[[0m
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.4667253Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.4667595Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.4667797Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.4668096Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.4668365Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:53:29.4669673Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:34.3033795Z ##[group]Run python "Generated Files/arm-build/ci_prepare.py" --smoke
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:34.3034439Z ^[[36;1mpython "Generated Files/arm-build/ci_prepare.py" --smoke^[[0m
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:34.3091157Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:34.3091501Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:34.3091699Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:34.3091973Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:34.3092249Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:34.3092513Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:37.6652128Z ##[group]Run python -m ruff check "Generated Files/arm-build/benchmark.py" "Generated Files/arm-build/test_benchmark.py" "Generated Files/arm-build/ci_prepare.py" --output-format github
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:37.6653488Z ^[[36;1mpython -m ruff check "Generated Files/arm-build/benchmark.py" "Generated Files/arm-build/test_benchmark.py" "Generated Files/arm-build/ci_prepare.py" --output-format github^[[0m
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:37.6708416Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:37.6708750Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:37.6708950Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:37.6709220Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:37.6709493Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:37.6709757Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1875269Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1875782Z with:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1875971Z   name: arm-build-windows-11-arm
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1877612Z   path: Generated Files/arm-build/results/ci/report.json
+windows-11-arm	UNKNOWN STEP	Generated Files/arm-build/results/ci/harness.py
+windows-11-arm	UNKNOWN STEP	Generated Files/arm-build/results/ci/logs
+windows-11-arm	UNKNOWN STEP	Generated Files/arm-build/results/ci/artifacts/*.manifest.json
+windows-11-arm	UNKNOWN STEP	Generated Files/arm-build/results/ci/build-constraints.txt
+windows-11-arm	UNKNOWN STEP	Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.whl
+windows-11-arm	UNKNOWN STEP	Generated Files/arm-build/results/ci/artifacts/prepare-baseline/*.tar.gz
+windows-11-arm	UNKNOWN STEP	Generated Files/arm-build/results/bootstrap
+windows-11-arm	UNKNOWN STEP	
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1879302Z   if-no-files-found: error
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1879506Z   retention-days: 14
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1879698Z   compression-level: 6
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1879887Z   overwrite: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1880077Z   include-hidden-files: false
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1880289Z   archive: true
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1880509Z env:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1880695Z   UV_TOOL_BIN_DIR: C:\a\_temp\uv-tool-bin-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1880962Z   UV_TOOL_DIR: C:\a\_temp\uv-tool-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1881229Z   UV_PYTHON_INSTALL_DIR: C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.1881490Z ##[endgroup]
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.4881265Z Multiple search paths detected. Calculating the least common ancestor of all paths
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.4883681Z The least common ancestor is C:\a\fastapi\fastapi\Generated Files\arm-build\results. This will be the root directory of the artifact
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.4884475Z With the provided path, there will be 79 files uploaded
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.4887872Z Artifact name is valid!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.4889758Z Root directory input is valid!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.7241345Z Uploading artifact: arm-build-windows-11-arm.zip
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:38.7278441Z Beginning upload of artifact content to blob storage
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.2284091Z Uploaded bytes 1774070
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.2569858Z Finished uploading artifact content to blob storage!
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.2572849Z SHA256 digest of uploaded artifact is 622274529288eb156de0a97c9f07cd2f57e509897bb9142793f620e872713757
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.2573332Z Finalizing artifact upload
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.6938821Z Artifact arm-build-windows-11-arm successfully finalized. Artifact ID 12871413270
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.6939521Z Artifact arm-build-windows-11-arm has been successfully uploaded! Final size is 1774070 bytes. Artifact ID is 12871413270
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.6953556Z Artifact download URL: https://github.com/yeelam-gordon/fastapi/actions/runs/40814588064/artifacts/12871413270
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.7397206Z Post job cleanup.
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.9611470Z UV_PYTHON_INSTALL_DIR is already set to C:\a\_temp\uv-python-dir
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:39.9960534Z Post job cleanup.
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:40.2850000Z [command]"C:\Program Files\Git\bin\git.exe" version
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:40.3307992Z git version 2.56.0.windows.3
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:40.3387939Z Temporarily overriding HOME='C:\a\_temp\8864a5d3-f02e-4a3b-8b98-b50d0ae85cc2' before making global git config changes
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:40.3388653Z Adding repository directory to the temporary git global config as a safe directory
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:40.3397517Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory C:\a\fastapi\fastapi
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:40.3902194Z Removing SSH command configuration
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:40.3914085Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:40.4421963Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:41.6660976Z Removing HTTP extra header
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:41.6671748Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:41.7202721Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:42.9543081Z Removing includeIf entries pointing to credentials config files
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:42.9554830Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:43.0064880Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-11-arm	UNKNOWN STEP	2026-10-29T03:54:44.1956143Z Cleaning up orphan processes

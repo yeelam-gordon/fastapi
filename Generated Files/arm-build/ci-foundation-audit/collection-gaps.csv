@@ -1,0 +1,18 @@
+evidence,windows,macos,interpretation,minimum_next_collection
+Queue-only and VM allocation,UNAVAILABLE,UNAVAILABLE,Run creation to job start is only a scheduling envelope,Preserve job creation and runner assignment timestamps if exposed
+Workflow steps,AVAILABLE coarse seconds,AVAILABLE coarse seconds,Single job each; zero-duration boundary is not zero work,Keep raw API and timestamped console
+Bootstrap command walls,AVAILABLE,AVAILABLE,Python tools and smoke receipts; Windows wheelhouse export unpaired,Keep separate command wall timings and exclude export extras
+Normal complete build wall,AVAILABLE seven per variant,AVAILABLE seven per variant,Warm offline sdist then wheel; historical artifact parity rejected,Canonical source and artifact equivalence gate before interpreting future paired results
+sdist and wheel separate walls,UNAVAILABLE,UNAVAILABLE,Untimestamped markers only; stdout empty and stderr retained,Monotonic start/end for sdist and wheel-from-sdist on both platforms
+Backend hook walls and counts,UNAVAILABLE,UNAVAILABLE,Frontend markers do not identify timed backend process groups,PID parent PID hook name argv and start/end for each hook
+Isolation dependency setup walls,UNAVAILABLE,UNAVAILABLE,Isolation-removal whole-command diagnostic exists; no isolated internal setup timer,Timed environment creation and dependency preparation inside same build semantics
+Parent imports,AVAILABLE one diagnostic,AVAILABLE one diagnostic,219 versus 209 numeric records; exclusive self only; no backend import coverage,Keep context PID and hook IDs if imports remain a hypothesis
+Backend imports,UNAVAILABLE,UNAVAILABLE,No pdm import rows; -X importtime is parent argv not propagated backend instrumentation,Only if needed instrument matched backend child contexts on both runners
+CPU user and kernel,UNAVAILABLE,UNAVAILABLE,Wall time cannot distinguish computation from waiting,Per-stage parent and child user/system CPU with process family attribution
+Process family IO,UNAVAILABLE,UNAVAILABLE,No comparable byte operation or file counts from OS counters,Per-stage child-inclusive read/write bytes and operations with platform semantics
+Memory profiles,UNAVAILABLE,UNAVAILABLE,No peak RSS allocation or per-stage memory samples,Peak process-family memory only after CPU versus wait triage if needed
+Stage work counts,PARTIAL adding-file markers,PARTIAL adding-file markers,Member manifests and log counts are not filesystem IO counts,Canonical members and bytes plus stage operation counters
+Toolchain,AVAILABLE versions,AVAILABLE versions,CPython native 3.13.15 uv 0.13.6 PDM 2.5.0; compiler strings do not prove PGO cause,Record distribution provenance and actual build flags if investigating interpreter differences
+Runner hardware,PARTIAL four logical ARMv8 Model D49,PARTIAL three logical Apple M1 Virtual,No physical-host equivalence or Cobalt SoC claim permitted,Exact VM shape CPU exposure and throttling if supplied by runner
+Runner image,CONFLICT console versus receipt,AVAILABLE consistent,Windows console 20261025.196.1 versus receipt 20261026.197.1; preserve both,Resolve metadata source discrepancy before image-specific conclusions
+Storage,UNAVAILABLE,UNAVAILABLE,Paths and file listing do not establish device latency throughput cache state or contention,Record filesystem volume class and cache policy; trace storage only if IO wait evidence warrants
