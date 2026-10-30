@@ -25,6 +25,10 @@ are reused without a new dependency/version/security policy.
   separate singleton wheelhouses/caches, SDE `1700000000`.
 * A: `python -m build -v --installer uv`, normal provided-hash Verify using
   `UV_CONSTRAINT`; not generic Require.
+  Constraint environments are percent-encoded **absolute file URLs**: spaces
+  remain in the owned filesystem paths, never in the list token. Both A
+  isolations therefore select the same absolute hashed constraint file,
+  independent of cwd. No shell quoting, path shortening or private uv wrapper.
 * B: verified native uv 0.13.6 `build -v`, exact native312 selector,
   `--build-constraints`, `--require-hashes --offline --no-index --no-config
   --no-managed-python --no-python-downloads --no-create-gitignore`.
@@ -55,6 +59,27 @@ is started for either warmup or any of the twelve measured samples. The timer
 encloses only the subprocess call, with environment, extraction, log handles,
 hashing, preservation, validation and receipts outside. Setup is not timed
 frontend performance.
+
+The frontend-only environment restores P40 `COLUMNS=4096` and `TERM=dumb`
+explicitly for both arms, overriding inherited narrow/interactive settings.
+Both are retained in every new command plan. Existing text/URL/hash phase
+oracles remain strict; failed output is never rewrapped or normalized.
+
+Pinned uv commit `329bf9448afd9f9088d14a4d57fbc61eb454f117`:
+[`uv-settings/src/lib.rs`](https://github.com/astral-sh/uv/blob/329bf9448afd9f9088d14a4d57fbc61eb454f117/crates/uv-settings/src/lib.rs)
+`parse_path_list_environment_variable` splits constraints on Unicode whitespace;
+[`uv-configuration/src/requirements_input.rs`](https://github.com/astral-sh/uv/blob/329bf9448afd9f9088d14a4d57fbc61eb454f117/crates/uv-configuration/src/requirements_input.rs)
+`RequirementsInput::from_str` converts `file://` URLs to local paths. File URLs
+are not remote fetching. `UV_BUILD_CONSTRAINT`, `PIP_CONSTRAINT` and both
+find-links environments also use file URLs; this encodes commas for uv's
+comma-delimited find-links parser as well as whitespace for path lists.
+Single-valued executable, interpreter, cache and scratch paths remain unchanged.
+This follows the prior portable installer's supported file-URL transport.
+[`PyPA build 1.6.1`](https://github.com/pypa/build/blob/1.6.1/src/build/env.py)
+`_UvBackend.install_dependencies` forwards the environment
+unchanged apart from removing PYTHONPATH and setting VIRTUAL_ENV; it does not
+reparse the constraint string between sdist and wheel installs. Absolute URLs
+do not depend on frontend, backend or extracted-sdist working directories.
 
 Every new frontend command records raw `perf_counter_ns_start` and
 `perf_counter_ns_stop`; `elapsed_ns` and `wall_seconds` are derived from those
@@ -157,7 +182,15 @@ follow-up corrects only the ABI gate and early snapshot persistence; the
 parent alone chooses a fresh corrected preflight epoch, not a retry of the
 retained failure.
 
-Q validation: 79 unit contracts (65 unchanged reference contracts plus 14 new
+The parent's second actual epoch at `1a00a765c` passed ABI and all three B
+frontend hash gates, then correctness-A exited 1 before its first sdist because
+the raw spaced `UV_CONSTRAINT` path was split into multiple files. The uv
+executable and isolated Python argv were correctly quoted. That failed epoch
+has **zero complete pairs and zero timings**; its first error, raw logs, code
+hash and source states remain unchanged. This transport/presentation follow-up
+does not retry that root or claim a newly completed native pair.
+
+Q validation: 81 unit contracts (65 unchanged reference contracts plus 16 new
 frontend contracts), Ruff check/format, actionlint 1.7.12, PowerShell parsing
 of all ten workflow run blocks plus the unchanged bootstrap, and `git diff
 --check`. Fixtures cover Mac transients/Mach-O, path spaces, native/ABI
@@ -166,3 +199,16 @@ warmups/timers, raw failed logs, hosted guards, minimal-only setup and default/
 old-selector compatibility, complete local import closure, and raw nanosecond
 clock fields/order/positive elapsed derivation. No local frontend preflight,
 build or timing was executed to obtain these Q results.
+
+One new test is opt-in via `P40_Q_UV_PARSER`, pointing to the existing hash-
+verified native uv executable; it was enabled for Q validation, not for the
+hosted cohort's default contract step. It exercises uv's **actual** environment
+and file-URL reader from spaced sdist/wheel isolation cwd fixtures, including
+comma-bearing find-links and unknown files. Each fixture deliberately ends at
+a missing nested constraint before interpreter discovery (pinned
+`uv-pip-commands/src/compile.rs` reads constraints first), with an explicitly
+absent Q interpreter forbidding fallback. No Python child, backend, install or build
+is run by those parser checks. The unchanged closed-constraint integrity gate
+separately rejects a substituted valid-length wrong digest and a missing file.
+This is not another frontend hash probe or a claim that A has now completed.
+Without that explicit test flag, the parser integration test is visibly skipped.

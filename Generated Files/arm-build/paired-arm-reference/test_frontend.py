@@ -2,6 +2,7 @@
 
 import io
 import json
+import os
 import shutil
 import struct
 import subprocess
@@ -385,6 +386,7 @@ class Fixture(unittest.TestCase):
 
     def test_environment_hash_policies_and_private_caches(self):
         run = frontend.FrontendRun(self.root)
+        run.env.update(COLUMNS="80", TERM="xterm-256color")
         run.uv = self.root / "uv"
         run.wheels = {a: self.root / a / frontend.WHEEL for a in "AB"}
         run.backend_constraints = {a: self.root / a / "constraints.txt" for a in "AB"}
@@ -395,15 +397,130 @@ class Fixture(unittest.TestCase):
             self.assertNotIn("UV_NO_BUILD_ISOLATION", env)
             self.assertEqual(env["UV_OFFLINE"], "1")
             self.assertEqual(env["SOURCE_DATE_EPOCH"], "1700000000")
+            self.assertEqual(env["COLUMNS"], "4096")
+            self.assertEqual(env["TERM"], "dumb")
+            self.assertEqual(
+                env["PIP_CONSTRAINT"], run.backend_constraints[arm].as_uri()
+            )
+            for key in ("UV_FIND_LINKS", "PIP_FIND_LINKS"):
+                self.assertEqual(env[key], run.wheels[arm].parent.as_uri())
+                self.assertEqual(len(env[key].split()), 1)
             if arm == "A":
-                self.assertIn("UV_CONSTRAINT", env)
+                self.assertEqual(
+                    env["UV_CONSTRAINT"], run.backend_constraints[arm].as_uri()
+                )
                 self.assertNotIn("UV_BUILD_CONSTRAINT", env)
             else:
                 self.assertNotIn("UV_CONSTRAINT", env)
-                self.assertIn("UV_BUILD_CONSTRAINT", env)
+                self.assertEqual(
+                    env["UV_BUILD_CONSTRAINT"], run.backend_constraints[arm].as_uri()
+                )
         wheel = self.root / frontend.WHEEL
         self.assertEqual(frontend.constraint_text(wheel).count(frontend.STOCK), 2)
         self.assertIn("%20", frontend.constraint_text(wheel))
+
+    def test_constraint_identity_guard_rejects_wrong_digest_and_unknown_file(self):
+        run = frontend.FrontendRun(self.root)
+        run.source = self.root / "source"
+        run.source.mkdir()
+        run.source_before, run.native_before = {}, {}
+        run.base_before, run.imports_before = {}, {}
+        run.wheels, run.backend_constraints = {}, {}
+        for arm in "AB":
+            wheel = self.root / arm / "wheelhouse" / frontend.WHEEL
+            wheel.parent.mkdir(parents=True)
+            wheel.write_bytes(b"Q fixture; never installed")
+            constraint = self.root / arm / "constraints.txt"
+            constraint.write_text(
+                frontend.constraint_text(wheel), encoding="utf-8", newline="\n"
+            )
+            run.wheels[arm], run.backend_constraints[arm] = wheel, constraint
+        with (
+            patch.object(run, "inputs_unchanged"),
+            patch("frontend.helper_imports", return_value={}),
+            patch("frontend.native_guard", return_value={}),
+            patch("frontend.sha", return_value=frontend.STOCK),
+        ):
+            run.integrity_frontend(outer=False)
+            constraint = run.backend_constraints["A"]
+            constraint.write_text(
+                frontend.constraint_text(run.wheels["A"], frontend.installer.WRONG_SHA),
+                encoding="utf-8",
+                newline="\n",
+            )
+            with self.assertRaisesRegex(RuntimeError, "Closed constraint changed"):
+                run.integrity_frontend(outer=False)
+            constraint.unlink()
+            with self.assertRaises(FileNotFoundError):
+                run.integrity_frontend(outer=False)
+
+    @unittest.skipUnless(
+        os.environ.get("P40_Q_UV_PARSER"), "Opt-in Q-only native parser fixture"
+    )
+    def test_pinned_uv_parses_absolute_file_url_from_both_isolation_cwds(self):
+        uv = Path(os.environ["P40_Q_UV_PARSER"]).absolute()
+        frontend.installer.native_uv(uv)
+        run = frontend.FrontendRun(self.root)
+        run.uv = uv
+        run.wheels, run.backend_constraints = {}, {}
+        empty = self.root / "empty requirements.in"
+        empty.write_bytes(b"")
+        for arm in "AB":
+            wheel = self.root / arm / "wheelhouse, local" / frontend.WHEEL
+            wheel.parent.mkdir(parents=True)
+            wheel.write_bytes(b"Q parser fixture; never resolved, installed or built")
+            constraint = self.root / arm / "constraints.txt"
+            marker = self.root / arm / "missing-nested-constraint-marker.txt"
+            constraint.write_text(
+                frontend.constraint_text(wheel) + "-c " + marker.as_uri() + "\n",
+                encoding="utf-8",
+            )
+            run.wheels[arm], run.backend_constraints[arm] = wheel, constraint
+            digest = frontend.sha(constraint)
+            for phase in ("sdist isolation", "wheel-from-sdist isolation"):
+                cwd = self.root / phase / "source with spaces"
+                cwd.mkdir(parents=True, exist_ok=True)
+                (cwd / "scratch").mkdir(exist_ok=True)
+                env = run.env_for(arm, cwd, self.root / "parser cache")
+                key = "UV_CONSTRAINT" if arm == "A" else "UV_BUILD_CONSTRAINT"
+                self.assertEqual(env[key].split(), [constraint.as_uri()])
+                self.assertIn("%20", env[key])
+                self.assertIn("%2C", env["UV_FIND_LINKS"])
+                argv = [
+                    str(uv),
+                    "pip",
+                    "compile",
+                    str(empty),
+                    "--offline",
+                    "--no-index",
+                    "--no-config",
+                    "--no-managed-python",
+                    "--no-python-downloads",
+                    "--python",
+                    str(self.root / "must-not-execute-python"),
+                ]
+                # The nested missing file stops pinned compile.rs before interpreter
+                # discovery; the explicit absent Q interpreter also forbids fallback.
+                result = subprocess.run(
+                    argv, cwd=cwd, env=env, capture_output=True, timeout=30
+                )
+                self.assertNotEqual(result.returncode, 0)
+                text = result.stderr.decode("utf-8")
+                self.assertIn(marker.name, text)
+                self.assertNotIn("must-not-execute-python", text)
+                self.assertNotIn("No interpreter", text)
+                self.assertEqual(frontend.sha(constraint), digest)
+                env[key] = (self.root / "unknown-top-level-constraint.txt").as_uri()
+                result = subprocess.run(
+                    argv, cwd=cwd, env=env, capture_output=True, timeout=30
+                )
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn(
+                    "unknown-top-level-constraint.txt", result.stderr.decode("utf-8")
+                )
+                self.assertNotIn(
+                    "must-not-execute-python", result.stderr.decode("utf-8")
+                )
 
     def test_preflight_schedule_and_no_observer_in_fourteen(self):
         for preflight in (True, False):
@@ -438,7 +555,9 @@ class Fixture(unittest.TestCase):
         work, src = self.root / "work", self.root / "src"
         with (
             patch.object(run, "fresh_source", return_value=(work, src, {})),
-            patch.object(run, "env_for", return_value={}),
+            patch.object(
+                run, "env_for", return_value={"COLUMNS": "4096", "TERM": "dumb"}
+            ),
             patch.object(run, "spawn_frontend", side_effect=RuntimeError("stop")),
             patch(
                 "frontend.Observation", side_effect=AssertionError("observer in timer")
@@ -450,6 +569,8 @@ class Fixture(unittest.TestCase):
                 run.execute_frontend("pair-1-B", "B", pair=1, timed=True)
             with self.assertRaisesRegex(RuntimeError, "stop"):
                 run.execute_frontend("warmup-B", "B")
+        plan = json.loads((run.upload / "pair-1-B" / "plan.json").read_bytes())
+        self.assertEqual(plan["environment"], {"COLUMNS": "4096", "TERM": "dumb"})
 
     def test_failure_logs_raw_bytes_and_no_retry(self):
         run = frontend.FrontendRun(self.root)

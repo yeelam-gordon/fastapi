@@ -484,25 +484,27 @@ class FrontendRun(Run):
         env.update(
             UV=str(self.uv),
             UV_CACHE_DIR=str(cache),
-            UV_FIND_LINKS=str(wheel.parent),
+            UV_FIND_LINKS=wheel.parent.as_uri(),
             UV_OFFLINE="1",
             UV_NO_INDEX="1",
             UV_NO_CONFIG="1",
             UV_NO_MANAGED_PYTHON="1",
             UV_PYTHON_DOWNLOADS="never",
             PIP_NO_INDEX="1",
-            PIP_FIND_LINKS=str(wheel.parent),
-            PIP_CONSTRAINT=str(constraint),
+            PIP_FIND_LINKS=wheel.parent.as_uri(),
+            PIP_CONSTRAINT=constraint.as_uri(),
             PIP_CACHE_DIR=str(self.root / arm / "pip-cache"),
             SOURCE_DATE_EPOCH="1700000000",
+            COLUMNS="4096",
+            TERM="dumb",
             PATH=str(self.uv.parent) + os.pathsep + env["PATH"],
         )
         for key in ("TEMP", "TMP", "TMPDIR"):
             env[key] = str(work / "scratch")
         if arm == "A":
-            env["UV_CONSTRAINT"] = str(constraint)
+            env["UV_CONSTRAINT"] = constraint.as_uri()
         else:
-            env["UV_BUILD_CONSTRAINT"] = str(constraint)
+            env["UV_BUILD_CONSTRAINT"] = constraint.as_uri()
         installer.reject_bypass(env)
         return env
 
@@ -564,7 +566,7 @@ class FrontendRun(Run):
                     k: v
                     for k, v in env.items()
                     if k.startswith(("UV_", "PIP_", "PYTHON"))
-                    or k == "SOURCE_DATE_EPOCH"
+                    or k in ("SOURCE_DATE_EPOCH", "COLUMNS", "TERM")
                 },
             },
         )
