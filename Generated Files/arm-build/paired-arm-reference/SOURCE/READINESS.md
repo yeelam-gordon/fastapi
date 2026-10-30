@@ -2,10 +2,11 @@
 
 ## Status and authority
 
-**LOCAL PORTABLE CHECKS PASS; parent native preflight is still outstanding.**
+**LOCAL FIX CHECKS PASS; parent owns any corrected Mac-only backfill decision.**
 No native bootstrap, dependency restoration, full suite, performance series,
 push, dispatch, default-branch change, workflow-state change or upstream PR was
-performed by this worker. No Mac execution is claimed.
+performed by this worker. The new fix has not executed on Mac; the first hosted
+attempt's successful native Mac bootstrap is distinct from its failed guard.
 
 This is the original human-requested, finite, readiness-gated owned-fork CI work.
 It is not a new upstream proposal or a requirement for new per-run human
@@ -29,6 +30,7 @@ Exact relative paths under `Generated Files/arm-build/paired-arm-reference/`:
 `source.py`, `compare.py`, `frozen.py`, `test_reference.py`, `cpu_audit.py`,
 `cpu-hook/sitecustomize.py`, `test_cpu_hook.py`, `test_cpu_audit.py`,
 `installer.py`, `test_installer.py`,
+`macos-reference-graph.json`, `test_reference_versions.py`,
 `build-constraints.txt`, `reference-constraints.txt`, `owner-dev.txt`,
 `cloud.patch`, `pdm-small-read-prefetch.patch`, `CLOUD-LICENSE.txt`,
 `PDM-LICENSE.txt`, `pdm_backend-2.5.0-py3-none-any.whl.gz`,
@@ -45,6 +47,8 @@ Read-only GitHub API checks on 2026-10-30 established:
   the 20 remote workflow blob IDs matched the audited base.
 - The new case uses **existing input names**, not a new registration:
   `platform=matched-reference`, optionally `native_traces=false`.
+  The prepared `platform=matched-macos` option is explicit manual Mac-only
+  selection, not an automatic retry or a change to the paired default.
   `platform` still defaults to `both`; `native_traces` still defaults to true.
   Existing `both/windows/macos` analysis steps, source and behavior are intact.
   The matched driver does not import or run that historical collector;
@@ -52,14 +56,60 @@ Read-only GitHub API checks on 2026-10-30 established:
 - A future parent-owned dispatch can address the existing workflow filename,
   explicit owned repository, and `--ref perf/hobl-arm-reference`, with those
   existing input names. No default-branch edit is needed to register another
-  workflow. This new ref/input combination has **not** been dispatched.
-- Only the matched matrix allocates runners: **windows-11-arm + macos-15**,
-  the exact previous runner labels. The analysis job is skipped before matrix
+  workflow. `matched-reference` was dispatched at `0712ba752`; the new
+  `matched-macos` combination is **preparation only, not dispatched**.
+- Only the matched matrix allocates runners: `matched-reference` retains
+  **windows-11-arm + macos-15**; `matched-macos` selects **macos-15 only**,
+  with no Windows allocation. The analysis job is skipped before matrix
   expansion. There is no Linux/aggregation job, retry action or second run.
   The matched job also requires the exact fork/ref and first run attempt.
 - Each job has a finite 60-minute ceiling, fails closed, retains partial
   evidence, and never repairs/replaces failed samples. The parent aggregates
   the two artifact sets offline.
+
+### First hosted Mac guard failure and bounded correction
+
+Run `41002642194`, Mac job `123890363719`, failed the reference-version guard
+before any performance commands: **zero valid Mac performance samples**.
+The original partial artifact/failure is preserved, not repaired or counted
+as a new measurement. Windows job `123890362482` finished **SUCCESS** under
+fail-fast=false at the original commit. Its valid results remain unchanged:
+PDM-code did not advance; SDK-code and supported-installer met their gates.
+No Windows tuning or repetition is part of this correction.
+
+The actual Mac identity has 78 distributions: all 77 present Windows-reference
+pins match exactly; only `colorama` is absent, and the sole extra is the
+already-allowed `uvloop==0.23.0`. Native bootstrap/extension-architecture checks passed.
+This was our Windows-graph expectation bug, not evidence of Mac ABI/performance
+failure. Primary installed-wheel Requires-Dist metadata establishes:
+
+- pytest 8.4.2: `colorama>=0.4; sys_platform == "win32"`.
+- typer 0.27.3: `colorama; platform_system == "Windows"`.
+- Pygments 2.21.0's colorama dependency is only its unselected
+  `windows-terminal` extra; all graph references to Pygments omit that extra.
+  Click 8.5.0 declares no Requires-Dist here, so no Click marker is invented.
+- uvicorn 0.54.0 permits uvloop for its standard extra only outside
+  win32/cygwin/PyPy, matching the pre-existing Mac-only extra policy.
+
+Evidence: identity SHA256
+`981eb6039e555b182b98507c71d3765a0ece1239b29f721216556dc53e2be39f`,
+install-report SHA256
+`a30cb23e639683c49279ecde8f22a1093544b9f0750a7fde6288190d0703ded3`.
+The sub-3-KiB fixture projects only public package versions/source IDs, not
+the raw artifact, logs, native paths or environment.
+
+The correction permits only absent colorama in the **Darwin reference**
+graph with the verified pytest 8.4.2 / typer 0.27.3 pins. A future parent-version
+change must re-establish that marker policy. Windows still requires it;
+a present Mac colorama must still be exactly
+0.4.6. Every other missing/present-version/extra check stays strict. The
+explicit minimal build requirements, all 78 constraint pins, original test
+requirements/workload/oracles, and runner/package bootstrap remain unchanged.
+
+One potential corrected Mac-only manual backfill is merely prepared. Parent
+must first assess the original Windows result, local regressions, review and
+native preflight, and recheck publication triggers. No bad-commit GH rerun,
+automatic retry, push or dispatch is performed by this worker.
 
 ### Complete feature-push trigger audit
 
@@ -260,7 +310,7 @@ in the new case. Independent review/publication remains parent-owned.
 Completed on Q only, with TEMP/TMP/TMPDIR/PYTEST_TMPDIR pointing into private
 owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
 
-- 54 stdlib contract/mocked tests pass, including native universal2/Rosetta/
+- 62 stdlib contract/mocked tests pass, including native universal2/Rosetta/
   x86 guards; synthetic HOME/credential removal; literal CLI exit 1; raw
   CRLF-vs-LF inequality; backend identity/RECORD; Git-LF/executable-mode
   integrity; both raw build phase streams; stale/failed coverage preservation;
@@ -273,6 +323,9 @@ owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
   Installer additions check Require/Verify separation, bypass rejection,
   positive/cold/warm gate scheduling, exact closed inputs/hashed-URL selections,
   native-tool identity, installed RECORD boundaries and three-case budgets.
+  The hosted Mac graph regression passes; Windows missing colorama, Mac
+  wrong-present colorama, unrelated missing/version drift/extra, and minimal
+  environment absence all fail. Matrix guards prove paired=2 and Mac-only=1.
 - Existing native Ruff **0.16.6** check and format pass; existing actionlint
   **1.7.12** passes; bootstrap PowerShell AST parses without errors.
 - Static real Git archive proof passed for all **2,557** pinned LF payloads;
@@ -355,10 +408,11 @@ searched and no approved-index request/native preflight was run during the
 lease. Child index settings do not mutate global configuration; keep local
 preflight logs local rather than publishing private feed-route receipts.
 
-Remaining bounded uncertainties: parent native preflight, actual runner
+Remaining bounded uncertainties: corrected-input parent native preflight, actual runner
 download/setup behavior, availability of all frozen official native wheels
 (especially macOS-only uvloop), real Mac execution/coverage shape, hosted
-hardware/load, and the unexecuted new ref dispatch combination. No local
+hardware/load, and the unexecuted manual Mac-only selection. The first paired
+allocation has now exercised the existing registration/ref strategy. No local
 lint/mock claims these are executed. Confidence is **high** for portable
 guards/source/trigger scope, **medium** for runner orchestration before native
 preflight, and **low/unmeasured** for cross-host benefit/parity. Stop here for

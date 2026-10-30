@@ -8,6 +8,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import shutil
 import sqlite3
 import struct
@@ -659,18 +660,31 @@ class ScheduleTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             frozen.summary(rows[:-1])
 
-    def test_only_two_jobs_and_unchanged_default_analysis(self):
+    def test_manual_two_or_mac_only_jobs_and_unchanged_legacy_default(self):
         text = (
             HERE.parents[2] / ".github" / "workflows" / "arm-build-diagnostics.yml"
         ).read_text()
         old, matched = text.split("\n  matched-reference:", 1)
         self.assertIn("default: both", old)
         self.assertNotIn("      case:", old)
-        self.assertIn("if: inputs.platform != 'matched-reference'", old)
+        self.assertIn(
+            "if: inputs.platform != 'matched-reference' && inputs.platform != 'matched-macos'",
+            old,
+        )
         self.assertIn("Preserve native Python setup receipts", old)
-        self.assertEqual(matched.count("- runner:"), 2)
-        self.assertIn("runner: windows-11-arm", matched)
-        self.assertIn("runner: macos-15", matched)
+        matrices = [
+            json.loads(value)
+            for value in re.findall(r"'(\[\{\"runner\".*?\}\])'", matched)
+        ]
+        mac = {"runner": "macos-15", "platform": "macos"}
+        windows = {"runner": "windows-11-arm", "platform": "windows"}
+        self.assertEqual(matrices, [[mac], [windows, mac]])
+        self.assertIn("inputs.platform == 'matched-macos' &&", matched)
+        self.assertIn(
+            "(inputs.platform == 'matched-reference' || inputs.platform == 'matched-macos') &&",
+            matched,
+        )
+        self.assertIn("github.repository == 'yeelam-gordon/fastapi'", matched)
         self.assertNotIn("ubuntu", matched)
         self.assertIn("github.run_attempt == '1'", matched)
         self.assertIn("refs/heads/perf/hobl-arm-reference", matched)

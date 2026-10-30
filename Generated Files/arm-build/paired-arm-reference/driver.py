@@ -90,6 +90,33 @@ def constraints(path):
     }
 
 
+def verify_versions(installed, expected, *, system, reference=False):
+    missing = set(expected) - installed.keys()
+    # Pinned pytest 8.4.2 and typer 0.27.3 require colorama only on Windows.
+    known_markers = (
+        expected.get("pytest") == "8.4.2" and expected.get("typer") == "0.27.3"
+    )
+    allowed_missing = (
+        {"colorama"} if reference and system == "Darwin" and known_markers else set()
+    )
+    require(
+        not missing - allowed_missing,
+        "Unexplained missing frozen distributions: "
+        + ", ".join(sorted(missing - allowed_missing)),
+    )
+    for key, value in expected.items():
+        if key in installed:
+            require(installed[key] == value, f"Frozen version drift: {key}")
+    extras = {key: value for key, value in installed.items() if key not in expected}
+    if reference:
+        allowed_extras = {"uvloop"} if system == "Darwin" else set()
+        require(
+            set(extras) <= allowed_extras,
+            "Unexpected reference distributions/platform extras",
+        )
+    return {"resolved": extras, "marker_governed_absences": sorted(missing)}
+
+
 def input_hashes():
     files = [p for p in HERE.iterdir() if p.is_file()]
     files.extend((HERE / "SOURCE").glob("*"))
@@ -464,11 +491,12 @@ class Run:
                 installed = {
                     canonical_name(k): v for k, v in identity["distributions"].items()
                 }
-                for key, value in constraints(HERE / filename).items():
-                    require(
-                        installed.get(key) == value,
-                        f"Existing venv version drift: {key}",
-                    )
+                verify_versions(
+                    installed,
+                    constraints(HERE / filename),
+                    system=platform.system(),
+                    reference=filename == "reference-constraints.txt",
+                )
         build_identity = self.identity(self.build_python, "minimal-frozen")
         self.build_site = Path(build_identity["site"])
         self.build_before = payload_tree(self.build_site)
@@ -538,21 +566,19 @@ class Run:
         self.py(python, name + "-check", ["-m", "pip", "check"])
         identity = self.identity(python, name + "-setup")
         installed = {canonical_name(k): v for k, v in identity["distributions"].items()}
-        for key, value in constraints(HERE / constraint).items():
-            require(installed.get(key) == value, f"Frozen {name} version drift: {key}")
+        graph = verify_versions(
+            installed,
+            constraints(HERE / constraint),
+            system=platform.system(),
+            reference=name == "reference",
+        )
         if name == "reference":
-            expected = constraints(HERE / constraint)
-            extras = {k: v for k, v in installed.items() if k not in expected}
-            allowed = {"uvloop"} if platform.system() == "Darwin" else set()
-            require(
-                set(extras) <= allowed,
-                "Unexpected reference distributions/platform extras",
-            )
             save(
                 self.upload / "platform-extras.json",
                 {
-                    "resolved": extras,
-                    "policy": "Only original uvicorn[standard] macOS uvloop marker",
+                    **graph,
+                    "policy": "Darwin reference may lack Windows-marker colorama; only "
+                    "original uvicorn[standard] macOS uvloop is an allowed extra",
                 },
             )
         return python

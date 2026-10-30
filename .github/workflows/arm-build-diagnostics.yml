@@ -4,13 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       platform:
-        description: Analysis platform, or matched-reference for exactly two native reference jobs.
+        description: Analysis platform, matched-reference (two jobs), or explicit matched-macos (one job).
         type: choice
         options:
           - both
           - windows
           - macos
           - matched-reference
+          - matched-macos
         default: both
       native_traces:
         description: Request capability/privacy-gated native diagnostics.
@@ -27,7 +28,7 @@ env:
 
 jobs:
   diagnostics:
-    if: inputs.platform != 'matched-reference'
+    if: inputs.platform != 'matched-reference' && inputs.platform != 'matched-macos'
     name: Analysis only (${{ matrix.platform }})
     strategy:
       fail-fast: false
@@ -198,7 +199,7 @@ jobs:
           retention-days: 3
   matched-reference:
     if: >-
-      inputs.platform == 'matched-reference' &&
+      (inputs.platform == 'matched-reference' || inputs.platform == 'matched-macos') &&
       github.repository == 'yeelam-gordon/fastapi' &&
       github.ref == 'refs/heads/perf/hobl-arm-reference' &&
       github.run_attempt == '1'
@@ -206,11 +207,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - runner: windows-11-arm
-            platform: windows
-          - runner: macos-15
-            platform: macos
+        include: >-
+          ${{ fromJSON(
+            inputs.platform == 'matched-macos' && '[{"runner":"macos-15","platform":"macos"}]' ||
+            '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-15","platform":"macos"}]'
+          ) }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 60
     defaults:
