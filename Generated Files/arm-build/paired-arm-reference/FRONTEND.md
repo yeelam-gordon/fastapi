@@ -81,8 +81,29 @@ hash-verified stock wheel metadata, explicit native312 selection and guarded
 outer/base; this is **not** a claim of full portable transient attestation.
 The native binary and actual Python machine/version guards are retained.
 The actual child ABI/cache tag, pointer width and base interpreter must also
-match native CPython 3.12. The complete outer file snapshot includes bytecode;
-preflight snapshots it before any outer child invocation and checks preservation.
+match native CPython 3.12.10. Windows requires the actual `SOABI=null`,
+`sysconfig_platform=win-arm64` and `EXT_SUFFIX=.cp312-win_arm64.pyd` together,
+not generic acceptance of absent ABI metadata. macOS requires
+`SOABI=cpython-312-darwin`, `EXT_SUFFIX=.cpython-312-darwin.so` and an ARM64/
+universal2 macOS sysconfig platform. Both retain native execution and exact
+base PE/Mach-O checks. These fields are captured by the existing untimed ABI
+probe, not another subprocess or any change to the measured commands.
+The complete outer file snapshot includes bytecode; preflight persists it
+before native/ABI validation or any outer child invocation, then checks
+preservation. Hosted setup also persists its snapshot before ABI validation.
+
+Target-version primary sources: CPython **v3.12.10**
+[`Lib/sysconfig.py`](https://github.com/python/cpython/blob/v3.12.10/Lib/sysconfig.py)
+initializes Windows `EXT_SUFFIX` from `_imp.extension_suffixes()[0]`, does not
+set Windows `SOABI`, and returns `win-arm64` for ARM64;
+[`Python/dynload_win.c`](https://github.com/python/cpython/blob/v3.12.10/Python/dynload_win.c)
+places the tagged suffix first;
+[`PC/pyconfig.h`](https://github.com/python/cpython/blob/v3.12.10/PC/pyconfig.h)
+defines the ARM64 tag as `win_arm64`. No Python 3.13 extrapolation is used.
+The parent's separate read-only native312 sysconfig follow-up confirms these
+exact Windows values and loader suffixes `['.cp312-win_arm64.pyd', '.pyd']`;
+the positive Q fixture retains that list, while generic `.pyd` as `EXT_SUFFIX`
+is rejected.
 
 Cross-host five executable sdist script modes (`coverage.sh`, `format.sh`,
 `lint.sh`, `test-cov-html.sh`, `test.sh`) and ZIP creator/header fields remain
@@ -128,7 +149,15 @@ manifest coverage and elapsed-only clock receipts are not retroactively fixed
 or remeasured; the unused legacy helper's current LF agreement does not prove
 historical raw pre/post identity.
 
-Q validation: 78 unit contracts (65 unchanged reference contracts plus 13 new
+The parent's first actual c62 preflight stopped before hash probes, builds or
+timings because this helper incorrectly required POSIX SOABI on Windows.
+Its native guard passed and its actual Windows CPython 3.12 receipt had null
+SOABI. That failed epoch, code hash and raw logs remain unchanged. This
+follow-up corrects only the ABI gate and early snapshot persistence; the
+parent alone chooses a fresh corrected preflight epoch, not a retry of the
+retained failure.
+
+Q validation: 79 unit contracts (65 unchanged reference contracts plus 14 new
 frontend contracts), Ruff check/format, actionlint 1.7.12, PowerShell parsing
 of all ten workflow run blocks plus the unchanged bootstrap, and `git diff
 --check`. Fixtures cover Mac transients/Mach-O, path spaces, native/ABI

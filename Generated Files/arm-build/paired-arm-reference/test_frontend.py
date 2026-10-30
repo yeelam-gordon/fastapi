@@ -34,6 +34,27 @@ def native_log(wheel, *, sdist_only=False):
     return "\n".join(lines)
 
 
+def abi_fixture(system, base):
+    abi = {
+        "cache_tag": "cpython-312",
+        "version": "3.12.10",
+        "system": system,
+        "bits": 64,
+        "machine": "ARM64" if system == "Windows" else "arm64",
+        "soabi": None if system == "Windows" else "cpython-312-darwin",
+        "sysconfig_platform": (
+            "win-arm64" if system == "Windows" else "macosx-11.0-universal2"
+        ),
+        "ext_suffix": (
+            ".cp312-win_arm64.pyd" if system == "Windows" else ".cpython-312-darwin.so"
+        ),
+        "base": str(base),
+    }
+    if system == "Windows":
+        abi["extension_suffixes"] = [".cp312-win_arm64.pyd", ".pyd"]
+    return abi
+
+
 class Fixture(unittest.TestCase):
     def setUp(self):
         self.root = HERE / ".local" / ("frontend path spaces " + uuid.uuid4().hex)
@@ -128,13 +149,6 @@ class Fixture(unittest.TestCase):
         with zipfile.ZipFile(wheel, "w") as archive:
             archive.writestr("fixture", b"fixture")
         versions = frontend.constraints(HERE / "build-constraints.txt")
-        abi = {
-            "cache_tag": "cpython-312",
-            "bits": 64,
-            "machine": "arm64",
-            "soabi": "cpython-312-darwin",
-            "base": sys._base_executable,
-        }
 
         def fake_extract(archive, target, proof):
             target.mkdir()
@@ -147,8 +161,11 @@ class Fixture(unittest.TestCase):
             out = b"uv 0.13.6" if label == "uv-version" else json.dumps(abi).encode()
             return {}, out, b""
 
-        for preflight in (True, False):
-            run = frontend.FrontendRun(self.root / str(preflight))
+        for preflight, valid_abi in ((True, True), (False, True), (True, False)):
+            abi = abi_fixture(frontend.platform.system(), sys._base_executable)
+            if not valid_abi:
+                abi["cache_tag"] = "cpython-313"
+            run = frontend.FrontendRun(self.root / f"{preflight}-{valid_abi}")
             identity = {
                 "prefix": str(run.root / "outer"),
                 "distributions": versions,
@@ -193,11 +210,21 @@ class Fixture(unittest.TestCase):
                     side_effect=lambda url, target: shutil.copyfile(wheel, target),
                 ),
             ):
-                run.setup_frontend(
-                    self.root / "uv",
-                    preflight=preflight,
-                    stock_wheel=wheel if preflight else None,
-                )
+                if valid_abi:
+                    run.setup_frontend(
+                        self.root / "uv",
+                        preflight=preflight,
+                        stock_wheel=wheel if preflight else None,
+                    )
+                else:
+                    with self.assertRaisesRegex(RuntimeError, "Actual child ABI"):
+                        run.setup_frontend(
+                            self.root / "uv", preflight=True, stock_wheel=wheel
+                        )
+                    self.assertEqual(
+                        json.loads((run.upload / "outer-before.json").read_bytes()), {}
+                    )
+                    self.assertFalse((run.upload / "actual-python-abi.json").exists())
             if preflight:
                 make.assert_not_called()
             else:
@@ -208,20 +235,23 @@ class Fixture(unittest.TestCase):
             self.assertEqual(run.wheels["A"].read_bytes(), run.wheels["B"].read_bytes())
 
     def test_actual_abi_and_readonly_bytecode_negatives(self):
-        valid = {
-            "cache_tag": "cpython-312",
-            "bits": 64,
-            "machine": "arm64",
-            "soabi": "cpython-312-darwin",
-            "base": sys._base_executable,
-        }
-        with patch("frontend.binary_guard"):
+        valid = abi_fixture("Darwin", sys._base_executable)
+        with (
+            patch("frontend.binary_guard"),
+            patch("frontend.platform.system", return_value="Darwin"),
+        ):
             frontend.verify_python_abi(valid)
             for key, bad in (
                 ("cache_tag", "cpython-313"),
+                ("version", "3.12.9"),
                 ("bits", 32),
                 ("machine", "x86_64"),
                 ("soabi", None),
+                ("soabi", "cpython-313-darwin"),
+                ("system", "Windows"),
+                ("sysconfig_platform", "macosx-10.9-x86_64"),
+                ("sysconfig_platform", None),
+                ("ext_suffix", ".cpython-313-darwin.so"),
                 ("base", str(self.root / "other-python")),
             ):
                 with self.assertRaises(RuntimeError):
@@ -232,6 +262,44 @@ class Fixture(unittest.TestCase):
         before = frontend.outer_snapshot(self.root)
         bytecode.write_bytes(b"new")
         self.assertNotEqual(before, frontend.outer_snapshot(self.root))
+
+    def test_actual_windows_null_soabi_receipt_requires_strict_arm64_abi_and_pe(self):
+        base = self.root / "python-official" / "python.exe"
+        base.parent.mkdir()
+        data = bytearray(128)
+        data[:2] = b"MZ"
+        struct.pack_into("<I", data, 60, 80)
+        data[80:84] = b"PE\0\0"
+        struct.pack_into("<H", data, 84, 0xAA64)
+        base.write_bytes(data)
+        # Observed c62/sysconfig-followup values; base is relocated to owned Q.
+        valid = abi_fixture("Windows", base)
+        with (
+            patch("frontend.platform.system", return_value="Windows"),
+            patch("frontend.sys._base_executable", str(base)),
+        ):
+            frontend.verify_python_abi(valid)
+            for key, bad in (
+                ("cache_tag", "cpython-313"),
+                ("version", "3.13.0"),
+                ("bits", 32),
+                ("machine", "AMD64"),
+                ("soabi", "cpython-312-darwin"),
+                ("system", "Darwin"),
+                ("sysconfig_platform", "win-amd64"),
+                ("sysconfig_platform", None),
+                ("ext_suffix", ".pyd"),
+                ("ext_suffix", ".cp313-win_arm64.pyd"),
+                ("ext_suffix", ".cp312-win_amd64.pyd"),
+                ("ext_suffix", None),
+                ("base", str(self.root / "other-python.exe")),
+            ):
+                with self.subTest(key=key, bad=bad), self.assertRaises(RuntimeError):
+                    frontend.verify_python_abi({**valid, key: bad})
+            struct.pack_into("<H", data, 84, 0x8664)
+            base.write_bytes(data)
+            with self.assertRaisesRegex(RuntimeError, "native ARM64"):
+                frontend.verify_python_abi(valid)
 
     def test_exact_default_sdist_to_wheel_and_constraint_paths(self):
         uv, python, constraint = (

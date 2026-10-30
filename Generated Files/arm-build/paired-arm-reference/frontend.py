@@ -77,12 +77,32 @@ def outer_snapshot(root):
 def verify_python_abi(abi):
     require(
         abi["cache_tag"] == "cpython-312"
+        and abi["version"] == "3.12.10"
         and abi["bits"] == 64
-        and abi["machine"].lower() in ("arm64", "aarch64")
-        and abi["soabi"]
-        and "312" in abi["soabi"],
+        and abi["machine"].lower() in ("arm64", "aarch64"),
         "Actual child ABI must be native CPython 3.12",
     )
+    system = platform.system()
+    require(abi["system"] == system, "Child ABI host mismatch")
+    if system == "Windows":
+        require(
+            abi["soabi"] is None
+            and abi["sysconfig_platform"] == "win-arm64"
+            and abi["ext_suffix"] == ".cp312-win_arm64.pyd",
+            "Require Windows CPython 3.12 ARM64 extension ABI",
+        )
+    elif system == "Darwin":
+        require(
+            abi["soabi"] == "cpython-312-darwin"
+            and abi["ext_suffix"] == ".cpython-312-darwin.so"
+            and isinstance(abi["sysconfig_platform"], str)
+            and re.fullmatch(
+                r"macosx-\d+\.\d+-(arm64|universal2)", abi["sysconfig_platform"]
+            ),
+            "Require macOS CPython 3.12 native-capable extension ABI",
+        )
+    else:
+        raise RuntimeError("Unsupported child ABI host")
     require(
         Path(abi["base"]).resolve() == Path(sys._base_executable).resolve(),
         "Child interpreter uses a different native base",
@@ -289,6 +309,8 @@ class FrontendRun(Run):
         self, uv, *, preflight=False, stock_wheel=None, source_repo=None
     ):
         preflight_outer = outer_snapshot(Path(sys.prefix)) if preflight else None
+        if preflight:
+            save(self.upload / "outer-before.json", preflight_outer)
         save(self.upload / "native.json", native_guard())
         installer.reject_bypass(os.environ)
         installer.native_uv(uv)
@@ -397,6 +419,7 @@ class FrontendRun(Run):
             "Owned root must not alter outer venv",
         )
         self.outer_before = preflight_outer if preflight else outer_snapshot(self.outer)
+        save(self.upload / "outer-before.json", self.outer_before)
         require(
             outer_snapshot(self.outer) == self.outer_before,
             "Read-only preflight outer changed during setup",
@@ -409,8 +432,11 @@ class FrontendRun(Run):
                 "-c",
                 "import json,sys,sysconfig,struct,platform;"
                 "print(json.dumps(dict(cache_tag=sys.implementation.cache_tag,"
+                "version=platform.python_version(),system=platform.system(),"
                 "bits=struct.calcsize('P')*8,machine=platform.machine(),"
                 "soabi=sysconfig.get_config_var('SOABI'),"
+                "sysconfig_platform=sysconfig.get_platform(),"
+                "ext_suffix=sysconfig.get_config_var('EXT_SUFFIX'),"
                 "base=sys._base_executable)))",
             ],
         )
@@ -425,7 +451,6 @@ class FrontendRun(Run):
                 Path(self.uv).resolve(),
             }
         }
-        save(self.upload / "outer-before.json", self.outer_before)
         save(self.upload / "native-tools.json", self.base_before)
         self.native_before = native_guard()
         self.imports_before = helper_imports(self.frozen_inputs)
