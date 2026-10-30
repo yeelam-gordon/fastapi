@@ -28,6 +28,7 @@ Exact relative paths under `Generated Files/arm-build/paired-arm-reference/`:
 `.gitattributes`, `.gitignore`, `bootstrap.ps1`, `driver.py`, `guards.py`,
 `source.py`, `compare.py`, `frozen.py`, `test_reference.py`, `cpu_audit.py`,
 `cpu-hook/sitecustomize.py`, `test_cpu_hook.py`, `test_cpu_audit.py`,
+`installer.py`, `test_installer.py`,
 `build-constraints.txt`, `reference-constraints.txt`, `owner-dev.txt`,
 `cloud.patch`, `pdm-small-read-prefetch.patch`, `CLOUD-LICENSE.txt`,
 `PDM-LICENSE.txt`, `pdm_backend-2.5.0-py3-none-any.whl.gz`,
@@ -199,12 +200,67 @@ gate, not a significance claim. No old CRLF/3.13/uv trial is pooled here.
 All result statuses explicitly leave cross-platform artifact/mode parity
 **NOT ACCEPTED**, even after within-host correctness succeeds.
 
+### Third independent case: existing supported installer
+
+The same two jobs now contain three separate cases, in fixed order:
+PDM-code, supported-installer, SDK-code. **Each has A/B warmups plus six
+AB/BA pairs = 14 commands**, so the explicit performance budget is **42
+commands per host**, not another workflow/job or four-arm factorial.
+Each case has separate correctness references, private arm caches and
+statistics. The sole stock full suite remains one instrumented,
+non-performance pass per job; it is not repeated for each case.
+
+The added case is existing supported P13 capability, not a new code candidate
+or a combination with PDM prefetch/Sentry changes:
+
+- Both arms use the **same official stock PDM 2.5.0 wheel** (`5b8746...`).
+  A is `python -m build -v`; B only adds `--installer uv`.
+  Neither source pyproject nor build dependency closure is patched.
+- uv **0.13.6** is an explicit absolute native executable, PE/Mach-O and
+  SHA256 guarded before invocation. CI uses the existing pinned official
+  setup-uv action; the owned copied executable must match Windows
+  `ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc`
+  or Mac ARM
+  `3996850e6d85e60b0142b40af4bd984822d65f736b52209921c47312450685cb`.
+  No bare-path executable or managed Python download is used.
+- Mac identity was established **as data only on Q**, without execution,
+  from the official `uv-aarch64-apple-darwin.tar.gz` release asset, SHA256
+  `60fbd5c8a1ed681845eea28d9d622fcde03c51e91a43465b64a1e17db1ed3472`.
+  Its native ARM64 slice and binary hash above were verified; the archive was
+  deleted afterward. This is not a Mac workload claim.
+- Controls directly follow the completed Windows V2 protocol at
+  `87349d256e4b001bf4367a4796277c0cab6b62e9`: A uses pip mandatory hash
+  constraints/no-index. B uses **normal provided-hash Verify**, not
+  `UV_REQUIRE_HASHES`, with the same direct wheel URL plus SHA fragment and
+  `--hash` constraint. `UV_NO_VERIFY_HASHES` is forbidden. Both are offline,
+  no-config, no-managed-Python, no-download, singleton-wheelhouse controls.
+- Before correctness/timings, the three V2-style gates must pass: positive
+  exact installed stock payload/RECORD plus empty sdist/wheel get_requires;
+  wrong declared SHA rejection with cold private uv cache; the same rejection
+  after a correct artifact has warmed a separate cache. Negatives require
+  actual expected/computed hash-mismatch diagnostics and zero installed
+  payloads; the real wheel is never altered.
+- Verbose build logs must show exactly the closed original `pdm-backend`
+  requirements, two 2.5.0 selections and complete sdist/wheel payload. The
+  same unchanged full artifact comparator applies. Normal Verify is proven
+  only for this closed input, **not generic Require for all future deps**.
+- Encoded local constraint file URIs preserve paths with spaces. The pinned
+  uv source `329bf9448afd9f9088d14a4d57fbc61eb454f117`,
+  `crates/uv-configuration/src/requirements_input.rs`, explicitly converts
+  file URLs to local paths. Actual native hash gates remain part of preflight.
+
+Historical V2 Windows medians 14.5709307 → 9.52788325 seconds (-34.6103%,
+6/6 favorable pairs) motivate this separate case; those data are **not
+pooled** into the new CI estimates, PDM-code/SDK estimates or Mac benefit.
+The historical V1 zero-trial stop remains untouched, not an invalid sample
+in the new case. Independent review/publication remains parent-owned.
+
 ## Local checks and parent handoff
 
 Completed on Q only, with TEMP/TMP/TMPDIR/PYTEST_TMPDIR pointing into private
 owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
 
-- 48 stdlib contract/mocked tests pass, including native universal2/Rosetta/
+- 54 stdlib contract/mocked tests pass, including native universal2/Rosetta/
   x86 guards; synthetic HOME/credential removal; literal CLI exit 1; raw
   CRLF-vs-LF inequality; backend identity/RECORD; Git-LF/executable-mode
   integrity; both raw build phase streams; stale/failed coverage preservation;
@@ -214,6 +270,9 @@ owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
   2/2 PID reconciliation, Mac direct/Windows redirector relationships,
   missing/invalid counters, legitimate smoke zero, startup-hook exclusion,
   process-local injection and benchmark-hook rejection.
+  Installer additions check Require/Verify separation, bypass rejection,
+  positive/cold/warm gate scheduling, exact closed inputs/hashed-URL selections,
+  native-tool identity, installed RECORD boundaries and three-case budgets.
 - Existing native Ruff **0.16.6** check and format pass; existing actionlint
   **1.7.12** passes; bootstrap PowerShell AST parses without errors.
 - Static real Git archive proof passed for all **2,557** pinned LF payloads;
@@ -238,9 +297,11 @@ owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
 After the parent grants the native resource handoff, the driver supports
 `--preflight --build-python <absolute-existing-native-312-venv-python>
 --test-python <absolute-existing-native-312-reference-venv-python>
+--uv <absolute-official-native-uv-0.13.6>
 --root <fresh-owned-root>`, launched with an actual native 3.12.10 interpreter.
 Both venv identities are checked; they are not restored/reinstalled.
-This performs two untimed build correctness commands and portable targeted
+This performs four untimed build correctness commands (PDM-code A/B and
+supported-installer A/B), all three installer hash gates, and portable targeted
 CLI/owner gates and one `python -c pass` SELF-hook smoke, **no 14-trial series
 and no full suite**. The smoke validates actual receipt/PID/counter shape,
 does no busy-loop work and accepts legitimate zero CPU. It still fetches
@@ -279,12 +340,14 @@ Exact invocation shape, **only after the parent releases the timing lease**:
 ```powershell
 $env:PIP_INDEX_URL = '<approved HTTPS package index>'
 & $ReferencePython $Driver --preflight --build-python $BuildPython `
-    --test-python $ReferencePython --stock-wheel $StockWheel --root $FreshQRoot
+    --test-python $ReferencePython --stock-wheel $StockWheel --uv $Uv --root $FreshQRoot
 ```
 
 Bind the Python variables to the existing absolute native 3.12.10 venv
 executables, `$Driver` to this `driver.py`, `$StockWheel` to that verified
 existing Q stock wheel, and `$FreshQRoot` to a new owned output directory.
+`$Uv` is the existing absolute native Q tool matching `ec27977...` on Windows;
+it is never selected by bare PATH or downloaded during this local preflight.
 Append `--respx-wheel $RespxWheel` only if an actual cached wheel is found;
 never reconstruct a wheel from installed SDK files. No such wheel was found
 in the two bounded Q-side SDK directories checked. C-side caches were not

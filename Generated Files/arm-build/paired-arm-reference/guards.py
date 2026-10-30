@@ -143,7 +143,7 @@ def environment(root, inherited=None):
         and not any(
             word in k.upper() for word in ("TOKEN", "SECRET", "PASSWORD", "AUTH")
         )
-        and k not in ("CONTEXT", "SOURCE_DATE_EPOCH")
+        and k.upper() not in ("CONTEXT", "SOURCE_DATE_EPOCH", "UV")
     }
     for key, subdir in (
         ("HOME", "home"),

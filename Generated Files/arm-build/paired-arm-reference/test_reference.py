@@ -99,6 +99,7 @@ class EnvironmentTests(Fixture):
                 "PYTHONPATH": "private-hook",
                 "PYTHONDONTWRITEBYTECODE": "1",
                 "PYTHONPYCACHEPREFIX": "private-pyc",
+                "UV": "private-tool",
                 "FASTAPI_CLOUD_TOKEN": "private",
                 "SENTRY_DSN": "private",
                 "GITHUB_TOKEN": "private",
@@ -473,7 +474,7 @@ class OrchestrationTests(Fixture):
     def execute(self, preflight):
         run = driver.Run(self.root)
 
-        def build(label, arm, pair=0, timed=False):
+        def build(label, arm, pair=0, timed=False, installer_case=False):
             return {
                 "label": label,
                 "arm": arm,
@@ -488,6 +489,8 @@ class OrchestrationTests(Fixture):
 
         with (
             patch.object(run, "setup"),
+            patch.object(run, "prepare_installer"),
+            patch.object(run, "installer_gates") as hashes,
             patch.object(run, "cpu_hook_smoke") as smoke,
             patch.object(run, "build", side_effect=build) as builds,
             patch.object(run, "semantic_gates") as semantics,
@@ -498,18 +501,26 @@ class OrchestrationTests(Fixture):
         ):
             run.execute(preflight=preflight)
             self.assertEqual(smoke.call_count, int(preflight))
+            hashes.assert_called_once()
         return builds, clis, full, semantics
 
     def test_bounded_cohort_counts(self):
         builds, clis, full, semantics = self.execute(False)
-        self.assertEqual(builds.call_count, 16)
+        self.assertEqual(builds.call_count, 32)
+        self.assertEqual(
+            sum(
+                call.kwargs.get("installer_case", False)
+                for call in builds.call_args_list
+            ),
+            16,
+        )
         self.assertEqual(clis.call_count, 16)
         full.assert_called_once()
         semantics.assert_called_once()
 
     def test_preflight_has_no_timings_or_full_suite(self):
         builds, clis, full, semantics = self.execute(True)
-        self.assertEqual(builds.call_count, 2)
+        self.assertEqual(builds.call_count, 4)
         self.assertEqual(clis.call_count, 2)
         full.assert_not_called()
         semantics.assert_called_once()

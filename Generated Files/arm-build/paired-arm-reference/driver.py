@@ -18,6 +18,8 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 import cpu_audit
+import installer
+import tomllib
 from compare import compare_outputs
 from frozen import full_inventory, summary, verify_record
 from guards import (
@@ -197,7 +199,7 @@ class Run:
         self.env = environment(self.root / "environment")
         self.frozen_inputs = input_hashes()
         save(self.upload / "inputs.json", self.frozen_inputs)
-        self.rows = {"build": [], "cli": []}
+        self.rows = {"build": [], "cli": [], "installer": []}
         self.stock_wheel = None
         self.respx_wheel = None
         self.owner_dev_index = self.env["PIP_INDEX_URL"]
@@ -637,22 +639,143 @@ print(json.dumps({
         )
         save(self.upload / "isolation-selection.json", self.isolation)
 
-    def build_env(self, arm, work, stage):
+    def prepare_installer(self, uv):
+        require(uv is not None, "An absolute verified --uv is required")
+        installer.reject_bypass(os.environ)
+        installer.native_uv(uv)
+        self.uv = uv.resolve()
+        _, out, _ = self.command("uv-version", [self.uv, "--version"])
+        require(re.match(rb"uv 0\.13\.6(?:\s|$)", out), "Wrong uv release")
+        config = tomllib.loads((self.source / "pyproject.toml").read_text())
+        require(
+            config["build-system"]
+            == {"requires": ["pdm-backend"], "build-backend": "pdm.backend"},
+            "Unknown original build-system input",
+        )
+        self.installer_wheels, self.installer_constraints = {}, {}
+        for arm in "AB":
+            folder = self.root / "installer" / arm
+            (folder / "wheelhouse").mkdir(parents=True)
+            wheel = folder / "wheelhouse" / WHEEL
+            shutil.copyfile(self.wheels["A"], wheel)
+            require(
+                sha(wheel) == WHEEL_HASHES["A"],
+                "Installer case must use stock PDM in BOTH arms",
+            )
+            constraint = folder / "constraints.txt"
+            constraint.write_text(
+                f"pdm-backend @ {wheel.as_uri()}#sha256={WHEEL_HASHES['A']} "
+                f"--hash=sha256:{WHEEL_HASHES['A']}\n",
+                encoding="utf-8",
+            )
+            self.installer_wheels[arm], self.installer_constraints[arm] = (
+                wheel,
+                constraint,
+            )
+        save(
+            self.upload / "uv-native.json",
+            {
+                "version": "0.13.6",
+                "sha256": sha(self.uv),
+                "slices": binary_guard(self.uv),
+                "stock_backend_sha256": WHEEL_HASHES["A"],
+                "novelty": "Existing supported installer capability, not a new code candidate",
+            },
+        )
+
+    def installer_gates(self):
+        for case in ("positive", "negative-cold", "negative-warm"):
+            label = "installer-hash-" + case
+            work = self.root / label
+            (work / "scratch").mkdir(parents=True)
+            env = self.build_env("B", work, "hash-probes", installer_case=True)
+            env["UV_CACHE_DIR"] = str(
+                self.root
+                / "installer"
+                / "B"
+                / (
+                    "cold-probe-cache"
+                    if case == "negative-cold"
+                    else "positive-probe-cache"
+                )
+            )
+            if case != "positive":
+                wrong = work / "wrong-constraints.txt"
+                wheel = self.installer_wheels["B"]
+                wrong.write_text(
+                    f"pdm-backend @ {wheel.as_uri()}#sha256={installer.WRONG_SHA} "
+                    f"--hash=sha256:{installer.WRONG_SHA}\n",
+                    encoding="utf-8",
+                )
+                env["UV_CONSTRAINT"] = wrong.as_uri()
+            proof = self.upload / label / "proof.json"
+            self.py(
+                self.build_python,
+                label,
+                [
+                    str(HERE / "installer.py"),
+                    "--case",
+                    case,
+                    "--source",
+                    str(self.source),
+                    "--wheel",
+                    str(self.installer_wheels["B"]),
+                    "--output",
+                    str(proof),
+                ],
+                cwd=self.source,
+                env=env,
+            )
+            require(
+                json.loads(proof.read_bytes())["passed"], "Installer hash gate failed"
+            )
+
+    def build_env(self, arm, work, stage, installer_case=False):
+        wheels = self.installer_wheels if installer_case else self.wheels
+        constraints = (
+            self.installer_constraints if installer_case else self.backend_constraints
+        )
         env = self.env.copy()
         env.update(
             SOURCE_DATE_EPOCH="1700000000",
             PIP_NO_INDEX="1",
             PIP_REQUIRE_HASHES="1",
-            PIP_FIND_LINKS=self.wheels[arm].parent.as_uri(),
-            PIP_CONSTRAINT=self.backend_constraints[arm].as_uri(),
+            PIP_FIND_LINKS=wheels[arm].parent.as_uri(),
+            PIP_CONSTRAINT=constraints[arm].as_uri(),
             PIP_CACHE_DIR=str(self.root / arm / (stage + "-cache")),
             PIP_LOG=str(self.upload / work.name / "pip.log"),
         )
         for key in ("TEMP", "TMP", "TMPDIR"):
             env[key] = str(work / "scratch")
+        if installer_case:
+            installer.reject_bypass(os.environ)
+            env.update(
+                UV=str(self.uv),
+                UV_DEFAULT_INDEX=self.env["PIP_INDEX_URL"],
+                UV_NO_CONFIG="1",
+                UV_OFFLINE="1",
+                UV_NO_MANAGED_PYTHON="1",
+                UV_PYTHON_DOWNLOADS="never",
+                UV_PYTHON=str(self.build_python),
+                UV_FIND_LINKS=wheels[arm].parent.as_uri(),
+                UV_CONSTRAINT=constraints[arm].as_uri(),
+                UV_CACHE_DIR=str(self.root / "installer" / arm / (stage + "-uv-cache")),
+                PIP_CACHE_DIR=str(
+                    self.root / "installer" / arm / (stage + "-pip-cache")
+                ),
+                COLUMNS="4096",
+            )
+            if arm == "A":
+                env["UV_REQUIRE_HASHES"] = "1"
+            else:
+                require(
+                    "UV_REQUIRE_HASHES" not in env,
+                    "B requires normal provided-hash Verify",
+                )
+            installer.reject_bypass(env)
         return env
 
-    def build(self, label, arm, pair=0, timed=False):
+    def build(self, label, arm, pair=0, timed=False, installer_case=False):
         prepare_start = time.perf_counter()
         self.inputs_unchanged()
         require(
@@ -660,6 +783,13 @@ print(json.dumps({
             "Minimal outer environment drift",
         )
         verify_backend(self.wheels["A"], self.wheels["B"])
+        wheels = self.installer_wheels if installer_case else self.wheels
+        if installer_case:
+            installer.native_uv(self.uv)
+            require(
+                all(sha(w) == WHEEL_HASHES["A"] for w in wheels.values()),
+                "Installer case backend identity changed",
+            )
         work = self.root / ("work-" + label)
         work.mkdir()
         (work / "scratch").mkdir()
@@ -668,7 +798,10 @@ print(json.dumps({
         require(before == self.source_before, "Fresh source conditions differ")
         # command creates the evidence directory immediately before invocation.
         env = self.build_env(
-            arm, self.upload / label, "trials" if timed else "correctness"
+            arm,
+            self.upload / label,
+            "trials" if timed else "correctness",
+            installer_case,
         )
         for key in ("TEMP", "TMP", "TMPDIR"):
             env[key] = str(work / "scratch")
@@ -676,28 +809,43 @@ print(json.dumps({
         row, out, err = self.py(
             self.build_python,
             label,
-            ["-m", "build"],
+            ["-m", "build"]
+            + (
+                ["-v"] + (["--installer", "uv"] if arm == "B" else [])
+                if installer_case
+                else []
+            ),
             cwd=source,
             env=env,
             timed=timed,
         )
         validation_start = time.perf_counter()
         unchanged(source, before)
-        phases = verify_phases(out.decode("utf-8"), err.decode("utf-8"))
-        verify_selection(
-            self.upload / label / "pip.log",
-            self.wheels[arm],
-            self.wheels["B" if arm == "A" else "A"],
+        other = wheels["B" if arm == "A" else "A"]
+        phases = (
+            installer.phases(
+                out.decode("utf-8"),
+                err.decode("utf-8"),
+                arm,
+                self.uv,
+                wheels[arm],
+                other,
+            )
+            if installer_case
+            else (verify_phases(out.decode("utf-8"), err.decode("utf-8")))
         )
+        if not installer_case or arm == "A":
+            verify_selection(self.upload / label / "pip.log", wheels[arm], other)
         save(
             self.upload / label / "selection.json",
             {
                 "arm": arm,
-                "wheel_sha256": WHEEL_HASHES[arm],
-                "module_sha256": MODULE_HASHES[arm],
-                "exact_pip_processing_count": 2,
+                "case": "supported-installer" if installer_case else "pdm-code",
+                "wheel_sha256": WHEEL_HASHES["A" if installer_case else arm],
+                "module_sha256": MODULE_HASHES["A" if installer_case else arm],
+                "exact_backend_selections": 2,
                 "phases": phases,
-                "isolation": self.isolation,
+                "isolation": phases if installer_case else self.isolation,
             },
         )
         dist = self.upload / label / "dist"
@@ -712,6 +860,7 @@ print(json.dumps({
             valid=True,
             preparation_seconds=prepare_seconds,
             validation_seconds=time.perf_counter() - validation_start,
+            case="supported-installer" if installer_case else "pdm-code",
         )
         return row, dist
 
@@ -1098,16 +1247,22 @@ print(json.dumps({
         test_python=None,
         stock_wheel=None,
         respx_wheel=None,
+        uv=None,
     ):
         self.preflight_inputs(preflight, stock_wheel, respx_wheel)
         setup_start = time.perf_counter()
         self.setup(build_python, test_python)
+        self.prepare_installer(uv)
         if preflight:
             self.cpu_hook_smoke()
         setup_end = time.perf_counter()
+        self.installer_gates()
         a = self.build("correctness-build-A", "A")[1]
         b = self.build("correctness-build-B", "B")[1]
         save(self.upload / "build-correctness.json", compare_outputs(a, b))
+        ia = self.build("correctness-installer-A", "A", installer_case=True)[1]
+        ib = self.build("correctness-installer-B", "B", installer_case=True)[1]
+        save(self.upload / "installer-correctness.json", compare_outputs(ia, ib))
         self.semantic_gates()
         cli_reference = self.cli("correctness-cli-A", "A")[1]
         raw_equal(cli_reference, self.cli("correctness-cli-B", "B")[1])
@@ -1118,6 +1273,12 @@ print(json.dumps({
                 {
                     "status": "PREFLIGHT_ONLY_NO_TIMINGS_OR_FULL_SUITE",
                     "parity": "NOT_ACCEPTED: cross-platform mode gate unresolved",
+                    "validated_cases": ["pdm-code", "sdk-code", "supported-installer"],
+                    "untimed_build_commands": 4,
+                    "installer_hash_gates": 3,
+                    "cpu_no_test_smoke": True,
+                    "full_suite_runs": 0,
+                    "timed_samples": 0,
                 },
             )
             return
@@ -1126,6 +1287,12 @@ print(json.dumps({
             self.upload / "schedule.json",
             {
                 "commands_per_experiment": sequence(),
+                "case_budget": {
+                    "pdm-code": 14,
+                    "sdk-code": 14,
+                    "supported-installer": 14,
+                },
+                "case_execution_order": ["pdm-code", "supported-installer", "sdk-code"],
                 "no_retries": True,
                 "bytecode": "default enabled",
                 "profile": "none",
@@ -1141,6 +1308,15 @@ print(json.dumps({
             self.rows["build"].append(row)
             save(self.upload / "partial-rows.json", self.rows)
         for label, arm, pair in sequence():
+            row, dist = self.build(
+                "installer-" + label, arm, pair, timed=True, installer_case=True
+            )
+            compare_start = time.perf_counter()
+            compare_outputs(ia, dist)
+            row["comparison_seconds"] = time.perf_counter() - compare_start
+            self.rows["installer"].append(row)
+            save(self.upload / "partial-rows.json", self.rows)
+        for label, arm, pair in sequence():
             row, output = self.cli("cli-" + label, arm, pair, timed=True)
             raw_equal(cli_reference, output)
             self.rows["cli"].append(row)
@@ -1153,10 +1329,12 @@ print(json.dumps({
                 "parity": "NOT_ACCEPTED: cross-platform source/artifact mode gate unresolved",
                 "build": summary(self.rows["build"]),
                 "cli": summary(self.rows["cli"]),
+                "installer": summary(self.rows["installer"]),
                 "setup_seconds": setup_end - setup_start,
                 "gates_seconds": gates_end - setup_end,
                 "experiments_seconds": time.perf_counter() - gates_end,
-                "scope": "Controlled local backend and SDK mechanism; not unmodified HOBL.",
+                "scope": "Three separate controlled backend-code, SDK-code and supported-installer "
+                "cases; no pooled baselines/factorial or unmodified HOBL claim.",
             },
         )
 
@@ -1170,6 +1348,7 @@ def main():
     parser.add_argument("--test-python", type=Path)
     parser.add_argument("--stock-wheel", type=Path)
     parser.add_argument("--respx-wheel", type=Path)
+    parser.add_argument("--uv", type=Path)
     args = parser.parse_args()
     require(
         bool(args.build_python) == bool(args.test_python),
@@ -1186,6 +1365,7 @@ def main():
     if args.guard_only:
         save(args.root / "bootstrap-native.json", native_guard())
         return
+    require(args.uv is not None, "Three-case cohort/preflight requires absolute --uv")
     native_guard()
     run = Run(args.root)
     started = time.perf_counter()
@@ -1196,6 +1376,7 @@ def main():
             test_python=args.test_python,
             stock_wheel=args.stock_wheel,
             respx_wheel=args.respx_wheel,
+            uv=args.uv,
         )
     finally:
         save(

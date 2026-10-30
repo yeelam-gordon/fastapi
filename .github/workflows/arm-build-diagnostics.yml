@@ -254,10 +254,18 @@ jobs:
           $env:PYTEST_TMPDIR = $fixtures
           & $env:PAIRED_PYTHON -B -m unittest discover -s $helper -p 'test_*.py'
           exit $LASTEXITCODE
-      - name: One compatible-reference cohort (no retry or aggregate job)
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - name: One three-case compatible-reference cohort (no retry or aggregate job)
         run: |
           $driver = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/paired-arm-reference/driver.py'
-          & $env:PAIRED_PYTHON $driver --root $env:PAIRED_ROOT
+          $bin = Join-Path $env:PAIRED_ROOT 'bin'
+          New-Item -ItemType Directory -Path $bin | Out-Null
+          $uv = Join-Path $bin $(if ($env:RUNNER_OS -eq 'Windows') { 'uv.exe' } else { 'uv' })
+          Copy-Item (Get-Command uv -ErrorAction Stop).Source $uv
+          & $env:PAIRED_PYTHON $driver --root $env:PAIRED_ROOT --uv $uv
           exit $LASTEXITCODE
       - name: Preserve only newly generated public-input evidence, including failures
         if: always() && env.PAIRED_ROOT != ''
