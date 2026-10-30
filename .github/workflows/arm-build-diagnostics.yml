@@ -1,15 +1,16 @@
-name: ARM build diagnostics (analysis only)
+name: ARM build diagnostics and paired reference
 
 on:
   workflow_dispatch:
     inputs:
       platform:
-        description: Limit a follow-up allocation to the missing platform.
+        description: Analysis platform, or matched-reference for exactly two native reference jobs.
         type: choice
         options:
           - both
           - windows
           - macos
+          - matched-reference
         default: both
       native_traces:
         description: Request capability/privacy-gated native diagnostics.
@@ -26,6 +27,7 @@ env:
 
 jobs:
   diagnostics:
+    if: inputs.platform != 'matched-reference'
     name: Analysis only (${{ matrix.platform }})
     strategy:
       fail-fast: false
@@ -193,4 +195,79 @@ jobs:
             ${{ env.DIAG_TOOLS }}/Generated Files/arm-build/results/bootstrap
             ${{ env.ARM_DIAGNOSTIC_ACTION_JSON }}
           if-no-files-found: warn
+          retention-days: 3
+  matched-reference:
+    if: >-
+      inputs.platform == 'matched-reference' &&
+      github.repository == 'yeelam-gordon/fastapi' &&
+      github.ref == 'refs/heads/perf/hobl-arm-reference' &&
+      github.run_attempt == '1'
+    name: Compatible reference (${{ matrix.platform }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-11-arm
+            platform: windows
+          - runner: macos-15
+            platform: macos
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/workflows/arm-build-diagnostics.yml
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/paired-arm-reference/
+      - name: Select native macOS CPython (manifest has 3.12.10 darwin arm64)
+        if: matrix.platform == 'macos'
+        id: python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12.10"
+          architecture: arm64
+          update-environment: false
+      - name: Bootstrap exact native interpreter, without global installation
+        env:
+          PAIRED_MAC_PYTHON: ${{ steps.python.outputs.python-path }}
+        run: |
+          & 'tools/Generated Files/arm-build/paired-arm-reference/bootstrap.ps1'
+          exit $LASTEXITCODE
+      - name: Verify portable contracts before dependency setup
+        run: |
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/paired-arm-reference'
+          $fixtures = Join-Path $env:PAIRED_ROOT 'unit-fixtures'
+          New-Item -ItemType Directory -Path $fixtures | Out-Null
+          $env:TEMP = $fixtures
+          $env:TMP = $fixtures
+          $env:TMPDIR = $fixtures
+          $env:PYTEST_TMPDIR = $fixtures
+          & $env:PAIRED_PYTHON -B -m unittest discover -s $helper -p 'test_*.py'
+          exit $LASTEXITCODE
+      - name: One compatible-reference cohort (no retry or aggregate job)
+        run: |
+          $driver = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/paired-arm-reference/driver.py'
+          & $env:PAIRED_PYTHON $driver --root $env:PAIRED_ROOT
+          exit $LASTEXITCODE
+      - name: Preserve only newly generated public-input evidence, including failures
+        if: always() && env.PAIRED_ROOT != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: paired-compatible-reference-${{ matrix.platform }}
+          path: |
+            ${{ env.PAIRED_ROOT }}/upload
+            ${{ env.PAIRED_ROOT }}/bootstrap-native.json
+            ${{ env.PAIRED_ROOT }}/bootstrap-download.json
+          include-hidden-files: true
+          if-no-files-found: error
           retention-days: 3

@@ -1,0 +1,7 @@
+*.py text eol=lf
+*.ps1 text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.patch text eol=lf whitespace=-blank-at-eol
+*.whl -text
+*.gz -text
