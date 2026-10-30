@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       platform:
-        description: Analysis platform, matched-reference (two jobs), or explicit matched-macos (one job).
+        description: Analysis platform, matched-reference, matched-macos, or matched-frontend (two jobs).
         type: choice
         options:
           - both
@@ -12,6 +12,7 @@ on:
           - macos
           - matched-reference
           - matched-macos
+          - matched-frontend
         default: both
       native_traces:
         description: Request capability/privacy-gated native diagnostics.
@@ -28,7 +29,7 @@ env:
 
 jobs:
   diagnostics:
-    if: inputs.platform != 'matched-reference' && inputs.platform != 'matched-macos'
+    if: inputs.platform != 'matched-reference' && inputs.platform != 'matched-macos' && inputs.platform != 'matched-frontend'
     name: Analysis only (${{ matrix.platform }})
     strategy:
       fail-fast: false
@@ -199,11 +200,15 @@ jobs:
           retention-days: 3
   matched-reference:
     if: >-
-      (inputs.platform == 'matched-reference' || inputs.platform == 'matched-macos') &&
       github.repository == 'yeelam-gordon/fastapi' &&
-      github.ref == 'refs/heads/perf/hobl-arm-reference' &&
+      (
+        ((inputs.platform == 'matched-reference' || inputs.platform == 'matched-macos') &&
+         github.ref == 'refs/heads/perf/hobl-arm-reference') ||
+        (inputs.platform == 'matched-frontend' &&
+         github.ref == 'refs/heads/perf/hobl-arm-frontend')
+      ) &&
       github.run_attempt == '1'
-    name: Compatible reference (${{ matrix.platform }})
+    name: ${{ inputs.platform == 'matched-frontend' && 'Supported frontend' || 'Compatible reference' }} (${{ matrix.platform }})
     strategy:
       fail-fast: false
       matrix:
@@ -260,6 +265,7 @@ jobs:
           version: "0.13.6"
           enable-cache: "false"
       - name: One three-case compatible-reference cohort (no retry or aggregate job)
+        if: inputs.platform != 'matched-frontend'
         run: |
           $driver = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/paired-arm-reference/driver.py'
           $bin = Join-Path $env:PAIRED_ROOT 'bin'
@@ -267,6 +273,16 @@ jobs:
           $uv = Join-Path $bin $(if ($env:RUNNER_OS -eq 'Windows') { 'uv.exe' } else { 'uv' })
           Copy-Item (Get-Command uv -ErrorAction Stop).Source $uv
           & $env:PAIRED_PYTHON $driver --root $env:PAIRED_ROOT --uv $uv
+          exit $LASTEXITCODE
+      - name: One frontend-only cohort (three hash gates, untimed pair, fixed fourteen)
+        if: inputs.platform == 'matched-frontend'
+        run: |
+          $driver = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/paired-arm-reference/frontend.py'
+          $bin = Join-Path $env:PAIRED_ROOT 'bin'
+          New-Item -ItemType Directory -Path $bin | Out-Null
+          $uv = Join-Path $bin $(if ($env:RUNNER_OS -eq 'Windows') { 'uv.exe' } else { 'uv' })
+          Copy-Item (Get-Command uv -ErrorAction Stop).Source $uv
+          & $env:PAIRED_PYTHON -B $driver --root $env:PAIRED_ROOT --uv $uv
           exit $LASTEXITCODE
       - name: Preserve only newly generated public-input evidence, including failures
         if: always() && env.PAIRED_ROOT != ''
