@@ -49,6 +49,91 @@ def known_pid_alive(pid, *, terminate=False):
 
 
 class OwnedTests(unittest.TestCase):
+    def test_native_clock_starts_at_direct_spawn_not_supervisor_launch(self):
+        spec = {
+            "argv": ["native-fixture"],
+            "stdout": str(self.root / "out"),
+            "stderr": str(self.root / "err"),
+            "timeout": 1,
+            "native_clock": True,
+        }
+        events = []
+        child = Mock()
+        child.wait.side_effect = lambda **kwargs: events.append("wait") or 0
+        with (
+            patch.object(owned, "_WINDOWS", False),
+            patch.object(owned.json, "load", return_value=spec),
+            patch.object(owned.time, "perf_counter", return_value=1),
+            patch.object(
+                owned.time,
+                "perf_counter_ns",
+                side_effect=lambda: events.append("start") or 100,
+            ),
+            patch.object(
+                owned.subprocess,
+                "Popen",
+                side_effect=lambda *a, **k: events.append("spawn") or child,
+            ),
+            patch("builtins.print"),
+        ):
+            owned._supervise()
+        self.assertEqual(events, ["start", "spawn", "wait"])
+
+    def test_native_endpoint_follows_owned_family_drain_on_both_platforms(self):
+        for windows in (True, False):
+            process = Mock(pid=123, returncode=0)
+            process.poll.return_value = 0
+            process.communicate.return_value = (
+                json.dumps(
+                    {
+                        "owned": True,
+                        "started": 1,
+                        "returncode": 0,
+                        "timed_out": False,
+                        "native_start_ns": 100,
+                    }
+                ),
+                "",
+            )
+            events = []
+            job = Mock()
+            job.alive.side_effect = lambda events=events: (
+                events.append("drain") or False
+            )
+            with (
+                patch.object(owned, "_WINDOWS", windows),
+                patch.object(owned, "_Job", return_value=job),
+                patch.object(
+                    owned,
+                    "_group_alive",
+                    side_effect=lambda pid, events=events: (
+                        events.append("drain") or False
+                    ),
+                ),
+                patch.object(owned.subprocess, "Popen", return_value=process) as spawn,
+                patch.object(owned.time, "perf_counter", return_value=1),
+                patch.object(
+                    owned.time,
+                    "perf_counter_ns",
+                    side_effect=lambda events=events: events.append("end") or 250,
+                ),
+            ):
+                receipt = owned.run_owned(
+                    ["fixture"],
+                    cwd=self.root,
+                    env={},
+                    stdout_path=self.root / "out",
+                    stderr_path=self.root / "err",
+                    native_clock=True,
+                )
+            self.assertTrue(receipt.succeeded)
+            self.assertEqual(
+                (receipt.native_start_ns, receipt.native_end_ns), (100, 250)
+            )
+            self.assertEqual(events[-1], "end")
+            self.assertIn("drain", events[:-1])
+            self.assertEqual(spawn.call_args.kwargs["start_new_session"], not windows)
+
     def setUp(self):
         self.root = Path(__file__).parent / (".owned-test-" + uuid.uuid4().hex)
         self.root.mkdir()

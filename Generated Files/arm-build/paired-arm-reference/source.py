@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 import subprocess
 import tarfile
 
@@ -153,6 +154,87 @@ def mode_receipt(inventory, proof):
             }
             for name, row in inventory.items()
         },
+    }
+
+
+def generated_cache(root, proof):
+    """Portable P47 exact-cache proof; compile for comparison, never execute."""
+    import importlib.util
+    import io
+    import marshal
+    import struct
+    import types
+
+    import tomllib
+
+    cache_name = "__pycache__/pdm_build.cpython-312.pyc"
+    expected = set(proof["files"]) | {
+        cache_name,
+        "dist/fastapi-0.119.1.tar.gz",
+        "dist/fastapi-0.119.1-py3-none-any.whl",
+        ".pdm-build/.gitignore",
+        ".pdm-build/pyproject.toml",
+    }
+    files = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
+    require(files == expected, "Unexpected/missing generated source payload")
+    for path in root.rglob("*"):
+        require(
+            not path.is_symlink() and not path.is_junction(), "Linked source output"
+        )
+    project = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))
+    project["project"]["version"] = "0.119.1"
+    project["project"]["dynamic"].remove("version")
+    require(
+        (root / ".pdm-build" / ".gitignore").read_bytes() == ("*" + os.linesep).encode()
+        and tomllib.loads(
+            (root / ".pdm-build" / "pyproject.toml").read_text(encoding="utf-8")
+        )
+        == project,
+        "Unexpected generated PDM metadata",
+    )
+    source, cache = root / "pdm_build.py", root / cache_name
+    data = cache.read_bytes()
+    require(
+        sha(source)
+        == "dd68c065e895097ab395f00cb05e58456b72e963295003f6934a741e4a1aab46"
+        and len(data) > 16
+        and data[:4] == importlib.util.MAGIC_NUMBER
+        and data[:4].hex() == "cb0d0d0a",
+        "Wrong canonical source/native CPython 3.12 cache",
+    )
+    flags, timestamp, size = struct.unpack("<III", data[4:16])
+    require(
+        flags == 0
+        and timestamp == (int(source.stat().st_mtime) & 0xFFFFFFFF)
+        and size == source.stat().st_size,
+        "Cache source header mismatch",
+    )
+    stream = io.BytesIO(data[16:])
+    code = marshal.load(stream)
+    require(
+        isinstance(code, types.CodeType) and not stream.read(), "Invalid cache code"
+    )
+
+    def filenames(value):
+        require(value.co_filename == str(source), "Cache code filename mismatch")
+        for constant in value.co_consts:
+            if isinstance(constant, types.CodeType):
+                filenames(constant)
+
+    filenames(code)
+    expected_code = compile(
+        source.read_bytes(), str(source), "exec", dont_inherit=True, optimize=0
+    )
+    require(
+        code == expected_code, "Cache code/source filename differs from exact source"
+    )
+    return {
+        "path": cache_name,
+        "sha256": sha(cache),
+        "mode": cache.stat().st_mode,
+        "source_sha256": sha(source),
+        "exact_code_and_header": True,
+        "cache_executed_by_validator": False,
     }
 
 

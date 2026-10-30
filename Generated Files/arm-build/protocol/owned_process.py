@@ -26,6 +26,8 @@ class Receipt:
     cleanup_complete: bool
     errors: tuple[str, ...]
     liveness: tuple[dict, ...] = ()
+    native_start_ns: int | None = None
+    native_end_ns: int | None = None
 
     @property
     def succeeded(self):
@@ -290,6 +292,8 @@ def _supervise():
             err = out if same else open(spec["stderr"], "wb")
             try:
                 result["started"] = time.perf_counter()
+                if spec.get("native_clock"):
+                    result["native_start_ns"] = time.perf_counter_ns()
                 child = subprocess.Popen(spec["argv"], stdout=out, stderr=err)
                 try:
                     remaining = spec["timeout"] - (
@@ -306,7 +310,9 @@ def _supervise():
     print(json.dumps(result), flush=True)
 
 
-def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Receipt:
+def run_owned(
+    argv, *, cwd, env, stdout_path, stderr_path, timeout=120, native_clock=False
+) -> Receipt:
     """Run a fixed non-detaching command; caller must stop sampling unless succeeded."""
     if not math.isfinite(timeout) or timeout <= 0:
         raise ValueError("timeout must be positive and finite")
@@ -315,6 +321,7 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
     data, errors, liveness = {}, [], []
     survivors = None
     clean = False
+    native_end_ns = None
     try:
         name = "arm-owned-" + uuid.uuid4().hex
         job = _Job(name) if _WINDOWS else None
@@ -324,12 +331,13 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
             "stderr": str(Path(stderr_path).resolve()),
             "timeout": timeout,
             "job": name,
+            "native_clock": native_clock,
         }
         interpreter = (
             str(Path(sys.base_prefix) / "python.exe") if _WINDOWS else sys.executable
         )
         process = subprocess.Popen(
-            [interpreter, "-I", str(Path(__file__).resolve()), "--supervisor"],
+            [interpreter, "-I", "-B", str(Path(__file__).resolve()), "--supervisor"],
             cwd=cwd,
             env=env,
             stdin=subprocess.PIPE,
@@ -371,6 +379,8 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
                 while alive() and time.perf_counter() < deadline:
                     time.sleep(0.01)
                 clean = not alive()
+                if clean and native_clock and data.get("native_start_ns") is not None:
+                    native_end_ns = time.perf_counter_ns()
                 if not clean:
                     errors.append("Owned family did not drain before cleanup deadline")
         except Exception as error:
@@ -406,6 +416,8 @@ def run_owned(argv, *, cwd, env, stdout_path, stderr_path, timeout=120) -> Recei
         clean,
         tuple(errors),
         tuple(liveness),
+        data.get("native_start_ns"),
+        native_end_ns,
     )
 
 

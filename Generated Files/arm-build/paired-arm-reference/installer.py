@@ -19,6 +19,7 @@ from guards import WHEEL_HASHES, binary_guard, native_guard, require, sha
 UV_HASHES = {
     "Windows": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
     "Darwin": "3996850e6d85e60b0142b40af4bd984822d65f736b52209921c47312450685cb",
+    "Linux": "7d60258dc76bca41d7b3591cdd829fa9633827fad944970bf5e1fb2a8c01476d",
 }
 WRONG_SHA = "0" * 64
 

@@ -47,7 +47,18 @@ def candidate_bytes(path):
 
 
 def slices(data):
-    """Return actual PE/Mach-O architectures, accepting native universal2."""
+    """Return PE/Mach-O/ELF header architectures, not proof of execution."""
+    if data[:4] == b"\x7fELF":
+        require(len(data) >= 64, "Truncated ELF64 header")
+        require(data[4:7] == b"\x02\x01\x01", "Require little-endian ELF64 v1")
+        kind, machine, version = struct.unpack_from("<HHI", data, 16)
+        require(
+            kind in (2, 3)
+            and version == 1
+            and struct.unpack_from("<H", data, 52)[0] == 64,
+            "Invalid executable/shared ELF64 header",
+        )
+        return {machine}
     if data[:2] == b"MZ":
         offset = struct.unpack_from("<I", data, 60)[0]
         require(data[offset : offset + 4] == b"PE\0\0", "Invalid PE")
@@ -71,17 +82,23 @@ def architecture_ok(system, machine, bits, architectures, translated=0):
         require(architectures == {0xAA64}, "Not native Windows ARM64 PE")
     elif system == "Darwin":
         require(not translated and 0x100000C in architectures, "Rosetta/non-ARM Mach-O")
+    elif system == "Linux":
+        require(architectures == {183}, "Not native Linux AArch64 ELF")
     else:
-        raise RuntimeError("Only native Windows/macOS ARM are supported")
+        raise RuntimeError("Only native Windows/macOS/Linux ARM are supported")
 
 
 def binary_guard(path, system=None):
     system = system or platform.system()
-    architectures = slices(Path(path).resolve().read_bytes())
-    required = 0xAA64 if system == "Windows" else 0x100000C
+    data = Path(path).resolve().read_bytes()
+    required = {"Windows": 0xAA64, "Darwin": 0x100000C, "Linux": 183}.get(system)
+    require(required is not None, "Unsupported native binary host")
+    if system == "Linux":
+        require(data[:4] == b"\x7fELF", "Linux requires ELF, not PE/Mach-O")
+    architectures = slices(data)
     require(required in architectures, "Interpreter/extension lacks native ARM64 slice")
-    if system == "Windows":
-        require(architectures == {required}, "Mixed/non-native PE")
+    if system in ("Windows", "Linux"):
+        require(architectures == {required}, "Mixed/non-native PE/ELF")
     return sorted(architectures)
 
 
@@ -109,7 +126,7 @@ def native_guard():
     # sysconfig is deliberately imported only on a real, initialized platform.
     import sysconfig
 
-    return {
+    receipt = {
         "version": sys.version,
         "compiler": platform.python_compiler(),
         "machine": platform.machine(),
@@ -120,6 +137,28 @@ def native_guard():
         "executable_sha256": sha(sys.executable),
         "cpu_count": os.cpu_count(),
     }
+    if system == "Linux":
+        receipt["runtime_configuration"] = {
+            key: sysconfig.get_config_var(key)
+            for key in (
+                "CC",
+                "CFLAGS",
+                "PY_CFLAGS",
+                "PY_CORE_CFLAGS",
+                "CONFIG_ARGS",
+                "LDFLAGS",
+                "PY_LDFLAGS",
+                "PGO_PROF_USE_FLAG",
+                "LTOFLAGS",
+                "Py_DEBUG",
+                "MULTIARCH",
+                "SOABI",
+                "EXT_SUFFIX",
+            )
+        }
+        receipt["libc"] = platform.libc_ver()
+        receipt["source_prefix"] = sys.base_prefix
+    return receipt
 
 
 def environment(root, inherited=None):

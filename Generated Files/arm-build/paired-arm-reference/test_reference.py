@@ -41,6 +41,30 @@ class Fixture(unittest.TestCase):
 
 
 class NativeTests(unittest.TestCase):
+    def test_linux_elf64_header_and_execution_identity_are_separate(self):
+        data = bytearray(64)
+        data[:7] = b"\x7fELF\x02\x01\x01"
+        struct.pack_into("<HHI", data, 16, 3, 183, 1)
+        struct.pack_into("<H", data, 52, 64)
+        architectures = guards.slices(data)
+        guards.architecture_ok("Linux", "aarch64", 64, architectures)
+        for machine, bits in (("x86_64", 64), ("aarch64", 32)):
+            with (
+                self.subTest(machine=machine, bits=bits),
+                self.assertRaises(RuntimeError),
+            ):
+                guards.architecture_ok("Linux", machine, bits, architectures)
+        for offset, value in ((4, 1), (5, 2), (6, 0), (16, 1), (20, 0), (52, 32)):
+            invalid = bytearray(data)
+            invalid[offset] = value
+            with self.subTest(offset=offset), self.assertRaises(RuntimeError):
+                guards.slices(invalid)
+        with self.assertRaises(RuntimeError):
+            guards.slices(data[:63])
+        struct.pack_into("<H", data, 18, 62)
+        with self.assertRaises(RuntimeError):
+            guards.architecture_ok("Linux", "aarch64", 64, guards.slices(data))
+
     def test_native_universal2_not_tag_rejected(self):
         data = bytearray(48)
         data[:4] = b"\xca\xfe\xba\xbe"
@@ -89,6 +113,35 @@ class NativeTests(unittest.TestCase):
 
 
 class EnvironmentTests(Fixture):
+    def test_linux_binary_and_uv_guards_reject_other_formats_and_wrong_digest(self):
+        import installer
+
+        executable = self.root / "uv"
+        header = bytearray(64)
+        header[:7] = b"\x7fELF\x02\x01\x01"
+        struct.pack_into("<HHI", header, 16, 3, 183, 1)
+        struct.pack_into("<H", header, 52, 64)
+        executable.write_bytes(header)
+        self.assertEqual(guards.binary_guard(executable, "Linux"), [183])
+        with (
+            patch("installer.platform.system", return_value="Linux"),
+            patch("installer.sha", return_value=installer.UV_HASHES["Linux"]),
+        ):
+            installer.native_uv(executable.resolve())
+        with (
+            patch("installer.platform.system", return_value="Linux"),
+            self.assertRaisesRegex(RuntimeError, "Wrong official"),
+        ):
+            installer.native_uv(executable.resolve())
+        pe = bytearray(128)
+        pe[:2] = b"MZ"
+        struct.pack_into("<I", pe, 60, 80)
+        pe[80:84] = b"PE\0\0"
+        struct.pack_into("<H", pe, 84, 183)
+        executable.write_bytes(pe)
+        with self.assertRaisesRegex(RuntimeError, "Linux requires ELF"):
+            guards.binary_guard(executable, "Linux")
+
     def test_synthetic_home_no_credentials_hooks_or_corporate_feed(self):
         env = guards.environment(
             self.root,

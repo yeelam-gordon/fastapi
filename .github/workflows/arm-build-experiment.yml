@@ -1,4 +1,4 @@
-name: Paired ARM build experiment v4 (manual only)
+name: P50 hardware-family native build control (manual only)
 
 on:
   workflow_dispatch:
@@ -10,22 +10,17 @@ env:
   GIT_CONFIG_COUNT: "1"
   GIT_CONFIG_KEY_0: core.autocrlf
   GIT_CONFIG_VALUE_0: "false"
+  NoDefaultCurrentDirectoryInExePath: "1"
 
 jobs:
   windows:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.ref == 'refs/heads/perf/arm-cobalt-control' && github.run_attempt == 1
     runs-on: windows-11-arm
     timeout-minutes: 20
     defaults:
       run:
         shell: pwsh
     steps:
-      - name: Require Git sparse checkout support before checkout
-        run: |
-          $git = Get-Command git -ErrorAction Stop
-          $version = & $git.Source version
-          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
-            throw 'Git >= 2.28 is required; archive fallback is not permitted'
-          }
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
@@ -34,108 +29,69 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /.gitattributes
-            /.github/.gitattributes
-            /.github/workflows/.gitattributes
             /.github/workflows/arm-build-experiment.yml
             /Generated Files/.gitattributes
             /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/*.lock
-            /Generated Files/arm-build/setup_python.cjs
-            /Generated Files/arm-build/ci_prepare.py
-            /Generated Files/arm-build/candidate/.gitattributes
-            /Generated Files/arm-build/candidate/*.py
-            /Generated Files/arm-build/candidate/actual-manifest.json
+            /Generated Files/arm-build/paired-arm-reference/.gitattributes
+            /Generated Files/arm-build/paired-arm-reference/*.py
+            /Generated Files/arm-build/paired-arm-reference/bootstrap.ps1
             /Generated Files/arm-build/protocol/.gitattributes
-            /Generated Files/arm-build/protocol/*.py
             /Generated Files/arm-build/protocol/owned_process.py
-            /Generated Files/arm-build/protocol/*.lock
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
-          path: package-source
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: source-objects
           persist-credentials: false
-      - name: Place complete experiment on C without changing volume trust
+      - name: Private bootstrap state
         run: |
-          $started = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() / 1000.0
-          "PAIR_PROVISION_STARTED=$($started.ToString([Globalization.CultureInfo]::InvariantCulture))" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $required = @(
-            '.github/workflows/arm-build-experiment.yml'
-            'Generated Files/arm-build/setup_python.cjs'
-            'Generated Files/arm-build/ci_prepare.py'
-            'Generated Files/arm-build/tooling.lock'
-            'Generated Files/arm-build/smoke.lock'
-            'Generated Files/arm-build/candidate/actual-manifest.json'
-            'Generated Files/arm-build/protocol/isolated_build.py'
-            'Generated Files/arm-build/protocol/backend.lock'
-            'Generated Files/arm-build/protocol/owned_process.py'
-          )
-          $required += git -C tools ls-files -- ':(glob)Generated Files/arm-build/candidate/*.py' ':(glob)Generated Files/arm-build/protocol/*.py' ':(glob)Generated Files/arm-build/protocol/*.lock' ':(glob)Generated Files/arm-build/*.lock'
-          if ($LASTEXITCODE) { throw 'Cannot enumerate complete tool hash inputs' }
-          foreach ($file in $required) {
-            if (-not (Test-Path -LiteralPath (Join-Path tools $file) -PathType Leaf)) {
-              throw "Required sparse tool input missing: $file"
-            }
-          }
-          $root = "C:\arm-pairs-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          $ErrorActionPreference = 'Stop'
+          $root = Join-Path $env:GITHUB_WORKSPACE 'p50-bootstrap'
           New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
-          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
-          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
+          foreach ($name in @('home', 'temp', 'cache', 'config')) {
+            New-Item -ItemType Directory (Join-Path $root $name) | Out-Null
+          }
           @(
-            "PAIR_ROOT=$root"
-            "PAIR_TOOLS=$(Join-Path $root 'tools')"
-            "UV_CACHE_DIR=$(Join-Path $root 'uv-cache')"
-            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
-            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
-            "TEMP=$root"
-            "TMP=$root"
+            "HOME=$(Join-Path $root 'home')"
+            "USERPROFILE=$(Join-Path $root 'home')"
+            "APPDATA=$(Join-Path $root 'config')"
+            "LOCALAPPDATA=$(Join-Path $root 'cache')"
+            "TEMP=$(Join-Path $root 'temp')"
+            "TMP=$(Join-Path $root 'temp')"
+            "UV_CACHE_DIR=$(Join-Path $root 'cache')"
           ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
         with:
           version: "0.13.6"
           enable-cache: "false"
-      - name: Pin native runtime and prepare locked offline wheels
+      - name: Official stock native Python bootstrap
         run: |
-          $uv = Join-Path $env:PAIR_ROOT 'uv.exe'
-          Copy-Item (Get-Command uv).Source $uv
-          $env:PATH = "$env:PAIR_ROOT;$env:PATH"
-          "PAIR_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $arm = Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build'
-          node (Join-Path $arm 'setup_python.cjs')
+          & 'tools/Generated Files/arm-build/paired-arm-reference/bootstrap.ps1'
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
-      - name: Prepare canonical source and run fixed protocol
+          "P50_UV=$((Get-Command uv -ErrorAction Stop).Source)" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+      - name: Attestation, excluded full correctness warmup, six stock samples
         run: |
-          $protocol = Join-Path (Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build') 'protocol'
-          python (Join-Path $protocol 'test_pairs.py')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python (Join-Path $protocol 'measure_pairs.py') --prepare --uv $env:PAIR_UV --source-checkout (Join-Path $env:PAIR_ROOT 'package-source') --output (Join-Path $env:PAIR_ROOT 'evidence')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python (Join-Path $protocol 'measure_pairs.py') --uv $env:PAIR_UV --output (Join-Path $env:PAIR_ROOT 'evidence')
+          & $env:PAIRED_PYTHON -B 'tools/Generated Files/arm-build/paired-arm-reference/control.py' --root (Join-Path $env:PAIRED_ROOT 'p50') --uv $env:P50_UV --source-repo (Join-Path $env:GITHUB_WORKSPACE 'source-objects')
           exit $LASTEXITCODE
-      - name: Preserve complete v4 evidence even on failure
+      - name: Preserve evidence and first failure
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: paired-v4-windows
+          name: p50-windows
           path: |
-            ${{ env.PAIR_ROOT }}/evidence
-            ${{ env.PAIR_TOOLS }}/Generated Files/arm-build/results/bootstrap
+            ${{ github.workspace }}/paired-reference/p50/evidence
+            ${{ github.workspace }}/paired-reference/p50/*/source/dist
+            ${{ github.workspace }}/paired-reference/bootstrap*.json
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 3
 
-  macos:
-    runs-on: macos-15
+  linux:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.ref == 'refs/heads/perf/arm-cobalt-control' && github.run_attempt == 1
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 20
     defaults:
       run:
-        shell: pwsh
+        shell: bash
     steps:
-      - name: Require Git sparse checkout support before checkout
-        run: |
-          $git = Get-Command git -ErrorAction Stop
-          $version = & $git.Source version
-          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
-            throw 'Git >= 2.28 is required; archive fallback is not permitted'
-          }
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
@@ -144,89 +100,50 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /.gitattributes
-            /.github/.gitattributes
-            /.github/workflows/.gitattributes
             /.github/workflows/arm-build-experiment.yml
             /Generated Files/.gitattributes
             /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/*.lock
-            /Generated Files/arm-build/setup_python.cjs
-            /Generated Files/arm-build/ci_prepare.py
-            /Generated Files/arm-build/candidate/.gitattributes
-            /Generated Files/arm-build/candidate/*.py
-            /Generated Files/arm-build/candidate/actual-manifest.json
+            /Generated Files/arm-build/paired-arm-reference/.gitattributes
+            /Generated Files/arm-build/paired-arm-reference/*.py
+            /Generated Files/arm-build/paired-arm-reference/bootstrap.ps1
             /Generated Files/arm-build/protocol/.gitattributes
-            /Generated Files/arm-build/protocol/*.py
             /Generated Files/arm-build/protocol/owned_process.py
-            /Generated Files/arm-build/protocol/*.lock
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
-          path: package-source
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: source-objects
           persist-credentials: false
-      - name: Prepare owned experiment root
+      - name: Private bootstrap state
         run: |
-          $started = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() / 1000.0
-          "PAIR_PROVISION_STARTED=$($started.ToString([Globalization.CultureInfo]::InvariantCulture))" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $required = @(
-            '.github/workflows/arm-build-experiment.yml'
-            'Generated Files/arm-build/setup_python.cjs'
-            'Generated Files/arm-build/ci_prepare.py'
-            'Generated Files/arm-build/tooling.lock'
-            'Generated Files/arm-build/smoke.lock'
-            'Generated Files/arm-build/candidate/actual-manifest.json'
-            'Generated Files/arm-build/protocol/isolated_build.py'
-            'Generated Files/arm-build/protocol/backend.lock'
-            'Generated Files/arm-build/protocol/owned_process.py'
-          )
-          $required += git -C tools ls-files -- ':(glob)Generated Files/arm-build/candidate/*.py' ':(glob)Generated Files/arm-build/protocol/*.py' ':(glob)Generated Files/arm-build/protocol/*.lock' ':(glob)Generated Files/arm-build/*.lock'
-          if ($LASTEXITCODE) { throw 'Cannot enumerate complete tool hash inputs' }
-          foreach ($file in $required) {
-            if (-not (Test-Path -LiteralPath (Join-Path tools $file) -PathType Leaf)) {
-              throw "Required sparse tool input missing: $file"
-            }
-          }
-          $root = Join-Path $env:GITHUB_WORKSPACE "arm-pairs-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
-          New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
-          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
-          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
-          @(
-            "PAIR_ROOT=$root"
-            "PAIR_TOOLS=$(Join-Path $root 'tools')"
-            "UV_CACHE_DIR=$(Join-Path $root 'uv-cache')"
-            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
-            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
-            "TMPDIR=$root"
-          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
-        with:
-          version: "0.13.6"
-          enable-cache: "false"
-      - name: Pin native runtime
+          set -euo pipefail
+          root="$GITHUB_WORKSPACE/p50-bootstrap"
+          mkdir "$root"
+          mkdir "$root/home" "$root/temp" "$root/cache" "$root/config"
+          {
+            echo "HOME=$root/home"
+            echo "TMPDIR=$root/temp"
+            echo "TEMP=$root/temp"
+            echo "TMP=$root/temp"
+            echo "XDG_CACHE_HOME=$root/cache"
+            echo "XDG_CONFIG_HOME=$root/config"
+          } >> "$GITHUB_ENV"
+      - name: Exact verified native Linux Python and UV
         run: |
-          $uv = Join-Path $env:PAIR_ROOT 'uv'
-          Copy-Item (Get-Command uv).Source $uv
-          $env:PATH = "$env:PAIR_ROOT`:$env:PATH"
-          "PAIR_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $arm = Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build'
-          node (Join-Path $arm 'setup_python.cjs')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-      - name: Prepare canonical source and run fixed protocol
+          set -euo pipefail
+          python3 -B 'tools/Generated Files/arm-build/paired-arm-reference/linux_bootstrap.py'
+      - name: Attestation, excluded full correctness warmup, six stock samples
         run: |
-          $protocol = Join-Path (Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build') 'protocol'
-          python (Join-Path $protocol 'test_pairs.py')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python (Join-Path $protocol 'measure_pairs.py') --prepare --uv $env:PAIR_UV --source-checkout (Join-Path $env:PAIR_ROOT 'package-source') --output (Join-Path $env:PAIR_ROOT 'evidence')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python (Join-Path $protocol 'measure_pairs.py') --uv $env:PAIR_UV --output (Join-Path $env:PAIR_ROOT 'evidence')
-          exit $LASTEXITCODE
-      - name: Preserve complete v4 evidence even on failure
+          set -euo pipefail
+          "$PAIRED_PYTHON" -B 'tools/Generated Files/arm-build/paired-arm-reference/control.py' \
+            --root "$PAIRED_ROOT/p50" --uv "$P50_UV" --source-repo "$GITHUB_WORKSPACE/source-objects"
+      - name: Preserve evidence and first failure
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: paired-v4-macos
+          name: p50-linux
           path: |
-            ${{ env.PAIR_ROOT }}/evidence
-            ${{ env.PAIR_TOOLS }}/Generated Files/arm-build/results/bootstrap
+            ${{ github.workspace }}/paired-reference/p50/evidence
+            ${{ github.workspace }}/paired-reference/p50/*/source/dist
+            ${{ github.workspace }}/paired-reference/bootstrap*.json
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 3

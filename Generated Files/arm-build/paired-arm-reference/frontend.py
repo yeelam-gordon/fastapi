@@ -101,6 +101,20 @@ def verify_python_abi(abi):
             ),
             "Require macOS CPython 3.12 native-capable extension ABI",
         )
+    elif system == "Linux":
+        require(
+            abi["soabi"] == "cpython-312-aarch64-linux-gnu"
+            and abi["ext_suffix"] == ".cpython-312-aarch64-linux-gnu.so"
+            and abi["sysconfig_platform"] == "linux-aarch64",
+            "Require Linux CPython 3.12 AArch64 GNU extension ABI",
+        )
+        require(
+            Path(abi["source_prefix"]).resolve() == Path(sys.base_prefix).resolve()
+            and Path(abi["base"])
+            .resolve()
+            .is_relative_to(Path(abi["source_prefix"]).resolve()),
+            "Linux child runtime source prefix mismatch",
+        )
     else:
         raise RuntimeError("Unsupported child ABI host")
     require(
@@ -136,7 +150,7 @@ def helper_imports(inputs):
 def transient_paths(base, system):
     if system == "Windows":
         return base / "Scripts" / "python.exe", [base / "Lib" / "site-packages"]
-    require(system == "Darwin", "Unsupported transient host")
+    require(system in ("Darwin", "Linux"), "Unsupported transient host")
     return base / "bin" / "python", list(
         (base / "lib").glob("python3.12/site-packages")
     )
@@ -437,7 +451,7 @@ class FrontendRun(Run):
                 "soabi=sysconfig.get_config_var('SOABI'),"
                 "sysconfig_platform=sysconfig.get_platform(),"
                 "ext_suffix=sysconfig.get_config_var('EXT_SUFFIX'),"
-                "base=sys._base_executable)))",
+                "base=sys._base_executable,source_prefix=sys.base_prefix)))",
             ],
         )
         abi = json.loads(abi_out)

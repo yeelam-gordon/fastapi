@@ -64,6 +64,44 @@ class Fixture(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.root)
 
+    def test_linux_actual_abi_prefix_and_transient_layout(self):
+        abi = {
+            "cache_tag": "cpython-312",
+            "version": "3.12.10",
+            "system": "Linux",
+            "bits": 64,
+            "machine": "aarch64",
+            "soabi": "cpython-312-aarch64-linux-gnu",
+            "sysconfig_platform": "linux-aarch64",
+            "ext_suffix": ".cpython-312-aarch64-linux-gnu.so",
+            "base": sys._base_executable,
+            "source_prefix": sys.base_prefix,
+        }
+        with (
+            patch("frontend.platform.system", return_value="Linux"),
+            patch("frontend.binary_guard") as guard,
+        ):
+            frontend.verify_python_abi(abi)
+            guard.assert_called_once_with(Path(sys._base_executable))
+            for key, value in (
+                ("bits", 32),
+                ("machine", "x86_64"),
+                ("soabi", "cpython-312-x86_64-linux-gnu"),
+                ("ext_suffix", ".so"),
+                ("sysconfig_platform", "linux-x86_64"),
+                ("source_prefix", str(self.root / "different-runtime")),
+                ("base", str(self.root / "different-python")),
+                ("system", "Darwin"),
+            ):
+                with self.subTest(key=key), self.assertRaises(RuntimeError):
+                    frontend.verify_python_abi({**abi, key: value})
+        site = self.root / "lib" / "python3.12" / "site-packages"
+        site.mkdir(parents=True)
+        self.assertEqual(
+            frontend.transient_paths(self.root, "Linux"),
+            (self.root / "bin" / "python", [site]),
+        )
+
     def test_raw_clock_endpoints_elapsed_and_chronology_outside_boundary(self):
         run = frontend.FrontendRun(self.root)
         events = []
