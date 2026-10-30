@@ -26,7 +26,8 @@ research history or research bundle is part of the diff.
 
 Exact relative paths under `Generated Files/arm-build/paired-arm-reference/`:
 `.gitattributes`, `.gitignore`, `bootstrap.ps1`, `driver.py`, `guards.py`,
-`source.py`, `compare.py`, `frozen.py`, `test_reference.py`,
+`source.py`, `compare.py`, `frozen.py`, `test_reference.py`, `cpu_audit.py`,
+`cpu-hook/sitecustomize.py`, `test_cpu_hook.py`, `test_cpu_audit.py`,
 `build-constraints.txt`, `reference-constraints.txt`, `owner-dev.txt`,
 `cloud.patch`, `pdm-small-read-prefetch.patch`, `CLOUD-LICENSE.txt`,
 `PDM-LICENSE.txt`, `pdm_backend-2.5.0-py3-none-any.whl.gz`,
@@ -174,8 +175,24 @@ SQLite/JSON must agree on 863 source files and 1,409 contexts.
 Any platform difference is retained and stops the gate; it is not normalized
 or forced into an original skip.
 
-Correctness wall is labeled non-performance-eligible; CPU is explicitly
-**not measured**, rather than reporting launcher-only zero as workload CPU.
+Correctness wall is **instrumented and non-performance-eligible**. The unchanged
+validated LF SELF hook (SHA256
+`35dc681fc09f34774c359826a61aa1376e352c973336085ab2bf176c5f6d9517`)
+is injected only into this full pass through process-local PYTHONPATH and a
+fresh owned receipt directory. It registers one early stdlib atexit callback;
+each actual Python worker/covered CLI child records its own os.times user/system,
+PID/PPID and orig_argv. No trace/profile callback, runtime patch or environment
+dump is added. Existing startup hooks/tracing must be absent before injection.
+The early callback runs after coverage's later-registered exit callback (LIFO).
+
+`CPU-AUDIT.json` reconciles both raw coverage shard PIDs against validated
+receipts, roles and the actual entry PID. A direct macOS entry may equal the
+worker PID; a Windows redirector may instead equal the worker PPID. No
+Windows-only inequality is imposed. Only observed Python SELF CPU is summed;
+this is not whole OS-tree/non-Python CPU, and incomplete totals are null,
+never a substituted launcher-only zero. Valid short-process zero is permitted.
+All ordinary/performance commands reject SELF receipt variables or the hook
+path; clean default environments also remove inherited HOBL_CPU variables.
 Setup/queue/checkout/bootstrap, correctness gates and trials have separate
 boundaries. Per-host statistics reuse the frozen 5% / 5-of-6 / both-order
 gate, not a significance claim. No old CRLF/3.13/uv trial is pooled here.
@@ -187,12 +204,16 @@ All result statuses explicitly leave cross-platform artifact/mode parity
 Completed on Q only, with TEMP/TMP/TMPDIR/PYTEST_TMPDIR pointing into private
 owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
 
-- 37 stdlib contract/mocked tests pass, including native universal2/Rosetta/
+- 48 stdlib contract/mocked tests pass, including native universal2/Rosetta/
   x86 guards; synthetic HOME/credential removal; literal CLI exit 1; raw
   CRLF-vs-LF inequality; backend identity/RECORD; Git-LF/executable-mode
   integrity; both raw build phase streams; stale/failed coverage preservation;
   canonical node identity rejection; exact 14-command schedules and one
   full pass; preflight excludes full pass/timings; two allocated runner jobs.
+  CPU additions directly reuse the original three schema guards and test
+  2/2 PID reconciliation, Mac direct/Windows redirector relationships,
+  missing/invalid counters, legitimate smoke zero, startup-hook exclusion,
+  process-local injection and benchmark-hook rejection.
 - Existing native Ruff **0.16.6** check and format pass; existing actionlint
   **1.7.12** passes; bootstrap PowerShell AST parses without errors.
 - Static real Git archive proof passed for all **2,557** pinned LF payloads;
@@ -220,7 +241,9 @@ After the parent grants the native resource handoff, the driver supports
 --root <fresh-owned-root>`, launched with an actual native 3.12.10 interpreter.
 Both venv identities are checked; they are not restored/reinstalled.
 This performs two untimed build correctness commands and portable targeted
-CLI/owner gates, **no 14-trial series and no full suite**. It still fetches
+CLI/owner gates and one `python -c pass` SELF-hook smoke, **no 14-trial series
+and no full suite**. The smoke validates actual receipt/PID/counter shape,
+does no busy-loop work and accepts legitimate zero CPU. It still fetches
 pinned public Git inputs, downloads the exact stock backend unless supplied
 locally as below, and restores only isolated owner-test respx. Do not run
 during another worker's disk lease.

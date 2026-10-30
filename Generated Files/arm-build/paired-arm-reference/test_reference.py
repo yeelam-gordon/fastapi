@@ -374,6 +374,9 @@ class CoverageTests(Fixture):
         run.source = self.root
         run.full_env = {}
         (self.root / "full-coverage").mkdir()
+        receipts = run.upload / "full-worker-cpu"
+        receipts.mkdir()
+        run.cpu_environment = lambda stage: ({}, receipts)
         return run
 
     def test_failed_full_suite_preserves_raw_coverage(self):
@@ -442,6 +445,11 @@ class CoverageTests(Fixture):
             patch.object(run, "py", side_effect=child),
             patch.object(run, "integrity"),
             patch.object(driver, "junit_oracle", return_value={}),
+            patch.object(
+                driver.cpu_audit,
+                "audit",
+                return_value={"covered_worker_receipts_complete": True},
+            ),
         ):
             run.full_correctness()
         self.assertEqual(
@@ -480,6 +488,7 @@ class OrchestrationTests(Fixture):
 
         with (
             patch.object(run, "setup"),
+            patch.object(run, "cpu_hook_smoke") as smoke,
             patch.object(run, "build", side_effect=build) as builds,
             patch.object(run, "semantic_gates") as semantics,
             patch.object(run, "full_correctness") as full,
@@ -488,6 +497,7 @@ class OrchestrationTests(Fixture):
             patch.object(driver, "compare_outputs", return_value={"full_pass": True}),
         ):
             run.execute(preflight=preflight)
+            self.assertEqual(smoke.call_count, int(preflight))
         return builds, clis, full, semantics
 
     def test_bounded_cohort_counts(self):

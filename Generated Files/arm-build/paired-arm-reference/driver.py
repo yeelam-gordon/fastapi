@@ -17,6 +17,7 @@ from contextlib import closing
 from pathlib import Path
 from urllib.parse import urlsplit
 
+import cpu_audit
 from compare import compare_outputs
 from frozen import full_inventory, summary, verify_record
 from guards import (
@@ -30,6 +31,7 @@ from guards import (
     cli_command,
     cli_valid,
     environment,
+    forbid_cpu_hook,
     native_guard,
     payload_tree,
     raw_equal,
@@ -89,6 +91,7 @@ def constraints(path):
 def input_hashes():
     files = [p for p in HERE.iterdir() if p.is_file()]
     files.extend((HERE / "SOURCE").glob("*"))
+    files.extend((HERE / "cpu-hook").glob("*.py"))
     return {p.relative_to(HERE).as_posix(): sha(p) for p in files if p.is_file()}
 
 
@@ -242,7 +245,34 @@ class Run:
     def inputs_unchanged(self):
         require(input_hashes() == self.frozen_inputs, "Committed helper input drift")
 
-    def command(self, label, argv, cwd=None, env=None, expected=0, timed=False):
+    def command(
+        self,
+        label,
+        argv,
+        cwd=None,
+        env=None,
+        expected=0,
+        timed=False,
+        cpu_receipt=False,
+    ):
+        active_env = self.env if env is None else env
+        if cpu_receipt:
+            require(
+                not timed and label in ("full-correctness", "cpu-hook-smoke"),
+                "SELF hook is only allowed in non-performance correctness/smoke",
+            )
+            directory = Path(active_env.get("HOBL_CPU_RECEIPT_DIR", "")).resolve()
+            require(
+                directory.parent == self.upload.resolve(),
+                "SELF receipt directory must be owned evidence",
+            )
+            require(
+                str(cpu_audit.HOOK)
+                in active_env.get("PYTHONPATH", "").split(os.pathsep),
+                "Expected validated startup hook missing",
+            )
+        else:
+            forbid_cpu_hook(active_env)
         directory = self.upload / label
         directory.mkdir()
         row = {
@@ -257,15 +287,31 @@ class Run:
         ):
             start = time.perf_counter()
             try:
-                result = subprocess.run(
-                    row["argv"],
-                    cwd=cwd or self.root,
-                    env=env or self.env,
-                    stdout=out,
-                    stderr=err,
-                    timeout=1800,
-                )
-                row["exit"] = result.returncode
+                if cpu_receipt:
+                    with subprocess.Popen(
+                        row["argv"],
+                        cwd=cwd or self.root,
+                        env=active_env,
+                        stdout=out,
+                        stderr=err,
+                    ) as process:
+                        row["entry_pid"] = process.pid
+                        try:
+                            row["exit"] = process.wait(timeout=1800)
+                        except BaseException:
+                            process.kill()
+                            process.wait()
+                            raise
+                else:
+                    result = subprocess.run(
+                        row["argv"],
+                        cwd=cwd or self.root,
+                        env=active_env,
+                        stdout=out,
+                        stderr=err,
+                        timeout=1800,
+                    )
+                    row["exit"] = result.returncode
             except BaseException as exc:
                 row["error"] = type(exc).__name__
                 raise
@@ -843,6 +889,7 @@ print(json.dumps({
         require(
             not list(shards.iterdir()), "Refuse stale/mixed coverage before full run"
         )
+        env, receipts = self.cpu_environment("full")
         try:
             row, stdout, stderr = self.py(
                 self.test_python,
@@ -863,12 +910,32 @@ print(json.dumps({
                     "--junitxml=" + str(self.upload / "junit.xml"),
                 ],
                 cwd=self.source,
-                env=self.full_env,
+                env=env,
+                cpu_receipt=True,
             )
         finally:
             # Raw SQLite shards survive failed tests and any later auto-combine.
             shutil.copytree(shards, raw)
             save(self.upload / "raw-coverage-hashes.json", payload_tree(raw))
+            command = self.upload / "full-correctness"
+            metadata = (
+                json.loads((command / "command.json").read_bytes())
+                if (command / "command.json").exists()
+                else {}
+            )
+            cpu = cpu_audit.audit(
+                receipts,
+                raw,
+                metadata.get("entry_pid"),
+                (command / "stderr").read_bytes()
+                if (command / "stderr").exists()
+                else b"",
+            )
+            save(self.upload / "CPU-AUDIT.json", cpu)
+        require(
+            cpu["covered_worker_receipts_complete"],
+            "Covered worker SELF CPU receipts incomplete",
+        )
         require(
             len(list(raw.glob(".coverage.*"))) == 2,
             "Expected worker and CLI child shards",
@@ -941,11 +1008,50 @@ print(json.dumps({
             {
                 "performance_eligible": False,
                 "wall_seconds": row["wall_seconds"],
-                "cpu": "NOT MEASURED: launcher CPU must not be used as workload CPU",
+                "cpu": "CPU-AUDIT.json: observed Python SELF only, not whole OS tree or launcher CPU",
                 "baseline": "Stock source/packages; AnyIO 4.14.2 compatible reference",
             },
         )
         self.integrity()
+
+    def cpu_environment(self, stage):
+        require(
+            sha(cpu_audit.HOOK / "sitecustomize.py")
+            == "35dc681fc09f34774c359826a61aa1376e352c973336085ab2bf176c5f6d9517",
+            "Validated SELF hook bytes changed",
+        )
+        _, out, _ = self.py(
+            self.test_python,
+            "cpu-startup-guard-" + stage,
+            ["-c", cpu_audit.STARTUP_CHECK],
+            cwd=self.source,
+            env=self.full_env,
+        )
+        guard = json.loads(out)
+        require(
+            not guard["existing_hooks"] and not guard["trace"] and not guard["profile"],
+            "Refuse to shadow an existing startup hook/trace/profile callback",
+        )
+        receipts = self.upload / (stage + "-worker-cpu")
+        receipts.mkdir()
+        env = self.full_env.copy()
+        env["PYTHONPATH"] = os.pathsep.join([str(cpu_audit.HOOK), env["PYTHONPATH"]])
+        env["HOBL_CPU_RECEIPT_DIR"] = str(receipts)
+        return env, receipts
+
+    def cpu_hook_smoke(self):
+        env, receipts = self.cpu_environment("smoke")
+        row, _, stderr = self.py(
+            self.test_python,
+            "cpu-hook-smoke",
+            ["-c", "pass"],
+            cwd=self.source,
+            env=env,
+            cpu_receipt=True,
+        )
+        result = cpu_audit.smoke(receipts, row.get("entry_pid"), stderr)
+        save(self.upload / "CPU-SMOKE.json", result)
+        require(result["complete"], "Native no-test SELF hook smoke failed")
 
     def integrity(self):
         self.inputs_unchanged()
@@ -996,6 +1102,8 @@ print(json.dumps({
         self.preflight_inputs(preflight, stock_wheel, respx_wheel)
         setup_start = time.perf_counter()
         self.setup(build_python, test_python)
+        if preflight:
+            self.cpu_hook_smoke()
         setup_end = time.perf_counter()
         a = self.build("correctness-build-A", "A")[1]
         b = self.build("correctness-build-B", "B")[1]

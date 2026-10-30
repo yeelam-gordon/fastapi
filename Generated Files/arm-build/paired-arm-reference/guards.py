@@ -124,7 +124,16 @@ def native_guard():
 
 def environment(root, inherited=None):
     inherited = os.environ if inherited is None else inherited
-    prefixes = ("PIP_", "UV_", "PYTHON", "COVERAGE_", "PYTEST_", "FASTAPI_", "SENTRY_")
+    prefixes = (
+        "PIP_",
+        "UV_",
+        "PYTHON",
+        "COVERAGE_",
+        "PYTEST_",
+        "FASTAPI_",
+        "SENTRY_",
+        "HOBL_CPU_",
+    )
     # Never carry deployment credentials, index overrides, user Python hooks or
     # profiling settings into workloads. No environment dump is persisted.
     env = {
@@ -161,6 +170,22 @@ def environment(root, inherited=None):
         PYTHONIOENCODING="utf8",
     )
     return env
+
+
+def forbid_cpu_hook(env):
+    require(
+        not any(key.upper().startswith("HOBL_CPU_") for key in env),
+        "SELF receipt variables forbidden outside instrumented correctness/smoke",
+    )
+    hook = Path(__file__).resolve().parent / "cpu-hook"
+    require(
+        not any(
+            Path(entry).resolve() == hook.resolve()
+            for entry in env.get("PYTHONPATH", "").split(os.pathsep)
+            if entry
+        ),
+        "SELF startup hook forbidden outside instrumented correctness/smoke",
+    )
 
 
 def tree(root):
