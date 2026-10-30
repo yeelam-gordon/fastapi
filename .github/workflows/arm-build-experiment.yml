@@ -1,4 +1,4 @@
-name: Paired ARM build experiment v4 (manual only)
+name: ARM volume inventory (manual only)
 
 on:
   workflow_dispatch:
@@ -6,227 +6,74 @@ on:
 permissions:
   contents: read
 
-env:
-  GIT_CONFIG_COUNT: "1"
-  GIT_CONFIG_KEY_0: core.autocrlf
-  GIT_CONFIG_VALUE_0: "false"
-
 jobs:
-  windows:
+  inventory:
+    if: github.repository == 'yeelam-gordon/fastapi'
     runs-on: windows-11-arm
-    timeout-minutes: 20
+    timeout-minutes: 5
     defaults:
       run:
         shell: pwsh
     steps:
-      - name: Require Git sparse checkout support before checkout
+      - name: Inventory existing fixed volumes and ARM host identity
         run: |
-          $git = Get-Command git -ErrorAction Stop
-          $version = & $git.Source version
-          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
-            throw 'Git >= 2.28 is required; archive fallback is not permitted'
-          }
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: ${{ github.sha }}
-          path: tools
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /.gitattributes
-            /.github/.gitattributes
-            /.github/workflows/.gitattributes
-            /.github/workflows/arm-build-experiment.yml
-            /Generated Files/.gitattributes
-            /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/*.lock
-            /Generated Files/arm-build/setup_python.cjs
-            /Generated Files/arm-build/ci_prepare.py
-            /Generated Files/arm-build/candidate/.gitattributes
-            /Generated Files/arm-build/candidate/*.py
-            /Generated Files/arm-build/candidate/actual-manifest.json
-            /Generated Files/arm-build/protocol/.gitattributes
-            /Generated Files/arm-build/protocol/*.py
-            /Generated Files/arm-build/protocol/owned_process.py
-            /Generated Files/arm-build/protocol/*.lock
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
-          path: package-source
-          persist-credentials: false
-      - name: Place complete experiment on C without changing volume trust
-        run: |
-          $started = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() / 1000.0
-          "PAIR_PROVISION_STARTED=$($started.ToString([Globalization.CultureInfo]::InvariantCulture))" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $required = @(
-            '.github/workflows/arm-build-experiment.yml'
-            'Generated Files/arm-build/setup_python.cjs'
-            'Generated Files/arm-build/ci_prepare.py'
-            'Generated Files/arm-build/tooling.lock'
-            'Generated Files/arm-build/smoke.lock'
-            'Generated Files/arm-build/candidate/actual-manifest.json'
-            'Generated Files/arm-build/protocol/isolated_build.py'
-            'Generated Files/arm-build/protocol/backend.lock'
-            'Generated Files/arm-build/protocol/owned_process.py'
-          )
-          $required += git -C tools ls-files -- ':(glob)Generated Files/arm-build/candidate/*.py' ':(glob)Generated Files/arm-build/protocol/*.py' ':(glob)Generated Files/arm-build/protocol/*.lock' ':(glob)Generated Files/arm-build/*.lock'
-          if ($LASTEXITCODE) { throw 'Cannot enumerate complete tool hash inputs' }
-          foreach ($file in $required) {
-            if (-not (Test-Path -LiteralPath (Join-Path tools $file) -PathType Leaf)) {
-              throw "Required sparse tool input missing: $file"
+          $ErrorActionPreference = 'Stop'
+          Set-StrictMode -Version Latest
+          $osArch = [Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+          $processArch = [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
+          if (-not [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::Windows) -or
+              $osArch -ne 'Arm64' -or $processArch -ne 'Arm64') { throw 'Native Windows ARM64 required' }
+          if ($env:RUNNER_OS -ne 'Windows' -or $env:RUNNER_ARCH -ne 'ARM64') { throw 'Runner identity mismatch' }
+          if (-not [IO.Path]::IsPathFullyQualified($env:RUNNER_TEMP) -or
+              -not (Test-Path -LiteralPath $env:RUNNER_TEMP -PathType Container)) { throw 'Invalid runner temp' }
+          $outputRoot = Join-Path $env:RUNNER_TEMP 'arm-volume-inventory'
+          if (Test-Path -LiteralPath $outputRoot) { throw 'Inventory output already exists' }
+          $volumes = @(Get-Volume -ErrorAction Stop | Where-Object { $_.DriveLetter -and $_.DriveType -eq 'Fixed' } |
+            ForEach-Object {
+              [ordered]@{
+                driveLetter = [string]$_.DriveLetter
+                fileSystem = [string]$_.FileSystem
+                driveType = [string]$_.DriveType
+                healthStatus = [string]$_.HealthStatus
+                sizeBytes = [long]$_.Size
+                freeBytes = [long]$_.SizeRemaining
+              }
+            })
+          $processors = @(Get-CimInstance -ClassName Win32_Processor -ErrorAction Stop | ForEach-Object {
+            [ordered]@{
+              name = $_.Name
+              coreCount = $_.NumberOfCores
+              logicalProcessorCount = $_.NumberOfLogicalProcessors
             }
+          })
+          $os = Get-CimInstance -ClassName Win32_OperatingSystem -ErrorAction Stop
+          if (-not $volumes.Count -or -not $processors.Count -or -not $os.BuildNumber) { throw 'Incomplete inventory' }
+          $inventory = [ordered]@{
+            schemaVersion = 1
+            os = [ordered]@{
+              architecture = $osArch
+              processArchitecture = $processArch
+              version = $os.Version
+              build = $os.BuildNumber
+              imageOS = $env:ImageOS
+              imageVersion = $env:ImageVersion
+            }
+            processors = $processors
+            runner = [ordered]@{
+              os = $env:RUNNER_OS
+              architecture = $env:RUNNER_ARCH
+              workspace = $env:GITHUB_WORKSPACE
+              temp = $env:RUNNER_TEMP
+            }
+            volumes = $volumes
           }
-          $root = "C:\arm-pairs-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
-          New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
-          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
-          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
-          @(
-            "PAIR_ROOT=$root"
-            "PAIR_TOOLS=$(Join-Path $root 'tools')"
-            "UV_CACHE_DIR=$(Join-Path $root 'uv-cache')"
-            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
-            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
-            "TEMP=$root"
-            "TMP=$root"
-          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
-        with:
-          version: "0.13.6"
-          enable-cache: "false"
-      - name: Pin native runtime and prepare locked offline wheels
-        run: |
-          $uv = Join-Path $env:PAIR_ROOT 'uv.exe'
-          Copy-Item (Get-Command uv).Source $uv
-          $env:PATH = "$env:PAIR_ROOT;$env:PATH"
-          "PAIR_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $arm = Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build'
-          node (Join-Path $arm 'setup_python.cjs')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-      - name: Prepare canonical source and run fixed protocol
-        run: |
-          $protocol = Join-Path (Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build') 'protocol'
-          python (Join-Path $protocol 'test_pairs.py')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python (Join-Path $protocol 'measure_pairs.py') --prepare --uv $env:PAIR_UV --source-checkout (Join-Path $env:PAIR_ROOT 'package-source') --output (Join-Path $env:PAIR_ROOT 'evidence')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python (Join-Path $protocol 'measure_pairs.py') --uv $env:PAIR_UV --output (Join-Path $env:PAIR_ROOT 'evidence')
-          exit $LASTEXITCODE
-      - name: Preserve complete v4 evidence even on failure
-        if: always()
+          $json = $inventory | ConvertTo-Json -Depth 6
+          New-Item -ItemType Directory -Path $outputRoot -ErrorAction Stop | Out-Null
+          $json | Set-Content -LiteralPath (Join-Path $outputRoot 'inventory.json') -Encoding utf8 -ErrorAction Stop
+      - name: Upload inventory JSON only
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: paired-v4-windows
-          path: |
-            ${{ env.PAIR_ROOT }}/evidence
-            ${{ env.PAIR_TOOLS }}/Generated Files/arm-build/results/bootstrap
+          name: arm-volume-inventory
+          path: ${{ runner.temp }}\arm-volume-inventory\inventory.json
           if-no-files-found: error
-          retention-days: 14
-
-  macos:
-    runs-on: macos-15
-    timeout-minutes: 20
-    defaults:
-      run:
-        shell: pwsh
-    steps:
-      - name: Require Git sparse checkout support before checkout
-        run: |
-          $git = Get-Command git -ErrorAction Stop
-          $version = & $git.Source version
-          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
-            throw 'Git >= 2.28 is required; archive fallback is not permitted'
-          }
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: ${{ github.sha }}
-          path: tools
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /.gitattributes
-            /.github/.gitattributes
-            /.github/workflows/.gitattributes
-            /.github/workflows/arm-build-experiment.yml
-            /Generated Files/.gitattributes
-            /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/*.lock
-            /Generated Files/arm-build/setup_python.cjs
-            /Generated Files/arm-build/ci_prepare.py
-            /Generated Files/arm-build/candidate/.gitattributes
-            /Generated Files/arm-build/candidate/*.py
-            /Generated Files/arm-build/candidate/actual-manifest.json
-            /Generated Files/arm-build/protocol/.gitattributes
-            /Generated Files/arm-build/protocol/*.py
-            /Generated Files/arm-build/protocol/owned_process.py
-            /Generated Files/arm-build/protocol/*.lock
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
-          path: package-source
-          persist-credentials: false
-      - name: Prepare owned experiment root
-        run: |
-          $started = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() / 1000.0
-          "PAIR_PROVISION_STARTED=$($started.ToString([Globalization.CultureInfo]::InvariantCulture))" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $required = @(
-            '.github/workflows/arm-build-experiment.yml'
-            'Generated Files/arm-build/setup_python.cjs'
-            'Generated Files/arm-build/ci_prepare.py'
-            'Generated Files/arm-build/tooling.lock'
-            'Generated Files/arm-build/smoke.lock'
-            'Generated Files/arm-build/candidate/actual-manifest.json'
-            'Generated Files/arm-build/protocol/isolated_build.py'
-            'Generated Files/arm-build/protocol/backend.lock'
-            'Generated Files/arm-build/protocol/owned_process.py'
-          )
-          $required += git -C tools ls-files -- ':(glob)Generated Files/arm-build/candidate/*.py' ':(glob)Generated Files/arm-build/protocol/*.py' ':(glob)Generated Files/arm-build/protocol/*.lock' ':(glob)Generated Files/arm-build/*.lock'
-          if ($LASTEXITCODE) { throw 'Cannot enumerate complete tool hash inputs' }
-          foreach ($file in $required) {
-            if (-not (Test-Path -LiteralPath (Join-Path tools $file) -PathType Leaf)) {
-              throw "Required sparse tool input missing: $file"
-            }
-          }
-          $root = Join-Path $env:GITHUB_WORKSPACE "arm-pairs-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
-          New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
-          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
-          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
-          @(
-            "PAIR_ROOT=$root"
-            "PAIR_TOOLS=$(Join-Path $root 'tools')"
-            "UV_CACHE_DIR=$(Join-Path $root 'uv-cache')"
-            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
-            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
-            "TMPDIR=$root"
-          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
-        with:
-          version: "0.13.6"
-          enable-cache: "false"
-      - name: Pin native runtime
-        run: |
-          $uv = Join-Path $env:PAIR_ROOT 'uv'
-          Copy-Item (Get-Command uv).Source $uv
-          $env:PATH = "$env:PAIR_ROOT`:$env:PATH"
-          "PAIR_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $arm = Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build'
-          node (Join-Path $arm 'setup_python.cjs')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-      - name: Prepare canonical source and run fixed protocol
-        run: |
-          $protocol = Join-Path (Join-Path (Join-Path $env:PAIR_TOOLS 'Generated Files') 'arm-build') 'protocol'
-          python (Join-Path $protocol 'test_pairs.py')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python (Join-Path $protocol 'measure_pairs.py') --prepare --uv $env:PAIR_UV --source-checkout (Join-Path $env:PAIR_ROOT 'package-source') --output (Join-Path $env:PAIR_ROOT 'evidence')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          python (Join-Path $protocol 'measure_pairs.py') --uv $env:PAIR_UV --output (Join-Path $env:PAIR_ROOT 'evidence')
-          exit $LASTEXITCODE
-      - name: Preserve complete v4 evidence even on failure
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: paired-v4-macos
-          path: |
-            ${{ env.PAIR_ROOT }}/evidence
-            ${{ env.PAIR_TOOLS }}/Generated Files/arm-build/results/bootstrap
-          if-no-files-found: error
-          retention-days: 14
+          retention-days: 7
