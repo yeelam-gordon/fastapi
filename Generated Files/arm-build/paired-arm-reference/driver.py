@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ET
 import zipfile
 from contextlib import closing
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from compare import compare_outputs
 from frozen import full_inventory, summary, verify_record
@@ -194,6 +195,49 @@ class Run:
         self.frozen_inputs = input_hashes()
         save(self.upload / "inputs.json", self.frozen_inputs)
         self.rows = {"build": [], "cli": []}
+        self.stock_wheel = None
+        self.respx_wheel = None
+        self.owner_dev_index = self.env["PIP_INDEX_URL"]
+
+    def preflight_inputs(self, preflight, stock_wheel=None, respx_wheel=None):
+        self.owner_dev_index = self.env["PIP_INDEX_URL"]
+        require(
+            preflight or not (stock_wheel or respx_wheel),
+            "Local wheel inputs are preflight-only",
+        )
+        for path, expected in (
+            (stock_wheel, WHEEL_HASHES["A"]),
+            (
+                respx_wheel,
+                (HERE / "owner-dev.txt").read_text().split("--hash=sha256:")[1].strip(),
+            ),
+        ):
+            if path is not None:
+                require(
+                    path.is_file() and sha(path) == expected,
+                    "Local preflight wheel does not match frozen official SHA256",
+                )
+        self.stock_wheel = stock_wheel.resolve() if stock_wheel else None
+        self.respx_wheel = respx_wheel.resolve() if respx_wheel else None
+        if self.respx_wheel:
+            require(
+                self.respx_wheel.name.startswith("respx-0.23.1-")
+                and self.respx_wheel.suffix == ".whl",
+                "Invalid respx wheel filename",
+            )
+        if preflight and not self.respx_wheel:
+            index = os.environ.get("PIP_INDEX_URL", self.env["PIP_INDEX_URL"])
+            parsed = urlsplit(index)
+            require(
+                parsed.scheme == "https"
+                and parsed.hostname
+                and parsed.username is None
+                and parsed.password is None
+                and not parsed.query
+                and not parsed.fragment,
+                "Preflight owner index requires plain verified HTTPS, without URL credentials",
+            )
+            self.owner_dev_index = index
 
     def inputs_unchanged(self):
         require(input_hashes() == self.frozen_inputs, "Committed helper input drift")
@@ -317,6 +361,8 @@ class Run:
             wheel = wheelhouse / WHEEL
             if arm == "B":
                 wheel.write_bytes(candidate_bytes(HERE / (WHEEL + ".gz")))
+            elif self.stock_wheel:
+                shutil.copyfile(self.stock_wheel, wheel)
             else:
                 # PyPI JSON and distribution downloads use normal verified TLS.
                 import urllib.request
@@ -678,7 +724,16 @@ print(json.dumps({
                 "B_label": "LOCAL source variant, NOT an official release",
             },
         )
+        self.owner_dev_install()
+
+    def owner_dev_install(self):
         self.dev = self.root / "owner-dev-only"
+        env = self.env.copy()
+        env["PIP_INDEX_URL"] = self.owner_dev_index
+        if self.respx_wheel:
+            env.update(
+                PIP_NO_INDEX="1", PIP_FIND_LINKS=self.respx_wheel.parent.as_uri()
+            )
         self.py(
             self.test_python,
             "owner-dev-install",
@@ -694,6 +749,7 @@ print(json.dumps({
                 "-r",
                 str(HERE / "owner-dev.txt"),
             ],
+            env=env,
         )
 
     def cli_env(self, arm, label, *, owner_dev=False, covered=False):
@@ -928,7 +984,16 @@ print(json.dumps({
         )
         return row, (stdout, stderr)
 
-    def execute(self, *, preflight=False, build_python=None, test_python=None):
+    def execute(
+        self,
+        *,
+        preflight=False,
+        build_python=None,
+        test_python=None,
+        stock_wheel=None,
+        respx_wheel=None,
+    ):
+        self.preflight_inputs(preflight, stock_wheel, respx_wheel)
         setup_start = time.perf_counter()
         self.setup(build_python, test_python)
         setup_end = time.perf_counter()
@@ -995,6 +1060,8 @@ def main():
     parser.add_argument("--preflight", action="store_true")
     parser.add_argument("--build-python", type=Path)
     parser.add_argument("--test-python", type=Path)
+    parser.add_argument("--stock-wheel", type=Path)
+    parser.add_argument("--respx-wheel", type=Path)
     args = parser.parse_args()
     require(
         bool(args.build_python) == bool(args.test_python),
@@ -1003,6 +1070,10 @@ def main():
     require(
         not args.build_python or args.preflight,
         "Existing venv override is preflight-only",
+    )
+    require(
+        not (args.stock_wheel or args.respx_wheel) or args.preflight,
+        "Local wheel inputs are preflight-only",
     )
     if args.guard_only:
         save(args.root / "bootstrap-native.json", native_guard())
@@ -1015,6 +1086,8 @@ def main():
             preflight=args.preflight,
             build_python=args.build_python,
             test_python=args.test_python,
+            stock_wheel=args.stock_wheel,
+            respx_wheel=args.respx_wheel,
         )
     finally:
         save(

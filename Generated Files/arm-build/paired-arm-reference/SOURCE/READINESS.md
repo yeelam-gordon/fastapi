@@ -187,7 +187,7 @@ All result statuses explicitly leave cross-platform artifact/mode parity
 Completed on Q only, with TEMP/TMP/TMPDIR/PYTEST_TMPDIR pointing into private
 owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
 
-- 32 stdlib contract/mocked tests pass, including native universal2/Rosetta/
+- 37 stdlib contract/mocked tests pass, including native universal2/Rosetta/
   x86 guards; synthetic HOME/credential removal; literal CLI exit 1; raw
   CRLF-vs-LF inequality; backend identity/RECORD; Git-LF/executable-mode
   integrity; both raw build phase streams; stale/failed coverage preservation;
@@ -221,9 +221,53 @@ After the parent grants the native resource handoff, the driver supports
 Both venv identities are checked; they are not restored/reinstalled.
 This performs two untimed build correctness commands and portable targeted
 CLI/owner gates, **no 14-trial series and no full suite**. It still fetches
-pinned public Git inputs, downloads the exact stock backend and restores
-only isolated owner-test respx. Do not run during another worker's disk lease.
+pinned public Git inputs, downloads the exact stock backend unless supplied
+locally as below, and restores only isolated owner-test respx. Do not run
+during another worker's disk lease.
 `--guard-only --root <owned-root>` checks just the actual interpreter.
+
+### Preflight-only local acquisition
+
+The original default path always used public PyPI JSON/files for stock PDM,
+and deliberately replaced inherited pip-index settings with public PyPI.
+That remains the **unchanged hosted-CI default**; it cannot solve this
+DevBox's known blocked public distribution route by itself.
+
+The narrow local preflight inputs are now:
+
+- `--stock-wheel <existing-wheel>`: verify the entire body against frozen
+  official stock SHA256 `5b8746...`, then copy it to the owned singleton
+  wheelhouse. No stock JSON/file download is made on this route. The existing
+  Q-side PDM screen `wheels/A/pdm_backend-2.5.0-py3-none-any.whl` was rehashed
+  successfully, without running a native workload.
+- Optional `--respx-wheel <existing-wheel>`: require the exact owner-locked
+  respx 0.23.1 SHA256 in `owner-dev.txt`. Its original hash-required/no-deps
+  target install then uses only local find-links and `PIP_NO_INDEX=1`.
+- Without that optional wheel, **only preflight's owner-test respx restore**
+  honors process-local `PIP_INDEX_URL`. It requires ordinary HTTPS with no
+  URL credentials/query. Original `--require-hashes --no-deps
+  --only-binary=:all:` remain. No certificate bypass, extra index,
+  URL rewrite, resolver substitution or private CI default is added.
+- Both local wheel options are rejected outside `--preflight`. CI setup,
+  its fixed public stock URL selection, and all timed mechanisms are unchanged.
+
+Exact invocation shape, **only after the parent releases the timing lease**:
+
+```powershell
+$env:PIP_INDEX_URL = '<approved HTTPS package index>'
+& $ReferencePython $Driver --preflight --build-python $BuildPython `
+    --test-python $ReferencePython --stock-wheel $StockWheel --root $FreshQRoot
+```
+
+Bind the Python variables to the existing absolute native 3.12.10 venv
+executables, `$Driver` to this `driver.py`, `$StockWheel` to that verified
+existing Q stock wheel, and `$FreshQRoot` to a new owned output directory.
+Append `--respx-wheel $RespxWheel` only if an actual cached wheel is found;
+never reconstruct a wheel from installed SDK files. No such wheel was found
+in the two bounded Q-side SDK directories checked. C-side caches were not
+searched and no approved-index request/native preflight was run during the
+lease. Child index settings do not mutate global configuration; keep local
+preflight logs local rather than publishing private feed-route receipts.
 
 Remaining bounded uncertainties: parent native preflight, actual runner
 download/setup behavior, availability of all frozen official native wheels

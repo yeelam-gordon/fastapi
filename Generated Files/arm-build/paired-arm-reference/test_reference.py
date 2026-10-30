@@ -7,6 +7,7 @@ import gzip
 import hashlib
 import io
 import json
+import os
 import shutil
 import sqlite3
 import struct
@@ -189,6 +190,81 @@ class EnvironmentTests(Fixture):
         self.assertEqual(row["error"], "TimeoutExpired")
         self.assertIn("stdout_sha256", row)
         self.assertFalse(row["valid"])
+
+
+class PreflightInputTests(Fixture):
+    def test_local_inputs_refused_for_ci(self):
+        run = driver.Run(self.root)
+        with self.assertRaisesRegex(RuntimeError, "preflight-only"):
+            run.preflight_inputs(False, stock_wheel=self.root / "stock.whl")
+        with patch.dict(
+            os.environ, {"PIP_INDEX_URL": "https://approved.example/simple"}
+        ):
+            run.preflight_inputs(False)
+        self.assertEqual(run.owner_dev_index, "https://pypi.org/simple")
+
+    def test_bad_local_bodies_stop_before_setup(self):
+        run = driver.Run(self.root)
+        bad = self.root / "respx-0.23.1-py3-none-any.whl"
+        bad.write_bytes(b"not the frozen wheel")
+        for keyword in ("stock_wheel", "respx_wheel"):
+            with self.subTest(keyword=keyword), patch.object(run, "setup") as setup:
+                with self.assertRaisesRegex(RuntimeError, "frozen official SHA256"):
+                    run.execute(preflight=True, **{keyword: bad})
+                setup.assert_not_called()
+
+    def test_approved_process_index_is_preflight_owner_only(self):
+        run = driver.Run(self.root)
+        run.test_python = self.root / "reference-python"
+        with patch.dict(
+            os.environ, {"PIP_INDEX_URL": "https://approved.example/simple"}
+        ):
+            run.preflight_inputs(True)
+            self.assertEqual(
+                os.environ["PIP_INDEX_URL"], "https://approved.example/simple"
+            )
+        with patch.object(run, "py") as invoke:
+            run.owner_dev_install()
+        args = invoke.call_args.args[2]
+        env = invoke.call_args.kwargs["env"]
+        self.assertEqual(env["PIP_INDEX_URL"], "https://approved.example/simple")
+        self.assertNotIn("PIP_NO_INDEX", env)
+        self.assertIn("--require-hashes", args)
+        self.assertIn("--no-deps", args)
+        self.assertIn("--only-binary=:all:", args)
+        self.assertEqual(
+            args[args.index("--target") + 1], str(self.root / "owner-dev-only")
+        )
+        self.assertEqual(run.env["PIP_INDEX_URL"], "https://pypi.org/simple")
+
+    def test_verified_local_respx_has_no_index_lookup(self):
+        run = driver.Run(self.root)
+        run.test_python = self.root / "reference-python"
+        wheel = self.root / "respx-0.23.1-py3-none-any.whl"
+        wheel.write_bytes(b"fixture")
+        expected = "b18004b029935384bccfa6d7d9d74b4ec9af73a081cc28600fffc0447f4b8c1a"
+        with patch.object(driver, "sha", return_value=expected):
+            run.preflight_inputs(True, respx_wheel=wheel)
+        with patch.object(run, "py") as invoke:
+            run.owner_dev_install()
+        env = invoke.call_args.kwargs["env"]
+        self.assertEqual(env["PIP_NO_INDEX"], "1")
+        self.assertEqual(env["PIP_FIND_LINKS"], self.root.as_uri())
+        self.assertIn("--require-hashes", invoke.call_args.args[2])
+
+    def test_preflight_index_does_not_weaken_tls_or_log_url_credentials(self):
+        run = driver.Run(self.root)
+        for index in (
+            "http://unverified.example/simple",
+            "https://user:password@example.test/simple",
+            "https://example.test/simple?token=private",
+        ):
+            with (
+                self.subTest(index=index),
+                patch.dict(os.environ, {"PIP_INDEX_URL": index}),
+            ):
+                with self.assertRaisesRegex(RuntimeError, "verified HTTPS"):
+                    run.preflight_inputs(True)
 
 
 class SourceTests(Fixture):
