@@ -2,7 +2,7 @@
 
 ## Status and authority
 
-**LOCAL FIX CHECKS PASS; parent owns any corrected Mac-only backfill decision.**
+**LOCAL PRESENTATION FIX ONLY; no additional hosted job is authorized here.**
 No native bootstrap, dependency restoration, full suite, performance series,
 push, dispatch, default-branch change, workflow-state change or upstream PR was
 performed by this worker. The new fix has not executed on Mac; the first hosted
@@ -10,8 +10,9 @@ attempt's successful native Mac bootstrap is distinct from its failed guard.
 
 This is the original human-requested, finite, readiness-gated owned-fork CI work.
 It is not a new upstream proposal or a requirement for new per-run human
-approval. Publication, final resource/readiness choice and exactly one run
-belong to the parent. Do not interpret this document as a dispatch instruction.
+approval. Publication and resource/readiness decisions belong to the parent. The initial
+paired allocation and the single corrected Mac-only allocation have both been
+spent. This request permits local readiness work, not another job or dispatch.
 
 Branch: `perf/hobl-arm-reference`, based directly on last-published
 `4ba888056a5e4f9316e03df99366836cc7c37fda`, not the research branch.
@@ -31,6 +32,7 @@ Exact relative paths under `Generated Files/arm-build/paired-arm-reference/`:
 `cpu-hook/sitecustomize.py`, `test_cpu_hook.py`, `test_cpu_audit.py`,
 `installer.py`, `test_installer.py`,
 `macos-reference-graph.json`, `test_reference_versions.py`,
+`test_help_presentation.py`,
 `build-constraints.txt`, `reference-constraints.txt`, `owner-dev.txt`,
 `cloud.patch`, `pdm-small-read-prefetch.patch`, `CLOUD-LICENSE.txt`,
 `PDM-LICENSE.txt`, `pdm_backend-2.5.0-py3-none-any.whl.gz`,
@@ -56,8 +58,9 @@ Read-only GitHub API checks on 2026-10-30 established:
 - A future parent-owned dispatch can address the existing workflow filename,
   explicit owned repository, and `--ref perf/hobl-arm-reference`, with those
   existing input names. No default-branch edit is needed to register another
-  workflow. `matched-reference` was dispatched at `0712ba752`; the new
-  `matched-macos` combination is **preparation only, not dispatched**.
+  workflow. `matched-reference` was dispatched at `0712ba752`; the single
+  corrected `matched-macos` allocation was used for `41004707015`. Those
+  allocations are spent; the selector is not authority for another dispatch.
 - Only the matched matrix allocates runners: `matched-reference` retains
   **windows-11-arm + macos-15**; `matched-macos` selects **macos-15 only**,
   with no Windows allocation. The analysis job is skipped before matrix
@@ -106,10 +109,51 @@ a present Mac colorama must still be exactly
 explicit minimal build requirements, all 78 constraint pins, original test
 requirements/workload/oracles, and runner/package bootstrap remain unchanged.
 
-One potential corrected Mac-only manual backfill is merely prepared. Parent
-must first assess the original Windows result, local regressions, review and
-native preflight, and recheck publication triggers. No bad-commit GH rerun,
-automatic retry, push or dispatch is performed by this worker.
+That single corrected Mac-only allocation was subsequently used for
+`41004707015`. Its budget is spent; this local follow-up authorizes no new
+allocation. No bad-commit GH rerun, automatic retry, push or dispatch is
+performed by this worker.
+
+### Second hosted Mac stop: ephemeral terminal presentation
+
+Run `41004707015` passed the colorama guard, all four untimed build/installer
+comparisons, hash gates, origin/auth/owner proofs and original CLI tests before
+stopping at raw `--help` equality. **Zero Mac performance samples** were taken.
+Both failed raw captures remain unchanged: 3,701 versus 3,702 stdout bytes,
+empty stderr; the same documentation hyperlink had OSC8 IDs `6941240` and
+`11370988`. They are not filtered, normalized or retroactively accepted.
+
+Primary pinned Rich 15.0.0 source explains this: `style.py` initializes
+`count(getrandbits(24))` and emits per-process link IDs; `Style.render` returns
+plain text before OSC8 construction when the color system is None.
+`console.py` detects `TERM=dumb` and selects that None color system, even when
+Typer 0.27.3 forces terminal rendering through GitHub Actions/color flags.
+This is the supported presentation mode, not a private Rich patch, random
+seed, disabled candidate feature or captured-byte cleanup.
+
+Only the separate untimed help/version/cloud-help probes now copy their
+environment and set `TERM=dumb` **before both arms are captured**. They still
+compare full raw stdout AND stderr bytes with the unchanged comparator.
+`cli_env`, timed covered missing-file CLI, build environments/commands,
+full correctness and schedules are exact source-identical to the prior
+commit. No global terminal setting or dependency/candidate change is made.
+
+Actual native ARM64 CPython 3.12.10 proof, with the frozen Rich/Typer versions:
+ten disposable untimed subprocesses, zero full suites/timed samples. A public
+Rich OSC-capable terminal fixture emitted IDs `2706845` versus `7123241`;
+`TERM=dumb` produced identical plain bytes in fresh processes. Real complete
+SDK overlays A/B produced identical raw help (2,880 bytes), version (64),
+cloud-help (3,062), with empty stderr. A genuine text change was rejected.
+This Windows proof uses public `legacy_windows=False` only in its separate
+Rich fixture; it is not a new Mac execution claim.
+
+The proof used `-B` solely to protect read-only existing native inputs; that
+flag is not added to CI probes or timings. All source/overlay/reference
+package files, including existing pyc bytes/mtimes/modes, matched before/after.
+The failed Mac capture hashes also matched before/after. Local-only evidence
+is in ignored `.local/presentation-native-proof`; its RESULT SHA256 is
+`008bbdcbf21d4fd1902da47a029fd537255b6118b6513a0e53cb867ee151b9f7`.
+It contains local paths and must not be published as a raw bundle.
 
 ### Complete feature-push trigger audit
 
@@ -310,7 +354,7 @@ in the new case. Independent review/publication remains parent-owned.
 Completed on Q only, with TEMP/TMP/TMPDIR/PYTEST_TMPDIR pointing into private
 owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
 
-- 62 stdlib contract/mocked tests pass, including native universal2/Rosetta/
+- 65 stdlib contract/mocked tests pass, including native universal2/Rosetta/
   x86 guards; synthetic HOME/credential removal; literal CLI exit 1; raw
   CRLF-vs-LF inequality; backend identity/RECORD; Git-LF/executable-mode
   integrity; both raw build phase streams; stale/failed coverage preservation;
@@ -326,6 +370,9 @@ owned Q fixtures, CPython 3.13.15 controller (not a claimed 3.12 workload):
   The hosted Mac graph regression passes; Windows missing colorama, Mac
   wrong-present colorama, unrelated missing/version drift/extra, and minimal
   environment absence all fail. Matrix guards prove paired=2 and Mac-only=1.
+  Presentation regressions preserve the timed environment byte-for-byte,
+  require only a copied untimed TERM change, and still reject ephemeral
+  terminal IDs and genuine changed text in raw comparison.
 - Existing native Ruff **0.16.6** check and format pass; existing actionlint
   **1.7.12** passes; bootstrap PowerShell AST parses without errors.
 - Static real Git archive proof passed for all **2,557** pinned LF payloads;
@@ -408,12 +455,11 @@ searched and no approved-index request/native preflight was run during the
 lease. Child index settings do not mutate global configuration; keep local
 preflight logs local rather than publishing private feed-route receipts.
 
-Remaining bounded uncertainties: corrected-input parent native preflight, actual runner
-download/setup behavior, availability of all frozen official native wheels
-(especially macOS-only uvloop), real Mac execution/coverage shape, hosted
-hardware/load, and the unexecuted manual Mac-only selection. The first paired
-allocation has now exercised the existing registration/ref strategy. No local
-lint/mock claims these are executed. Confidence is **high** for portable
-guards/source/trigger scope, **medium** for runner orchestration before native
-preflight, and **low/unmeasured** for cross-host benefit/parity. Stop here for
-parent review/readiness; do not push or dispatch from this worker.
+Remaining bounded uncertainties: the corrected presentation on an actual Mac,
+downstream Mac full correctness/coverage/SELF receipts and timed cases.
+Both hosted Mac attempts proved native bootstrap/dependency availability, and
+the second proved the preceding untimed contracts; neither yielded performance
+samples. Confidence is **high** for this local presentation fix, **medium** for
+unexecuted downstream Mac behavior, and **unmeasured** for Mac benefit/parity.
+Stop at local readiness: the previous one-backfill budget is spent and this
+message grants no additional hosted job. Do not push or dispatch.

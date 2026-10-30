@@ -117,6 +117,11 @@ def verify_versions(installed, expected, *, system, reference=False):
     return {"resolved": extras, "marker_governed_absences": sorted(missing)}
 
 
+def help_probe_env(env):
+    """Untimed presentation contracts only: Rich's dumb terminal omits OSC8 IDs."""
+    return {**env, "TERM": "dumb"}
+
+
 def input_hashes():
     files = [p for p in HERE.iterdir() if p.is_file()]
     files.extend((HERE / "SOURCE").glob("*"))
@@ -1046,7 +1051,7 @@ print(json.dumps({
                     label + "-" + arm,
                     args,
                     cwd=self.source,
-                    env=self.cli_env(arm, label + "-" + arm),
+                    env=help_probe_env(self.cli_env(arm, label + "-" + arm)),
                 )[1:]
                 for arm in "AB"
             ]
@@ -1054,7 +1059,11 @@ print(json.dumps({
         self.integrity()
         save(
             self.upload / "semantic-gates.json",
-            {"passed": True, "raw_byte_comparison": True},
+            {
+                "passed": True,
+                "raw_byte_comparison": True,
+                "help_probe_presentation": "TERM=dumb before capture, untimed probes only",
+            },
         )
 
     def full_correctness(self):
