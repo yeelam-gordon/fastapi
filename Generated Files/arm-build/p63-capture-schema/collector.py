@@ -743,13 +743,7 @@ def private_root(workspace):
         PATH=str(Path(env["SYSTEMROOT"]) / "System32"),
         NoDefaultCurrentDirectoryInExePath="1",
     )
-    powershell = (
-        Path(env["SYSTEMROOT"])
-        / "System32"
-        / "WindowsPowerShell"
-        / "v1.0"
-        / "powershell.exe"
-    )
+    powershell = Path(os.environ["PROGRAMFILES"]) / "PowerShell" / "7" / "pwsh.exe"
     # This fixed ACL-only bootstrap cannot use the disk-logging guardian yet.
     # Both streams stay in memory; no unverified root receives raw diagnostics.
     try:

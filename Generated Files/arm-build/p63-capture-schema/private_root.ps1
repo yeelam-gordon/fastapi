@@ -14,7 +14,7 @@ try {
             [Security.Principal.SecurityIdentifier]::new($sid),
             'FullControl', 'ContainerInherit,ObjectInherit', 'None', 'Allow'))
     }
-    [IO.Directory]::CreateDirectory($Root, $acl) | Out-Null
+    [IO.FileSystemAclExtensions]::CreateDirectory($acl, $Root) | Out-Null
     $item = Get-Item -LiteralPath $Root -Force
     if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) { exit 2 }
     if (@(Get-ChildItem -LiteralPath $Root -Force).Count -ne 0) { exit 2 }

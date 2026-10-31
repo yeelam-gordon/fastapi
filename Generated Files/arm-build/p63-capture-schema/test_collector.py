@@ -572,6 +572,35 @@ class Fixture(unittest.TestCase):
                     {"GITHUB_WORKSPACE": workspace},
                 )
 
+    def test_acl_bootstrap_binds_modern_host_with_bounded_memory_pipes(self):
+        env = {
+            "SYSTEMROOT": r"C:\Windows",
+            "WINDIR": r"C:\Windows",
+            "COMSPEC": r"C:\Windows\System32\cmd.exe",
+            "PROGRAMFILES": r"C:\Program Files",
+        }
+
+        def modern_acl(argv, **kwargs):
+            self.assertEqual(argv[0], r"C:\Program Files\PowerShell\7\pwsh.exe")
+            self.assertEqual(argv[1:4], ["-NoProfile", "-NonInteractive", "-File"])
+            self.assertEqual(source.Path(argv[4]), source.HERE / "private_root.ps1")
+            self.assertEqual(kwargs["timeout"], 10)
+            self.assertTrue(kwargs["capture_output"])
+            root = source.Path(argv[-1])
+            root.mkdir()
+            return subprocess.CompletedProcess(
+                argv, 0, b"P63_PRIVATE_ROOT_VERIFIED\n", b""
+            )
+
+        with patch.dict(source.os.environ, env, clear=True):
+            with patch.object(
+                source.subprocess, "run", side_effect=modern_acl
+            ) as command:
+                root = source.private_root(self.root)
+        command.assert_called_once()
+        self.assertTrue(root.is_dir())
+        self.assertEqual(list(root.iterdir()), [])
+
     def test_acl_bootstrap_failure_never_persists_raw_streams(self):
         plan = self.root / "acl-plan.json"
         authority = self.root / "acl-authority.json"

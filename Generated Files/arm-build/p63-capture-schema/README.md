@@ -97,12 +97,13 @@ live signed OIDC/API receipts and cleanup remain unexercised runtime gates.
    gate, not a local live-status observation.
 3. Before any raw receipt, guardian import, redirected stream or private error
    is written, `private_root.ps1` atomically creates the directory with its
-   protected DACL using .NET Framework `Directory.CreateDirectory(path, acl)`.
+   protected DACL using .NET `FileSystemAclExtensions.CreateDirectory(acl, path)`.
    It then verifies owner, protection, exactly the current SID/SYSTEM allow
    rules, FullControl/inheritance flags, no reparse point, and an empty root.
-   The one fixed ACL-only Windows PowerShell process uses memory pipes, a
+   The one fixed ACL-only pwsh 7 process uses memory pipes, a
    ten-second timeout, no profile, no token-bearing environment, and no guardian
-   or trace/build operation. Failure exposes only a fixed category/error hash
+   or trace/build operation. Its absolute host is `PROGRAMFILES\PowerShell\7\pwsh.exe`;
+   the decoder/preflight host remains Windows PowerShell. Failure exposes only a fixed category/error hash
    and never persists raw diagnostics under the unverified candidate root.
    The outer pwsh bootstrap uses the corresponding .NET
    `FileSystemAclExtensions.CreateDirectory(acl, path)` API and the same DACL
