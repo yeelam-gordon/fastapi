@@ -1,10 +1,16 @@
-name: P50 hardware-family native build control (manual only)
+name: P63 bounded capture and schema validation (manual only)
 
 on:
   workflow_dispatch:
+    inputs:
+      authority:
+        description: One separately approved fresh-VM capture/schema attempt; accepts transient overshoot
+        required: true
+        type: choice
+        options:
+          - P63_ONE_EPHEMERAL_ATTEMPT
 
-permissions:
-  contents: read
+permissions: {}
 
 env:
   GIT_CONFIG_COUNT: "1"
@@ -13,10 +19,15 @@ env:
   NoDefaultCurrentDirectoryInExePath: "1"
 
 jobs:
-  windows:
-    if: github.repository == 'yeelam-gordon/fastapi' && github.ref == 'refs/heads/perf/arm-cobalt-control' && github.run_attempt == 1
+  capture-schema:
+    name: p63-capture-schema
+    if: github.repository == 'yeelam-gordon/fastapi' && github.ref == 'refs/heads/perf/arm-scan-schema' && github.run_attempt == 1 && inputs.authority == 'P63_ONE_EPHEMERAL_ATTEMPT'
     runs-on: windows-11-arm
-    timeout-minutes: 20
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
     defaults:
       run:
         shell: pwsh
@@ -28,122 +39,44 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /.gitattributes
-            /.github/workflows/arm-build-experiment.yml
-            /Generated Files/.gitattributes
-            /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/paired-arm-reference/.gitattributes
-            /Generated Files/arm-build/paired-arm-reference/*.py
+            /Generated Files/arm-build/p63-capture-schema/
+            /Generated Files/arm-build/paired-arm-reference/frontend.py
+            /Generated Files/arm-build/paired-arm-reference/frozen.py
+            /Generated Files/arm-build/paired-arm-reference/compare.py
+            /Generated Files/arm-build/paired-arm-reference/guards.py
+            /Generated Files/arm-build/paired-arm-reference/driver.py
+            /Generated Files/arm-build/paired-arm-reference/installer.py
+            /Generated Files/arm-build/paired-arm-reference/source.py
+            /Generated Files/arm-build/paired-arm-reference/cpu_audit.py
             /Generated Files/arm-build/paired-arm-reference/bootstrap.ps1
-            /Generated Files/arm-build/protocol/.gitattributes
             /Generated Files/arm-build/protocol/owned_process.py
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: One private bootstrap and guarded controller invocation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          P63_AUTHORIZATION: ${{ inputs.authority }}
+        run: |
+          & 'tools\Generated Files\arm-build\p63-capture-schema\hosted.ps1'
+          exit $LASTEXITCODE
+      - name: Preserve only finite classified public JSON
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
-          path: source-objects
-          persist-credentials: false
-      - name: Private bootstrap state
+          name: p63-capture-schema-public
+          path: ${{ github.workspace }}/p63-public/public-result.json
+          if-no-files-found: error
+          retention-days: 3
+      - name: Preserve failure after publication
+        if: always()
         run: |
           $ErrorActionPreference = 'Stop'
-          $root = Join-Path $env:GITHUB_WORKSPACE 'p50-bootstrap'
-          New-Item -ItemType Directory $root -ErrorAction Stop | Out-Null
-          foreach ($name in @('home', 'temp', 'cache', 'config')) {
-            New-Item -ItemType Directory (Join-Path $root $name) | Out-Null
-          }
-          @(
-            "HOME=$(Join-Path $root 'home')"
-            "USERPROFILE=$(Join-Path $root 'home')"
-            "APPDATA=$(Join-Path $root 'config')"
-            "LOCALAPPDATA=$(Join-Path $root 'cache')"
-            "TEMP=$(Join-Path $root 'temp')"
-            "TMP=$(Join-Path $root 'temp')"
-            "UV_CACHE_DIR=$(Join-Path $root 'cache')"
-          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
-        with:
-          version: "0.13.6"
-          enable-cache: "false"
-      - name: Official stock native Python bootstrap
-        run: |
-          & 'tools/Generated Files/arm-build/paired-arm-reference/bootstrap.ps1'
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          "P50_UV=$((Get-Command uv -ErrorAction Stop).Source)" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - name: Attestation, excluded full correctness warmup, six stock samples
-        run: |
-          & $env:PAIRED_PYTHON -B 'tools/Generated Files/arm-build/paired-arm-reference/control.py' --root (Join-Path $env:PAIRED_ROOT 'p50') --uv $env:P50_UV --source-repo (Join-Path $env:GITHUB_WORKSPACE 'source-objects')
-          exit $LASTEXITCODE
-      - name: Preserve evidence and first failure
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: p50-windows
-          path: |
-            ${{ github.workspace }}/paired-reference/p50/evidence
-            ${{ github.workspace }}/paired-reference/p50/*/source/dist
-            ${{ github.workspace }}/paired-reference/bootstrap*.json
-          if-no-files-found: error
-          retention-days: 3
-
-  linux:
-    if: github.repository == 'yeelam-gordon/fastapi' && github.ref == 'refs/heads/perf/arm-cobalt-control' && github.run_attempt == 1
-    runs-on: ubuntu-24.04-arm
-    timeout-minutes: 20
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: ${{ github.sha }}
-          path: tools
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /.gitattributes
-            /.github/workflows/arm-build-experiment.yml
-            /Generated Files/.gitattributes
-            /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/paired-arm-reference/.gitattributes
-            /Generated Files/arm-build/paired-arm-reference/*.py
-            /Generated Files/arm-build/paired-arm-reference/bootstrap.ps1
-            /Generated Files/arm-build/protocol/.gitattributes
-            /Generated Files/arm-build/protocol/owned_process.py
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
-          path: source-objects
-          persist-credentials: false
-      - name: Private bootstrap state
-        run: |
-          set -euo pipefail
-          root="$GITHUB_WORKSPACE/p50-bootstrap"
-          mkdir "$root"
-          mkdir "$root/home" "$root/temp" "$root/cache" "$root/config"
-          {
-            echo "HOME=$root/home"
-            echo "TMPDIR=$root/temp"
-            echo "TEMP=$root/temp"
-            echo "TMP=$root/temp"
-            echo "XDG_CACHE_HOME=$root/cache"
-            echo "XDG_CONFIG_HOME=$root/config"
-          } >> "$GITHUB_ENV"
-      - name: Exact verified native Linux Python and UV
-        run: |
-          set -euo pipefail
-          python3 -B 'tools/Generated Files/arm-build/paired-arm-reference/linux_bootstrap.py'
-      - name: Attestation, excluded full correctness warmup, six stock samples
-        run: |
-          set -euo pipefail
-          "$PAIRED_PYTHON" -B 'tools/Generated Files/arm-build/paired-arm-reference/control.py' \
-            --root "$PAIRED_ROOT/p50" --uv "$P50_UV" --source-repo "$GITHUB_WORKSPACE/source-objects"
-      - name: Preserve evidence and first failure
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: p50-linux
-          path: |
-            ${{ github.workspace }}/paired-reference/p50/evidence
-            ${{ github.workspace }}/paired-reference/p50/*/source/dist
-            ${{ github.workspace }}/paired-reference/bootstrap*.json
-          if-no-files-found: error
-          retention-days: 3
+          $code = 2
+          $path = Join-Path $env:GITHUB_WORKSPACE 'p63-private-hosted\final-exit-code.json'
+          try {
+            if (Test-Path -LiteralPath $path) {
+              $receipt = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
+              if ($receipt.exit_code -is [long] -or $receipt.exit_code -is [int]) {
+                if ($receipt.exit_code -gt 0 -and $receipt.exit_code -le 255) { $code = [int]$receipt.exit_code }
+              }
+            }
+          } catch {}
+          exit $code

@@ -1,0 +1,8 @@
+{
+  "fixtures/FASTAPI-LICENSE.txt": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e",
+  "fixtures/fastapi-0.119.1-raw-git-lf.tar.gz": "4cba86b9b9d61883fe786425a505149ca777782cfe266e274796097c30eb8e83",
+  "fixtures/pdm_backend-2.5.0-py3-none-any.whl": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63",
+  "fixtures/reference/fastapi-0.119.1-py3-none-any.whl": "0c84a87ba4e03ab71fb08cd804abbf60685e4818513bb2ddc307a33547e780e5",
+  "fixtures/reference/fastapi-0.119.1.tar.gz": "494cfc8a447151bdbff61530fd8f4b2e431528545d0ac04310f6dcc79410c727",
+  "fixtures/source-proof.json": "70710281428a4027f87b00138bee5b8141f89a735d3f0e6e7fd0c5c32f3e087f"
+}

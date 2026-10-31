@@ -1,0 +1,2 @@
+# Byte-pinned source and fixture inputs must survive checkout unchanged.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

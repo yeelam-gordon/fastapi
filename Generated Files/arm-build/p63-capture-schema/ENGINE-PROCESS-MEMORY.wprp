@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowsPerformanceRecorder Version="1.0">
+  <Profiles>
+    <SystemCollector Id="OwnedProcessMemory" Name="NT Kernel Logger">
+      <BufferSize Value="1024"/>
+      <Buffers Value="32" PercentageOfTotalMemory="false"/>
+    </SystemCollector>
+    <EventCollector Id="OwnedEngineMemory" Name="Owned Engine Memory">
+      <BufferSize Value="1024"/>
+      <Buffers Value="32" PercentageOfTotalMemory="false"/>
+    </EventCollector>
+    <SystemProvider Id="OwnedProcessProvider">
+      <Keywords>
+        <Keyword Value="ProcessThread"/>
+      </Keywords>
+    </SystemProvider>
+    <EventProvider Id="OwnedEngineProvider" Name="0a002690-3839-4e3a-b3b6-96d8df868d99" Strict="true"/>
+    <Profile Id="OwnedEngineProcess.Light.Memory" Name="OwnedEngineProcess" Description="Engine and process circular memory source profile" LoggingMode="Memory" DetailLevel="Light">
+      <Collectors>
+        <SystemCollectorId Value="OwnedProcessMemory">
+          <SystemProviderId Value="OwnedProcessProvider"/>
+        </SystemCollectorId>
+        <EventCollectorId Value="OwnedEngineMemory">
+          <EventProviders>
+            <EventProviderId Value="OwnedEngineProvider"/>
+          </EventProviders>
+        </EventCollectorId>
+      </Collectors>
+    </Profile>
+  </Profiles>
+</WindowsPerformanceRecorder>
