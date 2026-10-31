@@ -601,6 +601,66 @@ class Fixture(unittest.TestCase):
         self.assertTrue(root.is_dir())
         self.assertEqual(list(root.iterdir()), [])
 
+    def test_acl_failure_codes_are_fixed_and_unexpected_streams_stay_unknown(self):
+        categories = {
+            2: "PRIVATE_ROOT_BOOTSTRAP_FAILED_EXISTING_ROOT",
+            10: "PRIVATE_ROOT_BOOTSTRAP_FAILED_IDENTITY",
+            11: "PRIVATE_ROOT_BOOTSTRAP_FAILED_CREATE",
+            12: "PRIVATE_ROOT_BOOTSTRAP_FAILED_REPARSE",
+            13: "PRIVATE_ROOT_BOOTSTRAP_FAILED_EMPTY",
+            14: "PRIVATE_ROOT_BOOTSTRAP_FAILED_OWNER",
+            15: "PRIVATE_ROOT_BOOTSTRAP_FAILED_DACL",
+            16: "PRIVATE_ROOT_BOOTSTRAP_FAILED_RULES",
+            99: "PRIVATE_ROOT_BOOTSTRAP_FAILED",
+        }
+        for code, category in categories.items():
+            with self.subTest(code=code):
+                result = subprocess.CompletedProcess([], code, b"", b"")
+                with patch.object(source.subprocess, "run", return_value=result):
+                    with self.assertRaisesRegex(source.Stop, "^" + category + "$"):
+                        source.private_root(self.root)
+        for result in (
+            subprocess.CompletedProcess([], 11, b"PRIVATE_SECRET_PATH", b""),
+            subprocess.CompletedProcess([], 16, b"", b"PRIVATE_SECRET_SID"),
+            subprocess.CompletedProcess([], 99, b"P63_PRIVATE_ROOT_VERIFIED\n", b""),
+            subprocess.CompletedProcess(
+                [], 0, b"P63_PRIVATE_ROOT_VERIFIED\n", b"PRIVATE_SECRET_ERROR"
+            ),
+        ):
+            with self.subTest(code=result.returncode, streams=True):
+                with patch.object(source.subprocess, "run", return_value=result):
+                    with self.assertRaisesRegex(
+                        source.Stop, "^PRIVATE_ROOT_BOOTSTRAP_FAILED$"
+                    ):
+                        source.private_root(self.root)
+        self.assertEqual(list(self.root.glob(".p63-private-*")), [])
+        self.assertEqual(self.fake.commands, [])
+
+    def test_acl_host_and_timeout_failures_discard_private_exception_details(self):
+        for error, category in (
+            (
+                FileNotFoundError("PRIVATE_SECRET_EXECUTABLE"),
+                "PRIVATE_ROOT_BOOTSTRAP_FAILED_HOST_MISSING",
+            ),
+            (
+                subprocess.TimeoutExpired(
+                    "PRIVATE_SECRET_ARGV", 10, output=b"PRIVATE_SECRET_OUTPUT"
+                ),
+                "PRIVATE_ROOT_BOOTSTRAP_FAILED_TIMEOUT",
+            ),
+            (
+                RuntimeError("PRIVATE_SECRET_UNEXPECTED"),
+                "PRIVATE_ROOT_BOOTSTRAP_FAILED",
+            ),
+        ):
+            with self.subTest(category=category):
+                with patch.object(source.subprocess, "run", side_effect=error):
+                    with self.assertRaises(source.Stop) as caught:
+                        source.private_root(self.root)
+                self.assertEqual(str(caught.exception), category)
+        self.assertEqual(list(self.root.glob(".p63-private-*")), [])
+        self.assertEqual(self.fake.commands, [])
+
     def test_acl_bootstrap_failure_never_persists_raw_streams(self):
         plan = self.root / "acl-plan.json"
         authority = self.root / "acl-authority.json"

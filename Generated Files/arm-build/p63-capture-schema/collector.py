@@ -763,8 +763,29 @@ def private_root(workspace):
             timeout=10,
             check=False,
         )
+    except FileNotFoundError:
+        raise Stop("PRIVATE_ROOT_BOOTSTRAP_FAILED_HOST_MISSING") from None
+    except subprocess.TimeoutExpired:
+        raise Stop("PRIVATE_ROOT_BOOTSTRAP_FAILED_TIMEOUT") from None
     except BaseException:
         raise Stop("PRIVATE_ROOT_BOOTSTRAP_FAILED") from None
+    if completed.returncode != 0:
+        require(
+            not completed.stdout and not completed.stderr,
+            "PRIVATE_ROOT_BOOTSTRAP_FAILED",
+        )
+        raise Stop(
+            {
+                2: "PRIVATE_ROOT_BOOTSTRAP_FAILED_EXISTING_ROOT",
+                10: "PRIVATE_ROOT_BOOTSTRAP_FAILED_IDENTITY",
+                11: "PRIVATE_ROOT_BOOTSTRAP_FAILED_CREATE",
+                12: "PRIVATE_ROOT_BOOTSTRAP_FAILED_REPARSE",
+                13: "PRIVATE_ROOT_BOOTSTRAP_FAILED_EMPTY",
+                14: "PRIVATE_ROOT_BOOTSTRAP_FAILED_OWNER",
+                15: "PRIVATE_ROOT_BOOTSTRAP_FAILED_DACL",
+                16: "PRIVATE_ROOT_BOOTSTRAP_FAILED_RULES",
+            }.get(completed.returncode, "PRIVATE_ROOT_BOOTSTRAP_FAILED")
+        )
     require(
         completed.returncode == 0
         and completed.stdout.strip() == b"P63_PRIVATE_ROOT_VERIFIED"

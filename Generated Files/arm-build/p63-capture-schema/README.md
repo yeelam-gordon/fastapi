@@ -115,6 +115,28 @@ not a claim that the final corrected controller AST equals the original.
 Targeted source review, hosted wiring/privacy review, and explicit finite
 allocation approval remain required. No runtime gate is marked passed.
 
+## ACL bootstrap failure stages
+
+The ACL helper keeps its stage only in memory and emits no failure streams.
+Fixed failure exits are: 2 existing root, 10 identity/security-descriptor setup,
+11 atomic creation, 12 reparse check, 13 empty-root check, 14 owner read/check,
+15 protected DACL, and 16 exact rules. Exit 2 remains unchanged for an existing
+root. Catch returns the current fixed stage, never an exception string.
+
+Only a known failure exit with empty stdout and stderr maps to its fixed
+`PRIVATE_ROOT_BOOTSTRAP_FAILED_...` category. Host-not-found and timeout have
+their own fixed suffixes. Unknown exits, unexpected streams, malformed success
+markers, and unexpected process errors remain generic UNKNOWN/nonzero. No
+path, SID, argv, raw error, or stream is added to public JSON. The strict pinned
+category allowlist and existing hashes remain the publication boundary. A
+stage describes the last attempted check, not a proven failure cause; no raw
+file is written under an unverified root.
+
+Local native evidence distinguishes hosts: the published legacy creation route
+works under Windows PowerShell 5/.NET Framework; under pwsh 7/.NET, that legacy
+overload fails and the extension-based route succeeds. The hosted failure's
+cause remains unknown. These compatibility facts do not authorize a retry.
+
 Primary API/format references:
 
 - https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options

@@ -50,6 +50,18 @@ class HostedTests(unittest.TestCase):
         with self.assertRaises(hosted.collector.Stop):
             hosted.public_result({**self.result, "source_sha256": "0" * 64}, self.pins)
 
+    def test_acl_stage_publication_accepts_only_the_pinned_finite_category(self):
+        result = {**self.result, "category": "PRIVATE_ROOT_BOOTSTRAP_FAILED_OWNER"}
+        self.assertEqual(
+            hosted.public_result(result, self.pins)["category"],
+            "PRIVATE_ROOT_BOOTSTRAP_FAILED_OWNER",
+        )
+        with self.assertRaisesRegex(hosted.collector.Stop, "PUBLIC_RESULT_REJECTED"):
+            hosted.public_result(
+                {**result, "category": "PRIVATE_ROOT_BOOTSTRAP_FAILED_PRIVATE_SECRET"},
+                self.pins,
+            )
+
     def test_current_unique_running_job_no_fallback(self):
         env = {"GITHUB_RUN_ID": "42", "GH_TOKEN": "private", "RUNNER_NAME": "owned"}
         job = {
