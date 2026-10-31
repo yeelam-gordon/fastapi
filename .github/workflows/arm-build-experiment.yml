@@ -1,4 +1,4 @@
-name: Exact locked publisher wheel acquisition (manual only)
+name: Exact locked publisher wheels (manual only)
 
 on:
   workflow_dispatch:
@@ -8,24 +8,53 @@ permissions:
 
 jobs:
   acquire:
-    if: github.repository == 'yeelam-gordon/fastapi' && github.ref == 'refs/heads/perf/locked-wheel-acquisition-20261031' && github.run_attempt == 1
+    if: github.event_name == 'workflow_dispatch' && github.repository == 'yeelam-gordon/fastapi' && github.ref == 'refs/heads/perf/locked-ci-wheel-recovery' && github.run_attempt == 1
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        env:
+          GIT_CONFIG_COUNT: "1"
+          GIT_CONFIG_KEY_0: core.autocrlf
+          GIT_CONFIG_VALUE_0: "false"
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /Generated Files/arm-build/package-acquisition/acquire.py
-      - name: Acquire exact publisher bytes without installing the package
-        run: python3 -I -B 'Generated Files/arm-build/package-acquisition/acquire.py' --output download
-      - name: Preserve exact wheel or original failure receipt
-        if: always()
+            /Generated Files/arm-build/publisher-wheel-recovery/acquire.py
+            /Generated Files/arm-build/publisher-wheel-recovery/publisher-manifest.json
+      - name: Bind exact commit and native source bytes before execution
+        id: binding
+        shell: bash
+        env:
+          EXPECTED_SOURCE_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          trap 'echo "FAILED source-binding"' ERR
+          test "$(git rev-parse HEAD 2>/dev/null)" = "$EXPECTED_SOURCE_COMMIT"
+          base='Generated Files/arm-build/publisher-wheel-recovery'
+          code='e78e613ff644a4502ca7b2da1bbdda928c7072393030fb6abfe593bb55547656'
+          manifest='cc9bf397aeaeba8a68fceffb94135b8a39c1d7fe6dc88d2b6a6dc17ad04b5c70'
+          printf '%s  %s\n' "$code" "$base/acquire.py" "$manifest" "$base/publisher-manifest.json" | sha256sum --check --status
+          test "$(git cat-file blob "HEAD:$base/acquire.py" | sha256sum | cut -d' ' -f1)" = "$code"
+          test "$(git cat-file blob "HEAD:$base/publisher-manifest.json" | sha256sum | cut -d' ' -f1)" = "$manifest"
+      - name: Acquire data only with default verified HTTPS
+        id: acquisition
+        shell: bash
+        run: python3 -I -B 'Generated Files/arm-build/publisher-wheel-recovery/acquire.py'
+      - name: Close exact artifact membership even after acquisition failure
+        id: audit
+        if: ${{ always() && steps.binding.outcome == 'success' && (steps.acquisition.outcome == 'success' || steps.acquisition.outcome == 'failure') }}
+        shell: bash
+        run: python3 -I -B 'Generated Files/arm-build/publisher-wheel-recovery/acquire.py' --check-output
+      - name: Retain verified bytes and original safe receipt only
+        if: ${{ always() && steps.audit.outcome == 'success' }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: exact-graphql-core-3.3.1
-          path: download
+          name: exact-locked-publisher-wheels
+          path: |
+            Generated Files/arm-build/publisher-wheel-recovery/verified-publisher-wheels/*.whl
+            Generated Files/arm-build/publisher-wheel-recovery/verified-publisher-wheels/receipt.json
           if-no-files-found: error
           retention-days: 3

@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "source_commit": "79cab5bed28b24d92c185d236feb33f5783dfeb3",
+  "lock_sha256": "1242be1a7d1b0b6937af014a4836feeb1eeb6a59c0ba6a24092e72221b47a785",
+  "selection": "CI tests+all; native CPython3.13 Windows ARM64; excludes accepted local httptools source-built wheel",
+  "count": 14,
+  "total_bytes": 2266989,
+  "files": [
+    {
+      "name": "dnspython",
+      "version": "2.8.0",
+      "filename": "dnspython-2.8.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/ba/5a/18ad964b0086c6e62e2e7500f7edc89e3faa45033c71c1893d34eed2b2de/dnspython-2.8.0-py3-none-any.whl",
+      "sha256": "01d9bbc4a2d76bf0db7c1f729812ded6d912bd318d3b1cf81d30c0f845dbf3af",
+      "size": 331094
+    },
+    {
+      "name": "email-validator",
+      "version": "2.3.0",
+      "filename": "email_validator-2.3.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/de/15/545e2b6cf2e3be84bc1ed85613edd75b8aea69807a71c26f4ca6a9258e82/email_validator-2.3.0-py3-none-any.whl",
+      "sha256": "80f13f623413e6b197ae73bb10bf4eb0908faf509ad8362c5edeb0be7fd450b4",
+      "size": 35604
+    },
+    {
+      "name": "fastapi-cli",
+      "version": "0.0.32",
+      "filename": "fastapi_cli-0.0.32-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/d5/53/56ae5ae17bb0a5d89d1d31e5320eb1865553ebbfbde91cdc4c221245f2a8/fastapi_cli-0.0.32-py3-none-any.whl",
+      "sha256": "8dcc286fa32f01bbd3f65dd09cfd5a2540ed5f2230b77db7fd30978d6165f3c4",
+      "size": 14670
+    },
+    {
+      "name": "fastapi-cloud-cli",
+      "version": "0.11.0",
+      "filename": "fastapi_cloud_cli-0.11.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/1a/07/60f79270a3320780be7e2ae8a1740cb98a692920b569ba420b97bcc6e175/fastapi_cloud_cli-0.11.0-py3-none-any.whl",
+      "sha256": "76857b0f09d918acfcb50ade34682ba3b2079ca0c43fda10215de301f185a7f8",
+      "size": 26884
+    },
+    {
+      "name": "fastar",
+      "version": "0.12.0",
+      "filename": "fastar-0.12.0-cp313-cp313-win_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/1e/e6/ec8ab1d44d73c0cad4f9e0ae4ce7b9330f2d504f835774802845dd465a42/fastar-0.12.0-cp313-cp313-win_arm64.whl",
+      "sha256": "a3de985d942247fa924e185ff2744a6da0005dcedbb39ae1b811bec11710e572",
+      "size": 458292
+    },
+    {
+      "name": "pydantic-extra-types",
+      "version": "2.11.0",
+      "filename": "pydantic_extra_types-2.11.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/fe/17/fabd56da47096d240dd45ba627bead0333b0cf0ee8ada9bec579287dadf3/pydantic_extra_types-2.11.0-py3-none-any.whl",
+      "sha256": "84b864d250a0fc62535b7ec591e36f2c5b4d1325fa0017eb8cda9aeb63b374a6",
+      "size": 74296
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.15.0",
+      "filename": "pydantic_settings-2.15.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/30/a4/2bffa9f8e804325a09867f0e9d30795c80ea9f8d62560bd1b6ad6220eb2f/pydantic_settings-2.15.0-py3-none-any.whl",
+      "sha256": "0ba092c291c94baceb5eff768aa0d56400a457585bc0175925a5a5510303da42",
+      "size": 69413
+    },
+    {
+      "name": "python-dotenv",
+      "version": "1.2.2",
+      "filename": "python_dotenv-1.2.2-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/0b/d7/1959b9648791274998a9c3526f6d0ec8fd2233e4d4acce81bbae76b44b2a/python_dotenv-1.2.2-py3-none-any.whl",
+      "sha256": "1d8214789a24de455a8b8bd8ae6fe3c6b69a5e3d64aa8a8e5d68e694bbcb285a",
+      "size": 22101
+    },
+    {
+      "name": "python-multipart",
+      "version": "0.0.32",
+      "filename": "python_multipart-0.0.32-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/e1/04/e8135ebd1ad02c56ec633277529b2602ff99ff634be76cdba5744cf554fd/python_multipart-0.0.32-py3-none-any.whl",
+      "sha256": "ff6d3f776f16878c894e52e107296ffc890e913c611b1a4ec6c44e2821fe2e23",
+      "size": 30042
+    },
+    {
+      "name": "rich-toolkit",
+      "version": "0.18.1",
+      "filename": "rich_toolkit-0.18.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/da/43/6f9860c4bfb1f181c347941542a8955ce24b228f84550253765aa1854d53/rich_toolkit-0.18.1-py3-none-any.whl",
+      "sha256": "04011a9751f4c2becdf44bd1aaff8562d4b00caf04f14e483a9873c15fbe3154",
+      "size": 32255
+    },
+    {
+      "name": "rignore",
+      "version": "0.7.6",
+      "filename": "rignore-0.7.6-cp313-cp313-win_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/aa/41/e26a075cab83debe41a42661262f606166157df84e0e02e2d904d134c0d8/rignore-0.7.6-cp313-cp313-win_arm64.whl",
+      "sha256": "e47443de9b12fe569889bdbe020abe0e0b667516ee2ab435443f6d0869bd2804",
+      "size": 656184
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.40.0",
+      "filename": "uvicorn-0.40.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/3d/d8/2083a1daa7439a66f3a48589a57d576aa117726762618f6bb09fe3798796/uvicorn-0.40.0-py3-none-any.whl",
+      "sha256": "c6c8f55bc8bf13eb6fa9ff87ad62308bbbc33d0b67f84293151efe87e0d5f2ee",
+      "size": 68502
+    },
+    {
+      "name": "watchfiles",
+      "version": "1.1.1",
+      "filename": "watchfiles-1.1.1-cp313-cp313-win_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/dc/61/fe0e56c40d5cd29523e398d31153218718c5786b5e636d9ae8ae79453d27/watchfiles-1.1.1-cp313-cp313-win_arm64.whl",
+      "sha256": "ac3cc5759570cd02662b15fbcd9d917f7ecd47efe0d6b40474eafd246f91ea18",
+      "size": 277909
+    },
+    {
+      "name": "websockets",
+      "version": "15.0.1",
+      "filename": "websockets-15.0.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/fa/a8/5b41e0da817d64113292ab1f8247140aac61cbf6cfd085d6a0fa77f4984f/websockets-15.0.1-py3-none-any.whl",
+      "sha256": "f7a866fbc1e97b5c617ee4116daaa09b722101d4a3c170c787450ba409f9736f",
+      "size": 169743
+    }
+  ]
+}
