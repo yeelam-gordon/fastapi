@@ -1,4 +1,4 @@
-name: ARM volume inventory (manual only)
+name: ARM mounted-volume coverage (manual only)
 
 on:
   workflow_dispatch:
@@ -15,65 +15,58 @@ jobs:
       run:
         shell: pwsh
     steps:
-      - name: Inventory existing fixed volumes and ARM host identity
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        id: checkout
+        env:
+          GIT_CONFIG_COUNT: "1"
+          GIT_CONFIG_KEY_0: core.autocrlf
+          GIT_CONFIG_VALUE_0: "false"
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Generated Files/arm-build/hosted-mounted-volume-readiness/candidate/Collect-MountedVolumes.ps1
+      - name: Validate source identity and collect metadata only
+        id: collection
+        env:
+          EXPECTED_SOURCE_COMMIT: ${{ github.sha }}
         run: |
           $ErrorActionPreference = 'Stop'
           Set-StrictMode -Version Latest
-          $osArch = [Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
-          $processArch = [Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString()
-          if (-not [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([Runtime.InteropServices.OSPlatform]::Windows) -or
-              $osArch -ne 'Arm64' -or $processArch -ne 'Arm64') { throw 'Native Windows ARM64 required' }
-          if ($env:RUNNER_OS -ne 'Windows' -or $env:RUNNER_ARCH -ne 'ARM64') { throw 'Runner identity mismatch' }
-          if (-not [IO.Path]::IsPathFullyQualified($env:RUNNER_TEMP) -or
-              -not (Test-Path -LiteralPath $env:RUNNER_TEMP -PathType Container)) { throw 'Invalid runner temp' }
-          $outputRoot = Join-Path $env:RUNNER_TEMP 'arm-volume-inventory'
-          if (Test-Path -LiteralPath $outputRoot) { throw 'Inventory output already exists' }
-          $volumes = @(Get-Volume -ErrorAction Stop | Where-Object { $_.DriveLetter -and $_.DriveType -eq 'Fixed' } |
-            ForEach-Object {
-              [ordered]@{
-                driveLetter = [string]$_.DriveLetter
-                fileSystem = [string]$_.FileSystem
-                driveType = [string]$_.DriveType
-                healthStatus = [string]$_.HealthStatus
-                sizeBytes = [long]$_.Size
-                freeBytes = [long]$_.SizeRemaining
-              }
-            })
-          $processors = @(Get-CimInstance -ClassName Win32_Processor -ErrorAction Stop | ForEach-Object {
-            [ordered]@{
-              name = $_.Name
-              coreCount = $_.NumberOfCores
-              logicalProcessorCount = $_.NumberOfLogicalProcessors
-            }
-          })
-          $os = Get-CimInstance -ClassName Win32_OperatingSystem -ErrorAction Stop
-          if (-not $volumes.Count -or -not $processors.Count -or -not $os.BuildNumber) { throw 'Incomplete inventory' }
-          $inventory = [ordered]@{
-            schemaVersion = 1
-            os = [ordered]@{
-              architecture = $osArch
-              processArchitecture = $processArch
-              version = $os.Version
-              build = $os.BuildNumber
-              imageOS = $env:ImageOS
-              imageVersion = $env:ImageVersion
-            }
-            processors = $processors
-            runner = [ordered]@{
-              os = $env:RUNNER_OS
-              architecture = $env:RUNNER_ARCH
-              workspace = $env:GITHUB_WORKSPACE
-              temp = $env:RUNNER_TEMP
-            }
-            volumes = $volumes
+          try {
+            $head = (& git rev-parse HEAD 2>$null)
+            if ($LASTEXITCODE -ne 0 -or $head -ne $env:EXPECTED_SOURCE_COMMIT) { exit 2 }
+            $source = Join-Path $env:GITHUB_WORKSPACE 'Generated Files\arm-build\hosted-mounted-volume-readiness\candidate\Collect-MountedVolumes.ps1'
+            $expected = 'BACEF9482F915FD4EBD998C2E4BC1C337F659AC4BC18E93387459BF3D2BDAD10'
+            if ((Get-FileHash -LiteralPath $source -Algorithm SHA256 -ErrorAction Stop).Hash -ne $expected) { exit 2 }
+            . $source
+            $collectionExit = Invoke-HostedMountedVolumeCollection
+            if ($collectionExit -notin @(0, 1)) { exit 2 }
+            if ($collectionExit -eq 1) { Write-Output 'UNKNOWN: sanitized evidence created; final verdict will fail the job.' }
+          } catch {
+            Write-Output 'UNKNOWN: source or collection boundary failed; no raw error exported.'
+            exit 2
           }
-          $json = $inventory | ConvertTo-Json -Depth 6
-          New-Item -ItemType Directory -Path $outputRoot -ErrorAction Stop | Out-Null
-          $json | Set-Content -LiteralPath (Join-Path $outputRoot 'inventory.json') -Encoding utf8 -ErrorAction Stop
-      - name: Upload inventory JSON only
+      - name: Upload exact sanitized JSON, including UNKNOWN evidence
+        if: ${{ always() && steps.collection.outcome == 'success' }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: arm-volume-inventory
-          path: ${{ runner.temp }}\arm-volume-inventory\inventory.json
+          name: p75-mounted-volume-coverage
+          path: ${{ runner.temp }}\p75-mounted-volumes.json
           if-no-files-found: error
           retention-days: 7
+      - name: Require observed coverage after preserving sanitized evidence
+        if: ${{ always() && steps.collection.outcome == 'success' }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          try {
+            $evidence = Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'p75-mounted-volumes.json') -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+            if ($evidence.schemaVersion -ne 1 -or $evidence.status -ne 'OBSERVED') {
+              Write-Output 'UNKNOWN: mounted-volume coverage is incomplete; job fails.'
+              exit 1
+            }
+          } catch {
+            Write-Output 'UNKNOWN: evidence boundary failed; job fails without raw error details.'
+            exit 2
+          }

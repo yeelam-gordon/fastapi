@@ -1,0 +1,3 @@
+.github/workflows/arm-build-experiment.yml -text
+"Generated Files/arm-build/hosted-mounted-volume-readiness/candidate/Collect-MountedVolumes.ps1" -text
+"Generated Files/arm-build/hosted-mounted-volume-readiness/candidate/Test-MountedVolumes.ps1" -text
