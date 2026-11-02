@@ -130,10 +130,9 @@ def identity(source, expected):
         and not getattr(getattr(sys, "_jit", None), "is_enabled", lambda: False)(),
         "JIT disabled required",
     )
+    import coverage
     import coverage.tracer
     from packaging.tags import parse_tag, sys_tags
-
-    import coverage
 
     sys.path.insert(0, str(source))
     import fastapi
@@ -179,6 +178,17 @@ def identity(source, expected):
         expected_pins[name] = version
     expected_pins["fastapi"] = "0.119.1"
     compare_pins(expected_pins, packages)
+    runtime_files = {
+        "executable": Path(sys.executable),
+        "base_executable": Path(sys._base_executable),
+        "native_coverage": Path(coverage.tracer.__file__),
+    }
+    if sys.platform == "win32":
+        runtime_files["runtime_dll"] = (
+            Path(sys.base_prefix) / "python313.dll"
+            if expected.startswith("3.13.")
+            else Path(sys.base_prefix) / "python312.dll"
+        )
     return {
         "version": platform.python_version(),
         "executable": sys.executable,
@@ -190,6 +200,9 @@ def identity(source, expected):
         "processor": platform.processor() or None,
         "packages": packages,
         "wheels": wheels,
+        "runtime_sha256": {
+            name: sha(path.read_bytes()) for name, path in runtime_files.items()
+        },
     }
 
 

@@ -252,7 +252,10 @@ class RuntimePairTests(unittest.TestCase):
         text = workflow.read_text()
         self.assertIn('"runner":"macos-14"', text)
         self.assertIn('"runner":"macos-15"', text)
-        self.assertIn("timeout-minutes: 20", text)
+        self.assertIn(
+            "timeout-minutes: ${{ inputs.platform == 'hobl-python313-gap-analysis' && 12 || 20 }}",
+            text,
+        )
         self.assertIn("--candidate-python", text)
         self.assertEqual(
             text.count(

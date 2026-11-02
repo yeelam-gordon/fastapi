@@ -1,13 +1,18 @@
 $ErrorActionPreference = 'Stop'
 $root = Join-Path $env:GITHUB_WORKSPACE 'hobl-complete'
 New-Item -ItemType Directory -Path $root -ErrorAction Stop | Out-Null
-if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+if ($env:HOBL_MODE -in @('hobl-paired-runtime', 'hobl-python313-gap-analysis')) {
     "HOBL_ROOT=$root" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
     '{"status":"bootstrap-started"}' | Set-Content -Encoding utf8 (Join-Path $root 'bootstrap.json')
 }
 $python = $env:HOBL_MAC_PYTHON
 $receipt = @{ version = '3.12.10'; distribution = 'actions/setup-python arm64' }
-if ($env:RUNNER_OS -eq 'Windows') {
+if ($env:HOBL_MODE -eq 'hobl-python313-gap-analysis') {
+    $python = $env:HOBL_CANDIDATE_BASE
+    $receipt.version = '3.13.15'
+    $receipt.distribution = 'actions/setup-python arm64'
+}
+if ($env:RUNNER_OS -eq 'Windows' -and $env:HOBL_MODE -ne 'hobl-python313-gap-analysis') {
     $receipt.distribution = 'PSF official portable ARM64 ZIP'
     $receipt.url = 'https://www.python.org/ftp/python/3.12.10/python-3.12.10-arm64.zip'
     $zip = Join-Path $root 'python.zip'
@@ -33,6 +38,11 @@ if ($env:RUNNER_OS -eq 'Windows') {
     }
 }
 if (-not $python -or -not (Test-Path -LiteralPath $python)) { throw 'Absolute base Python required' }
+if ($env:HOBL_MODE -eq 'hobl-python313-gap-analysis' -and $env:RUNNER_OS -eq 'Windows') {
+    $bytes = [IO.File]::ReadAllBytes($python)
+    $offset = [BitConverter]::ToInt32($bytes, 60)
+    if ([BitConverter]::ToUInt16($bytes, $offset + 4) -ne 0xAA64) { throw 'Native ARM64 analysis PE required' }
+}
 if ($env:RUNNER_OS -eq 'macOS') {
     $slices = & /usr/bin/lipo -archs $python
     if ($LASTEXITCODE -or $slices -notmatch '\barm64\b') { throw 'Native ARM64 Mach-O slice required' }

@@ -66,6 +66,23 @@ class PayloadTests(unittest.TestCase):
             ),
         )
 
+    def test_analysis_rejects_incomplete_manifest_and_wrong_common_guard(self):
+        self.args.phase_analysis = True
+        with patch.object(payload, "phase") as phases:
+            with self.assertRaisesRegex(RuntimeError, "common-source file count"):
+                payload.worker(self.args)
+            canonical = {f"canonical-{number}": "hash" for number in range(2557)}
+            self.manifest.write_text(json.dumps(canonical), encoding="utf-8")
+            (self.source / "tests").mkdir()
+            (self.source / "tests" / "utils.py").write_text(
+                "wrong source\n", encoding="utf-8"
+            )
+            with patch.object(payload, "snapshot", return_value=canonical):
+                with self.assertRaisesRegex(RuntimeError, "corrected common source"):
+                    payload.worker(self.args)
+            phases.assert_not_called()
+        self.assertFalse((self.output / "result.json").exists())
+
     @staticmethod
     def fake_phase(command, source, env, folder, name):
         (folder / f"{name}.stdout").write_text(

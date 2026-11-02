@@ -137,3 +137,49 @@ Local tests use tiny mocked complete workloads and tiny real archives, not a
 local full-suite/performance cohort. Actual runner provisioning, outcomes,
 archive equality and complete timings remain mandatory gates. No local
 readiness result establishes a whole-HOBL speedup or Windows/Mac parity.
+## Python 3.13 gap diagnostic (analysis only)
+
+Manual `hobl-python313-gap-analysis` retains the accepted runtime pair's native
+Python 3.13.15, Windows 11 ARM / macOS 14 ARM service classes, 80-pin closure
+and common source (2,556 unchanged files plus the known `tests/utils.py`
+`>=3.14` correction). It runs one instrumented covered suite per host, not a
+build or warmup: source imports are already editable. Existing baseline,
+frontend and runtime-pair schedules remain unchanged. No native-C, SQL,
+empty-copy or renamer changes are applied.
+
+The public-hook observer records wall and **caller-thread** CPU integer
+nanoseconds per span. Wall reads surround CPU reads. Direct-child exclusive
+CPU must be nonnegative and conserve the root exactly; malformed/nonmonotonic
+trees fail closed, never clamp. CPU may exceed a tiny wall interval because
+of OS accounting quantization: signed differences and overage counts are
+retained, with a recorded 20 ms per-span tolerance and both clock resolutions.
+This tolerance does not relax integer CPU-tree conservation.
+
+Collection, setup, call, teardown, nested fixture setup, reporting, session
+finish and residual ownership retain the proven per-node accounting.
+Wall minus caller CPU includes waiting, I/O, other-thread handoff and
+unmeasured work; it is neither process CPU nor worker CPU, and is not
+automatically removable overhead. Fixture setup is a nested subset, not an
+additional phase; finalizers remain in teardown/session finish.
+
+Each child has 300 seconds, the unchanged SHA-bound guardian has 600 seconds,
+and jobs have 12 minutes, with no automatic retries. Eligibility is always
+false. Natural drain, complete ownership, no survivors/errors/intervention,
+2,513 passes / 130 skips, exact observer/source identities, normal GIL/no JIT,
+native coverage, and original coverage configuration are mandatory future
+runner gates. A local synthetic probe cannot certify those hosted outcomes.
+
+Private fork artifacts retain complete events, accounted nodes, reports,
+stdout/stderr, ownership receipts, runtime/helper hashes, both raw coverage
+shards and complete contexts. Canonical source-relative file/context mappings
+and original `analysis2` exclusions permit independent reportable-line
+comparison (863 files / 1,409 contexts expected); raw unexcluded cross-OS
+equality is not required. Do not copy private IDs/absolute paths or logs into
+public reports. This first-cold attribution is not an explanation of the
+accepted cohort's warm medians, nor a performance/adoption claim.
+
+After both future jobs, compare their private `canonical-coverage.json` files
+with `phase_analysis.py --compare <windows-json> <macos-json>`. It rejects
+different complete file/context/exclusion sets, preserves every raw
+difference, and flags any reportable association difference separately from
+original excluded-line differences. Keep this output private as well.

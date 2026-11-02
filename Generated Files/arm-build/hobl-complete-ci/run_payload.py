@@ -120,6 +120,10 @@ def worker(args):
     source, output = args.source.resolve(), args.output.resolve()
     paired = getattr(args, "paired_uv", None) is not None
     runtime = getattr(args, "candidate_python", None) is not None
+    analysis = getattr(args, "phase_analysis", False)
+    require(
+        not analysis or (not runtime and not paired), "analysis is single-runtime only"
+    )
     require(not runtime or paired, "runtime pair requires common uv")
     manifest = json.loads(args.manifest.read_bytes())
     if paired:
@@ -179,8 +183,17 @@ def worker(args):
             save(output / "paired-config.json", config)
     before = snapshot(source, manifest)
     require(before == manifest, "canonical source payload mismatch")
+    if analysis:
+        require(len(manifest) == 2557, "analysis common-source file count")
+        require(
+            runtime_pair.sha(
+                (source / "tests" / "utils.py").read_bytes().replace(b"\r\n", b"\n")
+            )
+            == runtime_pair.NEW_SHA,
+            "analysis requires corrected common source",
+        )
     env = os.environ.copy()
-    if runtime:
+    if runtime or analysis:
         for key in list(env):
             if key.startswith(
                 ("PYTHON", "PYTEST_", "PIP_", "UV_", "COVERAGE_", "COV_CORE_")
@@ -262,6 +275,15 @@ def worker(args):
         "wrong FastAPI origin",
     )
     save(output / "identity.json", data)
+    if analysis:
+        import phase_analysis
+
+        identity = runtime_pair.probe(
+            args.python, "identity", source, "3.13.15", env, output
+        )
+        save(output / "candidate-runtime-identity.json", identity)
+        phase_analysis.run(args, env, before)
+        return
     runtime_identities = {}
     baseline_coverage = None
     if runtime:
@@ -562,13 +584,17 @@ def main(args):
         command.extend(["--paired-uv", str(args.paired_uv)])
     if getattr(args, "candidate_python", None) is not None:
         command.extend(["--candidate-python", str(args.candidate_python)])
+    if getattr(args, "phase_analysis", False):
+        command.append("--phase-analysis")
     receipt = guard.run_owned(
         command,
         cwd=str(args.source),
         env=os.environ.copy(),
         stdout_path=args.output / "driver.stdout",
         stderr_path=args.output / "driver.stderr",
-        timeout=1100
+        timeout=600
+        if getattr(args, "phase_analysis", False)
+        else 1100
         if getattr(args, "candidate_python", None) is not None
         else 1000
         if getattr(args, "paired_uv", None) is not None
@@ -587,7 +613,10 @@ def main(args):
             "succeeded": receipt.succeeded,
         },
     )
-    if getattr(args, "paired_uv", None) is not None and not receipt.succeeded:
+    if (
+        getattr(args, "paired_uv", None) is not None
+        or getattr(args, "phase_analysis", False)
+    ) and not receipt.succeeded:
         result_path = args.output / "result.json"
         if result_path.exists():
             invalid = json.loads(result_path.read_bytes())
@@ -596,6 +625,15 @@ def main(args):
     require(
         receipt.succeeded, "complete workload failed; inspect retained logs/receipt"
     )
+    if getattr(args, "phase_analysis", False):
+        result_path = args.output / "result.json"
+        result = json.loads(result_path.read_bytes())
+        require(
+            result["status"] == "awaiting-owned-natural-drain",
+            "analysis result not ready",
+        )
+        result["status"] = "analysis-complete"
+        save(result_path, result)
     if getattr(args, "candidate_python", None) is not None:
         result_path = args.output / "result.json"
         result = json.loads(result_path.read_bytes())
@@ -616,6 +654,7 @@ if __name__ == "__main__":
     parser.add_argument("--guardian", type=Path)
     parser.add_argument("--paired-uv", type=Path)
     parser.add_argument("--candidate-python", type=Path)
+    parser.add_argument("--phase-analysis", action="store_true")
     parser.add_argument("--loops", type=int, default=5, choices=range(1, 6))
     parser.add_argument(
         "--index", default="https://packagefeedproxy.microsoft.io/pypi/simple"
