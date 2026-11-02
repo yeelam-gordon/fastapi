@@ -5,6 +5,7 @@ import importlib.util
 import json
 import os
 import re
+import shutil
 import statistics
 import subprocess
 import sys
@@ -12,6 +13,11 @@ import tarfile
 import time
 import zipfile
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from artifact_gate import artifact_set, equivalent
+from prepare_uv import attest
 
 
 def save(path, value):
@@ -56,9 +62,85 @@ def phase(command, source, env, folder, name):
     return value
 
 
+def schedule(paired, loops):
+    if not paired:
+        return [("stock", True)] * loops
+    return [("stock", False), ("uv", False)] + [
+        (arm, True)
+        for pair in (
+            ("stock", "uv"),
+            ("uv", "stock"),
+            ("stock", "uv"),
+            ("uv", "stock"),
+            ("stock", "uv"),
+        )
+        for arm in pair
+    ]
+
+
+def build_command(args, arm):
+    if arm == "stock":
+        return [str(args.python), "-m", "build"]
+    return [
+        str(args.paired_uv),
+        "build",
+        "--python",
+        str(args.python),
+        "--no-python-downloads",
+        "--default-index",
+        args.index,
+        "--build-constraints",
+        str(Path(__file__).with_name("build-constraints.txt")),
+    ]
+
+
+def paired_summary(rows):
+    groups = {}
+    for arm in ("stock", "uv"):
+        measured = [row for row in rows if row["arm"] == arm and row["measured"]]
+        require(
+            len(measured) == 5, "five measured complete iterations per arm required"
+        )
+        groups[arm] = {
+            "measured_iterations": len(measured),
+            **{
+                f"median_{metric}": statistics.median(row[metric] for row in measured)
+                for metric in (
+                    "build_seconds",
+                    "test_seconds",
+                    "scenario_runtime_seconds",
+                )
+            },
+        }
+    return groups
+
+
 def worker(args):
     source, output = args.source.resolve(), args.output.resolve()
+    paired = getattr(args, "paired_uv", None) is not None
     manifest = json.loads(args.manifest.read_bytes())
+    if paired:
+        require(
+            len(manifest) == 2557, "paired canonical source must contain 2557 files"
+        )
+        require(not (source / "dist").exists(), "paired source dist must start absent")
+        save(output / "uv-identity.json", attest(args.paired_uv))
+        constraints = Path(__file__).with_name("build-constraints.txt")
+        require(constraints.read_text().strip() == "pdm-backend==2.5.0", "backend pin")
+        save(
+            output / "paired-config.json",
+            {
+                "schedule": schedule(True, 5),
+                "source_manifest_sha256": digest(args.manifest),
+                "build_constraints": constraints.read_text(),
+                "build_constraints_sha256": digest(constraints),
+                "cache_preparation": "Initially empty pip/uv caches; one complete warmup each",
+                "artifact_qualification": (
+                    "Same-host complete member content/mode/type/RECORD equality; "
+                    "archive timestamp/compression identity is not required"
+                ),
+            },
+        )
     before = snapshot(source, manifest)
     require(before == manifest, "canonical source payload mismatch")
     env = os.environ.copy()
@@ -100,10 +182,20 @@ def worker(args):
         }
     )
     env["PATH"] = str(args.python.parent) + os.pathsep + env["PATH"]
+    if paired:
+        env.pop("PIP_BUILD_CONSTRAINT", None)
+        for key in list(env):
+            if key.startswith("UV_"):
+                env.pop(key)
+        env["UV_CACHE_DIR"] = str(output / "cache" / "uv")
     identity_code = (
-        "import sys,platform,struct,importlib.metadata as m,json,fastapi;"
+        "import sys,os,platform,struct,importlib.metadata as m,json,fastapi;"
         "print(json.dumps({'python':sys.version,'executable':sys.executable,"
         "'machine':platform.machine(),'pointer_bits':struct.calcsize('P')*8,"
+        "'logical_cpu_count':os.cpu_count(),'os':platform.system(),"
+        "'os_release':platform.release(),'processor':platform.processor() or None,"
+        "'hardware_qualification':'Logical CPU count is not physical core count; "
+        "processor model may be unavailable; no matched hardware claim.',"
         "'fastapi_version':fastapi.__version__,'fastapi_origin':fastapi.__file__,"
         "'packages':{d.metadata['Name']:d.version for d in m.distributions()}},indent=2))"
     )
@@ -128,11 +220,37 @@ def worker(args):
         "wrong FastAPI origin",
     )
     save(output / "identity.json", data)
+    if paired:
+        require(
+            data["fastapi_version"] == "0.119.1"
+            and data["packages"].get("build") == "1.6.1"
+            and data["packages"].get("pip") == "25.0.1",
+            "paired FastAPI/build/pip runtime versions",
+        )
     rows = []
-    for number in range(1, args.loops + 1):
+    baseline_artifacts = None
+    for number, (arm, measured) in enumerate(schedule(paired, args.loops), 1):
         folder = output / f"loop-{number}"
         folder.mkdir()
-        build = phase([str(args.python), "-m", "build"], source, env, folder, "build")
+        if paired:
+            require(snapshot(source, manifest) == before, "canonical source changed")
+        row = {"loop": number}
+        if paired:
+            row.update({"arm": arm, "measured": measured, "status": "started"})
+            rows.append(row)
+            save(output / "loops.json", rows)
+        build_env = env
+        if paired and arm == "stock":
+            build_env = env.copy()
+            build_env["PIP_CONSTRAINT"] = str(
+                Path(__file__).with_name("build-constraints.txt")
+            )
+        build = phase(build_command(args, arm), source, build_env, folder, "build")
+        if paired:
+            row["build"] = build
+            save(output / "loops.json", rows)
+            if build["exitcode"] != 0 and (source / "dist").exists():
+                shutil.move(str(source / "dist"), folder / "artifacts")
         require(build["exitcode"] == 0, "build failed; raw logs retained")
         test_command = (
             ["bash", "scripts/test.sh"]
@@ -150,26 +268,48 @@ def worker(args):
                 r"(\d+) (passed|failed|skipped|xfailed|xpassed|errors?)", summary or ""
             )
         }
-        row = {
-            "loop": number,
-            "build_seconds": build["seconds"],
-            "test_seconds": test["seconds"],
-            "scenario_runtime_seconds": build["seconds"] + test["seconds"],
-            "hobl_rounded_scenario_runtime": round(
-                build["hobl_rounded_seconds"] + test["hobl_rounded_seconds"], 2
-            ),
-            "test_exitcode": test["exitcode"],
-            "pytest_summary": summary,
-            "outcomes": outcome,
-        }
-        rows.append(row)
+        row.update(
+            {
+                "loop": number,
+                "build_seconds": build["seconds"],
+                "test_seconds": test["seconds"],
+                "scenario_runtime_seconds": build["seconds"] + test["seconds"],
+                "hobl_rounded_scenario_runtime": round(
+                    build["hobl_rounded_seconds"] + test["hobl_rounded_seconds"], 2
+                ),
+                "test_exitcode": test["exitcode"],
+                "pytest_summary": summary,
+                "outcomes": outcome,
+            }
+        )
+        if not paired:
+            rows.append(row)
         save(output / "loops.json", rows)
         print(json.dumps(row), flush=True)
+        if paired and (source / "dist").exists():
+            shutil.move(str(source / "dist"), folder / "artifacts")
         require(
-            test["exitcode"] == 0 and outcome.get("passed", 0) > 0,
+            test["exitcode"] == 0
+            and (
+                outcome == {"passed": 2513, "skipped": 130}
+                if paired
+                else outcome.get("passed", 0) > 0
+            ),
             "full covered tests failed; not a valid score",
         )
         require(snapshot(source, manifest) == before, "canonical source changed")
+        if paired:
+            archives = artifact_set(folder / "artifacts", source, manifest)
+            save(folder / "artifacts.json", archives)
+            if baseline_artifacts is None:
+                require(
+                    arm == "stock", "first paired build must establish stock artifacts"
+                )
+                baseline_artifacts = archives
+            equivalent(archives, baseline_artifacts)
+            row["status"] = "valid"
+            save(output / "loops.json", rows)
+            continue
         archives = {}
         for path in sorted((source / "dist").glob("*")):
             if path.suffix == ".whl":
@@ -190,21 +330,45 @@ def worker(args):
             "complete build artifacts missing",
         )
         save(folder / "artifacts.json", archives)
+    measured_rows = [row for row in rows if row.get("measured", True)]
     result = {
         "status": "complete",
         "loops": rows,
         "versions": data,
-        "median_build_seconds": statistics.median(r["build_seconds"] for r in rows),
-        "median_test_seconds": statistics.median(r["test_seconds"] for r in rows),
+        "median_build_seconds": statistics.median(
+            r["build_seconds"] for r in measured_rows
+        ),
+        "median_test_seconds": statistics.median(
+            r["test_seconds"] for r in measured_rows
+        ),
         "median_scenario_runtime_seconds": statistics.median(
-            r["scenario_runtime_seconds"] for r in rows
+            r["scenario_runtime_seconds"] for r in measured_rows
         ),
         "source_files_preserved": len(before),
-        "under_10_seconds": all(r["scenario_runtime_seconds"] < 10 for r in rows),
+        "under_10_seconds": all(
+            r["scenario_runtime_seconds"] < 10 for r in measured_rows
+        ),
         "metric": "build wall + full coverage pytest wall; setup excluded",
         "package_index": args.index,
         "prep_qualification": args.prep_qualification,
     }
+    if paired:
+        result["arms"] = paired_summary(rows)
+        for metric in (
+            "median_build_seconds",
+            "median_test_seconds",
+            "median_scenario_runtime_seconds",
+            "under_10_seconds",
+        ):
+            result.pop(metric)
+        result["preparation"] = (
+            "One excluded complete stock warmup then one excluded complete uv warmup; "
+            "same source/bytecode/runtime closure, home and scratch throughout. "
+            "Separate initially empty pip and uv dependency caches, warmed by their "
+            "own complete warmups. Source/test bytecode and OS cache evolve in fixed "
+            "AB/BA/AB/BA/AB order; they are not reset or asserted identically warm. "
+            "dist is moved to per-iteration evidence after each complete iteration."
+        )
     save(output / "result.json", result)
 
 
@@ -213,6 +377,9 @@ def main(args):
     args.python = Path(os.path.abspath(args.python))
     args.output = args.output.resolve()
     args.manifest = args.manifest.resolve()
+    if getattr(args, "paired_uv", None) is not None:
+        require(args.paired_uv.is_absolute(), "paired uv must be absolute")
+        require(args.loops == 5, "paired mode requires five pairs")
     if args.worker:
         worker(args)
         return
@@ -250,13 +417,17 @@ def main(args):
         "--prep-qualification",
         args.prep_qualification,
     ]
+    if getattr(args, "paired_uv", None) is not None:
+        command.extend(["--paired-uv", str(args.paired_uv)])
     receipt = guard.run_owned(
         command,
         cwd=str(args.source),
         env=os.environ.copy(),
         stdout_path=args.output / "driver.stdout",
         stderr_path=args.output / "driver.stderr",
-        timeout=args.loops * 2400 + 120,
+        timeout=1000
+        if getattr(args, "paired_uv", None) is not None
+        else args.loops * 2400 + 120,
     )
     save(args.output / "ownership.json", dataclasses.asdict(receipt))
     save(
@@ -271,6 +442,12 @@ def main(args):
             "succeeded": receipt.succeeded,
         },
     )
+    if getattr(args, "paired_uv", None) is not None and not receipt.succeeded:
+        result_path = args.output / "result.json"
+        if result_path.exists():
+            invalid = json.loads(result_path.read_bytes())
+            invalid["status"] = "invalid-owned-lifecycle"
+            save(result_path, invalid)
     require(
         receipt.succeeded, "complete workload failed; inspect retained logs/receipt"
     )
@@ -284,6 +461,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--guardian", type=Path)
+    parser.add_argument("--paired-uv", type=Path)
     parser.add_argument("--loops", type=int, default=5, choices=range(1, 6))
     parser.add_argument(
         "--index", default="https://packagefeedproxy.microsoft.io/pypi/simple"

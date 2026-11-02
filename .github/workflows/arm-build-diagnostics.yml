@@ -9,6 +9,7 @@ on:
         options:
           - hobl-complete
           - hobl-macos
+          - hobl-paired-uv
         default: hobl-complete
 
 permissions:
@@ -69,6 +70,8 @@ jobs:
           & 'tools/Generated Files/arm-build/hobl-complete-ci/bootstrap.ps1'
           exit $LASTEXITCODE
       - name: Prepare complete timed-payload dependencies outside measurements
+        env:
+          HOBL_MODE: ${{ inputs.platform }}
         run: |
           $source = Join-Path $env:GITHUB_WORKSPACE 'package-source'
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
@@ -78,6 +81,12 @@ jobs:
           Set-Location -LiteralPath $source
           & $env:HOBL_PYTHON -m pip install --retries 1 --timeout 45 --index-url $env:PIP_INDEX_URL -c (Join-Path $helper 'runtime-constraints.txt') -r requirements-tests.txt build pip pdm-backend
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          if ($env:HOBL_MODE -eq 'hobl-paired-uv') {
+            & $env:HOBL_PYTHON -m pip install --only-binary=:all: --retries 1 --timeout 45 --index-url $env:PIP_INDEX_URL -c (Join-Path $helper 'runtime-constraints.txt') uv==0.13.6
+            if ($LASTEXITCODE) { exit $LASTEXITCODE }
+            & $env:HOBL_PYTHON (Join-Path $helper 'prepare_uv.py') (Join-Path $env:HOBL_ROOT 'uv-identity.json')
+            if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          }
           & $env:HOBL_PYTHON -m pip check
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           $env:HOBL_SOURCE = $source
@@ -97,20 +106,26 @@ jobs:
       - name: Verify workload and score contracts
         run: |
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
-          & $env:HOBL_BASE_PYTHON -B -m unittest discover -s $helper -p test_payload.py
+          & $env:HOBL_BASE_PYTHON -B -m unittest discover -s $helper -p 'test_*.py'
           exit $LASTEXITCODE
-      - name: Five complete HOBL payload iterations
+      - name: Complete HOBL payload iterations (optional paired frontend)
         env:
           HOBL_STYLE: ${{ matrix.platform }}
+          HOBL_MODE: ${{ inputs.platform }}
         run: |
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
+          $paired = @()
+          if ($env:HOBL_MODE -eq 'hobl-paired-uv') {
+            $identity = Get-Content -Raw (Join-Path $env:HOBL_ROOT 'uv-identity.json') | ConvertFrom-Json
+            $paired = @('--paired-uv', $identity.executable)
+          }
           & $env:HOBL_BASE_PYTHON -I -B (Join-Path $helper 'run_payload.py') `
             --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') `
             --python $env:HOBL_PYTHON `
             --output (Join-Path $env:HOBL_ROOT 'evidence') `
             --manifest (Join-Path $env:HOBL_ROOT 'source-files.json') `
             --guardian (Join-Path $helper 'owned_process.py') `
-            --loops 5 --style $env:HOBL_STYLE --index https://pypi.org/simple
+            --loops 5 --style $env:HOBL_STYLE --index https://pypi.org/simple @paired
           exit $LASTEXITCODE
       - name: Preserve complete payload phase results and failures
         if: always() && env.HOBL_ROOT != ''
@@ -119,6 +134,7 @@ jobs:
           name: hobl-complete-${{ matrix.platform }}
           path: |
             ${{ env.HOBL_ROOT }}/bootstrap.json
+            ${{ env.HOBL_ROOT }}/uv-identity.json
             ${{ env.HOBL_ROOT }}/source-files.json
             ${{ env.HOBL_ROOT }}/evidence/result.json
             ${{ env.HOBL_ROOT }}/evidence/loops.json
@@ -126,10 +142,15 @@ jobs:
             ${{ env.HOBL_ROOT }}/evidence/identity.stdout
             ${{ env.HOBL_ROOT }}/evidence/identity.stderr
             ${{ env.HOBL_ROOT }}/evidence/ownership-summary.json
+            ${{ env.HOBL_ROOT }}/evidence/ownership.json
+            ${{ env.HOBL_ROOT }}/evidence/uv-identity.json
+            ${{ env.HOBL_ROOT }}/evidence/paired-config.json
             ${{ env.HOBL_ROOT }}/evidence/driver.stdout
             ${{ env.HOBL_ROOT }}/evidence/driver.stderr
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.json
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stdout
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stderr
+            ${{ env.HOBL_ROOT }}/evidence/loop-*/artifacts/*
+            ${{ inputs.platform == 'hobl-paired-uv' && format('{0}/package-source/dist/*', github.workspace) || '' }}
           if-no-files-found: error
           retention-days: 7
