@@ -1,23 +1,14 @@
-name: ARM build diagnostics and paired reference
+name: Complete HOBL payload baseline (owned fork, manual)
 
 on:
   workflow_dispatch:
     inputs:
       platform:
-        description: Analysis platform, matched-reference, matched-macos, or matched-frontend (two jobs).
+        description: Complete build plus full covered tests on both ARM hosts.
         type: choice
         options:
-          - both
-          - windows
-          - macos
-          - matched-reference
-          - matched-macos
-          - matched-frontend
-        default: both
-      native_traces:
-        description: Request capability/privacy-gated native diagnostics.
-        type: boolean
-        default: true
+          - hobl-complete
+        default: hobl-complete
 
 permissions:
   contents: read
@@ -28,37 +19,22 @@ env:
   GIT_CONFIG_VALUE_0: "false"
 
 jobs:
-  diagnostics:
-    if: inputs.platform != 'matched-reference' && inputs.platform != 'matched-macos' && inputs.platform != 'matched-frontend'
-    name: Analysis only (${{ matrix.platform }})
+  complete:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
     strategy:
       fail-fast: false
       matrix:
-        include: >-
-          ${{ fromJSON(
-            inputs.platform == 'macos' && '[{"runner":"macos-15","platform":"macos"}]' ||
-            inputs.platform == 'windows' && '[{"runner":"windows-11-arm","platform":"windows"}]' ||
-            inputs.platform == 'both' && '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-15","platform":"macos"}]' ||
-            '[]'
-          ) }}
+        include:
+          - runner: windows-11-arm
+            platform: windows
+          - runner: macos-15
+            platform: macos
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 25
+    timeout-minutes: 20
     defaults:
       run:
         shell: pwsh
     steps:
-      - name: Record pre-checkout tool context
-        run: |
-          $git = Get-Command git -ErrorAction Stop
-          $version = & $git.Source version
-          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
-            throw 'Git >= 2.28 is required; archive fallback is not permitted'
-          }
-          "Git executable: $($git.Source)"
-          git version --build-options
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          node -p "JSON.stringify({kind:'path-node',arch:process.arch,version:process.version,executable:process.execPath})"
-          exit $LASTEXITCODE
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
@@ -67,175 +43,16 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /.gitattributes
-            /.github/.gitattributes
-            /.github/workflows/.gitattributes
-            /.github/workflows/arm-build-diagnostics.yml
             /Generated Files/.gitattributes
             /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/setup_python.cjs
-            /Generated Files/arm-build/tooling.lock
-            /Generated Files/arm-build/diagnostics/.gitattributes
-            /Generated Files/arm-build/diagnostics/*.py
-            /Generated Files/arm-build/diagnostics/*.md
-            /Generated Files/arm-build/diagnostics/hook/*.py
-            /Generated Files/arm-build/diagnostics/action/.gitattributes
-            /Generated Files/arm-build/diagnostics/action/*.yml
-            /Generated Files/arm-build/diagnostics/action/*.cjs
-            /Generated Files/arm-build/protocol/backend.lock
-            /Generated Files/arm-build/protocol/owned_process.py
-            /Generated Files/arm-build/candidate/validate.py
-            /Generated Files/arm-build/candidate/actual-manifest.json
+            /Generated Files/arm-build/hobl-complete-ci/
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
           path: package-source
           persist-credentials: false
-      - name: Prepare owned analysis directories
-        env:
-          NATIVE_REQUESTED: ${{ inputs.native_traces }}
-        run: |
-          if (-not $env:GITHUB_RUN_ID -or -not $env:GITHUB_RUN_ATTEMPT) {
-            throw 'Run identity is required before creating an owned analysis directory'
-          }
-          $name = 'arm-analysis-{0}-{1}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT
-          $root = if ($env:RUNNER_OS -eq 'Windows') {
-            Join-Path 'C:\' $name
-          } else {
-            Join-Path $env:GITHUB_WORKSPACE $name
-          }
-          New-Item -ItemType Directory -Path $root -ErrorAction Stop | Out-Null
-          foreach ($folder in @('bin', 'temp', 'wheelhouse')) {
-            New-Item -ItemType Directory -Path (Join-Path $root $folder) | Out-Null
-          }
-          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
-          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
-          @(
-            "DIAG_ROOT=$root"
-            "DIAG_TOOLS=$(Join-Path $root 'tools')"
-            "DIAG_SOURCE=$(Join-Path $root 'package-source')"
-            "DIAG_WHEELHOUSE=$(Join-Path $root 'wheelhouse')"
-            "ARM_DIAGNOSTIC_ACTION_JSON=$(Join-Path $root 'action-node.json')"
-            "DIAG_NATIVE_TRACES_REQUESTED=$env:NATIVE_REQUESTED"
-            "UV_CACHE_DIR=$(Join-Path $root 'cache')"
-            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
-            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
-            "TEMP=$(Join-Path $root 'temp')"
-            "TMP=$(Join-Path $root 'temp')"
-            "TMPDIR=$(Join-Path $root 'temp')"
-          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - name: Record actual Actions Node runtime
-        uses: ./tools/Generated Files/arm-build/diagnostics/action
-        with:
-          output: ${{ env.ARM_DIAGNOSTIC_ACTION_JSON }}
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
-        with:
-          version: "0.13.6"
-          enable-cache: "false"
-      - name: Prepare native Python and locked diagnostic tools
-        run: |
-          $windowsHost = $env:RUNNER_OS -eq 'Windows'
-          $bin = Join-Path $env:DIAG_ROOT 'bin'
-          $uvName = if ($windowsHost) { 'uv.exe' } else { 'uv' }
-          $uv = Join-Path $bin $uvName
-          Copy-Item (Get-Command uv -ErrorAction Stop).Source $uv
-          $env:PATH = "$bin$([IO.Path]::PathSeparator)$env:PATH"
-          $bin | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
-          "DIAG_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
-          node (Join-Path $arm 'setup_python.cjs')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          $scripts = if ($windowsHost) { 'Scripts' } else { 'bin' }
-          $pythonName = if ($windowsHost) { 'python.exe' } else { 'python' }
-          $python = Join-Path (Join-Path (Join-Path $arm '.venv') $scripts) $pythonName
-          & $uv --no-config pip install --python $python --require-hashes --only-binary :all: -r (Join-Path $arm 'tooling.lock')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          & $python -m pip check
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          & $python -m pip download --only-binary=:all: --require-hashes --index-url https://pypi.org/simple -r (Join-Path (Join-Path $arm 'protocol') 'backend.lock') --dest $env:DIAG_WHEELHOUSE
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          $wheelHashes = @{}
-          foreach ($wheel in Get-ChildItem -LiteralPath $env:DIAG_WHEELHOUSE -Filter '*.whl' -File) {
-            $wheelHashes[$wheel.Name] = (Get-FileHash -LiteralPath $wheel.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
-          }
-          if ($wheelHashes.Count -eq 0) { throw 'Hash-verified backend download produced no wheel' }
-          $wheelHashes | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $env:DIAG_WHEELHOUSE 'sha256.json') -Encoding utf8
-          "DIAG_PYTHON=$python" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - name: Check collector contracts
-        run: |
-          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
-          $diagnostics = Join-Path $arm 'diagnostics'
-          & $env:DIAG_PYTHON -m unittest discover -s $diagnostics -p 'test_*.py'
-          exit $LASTEXITCODE
-      - name: Collect read-only checkout tool context
-        run: |
-          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
-          $probe = Join-Path (Join-Path $arm 'diagnostics') 'git_context.py'
-          & $env:DIAG_PYTHON $probe --repo $env:DIAG_SOURCE --output (Join-Path (Join-Path $env:DIAG_ROOT 'context-upload') 'git-context.json') --repeats 3
-          exit $LASTEXITCODE
-      - name: Collect matched build diagnostics, not performance results
-        run: |
-          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
-          $collector = Join-Path (Join-Path $arm 'diagnostics') 'collect.py'
-          & $env:DIAG_PYTHON $collector --uv $env:DIAG_UV --source-checkout $env:DIAG_SOURCE --wheelhouse $env:DIAG_WHEELHOUSE --output (Join-Path $env:DIAG_ROOT 'evidence') --context-repeats 3
-          exit $LASTEXITCODE
-      - name: Preserve safe diagnostic evidence even on failure
-        if: always() && env.DIAG_ROOT != ''
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: arm-analysis-${{ matrix.platform }}
-          path: |
-            ${{ env.DIAG_ROOT }}/evidence/upload
-            ${{ env.DIAG_ROOT }}/context-upload
-          if-no-files-found: error
-          retention-days: 3
-      - name: Preserve native Python setup receipts
-        if: always() && env.DIAG_TOOLS != ''
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: arm-analysis-setup-${{ matrix.platform }}
-          path: |
-            ${{ env.DIAG_TOOLS }}/Generated Files/arm-build/results/bootstrap
-            ${{ env.ARM_DIAGNOSTIC_ACTION_JSON }}
-          if-no-files-found: warn
-          retention-days: 3
-  matched-reference:
-    if: >-
-      github.repository == 'yeelam-gordon/fastapi' &&
-      (
-        ((inputs.platform == 'matched-reference' || inputs.platform == 'matched-macos') &&
-         github.ref == 'refs/heads/perf/hobl-arm-reference') ||
-        (inputs.platform == 'matched-frontend' &&
-         github.ref == 'refs/heads/perf/hobl-arm-frontend')
-      ) &&
-      github.run_attempt == '1'
-    name: ${{ inputs.platform == 'matched-frontend' && 'Supported frontend' || 'Compatible reference' }} (${{ matrix.platform }})
-    strategy:
-      fail-fast: false
-      matrix:
-        include: >-
-          ${{ fromJSON(
-            inputs.platform == 'matched-macos' && '[{"runner":"macos-15","platform":"macos"}]' ||
-            '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-15","platform":"macos"}]'
-          ) }}
-    runs-on: ${{ matrix.runner }}
-    timeout-minutes: 60
-    defaults:
-      run:
-        shell: pwsh
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-        with:
-          ref: ${{ github.sha }}
-          path: tools
-          persist-credentials: false
-          sparse-checkout-cone-mode: false
-          sparse-checkout: |
-            /.gitattributes
-            /.github/workflows/arm-build-diagnostics.yml
-            /Generated Files/.gitattributes
-            /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/paired-arm-reference/
-      - name: Select native macOS CPython (manifest has 3.12.10 darwin arm64)
+      - name: Native macOS Python
         if: matrix.platform == 'macos'
         id: python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
@@ -243,56 +60,72 @@ jobs:
           python-version: "3.12.10"
           architecture: arm64
           update-environment: false
-      - name: Bootstrap exact native interpreter, without global installation
+      - name: Native runtime and owned venv
         env:
-          PAIRED_MAC_PYTHON: ${{ steps.python.outputs.python-path }}
+          HOBL_MAC_PYTHON: ${{ steps.python.outputs.python-path }}
         run: |
-          & 'tools/Generated Files/arm-build/paired-arm-reference/bootstrap.ps1'
+          & 'tools/Generated Files/arm-build/hobl-complete-ci/bootstrap.ps1'
           exit $LASTEXITCODE
-      - name: Verify portable contracts before dependency setup
+      - name: Prepare complete timed-payload dependencies outside measurements
         run: |
-          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/paired-arm-reference'
-          $fixtures = Join-Path $env:PAIRED_ROOT 'unit-fixtures'
-          New-Item -ItemType Directory -Path $fixtures | Out-Null
-          $env:TEMP = $fixtures
-          $env:TMP = $fixtures
-          $env:TMPDIR = $fixtures
-          $env:PYTEST_TMPDIR = $fixtures
-          & $env:PAIRED_PYTHON -B -m unittest discover -s $helper -p 'test_*.py'
-          exit $LASTEXITCODE
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
-        with:
-          version: "0.13.6"
-          enable-cache: "false"
-      - name: One three-case compatible-reference cohort (no retry or aggregate job)
-        if: inputs.platform != 'matched-frontend'
+          $source = Join-Path $env:GITHUB_WORKSPACE 'package-source'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
+          $env:PIP_INDEX_URL = 'https://pypi.org/simple'
+          $env:PIP_DISABLE_PIP_VERSION_CHECK = '1'
+          $env:PIP_CACHE_DIR = Join-Path $env:HOBL_ROOT 'setup-cache'
+          Set-Location -LiteralPath $source
+          & $env:HOBL_PYTHON -m pip install --retries 1 --timeout 45 --index-url $env:PIP_INDEX_URL -c (Join-Path $helper 'runtime-constraints.txt') -r requirements-tests.txt build pip pdm-backend
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          & $env:HOBL_PYTHON -m pip check
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $env:HOBL_SOURCE = $source
+          $manifest = Join-Path $env:HOBL_ROOT 'source-files.json'
+          $env:HOBL_MANIFEST = $manifest
+          @'
+          import hashlib,json,os,subprocess
+          from pathlib import Path
+          source=Path(os.environ["HOBL_SOURCE"])
+          head=subprocess.run(["git","-C",str(source),"rev-parse","HEAD"],check=True,capture_output=True,text=True).stdout.strip()
+          if head!="864b569cf8453654fc3bc2c64108c0f644e2918c":raise RuntimeError("Source commit mismatch")
+          names=subprocess.run(["git","-C",str(source),"ls-files","-z"],check=True,capture_output=True).stdout.decode().split("\0")
+          manifest={name:hashlib.sha256((source/name).read_bytes()).hexdigest() for name in names if name}
+          Path(os.environ["HOBL_MANIFEST"]).write_text(json.dumps(manifest,indent=2)+"\n",encoding="utf-8")
+          '@ | & $env:HOBL_PYTHON -
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: Verify workload and score contracts
         run: |
-          $driver = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/paired-arm-reference/driver.py'
-          $bin = Join-Path $env:PAIRED_ROOT 'bin'
-          New-Item -ItemType Directory -Path $bin | Out-Null
-          $uv = Join-Path $bin $(if ($env:RUNNER_OS -eq 'Windows') { 'uv.exe' } else { 'uv' })
-          Copy-Item (Get-Command uv -ErrorAction Stop).Source $uv
-          & $env:PAIRED_PYTHON $driver --root $env:PAIRED_ROOT --uv $uv
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
+          & $env:HOBL_BASE_PYTHON -B -m unittest discover -s $helper -p test_payload.py
           exit $LASTEXITCODE
-      - name: One frontend-only cohort (three hash gates, untimed pair, fixed fourteen)
-        if: inputs.platform == 'matched-frontend'
+      - name: Five complete HOBL payload iterations
+        env:
+          HOBL_STYLE: ${{ matrix.platform }}
         run: |
-          $driver = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/paired-arm-reference/frontend.py'
-          $bin = Join-Path $env:PAIRED_ROOT 'bin'
-          New-Item -ItemType Directory -Path $bin | Out-Null
-          $uv = Join-Path $bin $(if ($env:RUNNER_OS -eq 'Windows') { 'uv.exe' } else { 'uv' })
-          Copy-Item (Get-Command uv -ErrorAction Stop).Source $uv
-          & $env:PAIRED_PYTHON -B $driver --root $env:PAIRED_ROOT --uv $uv
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
+          & $env:HOBL_BASE_PYTHON -I -B (Join-Path $helper 'run_payload.py') `
+            --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') `
+            --python $env:HOBL_PYTHON `
+            --output (Join-Path $env:HOBL_ROOT 'evidence') `
+            --manifest (Join-Path $env:HOBL_ROOT 'source-files.json') `
+            --guardian (Join-Path $helper 'owned_process.py') `
+            --loops 5 --style $env:HOBL_STYLE --index https://pypi.org/simple
           exit $LASTEXITCODE
-      - name: Preserve only newly generated public-input evidence, including failures
-        if: always() && env.PAIRED_ROOT != ''
+      - name: Preserve complete payload phase results and failures
+        if: always() && env.HOBL_ROOT != ''
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: paired-compatible-reference-${{ matrix.platform }}
+          name: hobl-complete-${{ matrix.platform }}
           path: |
-            ${{ env.PAIRED_ROOT }}/upload
-            ${{ env.PAIRED_ROOT }}/bootstrap-native.json
-            ${{ env.PAIRED_ROOT }}/bootstrap-download.json
-          include-hidden-files: true
+            ${{ env.HOBL_ROOT }}/bootstrap.json
+            ${{ env.HOBL_ROOT }}/source-files.json
+            ${{ env.HOBL_ROOT }}/evidence/result.json
+            ${{ env.HOBL_ROOT }}/evidence/loops.json
+            ${{ env.HOBL_ROOT }}/evidence/identity.json
+            ${{ env.HOBL_ROOT }}/evidence/ownership-summary.json
+            ${{ env.HOBL_ROOT }}/evidence/driver.stdout
+            ${{ env.HOBL_ROOT }}/evidence/driver.stderr
+            ${{ env.HOBL_ROOT }}/evidence/loop-*/*.json
+            ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stdout
+            ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stderr
           if-no-files-found: error
-          retention-days: 3
+          retention-days: 7
