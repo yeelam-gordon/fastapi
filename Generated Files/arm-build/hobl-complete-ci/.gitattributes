@@ -1,3 +1,4 @@
 *.py -text
 *.ps1 -text
 runtime-constraints.txt -text
+candidate-v2.patch -text
