@@ -127,6 +127,12 @@ def worker(args):
         save(output / "uv-identity.json", attest(args.paired_uv))
         constraints = Path(__file__).with_name("build-constraints.txt")
         require(constraints.read_text().strip() == "pdm-backend==2.5.0", "backend pin")
+        owned_constraints = output / "build-constraints.txt"
+        shutil.copyfile(constraints, owned_constraints)
+        require(
+            owned_constraints.read_bytes() == constraints.read_bytes(),
+            "owned backend constraints bytes",
+        )
         save(
             output / "paired-config.json",
             {
@@ -134,6 +140,7 @@ def worker(args):
                 "source_manifest_sha256": digest(args.manifest),
                 "build_constraints": constraints.read_text(),
                 "build_constraints_sha256": digest(constraints),
+                "pip_constraint": owned_constraints.as_uri(),
                 "cache_preparation": "Initially empty pip/uv caches; one complete warmup each",
                 "artifact_qualification": (
                     "Same-host complete member content/mode/type/RECORD equality; "
@@ -242,9 +249,8 @@ def worker(args):
         build_env = env
         if paired and arm == "stock":
             build_env = env.copy()
-            build_env["PIP_CONSTRAINT"] = str(
-                Path(__file__).with_name("build-constraints.txt")
-            )
+            # pip splits this environment option on whitespace, not shell quotes.
+            build_env["PIP_CONSTRAINT"] = owned_constraints.as_uri()
         build = phase(build_command(args, arm), source, build_env, folder, "build")
         if paired:
             row["build"] = build

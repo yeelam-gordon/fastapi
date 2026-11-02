@@ -1,6 +1,8 @@
 import hashlib
 import io
 import json
+import subprocess
+import sys
 import tarfile
 import tempfile
 import types
@@ -278,8 +280,12 @@ class PayloadTests(unittest.TestCase):
         )
         environment = phases.call_args_list[0].args[2]
         self.assertEqual(
-            Path(environment["PIP_CONSTRAINT"]).read_text().strip(),
-            "pdm-backend==2.5.0",
+            environment["PIP_CONSTRAINT"],
+            (self.output / "build-constraints.txt").as_uri(),
+        )
+        self.assertEqual(
+            (self.output / "build-constraints.txt").read_bytes(),
+            Path(payload.__file__).with_name("build-constraints.txt").read_bytes(),
         )
         self.assertNotEqual(environment["PIP_CACHE_DIR"], environment["UV_CACHE_DIR"])
 
@@ -301,6 +307,32 @@ class PayloadTests(unittest.TestCase):
             result["median_scenario_runtime_seconds"],
             result["median_build_seconds"] + result["median_test_seconds"],
         )
+
+    def test_paired_constraint_survives_actual_pip_parser_with_space_paths(self):
+        self.output.rename(self.output.with_name("output with spaces"))
+        self.output = self.output.with_name("output with spaces")
+        self.args.output = self.output
+        phases = self.exercise_paired()
+        environment = phases.call_args_list[0].args[2]
+        probe = (
+            "import json;"
+            "from pip._internal.commands import create_command;"
+            "from pip._internal.req.req_file import parse_requirements;"
+            "from pip._internal.network.session import PipSession;"
+            "options,_=create_command('install').parse_args([]);"
+            "print(json.dumps([r.requirement for path in options.constraints "
+            "for r in parse_requirements(path,session=PipSession(),constraint=True)]))"
+        )
+        result = subprocess.run(
+            [sys.executable, "-c", probe],
+            cwd=self.source,
+            env=environment,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout), ["pdm-backend==2.5.0"])
 
     def test_paired_wrong_outcomes_retain_attempt_and_never_publish_success(self):
         def wrong_outcome(*args):

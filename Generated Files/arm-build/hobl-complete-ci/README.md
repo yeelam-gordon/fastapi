@@ -11,6 +11,12 @@ The declared treatment is supported native `uv build --python ...` with
 complete isolated sdist then wheel-from-sdist semantics, not wheel-only or
 no-isolation. Both isolated backends are constrained to pdm-backend 2.5.0;
 every wheel must attest `Generator: pdm-backend (2.5.0)`.
+The stock arm copies the exact constraints bytes into its owned output and passes
+that file's percent-encoded `file:` URI through `PIP_CONSTRAINT`. pip splits
+environment constraint lists on whitespace (shell quoting does not protect
+spaces); the URI preserves helper/output paths containing spaces without
+changing the build command. The effective URI and original constraints hash
+are retained in `paired-config.json`.
 
 Preparation installs official `uv==0.13.6` through normal pip/index settings,
 only in paired mode. `prepare_uv.py` resolves its bundled executable with
