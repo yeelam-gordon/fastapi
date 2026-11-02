@@ -107,6 +107,31 @@ class PayloadTests(unittest.TestCase):
         phases = self.exercise()
         self.assertEqual(phases.call_args_list[1].args[0], ["bash", "scripts/test.sh"])
 
+    def test_analysis_worker_bypasses_all_build_and_performance_loops(self):
+        self.args.phase_analysis = True
+        canonical = {f"canonical-{number}": "hash" for number in range(2557)}
+        self.manifest.write_text(json.dumps(canonical), encoding="utf-8")
+        identity = json.loads(self.identity.stdout)
+        identity.update(
+            {
+                "fastapi_version": "0.119.1",
+                "packages": {"build": "1.6.1", "pip": "25.0.1"},
+            }
+        )
+        self.identity.stdout = json.dumps(identity)
+        with (
+            patch.object(payload, "snapshot", return_value=canonical),
+            patch("phase_analysis.run") as analysis,
+        ):
+            phases = self.exercise()
+        phases.assert_not_called()
+        self.assertEqual(analysis.call_count, 1)
+        args, env, protected = analysis.call_args.args
+        self.assertIs(args, self.args)
+        self.assertEqual(env["PYTHONPATH"], "./docs_src")
+        self.assertEqual(protected, canonical)
+        self.assertFalse((self.output / "result.json").exists())
+
     def test_build_failure_never_runs_tests_or_publishes_success(self):
         with self.assertRaisesRegex(RuntimeError, "build failed"):
             self.exercise(lambda *args: {"exitcode": 1})

@@ -1,5 +1,59 @@
 # Optional paired complete-HOBL cohort
 
+## Optional analysis-only covered-test boundaries
+
+Manual choice `hobl-phase-analysis` runs **one** full covered-test invocation
+on each existing native ARM64 Windows/Mac job. It is not a performance cohort,
+has no build loop, warmup, retry or speed gate, and leaves the existing default
+and paired schedules and `phase()` clock unchanged. Provisioning, pinned source,
+runtime constraints and guardian identities are reused. The analysis job cap is
+12 minutes, its child cap 300 seconds, and outer owned-family cap 600 seconds.
+
+`phase_analysis.py` is a small adapter around the existing worker environment
+and ownership path. It requires the complete 2557-file source manifest and the
+original 2513 passed/130 setup-skipped outcomes, including each teardown report.
+Each collected node must have exactly one protocol/setup/teardown span; only
+passing report nodes may have a call span. Make/log spans must match the complete
+report `(nodeid, when)` multiset. Variable nested fixture spans are not subjected
+to per-test cardinality rules.
+The byte-identical previously executed public-hook observer has a strict SHA256
+gate. No configure wrapper, profiling callbacks or thread CPU timing are used.
+
+Windows retains `python -m coverage run -m pytest tests`; Mac retains the
+canonical `bash scripts/test.sh`. Both load the observer via `PYTEST_PLUGINS`,
+without disabling normal plugins. Mac's script resets `PYTHONPATH`, so an owned
+`BASH_ENV` shell function reapplies only the observer import directory when
+calling the original `coverage` executable with its unchanged arguments.
+Original tests, skips, coverage config and contexts are unchanged.
+
+`analysis/summary.json` reports absolute collection/setup/call/teardown walls,
+reporting, session finish, root/loop/protocol residuals, direct-child partitions,
+top phase nodeids and fixture aggregation. All nanosecond fields must be integer;
+one recorded caller thread, proper containment, nonoverlapping siblings and exact
+exclusive conservation are mandatory. Fixture setup is a nested subset, **never
+an additional setup cost**. Fixture finalizers remain in teardown/session finish.
+The command wall outside the root is explicitly unattributed startup/shutdown,
+not inferred CPU or OS cost. Instrumented values are never performance-eligible.
+
+Complete collection nodes, all raw test phase reports and normalized boundary
+spans survive as public analysis JSON. Absolute fixture paths are normalized;
+raw thread IDs, guardian liveness/PIDs, raw SQLite and full saved coverage
+context maps remain under `analysis/private`, outside upload globs. Untimed
+postprocessing reads both fresh main/CLI parallel shards through `CoverageData`,
+saves the complete union privately, and publishes context/association statistics
+and its hash. It does not invoke a JSON coverage report or assume one database.
+Dedicated postprocessing retains stderr and fails closed on any stderr output,
+even with exit zero and valid JSON; this does not suppress main pytest warnings.
+No cross-OS context equality is asserted; excluded timestamps/async pragma
+line 79 can differ. Source identities must match before and after the command.
+
+Failure logs and reports are retained and cannot become valid analysis.
+The final public result requires the unchanged guardian's successful owned
+natural drain. Local synthetic smoke evidence is readiness only: actual
+both-host full outcomes and attribution remain a future manually authorized run.
+
+## Paired performance mode
+
 The manual workflow's default `hobl-complete` and `hobl-macos` modes retain
 their baseline commands and five measured loops. `hobl-paired-uv` selects both
 existing ARM hosts, with the same 20-minute job limit and no automatic rerun.

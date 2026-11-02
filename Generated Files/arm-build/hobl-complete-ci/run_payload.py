@@ -227,6 +227,19 @@ def worker(args):
         "wrong FastAPI origin",
     )
     save(output / "identity.json", data)
+    if getattr(args, "phase_analysis", False):
+        from phase_analysis import run
+
+        require(not paired, "analysis is not a paired performance run")
+        require(len(manifest) == 2557, "analysis requires canonical 2557 files")
+        require(
+            data["fastapi_version"] == "0.119.1"
+            and data["packages"].get("build") == "1.6.1"
+            and data["packages"].get("pip") == "25.0.1",
+            "analysis runtime versions",
+        )
+        run(args, env, before)
+        return
     if paired:
         require(
             data["fastapi_version"] == "0.119.1"
@@ -383,6 +396,8 @@ def main(args):
     args.python = Path(os.path.abspath(args.python))
     args.output = args.output.resolve()
     args.manifest = args.manifest.resolve()
+    if getattr(args, "phase_analysis", False):
+        require(getattr(args, "paired_uv", None) is None, "analysis cannot be paired")
     if getattr(args, "paired_uv", None) is not None:
         require(args.paired_uv.is_absolute(), "paired uv must be absolute")
         require(args.loops == 5, "paired mode requires five pairs")
@@ -425,17 +440,26 @@ def main(args):
     ]
     if getattr(args, "paired_uv", None) is not None:
         command.extend(["--paired-uv", str(args.paired_uv)])
+    if getattr(args, "phase_analysis", False):
+        command.append("--phase-analysis")
     receipt = guard.run_owned(
         command,
         cwd=str(args.source),
         env=os.environ.copy(),
         stdout_path=args.output / "driver.stdout",
         stderr_path=args.output / "driver.stderr",
-        timeout=1000
+        timeout=600
+        if getattr(args, "phase_analysis", False)
+        else 1000
         if getattr(args, "paired_uv", None) is not None
         else args.loops * 2400 + 120,
     )
-    save(args.output / "ownership.json", dataclasses.asdict(receipt))
+    if getattr(args, "phase_analysis", False):
+        private = args.output / "analysis" / "private"
+        private.mkdir(parents=True, exist_ok=True)
+        save(private / "ownership.json", dataclasses.asdict(receipt))
+    else:
+        save(args.output / "ownership.json", dataclasses.asdict(receipt))
     save(
         args.output / "ownership-summary.json",
         {
@@ -448,7 +472,10 @@ def main(args):
             "succeeded": receipt.succeeded,
         },
     )
-    if getattr(args, "paired_uv", None) is not None and not receipt.succeeded:
+    if (
+        getattr(args, "paired_uv", None) is not None
+        or getattr(args, "phase_analysis", False)
+    ) and not receipt.succeeded:
         result_path = args.output / "result.json"
         if result_path.exists():
             invalid = json.loads(result_path.read_bytes())
@@ -457,6 +484,11 @@ def main(args):
     require(
         receipt.succeeded, "complete workload failed; inspect retained logs/receipt"
     )
+    if getattr(args, "phase_analysis", False):
+        result = json.loads((args.output / "result.json").read_bytes())
+        result.update({"status": "analysis-complete", "owned_natural_drain": True})
+        save(args.output / "result.json", result)
+        save(args.output / "analysis" / "summary.json", result)
     print((args.output / "result.json").read_text(encoding="utf-8"))
 
 
@@ -468,6 +500,7 @@ if __name__ == "__main__":
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--guardian", type=Path)
     parser.add_argument("--paired-uv", type=Path)
+    parser.add_argument("--phase-analysis", action="store_true")
     parser.add_argument("--loops", type=int, default=5, choices=range(1, 6))
     parser.add_argument(
         "--index", default="https://packagefeedproxy.microsoft.io/pypi/simple"

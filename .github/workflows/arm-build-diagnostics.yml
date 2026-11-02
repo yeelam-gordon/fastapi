@@ -10,6 +10,7 @@ on:
           - hobl-complete
           - hobl-macos
           - hobl-paired-uv
+          - hobl-phase-analysis
         default: hobl-complete
 
 permissions:
@@ -33,7 +34,7 @@ jobs:
             '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-15","platform":"macos"}]'
           ) }}
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 20
+    timeout-minutes: ${{ inputs.platform == 'hobl-phase-analysis' && 12 || 20 }}
     defaults:
       run:
         shell: pwsh
@@ -119,6 +120,9 @@ jobs:
             $identity = Get-Content -Raw (Join-Path $env:HOBL_ROOT 'uv-identity.json') | ConvertFrom-Json
             $paired = @('--paired-uv', $identity.executable)
           }
+          if ($env:HOBL_MODE -eq 'hobl-phase-analysis') {
+            $paired = @('--phase-analysis')
+          }
           & $env:HOBL_BASE_PYTHON -I -B (Join-Path $helper 'run_payload.py') `
             --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') `
             --python $env:HOBL_PYTHON `
@@ -147,6 +151,9 @@ jobs:
             ${{ env.HOBL_ROOT }}/evidence/paired-config.json
             ${{ env.HOBL_ROOT }}/evidence/driver.stdout
             ${{ env.HOBL_ROOT }}/evidence/driver.stderr
+            ${{ env.HOBL_ROOT }}/evidence/analysis/*.json
+            ${{ env.HOBL_ROOT }}/evidence/analysis/*.stdout
+            ${{ env.HOBL_ROOT }}/evidence/analysis/*.stderr
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.json
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stdout
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stderr
