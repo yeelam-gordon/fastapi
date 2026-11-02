@@ -1,0 +1,100 @@
+--- stock/coverage/collector.py
++++ candidate/coverage/collector.py
+@@ -15,6 +15,7 @@
+ 
+ from coverage import env
+ from coverage.core import Core
++from coverage.context import should_start_context_test_function
+ from coverage.data import CoverageData
+ from coverage.debug import short_stack
+ from coverage.exceptions import ConfigError
+@@ -264,6 +265,9 @@
+             tracer.check_include = self.check_include
+         if hasattr(tracer, "should_start_context"):
+             tracer.should_start_context = self.should_start_context
++        if hasattr(tracer, "_context_test_function"):
++            if self.should_start_context is should_start_context_test_function:
++                tracer._context_test_function = self.should_start_context
+         if hasattr(tracer, "switch_context"):
+             tracer.switch_context = self.switch_context
+         if hasattr(tracer, "disable_plugin"):
+--- stock/coverage/tracer.pyi
++++ candidate/coverage/tracer.pyi
+@@ -28,6 +28,7 @@
+     disable_plugin: Any
+     file_tracers: Any
+     should_start_context: Any
++    _context_test_function: Any
+     should_trace: Any
+     should_trace_cache: Any
+     switch_context: Any
+--- stock/coverage/ctracer/tracer.c
++++ candidate/coverage/ctracer/tracer.c
+@@ -67,6 +67,7 @@
+ 
+     self->context = Py_None;
+     Py_INCREF(self->context);
++    self->_context_test_function = Py_NewRef(Py_None);
+ 
+     ret = RET_OK;
+     goto ok;
+@@ -96,6 +97,7 @@
+     Py_XDECREF(self->should_trace_cache);
+     Py_XDECREF(self->trace_arcs);
+     Py_XDECREF(self->should_start_context);
++    Py_XDECREF(self->_context_test_function);
+     Py_XDECREF(self->switch_context);
+     Py_XDECREF(self->lock_data);
+     Py_XDECREF(self->unlock_data);
+@@ -347,7 +349,31 @@
+         /* We're looking for our context, ask should_start_context if this is the start. */
+         STATS( self->stats.start_context_calls++; )
+         STATS( self->stats.pycalls++; )
+-        context = PyObject_CallFunctionObjArgs(self->should_start_context, frame, NULL);
++        PyObject *name = (PyObject *)MyFrame_BorrowCode(frame)->co_name;
++        if (self->should_start_context == self->_context_test_function
++            && PyUnicode_CheckExact(name)
++            && !(PyUnicode_GET_LENGTH(name) >= 4
++                && PyUnicode_READ_CHAR(name, 0) == 't'
++                && PyUnicode_READ_CHAR(name, 1) == 'e'
++                && PyUnicode_READ_CHAR(name, 2) == 's'
++                && PyUnicode_READ_CHAR(name, 3) == 't')
++            && !(PyUnicode_GET_LENGTH(name) == 7
++                && PyUnicode_READ_CHAR(name, 0) == 'r'
++                && PyUnicode_READ_CHAR(name, 1) == 'u'
++                && PyUnicode_READ_CHAR(name, 2) == 'n'
++                && PyUnicode_READ_CHAR(name, 3) == 'T'
++                && PyUnicode_READ_CHAR(name, 4) == 'e'
++                && PyUnicode_READ_CHAR(name, 5) == 's'
++                && PyUnicode_READ_CHAR(name, 6) == 't')) {
++            /* Match frame.f_code's public audit event even when eliding Python. */
++            if (PySys_Audit("object.__getattr__", "Os", frame, "f_code") < 0) {
++                goto error;
++            }
++            context = Py_NewRef(Py_None);
++        }
++        else {
++            context = PyObject_CallFunctionObjArgs(self->should_start_context, frame, NULL);
++        }
+         if (context == NULL) {
+             goto error;
+         }
+@@ -1092,6 +1118,8 @@
+ 
+     { "should_start_context", T_OBJECT, offsetof(CTracer, should_start_context), 0,
+             PyDoc_STR("Function for starting contexts.") },
++    { "_context_test_function", T_OBJECT, offsetof(CTracer, _context_test_function), 0,
++            PyDoc_STR("Owned builtin callback eligible for native prefix rejection.") },
+ 
+     { "switch_context",     T_OBJECT, offsetof(CTracer, switch_context), 0,
+             PyDoc_STR("Function for switching to a new context.") },
+--- stock/coverage/ctracer/tracer.h
++++ candidate/coverage/ctracer/tracer.h
+@@ -26,6 +26,7 @@
+     PyObject * should_trace_cache;
+     PyObject * trace_arcs;
+     PyObject * should_start_context;
++    PyObject * _context_test_function;
+     PyObject * switch_context;
+     PyObject * lock_data;
+     PyObject * unlock_data;

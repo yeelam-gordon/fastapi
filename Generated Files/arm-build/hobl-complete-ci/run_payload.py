@@ -16,6 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import native_context
 import runtime_pair
 from artifact_gate import artifact_set, equivalent
 from prepare_uv import attest
@@ -120,6 +121,8 @@ def worker(args):
     source, output = args.source.resolve(), args.output.resolve()
     paired = getattr(args, "paired_uv", None) is not None
     runtime = getattr(args, "candidate_python", None) is not None
+    native = getattr(args, "native_context", None)
+    require(not native or runtime, "native pair requires two common 3.13 runtimes")
     require(not runtime or paired, "runtime pair requires common uv")
     manifest = json.loads(args.manifest.read_bytes())
     if paired:
@@ -266,11 +269,18 @@ def worker(args):
     baseline_coverage = None
     if runtime:
         for arm, python, version in (
-            ("stock", args.python, "3.12.10"),
+            ("stock", args.python, "3.13.15" if native else "3.12.10"),
             ("candidate", args.candidate_python, "3.13.15"),
         ):
+            probe_env = env.copy()
+            if native:
+                native_context.verify(native, arm)
+                probe_env["HOBL_NATIVE_OVERLAY"] = str(native / "overlays" / arm)
+                probe_env["PYTHONPATH"] = os.pathsep.join(
+                    (str(native / "overlays" / arm), "./docs_src")
+                )
             runtime_identities[arm] = runtime_pair.probe(
-                python, "identity", source, version, env, output
+                python, "identity", source, version, probe_env, output
             )
             require(
                 Path(runtime_identities[arm]["executable"])
@@ -319,6 +329,23 @@ def worker(args):
             iteration_env["PATH"] = str(python.parent) + os.pathsep + env["PATH"]
             (folder / "private").mkdir()
             iteration_env["COVERAGE_FILE"] = str(folder / "private" / ".coverage")
+            if native:
+                native_context.verify(native, arm)
+                overlay = native / "overlays" / arm
+                iteration_env["HOBL_NATIVE_OVERLAY"] = str(overlay)
+                iteration_env["PYTHONPATH"] = os.pathsep.join(
+                    (str(overlay), "./docs_src")
+                )
+                if args.style == "macos":
+                    shim = folder / "native-cli.bash"
+                    shim.write_text(
+                        'coverage() { PYTHONPATH="$HOBL_NATIVE_OVERLAY:$PYTHONPATH" '
+                        'command coverage "$@"; }\n',
+                        encoding="utf-8",
+                        newline="\n",
+                    )
+                    iteration_env["HOBL_NATIVE_OVERLAY"] = str(overlay)
+                    iteration_env["BASH_ENV"] = str(shim)
         if paired:
             require(snapshot(source, manifest) == before, "canonical source changed")
         row = {"loop": number}
@@ -401,6 +428,9 @@ def worker(args):
             ),
             "full covered tests failed; not a valid score",
         )
+        if native:
+            require(not (folder / "test.stderr").read_bytes(), "native test stderr")
+            native_context.verify(native, arm)
         require(snapshot(source, manifest) == before, "canonical source changed")
         if runtime:
             shutil.move(str(source / "dist"), folder / "artifacts")
@@ -454,6 +484,9 @@ def worker(args):
         )
         save(folder / "artifacts.json", archives)
     measured_rows = [row for row in rows if row.get("measured", True)]
+    if native:
+        for arm in ("stock", "candidate"):
+            native_context.verify(native, arm)
     result = {
         "status": "complete",
         "loops": rows,
@@ -494,8 +527,38 @@ def worker(args):
             "AB/BA/AB/BA/AB order; they are not reset or asserted identically warm. "
             "dist is moved to per-iteration evidence after each complete iteration."
         )
+        if native:
+            savings = [
+                next(
+                    r["scenario_runtime_seconds"]
+                    for r in rows[i : i + 2]
+                    if r["arm"] == "stock"
+                )
+                - next(
+                    r["scenario_runtime_seconds"]
+                    for r in rows[i : i + 2]
+                    if r["arm"] == "candidate"
+                )
+                for i in range(2, 12, 2)
+            ]
+            result["labels"] = {
+                "stock": "compiled stock cp313",
+                "candidate": "compiled native guard cp313",
+            }
+            result["compiler"] = json.loads((native / "build-spec.json").read_bytes())
+            result["pair_savings_seconds"] = savings
+            result["candidate_screen_pass"] = (
+                all(s > 0 for s in savings)
+                and all(statistics.mean(savings[i::2]) > 0 for i in (0, 1))
+                and result["arms"]["candidate"]["median_scenario_runtime_seconds"]
+                <= result["arms"]["stock"]["median_scenario_runtime_seconds"] * 0.99
+            )
+            result["preparation"] = (
+                "Common normal-GIL/no-JIT3.13.15; matched installed compiler/flags no PGO/LTO; owned coverage overlay only; two complete excluded warmups then five AB/BA pairs. Official wheel semantic reference only."
+            )
     if runtime:
         result["status"] = "pending-owned-lifecycle"
+    if runtime and not native:
         result["labels"] = {"stock": "stock 3.12.10", "candidate": "candidate 3.13.15"}
         result["preparation"] = (
             "Common uv 0.13.6 and PDM 2.5.0; one excluded complete warmup/runtime; "
@@ -562,6 +625,8 @@ def main(args):
         command.extend(["--paired-uv", str(args.paired_uv)])
     if getattr(args, "candidate_python", None) is not None:
         command.extend(["--candidate-python", str(args.candidate_python)])
+    if getattr(args, "native_context", None):
+        command.extend(["--native-context", str(args.native_context)])
     receipt = guard.run_owned(
         command,
         cwd=str(args.source),
@@ -616,6 +681,7 @@ if __name__ == "__main__":
     parser.add_argument("--guardian", type=Path)
     parser.add_argument("--paired-uv", type=Path)
     parser.add_argument("--candidate-python", type=Path)
+    parser.add_argument("--native-context", type=Path)
     parser.add_argument("--loops", type=int, default=5, choices=range(1, 6))
     parser.add_argument(
         "--index", default="https://packagefeedproxy.microsoft.io/pypi/simple"

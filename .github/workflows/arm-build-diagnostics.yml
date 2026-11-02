@@ -11,6 +11,7 @@ on:
           - hobl-macos
           - hobl-paired-uv
           - hobl-paired-runtime
+          - hobl-paired-native-context
         default: hobl-complete
 
 permissions:
@@ -29,7 +30,7 @@ jobs:
       matrix:
         include: >-
           ${{ fromJSON(
-            inputs.platform == 'hobl-paired-runtime' &&
+            (inputs.platform == 'hobl-paired-runtime' || inputs.platform == 'hobl-paired-native-context') &&
             '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-14","platform":"macos"}]' ||
             inputs.platform == 'hobl-macos' &&
             '[{"runner":"macos-15","platform":"macos"}]' ||
@@ -63,11 +64,11 @@ jobs:
         id: python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
-          python-version: "3.12.10"
+          python-version: ${{ inputs.platform == 'hobl-paired-native-context' && '3.13.15' || '3.12.10' }}
           architecture: arm64
           update-environment: false
       - name: Native candidate runtime (optional paired runtime)
-        if: inputs.platform == 'hobl-paired-runtime'
+        if: inputs.platform == 'hobl-paired-runtime' || inputs.platform == 'hobl-paired-native-context'
         id: candidate
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
@@ -92,7 +93,7 @@ jobs:
           $env:PIP_DISABLE_PIP_VERSION_CHECK = '1'
           $env:PIP_CACHE_DIR = Join-Path $env:HOBL_ROOT 'setup-cache'
           Set-Location -LiteralPath $source
-          if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+          if ($env:HOBL_MODE -in @('hobl-paired-runtime', 'hobl-paired-native-context')) {
             $env:PIP_CONSTRAINT = & $env:HOBL_BASE_PYTHON -I -B -c "from pathlib import Path; import sys; print(Path(sys.argv[1]).absolute().as_uri())" (Join-Path $helper 'build-constraints.txt')
             if ($LASTEXITCODE) { exit $LASTEXITCODE }
             & $env:HOBL_BASE_PYTHON -I -B (Join-Path $helper 'runtime_pair.py') prepare $source $env:HOBL_ROOT
@@ -104,6 +105,10 @@ jobs:
               if ($LASTEXITCODE) { exit $LASTEXITCODE }
             }
             & $env:HOBL_PYTHON (Join-Path $helper 'prepare_uv.py') (Join-Path $env:HOBL_ROOT 'uv-identity.json')
+            if ($LASTEXITCODE) { exit $LASTEXITCODE }
+            if ($env:HOBL_MODE -eq 'hobl-paired-native-context') {
+              & $env:HOBL_PYTHON -B (Join-Path $helper 'native_context.py') prepare (Join-Path $env:HOBL_ROOT 'native') $source $env:HOBL_CANDIDATE_PYTHON
+            }
             exit $LASTEXITCODE
           }
           & $env:HOBL_PYTHON -m pip install --retries 1 --timeout 45 --index-url $env:PIP_INDEX_URL -c (Join-Path $helper 'runtime-constraints.txt') -r requirements-tests.txt build pip pdm-backend
@@ -142,11 +147,14 @@ jobs:
         run: |
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
           $paired = @()
-          if ($env:HOBL_MODE -in @('hobl-paired-uv', 'hobl-paired-runtime')) {
+          if ($env:HOBL_MODE -in @('hobl-paired-uv', 'hobl-paired-runtime', 'hobl-paired-native-context')) {
             $identity = Get-Content -Raw (Join-Path $env:HOBL_ROOT 'uv-identity.json') | ConvertFrom-Json
             $paired = @('--paired-uv', $identity.executable)
-            if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+            if ($env:HOBL_MODE -in @('hobl-paired-runtime', 'hobl-paired-native-context')) {
               $paired += @('--candidate-python', $env:HOBL_CANDIDATE_PYTHON)
+            }
+            if ($env:HOBL_MODE -eq 'hobl-paired-native-context') {
+              $paired += @('--native-context', (Join-Path $env:HOBL_ROOT 'native'))
             }
           }
           & $env:HOBL_BASE_PYTHON -I -B (Join-Path $helper 'run_payload.py') `
@@ -166,9 +174,9 @@ jobs:
             ${{ env.HOBL_ROOT }}/bootstrap.json
             ${{ env.HOBL_ROOT }}/uv-identity.json
             ${{ env.HOBL_ROOT }}/source-files.json
-            ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/original-source-files.json', env.HOBL_ROOT) || '' }}
-            ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/common-source.json', env.HOBL_ROOT) || '' }}
-            ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/evidence/*runtime-identity.json', env.HOBL_ROOT) || '' }}
+            ${{ (inputs.platform == 'hobl-paired-runtime' || inputs.platform == 'hobl-paired-native-context') && format('{0}/original-source-files.json', env.HOBL_ROOT) || '' }}
+            ${{ (inputs.platform == 'hobl-paired-runtime' || inputs.platform == 'hobl-paired-native-context') && format('{0}/common-source.json', env.HOBL_ROOT) || '' }}
+            ${{ (inputs.platform == 'hobl-paired-runtime' || inputs.platform == 'hobl-paired-native-context') && format('{0}/evidence/*runtime-identity.json', env.HOBL_ROOT) || '' }}
             ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/evidence/loop-*/private/*', env.HOBL_ROOT) || '' }}
             ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/evidence/loop-*/private/.coverage.*', env.HOBL_ROOT) || '' }}
             ${{ env.HOBL_ROOT }}/evidence/result.json
@@ -186,7 +194,9 @@ jobs:
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stdout
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stderr
             ${{ env.HOBL_ROOT }}/evidence/loop-*/artifacts/*
-            ${{ (inputs.platform == 'hobl-paired-uv' || inputs.platform == 'hobl-paired-runtime') && format('{0}/package-source/dist/*', github.workspace) || '' }}
+            ${{ inputs.platform == 'hobl-paired-native-context' && format('{0}/native', env.HOBL_ROOT) || '' }}
+            ${{ inputs.platform == 'hobl-paired-native-context' && format('{0}/evidence/loop-*/private', env.HOBL_ROOT) || '' }}
+            ${{ (inputs.platform == 'hobl-paired-uv' || inputs.platform == 'hobl-paired-runtime' || inputs.platform == 'hobl-paired-native-context') && format('{0}/package-source/dist/*', github.workspace) || '' }}
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 7

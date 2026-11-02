@@ -130,10 +130,17 @@ def identity(source, expected):
         and not getattr(getattr(sys, "_jit", None), "is_enabled", lambda: False)(),
         "JIT disabled required",
     )
+    import coverage
     import coverage.tracer
     from packaging.tags import parse_tag, sys_tags
 
-    import coverage
+    if os.environ.get("HOBL_NATIVE_OVERLAY"):
+        package = Path(os.environ["HOBL_NATIVE_OVERLAY"]) / "coverage"
+        require(
+            Path(coverage.__file__).resolve() == (package / "__init__.py").resolve()
+            and Path(coverage.tracer.__file__).resolve().parent == package.resolve(),
+            "owned native coverage import origin",
+        )
 
     sys.path.insert(0, str(source))
     import fastapi

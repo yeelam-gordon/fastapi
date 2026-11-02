@@ -1,13 +1,16 @@
 $ErrorActionPreference = 'Stop'
 $root = Join-Path $env:GITHUB_WORKSPACE 'hobl-complete'
 New-Item -ItemType Directory -Path $root -ErrorAction Stop | Out-Null
-if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+if ($env:HOBL_MODE -in @('hobl-paired-runtime', 'hobl-paired-native-context')) {
     "HOBL_ROOT=$root" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
     '{"status":"bootstrap-started"}' | Set-Content -Encoding utf8 (Join-Path $root 'bootstrap.json')
 }
 $python = $env:HOBL_MAC_PYTHON
 $receipt = @{ version = '3.12.10'; distribution = 'actions/setup-python arm64' }
-if ($env:RUNNER_OS -eq 'Windows') {
+if ($env:HOBL_MODE -eq 'hobl-paired-native-context') {
+    $python = $env:HOBL_CANDIDATE_BASE
+    $receipt.version = '3.13.15'
+} elseif ($env:RUNNER_OS -eq 'Windows') {
     $receipt.distribution = 'PSF official portable ARM64 ZIP'
     $receipt.url = 'https://www.python.org/ftp/python/3.12.10/python-3.12.10-arm64.zip'
     $zip = Join-Path $root 'python.zip'
@@ -45,7 +48,7 @@ $payloadPython = if ($env:RUNNER_OS -eq 'Windows') {
 } else {
     Join-Path $venv 'bin/python'
 }
-if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+if ($env:HOBL_MODE -in @('hobl-paired-runtime', 'hobl-paired-native-context')) {
     $candidate = $env:HOBL_CANDIDATE_BASE
     if (-not $candidate -or -not [IO.Path]::IsPathRooted($candidate) -or -not (Test-Path -LiteralPath $candidate)) {
         throw 'Absolute setup-python 3.13 candidate required'

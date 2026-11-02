@@ -137,3 +137,80 @@ Local tests use tiny mocked complete workloads and tiny real archives, not a
 local full-suite/performance cohort. Actual runner provisioning, outcomes,
 archive equality and complete timings remain mandatory gates. No local
 readiness result establishes a whole-HOBL speedup or Windows/Mac parity.
+
+## Optional matched native-context trial
+
+`native_context_inputs.py --source OWNER_TREE --output NEW_OWNED_DIRECTORY`
+is an offline, non-executing source gate. It copies 59 pinned source/license
+inputs into separate stock/candidate trees, preserving original bytes and
+per-file newline conventions. It verifies all four patched results and writes
+the complete input manifests and transport hashes into `source-receipt.json`.
+No installed coverage package or existing binary is modified or copied.
+No compiler, source downloader, package installer or workflow is invoked.
+
+Owner: coverage.py 7.17.0, coveragepy/coveragepy commit
+`393ac715ddae841a85452d97edeedd8be8f0cda8`.
+The manifest derives from the retained original official source and the
+already-reviewed normal-GIL 3.13 candidate, not an installed wheel's C files.
+`native-context.patch` is the unchanged 35-addition/one-removal experimental
+four-file treatment; exact raw patch SHA256 is checked before interpreting
+line endings. `native-context-LICENSE.txt` and `native-context-NOTICE.txt`
+retain the owner's Apache-2.0 license, Ned Batchelder attribution and notices.
+No whole third-party package or compiled extension is included in git.
+
+`hobl-paired-native-context` selects Windows11 ARM and macOS14 ARM, with
+normal-GIL/no-JIT Python3.13.15 in BOTH lexical venvs, common80 package pins
+and uv0.13.6/PDM2.5.0. Default and runtime-comparison modes are unchanged.
+Native preparation fetches only the pinned GitHub commit with normal TLS,
+checks every source input, builds two extensions with one installed compiler,
+and creates owned package overlays without changing either installed wheel.
+Preparation has a90-second strict-owned outer bound, each child at most180
+seconds; the existing unmodified guardian must accept every receipt and
+natural drain. The paired worker keeps its1100-second bound, job20minutes.
+Missing LLVM/Xcode/SDK/native headers or exhausted capacity fails closed,
+without compiler downloads, retries, telemetry flags or cleanup exemptions.
+
+Reuse recipe: the retained `epoch8-py313/BUILD-SPEC.json` compiles exactly
+`datastack.c`, `filedisp.c`, `module.c`, `tracer.c`.
+Windows uses supported installed clang-cl/lld-link, ARM64 output,
+`/O2 /MD /std:c11 /W3`, no `/GL`, LTO or PGO. Read-only bounded VS/MSVC
+and Windows Kits discovery selects one coherent SDK include/library version.
+Explicit `/imsvc` and `/LIBPATH:` paths configure compilation/linking;
+no vcvars, VS setup, vswhere or compiler-discovery helper is executed.
+Only standard Windows Kits HKLM install-root metadata may be read.
+Mac requires installed Xcode clang and native 3.13 headers, with
+`-O2 -std=c11 -fPIC -shared -undefined dynamic_lookup -arch arm64`,
+not Windows flags. Neither compiler may be downloaded automatically.
+Headers/library/suffix paths must come from the actual payload's sysconfig;
+the lexical venv executable must not be resolved to a clean base interpreter.
+Normal-GIL/no-JIT assertions remain mandatory before compilation and timing.
+
+Before timing, three tiny default/surrogate, callback-mutation and raising
+audit cases compare the official wheel, compiled stock and compiled guard.
+Source, installed packages and overlays/binaries are sealed before/after.
+Mac keeps the original script; a common BASH_ENV coverage function reapplies
+only the arm's owned overlay at the CLI boundary after the script resets
+PYTHONPATH. Args and docs_src remain intact, including CLI-child imports.
+Both arms keep two excluded complete warmups and five AB/BA pairs, exact
+2513pass/130skip outcomes, two fresh shards and original reportable-context
+and archive gates. Results remain pending until the final owned receipt;
+the screen passes only with >=1% complete-median decrease, all five pair
+savings positive and both order groups positive. A valid negative is retained.
+All source, compiler argv/version/host identity, binary hashes and ABI
+receipts, semantics and raw shards/archives are uploaded for review.
+Hosted compilation and the actual full paired pipeline remain unexecuted
+local-readiness gates; fresh parent review is required before dispatch.
+Earlier SDK-script probes failed the strict guardian and remain retained.
+The explicit-path recipe subsequently built both fresh extensions and passed
+ABI/import and three-arm tiny semantics under the same unchanged guardian.
+This is build-only local readiness, not a full80-pin HOBL replay or hosted proof.
+No telemetry/protection switch or lifecycle exception is added.
+Configuration references: [Microsoft Clang support](https://learn.microsoft.com/en-us/cpp/build/clang-support-msbuild)
+and [Microsoft /LIBPATH](https://learn.microsoft.com/en-us/cpp/build/reference/libpath-additional-libpath);
+the installed clang-cl/lld-link help documents `/imsvc` and `/libpath:`.
+
+The accepted 79.5979381s to 78.1468361s local matched-LLVM screen (1.823%)
+does not answer transfer to hosted Windows LLVM or Mac Xcode. The official
+PGO wheel is only a semantic reference. Other-platform/free-threaded owner
+acceptance, maintained Windows/Mac parity and released-package gains remain
+open; this source gate supplies no performance result.

@@ -4,3 +4,17 @@
 .gitattributes -text
 build-constraints.txt -text
 runtime-constraints.txt -text
+native-context.patch whitespace=-trailing-space,cr-at-eol
+native-context-inputs.json -text whitespace=cr-at-eol
+native_context_inputs.py whitespace=cr-at-eol
+test_native_context_inputs.py whitespace=cr-at-eol
+native-context-LICENSE.txt -text whitespace=cr-at-eol
+native-context-NOTICE.txt -text whitespace=cr-at-eol
+.gitattributes whitespace=cr-at-eol
+native_context.py whitespace=cr-at-eol
+native_smoke.py whitespace=cr-at-eol
+native_fixture.py whitespace=cr-at-eol
+test_native_context.py whitespace=cr-at-eol
+run_payload.py whitespace=cr-at-eol
+runtime_pair.py whitespace=cr-at-eol
+bootstrap.ps1 whitespace=cr-at-eol
