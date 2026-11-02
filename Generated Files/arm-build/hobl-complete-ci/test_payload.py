@@ -281,13 +281,19 @@ class PayloadTests(unittest.TestCase):
         environment = phases.call_args_list[0].args[2]
         self.assertEqual(
             environment["PIP_CONSTRAINT"],
-            (self.output / "build-constraints.txt").as_uri(),
+            (self.output / "build-constraints.txt").resolve().as_uri(),
         )
         self.assertEqual(
             (self.output / "build-constraints.txt").read_bytes(),
             Path(payload.__file__).with_name("build-constraints.txt").read_bytes(),
         )
         self.assertNotEqual(environment["PIP_CACHE_DIR"], environment["UV_CACHE_DIR"])
+
+    def test_paired_worker_contract_accepts_resolved_output_alias(self):
+        self.output = self.output / ".." / self.output.name
+        self.args.output = self.output
+        self.assertNotEqual(self.output.as_uri(), self.output.resolve().as_uri())
+        self.test_paired_worker_keeps_all_twelve_rows_and_untouched_test_commands()
 
     def test_paired_complete_median_is_not_sum_of_separate_phase_medians(self):
         rows = [
