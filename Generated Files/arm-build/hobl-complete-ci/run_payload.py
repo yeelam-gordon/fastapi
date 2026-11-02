@@ -112,9 +112,11 @@ def worker(args):
         cwd=source,
         env=env,
         capture_output=True,
-        check=True,
         text=True,
     )
+    (output / "identity.stdout").write_text(identity.stdout, encoding="utf-8")
+    (output / "identity.stderr").write_text(identity.stderr, encoding="utf-8")
+    require(identity.returncode == 0, "identity probe failed; stderr retained")
     data = json.loads(identity.stdout)
     require(
         data["machine"].lower() in {"arm64", "aarch64"} and data["pointer_bits"] == 64,
@@ -208,7 +210,7 @@ def worker(args):
 
 def main(args):
     args.source = args.source.resolve()
-    args.python = args.python.resolve()
+    args.python = Path(os.path.abspath(args.python))
     args.output = args.output.resolve()
     args.manifest = args.manifest.resolve()
     if args.worker:

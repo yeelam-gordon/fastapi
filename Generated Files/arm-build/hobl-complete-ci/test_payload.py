@@ -51,6 +51,8 @@ class PayloadTests(unittest.TestCase):
             prep_qualification="test",
         )
         self.identity = types.SimpleNamespace(
+            returncode=0,
+            stderr="",
             stdout=json.dumps(
                 {
                     "machine": "ARM64",
@@ -58,7 +60,7 @@ class PayloadTests(unittest.TestCase):
                     "fastapi_origin": str(self.original),
                     "packages": {},
                 }
-            )
+            ),
         )
 
     @staticmethod
@@ -117,6 +119,22 @@ class PayloadTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "canonical source changed"):
             self.exercise(mutate)
         self.assertFalse((self.output / "result.json").exists())
+
+    def test_interpreter_path_does_not_follow_venv_symlink(self):
+        wanted = self.args.python
+        original_resolve = Path.resolve
+        base_python = self.source / "base-python"
+
+        def fake_resolve(path, *args, **kwargs):
+            if path == wanted:
+                return base_python
+            return original_resolve(path, *args, **kwargs)
+
+        self.args.worker = True
+        with patch.object(Path, "resolve", fake_resolve):
+            with patch.object(payload, "worker") as worker:
+                payload.main(self.args)
+        self.assertEqual(worker.call_args.args[0].python, wanted.absolute())
 
 
 if __name__ == "__main__":

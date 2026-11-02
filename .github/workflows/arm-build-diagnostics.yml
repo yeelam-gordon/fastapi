@@ -8,6 +8,7 @@ on:
         type: choice
         options:
           - hobl-complete
+          - hobl-macos
         default: hobl-complete
 
 permissions:
@@ -24,11 +25,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - runner: windows-11-arm
-            platform: windows
-          - runner: macos-15
-            platform: macos
+        include: >-
+          ${{ fromJSON(
+            inputs.platform == 'hobl-macos' &&
+            '[{"runner":"macos-15","platform":"macos"}]' ||
+            '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-15","platform":"macos"}]'
+          ) }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 20
     defaults:
@@ -121,6 +123,8 @@ jobs:
             ${{ env.HOBL_ROOT }}/evidence/result.json
             ${{ env.HOBL_ROOT }}/evidence/loops.json
             ${{ env.HOBL_ROOT }}/evidence/identity.json
+            ${{ env.HOBL_ROOT }}/evidence/identity.stdout
+            ${{ env.HOBL_ROOT }}/evidence/identity.stderr
             ${{ env.HOBL_ROOT }}/evidence/ownership-summary.json
             ${{ env.HOBL_ROOT }}/evidence/driver.stdout
             ${{ env.HOBL_ROOT }}/evidence/driver.stderr
