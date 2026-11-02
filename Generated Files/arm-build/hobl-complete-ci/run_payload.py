@@ -118,6 +118,13 @@ def paired_summary(rows):
 def worker(args):
     source, output = args.source.resolve(), args.output.resolve()
     paired = getattr(args, "paired_uv", None) is not None
+    coverage_sql = getattr(args, "coverage_sql", False)
+    treatment = None
+    if coverage_sql:
+        from coverage_sql import Treatment
+
+        require(paired, "coverage SQL requires the common maintained uv build")
+        treatment = Treatment(args, output)
     manifest = json.loads(args.manifest.read_bytes())
     if paired:
         require(
@@ -136,12 +143,19 @@ def worker(args):
         save(
             output / "paired-config.json",
             {
-                "schedule": schedule(True, 5),
+                "schedule": [
+                    ("candidate" if coverage_sql and arm == "uv" else arm, measured)
+                    for arm, measured in schedule(True, 5)
+                ],
                 "source_manifest_sha256": digest(args.manifest),
                 "build_constraints": constraints.read_text(),
                 "build_constraints_sha256": digest(constraints),
                 "pip_constraint": owned_constraints.as_uri(),
-                "cache_preparation": "Initially empty pip/uv caches; one complete warmup each",
+                "cache_preparation": (
+                    "Common initially empty uv cache; one complete coverage warmup each"
+                    if coverage_sql
+                    else "Initially empty pip/uv caches; one complete warmup each"
+                ),
                 "artifact_qualification": (
                     "Same-host complete member content/mode/type/RECORD equality; "
                     "archive timestamp/compression identity is not required"
@@ -236,7 +250,13 @@ def worker(args):
         )
     rows = []
     baseline_artifacts = None
-    for number, (arm, measured) in enumerate(schedule(paired, args.loops), 1):
+    iterations = schedule(paired, args.loops)
+    if coverage_sql:
+        iterations = [
+            ("candidate" if arm == "uv" else arm, measured)
+            for arm, measured in iterations
+        ]
+    for number, (arm, measured) in enumerate(iterations, 1):
         folder = output / f"loop-{number}"
         folder.mkdir()
         if paired:
@@ -251,7 +271,15 @@ def worker(args):
             build_env = env.copy()
             # pip splits this environment option on whitespace, not shell quotes.
             build_env["PIP_CONSTRAINT"] = owned_constraints.as_uri()
-        build = phase(build_command(args, arm), source, build_env, folder, "build")
+        if coverage_sql:
+            build_env = treatment.environment(env, folder, arm)
+        build = phase(
+            build_command(args, "uv" if coverage_sql else arm),
+            source,
+            build_env,
+            folder,
+            "build",
+        )
         if paired:
             row["build"] = build
             save(output / "loops.json", rows)
@@ -263,7 +291,9 @@ def worker(args):
             if args.style == "macos"
             else [str(args.python), "-m", "coverage", "run", "-m", "pytest", "tests"]
         )
-        test = phase(test_command, source, env, folder, "test")
+        test = phase(
+            test_command, source, build_env if coverage_sql else env, folder, "test"
+        )
         text = (folder / "test.stdout").read_text(encoding="utf-8", errors="replace")
         text = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", text)
         summaries = re.findall(r"^=+.*\d+ passed.*=+$", text, flags=re.MULTILINE)
@@ -292,7 +322,7 @@ def worker(args):
             rows.append(row)
         save(output / "loops.json", rows)
         print(json.dumps(row), flush=True)
-        if paired and (source / "dist").exists():
+        if paired and not coverage_sql and (source / "dist").exists():
             shutil.move(str(source / "dist"), folder / "artifacts")
         require(
             test["exitcode"] == 0
@@ -304,6 +334,9 @@ def worker(args):
             "full covered tests failed; not a valid score",
         )
         require(snapshot(source, manifest) == before, "canonical source changed")
+        if coverage_sql:
+            treatment.finish(folder, build_env)
+            shutil.move(str(source / "dist"), folder / "artifacts")
         if paired:
             archives = artifact_set(folder / "artifacts", source, manifest)
             save(folder / "artifacts.json", archives)
@@ -359,7 +392,19 @@ def worker(args):
         "prep_qualification": args.prep_qualification,
     }
     if paired:
-        result["arms"] = paired_summary(rows)
+        result["arms"] = paired_summary(
+            [
+                {**row, "arm": "uv" if row["arm"] == "candidate" else row["arm"]}
+                for row in rows
+            ]
+            if coverage_sql
+            else rows
+        )
+        if coverage_sql:
+            result["arms"]["candidate"] = result["arms"].pop("uv")
+            result["coverage_treatment"] = (
+                "coverage 7.17 SQL V2 only; common uv 0.13.6 build"
+            )
         for metric in (
             "median_build_seconds",
             "median_test_seconds",
@@ -375,6 +420,14 @@ def worker(args):
             "AB/BA/AB/BA/AB order; they are not reset or asserted identically warm. "
             "dist is moved to per-iteration evidence after each complete iteration."
         )
+        if coverage_sql:
+            result["preparation"] = (
+                "One excluded stock coverage warmup, one excluded candidate coverage warmup; "
+                "five AB/BA pairs; identical maintained uv build and shared evolving cache. "
+                "No accepted global gain or local-to-CI extrapolation. "
+                "Archives remain in source/dist through tests and outcome gate."
+            )
+            result["status"] = "awaiting-owned-lifecycle"
     save(output / "result.json", result)
 
 
@@ -386,6 +439,11 @@ def main(args):
     if getattr(args, "paired_uv", None) is not None:
         require(args.paired_uv.is_absolute(), "paired uv must be absolute")
         require(args.loops == 5, "paired mode requires five pairs")
+    if getattr(args, "coverage_sql", False):
+        require(
+            getattr(args, "paired_uv", None) is not None,
+            "coverage SQL requires paired uv",
+        )
     if args.worker:
         worker(args)
         return
@@ -425,15 +483,21 @@ def main(args):
     ]
     if getattr(args, "paired_uv", None) is not None:
         command.extend(["--paired-uv", str(args.paired_uv)])
+    if getattr(args, "coverage_sql", False):
+        command.append("--coverage-sql")
     receipt = guard.run_owned(
         command,
         cwd=str(args.source),
         env=os.environ.copy(),
         stdout_path=args.output / "driver.stdout",
         stderr_path=args.output / "driver.stderr",
-        timeout=1000
-        if getattr(args, "paired_uv", None) is not None
-        else args.loops * 2400 + 120,
+        timeout=(
+            1100
+            if getattr(args, "coverage_sql", False)
+            else 1000
+            if getattr(args, "paired_uv", None) is not None
+            else args.loops * 2400 + 120
+        ),
     )
     save(args.output / "ownership.json", dataclasses.asdict(receipt))
     save(
@@ -457,6 +521,15 @@ def main(args):
     require(
         receipt.succeeded, "complete workload failed; inspect retained logs/receipt"
     )
+    if getattr(args, "coverage_sql", False):
+        result_path = args.output / "result.json"
+        result = json.loads(result_path.read_bytes())
+        require(
+            result["status"] == "awaiting-owned-lifecycle",
+            "coverage lifecycle promotion",
+        )
+        result["status"] = "complete"
+        save(result_path, result)
     print((args.output / "result.json").read_text(encoding="utf-8"))
 
 
@@ -468,6 +541,7 @@ if __name__ == "__main__":
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--guardian", type=Path)
     parser.add_argument("--paired-uv", type=Path)
+    parser.add_argument("--coverage-sql", action="store_true")
     parser.add_argument("--loops", type=int, default=5, choices=range(1, 6))
     parser.add_argument(
         "--index", default="https://packagefeedproxy.microsoft.io/pypi/simple"

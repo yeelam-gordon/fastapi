@@ -64,3 +64,41 @@ Local tests use tiny mocked complete workloads and tiny real archives, not a
 local full-suite/performance cohort. Actual runner provisioning, outcomes,
 archive equality and complete timings remain mandatory gates. No local
 readiness result establishes a whole-HOBL speedup or Windows/Mac parity.
+# Optional coverage SQL V2 comparison
+
+`hobl-paired-coverage-sql` is a manual, owned-fork-only two-host proposal:
+Windows ARM64 and macOS ARM64, no retry. Both arms build with the same maintained
+uv 0.13.6, PDM backend 2.5.0 and CPython 3.12.10. Only the coverage 7.17.0 SQL
+overlay differs. One complete stock warmup and one complete candidate warmup are
+excluded, followed by five AB/BA pairs (ten measured complete iterations/host).
+The existing phase clocks, strict 2513-pass/130-skip gate, archive audit and
+owned guardian remain in force beneath the 20-minute job cap (1100 seconds for
+this optional mode; the existing frontend comparison stays at 1000 seconds).
+
+The small authored `candidate-v2.patch` targets coverage.py, maintained by Ned
+Batchelder and contributors, Apache-2.0, official commit
+`393ac715ddae841a85452d97edeedd8be8f0cda8`:
+https://github.com/coveragepy/coveragepy/blob/393ac715ddae841a85452d97edeedd8be8f0cda8/NOTICE.txt
+No third-party package or binary is vendored; installed package licenses remain
+unchanged. Canonical LF source SHA is checked before transformation, each host's
+original newline convention is preserved, and all 53 other payloads must match.
+The installed environment is never patched.
+
+Each iteration retains public relative-file line/context oracles and all raw
+association differences, merging exactly two private main/CLI shards in memory
+using stock CoverageData. Every reportable association and exact file/context
+set must match the stock warmup. Original analysis2 exclusions classify raw
+differences; pre-existing excluded async lines 14/79 are known, not a post-hoc
+whitelist. Private raw SQLite and absolute paths are not uploaded. No observers,
+core changes, feature changes, profiling or between-phase artifact relocation.
+Archive move/audit occurs only after the test outcome gate. Success is promoted
+only after guardian success.
+
+This proposes one comparison, not acceptance of a global gain. Independent V2
+public API/error/context/report compatibility evidence is separate from timing;
+private callback ordering and serialized database byte ordering are not promised.
+Earlier native-uv and later local cohorts must not be added or extrapolated to CI.
+The independent local timing prerequisite has passed for its bounded cohort,
+not for global or CI gain. Native macOS/Windows runner behavior and total duration
+still require the bounded trial, after fresh parent review; this preparation
+does not publish or dispatch it.

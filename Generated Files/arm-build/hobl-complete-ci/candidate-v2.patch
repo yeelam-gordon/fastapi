@@ -1,0 +1,15 @@
+--- a/coverage/sqldata.py
++++ b/coverage/sqldata.py
+@@ -577,9 +577,10 @@
+                 if existing:
+                     line_bits = numbits_union(line_bits, existing[0][0])
+ 
++                conflict_action = "IGNORE" if existing and line_bits == existing[0][0] else "REPLACE"
+                 con.execute_void(
+-                    """
+-                    INSERT OR REPLACE INTO line_bits
++                    f"""
++                    INSERT OR {conflict_action} INTO line_bits
+                     (file_id, context_id, numbits) VALUES (?, ?, ?)
+                     """,
+                     (file_id, self._current_context_id, line_bits),

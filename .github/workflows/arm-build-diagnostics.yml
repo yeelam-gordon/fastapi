@@ -10,6 +10,7 @@ on:
           - hobl-complete
           - hobl-macos
           - hobl-paired-uv
+          - hobl-paired-coverage-sql
         default: hobl-complete
 
 permissions:
@@ -81,7 +82,7 @@ jobs:
           Set-Location -LiteralPath $source
           & $env:HOBL_PYTHON -m pip install --retries 1 --timeout 45 --index-url $env:PIP_INDEX_URL -c (Join-Path $helper 'runtime-constraints.txt') -r requirements-tests.txt build pip pdm-backend
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          if ($env:HOBL_MODE -eq 'hobl-paired-uv') {
+          if ($env:HOBL_MODE -in @('hobl-paired-uv', 'hobl-paired-coverage-sql')) {
             & $env:HOBL_PYTHON -m pip install --only-binary=:all: --retries 1 --timeout 45 --index-url $env:PIP_INDEX_URL -c (Join-Path $helper 'runtime-constraints.txt') uv==0.13.6
             if ($LASTEXITCODE) { exit $LASTEXITCODE }
             & $env:HOBL_PYTHON (Join-Path $helper 'prepare_uv.py') (Join-Path $env:HOBL_ROOT 'uv-identity.json')
@@ -115,9 +116,12 @@ jobs:
         run: |
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
           $paired = @()
-          if ($env:HOBL_MODE -eq 'hobl-paired-uv') {
+          if ($env:HOBL_MODE -in @('hobl-paired-uv', 'hobl-paired-coverage-sql')) {
             $identity = Get-Content -Raw (Join-Path $env:HOBL_ROOT 'uv-identity.json') | ConvertFrom-Json
             $paired = @('--paired-uv', $identity.executable)
+            if ($env:HOBL_MODE -eq 'hobl-paired-coverage-sql') {
+              $paired += '--coverage-sql'
+            }
           }
           & $env:HOBL_BASE_PYTHON -I -B (Join-Path $helper 'run_payload.py') `
             --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') `
@@ -151,6 +155,7 @@ jobs:
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stdout
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stderr
             ${{ env.HOBL_ROOT }}/evidence/loop-*/artifacts/*
-            ${{ inputs.platform == 'hobl-paired-uv' && format('{0}/package-source/dist/*', github.workspace) || '' }}
+            ${{ env.HOBL_ROOT }}/evidence/overlays/payloads.json
+            ${{ (inputs.platform == 'hobl-paired-uv' || inputs.platform == 'hobl-paired-coverage-sql') && format('{0}/package-source/dist/*', github.workspace) || '' }}
           if-no-files-found: error
           retention-days: 7
