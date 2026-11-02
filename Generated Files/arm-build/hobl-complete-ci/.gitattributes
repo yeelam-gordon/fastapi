@@ -1,3 +1,6 @@
 *.py -text
 *.ps1 -text
+*.patch -text
+.gitattributes -text
+build-constraints.txt -text
 runtime-constraints.txt -text

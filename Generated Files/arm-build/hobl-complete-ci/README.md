@@ -1,5 +1,78 @@
 # Optional paired complete-HOBL cohort
 
+## Optional maintained-runtime cohort
+
+`hobl-paired-runtime` is a new, optional manual question: stock CPython
+**3.12.10** versus candidate **3.13.15**, both using the same official native
+uv **0.13.6** frontend and isolated PDM **2.5.0** sdist-to-wheel build.
+Existing default/frontend modes and their phase clock are unchanged.
+No SQL/native overlay, observer, profiling hook, omitted feature or new skip.
+
+Exactly two 20-minute jobs use `windows-11-arm` and **`macos-14` ARM64**.
+The latter is the documented standard ARM alternate in GitHub's
+[hosted runner reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners),
+not a paid runner or automatic fallback. Both Mac runtime arms stay on that
+same label. Actual OS/hardware/runtime identities are retained; this is not
+a matched comparison with earlier macos-15 timings. A new label does not
+guarantee capacity. There is no rerun, fallback or runtime-mode pip retry.
+
+Windows stock retains the existing hash-verified PSF 3.12.10 portable archive.
+Candidate 3.13.15 on both hosts, and Mac stock 3.12.10, use the same pinned
+official setup-python action (`5fda3b95a4ea91299a34e894583c3862153e4b97`),
+`architecture: arm64`, `update-environment: false`, explicit action output
+paths and separate lexical venv executable paths. **Provisioning, including
+Windows action ARM64 availability, remains a runner-only uncertainty**;
+unavailability fails, not substitutes another release/architecture.
+No invented archive hash or local runtime download is used. Before timing,
+installed-payload probes require exact version, ARM64/64-bit, normal GIL,
+no JIT, correct source import, native original coverage 7.17.0, compatible
+WHEEL ABI tags and exact common package versions. WHEEL/RECORD identities
+are retained. The uv executable is bootstrapped once with its distribution
+RECORD gate. Platform-only colorama/uvloop pins remain platform-specific;
+all within-host runtime-arm pins must match, without optional omissions.
+
+Source is **FastAPI 0.119.1 plus one common test-helper correction**, not the
+unpatched tag: `tests/utils.py` changes `> (3, 13)` to `>= (3, 14)`.
+Preparation verifies the upstream committed blob, exact known old/new hashes,
+patch bytes and a clean source checkout before writing. Original 2557-file
+manifest/hash and the corrected manifest are retained: 2556 unchanged files
+plus that one declared helper. The patch is `-text` for transport safety.
+Both arms must report exactly **2513 passed, 130 skipped** every iteration.
+
+Reuse of the existing schedule gives one excluded complete warmup/runtime,
+then five **AB/BA/AB/BA/AB** pairs (10 measured rows/host). Dist remains
+available during tests and is moved/audited only after full outcome/source
+gates. Windows uses the unchanged coverage pytest command; Mac uses the
+canonical `bash scripts/test.sh`, including its `PYTHONPATH=./docs_src` reset.
+Arm-owned HOME/config/temp and version-tagged bytecode caches are separate.
+Initially empty shared pip/uv dependency caches warm in the fixed order;
+identical OS cache warmth is not claimed. Source content is common/frozen.
+Only runtime and matching-ABI wheel payloads differ within a host.
+
+Each iteration has a fresh private COVERAGE_FILE. Its **two actual main/CLI
+shards** are merged in memory through public CoverageData APIs inside the
+installed payload interpreter, never the clean base coordinator. Canonical
+source-relative file identities (863), context identities (1409), exclusions,
+and every reportable line/context association must agree. Raw oracles,
+shards, warnings and all differences survive, including existing excluded
+source-branch differences; no runtime-version whitelist. Original
+`analysis2` exclusions alone classify differences; reportable loss or any
+warning fails. Archive/RECORD/member/mode/source gates remain mandatory.
+
+The worker's existing guardian has a **1100-second** runtime-pair deadline
+inside the 20-minute job limit. `phase()` is unchanged. The worker result is
+pending until the receipt succeeds with natural drain, no survivors/errors/
+timeouts. Arm medians use actual complete build+test row totals, excluding
+warmups, not added phase medians. Labels are stock/candidate runtimes, not uv.
+Failure evidence is retained, never retried or replaced.
+
+Offline unit/mock/tiny API probes establish local readiness only. Future
+actual runner provisioning, full outcomes/oracles and performance remain
+unmeasured. Existing local runtime evidence and maintained-uv evidence are
+separate, not additive. This mode does not imply Python 3.13 is always faster.
+
+## Existing frontend cohort
+
 The manual workflow's default `hobl-complete` and `hobl-macos` modes retain
 their baseline commands and five measured loops. `hobl-paired-uv` selects both
 existing ARM hosts, with the same 20-minute job limit and no automatic rerun.

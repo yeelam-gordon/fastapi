@@ -1,6 +1,10 @@
 $ErrorActionPreference = 'Stop'
 $root = Join-Path $env:GITHUB_WORKSPACE 'hobl-complete'
 New-Item -ItemType Directory -Path $root -ErrorAction Stop | Out-Null
+if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+    "HOBL_ROOT=$root" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+    '{"status":"bootstrap-started"}' | Set-Content -Encoding utf8 (Join-Path $root 'bootstrap.json')
+}
 $python = $env:HOBL_MAC_PYTHON
 $receipt = @{ version = '3.12.10'; distribution = 'actions/setup-python arm64' }
 if ($env:RUNNER_OS -eq 'Windows') {
@@ -40,6 +44,37 @@ $payloadPython = if ($env:RUNNER_OS -eq 'Windows') {
     Join-Path $venv 'Scripts/python.exe'
 } else {
     Join-Path $venv 'bin/python'
+}
+if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+    $candidate = $env:HOBL_CANDIDATE_BASE
+    if (-not $candidate -or -not [IO.Path]::IsPathRooted($candidate) -or -not (Test-Path -LiteralPath $candidate)) {
+        throw 'Absolute setup-python 3.13 candidate required'
+    }
+    if ($env:RUNNER_OS -eq 'Windows') {
+        $bytes = [IO.File]::ReadAllBytes($candidate)
+        $offset = [BitConverter]::ToInt32($bytes, 60)
+        if ([BitConverter]::ToUInt16($bytes, $offset + 4) -ne 0xAA64) {
+            throw 'Native ARM64 candidate PE required before invocation'
+        }
+    } else {
+        $slices = & /usr/bin/lipo -archs $candidate
+        if ($LASTEXITCODE -or $slices -notmatch '\barm64\b') { throw 'Native candidate Mach-O slice required' }
+    }
+    $candidateVenv = Join-Path $root 'candidate-venv'
+    & $candidate -m venv $candidateVenv
+    if ($LASTEXITCODE) { exit $LASTEXITCODE }
+    $candidatePython = if ($env:RUNNER_OS -eq 'Windows') {
+        Join-Path $candidateVenv 'Scripts/python.exe'
+    } else {
+        Join-Path $candidateVenv 'bin/python'
+    }
+    $receipt.candidate = @{
+        version = '3.13.15'; distribution = 'actions/setup-python arm64'
+        base = $candidate; executable = $candidatePython
+        base_sha256 = (Get-FileHash $candidate -Algorithm SHA256).Hash.ToLowerInvariant()
+        qualification = 'Runner-only availability; actual ABI/version/GIL/JIT attestation precedes measurement'
+    }
+    "HOBL_CANDIDATE_PYTHON=$candidatePython" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
 }
 $receipt | ConvertTo-Json -Depth 4 | Set-Content -Encoding utf8 (Join-Path $root 'bootstrap.json')
 @(

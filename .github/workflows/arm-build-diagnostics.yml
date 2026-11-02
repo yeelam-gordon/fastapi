@@ -10,6 +10,7 @@ on:
           - hobl-complete
           - hobl-macos
           - hobl-paired-uv
+          - hobl-paired-runtime
         default: hobl-complete
 
 permissions:
@@ -28,6 +29,8 @@ jobs:
       matrix:
         include: >-
           ${{ fromJSON(
+            inputs.platform == 'hobl-paired-runtime' &&
+            '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-14","platform":"macos"}]' ||
             inputs.platform == 'hobl-macos' &&
             '[{"runner":"macos-15","platform":"macos"}]' ||
             '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-15","platform":"macos"}]'
@@ -63,9 +66,19 @@ jobs:
           python-version: "3.12.10"
           architecture: arm64
           update-environment: false
+      - name: Native candidate runtime (optional paired runtime)
+        if: inputs.platform == 'hobl-paired-runtime'
+        id: candidate
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.13.15"
+          architecture: arm64
+          update-environment: false
       - name: Native runtime and owned venv
         env:
+          HOBL_MODE: ${{ inputs.platform }}
           HOBL_MAC_PYTHON: ${{ steps.python.outputs.python-path }}
+          HOBL_CANDIDATE_BASE: ${{ steps.candidate.outputs.python-path }}
         run: |
           & 'tools/Generated Files/arm-build/hobl-complete-ci/bootstrap.ps1'
           exit $LASTEXITCODE
@@ -79,6 +92,20 @@ jobs:
           $env:PIP_DISABLE_PIP_VERSION_CHECK = '1'
           $env:PIP_CACHE_DIR = Join-Path $env:HOBL_ROOT 'setup-cache'
           Set-Location -LiteralPath $source
+          if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+            $env:PIP_CONSTRAINT = & $env:HOBL_BASE_PYTHON -I -B -c "from pathlib import Path; import sys; print(Path(sys.argv[1]).absolute().as_uri())" (Join-Path $helper 'build-constraints.txt')
+            if ($LASTEXITCODE) { exit $LASTEXITCODE }
+            & $env:HOBL_BASE_PYTHON -I -B (Join-Path $helper 'runtime_pair.py') prepare $source $env:HOBL_ROOT
+            if ($LASTEXITCODE) { exit $LASTEXITCODE }
+            foreach ($python in @($env:HOBL_PYTHON, $env:HOBL_CANDIDATE_PYTHON)) {
+              & $python -m pip install --only-binary=:all: --retries 0 --timeout 45 --index-url $env:PIP_INDEX_URL -c (Join-Path $helper 'runtime-constraints.txt') -r requirements-tests.txt build pip pdm-backend uv==0.13.6
+              if ($LASTEXITCODE) { exit $LASTEXITCODE }
+              & $python -m pip check
+              if ($LASTEXITCODE) { exit $LASTEXITCODE }
+            }
+            & $env:HOBL_PYTHON (Join-Path $helper 'prepare_uv.py') (Join-Path $env:HOBL_ROOT 'uv-identity.json')
+            exit $LASTEXITCODE
+          }
           & $env:HOBL_PYTHON -m pip install --retries 1 --timeout 45 --index-url $env:PIP_INDEX_URL -c (Join-Path $helper 'runtime-constraints.txt') -r requirements-tests.txt build pip pdm-backend
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           if ($env:HOBL_MODE -eq 'hobl-paired-uv') {
@@ -115,9 +142,12 @@ jobs:
         run: |
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-complete-ci'
           $paired = @()
-          if ($env:HOBL_MODE -eq 'hobl-paired-uv') {
+          if ($env:HOBL_MODE -in @('hobl-paired-uv', 'hobl-paired-runtime')) {
             $identity = Get-Content -Raw (Join-Path $env:HOBL_ROOT 'uv-identity.json') | ConvertFrom-Json
             $paired = @('--paired-uv', $identity.executable)
+            if ($env:HOBL_MODE -eq 'hobl-paired-runtime') {
+              $paired += @('--candidate-python', $env:HOBL_CANDIDATE_PYTHON)
+            }
           }
           & $env:HOBL_BASE_PYTHON -I -B (Join-Path $helper 'run_payload.py') `
             --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') `
@@ -136,6 +166,11 @@ jobs:
             ${{ env.HOBL_ROOT }}/bootstrap.json
             ${{ env.HOBL_ROOT }}/uv-identity.json
             ${{ env.HOBL_ROOT }}/source-files.json
+            ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/original-source-files.json', env.HOBL_ROOT) || '' }}
+            ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/common-source.json', env.HOBL_ROOT) || '' }}
+            ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/evidence/*runtime-identity.json', env.HOBL_ROOT) || '' }}
+            ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/evidence/loop-*/private/*', env.HOBL_ROOT) || '' }}
+            ${{ inputs.platform == 'hobl-paired-runtime' && format('{0}/evidence/loop-*/private/.coverage.*', env.HOBL_ROOT) || '' }}
             ${{ env.HOBL_ROOT }}/evidence/result.json
             ${{ env.HOBL_ROOT }}/evidence/loops.json
             ${{ env.HOBL_ROOT }}/evidence/identity.json
@@ -151,6 +186,7 @@ jobs:
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stdout
             ${{ env.HOBL_ROOT }}/evidence/loop-*/*.stderr
             ${{ env.HOBL_ROOT }}/evidence/loop-*/artifacts/*
-            ${{ inputs.platform == 'hobl-paired-uv' && format('{0}/package-source/dist/*', github.workspace) || '' }}
+            ${{ (inputs.platform == 'hobl-paired-uv' || inputs.platform == 'hobl-paired-runtime') && format('{0}/package-source/dist/*', github.workspace) || '' }}
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 7

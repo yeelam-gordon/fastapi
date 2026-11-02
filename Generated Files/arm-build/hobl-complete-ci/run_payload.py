@@ -16,6 +16,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import runtime_pair
 from artifact_gate import artifact_set, equivalent
 from prepare_uv import attest
 
@@ -94,9 +95,9 @@ def build_command(args, arm):
     ]
 
 
-def paired_summary(rows):
+def paired_summary(rows, arms=("stock", "uv")):
     groups = {}
-    for arm in ("stock", "uv"):
+    for arm in arms:
         measured = [row for row in rows if row["arm"] == arm and row["measured"]]
         require(
             len(measured) == 5, "five measured complete iterations per arm required"
@@ -118,6 +119,8 @@ def paired_summary(rows):
 def worker(args):
     source, output = args.source.resolve(), args.output.resolve()
     paired = getattr(args, "paired_uv", None) is not None
+    runtime = getattr(args, "candidate_python", None) is not None
+    require(not runtime or paired, "runtime pair requires common uv")
     manifest = json.loads(args.manifest.read_bytes())
     if paired:
         require(
@@ -148,9 +151,41 @@ def worker(args):
                 ),
             },
         )
+        if runtime:
+            config = json.loads((output / "paired-config.json").read_bytes())
+            config.pop("pip_constraint")
+            config["schedule"] = [
+                ("candidate" if arm == "uv" else arm, measured)
+                for arm, measured in schedule(True, 5)
+            ]
+            config["frontend"] = "common uv 0.13.6 isolated sdist -> wheel from sdist"
+            config["runtimes"] = {
+                "stock": str(args.python),
+                "candidate": str(args.candidate_python),
+            }
+            config["helper_hashes"] = {
+                name: digest(Path(__file__).with_name(name))
+                for name in (
+                    "run_payload.py",
+                    "runtime_pair.py",
+                    "artifact_gate.py",
+                    "prepare_uv.py",
+                    "owned_process.py",
+                    "build-constraints.txt",
+                    "runtime-constraints.txt",
+                    "common-guard.patch",
+                )
+            }
+            save(output / "paired-config.json", config)
     before = snapshot(source, manifest)
     require(before == manifest, "canonical source payload mismatch")
     env = os.environ.copy()
+    if runtime:
+        for key in list(env):
+            if key.startswith(
+                ("PYTHON", "PYTEST_", "PIP_", "UV_", "COVERAGE_", "COV_CORE_")
+            ):
+                env.pop(key)
     for key in (
         "PYTHONPYCACHEPREFIX",
         "PYTEST_ADDOPTS",
@@ -227,6 +262,26 @@ def worker(args):
         "wrong FastAPI origin",
     )
     save(output / "identity.json", data)
+    runtime_identities = {}
+    baseline_coverage = None
+    if runtime:
+        for arm, python, version in (
+            ("stock", args.python, "3.12.10"),
+            ("candidate", args.candidate_python, "3.13.15"),
+        ):
+            runtime_identities[arm] = runtime_pair.probe(
+                python, "identity", source, version, env, output
+            )
+            require(
+                Path(runtime_identities[arm]["executable"])
+                == Path(os.path.abspath(python)),
+                "runtime probe escaped lexical venv",
+            )
+            save(output / f"{arm}-runtime-identity.json", runtime_identities[arm])
+        runtime_pair.compare_pins(
+            runtime_identities["stock"]["packages"],
+            runtime_identities["candidate"]["packages"],
+        )
     if paired:
         require(
             data["fastapi_version"] == "0.119.1"
@@ -237,8 +292,33 @@ def worker(args):
     rows = []
     baseline_artifacts = None
     for number, (arm, measured) in enumerate(schedule(paired, args.loops), 1):
+        if runtime and arm == "uv":
+            arm = "candidate"
         folder = output / f"loop-{number}"
         folder.mkdir()
+        iteration_env = env
+        if runtime:
+            python = args.python if arm == "stock" else args.candidate_python
+            iteration_env = env.copy()
+            state = output / "state" / arm
+            for name in ("home", "config", "cache", "temp", "bytecode"):
+                (state / name).mkdir(parents=True, exist_ok=True)
+            for key, name in {
+                "HOME": "home",
+                "USERPROFILE": "home",
+                "APPDATA": "config",
+                "LOCALAPPDATA": "cache",
+                "XDG_CONFIG_HOME": "config",
+                "XDG_CACHE_HOME": "cache",
+                "TEMP": "temp",
+                "TMP": "temp",
+                "TMPDIR": "temp",
+                "PYTHONPYCACHEPREFIX": "bytecode",
+            }.items():
+                iteration_env[key] = str(state / name)
+            iteration_env["PATH"] = str(python.parent) + os.pathsep + env["PATH"]
+            (folder / "private").mkdir()
+            iteration_env["COVERAGE_FILE"] = str(folder / "private" / ".coverage")
         if paired:
             require(snapshot(source, manifest) == before, "canonical source changed")
         row = {"loop": number}
@@ -246,12 +326,22 @@ def worker(args):
             row.update({"arm": arm, "measured": measured, "status": "started"})
             rows.append(row)
             save(output / "loops.json", rows)
-        build_env = env
-        if paired and arm == "stock":
+        build_env = iteration_env
+        if paired and arm == "stock" and not runtime:
             build_env = env.copy()
             # pip splits this environment option on whitespace, not shell quotes.
             build_env["PIP_CONSTRAINT"] = owned_constraints.as_uri()
-        build = phase(build_command(args, arm), source, build_env, folder, "build")
+        build_args = args
+        if runtime:
+            build_args = argparse.Namespace(**vars(args))
+            build_args.python = python
+        build = phase(
+            build_command(build_args, "uv" if runtime else arm),
+            source,
+            build_env,
+            folder,
+            "build",
+        )
         if paired:
             row["build"] = build
             save(output / "loops.json", rows)
@@ -261,9 +351,17 @@ def worker(args):
         test_command = (
             ["bash", "scripts/test.sh"]
             if args.style == "macos"
-            else [str(args.python), "-m", "coverage", "run", "-m", "pytest", "tests"]
+            else [
+                str(python if runtime else args.python),
+                "-m",
+                "coverage",
+                "run",
+                "-m",
+                "pytest",
+                "tests",
+            ]
         )
-        test = phase(test_command, source, env, folder, "test")
+        test = phase(test_command, source, iteration_env, folder, "test")
         text = (folder / "test.stdout").read_text(encoding="utf-8", errors="replace")
         text = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", text)
         summaries = re.findall(r"^=+.*\d+ passed.*=+$", text, flags=re.MULTILINE)
@@ -292,7 +390,7 @@ def worker(args):
             rows.append(row)
         save(output / "loops.json", rows)
         print(json.dumps(row), flush=True)
-        if paired and (source / "dist").exists():
+        if paired and not runtime and (source / "dist").exists():
             shutil.move(str(source / "dist"), folder / "artifacts")
         require(
             test["exitcode"] == 0
@@ -304,6 +402,25 @@ def worker(args):
             "full covered tests failed; not a valid score",
         )
         require(snapshot(source, manifest) == before, "canonical source changed")
+        if runtime:
+            shutil.move(str(source / "dist"), folder / "artifacts")
+            current = runtime_pair.probe(
+                python, "oracle", source, folder, iteration_env, folder
+            )
+            save(folder / "coverage-oracle.json", current)
+            require(
+                len(current["files"]) == 863 and len(current["contexts"]) == 1409,
+                "complete coverage file/context counts",
+            )
+            baseline_coverage = (
+                current if baseline_coverage is None else baseline_coverage
+            )
+            differences = runtime_pair.compare(baseline_coverage, current)
+            save(folder / "coverage-differences.json", differences)
+            require(
+                all(d["excluded"] for d in differences),
+                "reportable coverage difference",
+            )
         if paired:
             archives = artifact_set(folder / "artifacts", source, manifest)
             save(folder / "artifacts.json", archives)
@@ -359,7 +476,9 @@ def worker(args):
         "prep_qualification": args.prep_qualification,
     }
     if paired:
-        result["arms"] = paired_summary(rows)
+        result["arms"] = paired_summary(
+            rows, ("stock", "candidate") if runtime else ("stock", "uv")
+        )
         for metric in (
             "median_build_seconds",
             "median_test_seconds",
@@ -375,14 +494,30 @@ def worker(args):
             "AB/BA/AB/BA/AB order; they are not reset or asserted identically warm. "
             "dist is moved to per-iteration evidence after each complete iteration."
         )
+    if runtime:
+        result["status"] = "pending-owned-lifecycle"
+        result["labels"] = {"stock": "stock 3.12.10", "candidate": "candidate 3.13.15"}
+        result["preparation"] = (
+            "Common uv 0.13.6 and PDM 2.5.0; one excluded complete warmup/runtime; "
+            "five AB/BA pairs; separate arm HOME/config/temp/version-tagged bytecode; "
+            "initially empty shared pip/uv caches warmed in fixed order; OS warmth not equal. "
+            "Common corrected source, not unpatched tag; no overlays/hooks/observers."
+        )
     save(output / "result.json", result)
 
 
 def main(args):
     args.source = args.source.resolve()
+    if getattr(args, "candidate_python", None) is not None:
+        require(args.python.is_absolute(), "stock Python must be absolute")
     args.python = Path(os.path.abspath(args.python))
     args.output = args.output.resolve()
     args.manifest = args.manifest.resolve()
+    if getattr(args, "candidate_python", None) is not None:
+        require(
+            args.candidate_python.is_absolute(), "candidate Python must be absolute"
+        )
+        args.candidate_python = Path(os.path.abspath(args.candidate_python))
     if getattr(args, "paired_uv", None) is not None:
         require(args.paired_uv.is_absolute(), "paired uv must be absolute")
         require(args.loops == 5, "paired mode requires five pairs")
@@ -425,13 +560,17 @@ def main(args):
     ]
     if getattr(args, "paired_uv", None) is not None:
         command.extend(["--paired-uv", str(args.paired_uv)])
+    if getattr(args, "candidate_python", None) is not None:
+        command.extend(["--candidate-python", str(args.candidate_python)])
     receipt = guard.run_owned(
         command,
         cwd=str(args.source),
         env=os.environ.copy(),
         stdout_path=args.output / "driver.stdout",
         stderr_path=args.output / "driver.stderr",
-        timeout=1000
+        timeout=1100
+        if getattr(args, "candidate_python", None) is not None
+        else 1000
         if getattr(args, "paired_uv", None) is not None
         else args.loops * 2400 + 120,
     )
@@ -457,6 +596,14 @@ def main(args):
     require(
         receipt.succeeded, "complete workload failed; inspect retained logs/receipt"
     )
+    if getattr(args, "candidate_python", None) is not None:
+        result_path = args.output / "result.json"
+        result = json.loads(result_path.read_bytes())
+        require(
+            result["status"] == "pending-owned-lifecycle", "runtime result not ready"
+        )
+        result["status"] = "complete"
+        save(result_path, result)
     print((args.output / "result.json").read_text(encoding="utf-8"))
 
 
@@ -468,6 +615,7 @@ if __name__ == "__main__":
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--guardian", type=Path)
     parser.add_argument("--paired-uv", type=Path)
+    parser.add_argument("--candidate-python", type=Path)
     parser.add_argument("--loops", type=int, default=5, choices=range(1, 6))
     parser.add_argument(
         "--index", default="https://packagefeedproxy.microsoft.io/pypi/simple"
