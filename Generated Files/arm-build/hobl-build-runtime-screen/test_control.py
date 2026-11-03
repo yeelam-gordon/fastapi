@@ -11,6 +11,16 @@ SPEC.loader.exec_module(control)
 
 
 class ControlTests(unittest.TestCase):
+    def test_environment_restores_default_bytecode_policy(self):
+        inherited = {
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONPYCACHEPREFIX": "parent-cache",
+            "PYTHONHASHSEED": "42",
+        }
+        with patch.dict(control.os.environ, inherited):
+            env = control.environment(Path("out"))
+        self.assertFalse(inherited.keys() & env.keys())
+
     def test_explicit_supplied_wheel_requires_hash_without_network_or_repatch(self):
         args = argparse.Namespace(source=Path("source"), output=Path("out"),
                                   uv=Path("uv.exe"),

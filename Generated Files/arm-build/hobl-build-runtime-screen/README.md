@@ -2,7 +2,7 @@
 
 One Windows ARM job, four-minute cap, original guardian with a 75-second cohort.
 Exact CPython 3.13.15 stock/managed, one excluded warmup each, then AB and BA.
-Only the interpreter argument changes in the default uv 0.13.6 sdist-to-wheel
+Only the interpreter argument changes in the uv 0.13.6 complete sdist-to-wheel
 build; PDM 2.5.0 is shared, hash-verified and offline. No project dependencies,
 tests, backend changes, no-isolation, retries, or macOS job.
 
@@ -16,3 +16,10 @@ canonical source snapshot. It performs no network request or automatic fallback.
 Hosted preparation remains the original public PyPI path.
 Advance requires >=5% and >=0.2s median savings, 2/2 favorable pairs, and all
 quality gates. Otherwise close without retuning. No Windows/macOS parity claim.
+
+The measured snapshot `0589f828e` additionally disabled bytecode writes for
+both runtimes. Its 13.17% median difference is evidence only for that
+controlled variant, not ordinary HOBL. The helper now leaves bytecode policy
+at Python defaults; five focused controls cover the correction, with no
+benchmark rerun or new CI. Offline wheelhouse isolation still differs from
+the ordinary HOBL command.

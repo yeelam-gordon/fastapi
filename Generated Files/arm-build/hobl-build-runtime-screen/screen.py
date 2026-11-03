@@ -67,7 +67,7 @@ def environment(output):
         if key.startswith(("PYTHON", "PYTEST", "PIP_", "UV_", "COVERAGE", "COV_CORE")):
             del env[key]
     env.update(UV_CACHE_DIR=str(output / "build-cache"), UV_HTTP_RETRIES="0",
-               UV_PYTHON_DOWNLOADS="never", PYTHONDONTWRITEBYTECODE="1")
+               UV_PYTHON_DOWNLOADS="never")
     return env
 
 
