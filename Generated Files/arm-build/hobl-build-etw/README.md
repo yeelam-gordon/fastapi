@@ -234,7 +234,7 @@ The same privately verified sample keys also select `sample.CallStack()`.
 Each lifetime reports `with_stack`, `without_stack`, `stack_frames` and
 `unknown_frames` (frames with no module). Missing stacks are explicit, not
 zero-cost evidence. With-stack plus without-stack equals its original CPU
-sample count; exclusive leaf `modules` buckets and selection are unchanged.
+sample count; exclusive leaf sample totals and selection are unchanged.
 If no selected sample has a stack, code 81 / `module_missing_stacks` fails
 closed before calibration can authorize the real build. Earlier positive
 analysis and capture proof survive; partial missing coverage remains explicit.
@@ -254,8 +254,12 @@ is exported. No symbol reader or symbol lookup is used.
 
 The stack-only static OS allowlist additionally admits `cng`, `ci`, `ntosext`,
 `mup`, `rdbss`, `bindflt`, `cldflt`, `wcifs`, `wof`, `fvevol`, `storvsp` and
-`wdf01000`, only with kernel-table provenance. Exclusive leaf naming is unchanged.
+`wdf01000`, only with kernel-table provenance. The exclusive leaf allowlist is unchanged.
 User-table images with these additional basenames collapse to `other-user`.
+TraceEvent 4.0.0 retains `.sys` in module names (unlike `.dll`/`.exe`).
+The shared leaf/stack projector removes that suffix case-insensitively only
+for kernel-table provenance before static allowlist matching. Unrecognized
+drivers remain `other-kernel`; user-table names are not suffix-normalized.
 Everything else stays `other-kernel`, `other-user` or `unresolved`.
 Existing exact module artifact paths carry this schema; no new upload route.
 Local retained-fixture proof does not establish ARM workload coverage or cause,

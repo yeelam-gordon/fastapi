@@ -3,6 +3,16 @@ using Microsoft.Diagnostics.Tracing.Etlx;
 
 internal static class ModuleMap
 {
+    internal static string PublicModuleName(string name, bool isKernel,
+        HashSet<string> allow, HashSet<string>? kernelAllow = null)
+    {
+        // TraceEvent 4.0.0 preserves .sys while removing .dll/.exe.
+        if (isKernel && name.EndsWith(".sys", StringComparison.OrdinalIgnoreCase))
+            name = name[..^4];
+        return allow.Contains(name) || (isKernel && kernelAllow?.Contains(name) == true) ?
+            name.ToLowerInvariant() : isKernel ? "other-kernel" : "other-user";
+    }
+
     internal static readonly Dictionary<string, int> FailureCodes = new() {
         ["module_arguments"] = 71, ["module_selection_schema"] = 72,
         ["module_counts"] = 73, ["module_key_schema"] = 74,
@@ -99,8 +109,7 @@ internal static class ModuleMap
                 if (isKernel != isUser)
                 {
                     provenance = isKernel ? "kernel-table" : "user-table";
-                    name = allow.Contains(module.Name) ? module.Name.ToLowerInvariant() :
-                        isKernel ? "other-kernel" : "other-user";
+                    name = PublicModuleName(module.Name, isKernel, allow);
                 }
             }
             string context = sample.ExecutingDPC ?
@@ -131,9 +140,7 @@ internal static class ModuleMap
                         if (frameKernel != frameUser)
                         {
                             frameProvenance = frameKernel ? "kernel-table" : "user-table";
-                            frameName = (allow.Contains(frameModule.Name) ||
-                                (frameKernel && stackAllow.Contains(frameModule.Name))) ? frameModule.Name.ToLowerInvariant() :
-                                frameKernel ? "other-kernel" : "other-user";
+                            frameName = PublicModuleName(frameModule.Name, frameKernel, allow, stackAllow);
                         }
                     }
                     seen.Add((selected.Owner, frameProvenance, frameName, context));
