@@ -1,0 +1,72 @@
+name: Paired native ARM Git checkout component screen (fork only)
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+
+jobs:
+  screen:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-11-arm
+            platform: windows
+          - runner: macos-14
+            platform: macos
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 6
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+          set-safe-directory: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/git-checkout-parallel-ci/
+            /Generated Files/arm-build/hobl-complete-ci/owned_process.py
+            /Generated Files/arm-build/hobl-build-etw/private.ps1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: package-source
+          persist-credentials: false
+          set-safe-directory: false
+          fetch-depth: 1
+          filter: ""
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - name: Private managed runtime and exactly four owned checkouts
+        run: |
+          & '.\tools\Generated Files\arm-build\git-checkout-parallel-ci\launch.ps1'
+          exit $LASTEXITCODE
+      - name: Upload exact sanitized result and failure stage only
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: git-checkout-screen-${{ matrix.platform }}
+          path: |
+            checkout-public/result.json
+            checkout-public/stage.json
+          if-no-files-found: warn
+          retention-days: 7
