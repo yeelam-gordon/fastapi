@@ -11,6 +11,7 @@ on:
           - hobl-macos
           - hobl-paired-uv
           - hobl-paired-runtime
+          - hobl-parallel-screen
         default: hobl-complete
 
 permissions:
@@ -22,8 +23,12 @@ env:
   GIT_CONFIG_VALUE_0: "false"
 
 jobs:
+  parallel-screen:
+    if: inputs.platform == 'hobl-parallel-screen'
+    uses: ./.github/workflows/hobl-parallel-screen.yml
+
   complete:
-    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
+    if: inputs.platform != 'hobl-parallel-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
     strategy:
       fail-fast: false
       matrix:

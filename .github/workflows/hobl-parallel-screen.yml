@@ -1,0 +1,93 @@
+name: Lean full-HOBL ARM parallel SCREEN (manual, not adoption)
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+
+jobs:
+  screen:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-11-arm
+            platform: windows
+            workers: 4
+          - runner: macos-14
+            platform: macos
+            workers: 3
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/hobl-complete-ci/
+            /Generated Files/arm-build/hobl-parallel-screen/
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: package-source
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        id: python
+        with:
+          python-version: "3.13.15"
+          architecture: arm64
+          update-environment: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - name: Prepare new owned venv, exact source and hash-locked wheels
+        env:
+          BASE_PYTHON: ${{ steps.python.outputs.python-path }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $root = Join-Path $env:GITHUB_WORKSPACE 'screen-evidence'
+          New-Item -ItemType Directory -Path $root -ErrorAction Stop | Out-Null
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-parallel-screen'
+          & $env:BASE_PYTHON -B (Join-Path $helper 'screen.py') prepare --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output $root --uv (Get-Command uv).Source --workers ${{ matrix.workers }}
+          exit $LASTEXITCODE
+      - name: Six complete payloads and one bounded final-pair audit
+        run: |
+          $root = Join-Path $env:GITHUB_WORKSPACE 'screen-evidence'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-parallel-screen'
+          $python = if ($env:RUNNER_OS -eq 'Windows') { Join-Path $root 'venv/Scripts/python.exe' } else { Join-Path $root 'venv/bin/python' }
+          & $python -B (Join-Path $helper 'screen.py') run --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output $root --uv (Get-Command uv).Source --workers ${{ matrix.workers }}
+          exit $LASTEXITCODE
+      - name: Preserve raw screen evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: hobl-parallel-screen-${{ matrix.platform }}
+          include-hidden-files: true
+          path: |
+            screen-evidence/*.json
+            screen-evidence/*.txt
+            screen-evidence/*.toml
+            screen-evidence/*.stdout
+            screen-evidence/*.stderr
+            screen-evidence/payload-*
+          if-no-files-found: error
+          retention-days: 14
