@@ -34,7 +34,10 @@ simultaneously hold. No global installation, tuning or security changes.
 
 Source preflight must rehearse `prepare_source` on a fresh checkout of the
 pinned commit with `core.autocrlf=false`, not just inspect a Windows working
-copy. The manifest contains raw hashes of that checkout plus the declared
+copy. Every subsequent Git operation, including patch application, forces the
+same setting: a checkout-only override is insufficient. Focused controls cover
+both inherited true/false settings and the actual source patch path.
+The manifest contains raw hashes of that checkout plus the declared
 test-only patch. Runtime checks do not normalize bytes or tolerate mismatches.
 The corrected local preflight verified every file and proved all differences
 from the prior manifest were CRLF-to-LF only; no package/test content changed.

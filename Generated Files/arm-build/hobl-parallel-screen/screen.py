@@ -81,9 +81,9 @@ def phase(command, source, env, folder, name, timeout):
 
 def git(source, *args):
     return subprocess.run(
-        ["git", "-C", str(source), *args],
+        ["git", "-c", "core.autocrlf=false", "-C", str(source), *args],
         check=True,
-        capture_output=True,
+        stdout=subprocess.PIPE,
         timeout=30,
     ).stdout
 
@@ -105,11 +105,7 @@ def prepare_source(source):
     (source / "tests" / "utils.py").write_bytes(
         corrected((source / "tests" / "utils.py").read_bytes())
     )
-    subprocess.run(
-        ["git", "-C", str(source), "apply", str(HERE / "resource-owner.patch")],
-        check=True,
-        timeout=30,
-    )
+    git(source, "apply", str(HERE / "resource-owner.patch"))
 
 
 def prepare(args):

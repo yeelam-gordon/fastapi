@@ -1,14 +1,60 @@
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 from unittest.mock import patch
 
 from identity_map import exact_mapping
-from screen import HERE, load, schedule, source_snapshot, test_command, tiny_outcome
+from screen import (
+    HERE,
+    SOURCE_REVISION,
+    git,
+    load,
+    prepare_source,
+    schedule,
+    source_snapshot,
+    test_command,
+    tiny_outcome,
+)
 
 
 class ScreenContracts(unittest.TestCase):
+    def test_git_overrides_inherited_newline_configuration(self):
+        with patch(
+            "screen.subprocess.run", return_value=SimpleNamespace(stdout=b"")
+        ) as run:
+            git(Path("source"), "apply", "owner.patch")
+        self.assertEqual(
+            run.call_args.args[0],
+            [
+                "git",
+                "-c",
+                "core.autocrlf=false",
+                "-C",
+                "source",
+                "apply",
+                "owner.patch",
+            ],
+        )
+
+    def test_source_patch_uses_the_same_controlled_git(self):
+        with TemporaryDirectory() as temporary:
+            source = Path(temporary)
+            (source / "tests").mkdir()
+            (source / "tests" / "utils.py").write_bytes(b"fixture")
+            with (
+                patch(
+                    "screen.git", side_effect=[SOURCE_REVISION.encode(), b"", b""]
+                ) as run,
+                patch("screen.corrected", return_value=b"corrected"),
+            ):
+                prepare_source(source)
+            self.assertEqual(
+                run.call_args.args,
+                (source, "apply", str(HERE / "resource-owner.patch")),
+            )
+
     def test_source_snapshot_rejects_and_names_changed_bytes(self):
         source = Path("owned-source")
         expected = load(HERE / "source-manifest.json")
