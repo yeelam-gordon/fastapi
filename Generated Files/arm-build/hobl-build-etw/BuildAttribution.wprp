@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowsPerformanceRecorder Version="1.0">
+  <Profiles>
+    <SystemCollector Id="BuildSystemCollector" Name="BuildAttributionSystem">
+      <BufferSize Value="256"/>
+      <Buffers Value="256"/>
+    </SystemCollector>
+    <SystemProvider Id="BuildSystemProvider">
+      <Keywords>
+        <Keyword Value="CpuConfig"/>
+        <Keyword Value="ProcessThread"/>
+        <Keyword Value="Loader"/>
+        <Keyword Value="SampledProfile"/>
+        <Keyword Value="CSwitch"/>
+        <Keyword Value="ReadyThread"/>
+        <Keyword Value="DiskIO"/>
+        <Keyword Value="DiskIOInit"/>
+        <Keyword Value="FileIO"/>
+        <Keyword Value="FileIOInit"/>
+        <Keyword Value="Filename"/>
+      </Keywords>
+      <Stacks>
+        <Stack Value="SampledProfile"/>
+        <Stack Value="CSwitch"/>
+        <Stack Value="ReadyThread"/>
+        <Stack Value="FileCreate"/>
+        <Stack Value="FileRead"/>
+        <Stack Value="FileWrite"/>
+        <Stack Value="FileQueryInformation"/>
+        <Stack Value="FileDirEnum"/>
+        <Stack Value="DiskReadInit"/>
+        <Stack Value="DiskWriteInit"/>
+      </Stacks>
+    </SystemProvider>
+    <Profile Id="BuildAttribution.Verbose.Memory"
+             Name="BuildAttribution"
+             Description="CPU, scheduling, file and disk attribution on an exclusive owned VM"
+             DetailLevel="Verbose"
+             LoggingMode="Memory">
+      <Collectors>
+        <SystemCollectorId Value="BuildSystemCollector">
+          <SystemProviderId Value="BuildSystemProvider"/>
+        </SystemCollectorId>
+      </Collectors>
+    </Profile>
+  </Profiles>
+</WindowsPerformanceRecorder>

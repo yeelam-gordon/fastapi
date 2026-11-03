@@ -1,0 +1,45 @@
+"""Private launch anchor, executed inside the unchanged guardian's owned job."""
+import ctypes
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+def qpc():
+    v = ctypes.c_longlong()
+    ctypes.windll.kernel32.QueryPerformanceCounter(ctypes.byref(v))
+    return v.value
+
+
+def filetime():
+    v = ctypes.c_ulonglong()
+    ctypes.windll.kernel32.GetSystemTimePreciseAsFileTime(ctypes.byref(v))
+    return v.value
+
+
+def spawn(command):
+    before = qpc()
+    process = subprocess.Popen(command)
+    after = qpc()
+    created, exited, kernel, user = (ctypes.c_ulonglong() for _ in range(4))
+    api = ctypes.windll.kernel32.GetProcessTimes
+    api.argtypes = [ctypes.c_void_p] + [ctypes.POINTER(ctypes.c_ulonglong)] * 4
+    if not api(int(process._handle), *map(ctypes.byref, (created, exited, kernel, user))):
+        raise ctypes.WinError()
+    anchor = dict(pid=process.pid, qpc_before=before, qpc_after=after,
+                  creation_filetime=created.value, filetime_after=filetime())
+    frequency = ctypes.c_longlong()
+    if not ctypes.windll.kernel32.QueryPerformanceFrequency(ctypes.byref(frequency)):
+        raise ctypes.WinError()
+    anchor["qpc_frequency"] = frequency.value
+    return process, anchor
+
+
+if __name__ == "__main__":
+    destination, *command = sys.argv[1:]
+    process, anchor = spawn(command)
+    code = process.wait()
+    anchor["qpc_end"] = qpc()
+    Path(destination).write_text(json.dumps(anchor), encoding="utf-8")
+    sys.exit(code)
