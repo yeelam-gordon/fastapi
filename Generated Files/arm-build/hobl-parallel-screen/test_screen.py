@@ -14,6 +14,7 @@ from screen import (
     SOURCE_REVISION,
     git,
     load,
+    phase,
     prepare_source,
     schedule,
     source_snapshot,
@@ -23,6 +24,20 @@ from screen import (
 
 
 class ScreenContracts(unittest.TestCase):
+    def test_phase_timing_preserves_the_subprocess_audit_summary(self):
+        with TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            summary = folder / "final-audit.json"
+
+            def audit_command(*args, **kwargs):
+                summary.write_text('{"status":"PASS_SELECTED_PAIR_ONLY"}')
+                return SimpleNamespace(returncode=0)
+
+            with patch("screen.subprocess.run", side_effect=audit_command):
+                timing = phase(["audit"], folder, {}, folder, "final-audit", 1)
+            self.assertEqual(load(summary)["status"], "PASS_SELECTED_PAIR_ONLY")
+            self.assertEqual(load(folder / "final-audit-timing.json"), timing)
+
     def test_phase_reports_open_one_file_and_preserve_every_record(self):
         with (
             TemporaryDirectory() as temporary,

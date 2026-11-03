@@ -19,6 +19,8 @@ No tests, package work, or contexts are removed. No local cohort is rerun.
 Raw streams, JUnit, shards, collection/phase/PID evidence, native identities,
 source hashes/Git modes, config, downloaded-wheel hashes, archives and nanosecond
 timings are retained. Hash/source proof runs once before/after, not per payload.
+Command timing receipts use `*-timing.json` so they cannot overwrite semantic
+audit summaries such as `final-audit.json`.
 There is no HTML, full-context JSON, or per-payload archive expansion.
 Only the measured pair gets archive member/RECORD and reportable no-loss checks;
 that audit has a single 60-second timeout. Failure or timeout stays a SCREEN

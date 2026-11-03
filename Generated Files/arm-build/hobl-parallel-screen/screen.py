@@ -72,7 +72,7 @@ def phase(command, source, env, folder, name, timeout):
         "seconds": (end - start) / 1e9,
         "exitcode": result.returncode,
     }
-    save(folder / f"{name}.json", row)
+    save(folder / f"{name}-timing.json", row)
     assert result.returncode == 0, f"{name} failed: {result.returncode}"
     return row
 
