@@ -5,10 +5,22 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 from identity_map import exact_mapping
-from screen import schedule, test_command, tiny_outcome
+from screen import HERE, load, schedule, source_snapshot, test_command, tiny_outcome
 
 
 class ScreenContracts(unittest.TestCase):
+    def test_source_snapshot_rejects_and_names_changed_bytes(self):
+        source = Path("owned-source")
+        expected = load(HERE / "source-manifest.json")
+
+        def changed_digest(path):
+            name = path.relative_to(source).as_posix()
+            return "0" * 64 if name == "fastapi/applications.py" else expected[name]
+
+        with patch("screen.digest", side_effect=changed_digest):
+            with self.assertRaisesRegex(AssertionError, r"fastapi/applications\.py"):
+                source_snapshot(source)
+
     def test_schedule_excludes_two_warmups_then_ab_ba(self):
         self.assertEqual(schedule()[:2], [("serial", False), ("parallel", False)])
         self.assertEqual(

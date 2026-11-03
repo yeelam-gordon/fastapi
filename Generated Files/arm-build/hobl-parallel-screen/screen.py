@@ -92,12 +92,14 @@ def source_snapshot(source):
     expected = load(HERE / "source-manifest.json")
     assert len(expected) == 2558
     actual = {name: digest(source / name) for name in expected}
-    assert actual == expected, "Exact previously tested source mismatch"
+    mismatches = [name for name in expected if actual[name] != expected[name]]
+    assert not mismatches, (
+        f"Exact Git-source mismatch ({len(mismatches)} files): {mismatches[:10]}"
+    )
     return actual
 
 
-def prepare(args):
-    source, output = args.source, args.output
+def prepare_source(source):
     assert git(source, "rev-parse", "HEAD").decode().strip() == SOURCE_REVISION
     assert not git(source, "status", "--porcelain")
     (source / "tests" / "utils.py").write_bytes(
@@ -108,6 +110,14 @@ def prepare(args):
         check=True,
         timeout=30,
     )
+
+
+def prepare(args):
+    source, output = args.source, args.output
+    save(
+        output / "preparation.json", {"status": "started", "revision": SOURCE_REVISION}
+    )
+    prepare_source(source)
     save(output / "source-before.json", source_snapshot(source))
     save(
         output / "source-proof.json",
@@ -229,6 +239,9 @@ def prepare(args):
         output,
         "ujson-last",
         30,
+    )
+    save(
+        output / "preparation.json", {"status": "complete", "revision": SOURCE_REVISION}
     )
 
 

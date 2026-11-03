@@ -2,7 +2,7 @@
 
 One manual dispatch, two native ARM jobs capped at 15 minutes each. Each uses
 normal-GIL CPython 3.13.15, native uv 0.13.6, PDM backend 2.5.0, identical 82
-runtime pins, and the exact previously tested 2558-file common source.
+runtime pins, and the tested 2558-file common source in Git's LF representation.
 Windows has four workers, macOS three; actual logical CPUs must match.
 The existing registered `arm-build-diagnostics.yml` entrypoint selects
 `platform=hobl-parallel-screen` and calls the dedicated workflow; the new file
@@ -31,6 +31,15 @@ Runtime wheels are downloaded using normal TLS, checked against PyPI metadata,
 then installed offline with explicit hashes. ujson is installed last at the same
 pin because types-ujson and ujson overlap: not all RECORD ownership claims can
 simultaneously hold. No global installation, tuning or security changes.
+
+Source preflight must rehearse `prepare_source` on a fresh checkout of the
+pinned commit with `core.autocrlf=false`, not just inspect a Windows working
+copy. The manifest contains raw hashes of that checkout plus the declared
+test-only patch. Runtime checks do not normalize bytes or tolerate mismatches.
+The corrected local preflight verified every file and proved all differences
+from the prior manifest were CRLF-to-LF only; no package/test content changed.
+Preparation writes a started record before the source check, so a failed gate
+still leaves an uploadable diagnostic artifact.
 
 Two prospective pairs show direction only; hardware is not matched across OSes,
 and two pairs are not the previous five-pair final-proof criterion.
