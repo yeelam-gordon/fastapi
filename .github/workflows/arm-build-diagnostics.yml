@@ -14,6 +14,13 @@ on:
           - hobl-parallel-screen
           - hobl-python-setup-screen
         default: hobl-complete
+      windows-python-source:
+        description: Optional Windows interpreter source for the parallel screen only.
+        type: choice
+        options:
+          - setup-python
+          - uv-managed
+        default: setup-python
 
 permissions:
   contents: read
@@ -31,6 +38,8 @@ jobs:
   parallel-screen:
     if: inputs.platform == 'hobl-parallel-screen'
     uses: ./.github/workflows/hobl-parallel-screen.yml
+    with:
+      windows-python-source: ${{ inputs.windows-python-source }}
 
   complete:
     if: inputs.platform != 'hobl-parallel-screen' && inputs.platform != 'hobl-python-setup-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
