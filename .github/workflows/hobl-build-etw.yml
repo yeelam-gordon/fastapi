@@ -99,5 +99,7 @@ jobs:
             etl-public/capture-proof.json
             etl-public/calibration-schema.json
             etl-public/build-schema.json
+            etl-public/calibration-reader.json
+            etl-public/build-reader.json
           if-no-files-found: error
           retention-days: 7

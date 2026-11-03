@@ -39,12 +39,12 @@ def events(path):
         root.clear()
 
 
-def scan(path):
+def scan(path, event_reader=None):
     """Private metadata pass; no process identifiers or strings are published."""
     header, lives, active = None, [], {}
     counts = collections.Counter()
     last = 0
-    for e in events(path):
+    for e in (event_reader or events)(path):
         counts[e["name"] or "unnamed"] += 1
         last = max(last, e["qpc"])
         d = e["data"]
@@ -52,16 +52,23 @@ def scan(path):
             header = {k: number(d[k]) for k in
                       ("PerfFreq", "ReservedFlags", "EventsLost", "BuffersLost", "StartTime", "EndTime")}
             header["qpc_start"] = e["qpc"]
-        if (e["provider"] != KERNEL or e["name"] != "Process" or e["version"] != 4
+            if e.get("last_qpc") is not None:
+                last = max(last, e["last_qpc"])
+        kind = e.get("kind")
+        if kind in {"processStart", "processStop"}:
+            pass
+        elif kind is not None:
+            continue
+        elif (e["provider"] != KERNEL or e["name"] != "Process" or e["version"] != 4
                 or e["opcode"] not in (1, 2)):
             continue
         pid = number(d["ProcessId"])
-        if e["opcode"] == 1:
+        if kind == "processStart" or (kind is None and e["opcode"] == 1):
             life = {"pid": pid, "parent": number(d["ParentId"]), "start": e["qpc"],
                     "end": None}
             lives.append(life)
             active[pid] = life
-        elif e["opcode"] == 2 and pid in active:
+        elif (kind == "processStop" or e["opcode"] == 2) and pid in active:
             active.pop(pid)["end"] = e["qpc"]
     if not header or header["ReservedFlags"] & 3 != 1 or header["PerfFreq"] <= 0:
         raise ValueError("unsupported_clock")
@@ -97,8 +104,8 @@ def family(lives, anchor, freq):
     return owned
 
 
-def analyze(path, anchor, calibration=False, child_anchor=None):
-    h, lives, _ = scan(path)
+def analyze(path, anchor, calibration=False, child_anchor=None, event_reader=None):
+    h, lives, _ = scan(path) if event_reader is None else scan(path, event_reader)
     if anchor["qpc_frequency"] != h["PerfFreq"]:
         raise ValueError("qpc_frequency_mismatch")
     owned = family(lives, anchor, h["PerfFreq"])
@@ -123,32 +130,37 @@ def analyze(path, anchor, calibration=False, child_anchor=None):
     def owner(pid, q):
         return next((x for x in owned if x["pid"] == pid and x["start"] <= q <= x["end"]), None)
 
-    for e in events(path):
+    for e in (event_reader or events)(path):
         d, q, name = e["data"], e["qpc"], e["name"]
+        kind = e.get("kind")
         if e["provider"] == KERNEL and name == "FileIo" and e["version"] == 2 and "FileObject" in d:
             obj = number(d["FileObject"])
             if e["opcode"] in (0, 32, 36) and "FileName" in d:
                 file_names[obj] = d["FileName"].replace("/", "\\").lower().endswith("\\calibration-data.bin")
             elif e["opcode"] == 35:
                 file_names.pop(obj, None)
-        if (e["provider"] == KERNEL and name == "Thread" and e["version"] == 3
-                and e["opcode"] in (1, 2, 3)):
+        if (kind in {"threadStart", "threadStop", "threadDCStart"} or
+                (kind is None and e["provider"] == KERNEL and name == "Thread" and e["version"] == 3
+                 and e["opcode"] in (1, 2, 3))):
             tid, pid = number(d["TThreadId"]), number(d["ProcessId"])
-            if e["opcode"] in (1, 3):
+            if kind in {"threadStart", "threadDCStart"} or (kind is None and e["opcode"] in (1, 3)):
                 threads[tid] = (pid, q)
-            elif e["opcode"] == 2:
+            elif kind == "threadStop" or (kind is None and e["opcode"] == 2):
                 threads.pop(tid, None)
-        if e["provider"] == KERNEL and name == "Image" and e["version"] == 2:
+        if (kind in {"imageLoad", "imageUnload", "imageDCStart"} or
+                (kind is None and e["provider"] == KERNEL and name == "Image" and e["version"] == 2)):
             pid = number(d["ProcessId"])
             if owner(pid, q):
                 base = number(d["ImageBase"])
-                if e["opcode"] in (10, 3):
+                if kind in {"imageLoad", "imageDCStart"} or (kind is None and e["opcode"] in (10, 3)):
                     module = d["FileName"].replace("\\", "/").rsplit("/", 1)[-1].lower()
                     images[pid].append((base, number(d["ImageSize"]), module, q, None))
                     if module in MODULES and all(k in d for k in ("ImageChecksum", "TimeDateStamp")):
                         fingerprints.add((owned.index(owner(pid, q)), module, number(d["ImageChecksum"]),
                                           number(d["TimeDateStamp"]), number(d["ImageSize"])))
-                elif e["opcode"] == 2:
+                    elif kind is not None and module in MODULES:
+                        fingerprints.add((owned.index(owner(pid, q)), module, None, None, number(d["ImageSize"])))
+                elif kind == "imageUnload" or (kind is None and e["opcode"] == 2):
                     images[pid] = [(b, s, m, t, q if b == base and end is None else end)
                                    for b, s, m, t, end in images[pid]]
         if not start <= q <= stop:
@@ -159,7 +171,7 @@ def analyze(path, anchor, calibration=False, child_anchor=None):
         if process_owner is None:
             continue
         process_index = owned.index(process_owner)
-        if e["provider"] == KERNEL and name == "PerfInfo" and e["opcode"] == 46 and e["version"] == 2:
+        if kind == "sample" or (kind is None and e["provider"] == KERNEL and name == "PerfInfo" and e["opcode"] == 46 and e["version"] == 2):
             ip = number(d["InstructionPointer"])
             module = next((m for b, s, m, begin, end in reversed(images[subject[0]])
                            if b <= ip < b + s and begin <= q and (end is None or q <= end)), None)
@@ -169,7 +181,8 @@ def analyze(path, anchor, calibration=False, child_anchor=None):
             root_samples += process_index == 0
             unresolved += bucket == "unresolved"
         # Count only actual issuing-thread operations, never name/rundown records.
-        if ((e["provider"] == KERNEL and name == "DiskIo" and e["version"] == 3 and e["opcode"] in (10, 11)
+        if (kind in {"fileCreate", "fileRead", "fileWrite"} or
+                (e["provider"] == KERNEL and name == "DiskIo" and e["version"] == 3 and e["opcode"] in (10, 11)
              and all(k in d for k in ("IssuingThreadId", "Irp", "FileObject", "TransferSize")))
                 or (e["provider"] == KERNEL and name == "FileIo" and e["version"] in (2, 3) and e["opcode"] in (64, 67, 68)
                     and ("Irp" in d or "IrpPtr" in d) and "FileObject" in d and ("TTID" in d or "IssuingThreadId" in d))
@@ -260,7 +273,8 @@ def validate(value):
             for row in v:
                 if set(row) != {"process_index", "module", "checksum", "timestamp", "size_bytes"} or row["module"] not in MODULES:
                     raise ValueError("public_image")
-                if any(type(row[f]) is not int or not 0 <= row[f] <= 2**40
+                if any((row[f] is not None or f not in {"checksum", "timestamp"}) and
+                       (type(row[f]) is not int or not 0 <= row[f] <= 2**40)
                        for f in ("process_index", "checksum", "timestamp", "size_bytes")):
                     raise ValueError("public_image_number")
         elif k == "modules":

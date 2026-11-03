@@ -1,5 +1,39 @@
 # Exclusive hosted build ETW research
 
+## Current native decoder: Microsoft TraceEvent 4.0.0
+
+Native captures now use the pinned standard Microsoft typed kernel reader in
+`reader`, not tracerpt/XML and never a fallback projection. The XML reader and
+old schema artifact names remain reference/rehearsal compatibility only.
+Before any trace, `reader_prepare` requires an existing major-10 SDK/runtime,
+restores locked dependencies through explicit `NuGet.MicrosoftPublic.Config`,
+and builds without restore, build servers, node reuse or shared compilation.
+`global.json` permits compatible 10.x feature bands, not just local 10.0.403.
+No SDK installer or global NuGet configuration is used. CLI home/package/cache
+directories and all logs are owned/private.
+
+`reader_decode` runs the built DLL under the unchanged guardian, producing
+private canonical JSONL and a private summary. Typed callback kind dispatch
+preserves the actual provider/event ID/source class/version/opcode. Image-v3
+is not relabeled v2; process rundown is never a measured birth. The existing
+Python lifetime/thread/image/sample/file analysis consumes a small strict DTO
+adapter. Unknown subjects cannot satisfy owned activity gates. Missing image
+checksum/timestamp values remain null rather than fabricated zeros.
+
+Typed header PerfFreq/ReservedFlags, source EventsLost and typed BuffersLost,
+actual public SessionStartTime/SessionEndTime bounds and observed QPC extrema
+are used. Only `calibration-reader.json` and `build-reader.json` are additional
+public paths: fixed library identity, numeric clock/loss and bounded observed
+schema/kind/static getter-field names; no global activity counts or raw values.
+The prior capture proof and failed-stage diagnostics remain unchanged.
+
+Local actual fixture proof: 179,474 binary events, nine/fifteen populated
+typed v3 thread start/stop events, 79,528 IP/TID samples and 35 image-v2 loads.
+Image-v3 is covered only by a focused semantic DTO case; native ARM64,
+FileIO and scheduling runtime behavior still require hosted calibration.
+Earlier narrative below describing tracerpt is historical, not the native
+execution path. No R2 trace was retrieved or decoded.
+
 Per-process-lifetime CPU sample and file-record counts reconcile to the
 family totals without publishing PIDs. Parent edges retain the launcher/
 runtime chain. After tracing stops, both complete package outputs must pass
@@ -80,6 +114,7 @@ I/O inference or unsupported symbol-level attribution is produced.
 
 Only exact `stage.json`, `calibration.json`, `build.json`, `capture-proof.json`,
 `calibration-schema.json`, `build-schema.json`
+and current typed-reader `calibration-reader.json`, `build-reader.json`
 are uploadable. Capture proof retains ETL SHA-256/bytes and exact profile
 SHA-256 after successful stop/size validation, before decode; absent slots are
 null, and later analysis failure cannot erase proof. Missing proof does not

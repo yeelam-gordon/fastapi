@@ -18,19 +18,20 @@ sys.path.insert(0, str(COMMON))
 from owned_process import run_owned
 from decode import analyze, validate
 from artifact_gate import artifact_set, equivalent
-from schema_metadata import extract as extract_schema
+import typed_events
 
 GUARDIAN = "45d6db4f6452c4f7116ca23c6e2aa74cda90a15548bd5c9bb3b3574973ef458e"
 STAGES = {"preflight", "prepare", "calibration_start", "calibration_launch",
           "calibration_stop", "calibration_decode", "calibration_analysis", "warmup",
           "build_start", "build_launch", "build_stop", "build_decode", "build_analysis", "build_artifacts", "cleanup", "complete"}
-TOOLS = {"controller", "wpr", "tracerpt", "python", "uv", "logman"}
+STAGES |= {"reader_prepare", "reader_decode"}
+TOOLS = {"controller", "wpr", "python", "uv", "logman", "DOTNET"}
 REASONS = {"none", "native_command", "host_context", "run_identity", "job_identity", "token",
            "disk", "tools", "guardian_hash", "existing_recording", "etl_size", "artifacts",
            "root_birth_window", "native_creation_mismatch", "unsupported_clock", "trace_loss",
            "incomplete_lifetime", "duplicate_owned_pid", "qpc_frequency_mismatch",
            "missing_known_child", "known_child_not_owned", "recording_window",
-           "insufficient_owned_evidence", "schema", "unexpected"}
+           "insufficient_owned_evidence", "schema", "unexpected", "missing_dotnet10"}
 EXCEPTION_TYPES = {"NONE", "NATIVE_FAILURE", "KEY_ERROR", "VALUE_ERROR", "TYPE_ERROR",
                    "XML_PARSE_ERROR", "FILE_NOT_FOUND", "OS_ERROR", "OTHER"}
 MISSING_FIELDS = {"NONE", "OTHER", "ProcessId", "ParentId", "TThreadId", "ThreadId",
@@ -107,7 +108,16 @@ class Controller:
         self.runner, self.stage, self.owned = runner, "preflight", None
         self.residual = False
         self.wpr = str(Path(os.environ.get("SystemRoot", r"C:\Windows")) / "System32" / "wpr.exe")
-        self.tracerpt = str(Path(self.wpr).with_name("tracerpt.exe"))
+        self.dotnet = shutil.which("dotnet")
+        self.reader_env = os.environ.copy()
+        self.reader_env.update(
+            DOTNET_CLI_HOME=str(private / "dotnet-home"), NUGET_PACKAGES=str(private / "nuget"),
+            NUGET_HTTP_CACHE_PATH=str(private / "nuget-http"),
+            DOTNET_SKIP_FIRST_TIME_EXPERIENCE="1", DOTNET_GENERATE_ASPNET_CERTIFICATE="false",
+            DOTNET_CLI_TELEMETRY_OPTOUT="1", DOTNET_CLI_USE_MSBUILD_SERVER="0",
+            MSBUILDDISABLENODEREUSE="1", DOTNET_NOLOGO="1", NUGET_EXE_NO_PROMPT="true",
+            DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE="true")
+        self.reader_dll = private / "reader-bin" / "traceevent-reader.dll"
         self.sequence = 0
         self.capture_proof = {"schema": 1, "calibration": None, "build": None}
 
@@ -153,6 +163,31 @@ class Controller:
             self.owned = None
             self.residual = False
 
+    def prepare_reader(self):
+        self.stage = "reader_prepare"
+        if self.dotnet is None:
+            raise Failure("DOTNET", -1, "missing_dotnet10")
+        project = HERE / "reader"
+        try:
+            self.command("DOTNET", [self.dotnet, "--version"], cwd=project, env=self.reader_env)
+        except Failure as error:
+            raise Failure("DOTNET", error.code, "missing_dotnet10") from error
+        version = (self.private / f"{self.sequence}.stdout").read_text().strip()
+        if re.fullmatch(r"10\.\d+\.\d+", version) is None:
+            raise Failure("DOTNET", -1, "missing_dotnet10")
+        self.command("DOTNET", [self.dotnet, "--list-runtimes"], cwd=project, env=self.reader_env)
+        runtimes = (self.private / f"{self.sequence}.stdout").read_text()
+        if re.search(r"(?m)^Microsoft\.NETCore\.App 10\.", runtimes) is None:
+            raise Failure("DOTNET", -1, "missing_dotnet10")
+        self.command("DOTNET", [self.dotnet, "restore", "traceevent-reader.csproj", "--locked-mode",
+                               "--configfile", "NuGet.MicrosoftPublic.Config", "--disable-parallel",
+                               "--verbosity", "quiet", "/nodeReuse:false", "/p:UseSharedCompilation=false"],
+                     120, cwd=project, env=self.reader_env)
+        self.command("DOTNET", [self.dotnet, "build", "traceevent-reader.csproj", "--no-restore",
+                               "--disable-build-servers", "--output", str(self.reader_dll.parent),
+                               "--verbosity", "quiet", "/nodeReuse:false", "/p:UseSharedCompilation=false"],
+                     90, cwd=project, env=self.reader_env)
+
     def trace(self, phase, command, env):
         folder = self.private / phase
         folder.mkdir()
@@ -183,15 +218,18 @@ class Controller:
         if not 0 < etl.stat().st_size <= 128 * 1024 * 1024:
             raise Failure("wpr", 4, "etl_size")
         self.save_capture_proof(phase, etl)
-        self.stage = phase + "_decode"
-        xml = folder / "events.xml"
-        self.command("tracerpt", [self.tracerpt, str(etl), "-o", str(xml), "-of", "XML", "-rts", "-y"], 60)
+        self.stage = "reader_decode"
+        dto = folder / "events.jsonl"
+        self.command("DOTNET", [self.dotnet, str(self.reader_dll), str(etl), str(dto),
+                               str(folder / "reader-private-summary.json")],
+                     60, cwd=HERE / "reader", env=self.reader_env)
         self.stage = phase + "_analysis"
-        diagnostic = extract_schema(xml)
-        (self.public / (phase + "-schema.json")).write_text(
+        diagnostic = typed_events.proof(dto)
+        (self.public / (phase + "-reader.json")).write_text(
             json.dumps(diagnostic, allow_nan=False), encoding="utf-8")
         child_anchor = json.loads((folder / "child-anchor.json").read_text()) if phase == "calibration" else None
-        result = analyze(xml, json.loads(anchor.read_text()), calibration=phase == "calibration", child_anchor=child_anchor)
+        result = analyze(dto, json.loads(anchor.read_text()), calibration=phase == "calibration",
+                         child_anchor=child_anchor, event_reader=typed_events.events)
         validate(result)
         (self.public / (phase + ".json")).write_text(json.dumps(result, allow_nan=False), encoding="utf-8")
 
@@ -203,7 +241,7 @@ class Controller:
             raise Failure("controller", 6)
         if hashlib.sha256((COMMON / "owned_process.py").read_bytes()).hexdigest() != GUARDIAN:
             raise Failure("controller", 7)
-        if not all(Path(x).is_file() for x in (self.wpr, self.tracerpt)):
+        if not Path(self.wpr).is_file():
             raise Failure("controller", 8)
         self.command("wpr", [self.wpr, "-status"])
         status = (self.private / f"{self.sequence}.stdout").read_text(encoding="utf-8", errors="replace")
@@ -214,6 +252,7 @@ class Controller:
         sessions = (self.private / f"{self.sequence}.stdout").read_text(encoding="utf-8", errors="replace").lower()
         if any(name in sessions for name in ("wpr_", "buildattributionsystem", "hobl-", "nt kernel logger")):
             raise Failure("logman", 10, "existing_recording")
+        self.prepare_reader()
         self.stage = "prepare"
         screen = HERE.with_name("hobl-parallel-screen") / "screen.py"
         preparation = self.private / "prepared"

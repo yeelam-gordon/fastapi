@@ -153,13 +153,11 @@ class Proof(unittest.TestCase):
         def fake(argv, **kwargs):
             if "-stop" in argv:
                 Path(argv[2]).write_bytes(b"PRIVATE_ETL_BYTES")
-            if "-o" in argv:
-                Path(argv[argv.index("-o") + 1]).write_text(
-                    f'<Events><Event xmlns="{decode.NS[1:-1]}"><System>'
-                    '<Provider/><EventID>0</EventID><Version>3</Version><Opcode>36</Opcode>'
-                    '<TimeCreated SystemTime="PRIVATE_TIME"/></System>'
-                    '<EventData><Data Name="NewThreadId">PRIVATE_PID</Data></EventData>'
-                    '</Event></Events>')
+            if len(argv) > 1 and str(argv[1]).endswith("traceevent-reader.dll"):
+                from test_typed_events import row
+                Path(argv[3]).write_text(json.dumps(row("header", 90, None, None, dict(
+                    perfFreq=10000000, reservedFlags=1, eventsLost=0, buffersLost=0,
+                    sessionStartFileTime=0, sessionEndFileTime=10000000, lastQpc=201), 2, 0)) + "\n")
             return SimpleNamespace(succeeded=True, returncode=0)
         c = capture.Controller(self.path, self.path / "public", self.path, Path("uv"), fake)
         with self.assertRaises(FileNotFoundError):
@@ -170,9 +168,9 @@ class Proof(unittest.TestCase):
         self.assertEqual(set(proof["build"]), {"etl_sha256", "bytes", "profile_sha256"})
         self.assertEqual(proof["build"]["bytes"], 17)
         self.assertNotIn("PRIVATE_ETL_BYTES", json.dumps(proof))
-        diagnostic = json.loads((c.public / "build-schema.json").read_text())
+        diagnostic = json.loads((c.public / "build-reader.json").read_text())
         self.assertNotIn("PRIVATE_", json.dumps(diagnostic))
-        self.assertEqual(diagnostic["schemas"][0]["time_attributes"], ["SystemTime"])
+        self.assertEqual(diagnostic["header"]["perfFreq"], 10000000)
         c.report("controller", -1, "FAILED", "schema", *capture.safe_exception(KeyError("ProcessId")))
         stage = json.loads((c.public / "stage.json").read_text())
         self.assertEqual((stage["exception_type"], stage["missing_field"]), ("KEY_ERROR", "ProcessId"))

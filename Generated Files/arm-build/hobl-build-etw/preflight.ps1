@@ -14,9 +14,11 @@ try {
     $result.reason = 'disk'
     if (([IO.DriveInfo]::new([IO.Path]::GetPathRoot($Private))).AvailableFreeSpace -lt 8GB) { throw 'disk gate' }
     $result.reason = 'tools'
-    foreach ($tool in @('wpr.exe', 'tracerpt.exe', 'logman.exe')) {
+    foreach ($tool in @('wpr.exe', 'logman.exe')) {
         if (-not (Test-Path -LiteralPath (Join-Path $env:SystemRoot "System32\$tool") -PathType Leaf)) { throw 'tool gate' }
     }
+    $result.reason = 'missing_dotnet10'
+    if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) { throw 'dotnet gate' }
     $result.reason = 'run_identity'
     $headers = @{Authorization="Bearer $env:GH_TOKEN";Accept='application/vnd.github+json'}
     $uri = "https://api.github.com/repos/yeelam-gordon/fastapi/actions/runs/$env:GITHUB_RUN_ID"
