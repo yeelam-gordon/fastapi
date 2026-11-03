@@ -12,6 +12,7 @@ on:
           - hobl-paired-uv
           - hobl-paired-runtime
           - hobl-parallel-screen
+          - hobl-python-setup-screen
         default: hobl-complete
 
 permissions:
@@ -23,12 +24,16 @@ env:
   GIT_CONFIG_VALUE_0: "false"
 
 jobs:
+  python-setup-screen:
+    if: inputs.platform == 'hobl-python-setup-screen'
+    uses: ./.github/workflows/hobl-python-setup-screen.yml
+
   parallel-screen:
     if: inputs.platform == 'hobl-parallel-screen'
     uses: ./.github/workflows/hobl-parallel-screen.yml
 
   complete:
-    if: inputs.platform != 'hobl-parallel-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
+    if: inputs.platform != 'hobl-parallel-screen' && inputs.platform != 'hobl-python-setup-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
     strategy:
       fail-fast: false
       matrix:
