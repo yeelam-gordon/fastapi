@@ -10,11 +10,21 @@ on:
           - setup-python
           - uv-managed
         default: setup-python
+      windows-checkout-workers:
+        description: Optional parallel Windows checkout; macOS keeps its default.
+        type: choice
+        options:
+          - "1"
+          - "4"
+        default: "1"
   workflow_call:
     inputs:
       windows-python-source:
         type: string
         default: setup-python
+      windows-checkout-workers:
+        type: string
+        default: "1"
 
 permissions:
   contents: read
@@ -43,13 +53,25 @@ jobs:
       run:
         shell: pwsh
     steps:
-      - name: Validate interpreter selection
+      - name: Validate screen selections
         env:
           WINDOWS_PYTHON_SOURCE: ${{ inputs.windows-python-source }}
+          WINDOWS_CHECKOUT_WORKERS: ${{ inputs.windows-checkout-workers }}
         run: |
           if ($env:WINDOWS_PYTHON_SOURCE -notin @('setup-python', 'uv-managed')) {
             throw "Unsupported Windows Python source: $env:WINDOWS_PYTHON_SOURCE"
           }
+          if ($env:WINDOWS_CHECKOUT_WORKERS -notin @('1', '4')) {
+            throw 'Unsupported Windows checkout worker count'
+          }
+      - name: Optional parallel checkout on Windows
+        if: matrix.platform == 'windows' && inputs.windows-checkout-workers == '4'
+        run: |
+          @(
+            'GIT_CONFIG_COUNT=2'
+            'GIT_CONFIG_KEY_1=checkout.workers'
+            'GIT_CONFIG_VALUE_1=4'
+          ) | Out-File -LiteralPath $env:GITHUB_ENV -Append -Encoding utf8
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}

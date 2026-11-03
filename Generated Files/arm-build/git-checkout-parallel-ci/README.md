@@ -57,5 +57,20 @@ Local validation (no checkout timing):
 python -B -m unittest discover -s 'Generated Files\arm-build\git-checkout-parallel-ci' -p 'test_*.py'
 ```
 
-Budget: one future dispatch, two jobs × six minutes, only after independent
-parent readiness/allocation review. Hosted execution remains unverified locally.
+Recorded budget: one dispatch, two jobs at six minutes each, after local
+readiness/allocation review. The hosted outcome is described below.
+
+## Windows-only HOBL opt-in
+
+Hosted run41692925086 passed both Windows component gates but failed the
+Mac gate. The parallel HOBL workflow therefore exposes
+`windows-checkout-workers=4` as an explicit Windows-only option. Its default
+is `1`; Mac settings remain unchanged. The option adds only a job-local Git
+configuration entry, retaining `core.autocrlf=false` and leaving global
+configuration untouched.
+
+The registered diagnostics workflow consumes this input only for
+`platform=hobl-parallel-screen`. That mode runs the complete HOBL workload;
+it was not rerun merely to wire this option. Component savings must not be
+added to or subtracted from the separate HOBL build/test score, and the
+complete checkout/authentication pipeline saving remains unmeasured.

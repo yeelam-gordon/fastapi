@@ -24,6 +24,13 @@ on:
           - setup-python
           - uv-managed
         default: setup-python
+      windows-checkout-workers:
+        description: Optional Windows checkout workers for the parallel HOBL screen only.
+        type: choice
+        options:
+          - "1"
+          - "4"
+        default: "1"
 
 permissions:
   contents: read
@@ -58,6 +65,7 @@ jobs:
     uses: ./.github/workflows/hobl-parallel-screen.yml
     with:
       windows-python-source: ${{ inputs.windows-python-source }}
+      windows-checkout-workers: ${{ inputs.windows-checkout-workers }}
 
   complete:
     if: inputs.platform != 'hobl-checkout-screen' && inputs.platform != 'hobl-build-etw' && inputs.platform != 'hobl-build-runtime-screen' && inputs.platform != 'hobl-parallel-screen' && inputs.platform != 'hobl-python-setup-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
