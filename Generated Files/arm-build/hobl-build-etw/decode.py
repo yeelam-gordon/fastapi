@@ -28,7 +28,7 @@ def events(path):
         execution = system.find(NS + "Execution")
         yield {
             "name": name, "data": data,
-            "qpc": number(system.find(NS + "TimeCreated").get("RawTime")),
+            "qpc": number(system.find(NS + "TimeCreated").attrib["RawTime"]),
             "version": number(system.findtext(NS + "Version", "0")),
             "opcode": number(system.findtext(NS + "Opcode", "0")),
             "id": number(system.findtext(NS + "EventID", "0")),
@@ -52,7 +52,8 @@ def scan(path):
             header = {k: number(d[k]) for k in
                       ("PerfFreq", "ReservedFlags", "EventsLost", "BuffersLost", "StartTime", "EndTime")}
             header["qpc_start"] = e["qpc"]
-        if e["provider"] != KERNEL or e["name"] != "Process" or e["version"] != 4:
+        if (e["provider"] != KERNEL or e["name"] != "Process" or e["version"] != 4
+                or e["opcode"] not in (1, 2)):
             continue
         pid = number(d["ProcessId"])
         if e["opcode"] == 1:
@@ -114,7 +115,8 @@ def analyze(path, anchor, calibration=False, child_anchor=None):
     root_samples = 0
     fingerprints = set()
     file_names, known_file_operations = {}, 0
-    start, stop = anchor["qpc_before"], anchor["qpc_end"]
+    start = anchor["qpc_before"]
+    stop = max(anchor["qpc_end"], *(life["end"] for life in owned))
     if stop <= start or (stop - start) / h["PerfFreq"] > 10:
         raise ValueError("recording_window")
 
@@ -129,7 +131,8 @@ def analyze(path, anchor, calibration=False, child_anchor=None):
                 file_names[obj] = d["FileName"].replace("/", "\\").lower().endswith("\\calibration-data.bin")
             elif e["opcode"] == 35:
                 file_names.pop(obj, None)
-        if e["provider"] == KERNEL and name == "Thread" and e["version"] == 3:
+        if (e["provider"] == KERNEL and name == "Thread" and e["version"] == 3
+                and e["opcode"] in (1, 2, 3)):
             tid, pid = number(d["TThreadId"]), number(d["ProcessId"])
             if e["opcode"] in (1, 3):
                 threads[tid] = (pid, q)
@@ -249,7 +252,7 @@ def validate(value):
                         raise ValueError("public_parent_graph")
                 elif type(parent) is not int or not 0 <= parent < index or row["role"] != "UNKNOWN_DESCENDANT":
                     raise ValueError("public_parent_graph")
-                elif not v[parent]["start_seconds"] <= row["start_seconds"] <= row["end_seconds"] <= v[parent]["end_seconds"]:
+                elif not v[parent]["start_seconds"] <= row["start_seconds"] <= v[parent]["end_seconds"]:
                     raise ValueError("public_parent_time")
         elif k == "images":
             if not isinstance(v, list) or len(v) > 256:
@@ -274,6 +277,8 @@ def validate(value):
             raise ValueError("public_number")
     if len(json.dumps(value, allow_nan=False)) > 65536:
         raise ValueError("public_size")
+    if any(row["end_seconds"] > value["interval_seconds"] for row in value["lifetimes"]):
+        raise ValueError("public_lifetime_time")
     if (value["schema"] != 1 or value["events_lost"] != 0 or value["buffers_lost"] != 0
             or value["family_lifetimes"] != len(value["lifetimes"])
             or value["cpu_samples"] != sum(r["samples"] for r in value["modules"])

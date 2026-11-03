@@ -78,7 +78,8 @@ decoding are not implemented: file durations and ready/blocked time are
 `UNSUPPORTED`, not zero. No overlap sum, critical-path claim, wall-minus-CPU
 I/O inference or unsupported symbol-level attribution is produced.
 
-Only exact `stage.json`, `calibration.json`, `build.json`, `capture-proof.json`
+Only exact `stage.json`, `calibration.json`, `build.json`, `capture-proof.json`,
+`calibration-schema.json`, `build-schema.json`
 are uploadable. Capture proof retains ETL SHA-256/bytes and exact profile
 SHA-256 after successful stop/size validation, before decode; absent slots are
 null, and later analysis failure cannot erase proof. Missing proof does not
@@ -95,8 +96,22 @@ under distinct PID-owned directories. Warmup archives are preserved privately;
 after the actual trace is stopped, `build_artifacts` rechecks the verified
 source manifest and existing `artifact_set` checks both archive sets, failing
 closed. Lifetimes include parent indices, with earlier-index/time-containment
-validation; duplicate owned PIDs fail closed rather than sharing image caches.
+validation; child birth must fall in its parent's lifetime, but a complete
+child may outlive that parent. Analysis includes all owned end timestamps and
+still rejects intervals over ten seconds. Duplicate owned PIDs fail closed
+rather than sharing image caches.
 Caller `actions: read` is scoped to the ETW reusable-call job only.
+
+After tracerpt completes, an independent bounded metadata reader writes
+`calibration-schema.json` or `build-schema.json` before any owned analysis.
+These sidecars contain only provider GUID/event ID/version/opcode, a static
+task-label enum, TimeCreated attribute names and EventData field names, plus
+numeric PerfFreq/ReservedFlags/EventsLost/BuffersLost/PointerSize when known.
+No field values, identifiers, times or global activity counts are published.
+Limits are 128 schema rows, 64 fields and ASCII identifier names up to 64
+characters; over-capacity, rejected metadata or malformed XML is explicit
+PARTIAL. Unknown header numbers are null, not zero. Stage failures add fixed
+exception-type and missing-field enums; unknown keys become OTHER.
 
 ## Local checks (never record)
 

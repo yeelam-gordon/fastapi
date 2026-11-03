@@ -18,6 +18,7 @@ sys.path.insert(0, str(COMMON))
 from owned_process import run_owned
 from decode import analyze, validate
 from artifact_gate import artifact_set, equivalent
+from schema_metadata import extract as extract_schema
 
 GUARDIAN = "45d6db4f6452c4f7116ca23c6e2aa74cda90a15548bd5c9bb3b3574973ef458e"
 STAGES = {"preflight", "prepare", "calibration_start", "calibration_launch",
@@ -30,6 +31,25 @@ REASONS = {"none", "native_command", "host_context", "run_identity", "job_identi
            "incomplete_lifetime", "duplicate_owned_pid", "qpc_frequency_mismatch",
            "missing_known_child", "known_child_not_owned", "recording_window",
            "insufficient_owned_evidence", "schema", "unexpected"}
+EXCEPTION_TYPES = {"NONE", "NATIVE_FAILURE", "KEY_ERROR", "VALUE_ERROR", "TYPE_ERROR",
+                   "XML_PARSE_ERROR", "FILE_NOT_FOUND", "OS_ERROR", "OTHER"}
+MISSING_FIELDS = {"NONE", "OTHER", "ProcessId", "ParentId", "TThreadId", "ThreadId",
+                  "RawTime", "PerfFreq", "ReservedFlags", "EventsLost", "BuffersLost",
+                  "StartTime", "EndTime", "InstructionPointer", "ImageBase", "ImageSize",
+                  "FileName", "FileObject", "qpc_frequency", "qpc_before", "qpc_after",
+                  "qpc_end", "pid", "creation_filetime", "filetime_after"}
+
+
+def safe_exception(error):
+    kinds = ((Failure, "NATIVE_FAILURE"), (ET.ParseError, "XML_PARSE_ERROR"),
+             (KeyError, "KEY_ERROR"), (ValueError, "VALUE_ERROR"), (TypeError, "TYPE_ERROR"),
+             (FileNotFoundError, "FILE_NOT_FOUND"), (OSError, "OS_ERROR"))
+    kind = next((name for cls, name in kinds if isinstance(error, cls)), "OTHER")
+    field = "NONE"
+    if isinstance(error, KeyError):
+        key = error.args[0] if len(error.args) == 1 else None
+        field = key if type(key) is str and key in MISSING_FIELDS else "OTHER"
+    return kind, field
 
 
 def safe_reason(error):
@@ -103,12 +123,15 @@ class Controller:
         self.public.mkdir(exist_ok=True)
         (self.public / "capture-proof.json").write_text(json.dumps(self.capture_proof), encoding="utf-8")
 
-    def report(self, tool="controller", code=0, status="RUNNING", reason="none"):
+    def report(self, tool="controller", code=0, status="RUNNING", reason="none",
+               exception_type="NONE", missing_field="NONE"):
         if (self.stage not in STAGES or tool not in TOOLS or type(code) is not int
-                or not -(2**31) <= code < 2**32 or status not in {"RUNNING", "PARTIAL", "FAILED"} or reason not in REASONS):
+                or not -(2**31) <= code < 2**32 or status not in {"RUNNING", "PARTIAL", "FAILED"} or reason not in REASONS
+                or exception_type not in EXCEPTION_TYPES or missing_field not in MISSING_FIELDS):
             raise ValueError("stage_schema")
         value = {"schema": 1, "stage": self.stage, "tool": tool, "native_code": code,
-                 "status": status, "reason": reason, "residual_buffers_possible": self.owned is not None or self.residual}
+                 "status": status, "reason": reason, "exception_type": exception_type,
+                 "missing_field": missing_field, "residual_buffers_possible": self.owned is not None or self.residual}
         self.public.mkdir(exist_ok=True)
         (self.public / "stage.json").write_text(json.dumps(value), encoding="utf-8")
 
@@ -164,6 +187,9 @@ class Controller:
         xml = folder / "events.xml"
         self.command("tracerpt", [self.tracerpt, str(etl), "-o", str(xml), "-of", "XML", "-rts", "-y"], 60)
         self.stage = phase + "_analysis"
+        diagnostic = extract_schema(xml)
+        (self.public / (phase + "-schema.json")).write_text(
+            json.dumps(diagnostic, allow_nan=False), encoding="utf-8")
         child_anchor = json.loads((folder / "child-anchor.json").read_text()) if phase == "calibration" else None
         result = analyze(xml, json.loads(anchor.read_text()), calibration=phase == "calibration", child_anchor=child_anchor)
         validate(result)
@@ -246,5 +272,6 @@ if __name__ == "__main__":
     except Exception as error:
         (c.private / "failure.txt").write_text(repr(error), encoding="utf-8")
         c.report(error.tool if isinstance(error, Failure) else "controller",
-                 error.code if isinstance(error, Failure) else -1, "FAILED", safe_reason(error))
+                 error.code if isinstance(error, Failure) else -1, "FAILED", safe_reason(error),
+                 *safe_exception(error))
         sys.exit(1)

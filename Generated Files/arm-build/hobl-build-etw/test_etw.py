@@ -10,6 +10,7 @@ from types import SimpleNamespace
 
 import capture
 import decode
+import schema_metadata
 
 
 class Proof(unittest.TestCase):
@@ -100,6 +101,8 @@ class Proof(unittest.TestCase):
     def test_graph_reasons_and_artifact_gate(self):
         self.assertEqual(capture.safe_reason(ValueError("root_birth_window")), "root_birth_window")
         self.assertEqual(capture.safe_reason(ValueError(r"C:\PRIVATE")), "schema")
+        self.assertEqual(capture.safe_exception(KeyError("TThreadId")), ("KEY_ERROR", "TThreadId"))
+        self.assertEqual(capture.safe_exception(KeyError(r"C:\PRIVATE")), ("KEY_ERROR", "OTHER"))
         anchor = dict(pid=10, qpc_before=99, qpc_after=101,
                       creation_filetime=1000, filetime_after=1000)
         lives = [dict(pid=10, parent=1, start=100, end=500),
@@ -150,6 +153,13 @@ class Proof(unittest.TestCase):
         def fake(argv, **kwargs):
             if "-stop" in argv:
                 Path(argv[2]).write_bytes(b"PRIVATE_ETL_BYTES")
+            if "-o" in argv:
+                Path(argv[argv.index("-o") + 1]).write_text(
+                    f'<Events><Event xmlns="{decode.NS[1:-1]}"><System>'
+                    '<Provider/><EventID>0</EventID><Version>3</Version><Opcode>36</Opcode>'
+                    '<TimeCreated SystemTime="PRIVATE_TIME"/></System>'
+                    '<EventData><Data Name="NewThreadId">PRIVATE_PID</Data></EventData>'
+                    '</Event></Events>')
             return SimpleNamespace(succeeded=True, returncode=0)
         c = capture.Controller(self.path, self.path / "public", self.path, Path("uv"), fake)
         with self.assertRaises(FileNotFoundError):
@@ -160,7 +170,12 @@ class Proof(unittest.TestCase):
         self.assertEqual(set(proof["build"]), {"etl_sha256", "bytes", "profile_sha256"})
         self.assertEqual(proof["build"]["bytes"], 17)
         self.assertNotIn("PRIVATE_ETL_BYTES", json.dumps(proof))
-        c.report("controller", -1, "FAILED", "schema")
+        diagnostic = json.loads((c.public / "build-schema.json").read_text())
+        self.assertNotIn("PRIVATE_", json.dumps(diagnostic))
+        self.assertEqual(diagnostic["schemas"][0]["time_attributes"], ["SystemTime"])
+        c.report("controller", -1, "FAILED", "schema", *capture.safe_exception(KeyError("ProcessId")))
+        stage = json.loads((c.public / "stage.json").read_text())
+        self.assertEqual((stage["exception_type"], stage["missing_field"]), ("KEY_ERROR", "ProcessId"))
         self.assertTrue((c.public / "capture-proof.json").is_file())
 
     def test_failed_start_is_not_cancel_authority(self):
@@ -177,6 +192,18 @@ class Proof(unittest.TestCase):
         c.cleanup()
         self.assertEqual(len(calls), 1)
 
+    def test_unsupported_thread_opcode_has_no_lifetime_subject(self):
+        lives = [dict(pid=10, parent=1, start=100, end=200),
+                 dict(pid=20, parent=10, start=120, end=180)]
+        anchor = dict(pid=10, qpc_before=99, qpc_after=101, qpc_end=201,
+                      creation_filetime=1000, filetime_after=1000, qpc_frequency=10000000)
+        unsupported = dict(provider=decode.KERNEL, name="Thread", version=3, opcode=36,
+                           qpc=110, data={"NewThreadId": "11", "OldThreadId": "99"}, tid=0)
+        with patch.object(decode, "scan", return_value=({"PerfFreq": 10000000}, lives, {})), \
+             patch.object(decode, "events", return_value=iter([unsupported])):
+            with self.assertRaisesRegex(ValueError, "insufficient_owned_evidence"):
+                decode.analyze(self.path / "unused.xml", anchor)
+
     def test_stream_decode_owned_counts_not_rundown(self):
         ns = decode.NS[1:-1]
         def event(name, q, version, opcode, data, tid=0, provider=decode.KERNEL, eid=0):
@@ -191,6 +218,9 @@ class Proof(unittest.TestCase):
             event("EventTrace", 90, 2, 0, dict(PerfFreq=10000000, ReservedFlags=1,
                    EventsLost=0, BuffersLost=0, StartTime=0, EndTime=10000000)),
             event("Process", 100, 4, 1, dict(ProcessId=10, ParentId=1)),
+            event("Process", 100, 4, 32, dict(UnsupportedSubject="PRIVATE")),
+            event("Thread", 100, 3, 36, dict(NewThreadId=11, OldThreadId=99)),
+            event("Thread", 100, 3, 50, dict(TThreadId=11)),
             event("Thread", 101, 3, 1, dict(ProcessId=10, TThreadId=11)),
             event("Image", 102, 2, 10, dict(ProcessId=10, ImageBase=4096, ImageSize=100, FileName="uv.exe")),
             event("PerfInfo", 110, 2, 46, dict(ThreadId=11, InstructionPointer=4100)),
@@ -225,11 +255,26 @@ class Proof(unittest.TestCase):
             decode.validate(poisoned)
         poisoned = copy.deepcopy(result)
         poisoned["lifetimes"][1]["end_seconds"] = 1
-        with self.assertRaisesRegex(ValueError, "public_parent_time"):
+        with self.assertRaisesRegex(ValueError, "public_lifetime_time"):
             decode.validate(poisoned)
         child_anchor = dict(pid=20, qpc_before=119, qpc_after=121, qpc_end=181,
                             creation_filetime=1000, filetime_after=1000, qpc_frequency=10000000)
         decode.analyze(xml, anchor, calibration=True, child_anchor=child_anchor)
+        outliving = document.replace(
+            event("Process", 180, 4, 2, dict(ProcessId=20)),
+            event("PerfInfo", 220, 2, 46, dict(ThreadId=21, InstructionPointer=8200))
+            + event("Process", 240, 4, 2, dict(ProcessId=20)))
+        xml.write_text(outliving)
+        result = decode.analyze(xml, anchor)
+        self.assertGreater(result["lifetimes"][1]["end_seconds"], result["lifetimes"][0]["end_seconds"])
+        self.assertEqual(result["cpu_samples"], 3)
+        self.assertAlmostEqual(result["interval_seconds"], (240 - 99) / 10000000)
+        decode.validate(result)
+        xml.write_text(outliving.replace(
+            event("Process", 240, 4, 2, dict(ProcessId=20)),
+            event("Process", 100000201, 4, 2, dict(ProcessId=20))))
+        with self.assertRaisesRegex(ValueError, "recording_window"):
+            decode.analyze(xml, anchor)
         xml.write_text(document.replace(child_sample, ""))
         with self.assertRaisesRegex(ValueError, "insufficient_owned_evidence"):
             decode.analyze(xml, anchor, calibration=True, child_anchor=child_anchor)
@@ -237,6 +282,43 @@ class Proof(unittest.TestCase):
         xml.write_text(xml.read_text().replace('Name="EventsLost">0', 'Name="EventsLost">1'))
         with self.assertRaises(ValueError):
             decode.analyze(xml, anchor)
+
+    def test_schema_metadata_poison_and_partial_parse(self):
+        event = (
+            f'<Event xmlns="{decode.NS[1:-1]}"><System><Provider Guid="{decode.KERNEL}"/>'
+            '<EventID>0</EventID><Version>2</Version><Opcode>0</Opcode>'
+            '<TimeCreated RawTime="PRIVATE_COUNTER"/><Execution ProcessID="PRIVATE_PID"/>'
+            '</System><EventData><Data Name="PerfFreq">10000000</Data>'
+            '<Data Name="EventsLost">0</Data><Data Name="CommandLine">PRIVATE_COMMAND</Data>'
+            '<Data Name="FileName">C:\\PRIVATE_PATH</Data></EventData>'
+            f'<RenderingInfo><EventName xmlns="{decode.TRACE[1:-1]}">EventTrace</EventName>'
+            '</RenderingInfo></Event>')
+        path = self.path / "schema.xml"
+        path.write_text("<Events>" + event + "</Events>")
+        result = schema_metadata.extract(path)
+        self.assertEqual(result["status"], "COMPLETE")
+        self.assertEqual(result["header"]["PerfFreq"], 10000000)
+        self.assertIsNone(result["header"]["BuffersLost"])
+        self.assertEqual(result["schemas"][0]["time_attributes"], ["RawTime"])
+        self.assertNotIn("PRIVATE_", json.dumps(result))
+        schema_metadata.validate(result)
+        poisoned = copy.deepcopy(result)
+        poisoned["schemas"][0]["fields"] = [r"C:\PRIVATE"]
+        with self.assertRaises(ValueError):
+            schema_metadata.validate(poisoned)
+        poisoned = copy.deepcopy(result)
+        poisoned["header"]["PerfFreq"] = float("nan")
+        with self.assertRaises(ValueError):
+            schema_metadata.validate(poisoned)
+        path.write_text("<Events>" + event + "<broken>")
+        result = schema_metadata.extract(path)
+        self.assertEqual(result["status"], "PARTIAL")
+        self.assertEqual(result["reason"], "XML_PARSE")
+        self.assertEqual(len(result["schemas"]), 1)
+        path.write_text("<Events>" + event.replace('Name="FileName"', 'Name="C:\\PRIVATE"') + "</Events>")
+        result = schema_metadata.extract(path)
+        self.assertEqual(result["status"], "PARTIAL")
+        self.assertNotIn("PRIVATE", json.dumps(result))
 
 
 if __name__ == "__main__":
