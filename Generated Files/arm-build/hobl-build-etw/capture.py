@@ -19,12 +19,14 @@ from owned_process import run_owned
 from decode import analyze, validate
 from artifact_gate import artifact_set, equivalent
 import typed_events
+import module_map
 
 GUARDIAN = "45d6db4f6452c4f7116ca23c6e2aa74cda90a15548bd5c9bb3b3574973ef458e"
 STAGES = {"preflight", "prepare", "calibration_start", "calibration_launch",
           "calibration_stop", "calibration_decode", "calibration_analysis", "warmup",
           "build_start", "build_launch", "build_stop", "build_decode", "build_analysis", "build_artifacts", "cleanup", "complete"}
 STAGES |= {"reader_prepare", "reader_decode"}
+STAGES |= {"calibration_modules", "build_modules"}
 TOOLS = {"controller", "wpr", "python", "uv", "logman", "DOTNET"}
 REASONS = {"none", "native_command", "host_context", "run_identity", "job_identity", "token",
            "disk", "tools", "guardian_hash", "existing_recording", "etl_size", "artifacts",
@@ -32,6 +34,8 @@ REASONS = {"none", "native_command", "host_context", "run_identity", "job_identi
            "incomplete_lifetime", "duplicate_owned_pid", "qpc_frequency_mismatch",
            "missing_known_child", "known_child_not_owned", "recording_window",
            "insufficient_owned_evidence", "schema", "unexpected", "missing_dotnet10"}
+REASONS |= {"module_mapping"}
+REASONS |= set(module_map.EXIT_REASONS.values())
 EXCEPTION_TYPES = {"NONE", "NATIVE_FAILURE", "KEY_ERROR", "VALUE_ERROR", "TYPE_ERROR",
                    "XML_PARSE_ERROR", "FILE_NOT_FOUND", "OS_ERROR", "OTHER"}
 MISSING_FIELDS = {"NONE", "OTHER", "ProcessId", "ParentId", "TThreadId", "ThreadId",
@@ -117,6 +121,7 @@ class Controller:
             DOTNET_CLI_TELEMETRY_OPTOUT="1", DOTNET_CLI_USE_MSBUILD_SERVER="0",
             MSBUILDDISABLENODEREUSE="1", DOTNET_NOLOGO="1", NUGET_EXE_NO_PROMPT="true",
             DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE="true")
+        self.reader_env.update(_NT_SYMBOL_PATH="", _NT_ALT_SYMBOL_PATH="")
         self.reader_dll = private / "reader-bin" / "traceevent-reader.dll"
         self.sequence = 0
         self.capture_proof = {"schema": 1, "calibration": None, "build": None}
@@ -228,10 +233,33 @@ class Controller:
         (self.public / (phase + "-reader.json")).write_text(
             json.dumps(diagnostic, allow_nan=False), encoding="utf-8")
         child_anchor = json.loads((folder / "child-anchor.json").read_text()) if phase == "calibration" else None
+        selected = []
         result = analyze(dto, json.loads(anchor.read_text()), calibration=phase == "calibration",
-                         child_anchor=child_anchor, event_reader=typed_events.events)
+                         child_anchor=child_anchor, event_reader=typed_events.events,
+                         sample_observer=lambda q, t, ip, i: selected.append([q, t, ip, i]))
         validate(result)
         (self.public / (phase + ".json")).write_text(json.dumps(result, allow_nan=False), encoding="utf-8")
+        self.stage = phase + "_modules"
+        self.report()
+        try:
+            selection = folder / "verified-samples.json"
+            selection.write_text(json.dumps(dict(schema=1,
+                counts=[r["cpu_samples"] for r in result["lifetimes"]],
+                samples=selected)), encoding="utf-8")
+            output = folder / "modules-private.json"
+            self.command("DOTNET", [self.dotnet, str(self.reader_dll), "--modules",
+                         str(etl), str(folder / "capture.etlx"), str(selection), str(output)],
+                         110, cwd=HERE / "reader", env=self.reader_env)
+            if not 0 < (folder / "capture.etlx").stat().st_size <= 256 * 1024**2:
+                raise ValueError("module_mapping")
+            modules = json.loads(output.read_text(encoding="utf-8"))
+            module_map.validate(modules, result)
+            (self.public / (phase + "-modules.json")).write_text(
+                json.dumps(modules, allow_nan=False), encoding="utf-8")
+        except Exception as error:
+            raise Failure("DOTNET", error.code if isinstance(error, Failure) else -1,
+                          module_map.EXIT_REASONS.get(error.code, "module_mapping")
+                          if isinstance(error, Failure) else "module_mapping") from error
 
     def run(self):
         hosted_gate()

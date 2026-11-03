@@ -104,7 +104,8 @@ def family(lives, anchor, freq):
     return owned
 
 
-def analyze(path, anchor, calibration=False, child_anchor=None, event_reader=None):
+def analyze(path, anchor, calibration=False, child_anchor=None, event_reader=None,
+            sample_observer=None):
     h, lives, _ = scan(path) if event_reader is None else scan(path, event_reader)
     if anchor["qpc_frequency"] != h["PerfFreq"]:
         raise ValueError("qpc_frequency_mismatch")
@@ -178,6 +179,8 @@ def analyze(path, anchor, calibration=False, child_anchor=None, event_reader=Non
             bucket = module if module in MODULES else "unresolved"
             samples[bucket] += 1
             process_samples[process_index] += 1
+            if sample_observer is not None:
+                sample_observer(q, tid, ip, process_index)
             root_samples += process_index == 0
             unresolved += bucket == "unresolved"
         # Count only actual issuing-thread operations, never name/rundown records.

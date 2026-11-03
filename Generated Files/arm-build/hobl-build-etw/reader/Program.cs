@@ -2,6 +2,15 @@ using System.Text.Json;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Parsers;
 
+if (args.Length > 0 && args[0] == "--modules")
+{
+    try { ModuleMap.Run(args[1..]); }
+    catch (InvalidDataException error) when (ModuleMap.FailureCodes.ContainsKey(error.Message))
+    {
+        Environment.ExitCode = ModuleMap.FailureCodes[error.Message];
+    }
+    return;
+}
 if (args.Length != 3)
     throw new ArgumentException("Expected ETL, private JSONL, private summary paths.");
 using var source = new ETWTraceEventSource(args[0]);

@@ -101,5 +101,7 @@ jobs:
             etl-public/build-schema.json
             etl-public/calibration-reader.json
             etl-public/build-reader.json
+            etl-public/calibration-modules.json
+            etl-public/build-modules.json
           if-no-files-found: error
           retention-days: 7

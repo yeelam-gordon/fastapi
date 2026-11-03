@@ -115,6 +115,7 @@ I/O inference or unsupported symbol-level attribution is produced.
 Only exact `stage.json`, `calibration.json`, `build.json`, `capture-proof.json`,
 `calibration-schema.json`, `build-schema.json`
 and current typed-reader `calibration-reader.json`, `build-reader.json`
+plus `calibration-modules.json`, `build-modules.json`
 are uploadable. Capture proof retains ETL SHA-256/bytes and exact profile
 SHA-256 after successful stop/size validation, before decode; absent slots are
 null, and later analysis failure cannot erase proof. Missing proof does not
@@ -160,3 +161,54 @@ authority, failed start/stop, skipped-job routing and real-format XML joins.
 The parent readiness artifact records actual local fixture/guardian/ACL
 checks. Hosted kernel capability remains a calibration gate, not a reason to
 block review waiting for physical machines.
+
+## Independently selected module mapping
+
+After positive raw typed analysis/validation, the existing owner join observes
+only accepted `(QPC, TID, IP, process_index)` records. These keys and original
+per-lifetime counts remain in the owner/SYSTEM private directory; they are never
+artifacts. A separate mode in the same pinned TraceEvent 4.0.0 reader converts
+privately to ETLX and uses mature code-address/module tables. Raw births, native
+clock, ownership and PID-reuse checks remain authoritative, not TraceLog process
+association or rundown. No global PID selection is passed to the library.
+
+Matching consumes the exact key multiset, including duplicate counts. Missing,
+extra occurrences of selected keys, ambiguous multi-owner keys and lifetime/count
+mismatches fail closed. Foreign samples are not analyzed or exported; conversion
+may privately read whole-trace rundown/kernel tables. Kernel mappings use only the
+PID-zero module table; user membership is consulted only for selected samples.
+Ambiguous/missing mappings remain explicit `unresolved`. Public names are a static
+allowlist (uv/Python/standard OS/filesystem modules), otherwise `other-user` or
+`other-kernel`. These are sample counts and module provenance, never execution
+mode, cause or I/O latency; scheduling/file durations remain unsupported.
+
+Symbols are disabled by all three TraceLog options and child-only cleared symbol
+paths; no SymbolReader/source lookup. Conversion caps at 500,000 events and runs
+under the unchanged 110-second guardian deadline. ETLX acceptance is at most
+256 MiB **after** conversion, not a hard disk quota. Default ordinary-idle
+filtering is allowed only if every selected identity survives; a missing selected
+TID-zero key fails just like any other missing key.
+
+`calibration_modules` / `build_modules` and fixed `module_mapping` failure reasons
+are explicit. Earlier positive analysis and capture proof survive module failure.
+Only validated fixed-schema aggregates (at most 256 KiB) reach the two exact
+allowlisted module artifact paths. All reader preparation still precedes capture.
+Native ARM integration remains unproved until an explicitly budgeted hosted run.
+
+Module reader known `InvalidDataException` failures have fixed exit codes:
+71 `module_arguments`, 72 `module_selection_schema`, 73 `module_counts`,
+74 `module_key_schema`, 75 `module_key_range`, 76 `module_multiowner`,
+77 `module_stale_etlx`, 78 `module_trace_loss`, 79 `module_sample_identity`.
+Only those exact allowlisted messages are caught, without printing exception
+text or values; the controller maps codes to the same fixed public reason enums.
+Unknown exceptions/codes remain nonzero generic `module_mapping` failures.
+No failed reader emits a success-shaped module document.
+
+Each per-index module bucket also has fixed `sample_context`:
+`PROCESS`, `DPC`, `ISR`, or `DPC_ISR`, derived only from typed
+`SampledProfileTraceData.ExecutingDPC` / `ExecutingISR` getters. `NonProcess`
+is the library's DPC-or-ISR flag, not an ownership signal. These contexts retain
+the identical independently selected key multiset and counts. DPC/ISR samples may
+interrupt an owned thread; their association is not process execution or cause.
+`PROCESS` means neither interrupt getter is set, not independently established
+privilege mode. Module provenance remains separate from sample context.
