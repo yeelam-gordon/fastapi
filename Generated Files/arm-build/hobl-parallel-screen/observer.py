@@ -4,6 +4,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from typing import TextIO
 
 import pytest
 from native import native_machine
@@ -12,6 +13,7 @@ OUT = Path(os.environ["CORRECTNESS_OUTPUT"])
 SOURCE = Path(os.environ["CORRECTNESS_SOURCE"])
 WORKER = "controller"
 OWNED = {}
+PHASE_STREAM: TextIO | None = None
 
 
 def save(name, value):
@@ -28,6 +30,8 @@ def pytest_configure(config):
 
 
 def pytest_sessionstart(session):
+    global PHASE_STREAM
+    PHASE_STREAM = (OUT / ("phases-" + WORKER + ".jsonl")).open("w", encoding="utf-8")
     if os.environ.get("CHECK_COVERAGE") != "1":
         return
     import coverage
@@ -88,18 +92,25 @@ def pytest_collection_finish(session):
 
 
 def pytest_runtest_logreport(report):
-    with (OUT / ("phases-" + WORKER + ".jsonl")).open("a", encoding="utf-8") as stream:
-        stream.write(
-            json.dumps(
-                {
-                    "nodeid": report.nodeid,
-                    "when": report.when,
-                    "outcome": report.outcome,
-                    "worker": WORKER,
-                }
-            )
-            + "\n"
+    assert PHASE_STREAM is not None
+    PHASE_STREAM.write(
+        json.dumps(
+            {
+                "nodeid": report.nodeid,
+                "when": report.when,
+                "outcome": report.outcome,
+                "worker": WORKER,
+            }
         )
+        + "\n"
+    )
+
+
+def pytest_sessionfinish(session, exitstatus):
+    global PHASE_STREAM
+    assert PHASE_STREAM is not None
+    PHASE_STREAM.close()
+    PHASE_STREAM = None
 
 
 @pytest.hookimpl(hookwrapper=True)
@@ -109,16 +120,18 @@ def pytest_fixture_setup(fixturedef, request):
         and fixturedef.argname == "client"
         and "test_custom_docs_ui" in request.node.nodeid
     )
+    if not observe:
+        yield
+        return
     before = Path.cwd()
     yield
-    if observe:
-        owned = Path.cwd()
-        base = request.getfixturevalue("tmp_path_factory").getbasetemp()
-        assert owned.is_relative_to(base) and owned != before
-        assert (owned / "static").is_dir()
-        key = request.node.nodeid
-        OWNED[key] = {"before": str(before), "owned": str(owned), "base": str(base)}
-        save("fixture-setup-" + WORKER + "-" + owned.name + ".json", OWNED[key])
+    owned = Path.cwd()
+    base = request.getfixturevalue("tmp_path_factory").getbasetemp()
+    assert owned.is_relative_to(base) and owned != before
+    assert (owned / "static").is_dir()
+    key = request.node.nodeid
+    OWNED[key] = {"before": str(before), "owned": str(owned), "base": str(base)}
+    save("fixture-setup-" + WORKER + "-" + owned.name + ".json", OWNED[key])
 
 
 def pytest_fixture_post_finalizer(fixturedef, request):

@@ -26,7 +26,7 @@ jobs:
             platform: macos
             workers: 3
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 15
+    timeout-minutes: 12
     defaults:
       run:
         shell: pwsh
@@ -69,7 +69,7 @@ jobs:
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-parallel-screen'
           & $env:BASE_PYTHON -B (Join-Path $helper 'screen.py') prepare --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output $root --uv (Get-Command uv).Source --workers ${{ matrix.workers }}
           exit $LASTEXITCODE
-      - name: Six complete payloads and one bounded final-pair audit
+      - name: Four complete payloads and one bounded measured-pair audit
         run: |
           $root = Join-Path $env:GITHUB_WORKSPACE 'screen-evidence'
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-parallel-screen'

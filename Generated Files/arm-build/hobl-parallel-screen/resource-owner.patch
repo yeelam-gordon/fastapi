@@ -90,3 +90,77 @@
 +                "workdir_lock" if filename in workdir else filename
 +            )
 +            item.add_marker(pytest.mark.xdist_group(name=group))
+diff --git a/tests/test_tutorial/test_websockets/test_tutorial003.py b/tests/test_tutorial/test_websockets/test_tutorial003.py
+index dbcad3b02..4c630f86e 100644
+--- a/tests/test_tutorial/test_websockets/test_tutorial003.py
++++ b/tests/test_tutorial/test_websockets/test_tutorial003.py
+@@ -11,17 +11,18 @@ def test_get():
+ 
+ 
+ def test_websocket_handle_disconnection():
+-    with client.websocket_connect("/ws/1234") as connection, client.websocket_connect(
+-        "/ws/5678"
+-    ) as connection_two:
+-        connection.send_text("Hello from 1234")
+-        data1 = connection.receive_text()
+-        assert data1 == "You wrote: Hello from 1234"
+-        data2 = connection_two.receive_text()
+-        client1_says = "Client #1234 says: Hello from 1234"
+-        assert data2 == client1_says
+-        data1 = connection.receive_text()
+-        assert data1 == client1_says
+-        connection_two.close()
+-        data1 = connection.receive_text()
+-        assert data1 == "Client #5678 left the chat"
++    with client:
++        with client.websocket_connect(
++            "/ws/1234"
++        ) as connection, client.websocket_connect("/ws/5678") as connection_two:
++            connection.send_text("Hello from 1234")
++            data1 = connection.receive_text()
++            assert data1 == "You wrote: Hello from 1234"
++            data2 = connection_two.receive_text()
++            client1_says = "Client #1234 says: Hello from 1234"
++            assert data2 == client1_says
++            data1 = connection.receive_text()
++            assert data1 == client1_says
++            connection_two.close()
++            data1 = connection.receive_text()
++            assert data1 == "Client #5678 left the chat"
+diff --git a/tests/test_tutorial/test_websockets/test_tutorial003_py39.py b/tests/test_tutorial/test_websockets/test_tutorial003_py39.py
+index 06c4a9279..055e84bd6 100644
+--- a/tests/test_tutorial/test_websockets/test_tutorial003_py39.py
++++ b/tests/test_tutorial/test_websockets/test_tutorial003_py39.py
+@@ -34,17 +34,18 @@ def test_get(client: TestClient, html: str):
+ 
+ @needs_py39
+ def test_websocket_handle_disconnection(client: TestClient):
+-    with client.websocket_connect("/ws/1234") as connection, client.websocket_connect(
+-        "/ws/5678"
+-    ) as connection_two:
+-        connection.send_text("Hello from 1234")
+-        data1 = connection.receive_text()
+-        assert data1 == "You wrote: Hello from 1234"
+-        data2 = connection_two.receive_text()
+-        client1_says = "Client #1234 says: Hello from 1234"
+-        assert data2 == client1_says
+-        data1 = connection.receive_text()
+-        assert data1 == client1_says
+-        connection_two.close()
+-        data1 = connection.receive_text()
+-        assert data1 == "Client #5678 left the chat"
++    with client:
++        with client.websocket_connect(
++            "/ws/1234"
++        ) as connection, client.websocket_connect("/ws/5678") as connection_two:
++            connection.send_text("Hello from 1234")
++            data1 = connection.receive_text()
++            assert data1 == "You wrote: Hello from 1234"
++            data2 = connection_two.receive_text()
++            client1_says = "Client #1234 says: Hello from 1234"
++            assert data2 == client1_says
++            data1 = connection.receive_text()
++            assert data1 == client1_says
++            connection_two.close()
++            data1 = connection.receive_text()
++            assert data1 == "Client #5678 left the chat"

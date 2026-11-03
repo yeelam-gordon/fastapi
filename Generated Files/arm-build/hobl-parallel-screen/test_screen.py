@@ -1,3 +1,6 @@
+import importlib.util
+import json
+import os
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -20,6 +23,64 @@ from screen import (
 
 
 class ScreenContracts(unittest.TestCase):
+    def test_phase_reports_open_one_file_and_preserve_every_record(self):
+        with (
+            TemporaryDirectory() as temporary,
+            patch.dict(
+                os.environ,
+                {
+                    "CORRECTNESS_OUTPUT": temporary,
+                    "CORRECTNESS_SOURCE": temporary,
+                    "CHECK_COVERAGE": "0",
+                },
+            ),
+        ):
+            spec = importlib.util.spec_from_file_location(
+                "buffered_observer_contract", HERE / "observer.py"
+            )
+            observer = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(observer)
+            with patch.object(
+                Path, "cwd", side_effect=AssertionError("Unexpected cwd IO")
+            ):
+                fixture = observer.pytest_fixture_setup(
+                    SimpleNamespace(argname="unrelated"), SimpleNamespace()
+                )
+                next(fixture)
+                with self.assertRaises(StopIteration):
+                    next(fixture)
+            opened = []
+            original_open = Path.open
+
+            def counted_open(path, *args, **kwargs):
+                opened.append(path)
+                return original_open(path, *args, **kwargs)
+
+            with patch.object(Path, "open", counted_open):
+                observer.pytest_sessionstart(None)
+                for number in range(1000):
+                    observer.pytest_runtest_logreport(
+                        SimpleNamespace(
+                            nodeid=f"test_{number}", when="call", outcome="passed"
+                        )
+                    )
+                observer.pytest_sessionfinish(None, 0)
+            output = Path(temporary) / "phases-controller.jsonl"
+            self.assertEqual(opened, [output])
+            records = [json.loads(line) for line in output.read_text().splitlines()]
+            self.assertEqual(
+                records,
+                [
+                    {
+                        "nodeid": f"test_{number}",
+                        "when": "call",
+                        "outcome": "passed",
+                        "worker": "controller",
+                    }
+                    for number in range(1000)
+                ],
+            )
+
     def test_git_overrides_inherited_newline_configuration(self):
         with patch(
             "screen.subprocess.run", return_value=SimpleNamespace(stdout=b"")
@@ -67,15 +128,13 @@ class ScreenContracts(unittest.TestCase):
             with self.assertRaisesRegex(AssertionError, r"fastapi/applications\.py"):
                 source_snapshot(source)
 
-    def test_schedule_excludes_two_warmups_then_ab_ba(self):
+    def test_schedule_excludes_two_warmups_then_one_screen_pair(self):
         self.assertEqual(schedule()[:2], [("serial", False), ("parallel", False)])
         self.assertEqual(
             schedule()[2:],
             [
                 ("serial", True),
                 ("parallel", True),
-                ("parallel", True),
-                ("serial", True),
             ],
         )
 
@@ -91,6 +150,7 @@ class ScreenContracts(unittest.TestCase):
         )
         self.assertIn("tests", serial)
         self.assertNotIn("--cov-context", serial)
+        self.assertNotIn("-rA", serial)
 
     def test_group_mapping_rejects_suffix_relabel(self):
         node = "tests/test_path.py::test_text_get"

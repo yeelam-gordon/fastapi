@@ -14,6 +14,9 @@ from observer import (
     pytest_runtest_logreport as pytest_runtest_logreport,
 )
 from observer import (
+    pytest_sessionfinish as pytest_sessionfinish,
+)
+from observer import (
     pytest_sessionstart as pytest_sessionstart,
 )
 

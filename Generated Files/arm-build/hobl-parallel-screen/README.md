@@ -1,6 +1,6 @@
 # Full-HOBL parallel SCREEN (not adoption)
 
-One manual dispatch, two native ARM jobs capped at 15 minutes each. Each uses
+One manual dispatch, two native ARM jobs capped at 12 minutes each. Each uses
 normal-GIL CPython 3.13.15, native uv 0.13.6, PDM backend 2.5.0, identical 82
 runtime pins, and the tested 2558-file common source in Git's LF representation.
 Windows has four workers, macOS three; actual logical CPUs must match.
@@ -8,7 +8,8 @@ The existing registered `arm-build-diagnostics.yml` entrypoint selects
 `platform=hobl-parallel-screen` and calls the dedicated workflow; the new file
 does not need to be added to the fork's default branch to register a dispatch.
 
-Schedule: excluded serial/parallel full warmups, then measured AB and BA.
+Schedule: excluded serial/parallel full warmups, then one measured serial/
+parallel pair. This cheaper direction screen is not order-counterbalanced.
 Every payload builds an sdist and a wheel **from that sdist**, then executes
 the entire original full covered suite: 2513 passed, 130 skipped, zero errors.
 Only worker count and stock loadgroup scheduling differ between arms.
@@ -19,12 +20,15 @@ Raw streams, JUnit, shards, collection/phase/PID evidence, native identities,
 source hashes/Git modes, config, downloaded-wheel hashes, archives and nanosecond
 timings are retained. Hash/source proof runs once before/after, not per payload.
 There is no HTML, full-context JSON, or per-payload archive expansion.
-Only the final BA pair gets archive member/RECORD and reportable no-loss checks;
+Only the measured pair gets archive member/RECORD and reportable no-loss checks;
 that audit has a single 60-second timeout. Failure or timeout stays a SCREEN
 quality limit, never an accepted result. The original guardian owns the entire
 cohort; natural drain must succeed and cannot be waived.
 
 The test fixtures/group hook and guard correction are exact frozen inputs.
+Both concurrent-WebSocket tests use the documented TestClient context so their
+peers share one application loop. Existing send/receive/assertion operations
+are unchanged; no sleeps, test removal or cross-test portal reuse is added.
 Observer/bootstrap adaptations remove local affinity binding, retain CLI/worker
 trace evidence, and substitute native Mach-O checking only on macOS.
 Runtime wheels are downloaded using normal TLS, checked against PyPI metadata,
@@ -44,5 +48,13 @@ from the prior manifest were CRLF-to-LF only; no package/test content changed.
 Preparation writes a started record before the source check, so a failed gate
 still leaves an uploadable diagnostic artifact.
 
-Two prospective pairs show direction only; hardware is not matched across OSes,
-and two pairs are not the previous five-pair final-proof criterion.
+Phase metadata uses one buffered file per process, not an open/close for every
+pytest report. Untargeted fixtures perform no observer cwd lookup. Complete
+runs retain every record; a killed run can lose its final buffered tail and
+remains invalid. The stock snapshot plugin disables snapshot editing/report
+generation under xdist; literal expected-value assertions still execute.
+Do not attribute the entire strategy's effect solely to CPU parallelism.
+
+One prospective pair shows direction only; hardware is not matched across OSes,
+and this is not the previous five-pair final-proof criterion. The owned cohort
+has a 480-second cap within the per-job limit, including its final audit.

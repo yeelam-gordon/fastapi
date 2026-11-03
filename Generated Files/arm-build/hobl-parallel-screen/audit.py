@@ -6,10 +6,9 @@ import re
 import sys
 from pathlib import Path
 
-from identity_map import exact_mapping, group_for
-from screen import COMMON, load, save, tiny_outcome
-
 import coverage
+from identity_map import exact_mapping, group_for
+from screen import COMMON, load, save, schedule, tiny_outcome
 
 sys.path.insert(0, str(COMMON))
 from artifact_gate import artifact_set, equivalent
@@ -153,7 +152,11 @@ def coverage_compare(old, new, source, config):
 
 
 def main(source, output, workers):
-    serial, parallel = output / "payload-06-serial", output / "payload-05-parallel"
+    serial, parallel = (
+        output / f"payload-{index:02d}-{arm}"
+        for index, (arm, measured) in enumerate(schedule(), 1)
+        if measured
+    )
     expected = load(serial / "collection-controller.json")
     assert len(expected) == 2643
     left, left_ids = execution(serial, expected, False, workers)

@@ -45,8 +45,6 @@ def schedule():
         ("parallel", False),
         ("serial", True),
         ("parallel", True),
-        ("parallel", True),
-        ("serial", True),
     ]
 
 
@@ -127,6 +125,7 @@ def prepare(args):
                 "tests/utils.py guard",
                 "two custom docs temp-cwd fixtures",
                 "root standard xdist groups",
+                "two WebSocket tests use one TestClient-owned application loop",
             ],
         },
     )
@@ -314,7 +313,6 @@ def test_command(args, folder, arm):
         "pytest",
         "tests",
         "-q",
-        "-rA",
         "-p",
         "no:pytest_cov",
         "-p",
@@ -360,7 +358,7 @@ def worker(args):
             "constraint_uri": env["PIP_CONSTRAINT"],
             "final_audit_budget_seconds": 60,
             "source_hash_scope": "once before/after cohort",
-            "archive_coverage_scope": "only final measured BA pair after all timings",
+            "archive_coverage_scope": "only measured serial/parallel pair after timing",
         },
     )
     for index, (arm, measured) in enumerate(schedule(), 1):
@@ -405,7 +403,8 @@ def worker(args):
             "measured": measured,
             "build_seconds": build["seconds"],
             "test_seconds": test["seconds"],
-            "complete_seconds": (end - start) / 1e9,
+            "complete_seconds": build["seconds"] + test["seconds"],
+            "wrapper_wall_seconds": (end - start) / 1e9,
             "counts": tiny_outcome(folder),
         }
         rows.append(row)
@@ -425,14 +424,14 @@ def worker(args):
         output / "result.json",
         {
             "status": "SCREEN_PENDING_NATURAL_DRAIN",
-            "measured_pairs": 2,
+            "measured_pairs": 1,
+            "order_counterbalanced": False,
             "medians": summary,
             "relative_improvement": 1
             - summary["parallel"]["complete_seconds"]
             / summary["serial"]["complete_seconds"],
             "pair_savings_seconds": [
                 rows[2]["complete_seconds"] - rows[3]["complete_seconds"],
-                rows[5]["complete_seconds"] - rows[4]["complete_seconds"],
             ],
         },
     )
@@ -494,10 +493,14 @@ def main(args):
             env=os.environ.copy(),
             stdout_path=args.output / "driver.stdout",
             stderr_path=args.output / "driver.stderr",
-            timeout=720,
+            timeout=480,
         )
         save(args.output / "ownership.json", dataclasses.asdict(receipt))
-        assert receipt.succeeded, "Original guardian natural drain failed; no waiver"
+        assert receipt.succeeded, (
+            f"Cohort failed: returncode={receipt.returncode}, "
+            f"timed_out={receipt.timed_out}, survivors={receipt.survivors}; "
+            "see driver.stderr and ownership.json; no waiver"
+        )
         result = load(args.output / "result.json")
         result["status"] = (
             "SCREEN_VALIDATION_LIMIT"
