@@ -115,9 +115,9 @@ class Proof(unittest.TestCase):
         env = dict(GITHUB_ACTIONS="true", GITHUB_REPOSITORY="yeelam-gordon/fastapi",
                    GITHUB_RUN_ATTEMPT="1", RUNNER_ENVIRONMENT="github-hosted",
                    RUNNER_OS="Windows", RUNNER_ARCH="ARM64",
-                   GITHUB_REF="refs/heads/perf/hobl-build-etw-20261103",
+                   GITHUB_REF="refs/heads/perf/hobl-owned-stacks-20261104",
                    GITHUB_RUN_ID="42", GITHUB_SHA="a" * 40, RUNNER_NAME="host")
-        run = dict(head_sha=env["GITHUB_SHA"], head_branch="perf/hobl-build-etw-20261103",
+        run = dict(head_sha=env["GITHUB_SHA"], head_branch="perf/hobl-owned-stacks-20261104",
                    workflow_id=400482741, run_attempt=1, event="workflow_dispatch")
         jobs = dict(total_count=2, jobs=[
             dict(status="in_progress", conclusion=None, name="build-etw / trace",

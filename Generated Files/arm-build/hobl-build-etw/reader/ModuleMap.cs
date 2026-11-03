@@ -8,7 +8,8 @@ internal static class ModuleMap
         ["module_counts"] = 73, ["module_key_schema"] = 74,
         ["module_key_range"] = 75, ["module_multiowner"] = 76,
         ["module_stale_etlx"] = 77, ["module_trace_loss"] = 78,
-        ["module_sample_identity"] = 79
+        ["module_sample_identity"] = 79, ["module_stack_depth"] = 80,
+        ["module_missing_stacks"] = 81
     };
 
     internal static void Run(string[] args)
@@ -71,6 +72,15 @@ internal static class ModuleMap
             "mountmgr", "storport", "stornvme", "disk", "classpnp", "fileinfo", "wdfilter"
         };
         var buckets = new SortedDictionary<(int Owner, string Provenance, string Module, string Context), long>();
+        var stackAllow = new HashSet<string>(allow, StringComparer.OrdinalIgnoreCase) {
+            "cng", "ci", "ntosext", "mup", "rdbss", "bindflt", "cldflt", "wcifs",
+            "wof", "fvevol", "storvsp", "wdf01000"
+        };
+        var stackBuckets = new SortedDictionary<(int Owner, string Provenance, string Module, string Context), long>();
+        var withStack = new long[counts.Length];
+        var withoutStack = new long[counts.Length];
+        var stackFrames = new long[counts.Length];
+        var unknownFrames = new long[counts.Length];
         long unexpected = 0;
         using var source = log.Events.GetSource();
         source.Kernel.PerfInfoSample += sample => {
@@ -98,6 +108,40 @@ internal static class ModuleMap
                 (sample.ExecutingISR ? "ISR" : "PROCESS");
             var bucket = (selected.Owner, provenance, name, context);
             buckets[bucket] = buckets.GetValueOrDefault(bucket) + 1;
+            var stack = sample.CallStack();
+            if (stack is null) withoutStack[selected.Owner]++;
+            else
+            {
+                withStack[selected.Owner]++;
+                var seen = new HashSet<(int Owner, string Provenance, string Module, string Context)>();
+                int depth = 0;
+                while (stack is not null)
+                {
+                    if (++depth > 512)
+                        throw new InvalidDataException("module_stack_depth");
+                    stackFrames[selected.Owner]++;
+                    var frameModule = stack.CodeAddress.ModuleFile;
+                    string frameProvenance = "unresolved", frameName = "unresolved";
+                    if (frameModule is null) unknownFrames[selected.Owner]++;
+                    else
+                    {
+                        bool frameKernel = kernel.Contains(frameModule.ModuleFileIndex);
+                        bool frameUser = sample.Process()?.LoadedModules.Any(
+                            loaded => loaded.ModuleFile?.ModuleFileIndex == frameModule.ModuleFileIndex) == true;
+                        if (frameKernel != frameUser)
+                        {
+                            frameProvenance = frameKernel ? "kernel-table" : "user-table";
+                            frameName = (allow.Contains(frameModule.Name) ||
+                                (frameKernel && stackAllow.Contains(frameModule.Name))) ? frameModule.Name.ToLowerInvariant() :
+                                frameKernel ? "other-kernel" : "other-user";
+                        }
+                    }
+                    seen.Add((selected.Owner, frameProvenance, frameName, context));
+                    stack = stack.Caller;
+                }
+                foreach (var presence in seen)
+                    stackBuckets[presence] = stackBuckets.GetValueOrDefault(presence) + 1;
+            }
         };
         bool complete = source.Process();
         if (!complete || unexpected != 0 || keys.Values.Any(v => v.Count != 0))
@@ -106,13 +150,21 @@ internal static class ModuleMap
         foreach (var bucket in buckets) actual[bucket.Key.Owner] += bucket.Value;
         if (!actual.SequenceEqual(counts))
             throw new InvalidDataException("module_counts");
+        if (withStack.Sum() == 0)
+            throw new InvalidDataException("module_missing_stacks");
         var result = new {
             schema = 1, cpu_units = "SAMPLE_COUNTS", cpu_samples = counts.Sum(),
             missing_samples = 0, unexpected_samples = 0,
-            lifetimes = counts.Select((n, i) => new { process_index = i, cpu_samples = n }),
+            lifetimes = counts.Select((n, i) => new { process_index = i, cpu_samples = n,
+                with_stack = withStack[i], without_stack = withoutStack[i],
+                stack_frames = stackFrames[i], unknown_frames = unknownFrames[i] }),
             modules = buckets.Select(b => new { process_index = b.Key.Owner,
                 provenance = b.Key.Provenance, module = b.Key.Module,
                 sample_context = b.Key.Context, samples = b.Value }),
+            stack_modules = stackBuckets.Select(b => new { process_index = b.Key.Owner,
+                provenance = b.Key.Provenance, module = b.Key.Module,
+                sample_context = b.Key.Context, samples = b.Value }),
+            stack_interpretation = "INCLUSIVE_DEDUPLICATED_PRESENCE_NOT_CPU_TIME_OR_LATENCY",
             symbol_resolution = "DISABLED", scheduling = "UNSUPPORTED", file_durations = "UNSUPPORTED",
             interpretation = "MODULE_PROVENANCE_NOT_EXECUTION_MODE_CAUSE_OR_IO_LATENCY"
         };

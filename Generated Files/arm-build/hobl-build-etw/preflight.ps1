@@ -6,7 +6,7 @@ try {
     if ($env:GITHUB_ACTIONS -ne 'true' -or $env:GITHUB_REPOSITORY -ne 'yeelam-gordon/fastapi' -or
         $env:GITHUB_RUN_ATTEMPT -ne '1' -or $env:RUNNER_ENVIRONMENT -ne 'github-hosted' -or
         $env:RUNNER_OS -ne 'Windows' -or $env:RUNNER_ARCH -ne 'ARM64' -or
-        $env:GITHUB_REF -ne 'refs/heads/perf/hobl-build-etw-20261103') { throw 'host gate' }
+        $env:GITHUB_REF -ne 'refs/heads/perf/hobl-owned-stacks-20261104') { throw 'host gate' }
     $result.reason = 'token'
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = [Security.Principal.WindowsPrincipal]::new($identity)
@@ -24,7 +24,7 @@ try {
     $uri = "https://api.github.com/repos/yeelam-gordon/fastapi/actions/runs/$env:GITHUB_RUN_ID"
     $run = Invoke-RestMethod -Uri $uri -Headers $headers -TimeoutSec 15
     if ($run.workflow_id -ne 400482741 -or $run.head_sha -ne $env:GITHUB_SHA -or
-        $run.head_branch -ne 'perf/hobl-build-etw-20261103' -or $run.run_attempt -ne 1 -or
+        $run.head_branch -ne 'perf/hobl-owned-stacks-20261104' -or $run.run_attempt -ne 1 -or
         $run.event -ne 'workflow_dispatch') { throw 'run gate' }
     $result.reason = 'job_identity'
     $jobs = Invoke-RestMethod -Uri "$uri/jobs?per_page=100" -Headers $headers -TimeoutSec 15

@@ -90,10 +90,10 @@ def hosted_gate(env=os.environ, fetch=api):
     if (env.get("GITHUB_ACTIONS") != "true" or env.get("GITHUB_REPOSITORY") != "yeelam-gordon/fastapi"
             or env.get("GITHUB_RUN_ATTEMPT") != "1" or env.get("RUNNER_ENVIRONMENT") != "github-hosted"
             or env.get("RUNNER_OS") != "Windows" or env.get("RUNNER_ARCH") != "ARM64"
-            or env.get("GITHUB_REF") != "refs/heads/perf/hobl-build-etw-20261103"):
+            or env.get("GITHUB_REF") != "refs/heads/perf/hobl-owned-stacks-20261104"):
         raise Failure("controller", 1)
     run = fetch("runs/" + env["GITHUB_RUN_ID"])
-    if (run["head_sha"] != env["GITHUB_SHA"] or run["head_branch"] != "perf/hobl-build-etw-20261103"
+    if (run["head_sha"] != env["GITHUB_SHA"] or run["head_branch"] != "perf/hobl-owned-stacks-20261104"
             or run["workflow_id"] != 400482741 or run["run_attempt"] != 1
             or run["event"] != "workflow_dispatch"):
         raise Failure("controller", 2)

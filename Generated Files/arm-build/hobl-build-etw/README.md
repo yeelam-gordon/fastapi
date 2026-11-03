@@ -55,7 +55,7 @@ source/member/RECORD checks and warmup-versus-traced semantic equivalence. resea
 
 Source only; **no dispatch is authorized by these files**. Parent reviews and
 allocates the single registered `arm-build-diagnostics` workflow (400482741),
-platform `hobl-build-etw`, branch `perf/hobl-build-etw-20261103`. All other
+platform `hobl-build-etw`, branch `perf/hobl-owned-stacks-20261104`. All other
 billable jobs are skipped; the job API gate permits skipped entries, not a
 misleading `total_count == 1` requirement. Direct workflow dispatch is not
 exposed on the reusable workflow.
@@ -212,7 +212,8 @@ Native ARM integration remains unproved until an explicitly budgeted hosted run.
 Module reader known `InvalidDataException` failures have fixed exit codes:
 71 `module_arguments`, 72 `module_selection_schema`, 73 `module_counts`,
 74 `module_key_schema`, 75 `module_key_range`, 76 `module_multiowner`,
-77 `module_stale_etlx`, 78 `module_trace_loss`, 79 `module_sample_identity`.
+77 `module_stale_etlx`, 78 `module_trace_loss`, 79 `module_sample_identity`,
+80 `module_stack_depth`, 81 `module_missing_stacks`.
 Only those exact allowlisted messages are caught, without printing exception
 text or values; the controller maps codes to the same fixed public reason enums.
 Unknown exceptions/codes remain nonzero generic `module_mapping` failures.
@@ -226,3 +227,36 @@ the identical independently selected key multiset and counts. DPC/ISR samples ma
 interrupt an owned thread; their association is not process execution or cause.
 `PROCESS` means neither interrupt getter is set, not independently established
 privilege mode. Module provenance remains separate from sample context.
+
+## Inclusive sampled-stack module presence
+
+The same privately verified sample keys also select `sample.CallStack()`.
+Each lifetime reports `with_stack`, `without_stack`, `stack_frames` and
+`unknown_frames` (frames with no module). Missing stacks are explicit, not
+zero-cost evidence. With-stack plus without-stack equals its original CPU
+sample count; exclusive leaf `modules` buckets and selection are unchanged.
+If no selected sample has a stack, code 81 / `module_missing_stacks` fails
+closed before calibration can authorize the real build. Earlier positive
+analysis and capture proof survive; partial missing coverage remains explicit.
+
+`stack_modules` counts presence once per sample for each
+`(process_index, provenance, module, sample_context)` class, regardless of how
+many frames repeat that class. Each bucket is bounded by its lifetime's
+with-stack count. Inclusive sums can exceed CPU sample counts: they are
+**not CPU time, latency, execution mode, driver blame or mechanism proof**.
+Unresolved or ambiguous module provenance stays explicit. Frame/module tables
+never establish ownership; only the independent raw analyzer's keys do.
+
+The walk follows only `CodeAddress.ModuleFile` and `Caller`, at most 512 frames.
+Overflow fails closed with code 80 / `module_stack_depth`, retaining earlier
+positive analysis and capture proof. No function, address or private image name
+is exported. No symbol reader or symbol lookup is used.
+
+The stack-only static OS allowlist additionally admits `cng`, `ci`, `ntosext`,
+`mup`, `rdbss`, `bindflt`, `cldflt`, `wcifs`, `wof`, `fvevol`, `storvsp` and
+`wdf01000`, only with kernel-table provenance. Exclusive leaf naming is unchanged.
+User-table images with these additional basenames collapse to `other-user`.
+Everything else stays `other-kernel`, `other-user` or `unresolved`.
+Existing exact module artifact paths carry this schema; no new upload route.
+Local retained-fixture proof does not establish ARM workload coverage or cause,
+and does not authorize or allocate another hosted run.
