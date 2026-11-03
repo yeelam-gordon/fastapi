@@ -14,7 +14,7 @@ try {
     $result.reason = 'disk'
     if (([IO.DriveInfo]::new([IO.Path]::GetPathRoot($Private))).AvailableFreeSpace -lt 8GB) { throw 'disk gate' }
     $result.reason = 'tools'
-    foreach ($tool in @('wpr.exe', 'logman.exe')) {
+    foreach ($tool in @('wpr.exe')) {
         if (-not (Test-Path -LiteralPath (Join-Path $env:SystemRoot "System32\$tool") -PathType Leaf)) { throw 'tool gate' }
     }
     $result.reason = 'missing_dotnet10'

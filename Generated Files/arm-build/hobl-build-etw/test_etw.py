@@ -19,6 +19,36 @@ class Proof(unittest.TestCase):
         self.path.mkdir()
         self.addCleanup(shutil.rmtree, self.path)
 
+    def test_inventory_preserves_conflict_and_error_gates(self):
+        for names, reason in ((["unrelated-private-sentinel"], None),
+                              (["WPR_existing"], "existing_recording"),
+                              (["hobl-existing"], "existing_recording"),
+                              (["NT Kernel Logger"], "existing_recording"),
+                              (["BuildAttributionSystem"], "existing_recording"),
+                              ({"not": "an inventory"}, "schema"),
+                              ([None], "schema")):
+            def fake(argv, **kwargs):
+                self.assertEqual(argv[-2], "--sessions")
+                Path(argv[-1]).write_text(json.dumps(names), encoding="utf-8")
+                return SimpleNamespace(succeeded=True, returncode=0)
+            c = capture.Controller(self.path, self.path / "public", self.path, Path("uv"), fake)
+            if reason == "schema":
+                with self.assertRaisesRegex(ValueError, "schema"):
+                    c.recorder_inventory()
+            elif reason:
+                with self.assertRaises(capture.Failure) as failure:
+                    c.recorder_inventory()
+                self.assertEqual(failure.exception.reason, reason)
+            else:
+                c.recorder_inventory()
+            self.assertEqual(c.stage, "recorder_inventory")
+        c = capture.Controller(self.path, self.path / "public", self.path, Path("uv"),
+                               lambda *a, **k: SimpleNamespace(succeeded=False, returncode=2147946601))
+        with self.assertRaises(capture.Failure) as failure:
+            c.recorder_inventory()
+        self.assertEqual((failure.exception.code, failure.exception.reason),
+                         (2147946601, "session_inventory"))
+
     def test_family_pid_reuse_and_native_clock(self):
         lives = [dict(pid=10, parent=1, start=100, end=200),
                  dict(pid=20, parent=10, start=150, end=190),

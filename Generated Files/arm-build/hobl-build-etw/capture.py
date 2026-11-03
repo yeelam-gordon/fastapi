@@ -27,6 +27,7 @@ STAGES = {"preflight", "prepare", "calibration_start", "calibration_launch",
           "build_start", "build_launch", "build_stop", "build_decode", "build_analysis", "build_artifacts", "cleanup", "complete"}
 STAGES |= {"reader_prepare", "reader_decode"}
 STAGES |= {"calibration_modules", "build_modules"}
+STAGES |= {"recorder_inventory"}
 TOOLS = {"controller", "wpr", "python", "uv", "logman", "DOTNET"}
 REASONS = {"none", "native_command", "host_context", "run_identity", "job_identity", "token",
            "disk", "tools", "guardian_hash", "existing_recording", "etl_size", "artifacts",
@@ -35,6 +36,7 @@ REASONS = {"none", "native_command", "host_context", "run_identity", "job_identi
            "missing_known_child", "known_child_not_owned", "recording_window",
            "insufficient_owned_evidence", "schema", "unexpected", "missing_dotnet10"}
 REASONS |= {"module_mapping"}
+REASONS |= {"session_inventory"}
 REASONS |= set(module_map.EXIT_REASONS.values())
 EXCEPTION_TYPES = {"NONE", "NATIVE_FAILURE", "KEY_ERROR", "VALUE_ERROR", "TYPE_ERROR",
                    "XML_PARSE_ERROR", "FILE_NOT_FOUND", "OS_ERROR", "OTHER"}
@@ -193,6 +195,22 @@ class Controller:
                                "--verbosity", "quiet", "/nodeReuse:false", "/p:UseSharedCompilation=false"],
                      90, cwd=project, env=self.reader_env)
 
+    def recorder_inventory(self):
+        self.stage = "recorder_inventory"
+        output = self.private / "session-names.json"
+        try:
+            self.command("DOTNET", [self.dotnet, str(self.reader_dll), "--sessions", str(output)],
+                         cwd=HERE / "reader", env=self.reader_env)
+        except Failure as error:
+            raise Failure("DOTNET", error.code, "session_inventory") from error
+        names = json.loads(output.read_text(encoding="utf-8"))
+        if (not isinstance(names, list) or len(names) > 1024
+                or any(type(name) is not str or not 0 < len(name) <= 1024 for name in names)):
+            raise ValueError("schema")
+        if any(marker in name.lower() for name in names
+               for marker in ("wpr_", "buildattributionsystem", "hobl-", "nt kernel logger")):
+            raise Failure("DOTNET", -1, "existing_recording")
+
     def trace(self, phase, command, env):
         folder = self.private / phase
         folder.mkdir()
@@ -275,12 +293,8 @@ class Controller:
         status = (self.private / f"{self.sequence}.stdout").read_text(encoding="utf-8", errors="replace")
         if "not recording" not in status.lower():
             raise Failure("wpr", 9, "existing_recording")
-        logman = str(Path(self.wpr).with_name("logman.exe"))
-        self.command("logman", [logman, "query", "-ets"])
-        sessions = (self.private / f"{self.sequence}.stdout").read_text(encoding="utf-8", errors="replace").lower()
-        if any(name in sessions for name in ("wpr_", "buildattributionsystem", "hobl-", "nt kernel logger")):
-            raise Failure("logman", 10, "existing_recording")
         self.prepare_reader()
+        self.recorder_inventory()
         self.stage = "prepare"
         screen = HERE.with_name("hobl-parallel-screen") / "screen.py"
         preparation = self.private / "prepared"

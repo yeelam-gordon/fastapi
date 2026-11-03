@@ -1,6 +1,25 @@
 using System.Text.Json;
 using Microsoft.Diagnostics.Tracing;
 using Microsoft.Diagnostics.Tracing.Parsers;
+using Microsoft.Diagnostics.Tracing.Session;
+
+if (args.Length == 2 && args[0] == "--sessions")
+{
+    try
+    {
+        var names = TraceEventSession.GetActiveSessionNames();
+        File.WriteAllText(args[1], JsonSerializer.Serialize(names));
+    }
+    catch (System.Runtime.InteropServices.COMException error)
+    {
+        Environment.ExitCode = error.HResult;
+    }
+    catch (UnauthorizedAccessException error)
+    {
+        Environment.ExitCode = error.HResult;
+    }
+    return;
+}
 
 if (args.Length > 0 && args[0] == "--modules")
 {

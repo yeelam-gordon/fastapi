@@ -1,5 +1,19 @@
 # Exclusive hosted build ETW research
 
+## Read-only recorder inventory
+
+After the hosted elevated-token gate and `wpr -status`, the prepared pinned
+reader calls `TraceEventSession.GetActiveSessionNames` (`QueryAllTraces`).
+Session names remain private; the controller rejects the same known recorder
+markers. No session is created, attached, stopped or cancelled by inventory.
+Native errors remain nonzero, with `recorder_inventory/session_inventory`
+reported explicitly. There is no empty-list fallback or ignored CLI failure.
+
+This replaces `logman query -ets`, which failed before recording in native
+run41683099307 with HRESULT0x80071069. The failed instance/cause is unknown.
+Local non-elevated execution proves only caller-visible query behavior;
+hosted completeness still requires the unchanged elevated-token gate.
+
 ## Current native decoder: Microsoft TraceEvent 4.0.0
 
 Native captures now use the pinned standard Microsoft typed kernel reader in
