@@ -24,6 +24,21 @@ TYPES = {
     "fileWrite": "FileIOReadWriteTraceData", "fileOpEnd": "FileIOOpEndTraceData",
     "cswitch": "CSwitchTraceData", "readyThread": "DispatcherReadyThreadTraceData",
 }
+PAYLOADS_V2 = {
+    **PAYLOADS,
+    "fileOpEnd": {"irp", "extraInfo", "ntStatus"},
+    "cswitch": {"oldTid", "newTid", "oldThreadState", "oldThreadWaitReason",
+                "oldThreadWaitMode", "processorNumber"},
+    "readyThread": {"awakenedTid", "adjustReason", "adjustIncrement", "flags",
+                    "processorNumber"},
+}
+V2_RANGES = {
+    "oldTid": (-1, 2**31 - 1), "newTid": (-1, 2**31 - 1),
+    "awakenedTid": (0, 2**31 - 1), "oldThreadState": (0, 255),
+    "oldThreadWaitReason": (0, 255), "oldThreadWaitMode": (0, 255),
+    "processorNumber": (0, 2**16 - 1), "adjustReason": (0, 255),
+    "adjustIncrement": (0, 255), "flags": (0, 255), "ntStatus": (0, 2**32 - 1),
+}
 
 
 def integer(value, low=0, high=2**64 - 1):
@@ -38,9 +53,11 @@ def rows(path):
             if len(line) > 65536:
                 raise ValueError("schema")
             row = json.loads(line)
-            if (set(row) != KEYS or type(row["schema"]) is not int or row["schema"] != 1
+            if (not isinstance(row, dict) or set(row) != KEYS
+                    or type(row["schema"]) is not int or row["schema"] not in (1, 2)
                     or row["kind"] not in PAYLOADS or row["sourceType"] != TYPES[row["kind"]]):
                 raise ValueError("schema")
+            payload_keys = (PAYLOADS if row["schema"] == 1 else PAYLOADS_V2)[row["kind"]]
             if not isinstance(row["provider"], str) or re.fullmatch(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}", row["provider"]) is None:
                 raise ValueError("schema")
             for key, maximum in (("eventId", 65535), ("version", 255), ("opcode", 255)):
@@ -54,16 +71,20 @@ def rows(path):
             if row["processBirthQpc"] is not None:
                 integer(row["processBirthQpc"], 0, 2**63 - 1)
             payload = row["payload"]
-            if payload is None and not PAYLOADS[row["kind"]]:
+            if payload is None and not payload_keys:
                 payload = {}
-            if not isinstance(payload, dict) or set(payload) != PAYLOADS[row["kind"]]:
+            if not isinstance(payload, dict) or set(payload) != payload_keys:
                 raise ValueError("schema")
             for key, value in payload.items():
                 if key == "fileName":
                     if not isinstance(value, str) or len(value) > 32768:
                         raise ValueError("schema")
                 else:
-                    integer(value, -1 if key in {"parentPid", "oldTid", "newTid"} else 0)
+                    limits = V2_RANGES.get(key) if row["schema"] == 2 else None
+                    if limits is not None:
+                        integer(value, *limits)
+                    else:
+                        integer(value, -1 if key in {"parentPid", "oldTid", "newTid"} else 0)
             row["payload"] = payload
             yield row
 
@@ -92,6 +113,21 @@ def events(path):
             data = dict(IssuingThreadId=row["tid"], Irp=p["irp"], FileObject=p["fileObject"])
             if "fileName" in p:
                 data["FileName"] = p["fileName"]
+        elif k == "fileOpEnd":
+            data = {"Irp": p["irp"]}
+            if row["schema"] == 2:
+                data.update(ExtraInfo=p["extraInfo"], NtStatus=p["ntStatus"])
+        elif k == "cswitch":
+            data = dict(OldThreadId=p["oldTid"], NewThreadId=p["newTid"])
+            if row["schema"] == 2:
+                data.update(OldThreadState=p["oldThreadState"],
+                            OldThreadWaitReason=p["oldThreadWaitReason"],
+                            OldThreadWaitMode=p["oldThreadWaitMode"],
+                            ProcessorNumber=p["processorNumber"])
+        elif k == "readyThread" and row["schema"] == 2:
+            data = dict(AwakenedThreadId=p["awakenedTid"], AdjustReason=p["adjustReason"],
+                        AdjustIncrement=p["adjustIncrement"], Flags=p["flags"],
+                        ProcessorNumber=p["processorNumber"])
         yield dict(kind=k, name="", data=data, qpc=row["qpc"], version=row["version"],
                    opcode=row["opcode"], id=row["eventId"], provider="{" + row["provider"].lower() + "}",
                    tid=row["tid"], source_type=row["sourceType"],

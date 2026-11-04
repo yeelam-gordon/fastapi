@@ -52,7 +52,7 @@ void Emit(string kind, TraceEvent e, object? payload = null)
     string shape = $"{kind}|{e.GetType().Name}|v{e.Version}|op{(int)e.Opcode}";
     shapes[shape] = shapes.GetValueOrDefault(shape) + 1;
     rows.WriteLine(JsonSerializer.Serialize(new {
-        schema = 1, kind, sourceType = e.GetType().Name,
+        schema = 2, kind, sourceType = e.GetType().Name,
         provider = e.ProviderGuid, eventId = (int)e.ID,
         version = e.Version, opcode = (int)e.Opcode,
         qpc = e.TimeStampQPC, pid = e.ProcessID, tid = e.ThreadID,
@@ -104,9 +104,18 @@ kernel.PerfInfoSample += e => {
 kernel.FileIOCreate += e => Emit("fileCreate", e, new { irp = e.IrpPtr, fileObject = e.FileObject, fileName = e.FileName });
 kernel.FileIORead += e => Emit("fileRead", e, new { irp = e.IrpPtr, fileObject = e.FileObject, fileKey = e.FileKey, sizeBytes = e.IoSize });
 kernel.FileIOWrite += e => Emit("fileWrite", e, new { irp = e.IrpPtr, fileObject = e.FileObject, fileKey = e.FileKey, sizeBytes = e.IoSize });
-kernel.FileIOOperationEnd += e => Emit("fileOpEnd", e, new { irp = e.IrpPtr });
-kernel.ThreadCSwitch += e => Emit("cswitch", e, new { oldTid = e.OldThreadID, newTid = e.NewThreadID });
-kernel.DispatcherReadyThread += e => Emit("readyThread", e);
+kernel.FileIOOperationEnd += e => Emit("fileOpEnd", e, new {
+    irp = e.IrpPtr, extraInfo = e.ExtraInfo, ntStatus = unchecked((uint)e.NtStatus)
+});
+kernel.ThreadCSwitch += e => Emit("cswitch", e, new {
+    oldTid = e.OldThreadID, newTid = e.NewThreadID, oldThreadState = (int)e.OldThreadState,
+    oldThreadWaitReason = (int)e.OldThreadWaitReason, oldThreadWaitMode = (int)e.OldThreadWaitMode,
+    processorNumber = e.ProcessorNumber
+});
+kernel.DispatcherReadyThread += e => Emit("readyThread", e, new {
+    awakenedTid = e.AwakenedThreadID, adjustReason = (int)e.AdjustReason,
+    adjustIncrement = e.AdjustIncrement, flags = e.Flags, processorNumber = e.ProcessorNumber
+});
 source.AllEvents += e => { all++; lastQpc = Math.Max(lastQpc, e.TimeStampQPC); };
 bool complete = source.Process();
 if (!complete || frequency is null || rawClock is null || buffersLost is null || headerQpc is null
@@ -114,7 +123,7 @@ if (!complete || frequency is null || rawClock is null || buffersLost is null ||
     || headerOpcode is null || headerCallbackIdentity is null)
     throw new InvalidDataException("Incomplete typed header.");
 rows.WriteLine(JsonSerializer.Serialize(new {
-    schema = 1, kind = "header", sourceType = "EventTraceHeaderTraceData",
+    schema = 2, kind = "header", sourceType = "EventTraceHeaderTraceData",
     provider = headerProvider, eventId = headerEventId,
     version = headerVersion, opcode = headerOpcode, qpc = headerQpc,
     pid = (int?)null, tid = (int?)null, processBirthQpc = (long?)null,
@@ -124,7 +133,7 @@ rows.WriteLine(JsonSerializer.Serialize(new {
 }));
 rows.Flush();
 File.WriteAllText(args[2], JsonSerializer.Serialize(new {
-    schema = 1, complete, package = "Microsoft.Diagnostics.Tracing.TraceEvent",
+    schema = 2, complete, package = "Microsoft.Diagnostics.Tracing.TraceEvent",
     packageVersion = "4.0.0", assemblyVersion = typeof(TraceEvent).Assembly.GetName().Version?.ToString(),
     allCallbacks = all, counts, shapes, populatedThreadStarts = populatedThreads,
     samplesWithSourceTid = sampleTid, samplesWithNonzeroIp = sampleIp,

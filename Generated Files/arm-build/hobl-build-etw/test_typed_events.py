@@ -86,6 +86,82 @@ class Typed(unittest.TestCase):
         self.assertEqual(controller.stage, "reader_prepare")
         self.assertEqual(failure.exception.reason, "missing_dotnet10")
 
+    def test_scheduling_and_completion_payloads_survive_adapter(self):
+        records = [
+            dict(row("readyThread", 100, tid=11, version=2, opcode=50),
+                 schema=2, sourceType="DispatcherReadyThreadTraceData",
+                 payload=dict(awakenedTid=99, adjustReason=2, adjustIncrement=3,
+                              flags=4, processorNumber=5)),
+            dict(row("cswitch", 101, tid=99, version=5, opcode=36),
+                 schema=2, sourceType="CSwitchTraceData",
+                 payload=dict(oldTid=11, newTid=99, oldThreadState=5,
+                              oldThreadWaitReason=6, oldThreadWaitMode=1, processorNumber=5)),
+            dict(row("fileOpEnd", 102, version=3, opcode=76),
+                 schema=2, sourceType="FileIOOpEndTraceData",
+                 payload=dict(irp=2**64 - 1, extraInfo=2**63 + 7, ntStatus=0xC0000001)),
+        ]
+        self.write(records)
+        events = list(typed_events.events(self.path))
+        self.assertEqual(events[0]["tid"], 11)
+        self.assertEqual(events[0]["data"], dict(
+            AwakenedThreadId=99, AdjustReason=2, AdjustIncrement=3, Flags=4, ProcessorNumber=5))
+        self.assertEqual(events[1]["data"], dict(
+            OldThreadId=11, NewThreadId=99, OldThreadState=5,
+            OldThreadWaitReason=6, OldThreadWaitMode=1, ProcessorNumber=5))
+        self.assertEqual(events[2]["data"], dict(
+            Irp=2**64 - 1, ExtraInfo=2**63 + 7, NtStatus=0xC0000001))
+        for record, event in zip(records, events):
+            for source, target in (("qpc", "qpc"), ("version", "version"),
+                                   ("opcode", "opcode"), ("eventId", "id")):
+                self.assertEqual(event[target], record[source])
+            self.assertEqual(event["provider"], "{" + record["provider"] + "}")
+        for index, field, value in ((0, "awakenedTid", None), (0, "flags", True),
+                                    (0, "adjustIncrement", 256), (1, "oldThreadState", -1),
+                                    (2, "ntStatus", 2**32), (2, "irp", 2**64)):
+            malformed = copy.deepcopy(records)
+            malformed[index]["payload"][field] = value
+            self.write(malformed)
+            with self.assertRaisesRegex(ValueError, "schema"):
+                list(typed_events.events(self.path))
+        for payload in (None, {}, dict(records[0]["payload"], unexpected=1)):
+            malformed = copy.deepcopy(records)
+            malformed[0]["payload"] = payload
+            self.write(malformed)
+            with self.assertRaisesRegex(ValueError, "schema"):
+                list(typed_events.events(self.path))
+
+    def test_legacy_payloads_remain_legacy_and_v2_analysis_matches(self):
+        legacy = [
+            dict(row("readyThread", 100), sourceType="DispatcherReadyThreadTraceData"),
+            dict(row("cswitch", 101), sourceType="CSwitchTraceData",
+                 payload=dict(oldTid=11, newTid=99)),
+            dict(row("fileOpEnd", 102), sourceType="FileIOOpEndTraceData", payload=dict(irp=123)),
+        ]
+        self.write(legacy)
+        self.assertEqual([event["data"] for event in typed_events.events(self.path)],
+                         [{}, dict(OldThreadId=11, NewThreadId=99), dict(Irp=123)])
+        self.assertTrue(all(record["schema"] == 1 for record in typed_events.rows(self.path)))
+        anchor = dict(pid=10, qpc_before=99, qpc_after=101, qpc_end=201,
+                      creation_filetime=1000, filetime_after=1000, qpc_frequency=10000000)
+        self.write(self.records())
+        original = decode.analyze(self.path, anchor, event_reader=typed_events.events)
+        enriched = [dict(record, schema=2) for record in self.records()]
+        enriched.extend([
+            dict(row("readyThread", 150, tid=11, version=2, opcode=50),
+                 schema=2, sourceType="DispatcherReadyThreadTraceData",
+                 payload=dict(awakenedTid=21, adjustReason=0, adjustIncrement=0,
+                              flags=0, processorNumber=0)),
+            dict(row("cswitch", 151, tid=21, version=5, opcode=36),
+                 schema=2, sourceType="CSwitchTraceData",
+                 payload=dict(oldTid=11, newTid=21, oldThreadState=5,
+                              oldThreadWaitReason=6, oldThreadWaitMode=1, processorNumber=0)),
+            dict(row("fileOpEnd", 152, pid=999, tid=888, version=3, opcode=76),
+                 schema=2, sourceType="FileIOOpEndTraceData",
+                 payload=dict(irp=4096, extraInfo=0, ntStatus=0xC0000001)),
+        ])
+        self.write(sorted(enriched, key=lambda record: record["qpc"]))
+        self.assertEqual(decode.analyze(self.path, anchor, event_reader=typed_events.events), original)
+
     def test_malformed_and_private_field_rejection(self):
         good = self.records()
         for mutate in (
