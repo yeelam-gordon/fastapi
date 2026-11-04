@@ -6,6 +6,7 @@ import time
 
 import decode
 import launch
+import observed_threads
 import timing_model
 import typed_events
 
@@ -255,50 +256,12 @@ def qualify(path, anchor, handshake):
     if len(owners) != 1:
         raise ValueError("calibration_owner_mismatch")
     owner = owners[0]
-    active, lives = {}, []
-    previous = -1
-    for row in records:
-        if row["kind"] == "header":
-            continue
-        if row["qpc"] < previous:
-            raise ValueError("calibration_event_order")
-        previous = row["qpc"]
-        if row["kind"] not in {"threadStart", "threadStop", "cswitch", "readyThread"}:
-            continue
-        opcode = {"threadStart": 1, "threadStop": 2, "cswitch": 36, "readyThread": 50}
-        if (
-            row["provider"].lower() != decode.KERNEL[1:-1]
-            or row["opcode"] != opcode[row["kind"]]
-        ):
-            raise ValueError("calibration_source")
-        if row["kind"] == "threadStart":
-            if row["tid"] in active:
-                raise ValueError("calibration_thread_conflict")
-            active[row["tid"]] = row
-        elif row["kind"] == "threadStop":
-            start = active.pop(row["tid"], None)
-            if start is not None:
-                if start["pid"] != row["pid"] or start["qpc"] >= row["qpc"]:
-                    raise ValueError("calibration_thread_conflict")
-                if (
-                    row["tid"] == handshake["tid"]
-                    and row["pid"] == owner["pid"]
-                    and owner["start"] <= start["qpc"] <= marks[1]
-                    and marks[-1] < row["qpc"] <= owner["end"]
-                ):
-                    if any(
-                        event["processBirthQpc"] not in (None, owner["start"])
-                        for event in (start, row)
-                    ):
-                        raise ValueError("calibration_owner_mismatch")
-                    lives.append(
-                        {
-                            "tid": row["tid"],
-                            "owner": "target",
-                            "start": start["qpc"],
-                            "end": row["qpc"],
-                        }
-                    )
+    observed, _ = observed_threads.collect(records, owner, "target")
+    lives = [
+        life for life in observed
+        if life["tid"] == handshake["tid"]
+        and life["start"] <= marks[1] and marks[-1] < life["end"]
+    ]
     if len(lives) != 1:
         return finish("missing_target_lifetime")
     life = lives[0]

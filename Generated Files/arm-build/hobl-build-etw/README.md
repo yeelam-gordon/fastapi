@@ -1,5 +1,37 @@
 # Exclusive hosted build ETW research
 
+## Optional auxiliary build scheduling
+
+`--build-scheduling` requires `--wait-calibration` and excludes
+`--calibration-only`. The same controller must observe an actual controlled
+wait PASS before warmup/build; that proof does not authorize build identities.
+The auxiliary analyzer independently validates schema2 clocks/losses, native
+process birth and the complete process family. It selects the earliest largest
+ROOT interval outside the union of clipped DIRECT-child process lifetimes.
+
+Only explicit, paired thread Start/Stop lifetimes contained in ROOT are modeled,
+with TID reuse separated. Rundown, unresolved stops, unclosed and censored
+lifetimes are counted, not completed artificially. `build-scheduling.json` has
+static metadata, counts and indexed per-thread tick totals; raw identifiers,
+QPC intervals and model partitions remain in `scheduling-private.json`.
+Missing observations produce explicit UNQUALIFIED reasons. The public output
+is validated before writing. Artifact publication still requires the separate
+parent-owned allowlist/manual route.
+
+This is `ROOT_OUTSIDE_DIRECT_CHILD`, not critical time or a main-thread guess.
+Each row conserves only its clipped observed lifetime. Rows overlap and must
+not be summed into process time. `known_scheduled_union_ticks` merges only
+observed SCHEDULED intervals across these complete lifetimes: a lower bound
+on any-thread scheduled residency, not exclusive CPU, progress or critical
+time. It is bounded by the selected window and the thread sum, and is at least
+the largest single-thread scheduled total. No full-root state partition is emitted.
+Unknown and omitted censored coverage remain unknown. Scheduled residency is
+not exclusive CPU/progress, and waiting establishes neither I/O nor hardware,
+Defender or OS attribution. Existing `build.json` scheduling stays UNSUPPORTED;
+default capture, guardian, module mapping and artifact oracles are unchanged.
+Known source/clock/owner/model failures use exact static build-prefixed stage
+tags; arbitrary exception payloads remain private with a generic failure tag.
+
 ## Read-only recorder inventory
 
 After the hosted elevated-token gate and `wpr -status`, the prepared pinned

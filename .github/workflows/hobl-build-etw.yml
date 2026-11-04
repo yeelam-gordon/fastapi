@@ -4,7 +4,11 @@ on:
   workflow_call:
     inputs:
       native-wait-qualification:
-        description: Qualify controlled native wait observations only, without warmup or build.
+        description: Require controlled native wait qualification; calibration-only unless build scheduling is selected.
+        type: boolean
+        default: false
+      build-scheduling:
+        description: Apply private root-thread scheduling analysis after native calibration passes.
         type: boolean
         default: false
 
@@ -67,6 +71,7 @@ jobs:
           UV_HTTP_RETRIES: "0"
           UV_HTTP_TIMEOUT: "20"
           HOBL_NATIVE_WAIT_QUALIFICATION: ${{ inputs.native-wait-qualification }}
+          HOBL_BUILD_SCHEDULING: ${{ inputs.build-scheduling }}
         run: |
           $ErrorActionPreference = 'Stop'
           $private = Join-Path $env:GITHUB_WORKSPACE 'etl-private'
@@ -88,7 +93,9 @@ jobs:
           & $python -I -B -c "import sys,sysconfig; assert sys.version_info[:3]==(3,13,15); assert sysconfig.get_platform()=='win-arm64'; assert sys._is_gil_enabled(); assert not hasattr(sys,'gettotalrefcount')" *> (Join-Path $private 'python-check.log')
           if ($LASTEXITCODE) { Stop-Setup 'python' $LASTEXITCODE }
           $captureArguments = @()
-          if ($env:HOBL_NATIVE_WAIT_QUALIFICATION -eq 'true') {
+          if ($env:HOBL_BUILD_SCHEDULING -eq 'true') {
+            $captureArguments = @('--wait-calibration', '--build-scheduling')
+          } elseif ($env:HOBL_NATIVE_WAIT_QUALIFICATION -eq 'true') {
             $captureArguments = @('--wait-calibration', '--calibration-only')
           }
           & $python -B '.\tools\Generated Files\arm-build\hobl-build-etw\capture.py' --private $private --public $public --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --uv (Get-Command uv).Source @captureArguments *> (Join-Path $private 'controller.log')
@@ -114,5 +121,6 @@ jobs:
             etl-public/calibration-modules.json
             etl-public/build-modules.json
             etl-public/calibration-wait.json
+            etl-public/build-scheduling.json
           if-no-files-found: error
           retention-days: 7

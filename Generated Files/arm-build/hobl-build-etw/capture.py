@@ -22,6 +22,7 @@ from artifact_gate import artifact_set, equivalent
 import typed_events
 import module_map
 import native_calibration
+import build_scheduling
 
 GUARDIAN = "45d6db4f6452c4f7116ca23c6e2aa74cda90a15548bd5c9bb3b3574973ef458e"
 STAGES = {"preflight", "prepare", "calibration_start", "calibration_launch",
@@ -42,6 +43,8 @@ REASONS |= {"session_inventory"}
 REASONS |= {"native_calibration"}
 REASONS |= set(native_calibration.FAILURE_REASONS.values())
 REASONS |= {"native_python"}
+REASONS |= {"build_scheduling_invalid", "build_scheduling_requires_native_proof"}
+REASONS |= set(build_scheduling.FAILURE_REASONS.values())
 REASONS |= set(module_map.EXIT_REASONS.values())
 EXCEPTION_TYPES = {"NONE", "NATIVE_FAILURE", "KEY_ERROR", "VALUE_ERROR", "TYPE_ERROR",
                    "XML_PARSE_ERROR", "FILE_NOT_FOUND", "OS_ERROR", "OTHER"}
@@ -115,14 +118,18 @@ def hosted_gate(env=os.environ, fetch=api):
 
 class Controller:
     def __init__(self, private, public, source, uv, runner=run_owned,
-                 wait_calibration=False, calibration_only=False):
+                 wait_calibration=False, calibration_only=False, build_scheduling=False):
         if calibration_only and not wait_calibration:
             raise ValueError("calibration_only_requires_wait_calibration")
+        if build_scheduling and (not wait_calibration or calibration_only):
+            raise ValueError("build_scheduling_requires_wait_calibration_and_build")
         self.private, self.public, self.source, self.uv = private, public, source, uv
         self.runner, self.stage, self.owned = runner, "preflight", None
         self.residual = False
         self.wait_calibration = wait_calibration
         self.calibration_only = calibration_only
+        self.build_scheduling = build_scheduling
+        self.native_wait_proof = None
         self.wpr = str(Path(os.environ.get("SystemRoot", r"C:\Windows")) / "System32" / "wpr.exe")
         self.dotnet = shutil.which("dotnet")
         self.reader_env = os.environ.copy()
@@ -269,6 +276,8 @@ class Controller:
                          sample_observer=lambda q, t, ip, i: selected.append([q, t, ip, i]))
         validate(result)
         (self.public / (phase + ".json")).write_text(json.dumps(result, allow_nan=False), encoding="utf-8")
+        if phase == "build" and self.build_scheduling:
+            self.qualify_build_scheduling(folder, dto, json.loads(anchor.read_text()))
         self.stage = phase + "_modules"
         self.report()
         try:
@@ -333,6 +342,8 @@ class Controller:
                    PIP_CONSTRAINT=(preparation / "build-constraints.txt").as_uri(),
                    UV_CACHE_DIR=str(preparation / "uv-cache"))
         self.calibration(python, env)
+        if self.build_scheduling and self.native_wait_proof is None:
+            raise Failure("controller", -1, "build_scheduling_requires_native_proof")
         command = [str(self.uv), "build", "--python", str(python), "--no-python-downloads",
                    "--default-index", "https://pypi.org/simple", "--build-constraints",
                    str(preparation / "build-constraints.txt")]
@@ -345,6 +356,7 @@ class Controller:
         self.report(status="PARTIAL")
 
     def calibration(self, python, env):
+        self.native_wait_proof = None
         calibration_env = env.copy()
         calibration_env.pop("HOBL_PRIVATE_WAIT_CALIBRATION", None)
         if self.wait_calibration:
@@ -371,6 +383,7 @@ class Controller:
             raise Failure("controller", -1, "native_python")
 
     def qualify_wait(self, folder, dto, anchor):
+        self.native_wait_proof = None
         try:
             handshake = json.loads((folder / "wait-handshake.json").read_text())
             summary = native_calibration.qualify(dto, anchor, handshake)
@@ -379,8 +392,22 @@ class Controller:
                 json.dumps(summary, allow_nan=False), encoding="utf-8")
             if summary["status"] != "PASS":
                 raise ValueError("native_calibration")
+            self.native_wait_proof = dict(summary)
         except Exception as error:
             raise Failure("controller", -1, native_calibration.failure_reason(error)) from error
+
+    def qualify_build_scheduling(self, folder, dto, anchor):
+        try:
+            if self.native_wait_proof is None:
+                raise ValueError("build_scheduling_requires_native_proof")
+            summary, private = build_scheduling.qualify(dto, anchor, self.native_wait_proof)
+            build_scheduling.validate_public(summary)
+            (folder / "scheduling-private.json").write_text(
+                json.dumps(private, allow_nan=False), encoding="utf-8")
+            (self.public / "build-scheduling.json").write_text(
+                json.dumps(summary, allow_nan=False), encoding="utf-8")
+        except Exception as error:
+            raise Failure("controller", -1, build_scheduling.failure_reason(error)) from error
 
     def check_artifacts(self):
         self.stage = "build_artifacts"
@@ -409,16 +436,20 @@ def parse_args(argv=None):
     p.add_argument("--uv", type=Path, required=True)
     p.add_argument("--wait-calibration", action="store_true")
     p.add_argument("--calibration-only", action="store_true")
+    p.add_argument("--build-scheduling", action="store_true")
     a = p.parse_args(argv)
     if a.calibration_only and not a.wait_calibration:
         p.error("--calibration-only requires --wait-calibration")
+    if a.build_scheduling and (not a.wait_calibration or a.calibration_only):
+        p.error("--build-scheduling requires --wait-calibration and excludes --calibration-only")
     return a
 
 
 def main(argv=None):
     a = parse_args(argv)
     c = Controller(a.private.resolve(), a.public.resolve(), a.source.resolve(), a.uv.resolve(),
-                   wait_calibration=a.wait_calibration, calibration_only=a.calibration_only)
+                   wait_calibration=a.wait_calibration, calibration_only=a.calibration_only,
+                   build_scheduling=a.build_scheduling)
     try:
         c.run()
     except Exception as error:

@@ -338,7 +338,7 @@ class NativeCalibration(unittest.TestCase):
             )
             self.assertEqual(
                 controller.call_args.kwargs,
-                {"wait_calibration": True, "calibration_only": True},
+                {"wait_calibration": True, "calibration_only": True, "build_scheduling": False},
             )
             controller.return_value.run.assert_called_once_with()
         with (
