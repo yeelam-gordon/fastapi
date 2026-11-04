@@ -2,6 +2,11 @@ name: Exclusive hosted ARM build ETW (research only)
 
 on:
   workflow_call:
+    inputs:
+      native-wait-qualification:
+        description: Qualify controlled native wait observations only, without warmup or build.
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -61,6 +66,7 @@ jobs:
           UV_CACHE_DIR: ${{ github.workspace }}\etl-private\managed-cache
           UV_HTTP_RETRIES: "0"
           UV_HTTP_TIMEOUT: "20"
+          HOBL_NATIVE_WAIT_QUALIFICATION: ${{ inputs.native-wait-qualification }}
         run: |
           $ErrorActionPreference = 'Stop'
           $private = Join-Path $env:GITHUB_WORKSPACE 'etl-private'
@@ -81,7 +87,11 @@ jobs:
           if (-not ([IO.Path]::GetFullPath($python)).StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) { Stop-Setup 'controller' -1 }
           & $python -I -B -c "import sys,sysconfig; assert sys.version_info[:3]==(3,13,15); assert sysconfig.get_platform()=='win-arm64'; assert sys._is_gil_enabled(); assert not hasattr(sys,'gettotalrefcount')" *> (Join-Path $private 'python-check.log')
           if ($LASTEXITCODE) { Stop-Setup 'python' $LASTEXITCODE }
-          & $python -B '.\tools\Generated Files\arm-build\hobl-build-etw\capture.py' --private $private --public $public --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --uv (Get-Command uv).Source *> (Join-Path $private 'controller.log')
+          $captureArguments = @()
+          if ($env:HOBL_NATIVE_WAIT_QUALIFICATION -eq 'true') {
+            $captureArguments = @('--wait-calibration', '--calibration-only')
+          }
+          & $python -B '.\tools\Generated Files\arm-build\hobl-build-etw\capture.py' --private $private --public $public --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --uv (Get-Command uv).Source @captureArguments *> (Join-Path $private 'controller.log')
           exit $LASTEXITCODE
           } catch {
             $_ | Out-File -LiteralPath (Join-Path $private 'setup-error.log')
@@ -103,5 +113,6 @@ jobs:
             etl-public/build-reader.json
             etl-public/calibration-modules.json
             etl-public/build-modules.json
+            etl-public/calibration-wait.json
           if-no-files-found: error
           retention-days: 7

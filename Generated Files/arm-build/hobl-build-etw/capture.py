@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 import shutil
 import sys
+import sysconfig
 import urllib.request
 import uuid
 import xml.etree.ElementTree as ET
@@ -20,6 +21,7 @@ from decode import analyze, validate
 from artifact_gate import artifact_set, equivalent
 import typed_events
 import module_map
+import native_calibration
 
 GUARDIAN = "45d6db4f6452c4f7116ca23c6e2aa74cda90a15548bd5c9bb3b3574973ef458e"
 STAGES = {"preflight", "prepare", "calibration_start", "calibration_launch",
@@ -37,6 +39,8 @@ REASONS = {"none", "native_command", "host_context", "run_identity", "job_identi
            "insufficient_owned_evidence", "schema", "unexpected", "missing_dotnet10"}
 REASONS |= {"module_mapping"}
 REASONS |= {"session_inventory"}
+REASONS |= {"native_calibration"}
+REASONS |= {"native_python"}
 REASONS |= set(module_map.EXIT_REASONS.values())
 EXCEPTION_TYPES = {"NONE", "NATIVE_FAILURE", "KEY_ERROR", "VALUE_ERROR", "TYPE_ERROR",
                    "XML_PARSE_ERROR", "FILE_NOT_FOUND", "OS_ERROR", "OTHER"}
@@ -109,10 +113,15 @@ def hosted_gate(env=os.environ, fetch=api):
 
 
 class Controller:
-    def __init__(self, private, public, source, uv, runner=run_owned):
+    def __init__(self, private, public, source, uv, runner=run_owned,
+                 wait_calibration=False, calibration_only=False):
+        if calibration_only and not wait_calibration:
+            raise ValueError("calibration_only_requires_wait_calibration")
         self.private, self.public, self.source, self.uv = private, public, source, uv
         self.runner, self.stage, self.owned = runner, "preflight", None
         self.residual = False
+        self.wait_calibration = wait_calibration
+        self.calibration_only = calibration_only
         self.wpr = str(Path(os.environ.get("SystemRoot", r"C:\Windows")) / "System32" / "wpr.exe")
         self.dotnet = shutil.which("dotnet")
         self.reader_env = os.environ.copy()
@@ -247,6 +256,8 @@ class Controller:
                                str(folder / "reader-private-summary.json")],
                      60, cwd=HERE / "reader", env=self.reader_env)
         self.stage = phase + "_analysis"
+        if phase == "calibration" and self.wait_calibration:
+            self.qualify_wait(folder, dto, json.loads(anchor.read_text()))
         diagnostic = typed_events.proof(dto)
         (self.public / (phase + "-reader.json")).write_text(
             json.dumps(diagnostic, allow_nan=False), encoding="utf-8")
@@ -295,6 +306,17 @@ class Controller:
             raise Failure("wpr", 9, "existing_recording")
         self.prepare_reader()
         self.recorder_inventory()
+        if self.calibration_only:
+            self.validate_calibration_python()
+            env = os.environ.copy()
+            for key in list(env):
+                if key.startswith(("PYTHON", "PYTEST_", "PIP_", "UV_", "COVERAGE_", "COV_CORE_")):
+                    env.pop(key)
+            self.calibration(Path(sys.executable), env)
+            self.cleanup()
+            self.stage = "complete"
+            self.report(status="PARTIAL")
+            return
         self.stage = "prepare"
         screen = HERE.with_name("hobl-parallel-screen") / "screen.py"
         preparation = self.private / "prepared"
@@ -309,7 +331,7 @@ class Controller:
         env.update(PIP_INDEX_URL="https://pypi.org/simple",
                    PIP_CONSTRAINT=(preparation / "build-constraints.txt").as_uri(),
                    UV_CACHE_DIR=str(preparation / "uv-cache"))
-        self.trace("calibration", [str(python), "-I", "-B", str(HERE / "calibrate.py")], env)
+        self.calibration(python, env)
         command = [str(self.uv), "build", "--python", str(python), "--no-python-downloads",
                    "--default-index", "https://pypi.org/simple", "--build-constraints",
                    str(preparation / "build-constraints.txt")]
@@ -320,6 +342,44 @@ class Controller:
         self.check_artifacts()
         self.stage = "complete"
         self.report(status="PARTIAL")
+
+    def calibration(self, python, env):
+        calibration_env = env.copy()
+        calibration_env.pop("HOBL_PRIVATE_WAIT_CALIBRATION", None)
+        if self.wait_calibration:
+            calibration_env["HOBL_PRIVATE_WAIT_CALIBRATION"] = "1"
+        self.trace("calibration", [str(python), "-I", "-B", str(HERE / "calibrate.py")],
+                   calibration_env)
+
+    def validate_calibration_python(self):
+        if (sys.version_info[:3] != (3, 13, 15)
+                or sysconfig.get_config_var("Py_GIL_DISABLED")
+                or not getattr(sys, "_is_gil_enabled", lambda: False)()
+                or sysconfig.get_config_var("PYTHON_JIT")
+                or getattr(getattr(sys, "_jit", None), "is_enabled", lambda: False)()):
+            raise Failure("controller", -1, "native_python")
+        kernel = ctypes.windll.kernel32
+        kernel.GetCurrentProcess.restype = ctypes.c_void_p
+        kernel.IsWow64Process2.argtypes = [ctypes.c_void_p,
+                                         ctypes.POINTER(ctypes.c_ushort),
+                                         ctypes.POINTER(ctypes.c_ushort)]
+        process, native = ctypes.c_ushort(), ctypes.c_ushort()
+        if (not kernel.IsWow64Process2(kernel.GetCurrentProcess(),
+                                      ctypes.byref(process), ctypes.byref(native))
+                or process.value != 0 or native.value != 0xAA64):
+            raise Failure("controller", -1, "native_python")
+
+    def qualify_wait(self, folder, dto, anchor):
+        try:
+            handshake = json.loads((folder / "wait-handshake.json").read_text())
+            summary = native_calibration.qualify(dto, anchor, handshake)
+            native_calibration.validate_public(summary)
+            (self.public / "calibration-wait.json").write_text(
+                json.dumps(summary, allow_nan=False), encoding="utf-8")
+            if summary["status"] != "PASS":
+                raise ValueError("native_calibration")
+        except Exception as error:
+            raise Failure("controller", -1, "native_calibration") from error
 
     def check_artifacts(self):
         self.stage = "build_artifacts"
@@ -340,14 +400,24 @@ class Controller:
             raise Failure("controller", -1, "artifacts") from error
 
 
-if __name__ == "__main__":
+def parse_args(argv=None):
     p = argparse.ArgumentParser()
     p.add_argument("--private", type=Path, required=True)
     p.add_argument("--public", type=Path, required=True)
     p.add_argument("--source", type=Path, required=True)
     p.add_argument("--uv", type=Path, required=True)
-    a = p.parse_args()
-    c = Controller(a.private.resolve(), a.public.resolve(), a.source.resolve(), a.uv.resolve())
+    p.add_argument("--wait-calibration", action="store_true")
+    p.add_argument("--calibration-only", action="store_true")
+    a = p.parse_args(argv)
+    if a.calibration_only and not a.wait_calibration:
+        p.error("--calibration-only requires --wait-calibration")
+    return a
+
+
+def main(argv=None):
+    a = parse_args(argv)
+    c = Controller(a.private.resolve(), a.public.resolve(), a.source.resolve(), a.uv.resolve(),
+                   wait_calibration=a.wait_calibration, calibration_only=a.calibration_only)
     try:
         c.run()
     except Exception as error:
@@ -355,4 +425,9 @@ if __name__ == "__main__":
         c.report(error.tool if isinstance(error, Failure) else "controller",
                  error.code if isinstance(error, Failure) else -1, "FAILED", safe_reason(error),
                  *safe_exception(error))
-        sys.exit(1)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

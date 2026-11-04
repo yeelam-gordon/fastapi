@@ -15,6 +15,7 @@ on:
           - hobl-python-setup-screen
           - hobl-build-runtime-screen
           - hobl-build-etw
+          - hobl-native-timing
         default: hobl-complete
       windows-python-source:
         description: Optional Windows interpreter source for the parallel screen only.
@@ -34,11 +35,13 @@ env:
 
 jobs:
   build-etw:
-    if: inputs.platform == 'hobl-build-etw'
+    if: inputs.platform == 'hobl-build-etw' || inputs.platform == 'hobl-native-timing'
     permissions:
       contents: read
       actions: read
     uses: ./.github/workflows/hobl-build-etw.yml
+    with:
+      native-wait-qualification: ${{ inputs.platform == 'hobl-native-timing' }}
 
   build-runtime-screen:
     if: inputs.platform == 'hobl-build-runtime-screen'
@@ -55,7 +58,7 @@ jobs:
       windows-python-source: ${{ inputs.windows-python-source }}
 
   complete:
-    if: inputs.platform != 'hobl-build-etw' && inputs.platform != 'hobl-build-runtime-screen' && inputs.platform != 'hobl-parallel-screen' && inputs.platform != 'hobl-python-setup-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
+    if: inputs.platform != 'hobl-build-etw' && inputs.platform != 'hobl-native-timing' && inputs.platform != 'hobl-build-runtime-screen' && inputs.platform != 'hobl-parallel-screen' && inputs.platform != 'hobl-python-setup-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
     strategy:
       fail-fast: false
       matrix:
