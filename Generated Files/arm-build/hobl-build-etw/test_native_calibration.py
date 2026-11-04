@@ -390,5 +390,19 @@ class NativeCalibration(unittest.TestCase):
                     controller.validate_calibration_python()
 
 
+    def test_failure_reasons_never_export_exception_values(self):
+        self.assertEqual(
+            calibration.failure_reason(ValueError("ambiguous_same_qpc_subject")),
+            "native_wait_subject_tie",
+        )
+        self.assertIn("native_wait_subject_tie", capture.REASONS)
+        for error in (
+            ValueError(r"C:\private\subject-123.json"),
+            ValueError(["private", 123]),
+            KeyError("private-target"),
+        ):
+            self.assertEqual(calibration.failure_reason(error), "native_calibration")
+
+
 if __name__ == "__main__":
     unittest.main()

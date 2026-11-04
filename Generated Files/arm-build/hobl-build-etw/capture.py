@@ -40,6 +40,7 @@ REASONS = {"none", "native_command", "host_context", "run_identity", "job_identi
 REASONS |= {"module_mapping"}
 REASONS |= {"session_inventory"}
 REASONS |= {"native_calibration"}
+REASONS |= set(native_calibration.FAILURE_REASONS.values())
 REASONS |= {"native_python"}
 REASONS |= set(module_map.EXIT_REASONS.values())
 EXCEPTION_TYPES = {"NONE", "NATIVE_FAILURE", "KEY_ERROR", "VALUE_ERROR", "TYPE_ERROR",
@@ -379,7 +380,7 @@ class Controller:
             if summary["status"] != "PASS":
                 raise ValueError("native_calibration")
         except Exception as error:
-            raise Failure("controller", -1, "native_calibration") from error
+            raise Failure("controller", -1, native_calibration.failure_reason(error)) from error
 
     def check_artifacts(self):
         self.stage = "build_artifacts"

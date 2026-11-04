@@ -44,6 +44,33 @@ REASONS = {
     "insufficient_wait",
     "marker_window_out_of_bounds",
 }
+FAILURE_REASONS = {
+    "ambiguous_same_qpc_subject": "native_wait_subject_tie",
+    "ambiguous_same_processor_qpc": "native_wait_cpu_tie",
+    "ambiguous_self_switch": "native_wait_self_switch",
+    "out_of_order_timing": "native_wait_event_order",
+    "calibration_event_order": "native_wait_event_order",
+    "calibration_source": "native_wait_source",
+    "qpc_frequency_mismatch": "native_wait_frequency",
+    "unsupported_clock": "native_wait_clock",
+    "calibration_clock_conflict": "native_wait_clock",
+    "calibration_owner_mismatch": "native_wait_owner",
+    "calibration_thread_conflict": "native_wait_thread",
+    "calibration_thread_birth": "native_wait_thread_birth",
+    "native_creation_mismatch": "native_wait_birth_clock",
+    "calibration_requires_schema2": "native_wait_schema",
+}
+
+
+def failure_reason(error):
+    """Return only exact static tags; never publish exception text."""
+    if (
+        type(error) is ValueError
+        and len(error.args) == 1
+        and type(error.args[0]) is str
+    ):
+        return FAILURE_REASONS.get(error.args[0], "native_calibration")
+    return "native_calibration"
 
 
 def controlled_wait():
