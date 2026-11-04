@@ -32,6 +32,29 @@ default capture, guardian, module mapping and artifact oracles are unchanged.
 Known source/clock/owner/model failures use exact static build-prefixed stage
 tags; arbitrary exception payloads remain private with a generic failure tag.
 
+Public `status: AUXILIARY` means observed data is available, not complete
+measurement or a successful causal attribution. `quality` is `UNQUALIFIED`
+for unqualified results, otherwise `PARTIAL` when any UNKNOWN ticks,
+unclosed/unresolved/censored counts or diagnostics are present; only otherwise
+is it `BRACKETED_OBSERVATIONS`. Even that label concerns the selected observed
+thread windows, not full ROOT coverage or native cause.
+
+Each indexed thread's `diagnostics` has exactly `unsupported_self`,
+`ambiguous_subject_qpc` and `ambiguous_processor_qpc` nonnegative counts.
+These counts concern the entire selected lifetime, not just the chosen window.
+They publish no event identities, QPCs or free-form values. Unsupported
+boundaries remain explicit UNKNOWN; UNKNOWN contributes neither scheduled
+residency nor waiting to the lower-bound union. Atomic self-switch details
+remain private. Invalid input still fails rather than becoming a zero-time success.
+
+`process_cpu` is independent of scheduling quality. Its OBSERVED kernel/user
+counters cover the entire owned ROOT process lifetime, across all its threads,
+in fixed `100ns` units from the held process handle and matching creation time.
+Legacy anchors without either counter report UNAVAILABLE with null values;
+partial or invalid counter pairs fail. These are not QPC ticks or selected-window
+CPU, exclude child processes, and can exceed elapsed time. Do not subtract them
+from wall time to infer I/O wait.
+
 ## Read-only recorder inventory
 
 After the hosted elevated-token gate and `wpr -status`, the prepared pinned

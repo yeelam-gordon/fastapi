@@ -41,6 +41,8 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
     Any legacy scheduling record makes scheduling unavailable for this input.
     Ambiguity guards concern selected observed lifetimes and their originating
     processor associations, not unrelated machine-wide scheduling activity.
+    Unsupported observations become UNKNOWN boundaries with fixed lifetime-wide
+    diagnostic counts; malformed inputs and decreasing scheduling QPC still fail.
     """
     _integer(frequency, "frequency", 1)
     if not isinstance(window, (tuple, list)) or len(window) != 2:
@@ -99,6 +101,12 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
         for tid, group in by_tid.items()
     }
     observations = {id(life): [] for life in lives}
+    diagnostics = {
+        id(life): dict.fromkeys(
+            ("unsupported_self", "ambiguous_subject_qpc", "ambiguous_processor_qpc"), 0
+        )
+        for life in lives
+    }
     running = {}
     previous, legacy = None, False
     timing = (row for row in _rows(path) if row["kind"] in {"cswitch", "readyThread"})
@@ -112,6 +120,7 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
             if row["schema"] == 2 and row["kind"] == "cswitch":
                 processor = row["payload"]["processorNumber"]
                 switched[processor] = switched.get(processor, 0) + 1
+        affected, updates, clear = {}, {}, set()
         for row in group:
             payload = row["payload"]
             if row["schema"] != 2:
@@ -133,26 +142,60 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                         for life in by_tid.get(previous_tid, ())
                     ):
                         targets.append((previous_tid, "gap"))
-                running[processor] = (payload["newTid"], qpc)
+                updates[processor] = (payload["newTid"], qpc)
             else:
                 targets = [(payload["awakenedTid"], "ready")]
             for tid, action in targets:
                 for life in by_tid.get(tid, ()):
                     if life["start"] <= qpc < life["end"]:
-                        if row["kind"] == "cswitch":
-                            if action == "self" and (
-                                tid == 0
-                                or association is None
-                                or association[0] != tid
-                                or not life["start"] <= association[1] < qpc
-                            ):
-                                raise ValueError("ambiguous_owned_self_switch")
-                            if switched[payload["processorNumber"]] > 1:
-                                raise ValueError("ambiguous_same_processor_qpc")
-                        subject = observations[id(life)]
-                        if subject and subject[-1][0] == qpc:
-                            raise ValueError("ambiguous_same_qpc_subject")
-                        subject.append((qpc, action, payload))
+                        if action == "self" and (
+                            tid == 0
+                            or association is None
+                            or association[0] != tid
+                            or not life["start"] <= association[1] < qpc
+                        ):
+                            action = "unsupported_self"
+                        affected.setdefault(id(life), (life, []))[1].append(
+                            (action, payload)
+                        )
+        for identity, (life, items) in affected.items():
+            subject = observations[identity]
+            subject_tie = len(items) > 1
+            processor_tie = any(
+                switched.get(payload.get("processorNumber"), 0) > 1
+                for action, payload in items
+                if action != "ready"
+            )
+            diagnostics[identity]["ambiguous_subject_qpc"] += int(subject_tie)
+            diagnostics[identity]["ambiguous_processor_qpc"] += int(processor_tie)
+            if subject_tie or processor_tie:
+                action = "ambiguous_subject_qpc" if subject_tie else "ambiguous_processor_qpc"
+                payload = {}
+            else:
+                action, payload = items[0]
+                if action == "self" and (
+                    not subject
+                    or subject[-1][1] not in {"in", "self"}
+                    or subject[-1][2]["processorNumber"] != payload["processorNumber"]
+                ):
+                    action = "unsupported_self"
+                diagnostics[identity]["unsupported_self"] += int(action == "unsupported_self")
+            if subject_tie or processor_tie or action == "unsupported_self":
+                clear.update(
+                    cpu for cpu, (tid, origin) in running.items()
+                    if tid == life["tid"] and life["start"] <= origin <= qpc < life["end"]
+                )
+                clear.update(
+                    payload["processorNumber"] for action, payload in items if action != "ready"
+                )
+            subject.append((qpc, action, payload))
+        for processor, association in updates.items():
+            if switched[processor] == 1 and processor not in clear:
+                running[processor] = association
+            else:
+                running.pop(processor, None)
+        for processor in clear:
+            running.pop(processor, None)
 
     results = []
     for life in lives:
@@ -174,11 +217,11 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
 
         cursor, state, processor = life["start"], "UNKNOWN", None
         atomic_self_switches = 0
+        unknown_reason = "missing_closing_boundary"
         for qpc, action, payload in () if legacy else observations[id(life)]:
             if action == "self":
-                if state != "SCHEDULED" or processor != payload["processorNumber"]:
-                    raise ValueError("ambiguous_owned_self_switch")
                 atomic_self_switches += int(left <= qpc < right)
+            unsupported = action in diagnostics[id(life)]
             compatible = (
                 (
                     state == "SCHEDULED"
@@ -195,8 +238,12 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                 state if compatible else "UNKNOWN",
                 "atomic_self_switch_accounting"
                 if action == "self"
+                else action
+                if unsupported
                 else "bracketed_observations"
                 if compatible
+                else unknown_reason
+                if state == "UNKNOWN"
                 else "missing_or_conflicting_boundary",
             )
             if action in {"in", "self"}:
@@ -206,18 +253,23 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                     payload["oldThreadState"], "UNKNOWN"
                 )
                 processor = None
-            elif action == "gap":
+            elif action == "gap" or unsupported:
                 state, processor = "UNKNOWN", None
             elif payload["flags"] != 0 or state == "SCHEDULED":
                 state, processor = "UNKNOWN", None
             else:
                 state, processor = "RUNNABLE", None
+            unknown_reason = action if unsupported else "missing_or_conflicting_boundary"
             cursor = qpc
         append(
             cursor,
             life["end"],
             "UNKNOWN",
-            "legacy_schema_unavailable" if legacy else "missing_closing_boundary",
+            "legacy_schema_unavailable"
+            if legacy
+            else unknown_reason
+            if state == "UNKNOWN"
+            else "missing_closing_boundary",
         )
         totals = {
             state: sum(
@@ -246,6 +298,7 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                 "ticks": totals,
                 "quality": "UNKNOWN_PRESENT" if totals["UNKNOWN"] else "BRACKETED_ONLY",
                 "atomic_self_switches": atomic_self_switches,
+                "diagnostics": diagnostics[id(life)],
             }
         )
     return {

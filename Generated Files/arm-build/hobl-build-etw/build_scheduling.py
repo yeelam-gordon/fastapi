@@ -14,6 +14,11 @@ REASONS = {
     "no_complete_root_threads",
 }
 COUNTS = {"complete", "unclosed", "unresolved", "censored"}
+DIAGNOSTIC_KEYS = {
+    "unsupported_self",
+    "ambiguous_subject_qpc",
+    "ambiguous_processor_qpc",
+}
 FAILURE_REASONS = {
     key: value.replace("native_wait_", "build_scheduling_")
     for key, value in native_calibration.FAILURE_REASONS.items()
@@ -28,11 +33,13 @@ FAILURE_REASONS.update(
         "partition_conservation_failure": "build_scheduling_conservation",
         "build_scheduling_conservation": "build_scheduling_conservation",
         "overlapping_thread_lifetimes": "build_scheduling_thread",
+        "build_scheduling_process_cpu": "build_scheduling_process_cpu",
     }
 )
 KEYS = {
     "schema",
     "status",
+    "quality",
     "reason",
     "scope",
     "calibration",
@@ -42,8 +49,60 @@ KEYS = {
     "known_scheduled_union_ticks",
     "coverage",
     "threads",
+    "process_cpu",
 }
-THREAD_KEYS = {"index", "window_ticks", *timing_model.STATES}
+THREAD_KEYS = {"index", "window_ticks", "diagnostics", *timing_model.STATES}
+PROCESS_CPU_KEYS = {"status", "scope", "units", "kernel", "user"}
+
+
+def validate_process_cpu(value):
+    if (
+        not isinstance(value, dict)
+        or set(value) != PROCESS_CPU_KEYS
+        or value["scope"] != "ROOT_PROCESS_LIFETIME"
+        or value["units"] != "100ns"
+    ):
+        raise ValueError("build_scheduling_process_cpu")
+    if value["status"] == "OBSERVED":
+        if all(
+            type(value[key]) is int and 0 <= value[key] < 2**63
+            for key in ("kernel", "user")
+        ):
+            return
+    elif value["status"] == "UNAVAILABLE":
+        if value["kernel"] is None and value["user"] is None:
+            return
+    raise ValueError("build_scheduling_process_cpu")
+
+
+def process_cpu(anchor):
+    """Whole-process cumulative CPU counters, independent of the selected window."""
+    keys = ("process_kernel_100ns", "process_user_100ns")
+    present = [key in anchor for key in keys]
+    if any(present) != all(present):
+        raise ValueError("build_scheduling_process_cpu")
+    value = {
+        "status": "OBSERVED" if all(present) else "UNAVAILABLE",
+        "scope": "ROOT_PROCESS_LIFETIME",
+        "units": "100ns",
+        "kernel": anchor[keys[0]] if all(present) else None,
+        "user": anchor[keys[1]] if all(present) else None,
+    }
+    validate_process_cpu(value)
+    return value
+
+
+def quality(value):
+    """Observation quality only; even bracketed rows do not prove full coverage."""
+    if value["status"] == "UNQUALIFIED":
+        return "UNQUALIFIED"
+    if any(
+        value["coverage"][key] for key in ("unclosed", "unresolved", "censored")
+    ) or any(
+        row["UNKNOWN"] or any(row["diagnostics"].values()) for row in value["threads"]
+    ):
+        return "PARTIAL"
+    return "BRACKETED_OBSERVATIONS"
 
 
 def failure_reason(error):
@@ -91,7 +150,8 @@ def largest_window(root, children):
 
 def validate_public(value):
     if (
-        set(value) != KEYS
+        not isinstance(value, dict)
+        or set(value) != KEYS
         or type(value["schema"]) is not int
         or value["schema"] != 1
         or value["status"] not in {"AUXILIARY", "UNQUALIFIED"}
@@ -100,10 +160,12 @@ def validate_public(value):
         != (value["reason"] == "observed_root_threads")
         or value["scope"] != "ROOT_OUTSIDE_DIRECT_CHILD"
         or value["calibration"] != "SAME_SESSION_CONTROLLED_WAIT_PASS"
+        or not isinstance(value["coverage"], dict)
         or set(value["coverage"]) != COUNTS
         or not isinstance(value["threads"], list)
     ):
         raise ValueError("build_scheduling_schema")
+    validate_process_cpu(value["process_cpu"])
     numbers = [
         value[key]
         for key in (
@@ -115,15 +177,23 @@ def validate_public(value):
     ]
     numbers += list(value["coverage"].values())
     for index, row in enumerate(value["threads"]):
-        if set(row) != THREAD_KEYS or row["index"] != index:
+        if (
+            not isinstance(row, dict)
+            or set(row) != THREAD_KEYS
+            or row["index"] != index
+            or not isinstance(row["diagnostics"], dict)
+            or set(row["diagnostics"]) != DIAGNOSTIC_KEYS
+        ):
             raise ValueError("build_scheduling_schema")
-        numbers += list(row.values())
+        numbers += [row[key] for key in THREAD_KEYS - {"diagnostics"}]
+        numbers += list(row["diagnostics"].values())
+    if any(type(number) is not int or not 0 <= number < 2**63 for number in numbers):
+        raise ValueError("build_scheduling_schema")
+    for row in value["threads"]:
         if sum(row[state] for state in timing_model.STATES) != row["window_ticks"]:
             raise ValueError("build_scheduling_conservation")
         if not 0 < row["window_ticks"] <= value["window_ticks"]:
             raise ValueError("build_scheduling_schema")
-    if any(type(number) is not int or not 0 <= number < 2**63 for number in numbers):
-        raise ValueError("build_scheduling_schema")
     scheduled = [row["SCHEDULED"] for row in value["threads"]]
     if not (
         max(scheduled, default=0)
@@ -135,6 +205,8 @@ def validate_public(value):
         not value["threads"] or value["frequency"] <= 0 or value["window_ticks"] <= 0
     ):
         raise ValueError("build_scheduling_schema")
+    if value["quality"] != quality(value):
+        raise ValueError("build_scheduling_schema")
 
 
 def qualify(path, anchor, calibration):
@@ -142,6 +214,7 @@ def qualify(path, anchor, calibration):
     native_calibration.validate_public(calibration)
     if calibration["status"] != "PASS":
         raise ValueError("build_scheduling_requires_native_proof")
+    cpu = process_cpu(anchor)
     records = list(typed_events.rows(path))
     if any(row["schema"] != 2 for row in records):
         raise ValueError("build_scheduling_schema")
@@ -157,6 +230,7 @@ def qualify(path, anchor, calibration):
     public = {
         "schema": 1,
         "status": "UNQUALIFIED",
+        "quality": "UNQUALIFIED",
         "reason": "incomplete_trace",
         "scope": "ROOT_OUTSIDE_DIRECT_CHILD",
         "calibration": "SAME_SESSION_CONTROLLED_WAIT_PASS",
@@ -166,6 +240,7 @@ def qualify(path, anchor, calibration):
         "known_scheduled_union_ticks": 0,
         "coverage": dict.fromkeys(COUNTS, 0),
         "threads": [],
+        "process_cpu": cpu,
     }
     private = {"schema": 1, "partition": None}
 
@@ -174,6 +249,7 @@ def qualify(path, anchor, calibration):
         public["status"] = (
             "AUXILIARY" if reason == "observed_root_threads" else "UNQUALIFIED"
         )
+        public["quality"] = quality(public)
         validate_public(public)
         return public, private
 
@@ -261,6 +337,7 @@ def qualify(path, anchor, calibration):
         dict(
             index=index,
             window_ticks=thread["window"][1] - thread["window"][0],
+            diagnostics=dict(thread["diagnostics"]),
             **thread["ticks"],
         )
         for index, thread in enumerate(private["partition"]["threads"])

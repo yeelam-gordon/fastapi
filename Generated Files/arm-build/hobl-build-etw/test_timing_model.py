@@ -190,17 +190,17 @@ class Timing(unittest.TestCase):
         self.assertEqual(expected["threads"][0]["ticks"]["SCHEDULED"], 20)
         self.assertEqual(expected["threads"][1]["ticks"]["SCHEDULED"], 30)
         self.assertEqual(expected["threads"][2]["ticks"]["RUNNABLE"], 40)
+        ambiguous = []
         for ordering in permutations([switch(20, 91, 92), ready(20, 11)]):
-            with self.assertRaisesRegex(ValueError, "same_qpc_subject"):
-                self.analyze([switch(10, 90, 11)] + list(ordering))
+            result = self.analyze([switch(10, 90, 11)] + list(ordering))
+            self.assertEqual(result["threads"][0]["ticks"]["UNKNOWN"], 100)
+            self.assertEqual(result["threads"][0]["diagnostics"]["ambiguous_subject_qpc"], 1)
+            ambiguous.append(result)
+        self.assertEqual(*ambiguous)
 
     def test_invalid_order_lifetimes_schema_and_legacy_policy(self):
-        for records, reason in (
-            ([ready(20, 11), ready(10, 11)], "out_of_order"),
-            ([ready(10, 11), switch(10, 90, 11)], "same_qpc"),
-        ):
-            with self.assertRaisesRegex(ValueError, reason):
-                self.analyze(records)
+        with self.assertRaisesRegex(ValueError, "out_of_order"):
+            self.analyze([ready(20, 11), ready(10, 11)])
         with self.assertRaisesRegex(ValueError, "overlapping"):
             self.analyze([], lifetimes=[self.life, dict(self.life, owner="other")])
         for kwargs, reason in (
@@ -276,12 +276,22 @@ class Timing(unittest.TestCase):
                 self.analyze(baseline, lifetimes=[self.life, foreign]),
             )
 
-    def test_selected_self_switch_and_relevant_processor_ties_remain_rejected(self):
-        with self.assertRaisesRegex(ValueError, "owned_self_switch"):
-            self.analyze([switch(10, 11, 11)])
+    def test_unsupported_self_and_relevant_processor_ties_are_unknown(self):
+        thread = self.analyze([switch(10, 11, 11)])["threads"][0]
+        self.assertEqual(thread["ticks"]["UNKNOWN"], 100)
+        self.assertEqual(thread["diagnostics"], {
+            "unsupported_self": 1, "ambiguous_subject_qpc": 0, "ambiguous_processor_qpc": 0,
+        })
+        results = []
         for ordering in permutations([switch(20, 11, 90), switch(20, 92, 93)]):
-            with self.assertRaisesRegex(ValueError, "same_processor_qpc"):
-                self.analyze([switch(10, 90, 11)] + list(ordering))
+            result = self.analyze([switch(10, 90, 11)] + list(ordering))
+            thread = result["threads"][0]
+            self.assertEqual(thread["ticks"]["UNKNOWN"], 100)
+            self.assertEqual(thread["diagnostics"], {
+                "unsupported_self": 0, "ambiguous_subject_qpc": 1, "ambiguous_processor_qpc": 1,
+            })
+            results.append(result)
+        self.assertEqual(*results)
 
     def test_bracketed_atomic_self_switches_preserve_scheduled_accounting(self):
         result = self.analyze(
@@ -298,6 +308,9 @@ class Timing(unittest.TestCase):
             {"UNKNOWN": 80, "WAITING": 0, "RUNNABLE": 0, "SCHEDULED": 20},
         )
         self.assertEqual(thread["atomic_self_switches"], 2)
+        self.assertEqual(thread["diagnostics"], {
+            "unsupported_self": 0, "ambiguous_subject_qpc": 0, "ambiguous_processor_qpc": 0,
+        })
         self.assertEqual(sum(thread["ticks"].values()), 100)
         self.assertEqual(
             [item["reason"] for item in thread["intervals"][1:3]],
@@ -316,13 +329,81 @@ class Timing(unittest.TestCase):
         ]
         for records, lives in cases:
             with self.subTest(records=records):
-                with self.assertRaisesRegex(ValueError, "ambiguous_owned_self_switch"):
-                    self.analyze(records, lifetimes=lives)
+                result = self.analyze(records, lifetimes=lives)
+                self.assertEqual(result["threads"][-1]["diagnostics"]["unsupported_self"], 1)
+                for thread in result["threads"]:
+                    self.assertEqual(thread["ticks"]["SCHEDULED"], 0)
+                    self.assertEqual(sum(thread["ticks"].values()),
+                                     thread["window"][1] - thread["window"][0])
+                self.assertTrue(any(
+                    item["reason"] == "unsupported_self"
+                    for item in result["threads"][-1]["intervals"]
+                ))
 
-    def test_atomic_self_does_not_allow_two_same_subject_qpc_records(self):
+    def test_atomic_self_same_subject_tie_is_unknown_not_normalized(self):
+        results = []
         for ordering in permutations([switch(20, 11, 11), ready(20, 11)]):
-            with self.assertRaisesRegex(ValueError, "same_qpc_subject"):
-                self.analyze([switch(10, 90, 11)] + list(ordering))
+            result = self.analyze([switch(10, 90, 11)] + list(ordering))
+            thread = result["threads"][0]
+            self.assertEqual(thread["ticks"]["UNKNOWN"], 100)
+            self.assertEqual(thread["atomic_self_switches"], 0)
+            self.assertEqual(thread["diagnostics"]["ambiguous_subject_qpc"], 1)
+            results.append(result)
+        self.assertEqual(*results)
+
+    def test_early_unsupported_self_counts_outside_window_without_poisoning_others(self):
+        result = self.analyze(
+            [switch(5, 11, 11), switch(10, 90, 12, cpu=1), switch(20, 91, 11),
+             switch(40, 11, 91), switch(50, 12, 90, cpu=1)],
+            lifetimes=[self.life, dict(self.life, tid=12)], window=(30, 80),
+        )
+        self.assertEqual(result["threads"][0]["ticks"],
+                         {"UNKNOWN": 40, "WAITING": 0, "RUNNABLE": 0, "SCHEDULED": 10})
+        self.assertEqual(result["threads"][1]["ticks"],
+                         {"UNKNOWN": 30, "WAITING": 0, "RUNNABLE": 0, "SCHEDULED": 20})
+        self.assertEqual(result["threads"][0]["diagnostics"]["unsupported_self"], 1)
+        self.assertEqual(result["threads"][1]["diagnostics"], {
+            "unsupported_self": 0, "ambiguous_subject_qpc": 0, "ambiguous_processor_qpc": 0,
+        })
+
+    def test_ambiguous_boundary_clears_processor_cache_before_positive_recovery(self):
+        results = []
+        for ordering in permutations([ready(20, 11), switch(20, 11, 90)]):
+            result = self.analyze(
+                [switch(10, 90, 11)] + list(ordering)
+                + [switch(30, 91, 11, cpu=1), switch(40, 92, 93),
+                   switch(60, 11, 91, cpu=1)]
+            )
+            thread = result["threads"][0]
+            self.assertEqual(thread["ticks"],
+                             {"UNKNOWN": 70, "WAITING": 0, "RUNNABLE": 0, "SCHEDULED": 30})
+            self.assertEqual(thread["diagnostics"]["ambiguous_subject_qpc"], 1)
+            results.append(result)
+        self.assertEqual(*results)
+
+    def test_processor_tie_without_subject_tie_does_not_seed_running(self):
+        results = []
+        for ordering in permutations([switch(20, 90, 11), switch(20, 92, 93)]):
+            result = self.analyze(list(ordering) + [switch(40, 11, 90)])
+            thread = result["threads"][0]
+            self.assertEqual(thread["ticks"]["UNKNOWN"], 100)
+            self.assertEqual(thread["diagnostics"], {
+                "unsupported_self": 0, "ambiguous_subject_qpc": 0, "ambiguous_processor_qpc": 1,
+            })
+            self.assertTrue(any(item["reason"] == "ambiguous_processor_qpc"
+                                for item in thread["intervals"]))
+            results.append(result)
+        self.assertEqual(*results)
+
+    def test_unsupported_self_state_conflict_clears_old_processor_association(self):
+        thread = self.analyze(
+            [switch(10, 90, 11), ready(15, 11), switch(20, 11, 11),
+             switch(30, 91, 11, cpu=1), switch(40, 92, 93),
+             switch(60, 11, 91, cpu=1)]
+        )["threads"][0]
+        self.assertEqual(thread["ticks"],
+                         {"UNKNOWN": 70, "WAITING": 0, "RUNNABLE": 0, "SCHEDULED": 30})
+        self.assertEqual(thread["diagnostics"]["unsupported_self"], 1)
 
 
 if __name__ == "__main__":

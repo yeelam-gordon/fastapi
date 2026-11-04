@@ -48,6 +48,10 @@ class BuildScheduling(unittest.TestCase):
             240,
         )
         self.assertEqual(private["partition"]["threads"][0]["lifetime"]["tid"], 12)
+        self.assertEqual(
+            public["threads"][0]["diagnostics"],
+            private["partition"]["threads"][0]["diagnostics"],
+        )
         self.assertEqual(set(public), build_scheduling.KEYS)
         with self.assertRaises(ValueError):
             build_scheduling.validate_public(
@@ -64,7 +68,116 @@ class BuildScheduling(unittest.TestCase):
                 dict(public, threads=[dict(public["threads"][0], tid=12)])
             )
         self.assertNotIn("pid", json.dumps(public).lower())
-        self.assertNotIn("qpc", json.dumps(public).lower())
+        self.assertNotIn('"qpc":', json.dumps(public).lower())
+
+    def test_quality_tracks_unknown_censor_and_lifetime_diagnostics(self):
+        public, _ = self.qualify()
+        self.assertEqual(public["quality"], "PARTIAL")
+        # A numeric schema fixture isolates quality consistency from observation proof.
+        bracketed = copy.deepcopy(public)
+        thread = bracketed["threads"][0]
+        thread["SCHEDULED"] += thread["UNKNOWN"]
+        thread["UNKNOWN"] = 0
+        thread["diagnostics"] = dict.fromkeys(build_scheduling.DIAGNOSTIC_KEYS, 0)
+        bracketed["known_scheduled_union_ticks"] = thread["SCHEDULED"]
+        bracketed["quality"] = "BRACKETED_OBSERVATIONS"
+        build_scheduling.validate_public(bracketed)
+        for key in ("unclosed", "unresolved", "censored"):
+            partial = copy.deepcopy(bracketed)
+            partial["coverage"][key] = 1
+            with self.assertRaises(ValueError):
+                build_scheduling.validate_public(partial)
+            partial["quality"] = "PARTIAL"
+            build_scheduling.validate_public(partial)
+        for key in build_scheduling.DIAGNOSTIC_KEYS:
+            partial = copy.deepcopy(bracketed)
+            partial["threads"][0]["diagnostics"][key] = 1
+            with self.assertRaises(ValueError):
+                build_scheduling.validate_public(partial)
+            partial["quality"] = "PARTIAL"
+            build_scheduling.validate_public(partial)
+        unqualified, _ = self.qualify(
+            [record for record in self.records if record["kind"] != "threadStop"]
+        )
+        self.assertEqual(unqualified["quality"], "UNQUALIFIED")
+        with self.assertRaises(ValueError):
+            build_scheduling.validate_public(dict(unqualified, quality="PARTIAL"))
+
+    def test_diagnostics_strict_counts_cannot_publish_private_fields(self):
+        public, _ = self.qualify()
+        for supplied in (
+            {"pid": 12},
+            dict.fromkeys(build_scheduling.DIAGNOSTIC_KEYS | {"qpc"}, 0),
+            dict.fromkeys(build_scheduling.DIAGNOSTIC_KEYS - {"unsupported_self"}, 0),
+        ):
+            invalid = copy.deepcopy(public)
+            invalid["threads"][0]["diagnostics"] = supplied
+            with self.assertRaises(ValueError):
+                build_scheduling.validate_public(invalid)
+        for count in (-1, True, 2**63, "private-value"):
+            invalid = copy.deepcopy(public)
+            invalid["threads"][0]["diagnostics"]["unsupported_self"] = count
+            with self.assertRaises(ValueError):
+                build_scheduling.validate_public(invalid)
+
+    def test_process_cpu_observed_and_legacy_are_independent_of_quality(self):
+        legacy, _ = self.qualify()
+        self.assertEqual(
+            legacy["process_cpu"],
+            {
+                "status": "UNAVAILABLE",
+                "scope": "ROOT_PROCESS_LIFETIME",
+                "units": "100ns",
+                "kernel": None,
+                "user": None,
+            },
+        )
+        self.fixture.anchor.update(
+            process_kernel_100ns=20_000_000, process_user_100ns=30_000_000
+        )
+        observed, _ = self.qualify()
+        self.assertEqual(
+            observed["process_cpu"],
+            {
+                "status": "OBSERVED",
+                "scope": "ROOT_PROCESS_LIFETIME",
+                "units": "100ns",
+                "kernel": 20_000_000,
+                "user": 30_000_000,
+            },
+        )
+        self.assertEqual(observed["quality"], legacy["quality"])
+        self.assertEqual(observed["threads"], legacy["threads"])
+        for field in ("pid", "creation_filetime", "qpc"):
+            invalid = copy.deepcopy(observed)
+            invalid["process_cpu"][field] = 123
+            with self.assertRaisesRegex(ValueError, "build_scheduling_process_cpu"):
+                build_scheduling.validate_public(invalid)
+        invalid = copy.deepcopy(legacy)
+        invalid["process_cpu"]["status"] = "OBSERVED"
+        with self.assertRaises(ValueError):
+            build_scheduling.validate_public(invalid)
+
+    def test_partial_or_invalid_process_cpu_fails_without_defaults(self):
+        for supplied in (
+            {"process_kernel_100ns": 0},
+            {"process_user_100ns": 0},
+            {"process_kernel_100ns": True, "process_user_100ns": 0},
+            {"process_kernel_100ns": 0, "process_user_100ns": -1},
+            {"process_kernel_100ns": 2**63, "process_user_100ns": 0},
+            {"process_kernel_100ns": 0, "process_user_100ns": None},
+        ):
+            with self.assertRaisesRegex(
+                ValueError, "^build_scheduling_process_cpu$"
+            ) as failure:
+                build_scheduling.qualify(
+                    self.fixture.path, dict(self.fixture.anchor, **supplied), self.proof
+                )
+            self.assertEqual(
+                build_scheduling.failure_reason(failure.exception),
+                "build_scheduling_process_cpu",
+            )
+            self.assertIn("build_scheduling_process_cpu", capture.REASONS)
 
     def test_child_union_clipping_and_earliest_tie(self):
         root = {"start": 100, "end": 600}
