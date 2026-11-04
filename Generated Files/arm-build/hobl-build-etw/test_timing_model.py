@@ -283,6 +283,47 @@ class Timing(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "same_processor_qpc"):
                 self.analyze([switch(10, 90, 11)] + list(ordering))
 
+    def test_bracketed_atomic_self_switches_preserve_scheduled_accounting(self):
+        result = self.analyze(
+            [
+                switch(10, 90, 11),
+                switch(20, 11, 11, state=1),
+                switch(25, 11, 11, state=5),
+                switch(30, 11, 90),
+            ]
+        )
+        thread = result["threads"][0]
+        self.assertEqual(
+            thread["ticks"],
+            {"UNKNOWN": 80, "WAITING": 0, "RUNNABLE": 0, "SCHEDULED": 20},
+        )
+        self.assertEqual(thread["atomic_self_switches"], 2)
+        self.assertEqual(sum(thread["ticks"].values()), 100)
+        self.assertEqual(
+            [item["reason"] for item in thread["intervals"][1:3]],
+            ["atomic_self_switch_accounting", "atomic_self_switch_accounting"],
+        )
+
+    def test_atomic_self_cannot_repair_missing_conflicting_or_reused_boundary(self):
+        cases = [
+            ([switch(20, 11, 11)], [self.life]),
+            ([switch(10, 90, 11), switch(20, 11, 11, cpu=1)], [self.life]),
+            ([switch(10, 90, 11), ready(15, 11), switch(20, 11, 11)], [self.life]),
+            (
+                [switch(10, 90, 11), switch(35, 91, 11, cpu=1), switch(40, 11, 11)],
+                [dict(self.life, end=20), dict(self.life, start=30)],
+            ),
+        ]
+        for records, lives in cases:
+            with self.subTest(records=records):
+                with self.assertRaisesRegex(ValueError, "ambiguous_owned_self_switch"):
+                    self.analyze(records, lifetimes=lives)
+
+    def test_atomic_self_does_not_allow_two_same_subject_qpc_records(self):
+        for ordering in permutations([switch(20, 11, 11), ready(20, 11)]):
+            with self.assertRaisesRegex(ValueError, "same_qpc_subject"):
+                self.analyze([switch(10, 90, 11)] + list(ordering))
+
 
 if __name__ == "__main__":
     unittest.main()

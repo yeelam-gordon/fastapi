@@ -119,6 +119,8 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                 continue
             if row["kind"] == "cswitch":
                 targets = [(payload["oldTid"], "out"), (payload["newTid"], "in")]
+                if payload["oldTid"] == payload["newTid"]:
+                    targets = [(payload["newTid"], "self")]
                 processor = payload["processorNumber"]
                 association = running.get(processor)
                 if association is not None:
@@ -138,7 +140,12 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                 for life in by_tid.get(tid, ()):
                     if life["start"] <= qpc < life["end"]:
                         if row["kind"] == "cswitch":
-                            if action != "gap" and payload["oldTid"] == payload["newTid"]:
+                            if action == "self" and (
+                                tid == 0
+                                or association is None
+                                or association[0] != tid
+                                or not life["start"] <= association[1] < qpc
+                            ):
                                 raise ValueError("ambiguous_owned_self_switch")
                             if switched[payload["processorNumber"]] > 1:
                                 raise ValueError("ambiguous_same_processor_qpc")
@@ -166,11 +173,16 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                 )
 
         cursor, state, processor = life["start"], "UNKNOWN", None
+        atomic_self_switches = 0
         for qpc, action, payload in () if legacy else observations[id(life)]:
+            if action == "self":
+                if state != "SCHEDULED" or processor != payload["processorNumber"]:
+                    raise ValueError("ambiguous_owned_self_switch")
+                atomic_self_switches += int(left <= qpc < right)
             compatible = (
                 (
                     state == "SCHEDULED"
-                    and action == "out"
+                    and action in {"out", "self"}
                     and processor == payload["processorNumber"]
                 )
                 or (state == "WAITING" and action == "ready" and payload["flags"] == 0)
@@ -181,11 +193,13 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                 cursor,
                 qpc,
                 state if compatible else "UNKNOWN",
-                "bracketed_observations"
+                "atomic_self_switch_accounting"
+                if action == "self"
+                else "bracketed_observations"
                 if compatible
                 else "missing_or_conflicting_boundary",
             )
-            if action == "in":
+            if action in {"in", "self"}:
                 state, processor = "SCHEDULED", payload["processorNumber"]
             elif action == "out":
                 state = {1: "RUNNABLE", 5: "WAITING"}.get(
@@ -231,6 +245,7 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
                 "intervals": intervals,
                 "ticks": totals,
                 "quality": "UNKNOWN_PRESENT" if totals["UNKNOWN"] else "BRACKETED_ONLY",
+                "atomic_self_switches": atomic_self_switches,
             }
         )
     return {
