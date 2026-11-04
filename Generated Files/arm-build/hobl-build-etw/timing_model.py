@@ -39,7 +39,8 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
     window and lifetimes are half-open integer QPC ranges. Missing closing
     observations remain UNKNOWN; no backwards extension from a switch-out.
     Any legacy scheduling record makes scheduling unavailable for this input.
-    Equal-QPC records require disjoint observed subjects and switch processors.
+    Ambiguity guards concern selected observed lifetimes and their originating
+    processor associations, not unrelated machine-wide scheduling activity.
     """
     _integer(frequency, "frequency", 1)
     if not isinstance(window, (tuple, list)) or len(window) != 2:
@@ -87,6 +88,16 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
         for life in lives
     ):
         raise ValueError("selected_lifetime_unavailable")
+    by_tid = {
+        tid: [
+            life
+            for life in group
+            if life["owner"] in owner_keys
+            and life["start"] < end
+            and begin < life["end"]
+        ]
+        for tid, group in by_tid.items()
+    }
     observations = {id(life): [] for life in lives}
     running = {}
     previous, legacy = None, False
@@ -95,20 +106,20 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
         if previous is not None and qpc < previous:
             raise ValueError("out_of_order_timing")
         previous = qpc
-        switched = set()
+        group = list(group)
+        switched = {}
+        for row in group:
+            if row["schema"] == 2 and row["kind"] == "cswitch":
+                processor = row["payload"]["processorNumber"]
+                switched[processor] = switched.get(processor, 0) + 1
         for row in group:
             payload = row["payload"]
             if row["schema"] != 2:
                 legacy = True
                 continue
             if row["kind"] == "cswitch":
-                if payload["oldTid"] == payload["newTid"]:
-                    raise ValueError("ambiguous_self_switch")
                 targets = [(payload["oldTid"], "out"), (payload["newTid"], "in")]
                 processor = payload["processorNumber"]
-                if processor in switched:
-                    raise ValueError("ambiguous_same_processor_qpc")
-                switched.add(processor)
                 association = running.get(processor)
                 if association is not None:
                     previous_tid, observed_qpc = association
@@ -126,6 +137,11 @@ def model(path, *, lifetimes, owner_keys, window, frequency):
             for tid, action in targets:
                 for life in by_tid.get(tid, ()):
                     if life["start"] <= qpc < life["end"]:
+                        if row["kind"] == "cswitch":
+                            if action != "gap" and payload["oldTid"] == payload["newTid"]:
+                                raise ValueError("ambiguous_owned_self_switch")
+                            if switched[payload["processorNumber"]] > 1:
+                                raise ValueError("ambiguous_same_processor_qpc")
                         subject = observations[id(life)]
                         if subject and subject[-1][0] == qpc:
                             raise ValueError("ambiguous_same_qpc_subject")

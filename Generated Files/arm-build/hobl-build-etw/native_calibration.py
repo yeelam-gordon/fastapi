@@ -48,6 +48,7 @@ FAILURE_REASONS = {
     "ambiguous_same_qpc_subject": "native_wait_subject_tie",
     "ambiguous_same_processor_qpc": "native_wait_cpu_tie",
     "ambiguous_self_switch": "native_wait_self_switch",
+    "ambiguous_owned_self_switch": "native_wait_owned_self_switch",
     "out_of_order_timing": "native_wait_event_order",
     "calibration_event_order": "native_wait_event_order",
     "calibration_source": "native_wait_source",

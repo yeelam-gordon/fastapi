@@ -396,6 +396,11 @@ class NativeCalibration(unittest.TestCase):
             "native_wait_subject_tie",
         )
         self.assertIn("native_wait_subject_tie", capture.REASONS)
+        self.assertEqual(
+            calibration.failure_reason(ValueError("ambiguous_owned_self_switch")),
+            "native_wait_owned_self_switch",
+        )
+        self.assertIn("native_wait_owned_self_switch", capture.REASONS)
         for error in (
             ValueError(r"C:\private\subject-123.json"),
             ValueError(["private", 123]),

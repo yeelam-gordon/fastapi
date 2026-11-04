@@ -242,6 +242,47 @@ class Timing(unittest.TestCase):
         result = self.analyze([switch(10, 90, 11), switch(20, 11, 90), header])
         self.assertEqual(result["threads"][0]["ticks"]["SCHEDULED"], 10)
 
+    def test_foreign_self_switches_do_not_abort_selected_lifetime(self):
+        baseline = [switch(40, 90, 11), switch(60, 11, 90)]
+        foreign = dict(self.life, tid=12, owner="unselected")
+        result = self.analyze(
+            [switch(10, 11, 11), switch(20, 12, 12), switch(30, 13, 13, cpu=2)]
+            + baseline,
+            lifetimes=[dict(self.life, start=30), foreign],
+        )
+        self.assertEqual(
+            result,
+            self.analyze(baseline, lifetimes=[dict(self.life, start=30), foreign]),
+        )
+
+    def test_foreign_self_switch_on_owned_processor_invalidates_bracket(self):
+        result = self.analyze(
+            [switch(10, 90, 11), switch(20, 92, 92), switch(30, 11, 90)]
+        )
+        self.assertEqual(
+            result["threads"][0]["ticks"],
+            {"UNKNOWN": 100, "WAITING": 0, "RUNNABLE": 0, "SCHEDULED": 0},
+        )
+
+    def test_unrelated_processor_ties_do_not_abort_owned_other_processor(self):
+        baseline = [switch(10, 90, 11, cpu=1), switch(60, 11, 90, cpu=1)]
+        foreign = dict(self.life, tid=12, owner="unselected")
+        for ordering in permutations([switch(20, 12, 92), switch(20, 93, 94)]):
+            self.assertEqual(
+                self.analyze(
+                    baseline[:1] + list(ordering) + baseline[1:],
+                    lifetimes=[self.life, foreign],
+                ),
+                self.analyze(baseline, lifetimes=[self.life, foreign]),
+            )
+
+    def test_selected_self_switch_and_relevant_processor_ties_remain_rejected(self):
+        with self.assertRaisesRegex(ValueError, "owned_self_switch"):
+            self.analyze([switch(10, 11, 11)])
+        for ordering in permutations([switch(20, 11, 90), switch(20, 92, 93)]):
+            with self.assertRaisesRegex(ValueError, "same_processor_qpc"):
+                self.analyze([switch(10, 90, 11)] + list(ordering))
+
 
 if __name__ == "__main__":
     unittest.main()
