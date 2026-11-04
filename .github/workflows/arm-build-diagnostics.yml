@@ -17,6 +17,7 @@ on:
           - hobl-build-etw
           - hobl-native-timing
           - hobl-build-scheduling
+          - hobl-secure-wipe-screen
         default: hobl-complete
       windows-python-source:
         description: Optional Windows interpreter source for the parallel screen only.
@@ -35,6 +36,10 @@ env:
   GIT_CONFIG_VALUE_0: "false"
 
 jobs:
+  secure-wipe-screen:
+    if: inputs.platform == 'hobl-secure-wipe-screen'
+    uses: ./.github/workflows/hobl-secure-wipe-screen.yml
+
   build-etw:
     if: inputs.platform == 'hobl-build-etw' || inputs.platform == 'hobl-native-timing' || inputs.platform == 'hobl-build-scheduling'
     permissions:
@@ -60,7 +65,7 @@ jobs:
       windows-python-source: ${{ inputs.windows-python-source }}
 
   complete:
-    if: inputs.platform != 'hobl-build-etw' && inputs.platform != 'hobl-native-timing' && inputs.platform != 'hobl-build-scheduling' && inputs.platform != 'hobl-build-runtime-screen' && inputs.platform != 'hobl-parallel-screen' && inputs.platform != 'hobl-python-setup-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
+    if: inputs.platform != 'hobl-secure-wipe-screen' && inputs.platform != 'hobl-build-etw' && inputs.platform != 'hobl-native-timing' && inputs.platform != 'hobl-build-scheduling' && inputs.platform != 'hobl-build-runtime-screen' && inputs.platform != 'hobl-parallel-screen' && inputs.platform != 'hobl-python-setup-screen' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
     strategy:
       fail-fast: false
       matrix:

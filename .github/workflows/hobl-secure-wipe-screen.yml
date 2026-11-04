@@ -1,0 +1,151 @@
+name: Finite ARM secure-wipe whole-HOBL screen (not adoption)
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+
+jobs:
+  screen:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.ref == 'refs/heads/perf/hobl-secure-wipe-20261104' && github.run_attempt == '1'
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - runner: windows-11-arm
+            platform: windows
+            workers: 4
+          - runner: macos-15
+            platform: macos
+            workers: 3
+    runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/hobl-complete-ci/
+            /Generated Files/arm-build/hobl-parallel-screen/
+            /Generated Files/arm-build/hobl-secure-wipe-screen/
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: package-source
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: matrix.platform == 'windows'
+        with:
+          repository: hynek/argon2-cffi-bindings
+          ref: fb50afcbb80aee5e87d6f8b1d15e7238321387c9
+          submodules: recursive
+          path: bindings-source
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        id: python
+        with:
+          python-version: "3.13.15"
+          architecture: arm64
+          update-environment: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - name: Qualified source fixture and pinned82 native runtime preparation
+        env:
+          BASE_PYTHON: ${{ steps.python.outputs.python-path }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $prepared = Join-Path $env:GITHUB_WORKSPACE 'prepared'
+          New-Item -ItemType Directory -Path $prepared -ErrorAction Stop | Out-Null
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-parallel-screen/screen.py'
+          & $env:BASE_PYTHON $helper prepare --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output $prepared --uv (Get-Command uv).Source --workers ${{ matrix.workers }}
+          exit $LASTEXITCODE
+      - name: Six complete payloads with original guardian and full contracts
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $prepared = Join-Path $env:GITHUB_WORKSPACE 'prepared'
+          $python = if ($env:RUNNER_OS -eq 'Windows') { Join-Path $prepared 'venv/Scripts/python.exe' } else { Join-Path $prepared 'venv/bin/python' }
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/hobl-secure-wipe-screen/screen.py'
+          $extra = @()
+          if ($env:RUNNER_OS -eq 'Windows') { $extra = @('--bindings-source', (Join-Path $env:GITHUB_WORKSPACE 'bindings-source')) }
+          & $python $helper --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output (Join-Path $env:GITHUB_WORKSPACE 'evidence') --prepared $prepared --uv (Get-Command uv).Source --workers ${{ matrix.workers }} @extra
+          exit $LASTEXITCODE
+      - name: Preserve only reviewed workload evidence (no native package roots)
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: hobl-secure-wipe-${{ matrix.platform }}
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            evidence/plan.json
+            evidence/input-plan.json
+            evidence/result.json
+            evidence/summary.json
+            evidence/source-freeze.json
+            evidence/reference-before.json
+            evidence/reference-after.json
+            evidence/binding-proof.json
+            evidence/builder-evidence/manifest.json
+            evidence/builder-evidence/build-plan.json
+            evidence/builder-evidence/source-proof.json
+            evidence/builder-evidence/library-resolution.json
+            evidence/builder-evidence/binding-proof.json
+            evidence/builder-evidence/reference-after.json
+            evidence/builder-evidence/compiler-version.stdout.txt
+            evidence/builder-evidence/candidate.stdout.txt
+            evidence/builder-evidence/reference.stdout.txt
+            evidence/builder-evidence/reference-probe.stdout.txt
+            evidence/builder-evidence/binding-head.receipt.json
+            evidence/builder-evidence/binding-tree.receipt.json
+            evidence/builder-evidence/libargon2-head.receipt.json
+            evidence/builder-evidence/libargon2-tree.receipt.json
+            evidence/builder-evidence/reference-probe.receipt.json
+            evidence/builder-evidence/vswhere.receipt.json
+            evidence/builder-evidence/compiler-version.receipt.json
+            evidence/builder-evidence/preparation.receipt.json
+            evidence/builder-evidence/reference.receipt.json
+            evidence/builder-evidence/candidate.receipt.json
+            evidence/full-coverage.toml
+            evidence/native-identity.json
+            evidence/readiness-*.json
+            evidence/*-coverage-delta.json
+            evidence/*.receipt.json
+            evidence/*-build.stdout
+            evidence/*-build.stderr
+            evidence/*-test.stdout
+            evidence/*-test.stderr
+            evidence/payload-*/commands.json
+            evidence/payload-*/archive-inventory.json
+            evidence/payload-*/archive-proof.json
+            evidence/payload-*/collection-gw*.json
+            evidence/payload-*/raw-to-canonical.json
+            evidence/payload-*/phases-*.jsonl
+            evidence/payload-*/groups-gw*.json
+            evidence/payload-*/identity-*.json
+            evidence/payload-*/binding-*.json
+            evidence/payload-*/fixture-*.json
+            evidence/payload-*/resource-pid-order.json
+            evidence/payload-*/native-flush-proof.json
+            evidence/payload-*/bootstrap.json
+            evidence/payload-*/junit.xml
+            evidence/payload-*/.coverage.*
