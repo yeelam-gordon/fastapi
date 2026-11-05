@@ -243,3 +243,82 @@ def test_local83_does_not_allow_arbitrary_extra_distribution():
     ):
         with pytest.raises(ValueError, match="Exact qualified local83 baseline"):
             local_preflight.local_metadata()
+
+
+@pytest.fixture
+def native_log_row(tmp_path):
+    source, helper, folder = (
+        tmp_path / name for name in ("source", "helper", "payload")
+    )
+    for path in (source, helper, folder):
+        path.mkdir()
+    (helper / "copied.py").write_bytes(b"source")
+    manifest, rewrite = tmp_path / "manifest.json", tmp_path / "rewrite.py"
+    manifest.write_text("{}")
+    rewrite.write_bytes(b"qualified writer")
+    row = {
+        "source": str(source),
+        "helper": str(helper),
+        "folder": str(folder),
+        "manifest": str(manifest),
+        "helper_sources": {"copied.py": digest(helper / "copied.py")},
+    }
+    return row, {"path": str(rewrite), "sha256": digest(rewrite)}
+
+
+@pytest.mark.parametrize(
+    "platform,newline,size,sha",
+    [
+        (
+            "win32",
+            "\r\n",
+            93,
+            "fb2707ae6c5e112087fe74eaaa41173f74bfe7129998dd5d882f6df9d8bb15a9",
+        ),
+        (
+            "darwin",
+            "\n",
+            91,
+            "ae838d85e7ea572eb7f048b1792eb39b8905cd5c58fe3a9e12160ebc38cd739f",
+        ),
+    ],
+)
+def test_native_log_byte_gate_accepts_only_source_pinned_crlf_or_lf(
+    native_log_row, platform, newline, size, sha
+):
+    row, rewrite = native_log_row
+    path = Path(row["source"]) / "log.txt"
+    with path.open("w", encoding="utf-8", newline=newline) as stream:
+        stream.write(
+            "found query: some-query\nmessage to foo@example.com\nApplication shutdownApplication shutdown"
+        )
+    original = path.read_bytes()
+    assert len(original) == size and digest(path) == sha
+    with patch.object(matched_audit.sys, "platform", platform):
+        matched_audit.source_gate(row, set(), rewrite)
+    assert path.read_bytes() == original
+
+
+@pytest.mark.parametrize("platform", ["win32", "darwin"])
+def test_wrong_native_log_bytes_fail_but_exact_generated_evidence_is_retained(
+    native_log_row, platform
+):
+    row, rewrite = native_log_row
+    path = Path(row["source"]) / "log.txt"
+    path.write_bytes(b"unexpected log bytes\n")
+    original = path.read_bytes()
+    with patch.object(matched_audit.sys, "platform", platform):
+        matched_audit.retain_source_log(row)
+        with pytest.raises(ValueError, match="Unexpected log output"):
+            matched_audit.source_gate(row, set(), rewrite)
+    folder = Path(row["folder"])
+    assert (folder / "source-log.bin").read_bytes() == original == path.read_bytes()
+    proof = load(folder / "source-log.json")
+    assert proof["size"] == len(original) and proof["sha256"] == digest(path)
+
+
+def test_native_log_has_no_unsupported_platform_fallback(native_log_row):
+    row, rewrite = native_log_row
+    with patch.object(matched_audit.sys, "platform", "linux"):
+        with pytest.raises(ValueError, match="Unsupported native log platform"):
+            matched_audit.source_gate(row, set(), rewrite)

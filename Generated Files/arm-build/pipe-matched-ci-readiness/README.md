@@ -194,8 +194,9 @@ its identity code is unchanged and no additional CLI run is requested.
 `archive_headers.expected_headers(reference, sys.platform)` deep-copies the
 unchanged Windows reference. Every baseline wheel member must have creator 0
 before either platform is accepted. Windows (`win32`) expects 0; Mac (`darwin`)
-expects 3 for every wheel member. Only this one field changes in the Mac
-expectation. Every other ZIP/TAR field and the complete member inventory remain
+expects 3 for every wheel member. The additional source-derived Mac sdist
+expectation is 0755 for exactly the five canonical executable shell scripts
+listed below. Every other ZIP/TAR field and the complete member inventory remain
 exact. Any other platform fails explicitly; the actual creator is never ignored.
 
 Source basis, established before Mac execution: pinned installed CPython
@@ -209,6 +210,28 @@ policy, not observed Mac data, a blanket cross-platform waiver, or a Mac runtime
 PASS. Existing unchanged Windows artifacts can be read-only revalidated against
 `expected_headers(reference, "win32")`; another build is unnecessary.
 The unresolved full raw context-association failure still blocks CI admission.
+
+The five exact sdist names are
+`fastapi-0.119.1/scripts/{lint.sh,test-cov-html.sh,format.sh,coverage.sh,test.sh}`.
+Canonical Git tree 864b569cf8453654fc3bc2c64108c0f644e2918c records each as
+100755. Before either platform transformation, all five exact versioned members
+must exist in the frozen Windows reference with mode420 (0644); Mac's deep-copy
+expectation changes only their `mode` to493 (0755), never actual source or files.
+Windows retains420. Missing/version-mismatched members or an altered Windows
+baseline fail rather than supplying defaults.
+
+Authoritative permission path: exact PDM2.5.0 wheel SHA5b8746...,
+`pdm/backend/sdist.py:109-110` obtains native `TarInfo` via `gettarinfo`;
+`sdist.py:31-35` invokes `normalize_file_permissions`.
+`pdm/backend/utils.py:166-178` normalizes nonexecutables to0644 and files with
+owner-execute to0755. Pinned CPythonv3.13.15 `Python/fileutils.c:1078-1089`
+maps regular Windows file attributes to read/write permissions without execute;
+`Modules/posixmodule.c:1957-1976` adds execute only for .exe/.bat/.cmd/.com,
+not .sh. Thus native Git-executable Mac scripts and ordinary Windows .sh files
+have independently source-derived expectations. No chmod, byte normalization,
+blanket mode waiver or other Mac field adjustment is made.
+The old Mac artifact/report is not edited or regraded, and the old unretained
+Mac log cause is still not asserted.
 
 ## Separate local controlled-schedule profile (source only)
 

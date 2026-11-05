@@ -41,6 +41,13 @@ TAR_FIELDS = frozenset(
         "uname",
     }
 )
+NATIVE_EXECUTABLE_SCRIPTS = (
+    "fastapi-0.119.1/scripts/lint.sh",
+    "fastapi-0.119.1/scripts/test-cov-html.sh",
+    "fastapi-0.119.1/scripts/format.sh",
+    "fastapi-0.119.1/scripts/coverage.sh",
+    "fastapi-0.119.1/scripts/test.sh",
+)
 
 
 def full_inventory(directory):
@@ -89,7 +96,7 @@ def require_reference(actual, expected):
 
 
 def expected_headers(reference, platform):
-    """Derive only the source-defined native ZIP creator before execution."""
+    """Derive only source-defined ZIP creator and five native script modes."""
     if platform not in ("win32", "darwin"):
         raise ValueError(f"Unsupported header expectation platform: {platform}")
     require_reference(reference, reference)
@@ -97,8 +104,17 @@ def expected_headers(reference, platform):
         member["create_system"] != 0 for member in reference["wheel"].values()
     ):
         raise ValueError("Frozen Windows baseline must have creator 0 for every member")
+    if any(
+        name not in reference["sdist"] or reference["sdist"][name]["mode"] != 0o644
+        for name in NATIVE_EXECUTABLE_SCRIPTS
+    ):
+        raise ValueError(
+            "Frozen 0.119.1 Windows script baseline must contain all five modes 0644"
+        )
     expected = copy.deepcopy(reference)
     if platform == "darwin":
         for member in expected["wheel"].values():
             member["create_system"] = 3
+        for name in NATIVE_EXECUTABLE_SCRIPTS:
+            expected["sdist"][name]["mode"] = 0o755
     return expected

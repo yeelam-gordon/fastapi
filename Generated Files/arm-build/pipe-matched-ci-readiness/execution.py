@@ -353,6 +353,10 @@ def worker(
                     )
                 else:
                     archive_copy(Path(row["source"]) / "dist", folder / "artifacts")
+            elif name == "test":
+                from matched_audit import retain_source_log
+
+                retain_source_log(row)
             return (receipt.native_end_ns - receipt.native_start_ns) / 1e9
 
         environments = {}

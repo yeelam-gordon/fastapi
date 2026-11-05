@@ -3,7 +3,7 @@
   "scope": "Controlled transfer consumed and failed; no further CI allocation authorized",
   "profile": "pipe-fixed-groups-ci82-v1",
   "cli_identity_qualified": true,
-  "sourcepins_sha256": "f5d1921590b96bf331d6af2393a9003f30f22e4793bd5fc78b3414e31f1e3b53",
+  "sourcepins_sha256": "fc131b1b1c1ce4720c551bb1dc31688114af54cf0c905dd5607c15bd1f36f20e",
   "source_freeze_commit": "3903db220d52e7b37fb74a68b34abf340593f6ca",
   "review_findings_closed": [
     "MATCHED-001",
@@ -37,8 +37,16 @@
     "job_seconds": 480,
     "queue_seconds": 300,
     "final_audit_seconds": 120,
-    "payloads_per_host": ["A1", "B1", "B2", "A2"],
-    "workers": {"windows": 4, "macos": 3},
+    "payloads_per_host": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "workers": {
+      "windows": 4,
+      "macos": 3
+    },
     "warmups": 0,
     "retries": 0,
     "traces": 0,
