@@ -1,6 +1,6 @@
 {
-  "approved": true,
-  "scope": "One new controlled-profile fork transfer only; default route and old failed allocation remain closed",
+  "approved": false,
+  "scope": "Controlled transfer consumed and failed; no further CI allocation authorized",
   "profile": "pipe-fixed-groups-ci82-v1",
   "cli_identity_qualified": true,
   "sourcepins_sha256": "f5d1921590b96bf331d6af2393a9003f30f22e4793bd5fc78b3414e31f1e3b53",
@@ -26,6 +26,9 @@
   },
   "new_allocation": {
     "id": "controlled-ci-transfer-02",
+    "run_id": 41969250383,
+    "result": "FAILED/CLOSED",
+    "dispatches_consumed": 1,
     "repository": "yeelam-gordon/fastapi",
     "route": "pipe-controlled-ci",
     "dispatches": 1,
@@ -45,8 +48,9 @@
     "stop": "First-pair integrity failure, source/native readiness failure, queue/job bounds or allocation failure: retain evidence, no automatic rerun"
   },
   "blocking": [
-    "No hosted controlled-profile performance observation exists before this allocation",
-    "Mac native runtime readiness must pass in the bounded pre-payload gate",
+    "Mac A1 stopped at the hardcoded Windows log-output oracle; actual generated log was not retained",
+    "Windows completed three test payloads and A2 build; final-audit/guardian budget stopped A2 test before launch",
+    "No complete matched ABBA/final audit or qualified hosted parity exists",
     "Physical twenty-core Windows versus sixteen-core Mac parity remains unmeasured"
   ],
   "acceptance": {
