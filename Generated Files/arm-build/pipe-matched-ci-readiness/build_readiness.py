@@ -38,6 +38,58 @@ def copy_uv_archives(directory, destination):
     return destination
 
 
+def build_environment(output, wheel_dir, *, profile_imports=False, log_context=False):
+    if profile_imports and log_context:
+        raise ValueError("Import profiling and uv log context are mutually exclusive")
+    env = {
+        key: value
+        for key, value in os.environ.items()
+        if key != "RUST_LOG"
+        and not key.startswith(
+            ("PYTHON", "PYTEST_", "PIP_", "UV_", "COVERAGE_", "COV_CORE_")
+        )
+    }
+    temp = output / "temp"
+    env.update(
+        SOURCE_DATE_EPOCH="1700000000",
+        UV_CACHE_DIR=str(output / "uv-cache"),
+        UV_FIND_LINKS=wheel_dir.as_uri(),
+        PIP_FIND_LINKS=wheel_dir.as_uri(),
+        PIP_NO_INDEX="1",
+        PIP_CONSTRAINT=(output / "build-constraints.txt").as_uri(),
+        TEMP=str(temp),
+        TMP=str(temp),
+        TMPDIR=str(temp),
+    )
+    if profile_imports:
+        env["PYTHONPROFILEIMPORTTIME"] = "1"
+    if log_context:
+        env["UV_LOG_CONTEXT"] = "true"
+        env["RUST_LOG"] = "uv_build_frontend=debug,uv_distribution=debug,uv=debug"
+    return env
+
+
+def argument_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--source-repo", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--uv", type=Path, required=True)
+    parser.add_argument("--wheel-dir", type=Path, required=True)
+    diagnostic = parser.add_mutually_exclusive_group()
+    diagnostic.add_argument(
+        "--profile-imports",
+        action="store_true",
+        help="Emit diagnostic Python import times; not comparable performance timing",
+    )
+    diagnostic.add_argument(
+        "--log-context",
+        action="store_true",
+        help="Emit timestamped coarse uv events; not hook CPU or performance timing",
+    )
+    parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
+    return parser
+
+
 def worker(args):
     verify_sourcepins()
     before = runtime_snapshot(Path(sys.prefix))
@@ -48,6 +100,8 @@ def worker(args):
         "ci_admission": False,
         "diagnostic_import_profile": args.profile_imports,
     }
+    if args.log_context:
+        result["diagnostic_log_context"] = True
     try:
         local_metadata()
         attest(args.uv)
@@ -74,30 +128,17 @@ def worker(args):
                 "uv_sha256": digest(args.uv),
             },
         )
-        env = {
-            key: value
-            for key, value in os.environ.items()
-            if not key.startswith(
-                ("PYTHON", "PYTEST_", "PIP_", "UV_", "COVERAGE_", "COV_CORE_")
-            )
-        }
         temp = args.output / "temp"
         temp.mkdir()
-        env.update(
-            SOURCE_DATE_EPOCH="1700000000",
-            UV_CACHE_DIR=str(args.output / "uv-cache"),
-            UV_FIND_LINKS=args.wheel_dir.as_uri(),
-            PIP_FIND_LINKS=args.wheel_dir.as_uri(),
-            PIP_NO_INDEX="1",
-            PIP_CONSTRAINT=(args.output / "build-constraints.txt").as_uri(),
-            TEMP=str(temp),
-            TMP=str(temp),
-            TMPDIR=str(temp),
+        env = build_environment(
+            args.output,
+            args.wheel_dir,
+            profile_imports=args.profile_imports,
+            log_context=args.log_context,
         )
-        if args.profile_imports:
-            env["PYTHONPROFILEIMPORTTIME"] = "1"
         command = [
             str(args.uv),
+            *(["--color", "never"] if args.log_context else []),
             "build",
             "--python",
             sys.executable,
@@ -159,17 +200,7 @@ def worker(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--source-repo", type=Path, required=True)
-    parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--uv", type=Path, required=True)
-    parser.add_argument("--wheel-dir", type=Path, required=True)
-    parser.add_argument(
-        "--profile-imports",
-        action="store_true",
-        help="Emit diagnostic Python import times; not comparable performance timing",
-    )
-    parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
+    parser = argument_parser()
     args = parser.parse_args()
     for name in ("source_repo", "output", "uv", "wheel_dir"):
         setattr(args, name, getattr(args, name).resolve())
@@ -197,6 +228,7 @@ if __name__ == "__main__":
                 "--wheel-dir",
                 str(args.wheel_dir),
                 *(["--profile-imports"] if args.profile_imports else []),
+                *(["--log-context"] if args.log_context else []),
             ],
             HERE,
             os.environ.copy(),

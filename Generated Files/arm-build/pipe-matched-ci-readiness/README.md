@@ -19,6 +19,15 @@ the current manifest. This local source check does not grant GitHub admission.
 The one-build local entrypoint also accepts `--profile-imports` for an explicitly
 instrumented, non-performance-eligible Python import diagnostic. It changes no
 backend or build phases; raw stderr is retained.
+The mutually exclusive `--log-context` option instead enables fixed
+`UV_LOG_CONTEXT=true` and narrowly scoped uv debug targets, with color disabled,
+for coarse timestamped hook/environment/extraction events where emitted.
+Ambient `RUST_LOG` is cleared rather than accepted as an observer configuration.
+Missing or unbracketed events remain unknown; logging adds overhead and does not
+measure Python hook CPU, child birth/critical path, speedup or full HOBL.
+The existing 150s controller/90s native bounds and all source/runtime/artifact
+guards remain unchanged. Source preparation is not permission to run; changed
+source pins deliberately require independent review and a new parent freeze.
 
 ## End-to-end entrypoints
 

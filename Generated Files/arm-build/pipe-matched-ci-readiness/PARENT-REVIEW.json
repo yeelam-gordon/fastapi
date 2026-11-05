@@ -3,7 +3,7 @@
   "scope": "Transfer03 consumed and completed; no further allocation authorized",
   "profile": "pipe-fixed-groups-ci82-v1",
   "cli_identity_qualified": true,
-  "sourcepins_sha256": "bec61fe363e8294faacc141185dba186966b469fe45a696ef6d64e8ffee9eee2",
+  "sourcepins_sha256": "4ee102156af162e3904d25304dc7622248915e87f430ece904ba7e410e277301",
   "source_freeze_commit": "f3d8866a10b0ac9988fa1f60a9fdf212de0bf7d3",
   "review_findings_closed": [
     "MATCHED-001",

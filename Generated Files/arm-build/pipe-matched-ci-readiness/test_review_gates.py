@@ -213,6 +213,72 @@ def test_local_readiness_uses_current_sourcepins_before_any_work(module):
     owned.assert_not_called()
 
 
+def test_build_logging_is_explicit_and_drops_ambient_observers():
+    with patch.dict(
+        build_readiness.os.environ,
+        {
+            "RUST_LOG": "trace",
+            "UV_LOG_CONTEXT": "true",
+            "PYTHONPROFILEIMPORTTIME": "1",
+            "PYTHONPATH": "observer",
+            "PYTHONDONTWRITEBYTECODE": "1",
+            "PYTHONPYCACHEPREFIX": "redirected",
+        },
+        clear=True,
+    ):
+        env = build_readiness.build_environment(HERE, HERE)
+    assert env == {
+        "SOURCE_DATE_EPOCH": "1700000000",
+        "UV_CACHE_DIR": str(HERE / "uv-cache"),
+        "UV_FIND_LINKS": HERE.as_uri(),
+        "PIP_FIND_LINKS": HERE.as_uri(),
+        "PIP_NO_INDEX": "1",
+        "PIP_CONSTRAINT": (HERE / "build-constraints.txt").as_uri(),
+        "TEMP": str(HERE / "temp"),
+        "TMP": str(HERE / "temp"),
+        "TMPDIR": str(HERE / "temp"),
+    }
+
+
+def test_build_log_context_adds_only_fixed_timestamp_logging_environment():
+    with patch.dict(build_readiness.os.environ, {"RUST_LOG": "trace"}, clear=True):
+        baseline = build_readiness.build_environment(HERE, HERE)
+        enabled = build_readiness.build_environment(HERE, HERE, log_context=True)
+    assert enabled == {
+        **baseline,
+        "UV_LOG_CONTEXT": "true",
+        "RUST_LOG": "uv_build_frontend=debug,uv_distribution=debug,uv=debug",
+    }
+
+
+def test_build_log_context_cannot_combine_with_import_profiling():
+    argv = [
+        "--source-repo",
+        str(HERE),
+        "--output",
+        str(HERE),
+        "--uv",
+        str(HERE / "uv.exe"),
+        "--wheel-dir",
+        str(HERE),
+    ]
+    assert not build_readiness.argument_parser().parse_args(argv).log_context
+    assert (
+        build_readiness.argument_parser()
+        .parse_args([*argv, "--log-context"])
+        .log_context
+    )
+    with pytest.raises(SystemExit) as error:
+        build_readiness.argument_parser().parse_args(
+            [*argv, "--log-context", "--profile-imports"]
+        )
+    assert error.value.code == 2
+    with pytest.raises(ValueError, match="mutually exclusive"):
+        build_readiness.build_environment(
+            HERE, HERE, log_context=True, profile_imports=True
+        )
+
+
 def test_local83_baseline_is_exact_ci82_plus_only_qualified_fastapi():
     baseline = load(HERE / "qualified-local83.json")["packages"]
     common = dict(
