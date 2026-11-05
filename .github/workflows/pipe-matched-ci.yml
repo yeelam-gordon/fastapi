@@ -1,0 +1,146 @@
+name: Matched pipe full-HOBL ARM (source-only readiness, manual fork only)
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+
+jobs:
+  matched:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: windows-11-arm
+            platform: windows
+            workers: 4
+          - runner: macos-14
+            platform: macos
+            workers: 3
+    runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Record finite job allocation
+        run: |
+          "MATCHED_STARTED=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())" >> $env:GITHUB_ENV
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/.gitattributes
+            /.github/workflows/.gitattributes
+            /.github/workflows/pipe-matched-ci.yml
+            /.github/workflows/arm-build-diagnostics.yml
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/pipe-matched-ci-readiness/
+            /Generated Files/arm-build/hobl-complete-ci/
+      - name: Mandatory source readiness gate before setup or workload
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/pipe-matched-ci-readiness'
+          $reviewPath = Join-Path $helper 'PARENT-REVIEW.json'
+          if (-not (Test-Path -LiteralPath $reviewPath)) {
+            throw 'NoParityClaim: missing parent source-review receipt'
+          }
+          $review = Get-Content -Raw $reviewPath | ConvertFrom-Json
+          $sha = (Get-FileHash (Join-Path $helper 'SOURCEPINS.json') -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($review.approved -ne $true -or $review.sourcepins_sha256 -ne $sha) {
+            throw 'NoParityClaim: review is not bound to current sources'
+          }
+          & (Join-Path $helper 'verify_sourcepins.ps1') -Root (Join-Path $env:GITHUB_WORKSPACE 'tools') -Manifest (Join-Path $helper 'SOURCEPINS.json')
+      - name: Reuse server UTC and actual job state queue bound
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          & (Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/pipe-matched-ci-readiness/queue_readiness.ps1')
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: package-source
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        if: matrix.platform == 'macos'
+        id: python
+        with:
+          python-version: "3.13.15"
+          architecture: arm64
+          update-environment: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - name: Private managed Windows Python
+        if: matrix.platform == 'windows'
+        id: managed-python
+        timeout-minutes: 1
+        env:
+          UV_PYTHON_INSTALL_DIR: ${{ github.workspace }}\managed-python
+          UV_CACHE_DIR: ${{ github.workspace }}\managed-python-cache
+          UV_HTTP_RETRIES: "0"
+          UV_HTTP_TIMEOUT: "20"
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & uv python install 3.13.15 --install-dir $env:UV_PYTHON_INSTALL_DIR --no-bin --no-registry --no-config --no-progress
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $python = & uv python find 3.13.15 --managed-python --no-python-downloads --no-project --no-config --no-progress
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $root = [IO.Path]::GetFullPath($env:UV_PYTHON_INSTALL_DIR) + [IO.Path]::DirectorySeparatorChar
+          if (-not ([IO.Path]::GetFullPath($python)).StartsWith($root, [StringComparison]::OrdinalIgnoreCase)) {
+            throw 'Managed interpreter escaped owned installation'
+          }
+          "python-path=$python" >> $env:GITHUB_OUTPUT
+      - name: Existing common82 bootstrap and four cold source payloads
+        env:
+          BASE_PYTHON: ${{ steps.managed-python.outputs.python-path || steps.python.outputs.python-path }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $remaining = 480 - ([DateTimeOffset]::UtcNow.ToUnixTimeSeconds() - [long]$env:MATCHED_STARTED) - 15
+          if ($remaining -le 120) { throw 'No finite preparation allocation remains' }
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/pipe-matched-ci-readiness'
+          & $env:BASE_PYTHON -B (Join-Path $helper 'execution.py') prepare --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output (Join-Path $env:GITHUB_WORKSPACE 'matched-evidence') --uv (Get-Command uv).Source --workers ${{ matrix.workers }} --seconds $remaining
+          exit $LASTEXITCODE
+      - name: Guarded complete ABBA and SHA-bound final audit
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $remaining = 480 - ([DateTimeOffset]::UtcNow.ToUnixTimeSeconds() - [long]$env:MATCHED_STARTED) - 15
+          if ($remaining -le 120) { throw 'No finite payload/audit allocation remains' }
+          $root = Join-Path $env:GITHUB_WORKSPACE 'matched-evidence'
+          $python = if ($env:RUNNER_OS -eq 'Windows') { Join-Path $root 'venv/Scripts/python.exe' } else { Join-Path $root 'venv/bin/python' }
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/pipe-matched-ci-readiness'
+          & $python -B (Join-Path $helper 'execution.py') run --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output $root --uv (Get-Command uv).Source --workers ${{ matrix.workers }} --seconds $remaining
+          exit $LASTEXITCODE
+      - name: Preserve source readiness without credentials or raw traces
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: pipe-matched-source-readiness-${{ matrix.platform }}
+          path: |
+            tools/Generated Files/arm-build/pipe-matched-ci-readiness/PLAN.json
+            tools/Generated Files/arm-build/pipe-matched-ci-readiness/SOURCEPINS.json
+            matched-evidence/*.json
+            matched-evidence/*.stdout
+            matched-evidence/*.stderr
+            matched-evidence/*.toml
+            matched-evidence/*.txt
+            matched-evidence/payload-*
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,4 @@
+/.gitattributes -text whitespace=trailing-space,space-before-tab,cr-at-eol
+/.github/workflows/arm-build-diagnostics.yml -text whitespace=trailing-space,space-before-tab,cr-at-eol
+/.github/workflows/pipe-matched-ci.yml -text whitespace=trailing-space,space-before-tab,cr-at-eol
+"/Generated Files/arm-build/hobl-complete-ci/README.md" -text whitespace=trailing-space,space-before-tab,cr-at-eol

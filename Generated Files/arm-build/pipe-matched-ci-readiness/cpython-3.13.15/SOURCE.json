@@ -1,0 +1,14 @@
+{
+  "selectors.py": {
+    "url": "https://raw.githubusercontent.com/python/cpython/v3.13.15/Lib/selectors.py",
+    "sha256": "4b8a60cfbb619d080f87dffe1578372e56e8c0ac826f043224a154cf7b77606d"
+  },
+  "selector_events.py": {
+    "url": "https://raw.githubusercontent.com/python/cpython/v3.13.15/Lib/asyncio/selector_events.py",
+    "sha256": "1938ac8e095741b3c1237c6d7b72ede732b9dcbbe7452d81c171e2e9e48bb259"
+  },
+  "selectmodule.c": {
+    "url": "https://raw.githubusercontent.com/python/cpython/v3.13.15/Modules/selectmodule.c",
+    "sha256": "0a40cdb1d3c8edb0ef41061b65f92e83493dcc644bfbe606dc5691a096f82fa7"
+  }
+}
