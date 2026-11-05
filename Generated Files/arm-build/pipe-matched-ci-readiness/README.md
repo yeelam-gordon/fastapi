@@ -5,6 +5,13 @@ The fourteenth manual route is isolated; the original thirteen routes and all
 defaults are unchanged. Admission requires a source-bound parent review receipt;
 the static plan and mocks do not grant it.
 
+The current repair revision is **not CI-admitted** (`approved: false`).
+Run 41947559106 remains failed: no reverse pair or Mac measurement completed.
+Local one-case CLI association and one offline build/header qualification pass,
+but retained raw per-context equality still fails at one cached-import
+association. Full raw data remains intact; the strict gate is unchanged.
+No new workflow dispatch or performance/parity claim follows from these repairs.
+
 ## End-to-end entrypoints
 
 `execution.py prepare --source CHECKOUT --output NEW --uv UV --workers N
@@ -134,3 +141,63 @@ all pass. Outputs are result.json, native-child.json, .coverage, stdout/stderr
 and ownership receipts, only under the new output directory.
 It does not exercise wakeup traffic, ASGI, full coverage equivalence, Mac,
 service-host timing or physical resource parity, and grants no CI admission.
+
+## New-route epoch and full frozen archive headers
+
+The matched route explicitly sets `SOURCE_DATE_EPOCH=1700000000` for both
+arms. This restores the original reference control, not a new optimization.
+`archive_headers` retains every frozen ZIP/TAR member field, including ZIP
+timestamps/creator flags/extra/comment/CRC and TAR mtime/PAX/ownership/mode.
+Unknown/missing schema fields and any complete inventory/value difference fail.
+The existing portable artifact_set source/RECORD checks still run first.
+No shared hobl-complete-ci helper, old route or frozen reference was changed.
+
+After parent source review/freeze, exactly one offline build and zero tests:
+
+```powershell
+& '.\Generated Files\arm-build\hobl-python-provision-screen\local-private\work\.venv\Scripts\python.exe' -B '.\Generated Files\worktrees\pipe-matched-ci\Generated Files\arm-build\pipe-matched-ci-readiness\build_readiness.py' --source-repo 'Q:\fastapi' --output '.\Generated Files\arm-build\pipe-matched-ci-readiness\build-readiness-01' --uv '.\Generated Files\arm-build\tools\uv.exe' --wheel-dir '.\Generated Files\arm-build\wheelhouse\ci-40814042898'
+```
+
+Run from `Q:\fastapi` with the exact existing qualified local83 runtime,
+native uv 0.13.6, the existing local canonical source object and a new output
+directory. The nested wheel directory must contain exactly one PDM backend
+wheel version 2.5.0 with SHA256
+5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63.
+No root-directory duplicate fallback, dependency download, test, CLI rerun or
+tool installation is permitted. The ordinary isolated backend reads that
+offline wheel. Fresh owned canonical source is prepared using the existing
+fixture overlay; application/test source is not preloaded.
+
+The controller is administrative `-B`; the actual uv build selects the existing
+Python without `-B` or custom bytecode switches and clears inherited Python/
+pip/uv/coverage overrides. SDE is explicit. Overall owned allocation is 150s;
+the one sdist-then-wheel command allocation is 90s, each includes 15s reserved
+guardian overhead/cleanup. Outputs include receipts/logs, raw artifacts,
+complete payload and header inventories, source/offline-input proofs and result.
+Original runtime/cache bytes and inventory must remain unchanged.
+
+No build has been executed during this source correction. A one-build PASS
+would not qualify the unresolved full raw context-association mismatch, grant
+CI admission, or rewrite old failed CI/readiness evidence. CLI02 already passed;
+its identity code is unchanged and no additional CLI run is requested.
+
+### Frozen prospective native ZIP creator policy
+
+`archive_headers.expected_headers(reference, sys.platform)` deep-copies the
+unchanged Windows reference. Every baseline wheel member must have creator 0
+before either platform is accepted. Windows (`win32`) expects 0; Mac (`darwin`)
+expects 3 for every wheel member. Only this one field changes in the Mac
+expectation. Every other ZIP/TAR field and the complete member inventory remain
+exact. Any other platform fails explicitly; the actual creator is never ignored.
+
+Source basis, established before Mac execution: pinned installed CPython
+3.13.15 `Lib/zipfile/__init__.py:435-439` assigns `ZipInfo.create_system = 0`
+for `sys.platform == 'win32'` and 3 otherwise. Exact PDM backend wheel SHA256
+5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63,
+`pdm/backend/wheel.py:265,289`, constructs `ZipInfo` for payload members and
+RECORD without a create_system override. Both audit and one-build qualification
+use this explicit platform expectation. This is a source-derived expected-field
+policy, not observed Mac data, a blanket cross-platform waiver, or a Mac runtime
+PASS. Existing unchanged Windows artifacts can be read-only revalidated against
+`expected_headers(reference, "win32")`; another build is unnecessary.
+The unresolved full raw context-association failure still blocks CI admission.

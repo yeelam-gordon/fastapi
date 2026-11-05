@@ -143,6 +143,8 @@ def verify_sourcepins():
 
 
 def admit():
+    if (HERE / "CLI-ASSOCIATION-PENDING.json").exists():
+        raise RuntimeError("NoParityClaim: prospective CLI correction requires new source review/freeze/budget")
     static_check()
     if os.environ.get("GITHUB_REPOSITORY") != "yeelam-gordon/fastapi":
         raise RuntimeError("Owned fork only")

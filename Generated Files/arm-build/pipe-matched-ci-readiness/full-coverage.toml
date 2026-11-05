@@ -187,6 +187,7 @@ filterwarnings = [
 ]
 
 [tool.coverage.run]
+plugins = ["cli_coverage_identity"]
 patch = ["subprocess", "_exit"]
 parallel = true
 data_file = "coverage/.coverage"

@@ -1,42 +1,32 @@
 {
-  "approved": true,
-  "scope": "One finite fork-only matched pipe full-HOBL allocation; not a performance or parity verdict",
-  "sourcepins_sha256": "519601b061b2df0fb0dcfc841cf5834a4a8c610ffcf9968a67181c3e55691210",
+  "approved": false,
+  "scope": "Post-run source repairs only; no further CI allocation admitted",
+  "sourcepins_sha256": "c9be4dd3c735f8332eaafa7e643c3550c2be70c0ca70332f0eb789e0175e7aa2",
   "review_findings_closed": [
     "MATCHED-001",
     "MATCHED-002",
     "MATCHED-003"
   ],
-  "source_review": "Independent risk review followed by coordinator source checks and focused negative regressions",
-  "windows_local_preflight": {
-    "status": "PASS_LOCAL_PREFLIGHT_NOT_CI_ADMISSION",
-    "scope": "Four close cases, active native CTracer, stock CLI flush and exact runtime/cache preservation",
-    "controller_seconds": 12.8692604,
-    "native_seconds": 1.221599,
-    "natural_family_drain": true,
-    "original_runtime_and_caches_unchanged": true,
-    "source_change_after_preflight": "Only queue watcher identity/UTC adaptation, mocks, documentation and scoped Git byte-preservation attributes; native preflight code unchanged"
+  "source_review": "Independent bounded CLI source review, coordinator postwait-lifetime correction, focused metadata and local runtime qualification",
+  "closed_allocation": {
+    "run_id": 41947559106,
+    "commit": "664d5b29ebd8584c71f8bf0b645d86380103f9a0",
+    "status": "FAILED/CLOSED",
+    "dispatches_consumed": 1,
+    "retries": 0
   },
-  "allocation": {
-    "repository": "yeelam-gordon/fastapi",
-    "branch": "perf/worker-pipe-hobl-20261105",
-    "workflow_id": 400482741,
-    "route": "pipe-matched-ci",
-    "dispatches": 1,
-    "attempt": 1,
-    "jobs": 2,
-    "job_minutes": 8,
-    "queue_seconds": 300,
-    "payloads_per_host": [
-      "A1",
-      "B1",
-      "B2",
-      "A2"
-    ],
-    "warmups": 0,
-    "retries": 0,
-    "trace_captures": 0
+  "local_repair_qualification": {
+    "one_cli_case": "PASS; actual stable handle/native parent association, source/runtime preservation and natural drain",
+    "one_offline_build": "PASS; complete frozen member/header/RECORD equality, source/runtime preservation and natural drain",
+    "mac_zip_creator": "Source-derived native value 3, not an actual Mac runtime qualification",
+    "performance_claim": false
   },
+  "new_allocation": null,
+  "blocking": [
+    "Strict full raw per-context equality remains unsatisfied by the retained first pair",
+    "No new source-bound finite CI allocation is admitted",
+    "Mac full-HOBL and physical parity remain unmeasured"
+  ],
   "acceptance": {
     "windows_within_host": "At least 0.5 seconds and 1 percent whole savings in both orders, no covered-test regression, all integrity gates",
     "cross_host": "Position-matched Windows B build/test/whole versus Mac B identity control, both orders; report failures honestly",

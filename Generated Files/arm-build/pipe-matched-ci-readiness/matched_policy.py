@@ -10,6 +10,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
+from cli_identity import popen_identity, popen_key, same_identity
 from portable_lifetime import capture, certificate
 
 ORIGINAL_POLICY = None
@@ -71,12 +72,14 @@ def pytest_runtest_call(item):
 
     def observe(*args, **kwargs):
         process = original(*args, **kwargs)
-        actual.append(process)
+        identity = popen_identity(process)
+        actual.append((process, identity))
         emit(
             "actual_cli_popen",
             child_pid=process.pid,
             argv=process.args,
             native_popen_object_id=id(process),
+            process_identity=identity,
         )
         return process
 
@@ -84,12 +87,16 @@ def pytest_runtest_call(item):
         with patch.object(subprocess, "Popen", side_effect=observe):
             yield
     finally:
-        for process in actual:
+        for process, identity in actual:
+            key = popen_key(process)
+            if not same_identity(key, identity):
+                raise RuntimeError("Stable Popen handle creation identity changed")
             emit(
                 "actual_cli_waited",
                 child_pid=process.pid,
                 returncode=process.returncode,
                 native_popen_object_id=id(process),
+                process_identity=key,
             )
 
 

@@ -11,10 +11,12 @@ import unicodedata
 from pathlib import Path
 
 from audit import combined, execution
+from cli_identity import associate
 from matched import HERE
 from screen import COMMON, digest, load, save, tiny_outcome
 
 sys.path.insert(0, str(COMMON))
+from archive_headers import expected_headers, full_inventory, require_reference
 from artifact_gate import artifact_set, equivalent
 
 
@@ -149,6 +151,7 @@ AUDIT_OUTPUTS = frozenset(
         "full-proof.json",
         "full-raw-map.json",
         "archive-inventory.json",
+        "full-reference-headers.json",
     }
 )
 
@@ -275,27 +278,28 @@ def full(row):
     identities = {item["pid"] for item in cheap_proof["identities"]}
     flush = load(folder / "native-audit-copies" / "native-flush-proof.json")
     native_cli = {item["pid"] for item in flush["cli"] if item["pid"] not in identities}
-    actual, waited = {}, {}
+    actual, waited = [], []
     for path in folder.glob("events-*.jsonl"):
         for line in path.read_text().splitlines():
             event = json.loads(line)
             if event["kind"] == "actual_cli_popen":
-                actual[event["child_pid"]] = event
+                actual.append(event)
             elif event["kind"] == "actual_cli_waited":
-                waited[event["child_pid"]] = event
+                waited.append(event)
+    records = [
+        load(folder / f"cli-native-identity-{pid}.json") for pid in sorted(native_cli)
+    ]
     require(
-        native_cli and native_cli == set(actual) == set(waited),
-        "Actual CLI Popen/native PID binding differs",
+        all(record["namespace"] == str(folder) for record in records),
+        "Foreign native namespace",
     )
-    for pid in native_cli:
+    require(
+        native_cli and set(associate(actual, waited, records)) == native_cli,
+        "Actual CLI Popen/native creation-identity binding differs",
+    )
+    for event in actual:
         require(
-            actual[pid]["native_popen_object_id"]
-            == waited[pid]["native_popen_object_id"]
-            and waited[pid]["returncode"] == 1,
-            "CLI object/wait binding failed",
-        )
-        require(
-            actual[pid]["argv"][1:]
+            event["argv"][1:]
             == [
                 "-m",
                 "coverage",
@@ -311,6 +315,8 @@ def full(row):
     save(folder / "full-raw-map.json", mapping)
     archives = artifact_set(folder / "artifacts", source, load(Path(row["manifest"])))
     reference = load(HERE / "reference-artifacts.json")
+    full_headers = full_inventory(folder / "artifacts")
+    require_reference(full_headers, expected_headers(reference, sys.platform))
     for name, value in archives.items():
         kind = "wheel" if name.endswith(".whl") else "sdist"
         require(
@@ -327,6 +333,7 @@ def full(row):
                 f"Reference member payload differs: {member}",
             )
     save(folder / "archive-inventory.json", archives)
+    save(folder / "full-reference-headers.json", full_headers)
     current = inventory(folder)
     for key in ("native_shards", "archives", "payload_inputs"):
         require(
@@ -346,6 +353,8 @@ def full(row):
         "inventory": inventory(folder),
         "raw_sha256": digest(folder / "full-raw-map.json"),
         "archive_sha256": digest(folder / "archive-inventory.json"),
+        "header_platform": sys.platform,
+        "header_policy": "source-defined-native-creator-only-v1",
     }
     save(folder / "full-proof.json", proof)
     return proof

@@ -32,6 +32,14 @@ def test_cli_observer_returns_original_popen_object_and_restores_constructor():
             "emit",
             side_effect=lambda kind, **values: events.append((kind, values)),
         ),
+        patch.object(
+            matched_policy,
+            "popen_identity",
+            return_value={"pid": 731, "birth_filetime": 9},
+        ),
+        patch.object(
+            matched_policy, "popen_key", return_value={"pid": 731, "birth_filetime": 9}
+        ),
     ):
         hook = matched_policy.pytest_runtest_call(
             SimpleNamespace(

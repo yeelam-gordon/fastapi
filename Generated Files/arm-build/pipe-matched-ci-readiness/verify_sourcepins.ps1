@@ -20,7 +20,7 @@ foreach ($name in $pins.Keys) {
         -not ($pin.bytes -is [int] -or $pin.bytes -is [long]) -or $pin.bytes -lt 0 -or
         $pin.sha256 -notmatch '^[0-9a-f]{64}$' -or
         -not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing/invalid source pin: $name" }
-    if ((Get-Item -LiteralPath $path).Length -ne $pin.bytes -or
+    if ((Get-Item -LiteralPath $path -Force).Length -ne $pin.bytes -or
         (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne $pin.sha256) {
         throw "Source pin bytes/hash mismatch: $name"
     }

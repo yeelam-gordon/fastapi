@@ -195,6 +195,7 @@ def environment(args, row):
         CORRECTNESS_OUTPUT=str(folder),
         MATCHED_READINESS=str(args.output / "readiness.json"),
         COVERAGE_FILE=str(folder / ".coverage"),
+        COVERAGE_RCFILE=str(args.output / "full-coverage.toml"),
         CONTEXT="",
         CHECK_COVERAGE="1",
         CHECK_FIXTURE="1",
@@ -208,6 +209,7 @@ def environment(args, row):
         PIP_NO_INDEX="1",
         PIP_CONSTRAINT=(args.output / "build-constraints.txt").as_uri(),
         PIP_DISABLE_PIP_VERSION_CHECK="1",
+        SOURCE_DATE_EPOCH="1700000000",
     )
     return env
 

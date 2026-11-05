@@ -18,16 +18,16 @@
       "bytes": 2326
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/execution.py": {
-      "sha256": "8848f4e8dec103dc1d43fa632d45654762db33a64fd22623ec6714e223690784",
-      "bytes": 17882
+      "sha256": "67887e1d95d87ee2d33753ca140f49a0ec89e01e2992ab9a544c1d520780e4f9",
+      "bytes": 17989
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/FROZEN-COMMANDS.json": {
       "sha256": "2a030e85f7a6bf51f2338edab3895c274cd93564b0aa85bd7b1174713f985195",
       "bytes": 7063
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/full-coverage.toml": {
-      "sha256": "3e1607a99d049fc9ebd54f650016243e0050271da59529c9336948c0e4247f1f",
-      "bytes": 8951
+      "sha256": "30b4b03b1f595be1bbfd9dddf23f247bc0e01afdb198b5b654b81a65fd0c2974",
+      "bytes": 8987
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/identity_map.py": {
       "sha256": "2fca08f4208582c407fb95f16c515bdadef5284550db2c81155fe649c9d6d930",
@@ -42,16 +42,16 @@
       "bytes": 9154
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/matched.py": {
-      "sha256": "29bcc2f2b98660fd55eb15c43b5b2e97e722479d3b1b7b146daa8fca05e44cd2",
-      "bytes": 6373
+      "sha256": "a8b21f4f32400ecfc29ee8b6d01bbb586599a31f7c58ebe5a3e3fd842bdcba1e",
+      "bytes": 6545
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/matched_audit.py": {
-      "sha256": "4825e692186bb491b488c2f450ed0613a56dd480d97229095efa18592ec9148d",
-      "bytes": 13808
+      "sha256": "45ac10d32c4ba50adce0f6d7e160da3c6a3a71749ff3eda570c41217d184007a",
+      "bytes": 14278
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/matched_policy.py": {
-      "sha256": "7394554de53cd24072f02b554b2d1250ea736198db45abdea59118010b189ee7",
-      "bytes": 6494
+      "sha256": "8572acff886b297b85a6328f6f1654737e4893bbebad077802c8a1770ea98f5c",
+      "bytes": 6879
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/native.py": {
       "sha256": "071bdd65ce347af65bcf862ae4c880e03c2a406191aa76dcb46857f344ff5c24",
@@ -90,8 +90,8 @@
       "bytes": 1868
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/README.md": {
-      "sha256": "0152b1a59c30a17e0fe69eb9a1d36b2255a809697f0ba612e95c86e23f268127",
-      "bytes": 8840
+      "sha256": "e2617c6f61cf1b9ab40d0f9fee609531155018bf62ec2f0439f811d2622a575c",
+      "bytes": 13310
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/reference-artifacts.json": {
       "sha256": "9be89c5c8df7d9e11c6855511427cc51866bd06aa49c1cf3ed5b783d32b47eae",
@@ -134,8 +134,8 @@
       "bytes": 2611
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/test_cli_binding.py": {
-      "sha256": "2ec48534dfb4c46cb4e70646add803a9469ed40458a4cd50a32d1928414b9090",
-      "bytes": 1495
+      "sha256": "d50241cc574ae81df49669a4fdcf67834e3acfcb8852365e55e3f02ef5dbbf88",
+      "bytes": 1775
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/test_execution.py": {
       "sha256": "d4cab8ecc7212c6372adc844fe822af88edfb65c6a08b2da02638bbb0373f681",
@@ -154,12 +154,12 @@
       "bytes": 7466
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/test_verify_sourcepins.ps1": {
-      "sha256": "d6c282f3bf6da0551cd63d610fc87947694726b04c382bf3395daa2f0a660a15",
-      "bytes": 1348
+      "sha256": "f71dd0d534d34b95ad671335e7f1247bb4edb1abcd1bcb22b8bc1d378098dbe3",
+      "bytes": 2216
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/verify_sourcepins.ps1": {
-      "sha256": "1a05956e2827a54fac6a2003b3b2d5aceec2680f1df82fa585d3d9a2e7173182",
-      "bytes": 1565
+      "sha256": "09df08752ca2f0751661894e487150075686a34c05bfa8f7702ea78eba9eb342",
+      "bytes": 1572
     },
     "Generated Files/arm-build/pipe-matched-ci-readiness/cpython-3.13.15/LICENSE": {
       "sha256": "78b12c3a81360b357002334f0e70ea0e92eebf7a9b358805c03c48484945f3bb",
@@ -268,6 +268,67 @@
     ".gitattributes": {
       "sha256": "c0ee2e5d081f1fa830e8e70b3705c88278c4d46539070f8751bafc6e9e27af94",
       "bytes": 396
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/ARCHIVE-HEADERS-v3-PLAN-RETAINED.json": {
+      "sha256": "1bfacadae63df57c41cc4561e677ea18f1a8645f9b57bbaa9109d0269c104ac4",
+      "bytes": 5427
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/CLI-ASSOCIATION-CORRECTION.md": {
+      "sha256": "3e1f629b8f781e8958387692881bb956fea264cdde6a57f6b58f2737c3507c2f",
+      "bytes": 4900
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/CLI-ASSOCIATION-PENDING.json": {
+      "sha256": "a39912769bfeaf5ee52621548d41f9fb24f2a98f9d7d78ed313777c648223f7f",
+      "bytes": 5832
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/CLI-ASSOCIATION-v1-PLAN-RETAINED.json": {
+      "sha256": "3149e653c41594c395097f999cd3911c43577b113b5b5fd21b7c0f7509fa61b4",
+      "bytes": 4337
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/CLI-ASSOCIATION-v2-PLAN-RETAINED.json": {
+      "sha256": "a633d77e184eb8536e80279060b72f9e00c7563912e395fdf45fd4a9d7c7b295",
+      "bytes": 4740
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/archive_headers.py": {
+      "sha256": "b0085c76f579837ea4e35750b4aa0a8db426c27aaca064b4cdf31ed57cbf3333",
+      "bytes": 3661
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/build_readiness.py": {
+      "sha256": "6258e4a5a9f7b1bb69ce41885adc03abc797d617b90a155397f6a64e660a4f9b",
+      "bytes": 7244
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cli_coverage_identity.py": {
+      "sha256": "d4784616e4aeeef97c76cd26a8ce4addbe54d288aeab7d4bbb1d61547a589364",
+      "bytes": 999
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cli_identity.py": {
+      "sha256": "16b1895a3b8234911877ad271324cece7e3b753c3d4d2cb2e58096360eb24d5f",
+      "bytes": 6393
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cli_readiness.py": {
+      "sha256": "f15829532f42c1ef96bd148547f269ed48a2948fb861c0592c43497eb8fab89b",
+      "bytes": 6974
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cpython-3.13.15/venvlauncher.c": {
+      "sha256": "3e534d781343250e507656f7606256d0b8bc89c11f4c780fc482d94e7e00363a",
+      "bytes": 13531
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_archive_headers.py": {
+      "sha256": "d2647fdc4dfcd3ae7b7f5146c5ee775f54925e3fbd2250b55f7f3ebf21f91921",
+      "bytes": 3238
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_cli_association.py": {
+      "sha256": "2d2b0db5ce39df7ad8e419623296533b653a951241aaf48c059b4a277ca8c448",
+      "bytes": 3914
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_cli_postwait_key.py": {
+      "sha256": "f9cdecb92869a5e64a4823764ed8c3410523c6f3c860816a5290af2bc59ca20e",
+      "bytes": 2384
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_header_platform.py": {
+      "sha256": "e1abe661d8d08fec638df6aafd0bd6069d52aed36752bc49a4dfeba30e564ed4",
+      "bytes": 2418
     }
-  }
+  },
+  "revision": "Post-41947559106 source repairs only; no CI admission"
 }
