@@ -1,7 +1,10 @@
 {
-  "approved": false,
-  "scope": "Post-run source repairs only; no further CI allocation admitted",
-  "sourcepins_sha256": "d3dc4538e4a301d6faeb7a96525df341f5ed8f221e73d320afa1a9ebf331c040",
+  "approved": true,
+  "scope": "One new controlled-profile fork transfer only; default route and old failed allocation remain closed",
+  "profile": "pipe-fixed-groups-ci82-v1",
+  "cli_identity_qualified": true,
+  "sourcepins_sha256": "f5d1921590b96bf331d6af2393a9003f30f22e4793bd5fc78b3414e31f1e3b53",
+  "source_freeze_commit": "3903db220d52e7b37fb74a68b34abf340593f6ca",
   "review_findings_closed": [
     "MATCHED-001",
     "MATCHED-002",
@@ -21,11 +24,30 @@
     "mac_zip_creator": "Source-derived native value 3, not an actual Mac runtime qualification",
     "performance_claim": false
   },
-  "new_allocation": null,
+  "new_allocation": {
+    "id": "controlled-ci-transfer-02",
+    "repository": "yeelam-gordon/fastapi",
+    "route": "pipe-controlled-ci",
+    "dispatches": 1,
+    "attempt": 1,
+    "jobs": 2,
+    "job_seconds": 480,
+    "queue_seconds": 300,
+    "final_audit_seconds": 120,
+    "payloads_per_host": ["A1", "B1", "B2", "A2"],
+    "workers": {"windows": 4, "macos": 3},
+    "warmups": 0,
+    "retries": 0,
+    "traces": 0,
+    "question": "Transfer named-pipe benefit under identical fixed-group controls and measure position-matched Windows/Mac build, tests, whole-HOBL and case gaps",
+    "local_value": "controlled-full-01: 1.6590375s/3.6297013% AB and 0.8723528s/1.8869649% BA; all four strict raw/archive/case/source/runtime/CLI/drain gates passed",
+    "source_evidence": "Independent source closure high; 98 helper metadata regressions; all 87 staged blobs and actual workflow sparse checkout verified",
+    "stop": "First-pair integrity failure, source/native readiness failure, queue/job bounds or allocation failure: retain evidence, no automatic rerun"
+  },
   "blocking": [
-    "Strict full raw per-context equality remains unsatisfied by the retained first pair",
-    "No new source-bound finite CI allocation is admitted",
-    "Mac full-HOBL and physical parity remain unmeasured"
+    "No hosted controlled-profile performance observation exists before this allocation",
+    "Mac native runtime readiness must pass in the bounded pre-payload gate",
+    "Physical twenty-core Windows versus sixteen-core Mac parity remains unmeasured"
   ],
   "acceptance": {
     "windows_within_host": "At least 0.5 seconds and 1 percent whole savings in both orders, no covered-test regression, all integrity gates",
