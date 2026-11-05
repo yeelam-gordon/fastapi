@@ -127,6 +127,34 @@ def test_cached_full_final_proof_checks_inventory_without_raw_reparse(payload_pr
     full.assert_not_called()
 
 
+@pytest.mark.parametrize("name", ["full-raw-map.json", "archive-inventory.json"])
+def test_derived_output_changes_invalidate_cached_full_proof(payload_proof, name):
+    folder, proof = payload_proof
+    for field, output in (
+        ("raw_sha256", "full-raw-map.json"),
+        ("archive_sha256", "archive-inventory.json"),
+    ):
+        (folder / output).write_text("{}")
+        proof[field] = digest(folder / output)
+    (folder / name).write_text('{"changed": true}')
+    with pytest.raises(ValueError, match="derived output changed"):
+        matched_audit.verify_bound(proof, require_derived=True)
+
+
+def test_identical_raw_map_tampering_cannot_pass_pair_equality(payload_proof):
+    folder, proof = payload_proof
+    for field, output in (
+        ("raw_sha256", "full-raw-map.json"),
+        ("archive_sha256", "archive-inventory.json"),
+    ):
+        (folder / output).write_text("{}")
+        proof[field] = digest(folder / output)
+    (folder / "full-proof.json").write_text(json.dumps(proof))
+    (folder / "full-raw-map.json").write_text('{"same tampering": true}')
+    with pytest.raises(ValueError, match="derived output changed"):
+        matched_audit.equal_pair(folder, folder)
+
+
 def test_local_preflight_is_guarded_without_ci_admission(tmp_path):
     output = HERE.parents[4] / "arm-build" / "pipe-matched-ci-readiness" / "mock-output"
     with (

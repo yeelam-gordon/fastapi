@@ -300,22 +300,29 @@ def compare(windows, macos):
     }
 
 
-def worker(args):
+def worker(
+    args,
+    *,
+    readiness_check=None,
+    commands=command_plan,
+    audit_commands=audit_command,
+    archive_copy=None,
+):
     deadline = time.monotonic() + args.seconds
     before = runtime_snapshot(Path(sys.prefix))
     result = {"status": "ERROR", "rows": [], "failures": []}
     save(args.output / "runtime-before.json", before)
     try:
-        ready = readiness(args)
+        ready = (readiness if readiness_check is None else readiness_check)(args)
         rows = load(args.output / "payloads.json")
 
         def phase(row, name, budget):
             folder = Path(row["folder"])
-            command = command_plan(
+            command = commands(
                 sys.executable, args.uv, row["source"], args.output, args.workers
             )[name]
             if name == "test":
-                command = command_plan(
+                command = commands(
                     sys.executable, args.uv, row["source"], folder, args.workers
                 )[name]
                 command[command.index("--rcfile") + 1] = str(
@@ -340,9 +347,12 @@ def worker(args):
                     or "Building wheel from source distribution" not in text
                 ):
                     raise ValueError("Full sdist then wheel-from-sdist not observed")
-                shutil.move(
-                    str(Path(row["source"]) / "dist"), str(folder / "artifacts")
-                )
+                if archive_copy is None:
+                    shutil.move(
+                        str(Path(row["source"]) / "dist"), str(folder / "artifacts")
+                    )
+                else:
+                    archive_copy(Path(row["source"]) / "dist", folder / "artifacts")
             return (receipt.native_end_ns - receipt.native_start_ns) / 1e9
 
         environments = {}
@@ -355,7 +365,7 @@ def worker(args):
         def audit_stage(action, measured, budget):
             save(args.output / "audit-rows.json", measured)
             owned(
-                audit_command(args, action),
+                audit_commands(args, action),
                 HERE,
                 os.environ.copy(),
                 args.output,
@@ -434,32 +444,34 @@ def main(args):
     elif args.action == "worker":
         worker(args)
     else:
-        import matched_audit
+        audit(args)
 
-        rows = load(args.output / "audit-rows.json")
-        if args.action == "cheap":
-            ready = load(args.output / "readiness.json")
-            matched_audit.cheap(rows[0], args.workers, ready["rewrite_pin"])
-        elif args.action == "first-pair":
-            for row in rows:
-                matched_audit.full(row)
-            matched_audit.equal_pair(rows[0]["folder"], rows[1]["folder"])
-        else:
-            proof = matched_audit.final(rows)
-            ready = load(args.output / "readiness.json")
-            for row in rows:
-                cached = load(Path(row["folder"]) / "cheap-proof.json")
-                pids = {
-                    item["pid"]
-                    for item in cached["identities"]
-                    if item["worker"] != "controller"
-                }
-                matched_audit.source_gate(row, pids, ready["rewrite_pin"])
-            runtime_preserved(
-                Path(sys.prefix), load(args.output / "runtime-before.json")
-            )
-            proof["final_runtime_and_sources_preserved"] = True
-            save(args.output / "final-audit.json", proof)
+
+def audit(args):
+    import matched_audit
+
+    rows = load(args.output / "audit-rows.json")
+    if args.action == "cheap":
+        ready = load(args.output / "readiness.json")
+        matched_audit.cheap(rows[0], args.workers, ready["rewrite_pin"])
+    elif args.action == "first-pair":
+        for row in rows:
+            matched_audit.full(row)
+        matched_audit.equal_pair(rows[0]["folder"], rows[1]["folder"])
+    else:
+        proof = matched_audit.final(rows)
+        ready = load(args.output / "readiness.json")
+        for row in rows:
+            cached = load(Path(row["folder"]) / "cheap-proof.json")
+            pids = {
+                item["pid"]
+                for item in cached["identities"]
+                if item["worker"] != "controller"
+            }
+            matched_audit.source_gate(row, pids, ready["rewrite_pin"])
+        runtime_preserved(Path(sys.prefix), load(args.output / "runtime-before.json"))
+        proof["final_runtime_and_sources_preserved"] = True
+        save(args.output / "final-audit.json", proof)
 
 
 if __name__ == "__main__":

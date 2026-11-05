@@ -1,0 +1,377 @@
+{
+  "status": "PENDING_NEW_SOURCE_REVIEW_FREEZE_FINITE_ALLOCATION",
+  "approved": false,
+  "ci_admission": false,
+  "profile": "pipe-fixed-groups-ci82-v1",
+  "files": {
+    "Generated Files/arm-build/pipe-matched-ci-readiness/archive_headers.py": {
+      "sha256": "b0085c76f579837ea4e35750b4aa0a8db426c27aaca064b4cdf31ed57cbf3333",
+      "bytes": 3661
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/audit.py": {
+      "sha256": "dc831c08cee6899a0affa0c303379401e7fcb447f7c7b5d3638c4ea1ab282b1b",
+      "bytes": 8652
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/bootstrap.py": {
+      "sha256": "afc44b8ce09d3190456f967650ec95b4df406e385edc2146f4e4da07a0b184e8",
+      "bytes": 843
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/build_readiness.py": {
+      "sha256": "b667f589aa71d6703e90703d7a9ee7f307f21d4741603d9812014d664e5f4870",
+      "bytes": 7449
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/CLI-ASSOCIATION-CORRECTION.md": {
+      "sha256": "3e1f629b8f781e8958387692881bb956fea264cdde6a57f6b58f2737c3507c2f",
+      "bytes": 4900
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cli_coverage_identity.py": {
+      "sha256": "d4784616e4aeeef97c76cd26a8ce4addbe54d288aeab7d4bbb1d61547a589364",
+      "bytes": 999
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cli_identity.py": {
+      "sha256": "16b1895a3b8234911877ad271324cece7e3b753c3d4d2cb2e58096360eb24d5f",
+      "bytes": 6393
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cli_readiness.py": {
+      "sha256": "ee9fee27ce4b89ad5ec048d0d005cd0732d32c05e1761d93526b07885a479285",
+      "bytes": 6769
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/comparison.py": {
+      "sha256": "8db116c60a3b73ff8ccb17ab67ef186b73512b1a1a91cea15ee0f084f669731e",
+      "bytes": 2326
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/controlled_ci.py": {
+      "sha256": "ac49ef0f51ba03b2705a275fcc16836f632cc914686af4f989993593427aa5b2",
+      "bytes": 4288
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/controlled_local.py": {
+      "sha256": "a3c88e5b7b7c3babf67e3909a0a36f97c35d06b8031103964b2eb20f6bc9d3a4",
+      "bytes": 13316
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/execution.py": {
+      "sha256": "ebdb5608fc1c20453a5d79c1046ade6948686f3374aea81a0b84ac076ab2c645",
+      "bytes": 18097
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/fixed_worker.py": {
+      "sha256": "1f6a3a788adc3594f2c5666c689c4f8b901df5a5b04c8df8de7526757cdb7fea",
+      "bytes": 5648
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/full-coverage.toml": {
+      "sha256": "30b4b03b1f595be1bbfd9dddf23f247bc0e01afdb198b5b654b81a65fd0c2974",
+      "bytes": 8987
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/identity_map.py": {
+      "sha256": "2fca08f4208582c407fb95f16c515bdadef5284550db2c81155fe649c9d6d930",
+      "bytes": 1189
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/local-coverage.toml": {
+      "sha256": "d3aec28670c09f37eff592d0a21a5635069058e410cd3f6168aba919db7207a7",
+      "bytes": 71
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/local_preflight.py": {
+      "sha256": "e6f75b18b5cae167a87c913d960150ea12242b0a889123959c4df0c78076dcd3",
+      "bytes": 9154
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/matched.py": {
+      "sha256": "a8b21f4f32400ecfc29ee8b6d01bbb586599a31f7c58ebe5a3e3fd842bdcba1e",
+      "bytes": 6545
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/matched_audit.py": {
+      "sha256": "58bd6b290cf386a7cebce21fffb8c12811b905bf116b7d7e266e0721b956a6d5",
+      "bytes": 14813
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/matched_policy.py": {
+      "sha256": "8572acff886b297b85a6328f6f1654737e4893bbebad077802c8a1770ea98f5c",
+      "bytes": 6879
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/native.py": {
+      "sha256": "071bdd65ce347af65bcf862ae4c880e03c2a406191aa76dcb46857f344ff5c24",
+      "bytes": 756
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/observer.py": {
+      "sha256": "100ee23584e9d39597dbf4ed1737688b724b4e5fcbb6af321eabc617d777f227",
+      "bytes": 4796
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/portable_lifetime.py": {
+      "sha256": "29a4777261dedf7027edb6ddc7bebff02f311d7b0523019ce60231da7f0f788a",
+      "bytes": 3525
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/prototype.py": {
+      "sha256": "77ed2c0db74060b43187c35edf6d41af6e053b145d54a76223f42b31b9f1a95a",
+      "bytes": 7700
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/provenance.py": {
+      "sha256": "d7046f3e4953d52da6214aac70c4b5a538d8380503502c8de8758559bbb083da",
+      "bytes": 2870
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/qualified-fixture.py": {
+      "sha256": "6d2c11683dc2e41f6c35507ec58fe55a12f0c641999b3f00a0e83727b3d7ee2d",
+      "bytes": 2115
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/README.md": {
+      "sha256": "4edc693235ffeac5be0190ad49449d41d5f7b32fbfd34c8c3afeb01e5ef7dcd0",
+      "bytes": 18945
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/requirements.txt": {
+      "sha256": "53defa1f72d43b88cb06a5f691fe944d8598dfe26bb894726655e1f05f41d811",
+      "bytes": 1473
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/resource-owner.patch": {
+      "sha256": "01ce5189b32a8e044bc27d0153b1f1f549af1910ba2c2d6fd64588cb4df359b2",
+      "bytes": 6725
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/resource_observer.py": {
+      "sha256": "475289b3b5e48aa89f4baa18fa4290a0f0080b69fc8ce462f5bed7555472c60c",
+      "bytes": 1186
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/screen.py": {
+      "sha256": "c4e01515bfa5b97dda6baf429ee5018e7611613746791a938464c7f7f4ff1aed",
+      "bytes": 16583
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/source_prepare.py": {
+      "sha256": "0f681b8ff6c32695b9a980280ae37357b9e9e6737e2128612ac9ab67506d8fa5",
+      "bytes": 2453
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/static_validate.py": {
+      "sha256": "870fdda4d86d1954208f9748401a7bce3cb4f9c592ade6af59b42bfcd2073086",
+      "bytes": 2611
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_archive_headers.py": {
+      "sha256": "d2647fdc4dfcd3ae7b7f5146c5ee775f54925e3fbd2250b55f7f3ebf21f91921",
+      "bytes": 3238
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_cli_association.py": {
+      "sha256": "2d2b0db5ce39df7ad8e419623296533b653a951241aaf48c059b4a277ca8c448",
+      "bytes": 3914
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_cli_binding.py": {
+      "sha256": "d50241cc574ae81df49669a4fdcf67834e3acfcb8852365e55e3f02ef5dbbf88",
+      "bytes": 1775
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_cli_postwait_key.py": {
+      "sha256": "f9cdecb92869a5e64a4823764ed8c3410523c6f3c860816a5290af2bc59ca20e",
+      "bytes": 2384
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_controlled_ci.py": {
+      "sha256": "e52156a1063126090c70aa6de6c602db5750f231d75cd0b27686a5f2c064c1af",
+      "bytes": 3935
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_controlled_local.py": {
+      "sha256": "1e06cf0232819943d6f51749691444306fe8b1ce0acde7cb7bd43f3bdcf669c5",
+      "bytes": 4586
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_execution.py": {
+      "sha256": "d4cab8ecc7212c6372adc844fe822af88edfb65c6a08b2da02638bbb0373f681",
+      "bytes": 6116
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_header_platform.py": {
+      "sha256": "e1abe661d8d08fec638df6aafd0bd6069d52aed36752bc49a4dfeba30e564ed4",
+      "bytes": 2418
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_matched.py": {
+      "sha256": "5131b3e1bec53c412576cfb324728d2578aea5af8b554d8cf0a46962273f7ee2",
+      "bytes": 3191
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_review_gates.py": {
+      "sha256": "0219a6e5c5e2e1d71ea87aea7153175ed7257720ad852ca6d6e4e3924bfddb7a",
+      "bytes": 9270
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_screen.py": {
+      "sha256": "145afb47fdecaa760d995c435ef37a9ac75b5dce8d5e9c4b13745f2da9e50cad",
+      "bytes": 7466
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cpython-3.13.15/selectors.py": {
+      "sha256": "4b8a60cfbb619d080f87dffe1578372e56e8c0ac826f043224a154cf7b77606d",
+      "bytes": 19457
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cpython-3.13.15/selector_events.py": {
+      "sha256": "1938ac8e095741b3c1237c6d7b72ede732b9dcbbe7452d81c171e2e9e48bb259",
+      "bytes": 48551
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/queue-prior-art/CLOCK-DOMAIN-FOLLOWUP.md": {
+      "sha256": "c3b330cd621d6d11e6d43a6c68fe4819613161e3f87f8c47c42ffc3939d8a18e",
+      "bytes": 1404
+    },
+    "Generated Files/arm-build/hobl-complete-ci/.gitattributes": {
+      "sha256": "32e91f037707a2f385f7fef3980cd3caa2ff909992cdea510687e0b4d5f2156e",
+      "bytes": 122
+    },
+    "Generated Files/arm-build/hobl-complete-ci/artifact_gate.py": {
+      "sha256": "7074e6697002d0e21bb131f551a932e9a6cf1a4ed946cb7bac03daecfa5033be",
+      "bytes": 5138
+    },
+    "Generated Files/arm-build/hobl-complete-ci/bootstrap.ps1": {
+      "sha256": "bd0a77e554bc508c7acc7090c9a7cf120b5014949666888047dc18f302101584",
+      "bytes": 4247
+    },
+    "Generated Files/arm-build/hobl-complete-ci/build-constraints.txt": {
+      "sha256": "f729230cb9adc788c4a3a9096baf57735ec02c62033102622174d600fb1bc908",
+      "bytes": 19
+    },
+    "Generated Files/arm-build/hobl-complete-ci/common-guard.patch": {
+      "sha256": "7f4e1b6f55fea34968927fa808f8c6f9e1732d0380c5ece01d62993c9d691316",
+      "bytes": 474
+    },
+    "Generated Files/arm-build/hobl-complete-ci/owned_process.py": {
+      "sha256": "45d6db4f6452c4f7116ca23c6e2aa74cda90a15548bd5c9bb3b3574973ef458e",
+      "bytes": 15822
+    },
+    "Generated Files/arm-build/hobl-complete-ci/prepare_uv.py": {
+      "sha256": "5bcf151447309807171760957df022c3ce240c7e8be96eca742bf4c5f3466163",
+      "bytes": 2824
+    },
+    "Generated Files/arm-build/hobl-complete-ci/README.md": {
+      "sha256": "46e1224b2df441a636967b9a9c535ec3967d1f66ba22760c05204e254b14a008",
+      "bytes": 8856
+    },
+    "Generated Files/arm-build/hobl-complete-ci/runtime-constraints.txt": {
+      "sha256": "e145b144c92c893db4a852db59525b94ce4c2b989532f0dd30ddb80f57927f0f",
+      "bytes": 1546
+    },
+    "Generated Files/arm-build/hobl-complete-ci/runtime_pair.py": {
+      "sha256": "d8fec39868616f675439cb321349bb07fc7e47583013bd28d42c1f5ed812be80",
+      "bytes": 10774
+    },
+    "Generated Files/arm-build/hobl-complete-ci/run_payload.py": {
+      "sha256": "1958dcd321dbd89262e2170bc5769fe9c742774977d018f50c337c04de6ade88",
+      "bytes": 24985
+    },
+    "Generated Files/arm-build/hobl-complete-ci/test_artifact_gate.py": {
+      "sha256": "f7a69c523a0fc39faa4ba2e0723003bf3e4735dbc27db9eacc1ba0ad59508337",
+      "bytes": 5397
+    },
+    "Generated Files/arm-build/hobl-complete-ci/test_payload.py": {
+      "sha256": "0b9c01976ef9a8e42565ad0d0596cdd06ddda21ef8d3ace559e21fd917a051fc",
+      "bytes": 17759
+    },
+    "Generated Files/arm-build/hobl-complete-ci/test_runtime_pair.py": {
+      "sha256": "eacc36e9d93a3bed14ea708a06826d059bc8a9961445ab335e67fca92f3d7acc",
+      "bytes": 10697
+    },
+    ".github/workflows/arm-build-diagnostics.yml": {
+      "sha256": "c357550be59e52fc8def271d8be27cb85a228dd436463b8e35164ce9d95bae5b",
+      "bytes": 13106
+    },
+    ".github/workflows/pipe-matched-ci.yml": {
+      "sha256": "d61ad9545822267b01c50c19e1b25b90c222f95e7404991dec97571a8eb491fb",
+      "bytes": 7477
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/qualified-local83.json": {
+      "sha256": "490aa81ef9b63d05f478aea670fdcc4e012caeb03bdf1df662074ac18719dab2",
+      "bytes": 3138
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/source-manifest.json": {
+      "sha256": "1be9357131561cdf3f9c4103184074cf3fe4e142788da0124c68996f4e80f0cc",
+      "bytes": 296970
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/reference-artifacts.json": {
+      "sha256": "9be89c5c8df7d9e11c6855511427cc51866bd06aa49c1cf3ed5b783d32b47eae",
+      "bytes": 533646
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/reference-cases.json": {
+      "sha256": "a35348e858527da4b9093927b0fe591090eab90273171d1cdcc782521ec4aa75",
+      "bytes": 251666
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/reference-outcomes.json": {
+      "sha256": "b5f5b0d7b1cbd96b674b697346d5a5ffabed71aaa672a27cfb7cb3842aec2544",
+      "bytes": 278226
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/.gitattributes": {
+      "sha256": "76746b9a2358bd10062a0bc7f39ce4bfdcbb8908b35512a5e4fd96ef33e89d7f",
+      "bytes": 123
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/FROZEN-COMMANDS.json": {
+      "sha256": "2a030e85f7a6bf51f2338edab3895c274cd93564b0aa85bd7b1174713f985195",
+      "bytes": 7063
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/PLAN.json": {
+      "sha256": "716b6fdda3465fdaf719da0d6588149e40fc82e824736305f060c57e663af543",
+      "bytes": 2564
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/queue_readiness.ps1": {
+      "sha256": "7599ad8ccb207392c0efaef447da653fdd5b33ef29a95aaa2afd9c9981ad9c8b",
+      "bytes": 1868
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_verify_sourcepins.ps1": {
+      "sha256": "f71dd0d534d34b95ad671335e7f1247bb4edb1abcd1bcb22b8bc1d378098dbe3",
+      "bytes": 2216
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/verify_sourcepins.ps1": {
+      "sha256": "09df08752ca2f0751661894e487150075686a34c05bfa8f7702ea78eba9eb342",
+      "bytes": 1572
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cpython-3.13.15/LICENSE": {
+      "sha256": "78b12c3a81360b357002334f0e70ea0e92eebf7a9b358805c03c48484945f3bb",
+      "bytes": 13809
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cpython-3.13.15/selectmodule.c": {
+      "sha256": "0a40cdb1d3c8edb0ef41061b65f92e83493dcc644bfbe606dc5691a096f82fa7",
+      "bytes": 76765
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cpython-3.13.15/SOURCE.json": {
+      "sha256": "19b6d758afb6def4aedea0e9077b30b55d6d6e7565a43184337d4aaa8277de9e",
+      "bytes": 630
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/required-backend-ci-readiness/queue_clock.ps1": {
+      "sha256": "c77c9f440fc71843999a02c37763b1dec3ce8fe19945a23bca5b1c14a104e620",
+      "bytes": 888
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/required-backend-ci-readiness/test_queue_clock.ps1": {
+      "sha256": "0a9cbfa963ab8328ee4151b5c3472724edda160d482fdc94bf7cbe8f5dc3916a",
+      "bytes": 1815
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/watch_ci.ps1": {
+      "sha256": "da8b073ee5e5672237bdfb1f21b28cae783dea3755b74388af6df0d616633b5c",
+      "bytes": 3131
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/test_watch_ci.ps1": {
+      "sha256": "b0fd728d7af652bc0f0035257d3e09711d5155cf6790078909f8b38d793f31de",
+      "bytes": 4577
+    },
+    ".gitattributes": {
+      "sha256": "c0ee2e5d081f1fa830e8e70b3705c88278c4d46539070f8751bafc6e9e27af94",
+      "bytes": 396
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/ARCHIVE-HEADERS-v3-PLAN-RETAINED.json": {
+      "sha256": "1bfacadae63df57c41cc4561e677ea18f1a8645f9b57bbaa9109d0269c104ac4",
+      "bytes": 5427
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/CLI-ASSOCIATION-PENDING.json": {
+      "sha256": "a39912769bfeaf5ee52621548d41f9fb24f2a98f9d7d78ed313777c648223f7f",
+      "bytes": 5832
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/CLI-ASSOCIATION-v1-PLAN-RETAINED.json": {
+      "sha256": "3149e653c41594c395097f999cd3911c43577b113b5b5fd21b7c0f7509fa61b4",
+      "bytes": 4337
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/CLI-ASSOCIATION-v2-PLAN-RETAINED.json": {
+      "sha256": "a633d77e184eb8536e80279060b72f9e00c7563912e395fdf45fd4a9d7c7b295",
+      "bytes": 4740
+    },
+    "Generated Files/arm-build/pipe-matched-ci-readiness/cpython-3.13.15/venvlauncher.c": {
+      "sha256": "3e534d781343250e507656f7606256d0b8bc89c11f4c780fc482d94e7e00363a",
+      "bytes": 13531
+    }
+  },
+  "hosts": {
+    "windows-11-arm": 4,
+    "macos-14": 3
+  },
+  "runtime_scope": "actual CI common82; no local83 substitution",
+  "budget_draft": {
+    "jobs": 2,
+    "job_seconds": 480,
+    "queue_seconds": 300,
+    "final_audit_seconds": 120,
+    "attempt": 1,
+    "payloads_per_host": 4,
+    "warmups": 0,
+    "retries": 0
+  },
+  "independent_local_audit": "c44d5a99 completed: four complete raw maps and inputs/derived hashes independently match; controlled timing thresholds both orders and covered-test gates pass",
+  "fixed_control_sha256": "1f6a3a788adc3594f2c5666c689c4f8b901df5a5b04c8df8de7526757cdb7fea",
+  "original_sourcepins_untouched_sha256": "fcc6d1bc1c768aa239fbcf09723dc10987e927c90c0a474684484d84a5c379ef",
+  "parent_consumer_fix": "Current verify_bound require_derived/equal_pair/final raw_sha256 and archive_sha256 checks included; original controller gap not retroactively qualified",
+  "source_freeze_scope": "FUTURE controlled CI only; no old 93-file/local admission snapshots rewritten",
+  "source_inventory_note": "Future tooling manifest restricted to exact declared sparse materialization; includes new driver/flags and parent derived-hash consumer fixes; old inventories unchanged"
+}

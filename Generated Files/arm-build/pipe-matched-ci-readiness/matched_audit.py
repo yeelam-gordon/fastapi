@@ -263,11 +263,22 @@ def raw_map(data, source):
     return {"files": files, "contexts": sorted(data.measured_contexts())}
 
 
-def verify_bound(proof):
+def verify_bound(proof, *, require_derived=False):
     require("inventory" in proof, "Missing exact inventory proof")
     verify_inventory(proof["inventory"])
     for name, expected in proof["input_hashes"].items():
         require(digest(Path(name)) == expected, f"SHA-bound input changed: {name}")
+    if require_derived:
+        folder = Path(proof["inventory"]["folder"])
+        for field, name in (
+            ("raw_sha256", "full-raw-map.json"),
+            ("archive_sha256", "archive-inventory.json"),
+        ):
+            require(field in proof, f"Missing derived output binding: {field}")
+            require(
+                digest(folder / name) == proof[field],
+                f"SHA-bound derived output changed: {name}",
+            )
 
 
 def full(row):
@@ -363,7 +374,7 @@ def full(row):
 def equal_pair(left, right):
     left, right = Path(left), Path(right)
     for folder in (left, right):
-        verify_bound(load(folder / "full-proof.json"))
+        verify_bound(load(folder / "full-proof.json"), require_derived=True)
     require(
         load(left / "full-raw-map.json") == load(right / "full-raw-map.json"),
         "Entire raw association maps differ; STOP",
@@ -378,7 +389,7 @@ def final(rows):
         folder = Path(row["folder"])
         if not (folder / "full-proof.json").exists():
             full(row)
-        verify_bound(load(folder / "full-proof.json"))
+        verify_bound(load(folder / "full-proof.json"), require_derived=True)
     for row in rows[1:]:
         equal_pair(rows[0]["folder"], row["folder"])
     return {

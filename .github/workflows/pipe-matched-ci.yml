@@ -2,7 +2,15 @@ name: Matched pipe full-HOBL ARM (source-only readiness, manual fork only)
 
 on:
   workflow_call:
+    inputs:
+      controlled-groups:
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      controlled-groups:
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -17,6 +25,8 @@ jobs:
   matched:
     if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
     timeout-minutes: 8
+    env:
+      MATCHED_PROFILE: ${{ inputs.controlled-groups && 'pipe-fixed-groups-ci82-v1' || 'pipe-matched-ci-v1' }}
     strategy:
       fail-fast: false
       matrix:
@@ -63,6 +73,9 @@ jobs:
           $sha = (Get-FileHash (Join-Path $helper 'SOURCEPINS.json') -Algorithm SHA256).Hash.ToLowerInvariant()
           if ($review.approved -ne $true -or $review.sourcepins_sha256 -ne $sha) {
             throw 'NoParityClaim: review is not bound to current sources'
+          }
+          if (($review.profile ?? 'pipe-matched-ci-v1') -ne $env:MATCHED_PROFILE) {
+            throw 'NoParityClaim: allocation does not authorize this profile'
           }
           & (Join-Path $helper 'verify_sourcepins.ps1') -Root (Join-Path $env:GITHUB_WORKSPACE 'tools') -Manifest (Join-Path $helper 'SOURCEPINS.json')
       - name: Reuse server UTC and actual job state queue bound
@@ -118,6 +131,8 @@ jobs:
           & $env:BASE_PYTHON -B (Join-Path $helper 'execution.py') prepare --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output (Join-Path $env:GITHUB_WORKSPACE 'matched-evidence') --uv (Get-Command uv).Source --workers ${{ matrix.workers }} --seconds $remaining
           exit $LASTEXITCODE
       - name: Guarded complete ABBA and SHA-bound final audit
+        env:
+          MATCHED_DRIVER: ${{ inputs.controlled-groups && 'controlled_ci.py' || 'execution.py' }}
         run: |
           $ErrorActionPreference = 'Stop'
           $remaining = 480 - ([DateTimeOffset]::UtcNow.ToUnixTimeSeconds() - [long]$env:MATCHED_STARTED) - 15
@@ -125,7 +140,7 @@ jobs:
           $root = Join-Path $env:GITHUB_WORKSPACE 'matched-evidence'
           $python = if ($env:RUNNER_OS -eq 'Windows') { Join-Path $root 'venv/Scripts/python.exe' } else { Join-Path $root 'venv/bin/python' }
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools/Generated Files/arm-build/pipe-matched-ci-readiness'
-          & $python -B (Join-Path $helper 'execution.py') run --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output $root --uv (Get-Command uv).Source --workers ${{ matrix.workers }} --seconds $remaining
+          & $python -B (Join-Path $helper $env:MATCHED_DRIVER) run --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --output $root --uv (Get-Command uv).Source --workers ${{ matrix.workers }} --seconds $remaining
           exit $LASTEXITCODE
       - name: Preserve source readiness without credentials or raw traces
         if: always()

@@ -1,7 +1,7 @@
 {
   "approved": false,
   "scope": "Post-run source repairs only; no further CI allocation admitted",
-  "sourcepins_sha256": "fcc6d1bc1c768aa239fbcf09723dc10987e927c90c0a474684484d84a5c379ef",
+  "sourcepins_sha256": "d3dc4538e4a301d6faeb7a96525df341f5ed8f221e73d320afa1a9ebf331c040",
   "review_findings_closed": [
     "MATCHED-001",
     "MATCHED-002",

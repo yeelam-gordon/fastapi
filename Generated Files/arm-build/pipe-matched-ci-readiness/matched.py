@@ -143,8 +143,6 @@ def verify_sourcepins():
 
 
 def admit():
-    if (HERE / "CLI-ASSOCIATION-PENDING.json").exists():
-        raise RuntimeError("NoParityClaim: prospective CLI correction requires new source review/freeze/budget")
     static_check()
     if os.environ.get("GITHUB_REPOSITORY") != "yeelam-gordon/fastapi":
         raise RuntimeError("Owned fork only")
@@ -160,6 +158,14 @@ def admit():
         != hashlib.sha256((HERE / "SOURCEPINS.json").read_bytes()).hexdigest()
     ):
         raise RuntimeError("NoParityClaim: review is not SHA-bound to these sources")
+    if review.get("profile", "pipe-matched-ci-v1") != os.environ.get(
+        "MATCHED_PROFILE", "pipe-matched-ci-v1"
+    ):
+        raise RuntimeError("NoParityClaim: allocation does not authorize this profile")
+    if (HERE / "CLI-ASSOCIATION-PENDING.json").exists() and review.get(
+        "cli_identity_qualified"
+    ) is not True:
+        raise RuntimeError("NoParityClaim: prospective CLI correction is not qualified")
     verify_sourcepins()
 
 

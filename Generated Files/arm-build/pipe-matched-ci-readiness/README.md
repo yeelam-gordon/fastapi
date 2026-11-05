@@ -209,3 +209,87 @@ policy, not observed Mac data, a blanket cross-platform waiver, or a Mac runtime
 PASS. Existing unchanged Windows artifacts can be read-only revalidated against
 `expected_headers(reference, "win32")`; another build is unnecessary.
 The unresolved full raw context-association failure still blocks CI admission.
+
+## Separate local controlled-schedule profile (source only)
+
+`controlled_local.py` implements `pipe-fixed-groups-local83-v1`: the byte-pinned
+generic fixed_worker control is loaded explicitly with `-p fixed_worker` in
+both arms, never the old completion-token candidate. SHA256 is
+1f6a3a788adc3594f2c5666c689c4f8b901df5a5b04c8df8de7526757cdb7fea.
+Pinned xdist 3.8.0 loadgroup/loadscope source hashes are checked before use.
+Whole-group binpacking, full collection, sent order and actual per-worker setup
+order are recomputed and checked in every payload, then compared across all
+retained payloads. Control is measurement configuration, not a speedup.
+
+From `Q:\fastapi`, after review/freeze, small control readiness only:
+
+```powershell
+& '.\Generated Files\arm-build\hobl-python-provision-screen\local-private\work\.venv\Scripts\python.exe' -B '.\Generated Files\worktrees\pipe-matched-ci\Generated Files\arm-build\pipe-matched-ci-readiness\controlled_local.py' readiness --output '.\Generated Files\arm-build\pipe-matched-ci-readiness\controlled-ready-01'
+```
+
+Four small file groups/four workers verify the qualified control's dispatch,
+not HOBL behavior. The owned case command has a 60s allocation including
+guardian reserve; no application, ASGI or pipe workload is used.
+
+Only with a separate full-cohort budget/review, not permission from this file:
+
+```powershell
+& '.\Generated Files\arm-build\hobl-python-provision-screen\local-private\work\.venv\Scripts\python.exe' -B '.\Generated Files\worktrees\pipe-matched-ci\Generated Files\arm-build\pipe-matched-ci-readiness\controlled_local.py' run --output '.\Generated Files\arm-build\pipe-matched-ci-readiness\controlled-full-01' --control-ready '.\Generated Files\arm-build\pipe-matched-ci-readiness\controlled-ready-01'
+```
+
+Requires existing qualified local83 runtime, local canonical object, exact uv
+ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc,
+and nested PDM 5b8746... wheel; defaults are the same known local paths above.
+No installer/download/network, fake GitHub identity or approval is used.
+The new CONTROLLED-PENDING manifest hashes complete current source inputs before
+controller and workers. Original SOURCEPINS/approval are not blessed or changed.
+
+Full mode requires the source/receipt-bound successful readiness proof, sets
+only its own four-LP mask, prepares four fresh complete sources, and invokes
+existing phase/orchestration/audit functions through explicit callbacks.
+ABBA, four workers, zero warmups/retries, all2643/2513/130 cases, full863/1409 raw
+equality, full1196/58 reference headers/RECORD, current6d fixture/77ed public
+named-pipe policy, CLI parent identity, lifetime and strict natural drain gates
+remain intact. First-pair mismatch stops; final audit retains its 120s cap.
+Owner allocation is at most420s including preparation/guardian reserves;
+remaining-aware native/cheap/first-pair work cannot consume the final120s reserve.
+This is not default-scheduler performance or a reopening of the old token study.
+CI82 readiness and all fourteen manual routes keep their existing defaults and
+admission; no CI is authorized by this local source-only profile.
+
+## Explicit controlled CI opt-in (separate prospective allocation)
+
+The new fifteenth manual router option `pipe-controlled-ci` calls the existing
+two-host workflow with `controlled-groups: true`. The reusable workflow's input
+defaults to false, retaining the existing fourteen routes/default behavior.
+Only the measured-run driver switches to `controlled_ci.py`; preparation still
+uses the actual hash-locked common82 bootstrap. Local83 is never substituted.
+The default and local controlled drivers are unchanged.
+
+`controlled_ci.readiness` calls the existing CI82/native runtime readiness and
+the same byte-pinned generic control attestation. `controlled_ci.dispatch`
+recomputes exact whole-group assignment/sent/setup order for four Windows or
+three Mac workers, in every payload and across all retained payloads.
+Existing worker/phase/full raw/CLI identity/lifetime/header/source/runtime
+oracles are invoked, not changed. The full-proof consumer additionally rechecks both derived-output hashes,
+closing the independent local evidence review's cache-integrity finding.
+
+The source-bound parent receipt controls the finite budget: one fork manual attempt, two native service-host
+jobs, eight minutes each, queue bound300s, four ABBA payloads per host,
+zero warmups/retries/profilers and a bounded120s final audit. The local timing
+observations are controlled-profile-only, not default/Mac/physical proof.
+Original failures remain closed. The local controlled cohort qualified
+3.6297013% AB and 1.8869649% BA whole-HOBL savings with complete raw equality,
+outcomes, archives and natural drain. These are not hosted or physical results.
+SOURCEPINS.json binds the current 87-file transfer inventory; pending manifests
+are retained historical preparation records, not approval. PARENT-REVIEW.json
+must explicitly approve this profile and its manifest before any allocation.
+The workflow and Python admission both check MATCHED_PROFILE, so a controlled
+approval cannot authorize the default route. The original PLAN.json describes
+the earlier default-profile allocation, not this controlled transfer.
+
+Future invocation only after that separate approval/publication:
+
+```powershell
+gh workflow run arm-build-diagnostics.yml --repo yeelam-gordon/fastapi --ref perf/worker-pipe-hobl-20261105 -f platform=pipe-controlled-ci
+```

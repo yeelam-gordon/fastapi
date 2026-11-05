@@ -25,10 +25,18 @@ def main():
     after = yaml.load((root / ROUTER).read_bytes(), Loader=yaml.BaseLoader)
     options = before["on"]["workflow_dispatch"]["inputs"]["platform"]["options"]
     revised = after["on"]["workflow_dispatch"]["inputs"]["platform"]["options"]
-    assert len(options) == 13 and revised == options + ["pipe-matched-ci"]
+    assert len(options) == 13 and revised in (
+        options + ["pipe-matched-ci"],
+        options + ["pipe-matched-ci", "pipe-controlled-ci"],
+    )
     restored = copy.deepcopy(after)
     restored["on"]["workflow_dispatch"]["inputs"]["platform"]["options"] = options
     del restored["jobs"]["pipe-matched-ci"]
+    if "pipe-controlled-ci" in restored["jobs"]:
+        del restored["jobs"]["pipe-controlled-ci"]
+        restored["jobs"]["complete"]["if"] = restored["jobs"]["complete"][
+            "if"
+        ].removeprefix("inputs.platform != 'pipe-controlled-ci' && ")
     restored["jobs"]["complete"]["if"] = restored["jobs"]["complete"][
         "if"
     ].removeprefix("inputs.platform != 'pipe-matched-ci' && ")
@@ -58,7 +66,7 @@ def main():
                 "status": "PASS_STATIC_ONLY_NOT_READY",
                 "ast_files": len(paths),
                 "routes_preserved": 13,
-                "routes_total": 14,
+                "routes_total": len(revised),
                 "frozen_prototype_and_fixture": True,
                 "yaml": True,
                 "execution_admitted": result["admission"],
