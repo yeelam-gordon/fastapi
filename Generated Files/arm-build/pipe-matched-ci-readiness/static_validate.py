@@ -46,7 +46,10 @@ def main():
         Loader=yaml.BaseLoader,
     )
     job = workflow["jobs"]["matched"]
-    assert job["timeout-minutes"] == "8"
+    assert job["timeout-minutes"] == "${{ inputs.controlled-groups && 10 || 8 }}"
+    assert job["env"]["MATCHED_JOB_SECONDS"] == (
+        "${{ inputs.controlled-groups && 600 || 480 }}"
+    )
     assert job["strategy"]["matrix"]["include"] == [
         {"runner": "windows-11-arm", "platform": "windows", "workers": "4"},
         {"runner": "macos-14", "platform": "macos", "workers": "3"},

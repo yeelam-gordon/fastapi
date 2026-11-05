@@ -53,7 +53,12 @@ def test_fifteen_routes_preserve_exact_existing_fourteen():
         workflow["on"]["workflow_call"]["inputs"]["controlled-groups"]["default"]
         == "false"
     )
-    assert workflow["jobs"]["matched"]["timeout-minutes"] == "8"
+    assert workflow["jobs"]["matched"]["timeout-minutes"] == (
+        "${{ inputs.controlled-groups && 10 || 8 }}"
+    )
+    assert workflow["jobs"]["matched"]["env"]["MATCHED_JOB_SECONDS"] == (
+        "${{ inputs.controlled-groups && 600 || 480 }}"
+    )
 
 
 def test_ci_callback_uses_actual_common82_not_local_metadata():

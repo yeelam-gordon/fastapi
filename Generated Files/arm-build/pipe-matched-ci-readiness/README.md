@@ -298,7 +298,7 @@ oracles are invoked, not changed. The full-proof consumer additionally rechecks 
 closing the independent local evidence review's cache-integrity finding.
 
 The source-bound parent receipt controls the finite budget: one fork manual attempt, two native service-host
-jobs, eight minutes each, queue bound300s, four ABBA payloads per host,
+jobs, at most ten minutes each for the controlled opt-in, queue bound300s, four ABBA payloads per host,
 zero warmups/retries/profilers and a bounded120s final audit. The local timing
 observations are controlled-profile-only, not default/Mac/physical proof.
 Original failures remain closed. The local controlled cohort qualified
@@ -310,6 +310,12 @@ must explicitly approve this profile and its manifest before any allocation.
 The workflow and Python admission both check MATCHED_PROFILE, so a controlled
 approval cannot authorize the default route. The original PLAN.json describes
 the earlier default-profile allocation, not this controlled transfer.
+The default workflow input remains false and retains eight minutes/480 seconds.
+The controlled ceiling is600 seconds; both remaining-time calculations use
+that same ceiling and retain the original15-second outer reserve. No inner
+guardian, first-pair or120-second final-audit reserve changes. The prior
+eight-minute controlled allocation failed before A2 tests and remains closed;
+the new ceiling is prospective source preparation, not approval or a retry.
 
 Future invocation only after that separate approval/publication:
 
