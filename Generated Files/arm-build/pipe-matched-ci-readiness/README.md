@@ -12,6 +12,14 @@ but retained raw per-context equality still fails at one cached-import
 association. Full raw data remains intact; the strict gate is unchanged.
 No new workflow dispatch or performance/parity claim follows from these repairs.
 
+Local readiness entrypoints validate the current complete `SOURCEPINS.json`
+before launching a controller and again before worker work. Retained
+`*-PENDING.json` plans describe earlier freezes; they are not substituted for
+the current manifest. This local source check does not grant GitHub admission.
+The one-build local entrypoint also accepts `--profile-imports` for an explicitly
+instrumented, non-performance-eligible Python import diagnostic. It changes no
+backend or build phases; raw stderr is retained.
+
 ## End-to-end entrypoints
 
 `execution.py prepare --source CHECKOUT --output NEW --uv UV --workers N

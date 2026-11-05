@@ -6,6 +6,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+import build_readiness
+import cli_readiness
 import local_preflight
 import matched
 import matched_audit
@@ -166,6 +168,21 @@ def test_local_source_changes_reject_before_owned_child(tmp_path, name):
             local_preflight.run(tmp_path / "unused-output")
     owned.assert_not_called()
     assert not (tmp_path / "unused-output").exists()
+
+
+@pytest.mark.parametrize("module", [build_readiness, cli_readiness])
+def test_local_readiness_uses_current_sourcepins_before_any_work(module):
+    with (
+        patch.object(
+            module, "verify_sourcepins", side_effect=RuntimeError("source changed")
+        ),
+        patch.object(module, "runtime_snapshot") as snapshot,
+        patch.object(module, "owned") as owned,
+    ):
+        with pytest.raises(RuntimeError, match="source changed"):
+            module.worker(SimpleNamespace())
+    snapshot.assert_not_called()
+    owned.assert_not_called()
 
 
 def test_local83_baseline_is_exact_ci82_plus_only_qualified_fastapi():

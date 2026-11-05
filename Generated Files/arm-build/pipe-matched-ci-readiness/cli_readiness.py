@@ -13,20 +13,17 @@ from types import SimpleNamespace
 from cli_identity import associate
 from execution import environment, owned, runtime_snapshot
 from local_preflight import local_metadata
-from matched import HERE
+from matched import HERE, verify_sourcepins
 from matched_audit import native_copies, resource, source_gate
 from screen import digest, load, save
 from source_prepare import fresh_payload, owned_helpers
 
 
 def worker(args):
+    verify_sourcepins()
     before = runtime_snapshot(Path(sys.prefix))
     result = {"status": "ERROR", "cases": 1, "workers": 1, "ci_admission": False}
     try:
-        pending = load(HERE / "CLI-ASSOCIATION-PENDING.json")
-        for name, expected in pending["prospective_source_sha256"].items():
-            if digest(HERE / name) != expected:
-                raise ValueError(f"Pending local qualification source changed: {name}")
         local_metadata()
         source = args.output / "source"
         manifest = fresh_payload(args.source_repo, source)
@@ -162,6 +159,7 @@ if __name__ == "__main__":
     if args.worker:
         worker(args)
     else:
+        verify_sourcepins()
         args.output.mkdir(exist_ok=False)
         owned(
             [

@@ -9,7 +9,7 @@ from pathlib import Path
 from archive_headers import expected_headers, full_inventory, require_reference
 from execution import BACKEND_SHA, owned, runtime_snapshot
 from local_preflight import local_metadata
-from matched import HERE
+from matched import HERE, verify_sourcepins
 from screen import COMMON, digest, load, save
 from source_prepare import fresh_payload
 
@@ -39,18 +39,16 @@ def copy_uv_archives(directory, destination):
 
 
 def worker(args):
+    verify_sourcepins()
     before = runtime_snapshot(Path(sys.prefix))
     result = {
         "status": "ERROR",
         "build_commands": 0,
         "test_commands": 0,
         "ci_admission": False,
+        "diagnostic_import_profile": args.profile_imports,
     }
     try:
-        pending = load(HERE / "CLI-ASSOCIATION-PENDING.json")
-        for name, expected in pending["prospective_source_sha256"].items():
-            if digest(HERE / name) != expected:
-                raise ValueError(f"Pending one-build source changed: {name}")
         local_metadata()
         attest(args.uv)
         uv_before = digest(args.uv)
@@ -96,6 +94,8 @@ def worker(args):
             TMP=str(temp),
             TMPDIR=str(temp),
         )
+        if args.profile_imports:
+            env["PYTHONPROFILEIMPORTTIME"] = "1"
         command = [
             str(args.uv),
             "build",
@@ -164,6 +164,11 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--uv", type=Path, required=True)
     parser.add_argument("--wheel-dir", type=Path, required=True)
+    parser.add_argument(
+        "--profile-imports",
+        action="store_true",
+        help="Emit diagnostic Python import times; not comparable performance timing",
+    )
     parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     for name in ("source_repo", "output", "uv", "wheel_dir"):
@@ -175,6 +180,7 @@ if __name__ == "__main__":
     if args.worker:
         worker(args)
     else:
+        verify_sourcepins()
         args.output.mkdir(exist_ok=False)
         owned(
             [
@@ -190,6 +196,7 @@ if __name__ == "__main__":
                 str(args.uv),
                 "--wheel-dir",
                 str(args.wheel_dir),
+                *(["--profile-imports"] if args.profile_imports else []),
             ],
             HERE,
             os.environ.copy(),
