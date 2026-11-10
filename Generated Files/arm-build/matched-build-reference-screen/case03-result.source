@@ -1,0 +1,26 @@
+# Local reference readiness 03: incomplete after seven builds
+
+**FAILED, 7/8 package commands; no readiness pass, retry or regrade.**
+Both excluded warmups and five of six measured commands completed. The final
+command was never launched: Windows returned sharing violation **WinError 32**
+while resetting the owned source tree between commands.
+
+Locked path:
+`C:\fastapi-matched-reference-local03-20261110-output\canonical-source\docs\pt\docs\index.md`.
+The owning process at the failure instant is **unknown**. Do not attribute
+this to Defender, indexing or disk performance without evidence.
+
+`OBSERVED-COMMANDS.json` preserves all seven actual clocks and their raw
+native/ownership associations. Prior owned families naturally drained. The
+outer controller also drained, with no survivors/cleanup errors, in
+**206.109 seconds**; that includes preparation/audits, not seven-build time.
+The full final seal and sixth measured command are missing. No subset median,
+speedup, host/Mac/physical comparison or HOBL result is qualified.
+
+Raw traceback: `controller.stderr`; the source snapshot is
+`source-c9a99efb`. Complete failed output remains at its original C: location.
+No live producer output was inspected and no original case was repaired.
+
+Next work is source-only cleanup/lifetime diagnosis and a prospective,
+strictly bounded response to the exact sharing-violation condition—not another
+build acquisition, protection/filter changes or ignoring the last sample.

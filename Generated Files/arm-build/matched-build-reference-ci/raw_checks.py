@@ -1,0 +1,920 @@
+"""Thirteen raw responsibilities, reused from the qualified local04 verifier."""
+
+import base64
+import collections
+import csv
+import hashlib
+import importlib.util
+import io
+import json
+import marshal
+import stat
+import statistics
+import struct
+import subprocess
+import sys
+import sysconfig
+import tarfile
+import time
+import traceback
+import types
+import zipfile
+from decimal import Decimal
+from pathlib import Path
+
+import case_contract as contract
+import tomllib
+
+OWN = BASE = RAW = PARENT = HELPERS = PREP = TARGET = CASE = PLATFORM = None
+PIN = "29c9e239434dfcf1479c2767de26d6df1088e9bcd85a3989241af993540b86e6"
+CREATION = "d0c64e3604ed58f992efe1de72d865ac9aa928c45c378a8f751dd31591298465"
+GUARDIAN = "595e46cedfcd270ccc6b1dfc3337034595096f0f58e70188e844bfc0cffaa261"
+REVISION = "864b569cf8453654fc3bc2c64108c0f644e2918c"
+SCHEDULE = [("C", False, "WA"), ("D", False, "WB")] + [
+    ("R", True, number) for number in range(1, 7)
+]
+STARTED = time.perf_counter()
+READSET = {}
+GROUPS = []
+COUNTS = collections.Counter()
+DETAILS = {}
+
+
+def require(condition, message):
+    if not condition:
+        raise AssertionError(message)
+
+
+def bounded():
+    require(time.perf_counter() - STARTED < 240, "240-second verifier bound exhausted")
+
+
+def metadata(path):
+    value = path.stat()
+    result = {
+        "size": value.st_size,
+        "mtime_ns": value.st_mtime_ns,
+        "ctime_ns": value.st_ctime_ns,
+        "mode": value.st_mode,
+        "inode": value.st_ino,
+        "timestamp": int(value.st_mtime) & 0xFFFFFFFF,
+    }
+    if sys.platform == "darwin":
+        result.update(device=value.st_dev, nlink=value.st_nlink)
+    return result
+
+
+def read(path):
+    bounded()
+    path = Path(path)
+    require(not path.is_symlink() and not path.is_junction(), f"aliased file: {path}")
+    before = metadata(path)
+    require(stat.S_ISREG(before["mode"]), f"nonregular file: {path}")
+    data = path.read_bytes()
+    require(metadata(path) == before, f"file changed during read: {path}")
+    record = {"sha256": hashlib.sha256(data).hexdigest(), **before}
+    old = READSET.setdefault(str(path), record)
+    require(old == record, f"file changed between reads: {path}")
+    return data
+
+
+def digest(path):
+    return hashlib.sha256(read(path)).hexdigest()
+
+
+def load(path):
+    return json.loads(read(path))
+
+
+def canonical_hash(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
+
+
+def save(name, value):
+    path = OWN / name
+    require(path.parent == OWN, "write outside sole owned directory")
+    path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
+
+
+def files_below(root):
+    result = {}
+    for path in root.rglob("*"):
+        bounded()
+        require(not path.is_symlink() and not path.is_junction(), f"aliased entry: {path}")
+        if path.is_file():
+            result[path.relative_to(root).as_posix()] = digest(path)
+    return result
+
+
+def group(name, function):
+    began = time.perf_counter()
+    try:
+        function()
+    except Exception as error:
+        GROUPS.append({
+            "name": name, "status": "FAIL", "error": str(error),
+            "traceback": traceback.format_exc(),
+            "seconds": time.perf_counter() - began,
+        })
+    else:
+        GROUPS.append({"name": name, "status": "PASS", "seconds": time.perf_counter() - began})
+    print(json.dumps(GROUPS[-1]), flush=True)
+
+
+def code_key(value):
+    if isinstance(value, types.CodeType):
+        names = (
+            "co_argcount co_posonlyargcount co_kwonlyargcount co_nlocals co_stacksize "
+            "co_flags co_code co_names co_varnames co_filename co_name co_qualname "
+            "co_firstlineno co_linetable co_exceptiontable co_freevars co_cellvars"
+        ).split()
+        return tuple(getattr(value, name) for name in names), code_key(value.co_consts)
+    if isinstance(value, tuple):
+        return ("tuple", tuple(code_key(item) for item in value))
+    if isinstance(value, frozenset):
+        return ("frozenset", frozenset(code_key(item) for item in value))
+    if isinstance(value, str):
+        return "str", value
+    return type(value).__name__, marshal.dumps(value)
+
+
+def decoded_code(raw):
+    require(len(raw) >= 16 and raw[:4] == importlib.util.MAGIC_NUMBER, "pyc magic/length")
+    stream = io.BytesIO(raw[16:])
+    value = marshal.load(stream)
+    require(isinstance(value, types.CodeType) and stream.read() == b"", "pyc code/trailing bytes")
+    return value
+
+
+def header_matches(raw, seal):
+    return struct.unpack_from("<III", raw, 4) == (
+        0, seal["timestamp"], seal["size"] & 0xFFFFFFFF
+    )
+
+
+def receipt_ok(receipt, label):
+    require(
+        receipt["returncode"] == 0
+        and receipt["timed_out"] is False
+        and receipt["ownership_established"] is True
+        and receipt["survivors"] is False
+        and receipt["cleanup_complete"] is True
+        and receipt["errors"] == []
+        and receipt["liveness"] == [],
+        f"not naturally drained: {label}",
+    )
+
+
+NATIVES = {}
+INVENTORIES = {}
+ARCHIVE_BYTES = {}
+
+def configure(case_path, output):
+    global OWN, BASE, RAW, PARENT, HELPERS, PREP, TARGET, CASE, PLATFORM, STARTED
+    global CONFIG, PROTOCOL, RESULT, ROWS, MANIFEST, TREE, INITIAL, FROZEN, FINAL
+    global INPUT_BEFORE, INPUT_AFTER, IDENTITY, PINS
+    OWN = Path(output)
+    OWN.mkdir()
+    STARTED = time.perf_counter()
+    CASE = contract.validate_case(case_path, read)
+    PLATFORM = CASE["platform"]
+    PARENT, HELPERS, PREP = (Path(CASE[name]) for name in ("case_root", "core_root", "preparation_root"))
+    BASE, RAW = PARENT.parent, Path(CASE["output"])
+    CONFIG = load(Path(CASE["bindings"]["configuration"]["path"]))
+    TARGET = CONFIG["python"]
+    for name, filename in (
+        ("PROTOCOL", "protocol.json"), ("RESULT", "result.json"), ("ROWS", "rows.json"),
+        ("MANIFEST", "source-manifest.json"), ("TREE", "git-tree.json"),
+        ("INITIAL", "runtime-initial.json"), ("FROZEN", "runtime-seal-after-WB.json"),
+        ("FINAL", "runtime-final.json"), ("INPUT_BEFORE", "inputs-before.json"),
+        ("INPUT_AFTER", "inputs-after.json"), ("IDENTITY", "runtime-identity.json"),
+    ):
+        globals()[name] = load(RAW / filename)
+    PINS = load(HELPERS / "SOURCEPINS.json")
+    sys.path.insert(0, str(HELPERS))
+
+
+def local_authority():
+    require(sys.executable == TARGET == CONFIG["python"], "exact target executable")
+    require(sys.flags.isolated == 1 and sys.dont_write_bytecode, "mandatory -I -B")
+    require(sys.flags.optimize == 0 and sys.pycache_prefix is None, "compiler flags")
+    require(sys.version_info[:3] == (3, 13, 15), "compiler patch version")
+    require(sys.version == IDENTITY["version"] == INITIAL["compiler"]["version"], "full compiler build string")
+    require(sys.prefix == CONFIG["venv_root"] and sys.base_prefix == CONFIG["sdk_root"], "compiler prefix binding")
+    require(sys._base_executable == CONFIG["base_python"], "base executable binding")
+    require(sysconfig.get_platform() == "win-arm64" and IDENTITY["platform"] == "win-arm64", "ARM64 target")
+    require(sys._is_gil_enabled() and not sysconfig.get_config_var("Py_GIL_DISABLED"), "normal GIL")
+    require(not sysconfig.get_config_var("PYTHON_JIT") and not sysconfig.get_config_var("Py_DEBUG"), "no JIT/debug")
+    require(IDENTITY["gil"] and not IDENTITY["jit"] and IDENTITY["bytecode"] == "default", "producer runtime flags")
+    require(digest(HELPERS / "SOURCEPINS.json") == PIN and PINS["version"] == 3, "v3 exact source pin")
+    closure = {p.name for p in HELPERS.iterdir() if p.suffix in (".py", ".source") or p.name in ("build-constraints.txt", "ORIGINS.json")}
+    require(closure == set(PINS["files"]), "source pin closure")
+    for name, expected in PINS["files"].items():
+        require(digest(HELPERS / name) == expected, f"source pin {name}")
+        COUNTS["source_pinned_files"] += 1
+    require(PINS["files"]["owned_process.py"] == GUARDIAN, "same guardian")
+    require(PROTOCOL["question"] == PINS["question"] and PROTOCOL["version"] == 3, "protocol question")
+    require(PROTOCOL["sourcepins"] == PIN and PROTOCOL["configuration"] == CONFIG, "protocol configuration")
+    require(PROTOCOL["classification"] == RESULT["classification"] == "LOCAL_READINESS_NONCOMPARATIVE", "local classification")
+    require(CONFIG["profile"] == PROTOCOL["profile"] == RESULT["profile"] == "LOCAL_WINDOWS_READINESS", "local profile")
+    admission = load(PARENT / "admission.json")
+    require(admission == load(RAW / "admission-used.json"), "used admission")
+    require(admission["authority"] == "separate-parent-native-readiness" and admission["version"] == 3, "authority")
+    require(admission["sourcepins_sha256"] == PIN and admission["question_sha256"] == canonical_hash(PROTOCOL["question"]), "admission protocol")
+    require(admission["configuration_sha256"] == canonical_hash(CONFIG), "admission config")
+    require(admission["expires_unix"] - admission["issued_unix"] == 600, "admission lifetime")
+    require(admission["max_build_commands"] == 8 and "native_platform_qualified" not in admission, "bounded authority")
+    require(all(admission[key] is True for key in ("bootstrap_receipt_qualified", "target_isa_runtime_prerequisites_qualified", "fixed_paths_and_cache_qualified")), "admission prerequisites")
+    core = load(PARENT / "CORE-ATTEMPT-ONCE")
+    require(admission["attempt_marker"] == str(PARENT / "CORE-ATTEMPT-ONCE"), "marker path")
+    require(core == {"sourcepins": PIN, "configuration": canonical_hash(CONFIG)}, "one core attempt")
+    marker = load(PARENT / "LAUNCH-ONCE")
+    require(marker["never_remove"] and marker["script_sha256"] == digest(PARENT / "run_once.py") and marker["plan_sha256"] == digest(PARENT / "PLAN.json"), "outer one-attempt seal")
+    require(marker["configuration_sha256"] == canonical_hash(CONFIG), "outer marker configuration")
+    plan = load(PARENT / "PLAN.json")
+    require(plan["maximum_acquisitions"] == 1 and plan["maximum_uv_builds"] == 8 and plan["retries"] == plan["ci_jobs"] == plan["test_or_hobl_commands"] == 0, "plan bounds")
+    require(plan["controller_seconds"] == CONFIG["seconds"] == 540 and plan["sourcepins_sha256"] == PIN, "controller cap")
+    DETAILS["compiler"] = {"executable": sys.executable, "version": sys.version, "flags": {"isolated": sys.flags.isolated, "dont_write_bytecode": sys.dont_write_bytecode, "optimize": sys.flags.optimize}, "producer_bytecode": IDENTITY["bytecode"]}
+
+def authority():
+    if CASE["profile"] == "LOCAL_WINDOWS_READINESS":
+        local_authority()
+    else:
+        contract.authority(CASE, CONFIG, PROTOCOL, IDENTITY, INITIAL, read)
+    require(CASE["profile"] == CONFIG["profile"] == PROTOCOL["profile"] == RESULT["profile"], "case/profile binding")
+    require(CASE["output"] == CONFIG["output"] == str(RAW), "raw prefix binding")
+    require(PROTOCOL["configuration"] == CONFIG and PROTOCOL["question"] == PINS["question"], "full protocol configuration/question")
+    require(PROTOCOL["classification"] == RESULT["classification"] == PINS["question"]["profiles"][CASE["profile"]]["classification"], "classification")
+    contract.path_profile(CASE, CONFIG, read)
+
+
+def schedule_commands_native():
+    require(RESULT["status"] == "COMPLETE" and RESULT["rows"] == ROWS and len(ROWS) == 8, "eight completed rows")
+    require([(r["arm"], r["measured"], r["pair"]) for r in ROWS] == SCHEDULE, "WA/WB plus all six fixed samples")
+    require(PROTOCOL["question"]["schedule"] == [list(value) for value in SCHEDULE], "protocol schedule")
+    require({p.name for p in RAW.iterdir() if p.is_dir() and p.name.startswith("build-")} == {r["folder"] for r in ROWS}, "no dropped/additional build folders")
+    expected_argv = [CONFIG["uv"], "build", "--python", TARGET, "--no-python-downloads", "--offline", "--build-constraints", str(RAW / "build-constraints.txt"), "--find-links", CONFIG["wheels"]]
+    require(PROTOCOL["argv"] == expected_argv and PROTOCOL["cwd"] == str(RAW / "canonical-source"), "exact actual CLI/source")
+    if PLATFORM == "win32":
+        require(Path(PROTOCOL["cwd"]).drive == "C:" and Path(CONFIG["cache"]).drive == ("Q:" if CASE["profile"] == "LOCAL_WINDOWS_READINESS" else "D:"), "source/cache drives")
+    else:
+        require(Path(CONFIG["cache"]).parent.is_dir(), "existing private cache filesystem")
+    require(PROTOCOL["environment"]["metadata_profile"] == {"SOURCE_DATE_EPOCH": "absent"}, "no SDE")
+    require(PROTOCOL["environment"]["values"]["UV_CACHE_DIR"] == CONFIG["cache"], "fixed cache")
+    require(set(PROTOCOL["environment"]["values"]) <= {"UV_CACHE_DIR", "TEMP", "TMP", "TMPDIR"}, "no retained override")
+    prior_end = 0
+    process_keys = set()
+    for index, row in enumerate(ROWS):
+        folder = RAW / row["folder"]
+        require(row["index"] == index and row["folder"] == f"build-{index:02}-{SCHEDULE[index][0]}" and row["status"] == "VALID", "exact row identity")
+        command = load(folder / "command.json")
+        native = load(folder / "native.json")
+        owned = load(folder / "ownership.json")
+        sidecar = load(folder / "stdout.actual-process.json")
+        receipt_ok(owned, folder.name)
+        require(command == {"argv": expected_argv, "cwd": PROTOCOL["cwd"], "environment": PROTOCOL["environment"], "arm": row["arm"], "measured": row["measured"], "pair": row["pair"]}, "row exact command")
+        require(all(native[key] == command[key] for key in ("argv", "cwd", "environment")), "held CLI/environment")
+        process = owned["actual_process"]
+        require(sidecar == process, "native sidecar identity")
+        require(all(native[key] == process[key] for key in process), "held native identity")
+        key, _ = contract.process_identity(process, CONFIG["uv"], PLATFORM)
+        require(key not in process_keys, "duplicate actual process")
+        process_keys.add(key)
+        require(native["status"] == "COMPLETE" and native["returncode"] == 0, "native completion")
+        start, end = native["start_ns"], native["end_ns"]
+        require(prior_end < start < end and start == owned["native_start_ns"] and end == owned["native_end_ns"], "held native monotonic clock")
+        require((end - start) / 1e9 == row["seconds"] <= 30, "raw native seconds/T30")
+        require(0 < owned["command_wall"] <= 30 and row["seconds"] <= row["owned_wall_seconds"] < 55, "owned T30/reserve")
+        prior_end = end
+        NATIVES[index] = native
+        COUNTS["native_held_commands_verified"] += 1
+    require(RESULT["native_seconds"] == [r["seconds"] for r in ROWS[2:]], "raw six seconds")
+    DETAILS["environment_limit"] = "Whitelisted values and exact source-bound in-memory override rejection are retained; the full inherited process environment was not persisted and is not independently recoverable."
+
+
+def local_outer():
+    command = load(PARENT / "outer-command.json")
+    receipt = load(PARENT / "outer-owned-receipt.json")
+    launch = load(PARENT / "LAUNCH-RESULT.json")
+    receipt_ok(receipt, "outer")
+    require(receipt["actual_process"] == load(PARENT / "controller.actual-process.json"), "outer actual process sidecar")
+    require(receipt["actual_process"]["image"] == TARGET, "outer target identity")
+    require(command["argv"] == [TARGET, "-I", str(HELPERS / "reference.py"), "--configuration", str(PARENT / "configuration.json"), "--admission", str(PARENT / "admission.json")], "outer exact argv")
+    require(command["cwd"] == str(PARENT) and command["timeout_seconds"] == 565 and command["cleanup_reserve_seconds"] == 25, "outer bounds")
+    require(command["scoped_git_override"] == {"core.autocrlf": "false"} and command["inherited_git_entries_preserved"] == 3, "scoped Git export")
+    birth = (receipt["actual_process"]["birth_filetime"] - 116444736000000000) / 1e7
+    admission = load(PARENT / "admission.json")
+    require(admission["issued_unix"] <= birth < admission["expires_unix"], "fresh admission at actual birth")
+    require(receipt["command_wall"] <= 565 and RESULT["controller_seconds"] <= 540, "outer/controller cap")
+    require(launch["outer_succeeded"] and not launch["survivors"] and launch["cleanup_complete"], "outer launch result")
+    require(launch["native_output_root"] == str(RAW) and not launch["ci_authority"] and not launch["performance_gain_claim"], "local outer authority")
+    require(read(PARENT / "controller.stderr") == b"" and read(PARENT / "controller.stdout") == b"", "outer controller streams")
+    require(RESULT["controller_seconds"] < receipt["command_wall"] < launch["outer_elapsed_seconds"] < 590, "separate nested wall clocks")
+    DETAILS["times_seconds"] = {
+        "native_all8": [r["seconds"] for r in ROWS],
+        "native_fixed6": RESULT["native_seconds"],
+        "native_fixed6_median_noncomparative": statistics.median(RESULT["native_seconds"]),
+        "native_all8_sum": sum(r["seconds"] for r in ROWS),
+        "setup": RESULT["setup_seconds"],
+        "prelaunch_all8": [r["prelaunch_seconds"] for r in ROWS],
+        "row_audits_all8": [r["audit_seconds"] for r in ROWS],
+        "row_audits_sum": sum(r["audit_seconds"] for r in ROWS),
+        "final_audit": RESULT["final_audit_seconds"],
+        "controller": RESULT["controller_seconds"],
+        "outer_command": receipt["command_wall"],
+        "outer_infrastructure": receipt["infrastructure_wall"],
+        "outer_elapsed": launch["outer_elapsed_seconds"],
+    }
+    COUNTS["outer_receipts_verified"] += 1
+
+def outer():
+    if CASE["profile"] == "LOCAL_WINDOWS_READINESS":
+        local_outer()
+    else:
+        contract.outer(CASE, CONFIG, RESULT, read)
+        COUNTS["outer_receipts_verified"] += 1
+        DETAILS["times_seconds"] = {
+            "native_all8": [row["seconds"] for row in ROWS],
+            "native_fixed6": RESULT["native_seconds"], "setup": RESULT["setup_seconds"],
+            "row_audits": [row["audit_seconds"] for row in ROWS],
+            "final_audit": RESULT["final_audit_seconds"], "controller": RESULT["controller_seconds"],
+        }
+
+
+def git_sources():
+    archived = {}
+    with tarfile.open(fileobj=io.BytesIO(read(RAW / "source.tar"))) as archive:
+        for member in archive:
+            require(not Path(member.name).is_absolute() and ".." not in Path(member.name).parts, "unsafe source member")
+            if member.isdir():
+                continue
+            require(member.isfile() and member.name not in archived, "nonregular/duplicate source")
+            data = archive.extractfile(member).read()
+            archived[member.name] = hashlib.sha256(data).hexdigest()
+            require(hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() == TREE[member.name]["git_blob"], f"raw Git object {member.name}")
+            git_export_mode = (0o666 | (int(TREE[member.name]["mode"], 8) & 0o111)) & ~0o002
+            require(member.mode == git_export_mode, "raw Git tar export default umask 0002 mode")
+            COUNTS["git_raw_blobs"] += 1
+    require(archived == MANIFEST and set(TREE) == set(MANIFEST) and len(MANIFEST) == 2557, "full 2557 canonical raw manifest")
+    source = Path(CONFIG["source"])
+    for root, counter in ((source, "actual_audit_checkout_files"), (RAW / "canonical-source", "actual_final_tracked_source_files")):
+        for name, expected in MANIFEST.items():
+            require(digest(root / name) == expected, f"actual tracked source {root / name}")
+            mode = (root / name).stat().st_mode
+            require(stat.S_ISREG(mode), "actual tracked source regular mode")
+            if PLATFORM == "darwin":
+                require(mode & 0o111 == int(TREE[name]["mode"], 8) & 0o111, "actual Darwin Git executable mode")
+                if root == RAW / "canonical-source":
+                    # The unchanged extractor applies tarfile's data filter.
+                    require(stat.S_IMODE(mode) == (0o666 | (int(TREE[name]["mode"], 8) & 0o111)) & ~0o002 & 0o755, "actual filtered Git extracted mode")
+            COUNTS[counter] += 1
+    commands = [
+        ["git", "--no-optional-locks", "--no-pager", "-C", str(source), "rev-parse", "HEAD"],
+        ["git", "--no-optional-locks", "--no-pager", "-C", str(source), "ls-files", "--stage", "-z"],
+    ]
+    observations = []
+    for command in commands:
+        completed = subprocess.run(command, capture_output=True, timeout=15, check=True)
+        observations.append({"argv": command, "returncode": completed.returncode, "stdout_sha256": hashlib.sha256(completed.stdout).hexdigest(), "stderr": completed.stderr.decode()})
+        if command[-1] == "HEAD":
+            require(completed.stdout.decode().strip() == REVISION, "live pinned source HEAD")
+        else:
+            live = {}
+            for entry in completed.stdout.split(b"\0"):
+                if not entry:
+                    continue
+                prefix, name = entry.split(b"\t", 1)
+                mode, blob, stage = prefix.decode().split()
+                require(stage == "0", "unmerged tracked source")
+                live[name.decode()] = {"mode": mode, "git_blob": blob}
+            require(live == TREE, "actual live Git index complete tree")
+    DETAILS["readonly_git_commands"] = observations
+    DETAILS["source_tar_modes"] = "Raw git-archive export preserves content and executable bits with Git's default tar.umask 0002: tree100644 -> tar0664; tree100755 -> tar0775. No archive bytes or modes rewritten."
+
+
+def archives():
+    sys.path.insert(0, str(HELPERS))
+    import screen
+    from artifact_gate import artifact_set
+
+    reference = None
+    header_windows = []
+    for index, row in enumerate(ROWS):
+        folder = RAW / row["folder"]
+        inventory = screen.full_inventory(folder / "artifacts")
+        require(inventory == load(folder / "full-headers.json"), "decoded full raw headers")
+        contract.headers(inventory, PLATFORM, TREE, RAW / "canonical-source")
+        require(len(inventory["sdist"]) == 1196 and len(inventory["wheel"]) == 58, "1196/58 exact full membership")
+        content = artifact_set(folder / "artifacts", RAW / "canonical-source", MANIFEST)
+        require(content == load(folder / "content-record.json"), "decoded content and RECORD source association")
+        COUNTS["archives_decoded"] += len(content)
+        COUNTS["sdist_members_decoded"] += len(inventory["sdist"])
+        COUNTS["wheel_members_decoded"] += len(inventory["wheel"])
+        raw_members = {}
+        for filename, record in content.items():
+            raw_archive = read(folder / "artifacts" / filename)
+            require(hashlib.sha256(raw_archive).hexdigest() == record["sha256"], "raw archive hash")
+            if filename.endswith(".whl"):
+                with zipfile.ZipFile(io.BytesIO(raw_archive)) as archive:
+                    data_by_name = {item.filename: archive.read(item) for item in archive.infolist()}
+                    require(len(data_by_name) == len(archive.infolist()) == 58 and archive.testzip() is None, "wheel CRC/member coverage")
+                    record_name = "fastapi-0.119.1.dist-info/RECORD"
+                    entries = list(csv.reader(io.StringIO(data_by_name[record_name].decode())))
+                    require(len(entries) == 58 and {entry[0] for entry in entries} == set(data_by_name), "independent RECORD membership")
+                    for name, recorded_hash, length in entries:
+                        if name == record_name:
+                            require(recorded_hash == length == "", "RECORD self")
+                        else:
+                            data = data_by_name[name]
+                            expected = "sha256=" + base64.urlsafe_b64encode(hashlib.sha256(data).digest()).rstrip(b"=").decode()
+                            require(recorded_hash == expected and int(length) == len(data), "independent RECORD bytes")
+                            COUNTS["record_entries_verified"] += 1
+                    require(b"Generator: pdm-backend (2.5.0)" in data_by_name["fastapi-0.119.1.dist-info/WHEEL"], "backend version")
+                    raw_members["wheel"] = data_by_name
+            else:
+                with tarfile.open(fileobj=io.BytesIO(raw_archive)) as archive:
+                    raw_members["sdist"] = {item.name: archive.extractfile(item).read() for item in archive}
+        for name in set(raw_members["wheel"]) & set(MANIFEST):
+            require(hashlib.sha256(raw_members["wheel"][name]).hexdigest() == MANIFEST[name], "independent wheel raw source")
+        source_project = tomllib.loads(read(RAW / "canonical-source" / "pyproject.toml").decode())
+        source_project["project"]["dynamic"] = []
+        source_project["project"]["version"] = "0.119.1"
+        require(tomllib.loads(raw_members["sdist"]["fastapi-0.119.1/pyproject.toml"].decode()) == source_project, "own generated metadata content")
+        for name, data in raw_members["sdist"].items():
+            relative = name.split("/", 1)[1]
+            if relative in MANIFEST and relative != "pyproject.toml":
+                require(hashlib.sha256(data).hexdigest() == MANIFEST[relative], "independent raw sdist source")
+        if reference is not None:
+            require({kind: set(value) for kind, value in inventory.items()} == {kind: set(value) for kind, value in reference.items()}, "cross-row exact membership")
+            for kind, members in inventory.items():
+                for name, fields in members.items():
+                    for field, value in fields.items():
+                        if kind == "sdist" and name == "fastapi-0.119.1/pyproject.toml" and field in ("mtime", "pax_headers"):
+                            continue
+                        require(value == reference[kind][name][field], f"un-normalized header/content cross-row {kind}/{name}/{field}")
+        else:
+            reference = inventory
+        proof = load(folder / "generated-metadata-proof.json")
+        native = NATIVES[index]
+        start, end = native["start_ns"], native["end_ns"]
+        _, birth = contract.process_identity(load(folder / "ownership.json")["actual_process"], CONFIG["uv"], PLATFORM)
+        lower, upper = birth[0], birth[1] + end - start
+        member = inventory["sdist"]["fastapi-0.119.1/pyproject.toml"]
+        require(set(member["pax_headers"]) == {"mtime"}, "only exact generated mtime PAX")
+        timestamp = Decimal(member["pax_headers"]["mtime"])
+        require(timestamp.is_finite() and timestamp == Decimal(str(member["mtime"])), "raw PAX decimal/header value")
+        require(Decimal(lower) <= timestamp * 1_000_000_000 <= Decimal(upper), "independent platform birth/native window")
+        clock = "native_QPC_ns" if PLATFORM == "win32" else "native_monotonic_ns"
+        require(proof["UTC_window_ns"] == [lower, upper] and proof[clock] == [start, end] and proof["raw_header"] == member, "exact independent generated-time binding")
+        require(proof == screen.generated_metadata_proof(inventory, folder, platform=PLATFORM), "qualified generated proof revalidation")
+        for name, expected in proof["bindings"].items():
+            require(digest(folder / name) == expected, f"generated evidence raw binding {name}")
+            COUNTS["generated_time_evidence_bindings"] += 1
+        header_windows.append({"folder": row["folder"], "pax_mtime": member["pax_headers"]["mtime"], "raw_mtime": member["mtime"], "UTC_window_ns": [lower, upper]})
+        COUNTS["independent_generated_time_windows"] += 1
+        INVENTORIES[index] = inventory
+        ARCHIVE_BYTES[index] = raw_members
+    DETAILS["generated_default_timestamp_windows"] = header_windows
+    DETAILS["timestamp_policy"] = "No normalization; platform birth UTC plus held native duration, including only Darwin birth quantization."
+
+
+def source_outputs():
+    for index, row in enumerate(ROWS):
+        folder = RAW / row["folder"]
+        require(load(folder / "source-before.json") == MANIFEST, "row complete fresh source")
+        after = load(folder / "source-after.json")
+        require(after["tracked"] == MANIFEST, "all tracked source after")
+        generated = files_below(folder / "generated")
+        require(generated == after["retained_generated"], "retained generated complete set")
+        allowed = {".pdm-build/.gitignore", ".pdm-build/pyproject.toml", "__pycache__/pdm_build.cpython-313.pyc", "dist/.gitignore", "dist/fastapi-0.119.1.tar.gz", "dist/fastapi-0.119.1-py3-none-any.whl"}
+        require(set(after["outputs"]) == allowed and set(generated) == allowed - {name for name in allowed if name.startswith("dist/")}, "known exact output set")
+        require(read(folder / "generated" / ".pdm-build" / ".gitignore") == (b"*\r\n" if PLATFORM == "win32" else b"*\n"), "native PDM ignore")
+        require(read(folder / "dist.gitignore") == b"*", "UV dist ignore")
+        generated_project = read(folder / "generated" / ".pdm-build" / "pyproject.toml")
+        require(generated_project == ARCHIVE_BYTES[index]["sdist"]["fastapi-0.119.1/pyproject.toml"], "generated file/raw sdist binding")
+        for name, expected in generated.items():
+            require(after["outputs"][name] == expected, "generated output hash")
+        for name, item in load(folder / "dist-output.json").items():
+            retained = folder / item["retained"]
+            require(digest(retained) == item["sha256"] == after["outputs"]["dist/" + name] and metadata(retained)["size"] == item["bytes"], "retained dist output binding")
+        require(set(after["pyc_associations"]) == {"__pycache__/pdm_build.cpython-313.pyc"}, "source bytecode association coverage")
+        for cache, association in after["pyc_associations"].items():
+            raw = read(folder / association["retained"])
+            source = read(RAW / "canonical-source" / association["source"])
+            require(hashlib.sha256(source).hexdigest() == MANIFEST[association["source"]] == association["source_sha256"], "source pyc SHA binding")
+            require(hashlib.sha256(raw).hexdigest() == association["pyc_sha256"] == generated[cache], "retained source bytecode hash")
+            require(raw[:4].hex() == association["magic"] and struct.unpack_from("<III", raw, 4) == (0, association["source_mtime"] & 0xFFFFFFFF, association["source_bytes"]), "source bytecode raw header")
+            require(len(source) == association["source_bytes"], "source byte count")
+            code = decoded_code(raw)
+            filename = str(RAW / "canonical-source" / association["source"])
+            require(code.co_filename == filename, "source bytecode exact filename")
+            expected = compile(source, filename, "exec", dont_inherit=True, optimize=0)
+            require(code_key(code) == code_key(expected), "deep source bytecode equivalence")
+            COUNTS["source_pycs_deep_compiled"] += 1
+        COUNTS["source_before_after_pairs"] += 1
+    last = load(RAW / ROWS[-1]["folder"] / "source-after.json")
+    require(files_below(RAW / "canonical-source") == last["tracked"] | last["outputs"], "actual final source complete output inventory")
+
+
+def runtime_phase_seals():
+    require(INITIAL["root_bindings"] == {root: root for root in IDENTITY["runtime_roots"]}, "retained runtime root binding")
+    require(set(INITIAL["state"]["files"]) == {CONFIG["sdk_root"], CONFIG["venv_root"]}, "exact runtime roots")
+    require({root: {name: entry["sha256"] for name, entry in files.items()} for root, files in INITIAL["state"]["files"].items()} == INPUT_BEFORE["runtime"], "runtime initial hash inventory")
+    previous = INITIAL["state"]
+    summaries = []
+    for index, row in enumerate(ROWS):
+        folder = RAW / row["folder"]
+        before, after = load(folder / "runtime-before.json"), load(folder / "runtime-after.json")
+        require(before == previous, "full runtime/input before continuity")
+        state = after["state"]
+        if PLATFORM == "darwin":
+            require(state["links"] == previous["links"], "all phase link/target preservation")
+            prior_ancestors, ancestors = previous["ancestors"], state["ancestors"]
+            require(all(ancestors.get(path) == record for path, record in prior_ancestors.items()), "phase ancestor identity preservation")
+        require(state["inputs"] == previous["inputs"] == INPUT_AFTER, "phase nonruntime full equality")
+        associations = after["associations"]
+        observed_changes = {}
+        for root, prior in previous["files"].items():
+            current = state["files"][root]
+            require(prior.keys() <= current.keys(), "no runtime deletion")
+            changes = {name for name in current if prior.get(name) != current[name]}
+            allowed = {a["cache"] for a in associations if a["root"] == root}
+            require(changes == allowed, "all warmup runtime changes associated")
+            require(set(previous["directories"][root]) <= set(state["directories"][root]), "no runtime directory deletion")
+            new_dirs = set(state["directories"][root]) - set(previous["directories"][root])
+            require(new_dirs <= {Path(name).parent.as_posix() for name in allowed}, "only associated cache directories")
+            observed_changes[root] = len(changes)
+        if index >= 2:
+            require(before == state == FROZEN and associations == [], "each measured boundary exact WB full seal")
+        for association in associations:
+            root, source_name = association["root"], association["source"]
+            seal = association["source_seal"]
+            require(seal == previous["files"][root][source_name] == state["files"][root][source_name], "warmup source unchanged")
+            source = read(Path(root) / source_name)
+            require(hashlib.sha256(source).hexdigest() == seal["sha256"], "warmup source actual SHA")
+            raw = read(Path(association["raw_after"]))
+            require(hashlib.sha256(raw).hexdigest() == association["after"]["sha256"] == state["files"][root][association["cache"]]["sha256"], "warmup retained raw hash")
+            require(header_matches(raw, seal), "warmup valid timestamp header")
+            filename = str(Path(root) / source_name)
+            require(association["filename"] == filename and importlib.util.cache_from_source(filename, optimization="") == str(Path(root) / association["cache"]), "warmup filename/cache association")
+            require(code_key(decoded_code(raw)) == code_key(compile(source, filename, "exec", dont_inherit=True, optimize=0)), "warmup compile equivalence")
+            if association["before"] is not None:
+                prior = read(Path(association["raw_before"]))
+                require(hashlib.sha256(prior).hexdigest() == association["before"]["sha256"] and not header_matches(prior, seal), "replaced stale warmup input")
+            COUNTS["runtime_warmup_outputs_deep_compiled"] += 1
+        if index == 1:
+            require(state == FROZEN, "WB full seal")
+        previous = state
+        COUNTS["runtime_before_after_phases"] += 2
+        summaries.append({"folder": row["folder"], "associations": len(associations), "file_changes_by_root": observed_changes})
+    require(previous == FROZEN == FINAL and digest(RAW / "runtime-final.json") == RESULT["runtime_final_sha256"], "final full runtime seal")
+    DETAILS["runtime_phases"] = summaries
+    DETAILS["warmup_output_scope"] = "Zero associations is an observed zero, not omitted evidence or an unexecuted warmup; complete before/after inventories are compared."
+
+
+def initial_raw_caches():
+    expected = {(root, name) for root, files in INITIAL["state"]["files"].items() for name in files if name.lower().endswith(".pyc")}
+    actual = {(a["root"], a["cache"]) for a in INITIAL["cache_associations"]}
+    require(actual == expected and len(actual) == len(INITIAL["cache_associations"]), "all initial caches association coverage")
+    anomalies = []
+    mismatch_examples = []
+    filenames = collections.Counter()
+    for association in INITIAL["cache_associations"]:
+        root, source_name = association["root"], association["source"]
+        seal = association["source_seal"]
+        require(source_name is not None and seal is not None, f"missing initial cache source: {association}")
+        require(seal == INITIAL["state"]["files"][root][source_name] == FINAL["files"][root][source_name], "initial source metadata association")
+        source = read(Path(root) / source_name)
+        require(hashlib.sha256(source).hexdigest() == seal["sha256"] and len(source) == seal["size"], "initial actual source bytes")
+        require(importlib.util.source_from_cache(str(Path(root) / association["cache"])) == str(Path(root) / source_name), "initial canonical cache/source path")
+        raw = read(Path(association["raw"]))
+        require(hashlib.sha256(raw).hexdigest() == INITIAL["state"]["files"][root][association["cache"]]["sha256"], "initial retained cache hash")
+        require(struct.unpack_from("<I", raw, 4)[0] == 0, "initial default flags")
+        valid = header_matches(raw, seal)
+        COUNTS["initial_cache_header_current" if valid else "initial_cache_header_stale"] += 1
+        code = decoded_code(raw)
+        filename = code.co_filename
+        filenames["current_root" if filename == str(Path(root) / source_name) else "historical_root"] += 1
+        expected_code = compile(source, filename, "exec", dont_inherit=True, optimize=0)
+        equivalent = code_key(code) == code_key(expected_code)
+        if not equivalent:
+            anomalies.append({"cache": association["cache"], "source": source_name, "header_current": valid, "filename": filename})
+            if len(mismatch_examples) < 5:
+                mismatch_examples.append(anomalies[-1])
+        else:
+            COUNTS["initial_cache_code_equivalent"] += 1
+        COUNTS["initial_raw_caches_verified"] += 1
+    DETAILS["initial_cache_filename_provenance"] = dict(filenames)
+    DETAILS["initial_cache_code_anomalies"] = anomalies
+    DETAILS["initial_cache_policy"] = "Stale timestamp headers and historical co_filename paths are retained inputs, never relabelled valid build outputs. Exact source bytes are independently compiled using each retained co_filename; code objects are decoded but never executed."
+    DETAILS["code_equivalence_policy"] = "All code fields/nested constants compared; strings by value, not marshal process-local intern flags."
+    require(not anomalies, f"initial cache/source code mismatches: {len(anomalies)}; examples={mismatch_examples}")
+
+
+def runtime_evidence():
+    evidence = load(RAW / "runtime-evidence-seal.json")
+    expected = {"runtime-initial.json", "runtime-seal-after-WB.json", "runtime-final.json"}
+    expected.update(f"{row['folder']}/runtime-{phase}.json" for row in ROWS for phase in ("before", "after"))
+    expected.update(Path(a["raw"]).relative_to(RAW).as_posix() for a in INITIAL["cache_associations"])
+    for row in ROWS:
+        for association in load(RAW / row["folder"] / "runtime-after.json")["associations"]:
+            expected.add(Path(association["raw_after"]).relative_to(RAW).as_posix())
+            if association["raw_before"] is not None:
+                expected.add(Path(association["raw_before"]).relative_to(RAW).as_posix())
+    require(set(evidence) == expected, "runtime-evidence-seal complete exact entry closure")
+    for name, expected_digest in evidence.items():
+        relative = Path(name)
+        require(not relative.is_absolute() and ".." not in relative.parts, "unsafe evidence path")
+        require(digest(RAW / relative) == expected_digest, f"runtime evidence {name}")
+        COUNTS["runtime_evidence_exact_hashes"] += 1
+    retained = {path.relative_to(RAW).as_posix() for path in (RAW / "runtime-initial").rglob("*") if path.is_file()}
+    require(retained == {name for name in expected if name.startswith("runtime-initial/")}, "no omitted initial retained container files")
+
+
+def live_final_runtime():
+    if PLATFORM == "darwin":
+        contract.runtime_links(CONFIG, FINAL, read)
+        COUNTS["live_final_runtime_files"] = sum(map(len, FINAL["files"].values()))
+        return
+    total_bytes = sum(entry["size"] for files in FINAL["files"].values() for entry in files.values())
+    require(total_bytes < 500_000_000 and sum(map(len, FINAL["files"].values())) < 5000, "bounded declared live runtime read")
+    for root, files in FINAL["files"].items():
+        observed_files, observed_dirs = set(), set()
+        root_path = Path(root)
+        require(root_path.resolve(strict=True) == root_path and not root_path.is_symlink() and not root_path.is_junction(), "live exact runtime root")
+        for path in root_path.rglob("*"):
+            bounded()
+            require(not path.is_symlink() and not path.is_junction(), "live runtime link")
+            name = path.relative_to(root_path).as_posix()
+            if path.is_dir():
+                observed_dirs.add(name)
+                continue
+            observed_files.add(name)
+            require(name in files, f"unexpected live runtime file {name}")
+            seal = files[name]
+            require(metadata(path) == {key: value for key, value in seal.items() if key != "sha256"}, f"live final runtime full metadata {name}")
+            require(digest(path) == seal["sha256"], f"live final runtime content {name}")
+            COUNTS["live_final_runtime_files"] += 1
+        require(observed_files == set(files) and observed_dirs == set(FINAL["directories"][root]), "live final complete directory/file inventory")
+    DETAILS["bounded_live_runtime_bytes"] = total_bytes
+    DETAILS["live_runtime_scan"] = "One bounded exact declared SDK+venv final inventory/content/metadata scan; no old SDK rescan, no cache writes."
+
+
+def input_and_creation_seals():
+    require(INPUT_AFTER == {key: value for key, value in INPUT_BEFORE.items() if key != "runtime"} == FINAL["inputs"], "all nonruntime before/after/final exact")
+    expected = {
+        "python": digest(Path(CONFIG["sdk_root"]) / "bin" / "python3.13"
+                         if PLATFORM == "darwin" else Path(CONFIG["python"])),
+        "uv": digest(Path(CONFIG["uv"])),
+        "source_checkout": {name: digest(Path(CONFIG["source"]) / name) for name in MANIFEST},
+        "source_archive": digest(RAW / "source.tar"),
+        "source_manifest": digest(RAW / "source-manifest.json"),
+        "wheels": files_below(Path(CONFIG["wheels"])),
+        "sourcepins": digest(HELPERS / "SOURCEPINS.json"),
+        "configuration": canonical_hash(CONFIG),
+        "creation_receipt": digest(Path(CONFIG["creation_receipt"])),
+        "constraints": digest(RAW / "build-constraints.txt"),
+    }
+    require(expected == INPUT_AFTER, "all independently recomputed nonruntime input seals")
+    require(expected["source_checkout"] == MANIFEST and expected["creation_receipt"] == CONFIG["creation_receipt_sha256"], "source and creation receipt")
+    if CASE["profile"] != "LOCAL_WINDOWS_READINESS":
+        contract.creation(CASE, CONFIG, expected, read)
+        COUNTS["nonruntime_input_categories"] = len(expected)
+        return
+    require(expected["creation_receipt"] == CREATION, "exact local05 creation receipt")
+    require(read(RAW / "build-constraints.txt") == b"pdm-backend==2.5.0\n", "backend constraints bytes")
+    uv = load(RAW / "uv-identity.json")
+    require(uv["sha256"] == expected["uv"] == "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc", "exact qualified UV digest")
+    require(uv["executable"] == CONFIG["uv"] and uv["qualified_source_revision"] == "329bf9448afd9f9088d14a4d57fbc61eb454f117" and uv["qualified_version"] == "0.13.6" and not uv["version_observed"], "UV qualified not freshly invoked")
+    require(digest(HELPERS / uv["qualification_source"]) == uv["qualification_source_sha256"], "UV qualification source")
+    for executable in (CONFIG["uv"], CONFIG["python"], CONFIG["base_python"]):
+        data = read(Path(executable))
+        require(data[:2] == b"MZ", "PE signature")
+        offset = struct.unpack_from("<I", data, 60)[0]
+        require(data[offset:offset + 4] == b"PE\0\0" and struct.unpack_from("<H", data, offset + 4)[0] == 0xAA64, "native ARM64 static PE")
+    creation = load(Path(CONFIG["creation_receipt"]))
+    require(creation["python_request"] == creation["venv_requested_python_argument"] == "3.13.15" and creation["variant"] == "normal", "actual fresh05 patch request")
+    require(creation["publisher_digest_basis"] == "CATALOG_EXPECTATION_ONLY" and not creation["publisher_archive_freshly_verified"], "honest historical publisher provenance")
+    require(creation["publisher_sha256"] == CONFIG["publisher_sha256"], "publisher expectation binding")
+    require(all(creation[key] == CONFIG[key] for key in ("sdk_root", "venv_root", "base_python")), "fresh05 creation roots")
+    for name, expected_digest in creation["evidence_sha256"].items():
+        require(digest(PREP / name) == expected_digest, f"creation evidence {name}")
+        COUNTS["creation_evidence_hashes"] += 1
+    commands = load(PREP / "commands.json")
+    require(len(commands) == 3, "exact preparation observed commands")
+    for command in commands:
+        receipt_ok(command["owned_receipt"], "historical preparation")
+        require(command["succeeded"] is True, "historical preparation succeeded")
+        for stream in ("stdout", "stderr"):
+            require(digest(Path(command[stream + "_path"])) == command[stream + "_sha256"], "creation command raw streams")
+        COUNTS["historical_preparation_commands_verified_not_reexecuted"] += 1
+    require(commands[0]["argv"][1:3] == ["python", "find"] and commands[0]["argv"][3] == "3.13.15", "actual find request")
+    require(commands[1]["argv"][1] == "venv" and commands[1]["argv"][commands[1]["argv"].index("--python") + 1] == "3.13.15", "actual venv patch request")
+    require(read(Path(commands[0]["stdout_path"])).decode().strip() == CONFIG["base_python"], "actual find output")
+    observed = load(PREP / "runtime-observed.json")
+    require(observed == json.loads(read(Path(commands[2]["stdout_path"]))), "observed compiler/raw probe output")
+    require(observed["version"] == sys.version and observed["optimization"] == 0 and observed["isolated"] == 1 and observed["dont_write_bytecode"] and observed["bootstrap_environment"] == {}, "historical safety probe flags")
+    require(observed["cfg_sha256"] == digest(Path(CONFIG["venv_root"]) / "pyvenv.cfg") and observed["cfg_utf8"].encode() == read(PREP / "new-pyvenv.cfg"), "actual venv configuration")
+    copied = load(PREP / "copied-sdk-before.json")
+    require(copied == load(PREP / "copied-sdk-after.json"), "historical copied SDK creation seal")
+    source = load(PREP / "source-sdk-before.json")
+    require(source == load(PREP / "source-sdk-after.json"), "historical original SDK immutable snapshots")
+    require(load(PREP / "old-venv-before.json") == load(PREP / "old-venv-after.json"), "historical original venv immutable snapshots")
+    bindings = load(PREP / "original-bindings.json")
+    require(bindings["alias"] == load(PREP / "original-alias-after.json"), "historical original alias snapshot")
+    require(bindings["seal_sha256"] == creation["source_copy_origin"]["source_final_seal_sha256"], "historical original final seal reference")
+    require(set(source["files"]) == set(copied["files"]) and source["directories"] == copied["directories"], "historical copied full membership")
+    for name, seal in source["files"].items():
+        require(all(seal[key] == copied["files"][name][key] for key in ("sha256", "size", "mtime_ns")), "historical raw copy preserves bytes/size/mtime")
+    initial_sdk = INITIAL["state"]["files"][CONFIG["sdk_root"]]
+    initial_dirs = INITIAL["state"]["directories"][CONFIG["sdk_root"]]
+    require(len(initial_dirs) == len(set(initial_dirs)) == len(copied["directories"]) and set(initial_dirs) == set(copied["directories"]), "fresh05 SDK to initial complete directory membership")
+    require(set(initial_sdk) == set(copied["files"]), "fresh05 SDK to initial full file membership")
+    pre_initial_changes = {name for name in initial_sdk if initial_sdk[name] != copied["files"][name]}
+    require(pre_initial_changes == {"Lib/ctypes/__pycache__/wintypes.cpython-313.pyc", "Lib/encodings/__pycache__/cp437.cpython-313.pyc"}, "only two known wrapper pre-initial cache changes")
+    for association in INITIAL["cache_associations"]:
+        if association["cache"] in pre_initial_changes:
+            require(header_matches(read(Path(association["raw"])), association["source_seal"]), "known wrapper output current header")
+    new_venv = load(PREP / "new-venv-final.json")
+    require(new_venv["files"] == INITIAL["state"]["files"][CONFIG["venv_root"]] and new_venv["directories"] == INITIAL["state"]["directories"][CONFIG["venv_root"]], "fresh05 venv to initial exact metadata/content")
+    prep_seal = load(PREP / "HASH-MANIFEST.json")
+    require(len(prep_seal) == 41, "full retained preparation artifact seal")
+    for name, entry in prep_seal.items():
+        require(digest(PREP / name) == entry["sha256"] and metadata(PREP / name)["size"] == entry["bytes"], f"preparation full artifact seal {name}")
+        COUNTS["preparation_manifest_artifacts_verified"] += 1
+    DETAILS["fresh05_to_initial"] = {"SDK_files": len(initial_sdk), "SDK_directories": len(initial_dirs), "directory_serialization": "Exact membership; preparation uses string sort, runtime Path sort uses Windows case-insensitive ordering. All within-runtime phase lists remain compared exactly.", "new_venv_files": len(new_venv["files"]), "known_wrapper_cache_changes_before_initial": sorted(pre_initial_changes), "unchanged_old_inputs": "Historical full before/after snapshots only; not freshly rescanned or regraded"}
+    catalog = load(PREP / "publisher-catalog-expectation.json")
+    require(catalog["record"]["sha256"] == creation["publisher_sha256"] and digest(Path(catalog["catalog_path"])) == catalog["catalog_sha256"], "catalog expectation raw binding")
+    require(not catalog["raw_original_archive_available_to_this_preparation"], "no fresh archive claim")
+    COUNTS["nonruntime_input_categories"] = len(expected)
+    DETAILS["old_sdk_provenance"] = "Historical source-copy/creation snapshots and their raw bindings verified, not a fresh publisher-archive verification, old-SDK reread, regrade or correction of case03."
+
+
+def resets_and_row_evidence():
+    import screen
+
+    policy = {
+        "platform": "win32", "winerror": 32, "additional_filesystem_attempts": 3,
+        "delays_ms": [50, 100, 200], "maximum_planned_wait_ms": 350,
+        "budget_scope": "Per reset, shared across every onexc callback.",
+        "scope": "Only failing os.unlink/os.rmdir within the owned canonical-source; outside native clocks; no build/controller retry.",
+    }
+    require(PROTOCOL["question"]["source_reset_policy"] == policy, "exact bounded reset policy")
+    first_reset = load(RAW / ROWS[0]["folder"] / "source-reset.json")["started_ns"]
+    # The first reset follows setup and the first complete runtime-before scan.
+    # This upper-bounds remaining controller time without inventing a start QPC.
+    details = []
+    for index, row in enumerate(ROWS):
+        folder = RAW / row["folder"]
+        for field, name in screen.ROW_EVIDENCE:
+            require(digest(folder / name) == row[field + "_sha256"], f"exact raw row evidence {row['folder']}/{name}")
+            COUNTS["row_evidence_hash_bindings"] += 1
+        reset = load(folder / "source-reset.json")
+        native = NATIVES[index]
+        require(reset["policy"] == policy and reset["platform"] == PLATFORM and reset["path"] == PROTOCOL["cwd"], "reset owned scope")
+        require(reset["completed"] and reset["performed"] == (index != 0) and reset["previous_proved_rows"] == index, "reset phase completion")
+        require(reset["started_ns"] <= reset["ended_ns"] < native["start_ns"], "reset strictly outside native clock")
+        if index:
+            require(reset["started_ns"] > NATIVES[index - 1]["end_ns"], "previous command ended before reset")
+            require(reset["previous_ownership_sha256"] == digest(RAW / ROWS[index - 1]["folder"] / "ownership.json") and reset["previous_receipt_succeeded"], "reset previous receipt exact raw SHA")
+            receipt_ok(load(RAW / ROWS[index - 1]["folder"] / "ownership.json"), "reset prior receipt")
+        attempts = []
+        require(PLATFORM == "win32" or reset["events"] == [], "Darwin has no Windows lock retry actions")
+        for event in reset["events"]:
+            error = event["initial_error"]
+            path = Path(event["path"])
+            require(event["action"] in ("unlink", "rmdir") and error["winerror"] == 32 and error["type"] in ("PermissionError", "OSError"), "only known32 unlink/rmdir")
+            require(path.is_relative_to(Path(PROTOCOL["cwd"])) and ".." not in path.parts and error["filename"] == str(path), "exact reset failing owned path")
+            require(len(event["target_identity"]) == 2 and reset["started_ns"] <= event["at_ns"] <= reset["ended_ns"], "reset identity/event lifetime")
+            for attempt in event["attempts"]:
+                attempts.append(attempt)
+                number = len(attempts)
+                require(attempt["number"] == number <= 3 and attempt["delay_ms"] == [50, 100, 200][number - 1], "global three-action reset budget")
+                require(attempt["action_called"] and attempt["completed"] and "error" not in attempt, "observed successful retry action")
+                require(attempt["wait_end_ns"] - attempt["wait_start_ns"] == attempt["delay_monotonic_ns"] >= attempt["delay_ms"] * 1_000_000, "raw retry wait monotonic duration")
+                require(event["at_ns"] <= attempt["wait_start_ns"] < attempt["wait_end_ns"] <= attempt["action_start_ns"] <= attempt["action_end_ns"] <= reset["ended_ns"], "retry event time nesting")
+                conservative_remaining = CONFIG["seconds"] - RESULT["setup_seconds"] - (attempt["wait_start_ns"] - first_reset) / 1e9
+                require(conservative_remaining > 100 + attempt["delay_ms"] / 1000, "conservative T30+25+45 deadline reserve")
+                COUNTS["observed_extra_filesystem_actions"] += 1
+                COUNTS["observed_reset_planned_wait_ms"] += attempt["delay_ms"]
+        require(reset["extra_attempts"] == len(attempts) <= 3 and reset["planned_wait_ms"] == sum(a["delay_ms"] for a in attempts) <= 350, "per-reset global counts/wait bound")
+        require("terminal_error" not in reset, "no hidden terminal reset error")
+        COUNTS["source_reset_logs"] += 1
+        details.append({"folder": row["folder"], "events": reset["events"], "extra_attempts": reset["extra_attempts"], "planned_wait_ms": reset["planned_wait_ms"]})
+    # seal_rows is read-only: it hashes and compares every retained row seal.
+    screen.seal_rows(RAW, ROWS)
+    DETAILS["source_resets"] = details
+    DETAILS["reset_deadline_limit"] = "Exact absolute controller deadline QPC was not separately persisted. Source-pinned guards plus conservative first-reset/setup bound verify ample reserve for the observed retry; no exact unrecorded start time is invented."
+    DETAILS["reset_observation"] = {"extra_actions": COUNTS["observed_extra_filesystem_actions"], "planned_wait_ms": COUNTS["observed_reset_planned_wait_ms"], "build_retries": 0}
+
+
+def retained_immutability():
+    if PLATFORM == "darwin":
+        contract.runtime_link_metadata(CONFIG, FINAL)
+    for name, seal in list(READSET.items()):
+        bounded()
+        require(metadata(Path(name)) == {key: value for key, value in seal.items() if key != "sha256"}, f"read-only final metadata preservation: {name}")
+    COUNTS["read_files_final_metadata_unchanged"] = len(READSET)
+    for name, expected in PINS["files"].items():
+        require(digest(HELPERS / name) == expected, "helper changed while verifying")
+    contract.validate_case(Path(CASE["descriptor_path"]), read)
+
+
+def main():
+    groups = [
+        ("authority_sourcepin_and_exact_sdk", authority),
+        ("all8_schedule_actual_commands_native_identity_T30", schedule_commands_native),
+        ("outer_receipt_and_separate_noncomparative_clocks", outer),
+        ("all2557_raw_git_and_actual_source", git_sources),
+        ("all16_archives_full_headers_content_RECORD_and_default_timestamp", archives),
+        ("source_outputs_containers_and_deep_source_bytecode", source_outputs),
+        ("all16_runtime_phases_WB_and_final_seals", runtime_phase_seals),
+        ("all_initial_raw_cache_source_code_equivalence", initial_raw_caches),
+        ("runtime_evidence_every_entry_exact", runtime_evidence),
+        ("bounded_live_final_sdk_venv_metadata_content", live_final_runtime),
+        ("nonruntime_and_origin_specific_creation_provenance", input_and_creation_seals),
+        ("all8_source_reset_policy_prior_receipts_and_raw_row_seals", resets_and_row_evidence),
+        ("read_input_metadata_and_source_immutability", retained_immutability),
+    ]
+    for name, function in groups:
+        group(name, function)
+    failed = sum(value["status"] != "PASS" for value in GROUPS)
+    report = {
+        "status": "PASS" if failed == 0 else "PARTIAL_PROOF_NOT_PASS",
+        "scope": PINS["question"]["profiles"][CASE["profile"]]["classification"],
+        "case": CASE["descriptor_path"],
+        "groups_executed": len(GROUPS),
+        "groups_passed": len(GROUPS) - failed,
+        "groups_failed": failed,
+        "groups": GROUPS,
+        "counts": dict(COUNTS),
+        "details": DETAILS,
+        "verification_seconds": time.perf_counter() - STARTED,
+        "verifier_source": str(Path(__file__)),
+        "verifier_sha256": digest(Path(__file__)),
+        "source_pins_sha256": PIN,
+        "original_raw_root": str(RAW),
+        "captured_absolute_paths_rewritten": False,
+        "build_test_bootstrap_uv_commands_reexecuted": 0,
+        "workload_modules_executed_or_imported": 0,
+        "pycs_written": 0,
+        "writes_confined_to": str(OWN),
+        "case03": "UNCHANGED_FAILED_7_OF_8",
+        "confidence": {
+            "raw_evidence_integrity": "HIGH" if not failed else "MEDIUM",
+            "source_associations": "HIGH" if not failed else "LOW_UNTIL_FAILED_GROUPS_RESOLVED",
+            "historical_whole_environment_and_transient_process_state": "MEDIUM_SOURCE_BOUND_RECORDED_NOT_REPLAYED",
+            "publisher_archive_chain": "LOW_NOT_FRESHLY_VERIFIED",
+            "hosted_mac_physical_optimization_transfer": "UNQUALIFIED_NO_INFERENCE",
+        },
+        "coverage_gaps_and_uncertainty": [
+            "The complete launch environment was checked in producer memory but only a whitelist persisted. Source-bound rejection is verified; independently recovering every historical environment variable is impossible.",
+            "Held process/job natural drain is verified from mutually bound raw receipts, sidecars and source; exited historical handles cannot be independently reopened or replayed.",
+            "Reset controller absolute deadline QPC was not serialized. Source guards and conservative elapsed-time bounds verify reserve, not an invented exact deadline.",
+            "Publisher digest is a catalog expectation, not a freshly authenticated archive. Preparation origin is explicit in the case descriptor.",
+            "No continuously observed file-system trace: full retained phase inventories, current content/metadata and read stability do not prove absence of transient writes restored between snapshots.",
+            "No comparative, hardware, HOBL or optimization claim; historical case03 remains failed."
+        ],
+    }
+    save("COMMANDS.json", {
+        "verification": {"argv": [sys.executable, "-I", "-B", *sys.argv], "cwd": str(Path.cwd())},
+        "readonly_subprocesses": DETAILS.get("readonly_git_commands", []),
+        "stdout": str(OWN / "verifier.stdout"),
+        "stderr": str(OWN / "verifier.stderr"),
+        "maximum_program_seconds": 240,
+    })
+    save("READSET.json", READSET)
+    save("REPORT.json", report)
+    times = DETAILS.get("times_seconds", {})
+    summary = [
+        "# Independent three-profile retained-raw integrity",
+        "",
+        f"**{report['status']}** — {len(GROUPS) - failed}/{len(GROUPS)} executed groups passed.",
+        f"Scope: {report['scope']}. No cross-host gain inference.",
+        "",
+        "## Executed counts",
+        *[f"- {name}: {count}" for name, count in sorted(COUNTS.items())],
+        "",
+        "## Group outcomes",
+        *[f"- {value['status']}: {value['name']}" + (f" — {value['error']}" if value["status"] != "PASS" else "") for value in GROUPS],
+        "",
+        "## Separate clocks (seconds; no comparative claim)",
+        "```json", json.dumps(times, indent=2), "```",
+        "",
+        "## Observed reset behavior",
+        json.dumps(DETAILS.get("reset_observation", "No reset success inferred.")),
+        "",
+        "## Coverage / uncertainty",
+        *[f"- {value}" for value in report["coverage_gaps_and_uncertainty"]],
+        "",
+        "Exact executable verifier, command list, stdout/stderr, read-set hashes/full metadata and detailed evidence are retained alongside this report.",
+        f"Verifier SHA256: `{report['verifier_sha256']}`.",
+        "No build/test/bootstrap/uv reruns, workload execution/import, raw path rewrites, producer edits or pyc writes.",
+    ]
+    (OWN / "REPORT.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
+    print(json.dumps({"status": report["status"], "groups_passed": len(GROUPS) - failed, "groups_failed": failed, "counts": dict(COUNTS), "report": str(OWN / "REPORT.json")}), flush=True)
+    return 0 if failed == 0 else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

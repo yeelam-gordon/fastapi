@@ -7,3 +7,6 @@ round-2/** -text whitespace=-blank-at-eol,-blank-at-eof
 round-3/** -text whitespace=-blank-at-eol,-blank-at-eof
 filesystem/** -text whitespace=-blank-at-eol,-blank-at-eof
 frontends/** -text whitespace=-blank-at-eol,-blank-at-eof
+matched-build-reference-screen/** -text
+matched-build-reference-ci/** -text
+matched-build-reference-ci/PYTHON-LICENSE.txt whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

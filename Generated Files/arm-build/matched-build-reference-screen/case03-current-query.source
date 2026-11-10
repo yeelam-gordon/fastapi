@@ -1,0 +1,16 @@
+{
+  "scope": "ONE_EXACT_OWNED_FILE_CURRENT_QUERY",
+  "path": "C:\\fastapi-matched-reference-local03-20261110-output\\canonical-source\\docs\\pt\\docs\\index.md",
+  "exists": true,
+  "observed_unix": 1794303079.8329966,
+  "failure_instant_locker": "UNKNOWN",
+  "process_or_service_control": false,
+  "kernel_capture": false,
+  "start_status": 0,
+  "register_status": 0,
+  "first_list_status": 0,
+  "needed": 0,
+  "current_processes": [],
+  "current_list_complete": true,
+  "end_status": 0
+}

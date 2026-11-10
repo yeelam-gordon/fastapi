@@ -1,0 +1,85 @@
+{
+  "status": "FAILED_INCOMPLETE_CASE_NO_QUALIFICATION",
+  "observed_builds": 7,
+  "expected_builds": 8,
+  "excluded_warmups": 2,
+  "observed_measured_commands": 5,
+  "missing_measured_commands": 1,
+  "observations": [
+    {
+      "folder": "build-00-C",
+      "native_seconds": 4.998248,
+      "native_status": "COMPLETE",
+      "natural_owned_drain": true,
+      "raw_native_sha256": "106e77e91f0e8916df12d10fcf39548a849cdf597dd9cb12cb8526cf409df62f",
+      "ownership_sha256": "32b2eb000b4858d2d15060fa08b8c5b6782c5dee33c9b8d4464727fcee4b16c8",
+      "headers_present": true,
+      "runtime_after_present": true
+    },
+    {
+      "folder": "build-01-D",
+      "native_seconds": 4.2444712,
+      "native_status": "COMPLETE",
+      "natural_owned_drain": true,
+      "raw_native_sha256": "f38a722a61a32948234f05622178ef5103285de22640ffd9e4c87f46df2dbde5",
+      "ownership_sha256": "0b6010bfb71ebd86eed0361e52214a2e68c818ff60f167b5ffca16d583447b62",
+      "headers_present": true,
+      "runtime_after_present": true
+    },
+    {
+      "folder": "build-02-R",
+      "native_seconds": 4.1830045,
+      "native_status": "COMPLETE",
+      "natural_owned_drain": true,
+      "raw_native_sha256": "8d616a8b5aad8f1223e3ceef3532998aa2050dd202ac2fedcca49cb0d27b9e8b",
+      "ownership_sha256": "796ee1db3dac3156f9bdfdea67389cb07c3f6dbcb673485ca3e573f0c5d074e7",
+      "headers_present": true,
+      "runtime_after_present": true
+    },
+    {
+      "folder": "build-03-R",
+      "native_seconds": 4.5837494,
+      "native_status": "COMPLETE",
+      "natural_owned_drain": true,
+      "raw_native_sha256": "fd7a1fdd55f4d23c930662ca140564524e1ae8ec344791148b799ee56f19ba95",
+      "ownership_sha256": "b0cc37551b62e561e20a11c5e5e9f094f7017db0e12bd1bbda589f9ef5902b09",
+      "headers_present": true,
+      "runtime_after_present": true
+    },
+    {
+      "folder": "build-04-R",
+      "native_seconds": 4.5697471,
+      "native_status": "COMPLETE",
+      "natural_owned_drain": true,
+      "raw_native_sha256": "9e4c723f4ceb5c0ef6c144172921f9cbb422b1adc2ff0f95278e07df246a6762",
+      "ownership_sha256": "33ca56c51a6846b1049487a06775c4341c12c470d224fb9d6a804f4eed5ca3c8",
+      "headers_present": true,
+      "runtime_after_present": true
+    },
+    {
+      "folder": "build-05-R",
+      "native_seconds": 6.0040147,
+      "native_status": "COMPLETE",
+      "natural_owned_drain": true,
+      "raw_native_sha256": "5927b43a3354e82a0d1489b0f14fbfe5f74e6d12f9259ce5e7d19993996f0570",
+      "ownership_sha256": "b6c8c8ed33255f406753a6fbf9a60b247b4aed30ce84aac162f52a79a1d3da7a",
+      "headers_present": true,
+      "runtime_after_present": true
+    },
+    {
+      "folder": "build-06-R",
+      "native_seconds": 4.3244093,
+      "native_status": "COMPLETE",
+      "natural_owned_drain": true,
+      "raw_native_sha256": "94712beebcb160ebc9bac213aeb29f0bc7257849577108d3c8dca9bc0ba539ce",
+      "ownership_sha256": "68e4b5dbb761f3271dacee171350e6a50ab355901491eb057797bba515cab605",
+      "headers_present": true,
+      "runtime_after_present": true
+    }
+  ],
+  "failure_stage": "source cleanup before command8",
+  "failure_type": "WinError32 sharing violation",
+  "locker_at_failure": "UNKNOWN",
+  "performance_gain_claim": false,
+  "complete_final_seal": false
+}

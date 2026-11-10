@@ -1,0 +1,203 @@
+name: Matched native ARM build reference (separate allocation required)
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+
+jobs:
+  windows:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1' && github.event_name == 'workflow_dispatch'
+    runs-on: windows-11-arm
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Record job clock and CPU identity separately
+        timeout-minutes: 1
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $evidence = Join-Path $env:GITHUB_WORKSPACE 'matched-job-evidence'
+          New-Item -ItemType Directory -Path $evidence -ErrorAction Stop | Out-Null
+          "MATCHED_JOB_START_MS=$([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())" >> $env:GITHUB_ENV
+          @{
+            os = [Environment]::OSVersion.VersionString
+            architecture = [Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+            logical_processors = [Environment]::ProcessorCount
+            cpu = @(Get-CimInstance Win32_Processor | Select-Object Name, Manufacturer, NumberOfCores, NumberOfLogicalProcessors)
+            comparison = $false
+          } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $evidence 'cpu.json') -Encoding utf8
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+      - name: Check combined sources and separate parent authority
+        timeout-minutes: 1
+        run: |
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
+          & (Join-Path $helper 'Check-Release.ps1') *>&1 |
+            Tee-Object -FilePath (Join-Path $env:GITHUB_WORKSPACE 'matched-job-evidence\readiness.txt')
+      - name: Prepare only unused RAW NVMe as ordinary ReFS
+        id: storage
+        timeout-minutes: 1
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
+          $evidence = Join-Path $env:GITHUB_WORKSPACE 'matched-job-evidence'
+          . (Join-Path $helper 'HostedNvme.ps1')
+          @{ context = Get-NvmeContext; inventory = Get-NvmeInventory } |
+            ConvertTo-Json -Depth 10 -EnumsAsStrings |
+            Set-Content -LiteralPath (Join-Path $evidence 'storage-before.json') -Encoding utf8
+          $clock = [Diagnostics.Stopwatch]::StartNew()
+          $storage = & (Join-Path $helper 'Prepare-HostedNvme.ps1') -Provision
+          $storage | Add-Member -NotePropertyName preparation_seconds -NotePropertyValue $clock.Elapsed.TotalSeconds
+          $storage | ConvertTo-Json -Depth 8 |
+            Set-Content -LiteralPath (Join-Path $evidence 'storage.json') -Encoding utf8
+          if ($storage.BenchmarkEligible -ne $true -or $storage.Status -cne 'Prepared') {
+            'NONCOMPARISON: no eligible unused RAW NVMe; no cache fallback' |
+              Set-Content -LiteralPath (Join-Path $evidence 'NONCOMPARISON.txt') -Encoding utf8
+            'eligible=false' >> $env:GITHUB_OUTPUT
+            return
+          }
+          'eligible=true' >> $env:GITHUB_OUTPUT
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: steps.storage.outputs.eligible == 'true'
+        timeout-minutes: 1
+        with:
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: package-source
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        if: steps.storage.outputs.eligible == 'true'
+        timeout-minutes: 1
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        if: steps.storage.outputs.eligible == 'true'
+        id: controller
+        timeout-minutes: 1
+        with:
+          python-version: "3.13.15"
+          architecture: arm64
+      - name: Observe private SDK and unseeded patch-request venv
+        if: steps.storage.outputs.eligible == 'true'
+        timeout-minutes: 3
+        env:
+          CONTROLLER: ${{ steps.controller.outputs.python-path }}
+        run: |
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
+          & $env:CONTROLLER -I -B (Join-Path $helper 'deploy.py') stage --workspace $env:GITHUB_WORKSPACE --uv (Get-Command uv).Source
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: One default-I core then exact-target read-only raw verification
+        if: steps.storage.outputs.eligible == 'true'
+        timeout-minutes: 15
+        env:
+          CONTROLLER: ${{ steps.controller.outputs.python-path }}
+        run: |
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
+          & $env:CONTROLLER -I -B (Join-Path $helper 'deploy.py') run --workspace $env:GITHUB_WORKSPACE
+          exit $LASTEXITCODE
+      - name: Seal job clock and gate collection on actual drain
+        id: finish
+        if: always()
+        run: |
+          & (Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci\Finish-Job.ps1')
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: matched-reference-windows-full-raw
+          path: ${{ steps.finish.outputs.artifact-paths || 'matched-job-evidence' }}
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+
+  darwin:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1' && github.event_name == 'workflow_dispatch'
+    runs-on: macos-14
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Record job clock and CPU identity separately
+        timeout-minutes: 1
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $evidence = Join-Path $env:GITHUB_WORKSPACE 'matched-job-evidence'
+          New-Item -ItemType Directory -Path $evidence -ErrorAction Stop | Out-Null
+          "MATCHED_JOB_START_MS=$([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())" >> $env:GITHUB_ENV
+          @{
+            os = [Environment]::OSVersion.VersionString
+            architecture = [Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+            logical_processors = [Environment]::ProcessorCount
+            cpu = @(& sysctl -n machdep.cpu.brand_string hw.physicalcpu hw.logicalcpu)
+            comparison = $false
+          } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $evidence 'cpu.json') -Encoding utf8
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+      - name: Check combined sources and separate parent authority
+        timeout-minutes: 1
+        run: |
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
+          & (Join-Path $helper 'Check-Release.ps1') *>&1 |
+            Tee-Object -FilePath (Join-Path $env:GITHUB_WORKSPACE 'matched-job-evidence\readiness.txt')
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        timeout-minutes: 1
+        with:
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: package-source
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        timeout-minutes: 1
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        id: controller
+        timeout-minutes: 1
+        with:
+          python-version: "3.13.15"
+          architecture: arm64
+      - name: Observe private SDK and unseeded patch-request venv
+        timeout-minutes: 3
+        env:
+          CONTROLLER: ${{ steps.controller.outputs.python-path }}
+        run: |
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
+          & $env:CONTROLLER -I -B (Join-Path $helper 'deploy.py') stage --workspace $env:GITHUB_WORKSPACE --uv (Get-Command uv).Source
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - name: One default-I core then exact-target read-only raw verification
+        timeout-minutes: 15
+        env:
+          CONTROLLER: ${{ steps.controller.outputs.python-path }}
+        run: |
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
+          & $env:CONTROLLER -I -B (Join-Path $helper 'deploy.py') run --workspace $env:GITHUB_WORKSPACE
+          exit $LASTEXITCODE
+      - name: Seal job clock and gate collection on actual drain
+        id: finish
+        if: always()
+        run: |
+          & (Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci\Finish-Job.ps1')
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: matched-reference-darwin-full-raw
+          path: ${{ steps.finish.outputs.artifact-paths || 'matched-job-evidence' }}
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14

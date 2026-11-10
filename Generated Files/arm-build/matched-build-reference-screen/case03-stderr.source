@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "Q:\fastapi\Generated Files\arm-build\matched-build-reference-20261110\reference-prototype\reference.py", line 532, in <module>
+    main()
+    ~~~~^^
+  File "Q:\fastapi\Generated Files\arm-build\matched-build-reference-20261110\reference-prototype\reference.py", line 528, in main
+    run(shared.load(args.configuration), shared.load(args.admission), pin)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "Q:\fastapi\Generated Files\arm-build\matched-build-reference-20261110\reference-prototype\reference.py", line 462, in run
+    rows = shared.execute(
+        args, canonical, deadline, dict.fromkeys(("C", "D", "R"), env), argv, guard
+    )
+  File "Q:\fastapi\Generated Files\arm-build\matched-build-reference-20261110\reference-prototype\screen.py", line 602, in execute
+    shutil.rmtree(live)
+    ~~~~~~~~~~~~~^^^^^^
+  File "C:\fastapi-matched-reference-prep04-20261110\python\cpython-3.13.15-windows-aarch64-none\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "C:\fastapi-matched-reference-prep04-20261110\python\cpython-3.13.15-windows-aarch64-none\Lib\shutil.py", line 629, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\fastapi-matched-reference-prep04-20261110\python\cpython-3.13.15-windows-aarch64-none\Lib\shutil.py", line 625, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\fastapi-matched-reference-local03-20261110-output\\canonical-source\\docs\\pt\\docs\\index.md'

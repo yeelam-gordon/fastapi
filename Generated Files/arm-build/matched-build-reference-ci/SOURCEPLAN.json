@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "authority": "SOURCE_ONLY_NO_ALLOCATION",
+  "profiles": ["LOCAL_WINDOWS_READINESS", "HOSTED_WINDOWS_REFERENCE", "DARWIN_REFERENCE"],
+  "case_schema": 1,
+  "production_python": ["bootstrap.py", "prepare_backend.py", "deploy.py", "case_contract.py", "raw_checks.py", "verify_raw.py"],
+  "powershell": ["Check-Release.ps1", "HostedNvme.ps1", "Prepare-HostedNvme.ps1", "Verify-Storage.ps1", "Finish-Job.ps1"],
+  "workflows": [".github/workflows/arm-build-diagnostics.yml", ".github/workflows/matched-native-build-reference.yml"],
+  "source_manifest": "RELEASE.json",
+  "core_sourcepins_sha256": "29c9e239434dfcf1479c2767de26d6df1088e9bcd85a3989241af993540b86e6",
+  "frozen_verifier_sha256": "60a91039345826be0af10e4fb99f12a1bf710029c290073b23b4ba2181f993ec",
+  "runtime_limits": {
+    "prospective_jobs": 2, "job_minutes": 15, "preparation_seconds": 120,
+    "core_seconds_maximum": 540, "outer_extra_seconds": 25,
+    "verification_seconds_maximum": 240, "native_commands": 8,
+    "native_command_seconds": 30, "cleanup_reserve_seconds": 25,
+    "retries": 0
+  }
+}

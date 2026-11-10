@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "core": {
+    "source": "parent reference-prototype",
+    "files": "Exactly SOURCEPINS.files plus SOURCEPINS.json; no other directories or files",
+    "sourcepins_sha256": "29c9e239434dfcf1479c2767de26d6df1088e9bcd85a3989241af993540b86e6",
+    "byte_changes": 0
+  },
+  "unchanged_reuse": {
+    "HostedNvme.ps1": "base revision Generated Files/arm-build/hosted-nvme-refs-screen/HostedNvme.ps1",
+    "Prepare-HostedNvme.ps1": "base revision Generated Files/arm-build/hosted-nvme-refs-screen/Prepare-HostedNvme.ps1",
+    "prepare_backend.py": "base revision Generated Files/arm-build/hosted-nvme-refs-screen/prepare_backend.py",
+    "verify_readiness04.source": "parent integrity-local-readiness-04/verify_readiness04.py"
+  },
+  "verifier_source_sha256": "60a91039345826be0af10e4fb99f12a1bf710029c290073b23b4ba2181f993ec",
+  "raw_checks.py": "Ordinary parameterized reuse of the thirteen responsibilities in verify_readiness04.source, with fixed three-profile creation, identity/time, header/mode and runtime graph adaptations.",
+  "qualification_limit": "Source/unit plus permitted local Windows read-only raw replay only. Native hosted bootstrap and Darwin ABI/archive acceptance remain unobserved. Shipping authority stays false/zero jobs."
+}

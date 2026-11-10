@@ -1,0 +1,104 @@
+{
+  "artifact_gate.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\worktrees\\hosted-nvme-refs-20261110\\Generated Files\\arm-build\\hosted-nvme-refs-screen\\artifact_gate.py",
+    "origin_sha256": "7074e6697002d0e21bb131f551a932e9a6cf1a4ed946cb7bac03daecfa5033be"
+  },
+  "archive_headers.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\worktrees\\hosted-nvme-refs-20261110\\Generated Files\\arm-build\\hosted-nvme-refs-screen\\archive_headers.py",
+    "origin_sha256": "f02711558e43a0d2592c403ffba88d6f2690e8b1350ddd38a2da88f361865b0c"
+  },
+  "prepare_uv.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\worktrees\\hosted-nvme-refs-20261110\\Generated Files\\arm-build\\hosted-nvme-refs-screen\\prepare_uv.py",
+    "origin_sha256": "5bcf151447309807171760957df022c3ce240c7e8be96eca742bf4c5f3466163"
+  },
+  "build-constraints.txt": {
+    "origin": "Q:\\fastapi\\Generated Files\\worktrees\\hosted-nvme-refs-20261110\\Generated Files\\arm-build\\hosted-nvme-refs-screen\\build-constraints.txt",
+    "origin_sha256": "f729230cb9adc788c4a3a9096baf57735ec02c62033102622174d600fb1bc908"
+  },
+  "test_generated_metadata.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\worktrees\\hosted-nvme-refs-20261110\\Generated Files\\arm-build\\hosted-nvme-refs-screen\\test_generated_metadata.py",
+    "origin_sha256": "ea5b0dba4af48940843d46ac1412fb093d8ad1135f2fd1133205e04de8a0ccbf"
+  },
+  "owned_process.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\guardian-prototype\\owned_process.py",
+    "origin_sha256": "595e46cedfcd270ccc6b1dfc3337034595096f0f58e70188e844bfc0cffaa261"
+  },
+  "cli_identity.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\guardian-prototype\\cli_identity.py",
+    "origin_sha256": "16b1895a3b8234911877ad271324cece7e3b753c3d4d2cb2e58096360eb24d5f"
+  },
+  "darwin_identity.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\guardian-prototype\\darwin_identity.py",
+    "origin_sha256": "82529238c11da846f5f0c2baec6ca1c2442ba050f5ea9b2e30f29b4b0e48f1c1"
+  },
+  "test_guardian.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\guardian-prototype\\test_guardian.py",
+    "origin_sha256": "24cf9350c927e74cad0f2b12dad6629d825b3fe02d1e11c7b3bd16afc9e60b9f"
+  },
+  "test_darwin_identity.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\identity-prototype\\test_darwin_identity.py",
+    "origin_sha256": "fa3f9e7ad669cd1c86dff0332b5a3d5d726027201a0af3e9039c308e51330326"
+  },
+  "runtime_bytecode.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\runtime-prototype\\runtime_bytecode.py",
+    "origin_sha256": "a04b79a96b7e2daf5616fe4c8064c308f2eecb74a91a7ef099f22d7f84a0e889"
+  },
+  "runtime_links.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\runtime-prototype\\runtime_links.py",
+    "origin_sha256": "35a0d36eec99c9f68c42d001662bd58772112959d33db43a965d19a5c4575813"
+  },
+  "test_runtime_bytecode.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\runtime-prototype\\test_runtime_bytecode.py",
+    "origin_sha256": "068672605fa187db74569afb09109487030daa8d9d20e228c51cc2ce2df42635"
+  },
+  "test_runtime_links.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\runtime-prototype\\test_runtime_links.py",
+    "origin_sha256": "5d53169c7ecff698a4de27a42b8893ba4676fc12a12b886d1b0c9839da5fce61"
+  },
+  "metadata_time.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\metadata-prototype\\metadata_time.py",
+    "origin_sha256": "d586d421e0b5f7527ca75173ec9fee207918fcf827566ddd3d1b5e432ed8716f"
+  },
+  "test_metadata_time.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\metadata-prototype\\test_metadata_time.py",
+    "origin_sha256": "217764fa7a843a2f9f3b9c436095db0df19b1a58df519a1d1389837b9b1e0d00"
+  },
+  "screen.py": {
+    "origin": "Q:\\fastapi\\Generated Files\\worktrees\\hosted-nvme-refs-20261110\\Generated Files\\arm-build\\hosted-nvme-refs-screen\\screen.py",
+    "origin_sha256": "338c307d3e9692f9908459366a12b023c1ce2b081ab20752929a92f950fd3567",
+    "selection": "named collectors; obsolete main/parser/summarize/validate_paths/input_hashes/SUPPORT and CLI dispatch excluded"
+  },
+  "pdm-hooks-base.source": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\hobl-build-installer\\inputs\\A\\pdm_backend-2.5.0-py3-none-any.whl::pdm/backend/hooks/base.py",
+    "origin_sha256": "36c34abc6bd9e204a647d9b16c0edf37465865c37689afb216bd7d0aa6a9bc41",
+    "container_sha256": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63"
+  },
+  "source-review-01.source": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\SOURCE-REVIEW-01.md",
+    "origin_sha256": "5331fbf368c22c566d28a41120469cef5687189d4998e7f27c78ed5d3436436c"
+  },
+  "local-inputs.source": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\LOCAL-INPUTS-SOURCE.md",
+    "origin_sha256": "659fbd66a690cd8b0c2afca35a003658c08a7f5b0fed7a85c26383ffc070839a"
+  },
+  "mac-uv-identity.source": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\pipe-matched-ci-readiness\\ci-41972551771\\artifacts\\pipe-matched-source-readiness-macos\\matched-evidence\\uv-identity.json",
+    "origin_sha256": "d75d473b64279e41fb4191ec8e32cd59a61688dc2642e40ffb19e7d13c64ec98"
+  },
+  "case03-result.source": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\local-readiness-03\\RESULT.md",
+    "origin_sha256": "cc0b1dea88538f7b01d5939fcf4a7ccfd0891bdb1ffce8dcb2a559aa486210c7"
+  },
+  "case03-commands.source": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\local-readiness-03\\OBSERVED-COMMANDS.json",
+    "origin_sha256": "897f1213098647235841170a2691252be12f5f3f922bcd8383611582ce944580"
+  },
+  "case03-stderr.source": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\local-readiness-03\\controller.stderr",
+    "origin_sha256": "b22c7be384ae4f0fc203e3ba4e491136f2c5835c964f51047a601005a89055a6"
+  },
+  "case03-current-query.source": {
+    "origin": "Q:\\fastapi\\Generated Files\\arm-build\\matched-build-reference-20261110\\lock-diagnosis-01\\RESULT.json",
+    "origin_sha256": "ca0d72998b3c91a52a5f5cac3fc425bd559462545bf803195973172ebb5f5f38"
+  }
+}

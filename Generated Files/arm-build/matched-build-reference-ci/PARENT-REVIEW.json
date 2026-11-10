@@ -1,0 +1,14 @@
+{
+  "approved": true,
+  "maximum_jobs": 2,
+  "scope": "matched-native-build-reference",
+  "status": "SOURCE_READY_NATIVE_UNKNOWN",
+  "delegated_native_admission": true,
+  "expected_run_number": 46,
+  "issued_unix": 1794312671.99941,
+  "expires_unix": 1794314471.99941,
+  "prospective_jobs_only": 2,
+  "core_sourcepins_sha256": "29c9e239434dfcf1479c2767de26d6df1088e9bcd85a3989241af993540b86e6",
+  "native_admission_present": false,
+  "reason": "ONE parent allocation CI-ALLOCATION-01: fresh matched native reference; first hosted/Darwin qualification, no prior acceptance; attempt1 only, no retries."
+}

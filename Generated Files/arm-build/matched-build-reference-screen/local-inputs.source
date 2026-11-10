@@ -1,0 +1,67 @@
+# Local readiness inputs: read-only availability, not admission
+
+The assembled coordinator is under independent source review. No runtime was
+launched, copied, installed or changed; no local acquisition is approved here.
+
+## Files actually checked
+
+| Input | Existing path | Bytes | SHA256 |
+|---|---|---:|---|
+| Native uv | `Q:\fastapi\Generated Files\arm-build\tools\uv.exe` | 30531376 | `ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc` |
+| Offline stock backend | `Q:\fastapi\Generated Files\arm-build\pipe-matched-ci-readiness\controlled-full-01\wheels\pdm_backend-2.5.0-py3-none-any.whl` | 199650 | `5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63` |
+| Retained venv launcher | `C:\source-output-local-value02-20261110-1339\runtime\Scripts\python.exe` | 47104 | `ea0ba3548c9d9b0c01d7edcb9b0c3e83dda714d53bdff75510df33d2a0bad4ff` |
+
+These are current file existence/content checks, not a fresh interpreter
+version/ISA observation or a complete current SDK rescan. The uv/backend hashes
+match the previously qualified inputs; the launcher is not the whole SDK.
+
+The closed local-value02 `evidence\runtime-identity.json` records Python
+`3.13.15 (main, Sep 29 2026, 08:22:55) [MSC v.1944 64 bit (ARM64)]`,
+normal GIL/no JIT/default bytecode, 16 logical processors and affinity 65535.
+Those are historical observations, not newly executed metadata.
+
+## Real platform constraints
+
+Read-only Get-Volume currently reports C: NTFS `Windows` and Q: ReFS `DevVHD`;
+there is no D: volume in that result. Trust/filter state was not queried or
+changed. Do not format a volume, map Q: to D:, create a junction, or relabel
+local Q: evidence as hosted ordinary-ReFS NVMe evidence.
+
+The retained `runtime\pyvenv.cfg` names:
+
+```text
+home = C:\source-output-local-value02-20261110-1339\python\cpython-3.13-windows-aarch64-none
+uv = 0.13.6
+version_info = 3.13
+```
+
+Get-Item confirms that named SDK root is a **junction** to:
+`C:\source-output-local-value02-20261110-1339\python\cpython-3.13.15-windows-aarch64-none`.
+The original qualified guard preserved this declared-to-canonical association;
+it was not silently repaired or treated as an arbitrary link exemption.
+
+The new assembly's hosted C:/D: policy cannot simply be called a local Q:
+readiness run. Its root-alias rejection also cannot truthfully be satisfied by
+rewriting an existing venv's historical home or inventing a creation receipt.
+Source review must resolve the intended local-readiness contract explicitly.
+Source checkout audits are outside native execution; the actual extracted
+source/output/cwd placement must still be positively checked.
+
+## Preservation before any future local preparation
+
+The retained case02 SDK/venv belong to completed evidence. Do not reuse them
+as writable new workload inputs or mutate their configuration. Any future
+readiness plan needs separately owned runtime inputs, a real observed creation
+receipt and before/after associations. An isolated copy of the physical SDK
+could be investigated without changing original bytes; no copy or bootstrap
+has been authorized or performed here.
+
+The prior `LOCAL-VALUE-PLAN-02.json` is closed and grants no follow-up authority.
+Existing local cache/source gains are not new reference timing evidence.
+
+## Probe correction
+
+The first read-only hash probe had a PowerShell parse error from piping a
+`foreach` statement directly; no file probe executed. Assigning its result
+before piping produced the table above. This was not a failed build,
+acquisition, retry or regraded timing sample.

@@ -1,0 +1,141 @@
+{
+  "version": 3,
+  "question": {
+    "revision": "864b569cf8453654fc3bc2c64108c0f644e2918c",
+    "blobs": 2557,
+    "uv": "0.13.6",
+    "uv_source_revision": "329bf9448afd9f9088d14a4d57fbc61eb454f117",
+    "qualified_uv": {
+      "win32": {
+        "sha256": "ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc",
+        "qualification_source": "local-inputs.source"
+      },
+      "darwin": {
+        "sha256": "3996850e6d85e60b0142b40af4bd984822d65f736b52209921c47312450685cb",
+        "qualification_source": "mac-uv-identity.source"
+      }
+    },
+    "profiles": {
+      "HOSTED_WINDOWS_REFERENCE": {
+        "platform": "win32",
+        "checkout_drive": "C:",
+        "cache_drive": "D:",
+        "classification": "HOSTED_WINDOWS_REFERENCE"
+      },
+      "LOCAL_WINDOWS_READINESS": {
+        "platform": "win32",
+        "checkout_drive": "Q:",
+        "cache_drive": "Q:",
+        "classification": "LOCAL_READINESS_NONCOMPARATIVE"
+      },
+      "DARWIN_REFERENCE": {
+        "platform": "darwin",
+        "classification": "DARWIN_REFERENCE"
+      }
+    },
+    "local_scope": "LOCAL_READINESS_NONCOMPARATIVE; no hosted/Mac/gain claim",
+    "entry_prerequisites": "Target ISA/runtime/bootstrap only; coordinator/libproc/archive acceptance must be observed in WA/WB, not supplied as prior success.",
+    "python": "3.13.15 normal GIL/no JIT/default bytecode",
+    "backend": "PDM 2.5.0 pinned wheel",
+    "backend_wheel_sha256": "5b8746b567a16a1fd506ce66ee28e89d46374526f52238aa1b96cc2c08245c63",
+    "darwin_sdk_archive_sha256": "d66c67f16148c7454b1509c32747175f7669c8b8e105b97b92a0000d66af6e6e",
+    "darwin_sdk_archive_bytes": 25207202,
+    "runtime_profile": "separate declared SDK plus patch-request venv; no bare substitution",
+    "metadata_profile": "stock default timestamps; reject SOURCE_DATE_EPOCH; exact remaining headers",
+    "semantics": "isolated offline full sdist then wheel-from-sdist",
+    "schedule": [
+      [
+        "C",
+        false,
+        "WA"
+      ],
+      [
+        "D",
+        false,
+        "WB"
+      ],
+      [
+        "R",
+        true,
+        1
+      ],
+      [
+        "R",
+        true,
+        2
+      ],
+      [
+        "R",
+        true,
+        3
+      ],
+      [
+        "R",
+        true,
+        4
+      ],
+      [
+        "R",
+        true,
+        5
+      ],
+      [
+        "R",
+        true,
+        6
+      ]
+    ],
+    "max_build_commands": 8,
+    "controller_cap_seconds": 600,
+    "command_cap_seconds": 30,
+    "cleanup_reserve_seconds": 25,
+    "audit_reserve_seconds": 45,
+    "source_reset_policy": {
+      "platform": "win32",
+      "winerror": 32,
+      "additional_filesystem_attempts": 3,
+      "delays_ms": [
+        50,
+        100,
+        200
+      ],
+      "maximum_planned_wait_ms": 350,
+      "budget_scope": "Per reset, shared across every onexc callback.",
+      "scope": "Only failing os.unlink/os.rmdir within the owned canonical-source; outside native clocks; no build/controller retry."
+    },
+    "cache": "one fixed private cache under the explicit profile; no default/fallback",
+    "source": "fixed raw Git extraction cwd/output; Windows always C, separate audit checkout per profile; all rows retained; no tests"
+  },
+  "files": {
+    "archive_headers.py": "f02711558e43a0d2592c403ffba88d6f2690e8b1350ddd38a2da88f361865b0c",
+    "artifact_gate.py": "7074e6697002d0e21bb131f551a932e9a6cf1a4ed946cb7bac03daecfa5033be",
+    "build-constraints.txt": "f729230cb9adc788c4a3a9096baf57735ec02c62033102622174d600fb1bc908",
+    "case03-commands.source": "897f1213098647235841170a2691252be12f5f3f922bcd8383611582ce944580",
+    "case03-current-query.source": "ca0d72998b3c91a52a5f5cac3fc425bd559462545bf803195973172ebb5f5f38",
+    "case03-result.source": "cc0b1dea88538f7b01d5939fcf4a7ccfd0891bdb1ffce8dcb2a559aa486210c7",
+    "case03-stderr.source": "b22c7be384ae4f0fc203e3ba4e491136f2c5835c964f51047a601005a89055a6",
+    "cli_identity.py": "16b1895a3b8234911877ad271324cece7e3b753c3d4d2cb2e58096360eb24d5f",
+    "darwin_identity.py": "82529238c11da846f5f0c2baec6ca1c2442ba050f5ea9b2e30f29b4b0e48f1c1",
+    "local-inputs.source": "659fbd66a690cd8b0c2afca35a003658c08a7f5b0fed7a85c26383ffc070839a",
+    "mac-uv-identity.source": "d75d473b64279e41fb4191ec8e32cd59a61688dc2642e40ffb19e7d13c64ec98",
+    "metadata_time.py": "d586d421e0b5f7527ca75173ec9fee207918fcf827566ddd3d1b5e432ed8716f",
+    "ORIGINS.json": "187fd373910975a06f03aa62cf51614d7ed4601c07c378c9ac4af58c6831628f",
+    "owned_process.py": "595e46cedfcd270ccc6b1dfc3337034595096f0f58e70188e844bfc0cffaa261",
+    "pdm-hooks-base.source": "36c34abc6bd9e204a647d9b16c0edf37465865c37689afb216bd7d0aa6a9bc41",
+    "prepare_uv.py": "5bcf151447309807171760957df022c3ce240c7e8be96eca742bf4c5f3466163",
+    "reader-lifetimes-03.source": "7cf648ff71b3b743061b05bb39e27510eef9f52efaf47ab5f534ab749cc59ec4",
+    "reference.py": "08f811e2506f776621c6de0ed2073bc9f1f973b0fc3244694c4705bda0f41075",
+    "runtime_bytecode.py": "a04b79a96b7e2daf5616fe4c8064c308f2eecb74a91a7ef099f22d7f84a0e889",
+    "runtime_links.py": "35a0d36eec99c9f68c42d001662bd58772112959d33db43a965d19a5c4575813",
+    "screen.py": "77b6ec477ae9a5168f6a8f76405a16db20367d8ca17224240038889c9baec067",
+    "source-review-01.source": "5331fbf368c22c566d28a41120469cef5687189d4998e7f27c78ed5d3436436c",
+    "test_darwin_identity.py": "fa3f9e7ad669cd1c86dff0332b5a3d5d726027201a0af3e9039c308e51330326",
+    "test_generated_metadata.py": "ea5b0dba4af48940843d46ac1412fb093d8ad1135f2fd1133205e04de8a0ccbf",
+    "test_guardian.py": "24cf9350c927e74cad0f2b12dad6629d825b3fe02d1e11c7b3bd16afc9e60b9f",
+    "test_metadata_time.py": "217764fa7a843a2f9f3b9c436095db0df19b1a58df519a1d1389837b9b1e0d00",
+    "test_reference.py": "6c1cc155fb3f34f424322bc7e1439429374f331129a32ca4f33ddf7564e3aecc",
+    "test_runtime_bytecode.py": "068672605fa187db74569afb09109487030daa8d9d20e228c51cc2ce2df42635",
+    "test_runtime_links.py": "5d53169c7ecff698a4de27a42b8893ba4676fc12a12b886d1b0c9839da5fce61",
+    "test_source_reset.py": "5d104cdb4d40cab1cea9721ea7ca3052d28469d825c7a7be515516fa6d379f2c"
+  }
+}

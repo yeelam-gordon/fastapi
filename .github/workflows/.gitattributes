@@ -1,3 +1,4 @@
 .gitattributes -text
 arm-build-diagnostics.yml -text
 hosted-nvme-refs-build-screen.yml -text
+matched-native-build-reference.yml -text

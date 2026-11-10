@@ -1,0 +1,43 @@
+# Assembled reference: independent functional review 01
+
+**Needs work. Not admitted.** Reviewer:
+`71683d67-c2d0-40b9-bb74-7c1551ff6898`.
+High confidence in the concrete static findings; medium overall.
+No reviewer writes, commands, tests, workloads or CI occurred.
+
+Paths below are relative to `reference-prototype`.
+
+| Finding | Evidence | Consequence / minimum correction |
+|---|---|---|
+| REF-001: declared uv revision not enforced | `reference.py:26,283`; `prepare_uv.py:34-47` | Prefix `uv 0.13.6 ` accepts another revision/build. Recorded digest is not compared with an independently qualified expected digest. Bind exact platform binary/source identity and reject a same-version wrong-revision case |
+| REF-002: attestation processes outside finite budget | `reference.py:283`; `prepare_uv.py:24-39` | `lipo` and uv version subprocesses have no timeout, after the attempt is consumed. Eliminate unnecessary spawned attestation using qualified exact binaries/static headers, or bound remaining-time launches and owned cleanup |
+| REF-003: intended local layout cannot enter hosted-only policy | `reference.py:171-191` | Hosted C:/D: constraints are intentional, but Q: checkout/cache cannot perform local readiness through this entrypoint. A separately declared source-pinned local-readiness scope must not relax hosted policy or claim cross-host value |
+
+Parent read-only input evidence in `LOCAL-INPUTS-SOURCE.md` confirms C: NTFS
+and Q: ReFS, no D: volume, exact existing uv/backend hashes and the old
+venv's preserved minor-version SDK junction. Do not repair that old venv,
+format/remap storage, bypass admission or reuse retained SDKs as writable
+new workloads to make a source check pass.
+
+## Additional contract clarifications
+
+The creation receipt remains independently supplied and digest-bound. Requested
+paths do not establish observed creation. A real bootstrap producer and its
+qualification are still required; none was supplied by this source assembly.
+
+`native_platform_qualified=True` must mean independently established target
+ISA/runtime prerequisites, not already successful complete acquisition.
+Otherwise admission would circularly require the first warmup's outcome.
+Warmup/archive/ABI acceptance remains an observed outcome, never an input flag.
+
+No additional concrete blocker was established in the inspected schedule,
+archive/header/RECORD, source/runtime seal, raw CLI/sidecar, native lifetime,
+UTC arithmetic or source-pin closure. The review did not rerun or independently
+reproduce the reported 141 mock tests or source hashes.
+
+## Remaining native unknowns
+
+Actual Darwin libproc capture/drain, SDK/venv installation layout, filesystem/
+header behavior, clock continuity and acquisition/audit cost remain untested.
+The assembled Windows coordinator is also unexecuted. Source corrections and
+follow-up review are required before proposing any finite native readiness run.
