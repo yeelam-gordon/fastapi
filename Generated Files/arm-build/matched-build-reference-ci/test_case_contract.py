@@ -110,6 +110,33 @@ class ContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "schema"):
             contract.validate_case(self.root / "case.json", read)
 
+    def test_windows_producer_handoff_round_trips_with_recorded_platform(self):
+        with patch.object(bootstrap.sys, "platform", "win32"):
+            clean, handoff = bootstrap.handoff(
+                {
+                    "PATH": "system",
+                    "PYTHONLOCATION": "secret",
+                    "PYTHON_ROOT_DIR": "root",
+                }
+            )
+            self.assertEqual(clean, {"PATH": "system"})
+            contract.setup_location_handoff(handoff, "win32")
+            with self.assertRaisesRegex(ValueError, "known locations"):
+                contract.setup_location_handoff(handoff, "darwin")
+        for names, retained in (
+            (["PYTHONLOCATION", "PYTHONLOCATION"], False),
+            (["UV_INSECURE_HOST"], False),
+            (["SOURCE_DATE_EPOCH"], False),
+            (["PYTHONLOCATION"], True),
+        ):
+            rejected = {
+                "removed_location_variable_names": names,
+                "values_retained": retained,
+            }
+            with self.subTest(names=names, retained=retained):
+                with self.assertRaisesRegex(ValueError, "known locations"):
+                    contract.setup_location_handoff(rejected, "win32")
+
     def test_windows_manifest_members_are_native_portable_without_prefix_escape(self):
         member = contract.release_member(
             r"Generated Files\arm-build\matched-build-reference-ci\deploy.py"

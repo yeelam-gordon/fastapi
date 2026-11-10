@@ -42,7 +42,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(set(workflow["on"]), {"workflow_call"})
         self.assertEqual(workflow["permissions"], {"contents": "read"})
         self.assertEqual(set(workflow["jobs"]), {"windows", "darwin"})
-        for name, runner in (("windows", "windows-11-arm"), ("darwin", "macos-14")):
+        for name, runner in (("windows", "windows-11-arm"), ("darwin", "macos-15")):
             job = workflow["jobs"][name]
             self.assertEqual(job["runs-on"], runner)
             self.assertEqual(job["timeout-minutes"], "15")
@@ -60,6 +60,26 @@ class WorkflowTests(unittest.TestCase):
         self.assertNotRegex(
             source, r"(?i)continue-on-error|format-devdrive|workflow_run"
         )
+
+    def test_storage_logging_projects_scalars_before_unchanged_provisioning(self):
+        path = ROOT / ".github" / "workflows" / "matched-native-build-reference.yml"
+        workflow = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+        steps = workflow["jobs"]["windows"]["steps"]
+        storage = next(step for step in steps if step.get("id") == "storage")
+        self.assertEqual(storage["timeout-minutes"], "1")
+        source = storage["run"]
+        self.assertNotIn("ConvertTo-Json -Depth 10", source)
+        self.assertIn("ConvertTo-NvmeDiagnosticJson -Context (Get-NvmeContext)", source)
+        self.assertIn("$diagnostic.Json", source)
+        self.assertIn("$diagnostic.Utf8Bytes", source)
+        self.assertLess(
+            source.index("storage-before.json"),
+            source.index("'Prepare-HostedNvme.ps1') -Provision"),
+        )
+        helper = Path(__file__).resolve().parent / "Storage-Diagnostic.ps1"
+        text = helper.read_text()
+        self.assertIn("ConvertTo-Json -Depth 5 -Compress -WarningAction Stop", text)
+        self.assertIn("$bytes -gt 65536", text)
 
     def test_dispatcher_routes_scope_without_falling_into_full_workload(self):
         path = ROOT / ".github" / "workflows" / "arm-build-diagnostics.yml"
@@ -84,6 +104,8 @@ class WorkflowTests(unittest.TestCase):
         release = json.loads((here / "RELEASE.json").read_text())
         self.assertIs(review["approved"], False)
         self.assertEqual(review["maximum_jobs"], 0)
+        self.assertIsNone(review["expected_run_number"])
+        self.assertIs(review["delegated_native_admission"], False)
         self.assertIs(release["hosted_raw_verifier_ready"], True)
         gate = (here / "Check-Release.ps1").read_text()
         self.assertIn("throw 'NOTADMITTED: zero approved jobs'", gate)

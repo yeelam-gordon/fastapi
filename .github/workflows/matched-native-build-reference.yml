@@ -53,9 +53,10 @@ jobs:
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
           $evidence = Join-Path $env:GITHUB_WORKSPACE 'matched-job-evidence'
           . (Join-Path $helper 'HostedNvme.ps1')
-          @{ context = Get-NvmeContext; inventory = Get-NvmeInventory } |
-            ConvertTo-Json -Depth 10 -EnumsAsStrings |
-            Set-Content -LiteralPath (Join-Path $evidence 'storage-before.json') -Encoding utf8
+          . (Join-Path $helper 'Storage-Diagnostic.ps1')
+          $diagnostic = ConvertTo-NvmeDiagnosticJson -Context (Get-NvmeContext) -Inventory (Get-NvmeInventory)
+          [IO.File]::WriteAllText((Join-Path $evidence 'storage-before.json'), $diagnostic.Json, [Text.UTF8Encoding]::new($false))
+          Write-Host "storage-before: $($diagnostic.Utf8Bytes) UTF-8 bytes; scalar-only; JSON depth $($diagnostic.Depth)"
           $clock = [Diagnostics.Stopwatch]::StartNew()
           $storage = & (Join-Path $helper 'Prepare-HostedNvme.ps1') -Provision
           $storage | Add-Member -NotePropertyName preparation_seconds -NotePropertyValue $clock.Elapsed.TotalSeconds
@@ -123,7 +124,7 @@ jobs:
 
   darwin:
     if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1' && github.event_name == 'workflow_dispatch'
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 15
     defaults:
       run:

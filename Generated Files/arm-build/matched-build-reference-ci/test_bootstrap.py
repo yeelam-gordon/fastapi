@@ -89,6 +89,39 @@ class BootstrapTests(unittest.TestCase):
             },
         )
 
+    def test_windows_setup_locations_use_normalized_environment_names(self):
+        inherited = {
+            "PATH": "system",
+            "PYTHONLOCATION": "private-location",
+            "PYTHON_ROOT_DIR": "another-location",
+            "PYTHON3_ROOT_DIR": "third-location",
+        }
+        with patch.object(bootstrap.sys, "platform", "win32"):
+            env, record = bootstrap.handoff(inherited)
+        self.assertEqual(env, {"PATH": "system"})
+        self.assertEqual(
+            record["removed_location_variable_names"],
+            ["PYTHON3_ROOT_DIR", "PYTHONLOCATION", "PYTHON_ROOT_DIR"],
+        )
+        self.assertNotIn("private-location", json.dumps(record))
+        self.assertEqual(inherited["PYTHONLOCATION"], "private-location")
+
+    def test_darwin_setup_locations_remain_case_sensitive(self):
+        with patch.object(bootstrap.sys, "platform", "darwin"):
+            env, record = bootstrap.handoff(
+                {"PATH": "system", "pythonLocation": "private-location"}
+            )
+            self.assertEqual(env, {"PATH": "system"})
+            self.assertEqual(
+                record["removed_location_variable_names"], ["pythonLocation"]
+            )
+            for name in ("pythonlocation", "PYTHONLOCATION", "PYTHON_ROOT_DIR"):
+                with (
+                    self.subTest(name=name),
+                    self.assertRaisesRegex(ValueError, "Unknown"),
+                ):
+                    bootstrap.handoff({name: "do-not-use"})
+
     def test_unknown_overrides_are_fatal_not_stripped(self):
         for name in (
             "UV_CACHE_DIR",
@@ -101,7 +134,6 @@ class BootstrapTests(unittest.TestCase):
             "COV_CORE_SOURCE",
             "SOURCE_DATE_EPOCH",
             "PYTEST_ADDOPTS",
-            "pythonlocation",
         ):
             with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Unknown"):
                 bootstrap.handoff({name: "do-not-use"})

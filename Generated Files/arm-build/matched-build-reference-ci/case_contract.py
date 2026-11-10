@@ -278,6 +278,13 @@ def headers(inventory, target, tree, source):
             require(member["mtime"] == 0 and member["pax_headers"] == {}, "stock PKG-INFO timestamp")
 
 
+def setup_location_handoff(handoff, target):
+    removed = handoff["removed_location_variable_names"]
+    require(removed == sorted(set(removed))
+            and all(bootstrap.is_location_handoff(name, target) for name in removed)
+            and handoff["values_retained"] is False, "known locations only names handoff")
+
+
 def creation(case, config, inputs, read):
     root = Path(case["preparation_root"])
     receipt = decode(case["bindings"]["creation_receipt"]["path"], read)
@@ -338,9 +345,7 @@ def creation(case, config, inputs, read):
                 str(bootstrap.HERE / "prepare_backend.py"), "--output", config["wheels"]],
             "exact metadata-only probe/backend argv")
     handoff = decode(root / "setup-location-handoff.json", read)
-    removed = handoff["removed_location_variable_names"]
-    require(removed == sorted(set(removed)) and set(removed) <= bootstrap.LOCATION_HANDOFF
-            and handoff["values_retained"] is False, "known locations only names handoff")
+    setup_location_handoff(handoff, case["platform"])
     observed = decode(root / "runtime-observed.json", read)
     require(observed == json.loads(read(Path(commands[3]["stdout_path"])))
             and observed["version"] == sys.version, "actual compiler probe bytes")

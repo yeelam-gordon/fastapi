@@ -2,13 +2,13 @@
   "approved": true,
   "maximum_jobs": 2,
   "scope": "matched-native-build-reference",
-  "status": "SOURCE_READY_NATIVE_UNKNOWN",
+  "status": "ALLOCATION02_EXACT_RUN47_ONE_DISPATCH",
   "delegated_native_admission": true,
-  "expected_run_number": 46,
-  "issued_unix": 1794312671.99941,
-  "expires_unix": 1794314471.99941,
+  "expected_run_number": 47,
+  "issued_unix": 1794315351.7094455,
+  "expires_unix": 1794317151.7094455,
   "prospective_jobs_only": 2,
   "core_sourcepins_sha256": "29c9e239434dfcf1479c2767de26d6df1088e9bcd85a3989241af993540b86e6",
   "native_admission_present": false,
-  "reason": "ONE parent allocation CI-ALLOCATION-01: fresh matched native reference; first hosted/Darwin qualification, no prior acceptance; attempt1 only, no retries."
+  "reason": "Allocation01 remains spent. New allocation02: reviewed corrected source,35 source tests, bounded local scalar inventory proof; exactly run47,2 jobs,15min each,8 builds per host,no tests,retries or aggregation. RISK001/002 closed; native hosted/Mac acceptance remains unknown."
 }

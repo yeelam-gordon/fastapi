@@ -80,9 +80,17 @@ def save(path, value):
         stream.write("\n")
 
 
+def is_location_handoff(name, target):
+    if target == "win32":
+        return name.upper() in {allowed.upper() for allowed in LOCATION_HANDOFF}
+    return name in LOCATION_HANDOFF
+
+
 def handoff(inherited):
     """Only explicit setup locations cross this boundary, never arbitrary overrides."""
-    removed = sorted(name for name in inherited if name in LOCATION_HANDOFF)
+    removed = sorted(
+        name for name in inherited if is_location_handoff(name, sys.platform)
+    )
     clean = {name: value for name, value in inherited.items() if name not in removed}
     forbidden = sorted(
         name
@@ -134,7 +142,8 @@ def observe_runtime(observed, found, paths, target):
     require(
         observed["platform_tag"] == "win-arm64"
         if target == "win32"
-        else observed["platform_tag"].startswith("macosx-") and observed["platform_tag"].endswith("-arm64"),
+        else observed["platform_tag"].startswith("macosx-")
+        and observed["platform_tag"].endswith("-arm64"),
         "observed native ABI",
     )
     require(
@@ -301,7 +310,9 @@ def prepare(workspace, uv, inherited=None):
         UV_HTTP_RETRIES="0",
         UV_HTTP_TIMEOUT="20",
     )
-    preparation = Preparation(paths["evidence"], clean, 120 - (time.monotonic() - started))
+    preparation = Preparation(
+        paths["evidence"], clean, 120 - (time.monotonic() - started)
+    )
     try:
         install = [
             str(uv),

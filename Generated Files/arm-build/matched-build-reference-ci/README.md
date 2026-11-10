@@ -1,7 +1,8 @@
 # Matched native reference — source closure, native acceptance unknown
 
 Shipping authority is **false / zero jobs**. The manual fork registry routes
-exactly two conditional native jobs (`windows-11-arm`, `macos-14`, 15 minutes),
+exactly two conditional native jobs (`windows-11-arm`, explicit standard ARM64
+`macos-15`, 15 minutes),
 but both stop before setup unless a separate finite parent allocation names the
 one expected dispatcher run number, attempt 1 and delegated admission authority.
 No commit, push or dispatch is authorized by this source.
@@ -16,6 +17,11 @@ The qualified core's 30 files and SOURCEPINS remain byte-identical:
 1. The source/parent gate precedes all setup. Windows reuses unchanged guarded
    unused-RAW-NVMe ordinary-ReFS helpers, retaining pre-format inventory and
    identity. Ineligible storage is NONCOMPARISON, never cache fallback.
+   Diagnostic logging explicitly projects every gate-relevant context/disk/
+   partition/volume/drive field to primitive scalars, never whole CIM or
+   PSDrive/provider graphs. It fails on missing/complex/oversized fields,
+   limits rows/strings and JSON to depth 5 / 64 KiB, and logs UTF-8 byte size.
+   The provisioning helpers and all safety gates are unchanged.
 2. Immutable setup actions provide only the initial native controller and uv.
    Explicit known setup-location handoff logs removed names; all unknown
    UV/Python/pip/coverage/SDE overrides fail, not disappear.
@@ -68,3 +74,11 @@ source-bound receipts and snapshots do not prove absence of transient changes.
 Source/unit and local Windows raw replay qualification is not native Darwin
 ABI/archive/bootstrap acceptance. That remains the first admitted host outcome.
 No A/B, gain, floor, cohort comparison, tests/HOBL, seed, common82 or extra job.
+
+Run 42814333593/46 at c2f1c0a was terminal before SDK/bootstrap or any package
+build. Allocation01 is spent, not retryable. macos-14 was retired November 2,
+2026; the explicit macos-15 label is an availability correction, not native
+qualification. The Windows depth-10 warning and absent storage records
+localize unsafe graph serialization, but do not establish whether provisioning
+began. Shipping approval/delegation is false, jobs zero and run number null.
+Any future host acceptance requires separate review and new finite authority.
