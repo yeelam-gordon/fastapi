@@ -621,11 +621,15 @@ def validate_source_paths(args, live_roots, runtime_roots):
     require(sys.platform == "win32", "Windows-only source placement")
     require(set(live_roots) == {"C", "D"}, "exact source arm bindings required")
     control, candidate = live_roots["C"], live_roots["D"]
+    scope = getattr(args, "hosted_source_scope", None)
+    if scope is not None:
+        scope.verify(args, live_roots)
+    drive = "Q:" if scope is None else "D:"
     require(
         control.drive == "C:"
-        and candidate.drive == "Q:"
+        and candidate.drive == drive
         and str(control)[2:] == str(candidate)[2:],
-        "exact C/Q equal-suffix source roots required",
+        "exact C/Q or admitted hosted C/D equal-suffix source roots required",
     )
     require(runtime_roots, "complete runtime roots required")
     require(
@@ -644,9 +648,9 @@ def validate_source_paths(args, live_roots, runtime_roots):
     )
     require(
         args.control_cache == args.candidate_cache
-        and args.control_cache.drive == "Q:"
+        and args.control_cache.drive == drive
         and args.control_cache.is_dir(),
-        "one existing explicit Q cache required",
+        "one existing explicit Q or admitted hosted D cache required",
     )
     protected = [
         args.source,
@@ -726,6 +730,12 @@ def source_bytecode_filenames(live, proof):
         )
 
 
+def source_factor(live_roots, arm):
+    if live_roots["D"].drive == "D:":
+        return "HOSTED_C_SOURCE" if arm == "C" else "HOSTED_D_SOURCE"
+    return "LOCAL_C_SOURCE" if arm == "C" else "LOCAL_Q_SOURCE"
+
+
 def execute(
     args,
     canonical,
@@ -751,11 +761,7 @@ def execute(
             args.output / "canonical-source" if live_roots is None else live_roots[arm]
         )
         factor = (
-            "CACHE_PLACEMENT"
-            if live_roots is None
-            else "LOCAL_C_SOURCE"
-            if arm == "C"
-            else "LOCAL_Q_SOURCE"
+            "CACHE_PLACEMENT" if live_roots is None else source_factor(live_roots, arm)
         )
         if live_roots is not None:
             source_launch_contract(args, envs, argv)
@@ -994,7 +1000,13 @@ def input_hashes(args, runtime_roots, names):
     }
 
 
-def seal_rows(output, rows, *, live_roots=None):
+def seal_rows(output, rows, *, live_roots=None, retained_roots=None):
+    recorded_output = output
+    if retained_roots is not None:
+        require(live_roots is not None, "retention requires original root bindings")
+        recorded_output = Path(
+            load(output / rows[0]["folder"] / "command.json")["requested_launch_cwd"]
+        )
     require(
         live_roots is not None
         or all(
@@ -1051,14 +1063,15 @@ def seal_rows(output, rows, *, live_roots=None):
         final_rows = {output / "canonical-source": rows[-1]}
     else:
         require(set(live_roots) == {"C", "D"}, "exact source arm bindings required")
-        source_root_links(live_roots.values())
+        if retained_roots is None:
+            source_root_links(live_roots.values())
         final_rows = {}
         common_argv = load(output / rows[0]["folder"] / "command.json")["common_argv"]
         for row in rows:
             root = live_roots[row["arm"]]
             command_proof = load(output / row["folder"] / "command.json")
             native_proof = load(output / row["folder"] / "native.json")
-            factor = "LOCAL_C_SOURCE" if row["arm"] == "C" else "LOCAL_Q_SOURCE"
+            factor = source_factor(live_roots, row["arm"])
             require(
                 row["selected_source_root"]
                 == command_proof["selected_source_root"]
@@ -1067,7 +1080,7 @@ def seal_rows(output, rows, *, live_roots=None):
                 and row["requested_launch_cwd"]
                 == command_proof["requested_launch_cwd"]
                 == native_proof["requested_launch_cwd"]
-                == str(output)
+                == str(recorded_output)
                 and row["common_argv"] == command_proof["common_argv"] == common_argv
                 and row["placement_argument_indices"]
                 == command_proof["placement_argument_indices"]
@@ -1075,10 +1088,18 @@ def seal_rows(output, rows, *, live_roots=None):
                 "source arm root binding changed",
             )
             verify_source_selection(
-                common_argv, command_proof["argv"], root, command_proof["cwd"], output
+                common_argv,
+                command_proof["argv"],
+                root,
+                command_proof["cwd"],
+                recorded_output,
             )
             verify_source_selection(
-                common_argv, native_proof["argv"], root, native_proof["cwd"], output
+                common_argv,
+                native_proof["argv"],
+                root,
+                native_proof["cwd"],
+                recorded_output,
             )
             final_rows[root] = row
     for root, row in final_rows.items():
@@ -1087,14 +1108,50 @@ def seal_rows(output, rows, *, live_roots=None):
             require(
                 last["selected_source_root"] == str(root), "source proof root differs"
             )
+        payload = root
+        if retained_roots is not None:
+            require(live_roots is not None, "retention requires original root bindings")
+            arm = row["arm"]
+            binding = retained_roots[arm]
+            payload = output / "final-payloads" / arm
+            require(
+                binding
+                == {
+                    "original": str(root),
+                    "retained": str(recorded_output / "final-payloads" / arm),
+                },
+                "retained root binding differs",
+            )
+            source_root_links([payload])
         require(
-            manifest(root) == last["tracked"] | last["outputs"],
+            manifest(payload) == last["tracked"] | last["outputs"],
             "last payload changed after audit",
         )
 
 
-def main(args):
-    validate_paths(args)
+def retain_source_payloads(output, rows, live_roots):
+    seal_rows(output, rows, live_roots=live_roots)
+    bindings = {}
+    for arm, root in live_roots.items():
+        retained = output / "final-payloads" / arm
+        require(not retained.exists(), "fresh retained payload required")
+        shutil.copytree(root, retained, copy_function=shutil.copy2)
+        bindings[arm] = {"original": str(root), "retained": str(retained)}
+    seal_rows(output, rows, live_roots=live_roots, retained_roots=bindings)
+    save(output / "final-payload-bindings.json", bindings)
+    return bindings
+
+
+def main(args, *, live_roots=None):
+    if live_roots is None:
+        validate_paths(args)
+    else:
+        require(
+            getattr(args, "hosted_source_scope", None) is not None,
+            "hosted scope required",
+        )
+        validate_source_paths(args, live_roots, (args.python.parent.parent,))
+        require(not args.output.exists(), "fresh output required")
     require(math.isfinite(args.seconds) and 0 < args.seconds <= 600, "600s maximum")
     args.output.mkdir(parents=True)
     started = time.perf_counter()
@@ -1105,7 +1162,7 @@ def main(args):
             "qualified support identity",
         )
         volumes = {
-            arm: volume_identity(cache)
+            arm: volume_identity(cache if live_roots is None else live_roots[arm])
             for arm, cache in (("C", args.control_cache), ("D", args.candidate_cache))
         }
         save(args.output / "volumes.json", volumes)
@@ -1146,7 +1203,13 @@ def main(args):
             arm: environment(cache, inherited)
             for arm, cache in (("C", args.control_cache), ("D", args.candidate_cache))
         }
-        delta_proof = environment_delta(envs["C"], envs["D"])
+        if live_roots is None:
+            delta_proof = environment_delta(envs["C"], envs["D"])
+        else:
+            source_launch_contract(
+                args, envs, command(args, args.output / "build-constraints.txt")
+            )
+            delta_proof = {"changed_keys": [], "all_environment_values_equal": True}
         identity = subprocess.run(
             [str(args.python), str(HERE / "screen.py"), "--identity"],
             env=envs["C"],
@@ -1177,12 +1240,19 @@ def main(args):
             },
         )
         argv = command(args, constraints)
-        for cache in (args.control_cache, args.candidate_cache):
-            cache.mkdir(parents=True)
+        if live_roots is None:
+            for cache in (args.control_cache, args.candidate_cache):
+                cache.mkdir(parents=True)
         save(
             args.output / "protocol.json",
             {
                 "schedule": schedule(),
+                "factor": "CACHE_PLACEMENT"
+                if live_roots is None
+                else "HOSTED_SOURCE_DEFAULT_OUTPUT",
+                "source_roots": None
+                if live_roots is None
+                else {arm: str(root) for arm, root in live_roots.items()},
                 "argv": argv,
                 "environments": {
                     arm: environment_evidence(env) for arm, env in envs.items()
@@ -1191,6 +1261,11 @@ def main(args):
                 "arm_labels": {
                     "A": "C control private cache",
                     "B": "D ordinary ReFS NVMe cache",
+                }
+                if live_roots is None
+                else {
+                    "A": "C source/default output; common D cache",
+                    "B": "D source/default output; common D cache",
                 },
                 "source_policy": "Unmodified complete Git LF archive, 2557 files; no overlay.",
                 "source_revision": REVISION,
@@ -1212,7 +1287,9 @@ def main(args):
                 "generated_metadata_contract": "Only stock generated sdist pyproject mtime/PAX mtime may vary after independent held-UV UTC lifetime proofs; SOURCE_DATE_EPOCH absent; all other fields exact.",
                 "runtime_contract": "Future-only: positive bytecode-output audit during WA/WB; full runtime seal after WB; exact measured/final preservation.",
                 "limitations": [
-                    "C versus D cache placement only, same canonical C source/output/runtime.",
+                    "C versus D cache placement only, same canonical C source/output/runtime."
+                    if live_roots is None
+                    else "C versus D source/default output only; one D cache; common C runtime and cwd.",
                     "Parent must attest D unused NVMe ordinary ReFS and volume/cache factors.",
                     "No automatic trust/filter changes; no TEMP/HOME/workspace/global changes.",
                     "Warm-cache build-only; OS warmth not controlled; no HOBL/mode/Mac parity.",
@@ -1225,7 +1302,18 @@ def main(args):
             },
         )
         setup_seconds = time.perf_counter() - started
-        rows = execute(args, canonical, deadline, envs, argv, runtime_guard)
+        rows = execute(
+            args,
+            canonical,
+            deadline,
+            envs,
+            argv,
+            runtime_guard,
+            live_roots=live_roots,
+            runtime_roots=()
+            if live_roots is None
+            else tuple(runtime_guard.roots.values()),
+        )
         audit_started = time.perf_counter()
         after = input_hashes(args, runtime["runtime_roots"], names)
         save(args.output / "inputs-after.json", after)
@@ -1235,7 +1323,9 @@ def main(args):
             == {key: value for key, value in after.items() if key != "runtime"},
             "nonruntime UV/wheel/source/support mutated",
         )
-        seal_rows(args.output, rows)
+        seal_rows(args.output, rows, live_roots=live_roots)
+        if live_roots is not None:
+            retain_source_payloads(args.output, rows, live_roots)
         require(
             digest(constraints) == SUPPORT["build-constraints.txt"],
             "constraints changed",

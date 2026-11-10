@@ -1,7 +1,7 @@
 {
-  "approved": false,
-  "sourcepins_sha256": "b9716318685ad934723d2e9e54cec0d3c0e62f0ccd8447bb3bbd8c15a693b34a",
-  "scope": "LOCAL_SOURCE_OUTPUT_PROTOTYPE_ONLY_NO_EXECUTION",
-  "maximum_jobs": 0,
-  "status": "NEW_DISTINCT_FACTOR_PROTOTYPE_NO_CI_OR_NATIVE_AUTHORITY"
+  "approved": true,
+  "sourcepins_sha256": "d83025c687af64408748d8cb86d3172149c68c69b9affafd795e62bbd2ccdc9e",
+  "scope": "ONE_HOSTED_SOURCE_OUTPUT_SCREEN_COMMON_D_CACHE_ONLY",
+  "maximum_jobs": 1,
+  "status": "SOURCE_AND_LOCAL_VALUE_QUALIFIED_ONE_FORK_RUN_NO_RETRY"
 }

@@ -138,8 +138,8 @@ and out-dir path values may differ; all other argv positions remain identical.
 Arm D means **LOCAL_Q_SOURCE**, not hosted NVMe or a D: cache.
 
 The internal optional `execute(..., live_roots=..., runtime_roots=...)` binding
-has source-only path admission; the cache CLI, storage gates and CI route remain
-cache-only. No acquisition/controller is supplied. Every source command retains
+has source-only path admission; the default cache CLI and storage gates remain
+cache-only. Every source command retains
 the complete source/archive/runtime audits; source bytecode additionally requires
 exact code and selected-root filenames. Final sealing must be called with the same
 explicit roots, checks only the allowed argument values, common requested launch
@@ -154,3 +154,32 @@ Separate parent source review, finite allocation and a source-mode acquisition/
 finalization admission are still required. No local source gain, whole-job,
 Mac or physical-machine result is established. The prior qualified cache-only
 result is not evidence for this factor; original published evidence stays closed.
+
+## Prospective hosted source/default-output route — unapproved
+
+The manual `hosted-nvme-source-output-screen` choice calls the same single
+Windows ARM reusable job with `source-output: true`. Parent approval and the
+complete source-pin gate precede unchanged RAW-NVMe preparation. Approval is
+false and maximum jobs is zero: this source candidate grants no execution.
+Missing, occupied or ambiguous storage skips without a fallback.
+
+`hosted_source.py` is an explicit entrypoint sharing the cache driver's complete
+setup, schedule, native lifetime and audit implementation. `HostedSourceScope`
+requires actual hosted fork/Windows ARM/attempt-one context, the preparation
+receipt and a fresh D partition/device/filesystem binding. It allows only the
+receipt's private nonce C/D source suffix and one existing D cache. Default local
+C/Q admission does not accept D. Original checkout, runtime, uv, TEMP/TMP and
+common requested launch cwd remain C. Only explicit SRC/out-dir values differ.
+
+After all 14 commands and live final-root seals, exact final payloads for both
+arms are copied under C evidence `final-payloads/C` and `final-payloads/D`.
+`final-payload-bindings.json` records original-to-retained paths without rewriting
+any recorded source filename or byte. To audit offline, call `seal_rows` with
+the original `live_roots` and the saved bindings as `retained_roots`; all row,
+artifact and per-root final manifests are checked against the retained bytes.
+Copy/verification costs are included only in final audit/elapsed time, never
+native timing. The evidence directory may move for offline audit: pass its new
+location as `output`, retaining original root bindings and all recorded paths.
+
+Native/host acceptance, storage economics and matched Mac/physical transfer
+remain unproven. No tests, retry, parity or adoption is authorized by this route.

@@ -2,6 +2,10 @@ name: Hosted ARM ordinary-ReFS cache screen (fork only)
 
 on:
   workflow_call:
+    inputs:
+      source-output:
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -45,7 +49,7 @@ jobs:
           $pinsPath = Join-Path $helper 'SOURCEPINS.json'
           $review = Get-Content -Raw -LiteralPath (Join-Path $helper 'PARENT-REVIEW.json') | ConvertFrom-Json
           $digest = (Get-FileHash -LiteralPath $pinsPath -Algorithm SHA256).Hash.ToLowerInvariant()
-          if ($review.approved -ne $true -or $review.sourcepins_sha256 -ne $digest) {
+          if ($review.approved -ne $true -or $review.maximum_jobs -ne 1 -or $review.sourcepins_sha256 -ne $digest) {
             throw 'No reviewed one-shot storage allocation'
           }
           $pins = Get-Content -Raw -LiteralPath $pinsPath | ConvertFrom-Json
@@ -138,10 +142,19 @@ jobs:
           CANDIDATE_CACHE: ${{ steps.storage.outputs.candidate-cache }}
           TARGET_PYTHON: ${{ steps.runtime.outputs.python }}
           BACKEND_WHEELS: ${{ steps.runtime.outputs.wheels }}
+          SOURCE_OUTPUT: ${{ inputs.source-output }}
         run: |
           $ErrorActionPreference = 'Stop'
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\hosted-nvme-refs-screen'
-          & $env:TARGET_PYTHON -I -B (Join-Path $helper 'screen.py') --python $env:TARGET_PYTHON --uv (Get-Command uv).Source --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --control-cache $env:CONTROL_CACHE --candidate-cache $env:CANDIDATE_CACHE --wheels $env:BACKEND_WHEELS --output (Join-Path $env:GITHUB_WORKSPACE 'storage-evidence\builds') --seconds 600
+          $arguments = @('--python', $env:TARGET_PYTHON, '--uv', (Get-Command uv).Source, '--source', (Join-Path $env:GITHUB_WORKSPACE 'package-source'), '--wheels', $env:BACKEND_WHEELS, '--output', (Join-Path $env:GITHUB_WORKSPACE 'storage-evidence\builds'), '--seconds', '600')
+          if ($env:SOURCE_OUTPUT -eq 'true') {
+            $driver = Join-Path $helper 'hosted_source.py'
+            $arguments += @('--storage', (Join-Path $env:GITHUB_WORKSPACE 'storage-evidence\storage.json'))
+          } else {
+            $driver = Join-Path $helper 'screen.py'
+            $arguments += @('--control-cache', $env:CONTROL_CACHE, '--candidate-cache', $env:CANDIDATE_CACHE)
+          }
+          & $env:TARGET_PYTHON -I -B $driver @arguments
           exit $LASTEXITCODE
       - name: Record total elapsed separately
         if: always()

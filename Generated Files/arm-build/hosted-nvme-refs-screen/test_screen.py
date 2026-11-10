@@ -319,6 +319,30 @@ class DriverTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "last payload"):
                 screen.seal_rows(self.root, rows, live_roots=self.live_roots)
             path.write_bytes(original)
+        bindings = screen.retain_source_payloads(self.root, rows, self.live_roots)
+        for root in self.live_roots.values():
+            shutil.rmtree(root)
+        screen.seal_rows(
+            self.root, rows, live_roots=self.live_roots, retained_roots=bindings
+        )
+        for arm in ("C", "D"):
+            path = Path(bindings[arm]["retained"]) / "pyproject.toml"
+            original = path.read_bytes()
+            path.write_bytes(b"tampered retained payload")
+            with self.assertRaisesRegex(RuntimeError, "last payload"):
+                screen.seal_rows(
+                    self.root,
+                    rows,
+                    live_roots=self.live_roots,
+                    retained_roots=bindings,
+                )
+            path.write_bytes(original)
+        relocated = self.root.with_name(self.root.name + "-retained")
+        shutil.copytree(self.root, relocated)
+        self.addCleanup(shutil.rmtree, relocated)
+        screen.seal_rows(
+            relocated, rows, live_roots=self.live_roots, retained_roots=bindings
+        )
 
     def test_source_driver_rejects_wrong_requested_common_launch_cwd(self):
         self.live_roots = {"C": self.root / "local-C", "D": self.root / "local-Q"}
