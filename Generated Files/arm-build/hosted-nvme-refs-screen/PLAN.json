@@ -13,7 +13,14 @@
   "workspace_relocation_or_junction_allowed": false,
   "existing_volume_reformat_allowed": false,
   "native_local_formats_allowed": false,
-  "maximum_jobs": 1,
+  "maximum_jobs": 0,
+  "local_source_prototype": {
+    "status": "UNAPPROVED_SOURCE_TESTS_ONLY_NO_NATIVE_OR_CI",
+    "factor": "C/Q equal-suffix owned live source and explicit SRC/dist output; D label LOCAL_Q_SOURCE",
+    "fixed": "One existing explicit Q cache; C native Python/uv; exact full environment, common evidence-directory launch cwd and all argv except SRC and --out-dir value",
+    "admission": "Separate source review and finite parent allocation required; no source-mode controller or CI route",
+    "sealing": "Exact per-arm SRC/out-dir argument positions and requested common cwd; launch fields are not held-process observations; full source/archive/runtime gates; exact source pyc code/filenames; last payload per used root"
+  },
   "job_timeout_minutes": 15,
   "driver_seconds": 600,
   "headroom_refreeze": "Before any new hosted paired data: local06 passed3phases but conditional14th start414.8-427.1s exceeds old380s reserve cutoff. New600s envelope has500s cutoff. No failed run extended; native30/T25/14commands/6pairs/5% gates unchanged.",

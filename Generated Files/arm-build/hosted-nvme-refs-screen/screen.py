@@ -6,6 +6,7 @@ import dataclasses
 import hashlib
 import importlib.util
 import json
+import marshal
 import math
 import os
 import re
@@ -28,7 +29,7 @@ import owned_process  # noqa: E402
 from archive_headers import full_inventory, require_reference  # noqa: E402
 from artifact_gate import artifact_set  # noqa: E402
 from prepare_uv import attest  # noqa: E402
-from runtime_bytecode import RuntimeGuard  # noqa: E402
+from runtime_bytecode import RuntimeGuard, code_key  # noqa: E402
 
 REVISION = "864b569cf8453654fc3bc2c64108c0f644e2918c"
 WHEEL = "pdm_backend-2.5.0-py3-none-any.whl"
@@ -205,6 +206,7 @@ def runtime_identity():
 
 
 def run_native(argv, **kwargs):
+    """Combine held identity/clocks with requested (not observed) launch fields."""
     receipt = owned_process.run_owned(argv, **kwargs)
     observation = dict(receipt.actual_process or {})
     observation.update(
@@ -601,10 +603,176 @@ def summarize(rows):
     }
 
 
-def execute(args, canonical, deadline, envs, argv, runtime_guard):
+def source_root_links(paths):
+    for path in paths:
+        require(
+            path.is_absolute() and ".." not in path.parts,
+            "absolute owned paths required",
+        )
+        for ancestor in (path, *path.parents):
+            require(
+                not ancestor.is_symlink() and not ancestor.is_junction(),
+                "source placement reparse points forbidden",
+            )
+
+
+def validate_source_paths(args, live_roots, runtime_roots):
+    """Source-only admission checks; intentionally not exposed by the cache CLI."""
+    require(sys.platform == "win32", "Windows-only source placement")
+    require(set(live_roots) == {"C", "D"}, "exact source arm bindings required")
+    control, candidate = live_roots["C"], live_roots["D"]
+    require(
+        control.drive == "C:"
+        and candidate.drive == "Q:"
+        and str(control)[2:] == str(candidate)[2:],
+        "exact C/Q equal-suffix source roots required",
+    )
+    require(runtime_roots, "complete runtime roots required")
+    require(
+        all(
+            path.drive == "C:"
+            for path in (
+                args.source,
+                args.output,
+                args.python,
+                args.uv,
+                args.wheels,
+                *runtime_roots,
+            )
+        ),
+        "original/evidence/runtime must remain on C:",
+    )
+    require(
+        args.control_cache == args.candidate_cache
+        and args.control_cache.drive == "Q:"
+        and args.control_cache.is_dir(),
+        "one existing explicit Q cache required",
+    )
+    protected = [
+        args.source,
+        args.output,
+        args.python,
+        args.uv,
+        args.wheels,
+        args.control_cache,
+        *runtime_roots,
+    ]
+    source_root_links([control, candidate, *protected])
+    isolated = [args.source, args.output, args.wheels, args.control_cache]
+    for index, path in enumerate(isolated):
+        require(
+            all(
+                not path.is_relative_to(other) and not other.is_relative_to(path)
+                for other in [
+                    *isolated[index + 1 :],
+                    args.python,
+                    args.uv,
+                    *runtime_roots,
+                ]
+            ),
+            "original/evidence/runtime/cache paths must be disjoint",
+        )
+    for root in (control, candidate):
+        require(
+            all(
+                not root.is_relative_to(path) and not path.is_relative_to(root)
+                for path in protected
+            ),
+            "source roots must be disjoint from original/evidence/runtime/cache",
+        )
+        require(
+            not root.exists() and root.parent.is_dir(),
+            "fresh owned source roots with existing parents required",
+        )
+
+
+def source_launch_contract(args, envs, argv):
+    require(set(envs) == {"C", "D"}, "exact environment arm bindings required")
+    require(
+        envs["C"] == envs["D"], "source placement requires identical full environment"
+    )
+    require(
+        envs["C"].get("UV_CACHE_DIR") == str(args.control_cache),
+        "source placement requires common explicit cache",
+    )
+    require(
+        argv == command(args, args.output / "build-constraints.txt"),
+        "source placement requires identical base argv",
+    )
+
+
+def source_command(base_argv, root):
+    return [*base_argv, str(root), "--out-dir", str(root / "dist")]
+
+
+def verify_source_selection(base_argv, argv, root, requested_cwd, common_cwd):
+    require(
+        argv == source_command(base_argv, root)
+        and str(requested_cwd) == str(common_cwd),
+        "source selection differs from exact SRC/out-dir/common launch cwd",
+    )
+
+
+def source_bytecode_filenames(live, proof):
+    for name, association in proof["pyc_associations"].items():
+        original = live / association["source"]
+        actual = marshal.loads((live / name).read_bytes()[16:])
+        expected = compile(
+            original.read_bytes(), str(original), "exec", dont_inherit=True, optimize=0
+        )
+        require(
+            code_key(actual) == code_key(expected),
+            "source bytecode code/filename differs from actual arm root",
+        )
+
+
+def execute(
+    args,
+    canonical,
+    deadline,
+    envs,
+    argv,
+    runtime_guard,
+    *,
+    live_roots=None,
+    runtime_roots=(),
+):
+    if live_roots is not None:
+        live_roots = dict(live_roots)
+        require(
+            set(runtime_roots) == set(runtime_guard.roots.values()),
+            "source placement runtime guard roots differ",
+        )
+        validate_source_paths(args, live_roots, runtime_roots)
+        source_launch_contract(args, envs, argv)
     rows, reference, reference_folder = [], None, None
-    live = args.output / "canonical-source"
     for index, (arm, measured, pair) in enumerate(schedule()):
+        live = (
+            args.output / "canonical-source" if live_roots is None else live_roots[arm]
+        )
+        factor = (
+            "CACHE_PLACEMENT"
+            if live_roots is None
+            else "LOCAL_C_SOURCE"
+            if arm == "C"
+            else "LOCAL_Q_SOURCE"
+        )
+        if live_roots is not None:
+            source_launch_contract(args, envs, argv)
+            source_root_links([live, args.control_cache, *runtime_roots])
+        selected_argv = argv if live_roots is None else source_command(argv, live)
+        launch_cwd = live if live_roots is None else args.output
+        selection = (
+            {"actual_source_root": str(live)}
+            if live_roots is None
+            else {
+                "selected_source_root": str(live),
+                "requested_launch_cwd": str(launch_cwd),
+                "common_argv": argv,
+                "placement_argument_indices": [len(argv), len(argv) + 2],
+                "launch_evidence": "Requested argv/cwd/environment; not held-process observations",
+            }
+        )
         room(deadline, COMMAND_SECONDS + GUARDIAN_ALLOWANCE + AUDIT_RESERVE)
         folder = args.output / f"build-{index:02}-{arm}"
         folder.mkdir()
@@ -619,10 +787,12 @@ def execute(args, canonical, deadline, envs, argv, runtime_guard):
         save(
             spec,
             {
-                "argv": argv,
-                "cwd": str(live),
+                "argv": selected_argv,
+                "cwd": str(launch_cwd),
                 "environment": environment_evidence(envs[arm]),
                 "arm": arm,
+                "factor": factor,
+                **selection,
                 "measured": measured,
                 "pair": pair,
             },
@@ -630,8 +800,8 @@ def execute(args, canonical, deadline, envs, argv, runtime_guard):
         room(deadline, COMMAND_SECONDS + GUARDIAN_ALLOWANCE + AUDIT_RESERVE)
         started = time.perf_counter()
         receipt, native = run_native(
-            argv,
-            cwd=live,
+            selected_argv,
+            cwd=launch_cwd,
             env=envs[arm],
             stdout_path=folder / "stdout",
             stderr_path=folder / "stderr",
@@ -644,6 +814,14 @@ def execute(args, canonical, deadline, envs, argv, runtime_guard):
             {
                 **native,
                 "environment": environment_evidence(native["environment"]),
+                **(
+                    {
+                        "launch_evidence": selection["launch_evidence"],
+                        "requested_launch_cwd": str(launch_cwd),
+                    }
+                    if live_roots is not None
+                    else {}
+                ),
             },
         )
         require(receipt.succeeded, "fatal receipt; no next command or value")
@@ -652,11 +830,19 @@ def execute(args, canonical, deadline, envs, argv, runtime_guard):
             "native command incomplete",
         )
         require(
-            native["argv"] == argv
-            and native["cwd"] == str(live)
+            native["argv"] == selected_argv
+            and native["cwd"] == str(launch_cwd)
             and native["environment"] == envs[arm],
-            "actual CLI/environment differs",
+            (
+                "actual CLI/environment differs"
+                if live_roots is None
+                else "requested source launch fields differ"
+            ),
         )
+        if live_roots is not None:
+            verify_source_selection(
+                argv, native["argv"], live, native["cwd"], args.output
+            )
         require(
             native["birth_filetime"] > 0
             and native["pid"] > 0
@@ -678,6 +864,9 @@ def execute(args, canonical, deadline, envs, argv, runtime_guard):
             live, canonical, reference, folder, reference_folder
         )
         source_proof = source_after(live, canonical, inventory, folder)
+        if live_roots is not None:
+            source_bytecode_filenames(live, source_proof)
+            source_proof["selected_source_root"] = str(live)
         save(folder / "source-after.json", source_proof)
         require(
             all(
@@ -696,6 +885,8 @@ def execute(args, canonical, deadline, envs, argv, runtime_guard):
                 "index": index,
                 "folder": folder.name,
                 "arm": arm,
+                "factor": factor,
+                **selection,
                 "measured": measured,
                 "pair": pair,
                 "seconds": seconds,
@@ -803,7 +994,14 @@ def input_hashes(args, runtime_roots, names):
     }
 
 
-def seal_rows(output, rows):
+def seal_rows(output, rows, *, live_roots=None):
+    require(
+        live_roots is not None
+        or all(
+            row.get("factor", "CACHE_PLACEMENT") == "CACHE_PLACEMENT" for row in rows
+        ),
+        "source rows require explicit final root bindings",
+    )
     for row in rows:
         folder = output / row["folder"]
         for field, filename in (
@@ -849,12 +1047,50 @@ def seal_rows(output, rows):
             and digest(folder / "dist.gitignore") == ignore["sha256"],
             "retained UV ignore changed",
         )
-    last = load(output / rows[-1]["folder"] / "source-after.json")
-    remaining = last["tracked"] | last["outputs"]
-    require(
-        manifest(output / "canonical-source") == remaining,
-        "last payload changed after audit",
-    )
+    if live_roots is None:
+        final_rows = {output / "canonical-source": rows[-1]}
+    else:
+        require(set(live_roots) == {"C", "D"}, "exact source arm bindings required")
+        source_root_links(live_roots.values())
+        final_rows = {}
+        common_argv = load(output / rows[0]["folder"] / "command.json")["common_argv"]
+        for row in rows:
+            root = live_roots[row["arm"]]
+            command_proof = load(output / row["folder"] / "command.json")
+            native_proof = load(output / row["folder"] / "native.json")
+            factor = "LOCAL_C_SOURCE" if row["arm"] == "C" else "LOCAL_Q_SOURCE"
+            require(
+                row["selected_source_root"]
+                == command_proof["selected_source_root"]
+                == str(root)
+                and row["factor"] == command_proof["factor"] == factor
+                and row["requested_launch_cwd"]
+                == command_proof["requested_launch_cwd"]
+                == native_proof["requested_launch_cwd"]
+                == str(output)
+                and row["common_argv"] == command_proof["common_argv"] == common_argv
+                and row["placement_argument_indices"]
+                == command_proof["placement_argument_indices"]
+                == [len(common_argv), len(common_argv) + 2],
+                "source arm root binding changed",
+            )
+            verify_source_selection(
+                common_argv, command_proof["argv"], root, command_proof["cwd"], output
+            )
+            verify_source_selection(
+                common_argv, native_proof["argv"], root, native_proof["cwd"], output
+            )
+            final_rows[root] = row
+    for root, row in final_rows.items():
+        last = load(output / row["folder"] / "source-after.json")
+        if live_roots is not None:
+            require(
+                last["selected_source_root"] == str(root), "source proof root differs"
+            )
+        require(
+            manifest(root) == last["tracked"] | last["outputs"],
+            "last payload changed after audit",
+        )
 
 
 def main(args):

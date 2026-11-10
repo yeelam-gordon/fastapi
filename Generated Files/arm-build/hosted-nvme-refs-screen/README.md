@@ -1,5 +1,9 @@
 # Hosted ordinary-ReFS uv-cache comparison
 
+**Current authority is source/tests only: parent approval FALSE, maximum jobs 0.**
+The cache-only profile below is retained as a specification, not authorization.
+The distinct unapproved local source/default-output prototype is described below.
+
 This is a manual, owned-fork, **build-only** experiment motivated by
 [actions/runner-images#14878](https://github.com/actions/runner-images/issues/14878)
 and [Devolutions/IronRDP#2186](https://github.com/Devolutions/IronRDP/pull/2186).
@@ -123,3 +127,30 @@ hash and raw cache remains required; errors propagate. Ordered results preserve
 the complete records. Pools finish before the next native command. This only
 overlaps audit file-open latency outside the build timer; it does not parallelize
 or optimize the FastAPI build.
+# Local source/default-output placement prototype — unapproved
+
+Source/tests only; no native or CI admission, maximum jobs **0**. This distinct
+local factor uses fresh equal-suffix/length C:/Q: owned source roots with supported
+explicit `uv build SRC --out-dir SRC\dist` selection in both arms. One existing
+explicit Q: cache, C: native Python/uv, the complete environment (including TEMP/TMP),
+and launch cwd (the common evidence directory) are identical. Only the two SRC
+and out-dir path values may differ; all other argv positions remain identical.
+Arm D means **LOCAL_Q_SOURCE**, not hosted NVMe or a D: cache.
+
+The internal optional `execute(..., live_roots=..., runtime_roots=...)` binding
+has source-only path admission; the cache CLI, storage gates and CI route remain
+cache-only. No acquisition/controller is supplied. Every source command retains
+the complete source/archive/runtime audits; source bytecode additionally requires
+exact code and selected-root filenames. Final sealing must be called with the same
+explicit roots, checks only the allowed argument values, common requested launch
+cwd and every root's last payload. Launch argv/cwd/environment in the adapter's
+native record are requested values, not observations of the held UV process.
+The held receipt proves PID/image/birth/clocks and ownership, not actual UV cwd.
+A two-process standard-Python launcher test reports real argv/cwd/PID through the
+unchanged adapter/guardian boundary and rejects wrong source selection; it is
+neither a UV acceptance build nor performance evidence.
+
+Separate parent source review, finite allocation and a source-mode acquisition/
+finalization admission are still required. No local source gain, whole-job,
+Mac or physical-machine result is established. The prior qualified cache-only
+result is not evidence for this factor; original published evidence stays closed.

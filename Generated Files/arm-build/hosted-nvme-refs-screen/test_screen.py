@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import io
 import marshal
+import os
 import shutil
 import struct
 import subprocess
@@ -75,6 +76,8 @@ class DriverTests(unittest.TestCase):
         self.audit_impl = None
         self.source_after_impl = None
         self.runtime_guard = create_autospec(screen.RuntimeGuard, instance=True)
+        self.runtime_guard.roots = {"C:\\runtime": Path("C:\\runtime")}
+        self.live_roots = None
 
     def extract(self, archive, destination):
         destination.mkdir()
@@ -96,8 +99,8 @@ class DriverTests(unittest.TestCase):
         native = {
             "status": "COMPLETE",
             "returncode": 0,
-            "argv": self.argv,
-            "cwd": str(self.root / "canonical-source"),
+            "argv": argv,
+            "cwd": str(kwargs["cwd"]),
             "environment": self.envs[folder.name[-1]],
             **receipt.actual_process,
             "start_ns": 1,
@@ -146,6 +149,8 @@ class DriverTests(unittest.TestCase):
                     self.envs,
                     self.argv,
                     self.runtime_guard,
+                    live_roots=self.live_roots,
+                    runtime_roots=(Path("C:\\runtime"),),
                 )
                 return result, owned.call_count, audit.call_count
             finally:
@@ -166,6 +171,248 @@ class DriverTests(unittest.TestCase):
             self.run_driver(deadline=time.perf_counter() + 99)
         self.assertEqual(self.owned_calls, 0)
         self.assertEqual(self.audit_calls, 0)
+
+    def test_source_placement_requires_full_environment_cache_and_fixed_base_argv(self):
+        self.args.control_cache = self.args.candidate_cache = Path("Q:\\common\\cache")
+        common = {
+            "UV_CACHE_DIR": str(self.args.control_cache),
+            "TEMP": "C:\\temp",
+            "TMP": "C:\\temp",
+            "PRIVATE": "unchanged",
+        }
+        envs = {"C": dict(common), "D": dict(common)}
+        argv = screen.command(self.args, self.root / "build-constraints.txt")
+        screen.source_launch_contract(self.args, envs, argv)
+        for key in ("PRIVATE", "TEMP", "TMP", "UV_CACHE_DIR"):
+            with self.subTest(key=key):
+                changed = {"C": dict(common), "D": dict(common)}
+                changed["D"][key] += "-changed"
+                with self.assertRaisesRegex(RuntimeError, "identical full environment"):
+                    screen.source_launch_contract(self.args, changed, argv)
+        with self.assertRaisesRegex(RuntimeError, "identical base argv"):
+            screen.source_launch_contract(
+                self.args, envs, argv + ["--out-dir", "Q:\\dist"]
+            )
+        for env in envs.values():
+            env["UV_CACHE_DIR"] = "Q:\\wrong"
+        with self.assertRaisesRegex(RuntimeError, "common explicit cache"):
+            screen.source_launch_contract(self.args, envs, argv)
+        root = Path("C:\\owned\\source")
+        selected = screen.source_command(argv, root)
+        screen.verify_source_selection(argv, selected, root, self.root, self.root)
+        for index in (0, len(argv), len(argv) + 1, len(argv) + 2):
+            with self.subTest(argument_index=index):
+                wrong = list(selected)
+                wrong[index] += "-wrong"
+                with self.assertRaisesRegex(RuntimeError, "exact SRC/out-dir"):
+                    screen.verify_source_selection(
+                        argv, wrong, root, self.root, self.root
+                    )
+        with self.assertRaisesRegex(RuntimeError, "common launch cwd"):
+            screen.verify_source_selection(
+                argv, selected, root, self.root / "wrong", self.root
+            )
+
+    def test_source_path_admission_rejects_wrong_volume_suffix_overlap_and_links(self):
+        args = argparse.Namespace(
+            source=Path("C:\\original"),
+            output=Path("C:\\evidence"),
+            python=Path("C:\\runtime\\python.exe"),
+            uv=Path("C:\\tools\\uv.exe"),
+            wheels=Path("C:\\wheels"),
+            control_cache=Path("Q:\\cache"),
+            candidate_cache=Path("Q:\\cache"),
+        )
+        roots = {"C": Path("C:\\owned\\source"), "D": Path("Q:\\owned\\source")}
+        with (
+            patch.object(Path, "is_dir", return_value=True),
+            patch.object(Path, "exists", return_value=False),
+            patch.object(Path, "is_symlink", return_value=False),
+            patch.object(Path, "is_junction", return_value=False),
+        ):
+            screen.validate_source_paths(args, roots, (Path("C:\\runtime"),))
+            for candidate in (Path("C:\\owned\\source"), Path("Q:\\other\\source")):
+                with self.subTest(candidate=candidate):
+                    with self.assertRaisesRegex(RuntimeError, "equal-suffix"):
+                        screen.validate_source_paths(
+                            args, {**roots, "D": candidate}, (Path("C:\\runtime"),)
+                        )
+            args.source = roots["C"].parent
+            with self.assertRaisesRegex(RuntimeError, "disjoint"):
+                screen.validate_source_paths(args, roots, (Path("C:\\runtime"),))
+            args.source = Path("C:\\original")
+            for kind in ("is_symlink", "is_junction"):
+                with self.subTest(kind=kind):
+                    with patch.object(
+                        Path,
+                        kind,
+                        new=lambda path: path == roots["C"].parent,
+                    ):
+                        with self.assertRaisesRegex(RuntimeError, "reparse"):
+                            screen.validate_source_paths(
+                                args, roots, (Path("C:\\runtime"),)
+                            )
+
+    def test_source_driver_binds_explicit_placement_and_seals_both_last_payloads(self):
+        self.use_real_audit()
+        self.live_roots = {"C": self.root / "local-C", "D": self.root / "local-Q"}
+        self.args.control_cache = self.args.candidate_cache = self.root / "cache"
+        self.envs = {
+            arm: {"UV_CACHE_DIR": str(self.args.control_cache)} for arm in ("C", "D")
+        }
+        self.argv = screen.command(self.args, self.root / "build-constraints.txt")
+        self.extract = lambda archive, destination: self.packaging_fixture(destination)
+        with patch.object(screen, "validate_source_paths") as validation:
+            rows, calls, audits = self.run_driver()
+        validation.assert_called_once()
+        self.assertEqual((calls, audits), (14, 14))
+        screen.seal_rows(self.root, rows, live_roots=self.live_roots)
+        with self.assertRaisesRegex(RuntimeError, "explicit final root"):
+            screen.seal_rows(self.root, rows)
+        command_file = self.root / rows[0]["folder"] / "command.json"
+        original_command = command_file.read_bytes()
+        command_proof = screen.load(command_file)
+        command_proof["argv"][-1] = str(self.root / "wrong-dist")
+        screen.save(command_file, command_proof)
+        original_digest = rows[0]["command_sha256"]
+        rows[0]["command_sha256"] = screen.digest(command_file)
+        metadata_file = command_file.parent / "generated-metadata-proof.json"
+        original_metadata = metadata_file.read_bytes()
+        metadata = screen.load(metadata_file)
+        metadata["bindings"]["command.json"] = rows[0]["command_sha256"]
+        screen.save(metadata_file, metadata)
+        original_metadata_digest = rows[0]["generated_metadata_sha256"]
+        rows[0]["generated_metadata_sha256"] = screen.digest(metadata_file)
+        with self.assertRaisesRegex(RuntimeError, "exact SRC/out-dir"):
+            screen.seal_rows(self.root, rows, live_roots=self.live_roots)
+        command_file.write_bytes(original_command)
+        rows[0]["command_sha256"] = original_digest
+        metadata_file.write_bytes(original_metadata)
+        rows[0]["generated_metadata_sha256"] = original_metadata_digest
+        for row in rows:
+            self.assertEqual(
+                row["selected_source_root"], str(self.live_roots[row["arm"]])
+            )
+            proof = screen.load(self.root / row["folder"] / "command.json")
+            self.assertEqual(proof["requested_launch_cwd"], str(self.root))
+            self.assertEqual(
+                proof["argv"],
+                screen.source_command(self.argv, self.live_roots[row["arm"]]),
+            )
+            self.assertEqual(
+                row["factor"],
+                "LOCAL_C_SOURCE" if row["arm"] == "C" else "LOCAL_Q_SOURCE",
+            )
+        with self.assertRaisesRegex(RuntimeError, "root binding"):
+            screen.seal_rows(
+                self.root,
+                rows,
+                live_roots={
+                    "C": self.live_roots["D"],
+                    "D": self.live_roots["C"],
+                },
+            )
+        for root in self.live_roots.values():
+            path = root / "pyproject.toml"
+            original = path.read_bytes()
+            path.write_bytes(b"tampered last payload")
+            with self.assertRaisesRegex(RuntimeError, "last payload"):
+                screen.seal_rows(self.root, rows, live_roots=self.live_roots)
+            path.write_bytes(original)
+
+    def test_source_driver_rejects_wrong_requested_common_launch_cwd(self):
+        self.live_roots = {"C": self.root / "local-C", "D": self.root / "local-Q"}
+        self.args.control_cache = self.args.candidate_cache = self.root / "cache"
+        self.envs = {
+            arm: {"UV_CACHE_DIR": str(self.args.control_cache)} for arm in ("C", "D")
+        }
+        self.argv = screen.command(self.args, self.root / "build-constraints.txt")
+
+        def wrong_cwd(argv, **kwargs):
+            receipt, native = self.owned(argv, **kwargs)
+            native["cwd"] = str(self.live_roots["D"])
+            return receipt, native
+
+        with patch.object(screen, "validate_source_paths"):
+            with self.assertRaisesRegex(RuntimeError, "requested source launch fields"):
+                self.run_driver(native=wrong_cwd)
+        self.assertEqual((self.owned_calls, self.audit_calls), (1, 0))
+
+    def test_real_source_adapter_binds_helper_identity_and_rejects_wrong_selection(
+        self,
+    ):
+        helper = self.root / "launch_probe.py"
+        helper.write_text(
+            "import json, os, sys\n"
+            "print(json.dumps({'argv': sys.argv, 'cwd': os.getcwd(), 'pid': os.getpid()}))\n",
+            encoding="utf-8",
+        )
+        base = [sys.executable, "-I", "-B", str(helper)]
+        control, candidate = self.root / "control", self.root / "candidate"
+        control.mkdir()
+        candidate.mkdir()
+        selected = screen.source_command(base, control)
+        receipt, native = screen.run_native(
+            selected,
+            cwd=self.root,
+            env=dict(os.environ),
+            stdout_path=self.root / "probe-control.stdout",
+            stderr_path=self.root / "probe-control.stderr",
+            timeout=10,
+            native_clock=True,
+        )
+        self.assertTrue(receipt.succeeded, receipt)
+        observed = screen.load(self.root / "probe-control.stdout")
+        self.assertEqual(observed["pid"], receipt.actual_process["pid"])
+        self.assertEqual(observed["pid"], native["pid"])
+        self.assertEqual(Path(receipt.actual_process["image"]), Path(sys.executable))
+        screen.verify_source_selection(
+            [str(helper)], observed["argv"], control, observed["cwd"], self.root
+        )
+        self.assertEqual((self.root / "probe-control.stderr").read_bytes(), b"")
+
+        receipt, native = screen.run_native(
+            screen.source_command(base, candidate),
+            cwd=self.root,
+            env=dict(os.environ),
+            stdout_path=self.root / "probe-wrong.stdout",
+            stderr_path=self.root / "probe-wrong.stderr",
+            timeout=10,
+            native_clock=True,
+        )
+        self.assertTrue(receipt.succeeded, receipt)
+        observed = screen.load(self.root / "probe-wrong.stdout")
+        self.assertEqual(observed["pid"], receipt.actual_process["pid"])
+        self.assertEqual(observed["pid"], native["pid"])
+        self.assertEqual(Path(receipt.actual_process["image"]), Path(sys.executable))
+        with self.assertRaisesRegex(
+            RuntimeError, "exact SRC/out-dir/common launch cwd"
+        ):
+            screen.verify_source_selection(
+                [str(helper)], observed["argv"], control, observed["cwd"], self.root
+            )
+        self.assertEqual((self.root / "probe-wrong.stderr").read_bytes(), b"")
+
+    def test_source_bytecode_requires_actual_arm_filename(self):
+        source = self.root / "sample.py"
+        source.write_bytes(b"value = 42\n")
+        cache = self.root / "sample.pyc"
+        proof = {"pyc_associations": {"sample.pyc": {"source": "sample.py"}}}
+        cache.write_bytes(
+            b"\0" * 16
+            + marshal.dumps(compile(source.read_bytes(), str(source), "exec"))
+        )
+        screen.source_bytecode_filenames(self.root, proof)
+        cache.write_bytes(
+            b"\0" * 16
+            + marshal.dumps(
+                compile(
+                    source.read_bytes(), str(self.root / "other" / "sample.py"), "exec"
+                )
+            )
+        )
+        with self.assertRaisesRegex(RuntimeError, "actual arm root"):
+            screen.source_bytecode_filenames(self.root, proof)
 
     def test_header_failure_stops_actual_driver(self):
         with self.assertRaisesRegex(ValueError, "Full frozen"):
