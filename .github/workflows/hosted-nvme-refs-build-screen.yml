@@ -1,0 +1,168 @@
+name: Hosted ARM ordinary-ReFS cache screen (fork only)
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+env:
+  GIT_CONFIG_COUNT: "1"
+  GIT_CONFIG_KEY_0: core.autocrlf
+  GIT_CONFIG_VALUE_0: "false"
+
+jobs:
+  storage-build:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
+    runs-on: windows-11-arm
+    timeout-minutes: 12
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Record job clock
+        run: |
+          "STORAGE_JOB_STARTED=$([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds())" >> $env:GITHUB_ENV
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          path: tools
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/.gitattributes
+            /.github/workflows/.gitattributes
+            /.github/workflows/hosted-nvme-refs-build-screen.yml
+            /.github/workflows/arm-build-diagnostics.yml
+            /Generated Files/.gitattributes
+            /Generated Files/arm-build/.gitattributes
+            /Generated Files/arm-build/hosted-nvme-refs-screen/
+      - name: Verify reviewed experiment sources
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\hosted-nvme-refs-screen'
+          $pinsPath = Join-Path $helper 'SOURCEPINS.json'
+          $review = Get-Content -Raw -LiteralPath (Join-Path $helper 'PARENT-REVIEW.json') | ConvertFrom-Json
+          $digest = (Get-FileHash -LiteralPath $pinsPath -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($review.approved -ne $true -or $review.sourcepins_sha256 -ne $digest) {
+            throw 'No reviewed one-shot storage allocation'
+          }
+          $pins = Get-Content -Raw -LiteralPath $pinsPath | ConvertFrom-Json
+          foreach ($entry in $pins.files.PSObject.Properties) {
+            $path = Join-Path (Join-Path $env:GITHUB_WORKSPACE 'tools') $entry.Name
+            if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne $entry.Value) {
+              throw "Source hash mismatch: $($entry.Name)"
+            }
+          }
+      - name: Prepare unused NVMe as ordinary ReFS
+        id: storage
+        if: runner.os == 'Windows' && runner.arch == 'ARM64' && runner.environment == 'github-hosted'
+        timeout-minutes: 1
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\hosted-nvme-refs-screen'
+          $evidence = Join-Path $env:GITHUB_WORKSPACE 'storage-evidence'
+          New-Item -ItemType Directory -Path $evidence -ErrorAction Stop | Out-Null
+          $started = [Diagnostics.Stopwatch]::StartNew()
+          @{
+            os_version = [Environment]::OSVersion.VersionString
+            os_architecture = [Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+            disks = @(Get-Disk -ErrorAction Stop | Select-Object Number, BusType, PartitionStyle, NumberOfPartitions, Size, IsBoot, IsSystem, IsOffline, IsReadOnly)
+            partitions = @(Get-Partition -ErrorAction Stop | Select-Object DiskNumber, DriveLetter)
+            volumes = @(Get-Volume -ErrorAction Stop | Select-Object DriveLetter, FileSystem, Size, SizeRemaining)
+            drives = @(Get-PSDrive -PSProvider FileSystem -ErrorAction Stop | Select-Object Name)
+          } | ConvertTo-Json -Depth 6 -EnumsAsStrings | Set-Content -LiteralPath (Join-Path $evidence 'storage-before.json') -Encoding utf8
+          $storage = & (Join-Path $helper 'Prepare-HostedNvme.ps1') -Provision
+          $started.Stop()
+          $storage | Add-Member -NotePropertyName ProvisionSeconds -NotePropertyValue $started.Elapsed.TotalSeconds
+          $storage | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $evidence 'storage.json') -Encoding utf8
+          if ($storage.BenchmarkEligible -ne $true -or $storage.Status -ne 'Prepared') {
+            Write-Host "NO BENCHMARK: $($storage.Reason)"
+            "eligible=false" >> $env:GITHUB_OUTPUT
+            return
+          }
+          $candidate = Join-Path $storage.CacheDirectory 'build-screen'
+          $control = $candidate -replace '^D:', 'C:'
+          if ($control -eq $candidate -or (Test-Path -LiteralPath $control) -or (Test-Path -LiteralPath $candidate)) {
+            throw 'Fresh length-matched C: control cache required'
+          }
+          "eligible=true" >> $env:GITHUB_OUTPUT
+          "control-cache=$control" >> $env:GITHUB_OUTPUT
+          "candidate-cache=$candidate" >> $env:GITHUB_OUTPUT
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: steps.storage.outputs.eligible == 'true'
+        with:
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
+          path: package-source
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
+        if: steps.storage.outputs.eligible == 'true'
+        with:
+          version: "0.13.6"
+          enable-cache: "false"
+      - name: Prepare common native runtime and pinned backend
+        if: steps.storage.outputs.eligible == 'true'
+        id: runtime
+        timeout-minutes: 2
+        env:
+          UV_PYTHON_INSTALL_DIR: ${{ github.workspace }}\storage-python
+          UV_HTTP_RETRIES: "0"
+          UV_HTTP_TIMEOUT: "20"
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & uv python install 3.13.15 --install-dir $env:UV_PYTHON_INSTALL_DIR --no-bin --no-registry --no-config --no-progress
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $base = & uv python find 3.13.15 --managed-python --no-python-downloads --no-project --no-config --no-progress
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $expected = [IO.Path]::GetFullPath($env:UV_PYTHON_INSTALL_DIR) + [IO.Path]::DirectorySeparatorChar
+          if (-not ([IO.Path]::GetFullPath($base)).StartsWith($expected, [StringComparison]::OrdinalIgnoreCase)) {
+            throw 'Managed interpreter escaped private installation'
+          }
+          $runtime = Join-Path $env:GITHUB_WORKSPACE 'storage-runtime'
+          & uv venv $runtime --python $base --no-python-downloads --no-config
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $python = Join-Path $runtime 'Scripts\python.exe'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\hosted-nvme-refs-screen'
+          $wheels = Join-Path $env:GITHUB_WORKSPACE 'storage-wheels'
+          & $python -I -B (Join-Path $helper 'prepare_backend.py') --output $wheels
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          "python=$python" >> $env:GITHUB_OUTPUT
+          "wheels=$wheels" >> $env:GITHUB_OUTPUT
+      - name: Paired complete packaging only
+        if: steps.storage.outputs.eligible == 'true'
+        timeout-minutes: 8
+        env:
+          CONTROL_CACHE: ${{ steps.storage.outputs.control-cache }}
+          CANDIDATE_CACHE: ${{ steps.storage.outputs.candidate-cache }}
+          TARGET_PYTHON: ${{ steps.runtime.outputs.python }}
+          BACKEND_WHEELS: ${{ steps.runtime.outputs.wheels }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\hosted-nvme-refs-screen'
+          & $env:TARGET_PYTHON -I -B (Join-Path $helper 'screen.py') --python $env:TARGET_PYTHON --uv (Get-Command uv).Source --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --control-cache $env:CONTROL_CACHE --candidate-cache $env:CANDIDATE_CACHE --wheels $env:BACKEND_WHEELS --output (Join-Path $env:GITHUB_WORKSPACE 'storage-evidence\builds') --seconds 480
+          exit $LASTEXITCODE
+      - name: Record total elapsed separately
+        if: always()
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $evidence = Join-Path $env:GITHUB_WORKSPACE 'storage-evidence'
+          if (-not (Test-Path -LiteralPath $evidence)) {
+            New-Item -ItemType Directory -Path $evidence -ErrorAction Stop | Out-Null
+          }
+          @{
+            elapsed_seconds = ([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() - [long]$env:STORAGE_JOB_STARTED) / 1000
+            includes = 'checkout, provisioning, setup, interleaved controls and candidates, audits'
+            excludes = 'queue, this publication and later upload/post-job cleanup'
+            baseline_vs_candidate_job_comparison = $false
+          } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'job-elapsed.json') -Encoding utf8
+      - name: Preserve exact storage and build evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: hosted-arm-ordinary-refs-cache
+          path: storage-evidence
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14

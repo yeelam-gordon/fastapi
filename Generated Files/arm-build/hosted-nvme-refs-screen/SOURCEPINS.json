@@ -1,0 +1,30 @@
+{
+  "scope": "ONE_FORK_HOSTED_ORDINARY_REFS_BUILD_SCREEN",
+  "files": {
+    "Generated Files/arm-build/hosted-nvme-refs-screen/.gitattributes": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/.gitignore": "84276cb95458fbebbf18092a65b6a0fa2da8aa6719f5c95339a554e80756b16d",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/archive_headers.py": "f02711558e43a0d2592c403ffba88d6f2690e8b1350ddd38a2da88f361865b0c",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/artifact_gate.py": "7074e6697002d0e21bb131f551a932e9a6cf1a4ed946cb7bac03daecfa5033be",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/build-constraints.txt": "f729230cb9adc788c4a3a9096baf57735ec02c62033102622174d600fb1bc908",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/cli_identity.py": "16b1895a3b8234911877ad271324cece7e3b753c3d4d2cb2e58096360eb24d5f",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/HostedNvme.ps1": "d39a7fb3f7d44c13feb5c9b330f1bdcf72df443ecfaffa5d1ba5545144a14ac2",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/HostedNvme.Tests.ps1": "7dedc59863db1decd98ec99f25aac53c5a725dbc4b2d7a3497721786d595dc6a",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/owned_process.py": "b20031881f39fb25b5da67c0bbd5e5fccbcd44630106958aa44caab629251530",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/PLAN.json": "ccc57c46817d985ae40ec4bf518ea656c837a7f0a62afb784d6c1a38a99860ff",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/Prepare-HostedNvme.ps1": "742f53c877aee436128e092a9bc493ac279cb8458e1154eba5e4d509746306a9",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/prepare_backend.py": "1bc99407c22cb59b682bf8bc4a74c3cec5cf9098f62b41483640128843f80225",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/prepare_uv.py": "5bcf151447309807171760957df022c3ce240c7e8be96eca742bf4c5f3466163",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/README.md": "21c544447b39c1fbbeaea832b6c04c7ee8640d6978d4e762b9561588fce65407",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/screen.py": "e31afa4ee590684b2a2a2f0c80b8b7da022a1226f9414ad0e919aa3534562ffe",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/test_prepare_backend.py": "a0531152c574e44f4f78226a1034f1e8d8225cf8a52d9d80b726714d742c0c76",
+    "Generated Files/arm-build/hosted-nvme-refs-screen/test_screen.py": "83b91f1ef1ba0630e074d996c5e5e6c2c3cb9f8a38e46002474fecec69152f71",
+    ".github/workflows/arm-build-diagnostics.yml": "e785b7bb9919ef77ab2fc1947dbe8f3ee5c7f0c48cf4b9298725eb32f528805a",
+    ".github/workflows/hosted-nvme-refs-build-screen.yml": "f914280c635913fa60649319a0d1aedc021e5fccf4d75030bc7a361db76fcd80",
+    ".github/workflows/.gitattributes": "ff22e1e76947f93b8eafbc745865c54ae89a5a9247f7417a48b887dd2e260513"
+  },
+  "exclusions": [
+    "SOURCEPINS.json self-reference",
+    "PARENT-REVIEW.json independently binds this manifest SHA",
+    "ignored local Python bytecode/test scratch; not committed experiment sources"
+  ]
+}

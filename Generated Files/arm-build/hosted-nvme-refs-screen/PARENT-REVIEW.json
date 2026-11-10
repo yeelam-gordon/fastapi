@@ -1,0 +1,7 @@
+{
+  "approved": true,
+  "sourcepins_sha256": "3b56dfa333e6aa33d08c20519b6c1f1c45bee7a238ed94ad02937802ed51ac0e",
+  "scope": "ONE_HOSTED_ORDINARY_REFS_CACHE_BUILD_SCREEN_ONLY",
+  "maximum_jobs": 1,
+  "status": "SOURCE_READY_ONE_RUN_NATIVE_QUALIFICATION_REQUIRED"
+}
