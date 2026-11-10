@@ -8,6 +8,7 @@ import importlib.util
 import json
 import math
 import os
+import re
 import shutil
 import statistics
 import struct
@@ -16,6 +17,8 @@ import sys
 import sysconfig
 import tarfile
 import time
+from concurrent.futures import ThreadPoolExecutor
+from decimal import Decimal
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -25,6 +28,7 @@ import owned_process  # noqa: E402
 from archive_headers import full_inventory, require_reference  # noqa: E402
 from artifact_gate import artifact_set  # noqa: E402
 from prepare_uv import attest  # noqa: E402
+from runtime_bytecode import RuntimeGuard  # noqa: E402
 
 REVISION = "864b569cf8453654fc3bc2c64108c0f644e2918c"
 WHEEL = "pdm_backend-2.5.0-py3-none-any.whl"
@@ -40,6 +44,11 @@ SUPPORT = {
 COMMAND_SECONDS = 30
 GUARDIAN_ALLOWANCE = 25
 AUDIT_RESERVE = 45
+GENERATED_PYPROJECT = "fastapi-0.119.1/pyproject.toml"
+FILETIME_EPOCH = 116444736000000000
+SETUP_UV_LOCATIONS = frozenset(
+    {"UV_PYTHON_INSTALL_DIR", "UV_TOOL_BIN_DIR", "UV_TOOL_DIR"}
+)
 
 
 def require(condition, message):
@@ -81,13 +90,27 @@ def command(args, constraints):
     ]
 
 
+def setup_uv_handoff(inherited):
+    removed = sorted(name for name in inherited if name.upper() in SETUP_UV_LOCATIONS)
+    return (
+        {name: value for name, value in inherited.items() if name not in removed},
+        {
+            "removed_location_variables": removed,
+            "reason": "Builds use an explicit installed Python with downloads disabled; no uv tool commands.",
+        },
+    )
+
+
 def environment(cache, inherited=None):
     env = dict(os.environ if inherited is None else inherited)
     forbidden = [
         name
         for name in env
-        if name.upper().startswith(
-            ("UV_", "PYTHON", "PYTEST", "PIP_", "COVERAGE", "COV_CORE")
+        if (
+            name.upper().startswith(
+                ("UV_", "PYTHON", "PYTEST", "PIP_", "COVERAGE", "COV_CORE")
+            )
+            or name.upper() == "SOURCE_DATE_EPOCH"
         )
         and name.upper() != "UV_CACHE_DIR"
     ]
@@ -107,7 +130,12 @@ def environment_delta(control, candidate):
 
 
 def environment_evidence(env):
+    require(
+        not any(name.upper() == "SOURCE_DATE_EPOCH" for name in env),
+        "unsupported ambient metadata override: SOURCE_DATE_EPOCH",
+    )
     return {
+        "metadata_profile": {"SOURCE_DATE_EPOCH": "absent"},
         "values": {
             key: env[key] for key in ("UV_CACHE_DIR", "TEMP", "TMP") if key in env
         },
@@ -230,15 +258,24 @@ def verify_git_payload(root, tree):
         )
 
 
+def manifest_entry(path, root):
+    require(not path.is_symlink() and not path.is_junction(), "payload reparse point")
+    return (path.relative_to(root).as_posix(), digest(path)) if path.is_file() else None
+
+
 def manifest(root):
-    result = {}
-    for path in sorted(root.rglob("*")):
-        require(
-            not path.is_symlink() and not path.is_junction(), "payload reparse point"
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        entries = pool.map(
+            lambda path: manifest_entry(path, root), sorted(root.rglob("*"))
         )
-        if path.is_file():
-            result[path.relative_to(root).as_posix()] = digest(path)
-    return result
+        return dict(entry for entry in entries if entry is not None)
+
+
+def hash_files(root, names):
+    names = sorted(names)
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        hashes = pool.map(digest, (root / name for name in names))
+        return dict(zip(names, hashes, strict=True))
 
 
 def extract(archive_path, destination):
@@ -381,7 +418,128 @@ def retain_archives(source, folder):
     return artifacts
 
 
-def archive_audit(source, canonical, reference, folder):
+def generated_metadata_proof(inventory, folder):
+    receipt, native, command_row = (
+        load(folder / name)
+        for name in ("ownership.json", "native.json", "command.json")
+    )
+    process = receipt["actual_process"]
+    start, end = receipt["native_start_ns"], receipt["native_end_ns"]
+    require(
+        owned_process.Receipt(**receipt).succeeded
+        and native["status"] == "COMPLETE"
+        and native["returncode"] == 0,
+        "successful native lifetime required for generated metadata",
+    )
+    require(
+        all(
+            type(value) is int
+            for value in (start, end, process["pid"], process["birth_filetime"])
+        )
+        and 0 < end - start <= COMMAND_SECONDS * 1_000_000_000
+        and process["pid"] > 0
+        and FILETIME_EPOCH < process["birth_filetime"] < 2**64,
+        "invalid generated metadata native clock/identity",
+    )
+    require(
+        native["start_ns"] == start
+        and native["end_ns"] == end
+        and all(
+            native[key] == process[key] for key in ("pid", "image", "birth_filetime")
+        )
+        and native["argv"] == command_row["argv"]
+        and command_row["argv"][1] == "build"
+        and Path(process["image"]).is_absolute()
+        and Path(process["image"]) == Path(command_row["argv"][0])
+        and native["cwd"] == command_row["cwd"]
+        and native["environment"] == command_row["environment"]
+        and native["environment"]["metadata_profile"] == {"SOURCE_DATE_EPOCH": "absent"}
+        and load(folder / "stdout.actual-process.json") == process,
+        "generated metadata native evidence association differs",
+    )
+    require_reference(inventory, load(folder / "full-headers.json"))
+    member = inventory["sdist"][GENERATED_PYPROJECT]
+    pax, mtime = member["pax_headers"], member["mtime"]
+    require(
+        set(pax) == {"mtime"}
+        and type(pax["mtime"]) is str
+        and re.fullmatch(r"[+-]?[0-9]+(?:\.[0-9]+)?", pax["mtime"])
+        and type(mtime) in (float, int)
+        and math.isfinite(mtime),
+        "default generated pyproject PAX/finite mtime required",
+    )
+    decimal = Decimal(pax["mtime"])
+    require(
+        decimal.is_finite() and decimal == Decimal(str(mtime)),
+        "generated pyproject PAX/parser mtime differs",
+    )
+    lower = (process["birth_filetime"] - FILETIME_EPOCH) * 100
+    upper = lower + end - start
+    numerator, denominator = decimal.as_integer_ratio()
+    require(
+        lower * denominator <= numerator * 1_000_000_000 <= upper * denominator,
+        "generated pyproject mtime outside actual UV UTC lifetime",
+    )
+    retained = load(folder / "dist-output.json")
+    paths = [
+        "ownership.json",
+        "native.json",
+        "command.json",
+        "stdout",
+        "stderr",
+        "stdout.actual-process.json",
+        "full-headers.json",
+        "dist-output.json",
+    ]
+    bindings = {
+        name: digest(folder / name)
+        for name in paths + [item["retained"] for item in retained.values()]
+    }
+    require(
+        all(bindings[item["retained"]] == item["sha256"] for item in retained.values()),
+        "generated metadata retained raw bytes differ",
+    )
+    return {
+        "profile": "stock PDM 2.5.0 generated pyproject default timestamp only",
+        "backend_wheel_sha256": WHEEL_SHA,
+        "member": GENERATED_PYPROJECT,
+        "raw_header": member,
+        "actual_process": process,
+        "native_QPC_ns": [start, end],
+        "UTC_window_ns": [lower, upper],
+        "clock_basis": "FILETIME birth UTC plus complete native QPC duration; zero added slack",
+        "bindings": bindings,
+    }
+
+
+def require_generated_headers(actual, reference, folder, reference_folder):
+    proof = generated_metadata_proof(actual, folder)
+    save(folder / "generated-metadata-proof.json", proof)
+    if reference is None:
+        return
+    require(
+        generated_metadata_proof(reference, reference_folder)
+        == load(reference_folder / "generated-metadata-proof.json"),
+        "reference generated metadata proof changed",
+    )
+    require_reference(reference, reference)
+    for kind, members in actual.items():
+        if members.keys() != reference[kind].keys():
+            raise ValueError("Full frozen archive names differ")
+        for name, fields in members.items():
+            for field, value in fields.items():
+                generated_time = (
+                    kind == "sdist"
+                    and name == GENERATED_PYPROJECT
+                    and field in ("mtime", "pax_headers")
+                )
+                if not generated_time and value != reference[kind][name][field]:
+                    raise ValueError(
+                        f"Full frozen archive member/header metadata differs: {kind}/{name}/{field}"
+                    )
+
+
+def archive_audit(source, canonical, reference, folder, reference_folder):
     artifacts = retain_archives(source, folder)
     inventory = full_inventory(artifacts)
     save(folder / "full-headers.json", inventory)
@@ -389,7 +547,7 @@ def archive_audit(source, canonical, reference, folder):
         len(inventory["sdist"]) == 1196 and len(inventory["wheel"]) == 58,
         "complete 1196-sdist/58-wheel membership required",
     )
-    require_reference(inventory, inventory if reference is None else reference)
+    require_generated_headers(inventory, reference, folder, reference_folder)
     content = artifact_set(artifacts, source, canonical)
     return inventory, content
 
@@ -443,13 +601,14 @@ def summarize(rows):
     }
 
 
-def execute(args, canonical, deadline, envs, argv):
-    rows, reference = [], None
+def execute(args, canonical, deadline, envs, argv, runtime_guard):
+    rows, reference, reference_folder = [], None, None
     live = args.output / "canonical-source"
     for index, (arm, measured, pair) in enumerate(schedule()):
         room(deadline, COMMAND_SECONDS + GUARDIAN_ALLOWANCE + AUDIT_RESERVE)
         folder = args.output / f"build-{index:02}-{arm}"
         folder.mkdir()
+        runtime_guard.before_row(arm, measured, pair, folder)
         if live.exists():
             shutil.rmtree(live)
         extract(args.output / "source.tar", live)
@@ -515,7 +674,9 @@ def execute(args, canonical, deadline, envs, argv):
         require(seconds <= COMMAND_SECONDS, "native command cap exceeded")
         room(deadline, AUDIT_RESERVE)
         audit_started = time.perf_counter()
-        inventory, content = archive_audit(live, canonical, reference, folder)
+        inventory, content = archive_audit(
+            live, canonical, reference, folder, reference_folder
+        )
         source_proof = source_after(live, canonical, inventory, folder)
         save(folder / "source-after.json", source_proof)
         require(
@@ -526,9 +687,10 @@ def execute(args, canonical, deadline, envs, argv):
             "source dist and retained raw archive association differs",
         )
         if reference is None:
-            reference = inventory
+            reference, reference_folder = inventory, folder
         save(folder / "full-headers.json", inventory)
         save(folder / "content-record.json", content)
+        runtime_guard.after_row(arm, measured, pair, folder)
         rows.append(
             {
                 "index": index,
@@ -547,6 +709,9 @@ def execute(args, canonical, deadline, envs, argv):
                 "content_sha256": digest(folder / "content-record.json"),
                 "source_before_sha256": digest(folder / "source-before.json"),
                 "source_after_sha256": digest(folder / "source-after.json"),
+                "generated_metadata_sha256": digest(
+                    folder / "generated-metadata-proof.json"
+                ),
             }
         )
         save(args.output / "rows.json", rows)
@@ -627,12 +792,14 @@ def input_hashes(args, runtime_roots, names):
         "python": digest(args.python),
         "uv": digest(args.uv),
         "runtime": {str(root): manifest(Path(root)) for root in runtime_roots},
-        "source_checkout": {name: digest(args.source / name) for name in sorted(names)},
+        "source_checkout": hash_files(args.source, names),
         "source_archive": digest(args.output / "source.tar"),
         "source_manifest": digest(args.output / "source-manifest.json"),
         "wheels": manifest(args.wheels),
         "support": {name: digest(HERE / name) for name in SUPPORT},
         "driver": digest(HERE / "screen.py"),
+        "runtime_audit": digest(HERE / "runtime_bytecode.py"),
+        "build_constraints": digest(args.output / "build-constraints.txt"),
     }
 
 
@@ -647,12 +814,19 @@ def seal_rows(output, rows):
             ("content", "content-record.json"),
             ("source_before", "source-before.json"),
             ("source_after", "source-after.json"),
+            ("generated_metadata", "generated-metadata-proof.json"),
         ):
             require(
                 digest(folder / filename) == row[field + "_sha256"],
                 f"evidence changed after audit: {folder.name}/{filename}",
             )
         archives = load(folder / "content-record.json")
+        for name, expected in load(folder / "generated-metadata-proof.json")[
+            "bindings"
+        ].items():
+            require(
+                digest(folder / name) == expected, "generated metadata evidence changed"
+            )
         require(
             {path.name for path in (folder / "artifacts").iterdir()} == set(archives),
             "retained archive set differs",
@@ -685,7 +859,7 @@ def seal_rows(output, rows):
 
 def main(args):
     validate_paths(args)
-    require(math.isfinite(args.seconds) and 0 < args.seconds <= 480, "480s maximum")
+    require(math.isfinite(args.seconds) and 0 < args.seconds <= 600, "600s maximum")
     args.output.mkdir(parents=True)
     started = time.perf_counter()
     deadline = started + args.seconds
@@ -730,8 +904,10 @@ def main(args):
         )
         require(digest(args.wheels / WHEEL) == WHEEL_SHA, "publisher wheel hash")
         pe_arm64(args.python)
+        inherited, handoff = setup_uv_handoff(os.environ)
+        save(args.output / "setup-uv-handoff.json", handoff)
         envs = {
-            arm: environment(cache)
+            arm: environment(cache, inherited)
             for arm, cache in (("C", args.control_cache), ("D", args.candidate_cache))
         }
         delta_proof = environment_delta(envs["C"], envs["D"])
@@ -749,10 +925,21 @@ def main(args):
         )
         save(args.output / "runtime-identity.json", runtime)
         save(args.output / "uv-identity.json", attest(args.uv))
-        before = input_hashes(args, runtime["runtime_roots"], names)
-        save(args.output / "inputs-before.json", before)
         constraints = args.output / "build-constraints.txt"
         shutil.copyfile(HERE / constraints.name, constraints)
+        before = input_hashes(args, runtime["runtime_roots"], names)
+        save(args.output / "inputs-before.json", before)
+        runtime_guard = RuntimeGuard(
+            args.python,
+            runtime,
+            args.output,
+            before,
+            lambda: {
+                key: value
+                for key, value in input_hashes(args, [], names).items()
+                if key != "runtime"
+            },
+        )
         argv = command(args, constraints)
         for cache in (args.control_cache, args.candidate_cache):
             cache.mkdir(parents=True)
@@ -786,6 +973,8 @@ def main(args):
                 "overall_cap": args.seconds,
                 "metric": "qualified native UV spawn through owned natural drain",
                 "process_identity": "Qualified guardian Receipt.actual_process from held live Popen handle.",
+                "generated_metadata_contract": "Only stock generated sdist pyproject mtime/PAX mtime may vary after independent held-UV UTC lifetime proofs; SOURCE_DATE_EPOCH absent; all other fields exact.",
+                "runtime_contract": "Future-only: positive bytecode-output audit during WA/WB; full runtime seal after WB; exact measured/final preservation.",
                 "limitations": [
                     "C versus D cache placement only, same canonical C source/output/runtime.",
                     "Parent must attest D unused NVMe ordinary ReFS and volume/cache factors.",
@@ -800,11 +989,16 @@ def main(args):
             },
         )
         setup_seconds = time.perf_counter() - started
-        rows = execute(args, canonical, deadline, envs, argv)
+        rows = execute(args, canonical, deadline, envs, argv, runtime_guard)
         audit_started = time.perf_counter()
         after = input_hashes(args, runtime["runtime_roots"], names)
         save(args.output / "inputs-after.json", after)
-        require(before == after, "runtime/UV/wheel/support mutated")
+        runtime_guard.final()
+        require(
+            {key: value for key, value in before.items() if key != "runtime"}
+            == {key: value for key, value in after.items() if key != "runtime"},
+            "nonruntime UV/wheel/source/support mutated",
+        )
         seal_rows(args.output, rows)
         require(
             digest(constraints) == SUPPORT["build-constraints.txt"],
@@ -859,5 +1053,5 @@ if __name__ == "__main__":
             parser.add_argument(
                 "--" + key, type=lambda value: Path(value).resolve(), required=True
             )
-        parser.add_argument("--seconds", type=float, default=480)
+        parser.add_argument("--seconds", type=float, default=600)
         main(parser.parse_args())

@@ -16,7 +16,7 @@ import unittest
 import uuid
 import zipfile
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import create_autospec, patch
 
 import screen
 from owned_process import Receipt
@@ -51,6 +51,8 @@ class DriverTests(unittest.TestCase):
         self.argv = screen.command(
             self.args, Path("C:\\evidence\\build-constraints.txt")
         )
+        self.birth_seconds = 1700000000
+        self.metadata_time = 1700000000.0
         self.receipt = Receipt(
             0,
             False,
@@ -65,12 +67,14 @@ class DriverTests(unittest.TestCase):
             actual_process={
                 "pid": 42,
                 "image": str(self.args.uv),
-                "birth_filetime": 100,
+                "birth_filetime": screen.FILETIME_EPOCH
+                + self.birth_seconds * 10_000_000,
             },
         )
         self.canonical = {"source.py": "hash"}
         self.audit_impl = None
         self.source_after_impl = None
+        self.runtime_guard = create_autospec(screen.RuntimeGuard, instance=True)
 
     def extract(self, archive, destination):
         destination.mkdir()
@@ -78,19 +82,32 @@ class DriverTests(unittest.TestCase):
 
     def owned(self, argv, **kwargs):
         folder = kwargs["stdout_path"].parent
+        receipt = dataclasses.replace(
+            self.receipt,
+            actual_process={
+                **self.receipt.actual_process,
+                "birth_filetime": screen.FILETIME_EPOCH
+                + self.birth_seconds * 10_000_000,
+            },
+        )
+        (folder / "stdout").write_bytes(b"")
+        (folder / "stderr").write_bytes(b"")
+        screen.save(folder / "stdout.actual-process.json", receipt.actual_process)
         native = {
             "status": "COMPLETE",
             "returncode": 0,
             "argv": self.argv,
             "cwd": str(self.root / "canonical-source"),
             "environment": self.envs[folder.name[-1]],
-            "pid": 42,
-            "image": str(self.args.uv),
-            "birth_filetime": 100,
+            **receipt.actual_process,
             "start_ns": 1,
             "end_ns": 10,
         }
-        return self.receipt, native
+        return receipt, native
+
+    def fake_audit(self, source, canonical, reference, folder, reference_folder):
+        screen.save(folder / "generated-metadata-proof.json", {"bindings": {}})
+        return {"sdist": {}, "wheel": {}}, {}
 
     def output_proof(self, source, canonical, inventory, folder):
         return {
@@ -118,8 +135,7 @@ class DriverTests(unittest.TestCase):
             patch.object(
                 screen,
                 "archive_audit",
-                side_effect=failure or self.audit_impl,
-                return_value=({"sdist": {}, "wheel": {}}, {}),
+                side_effect=failure or self.audit_impl or self.fake_audit,
             ) as audit,
         ):
             try:
@@ -129,6 +145,7 @@ class DriverTests(unittest.TestCase):
                     time.perf_counter() + 480 if deadline is None else deadline,
                     self.envs,
                     self.argv,
+                    self.runtime_guard,
                 )
                 return result, owned.call_count, audit.call_count
             finally:
@@ -177,10 +194,84 @@ class DriverTests(unittest.TestCase):
         rows, calls, audits = self.run_driver()
         self.assertEqual(calls, 14)
         self.assertEqual(audits, 14)
+        self.assertEqual(self.runtime_guard.before_row.call_count, 14)
+        self.assertEqual(self.runtime_guard.after_row.call_count, 14)
         self.assertEqual(
             [(row["arm"], row["measured"], row["pair"]) for row in rows],
             screen.schedule(),
         )
+
+    def test_runtime_prelaunch_failure_prevents_native_command(self):
+        self.runtime_guard.before_row.side_effect = RuntimeError(
+            "runtime/input changed"
+        )
+        with self.assertRaisesRegex(RuntimeError, "runtime/input changed"):
+            self.run_driver()
+        self.assertEqual(self.owned_calls, 0)
+        self.runtime_guard.after_row.assert_not_called()
+
+    def test_measured_runtime_failure_prevents_next_command_and_valid_row(self):
+        def after_row(arm, measured, pair, folder):
+            if measured:
+                raise RuntimeError("measured runtime/input changed")
+
+        self.runtime_guard.after_row.side_effect = after_row
+        with self.assertRaisesRegex(RuntimeError, "measured runtime/input changed"):
+            self.run_driver()
+        self.assertEqual(self.owned_calls, 3)
+        self.assertEqual(len(screen.load(self.root / "rows.json")), 2)
+        self.assertFalse((self.root / "result.json").exists())
+
+    def test_real_runtime_guard_accepts_only_warmup_output_through_driver(self):
+        runtime = self.root / "runtime-fixture"
+        runtime.mkdir()
+        source = runtime / "module.py"
+        source.write_bytes(b"value = 7\n")
+        self.args.python = Path(sys.executable)
+        self.argv = screen.command(
+            self.args, Path("C:\\evidence\\build-constraints.txt")
+        )
+        with (
+            patch.object(sys, "prefix", str(runtime)),
+            patch.object(sys, "base_prefix", str(runtime)),
+        ):
+            self.runtime_guard = screen.RuntimeGuard(
+                self.args.python,
+                {"version": sys.version, "runtime_roots": [str(runtime)]},
+                self.root,
+                {
+                    "runtime": {str(runtime): {"module.py": screen.digest(source)}},
+                    "tool": "sealed",
+                },
+                lambda: {"tool": "sealed"},
+            )
+
+            def owned(argv, **kwargs):
+                if kwargs["stdout_path"].parent.name == "build-00-C":
+                    cache = Path(
+                        importlib.util.cache_from_source(str(source), optimization="")
+                    )
+                    cache.parent.mkdir()
+                    header = importlib.util.MAGIC_NUMBER + struct.pack(
+                        "<III",
+                        0,
+                        int(source.stat().st_mtime) & 0xFFFFFFFF,
+                        source.stat().st_size,
+                    )
+                    code = compile(
+                        source.read_bytes(),
+                        str(source),
+                        "exec",
+                        dont_inherit=True,
+                        optimize=0,
+                    )
+                    cache.write_bytes(header + marshal.dumps(code))
+                return self.owned(argv, **kwargs)
+
+            rows, calls, audits = self.run_driver(native=owned)
+            self.assertEqual((len(rows), calls, audits), (14, 14, 14))
+            self.runtime_guard.final()
+        self.assertTrue((self.root / "runtime-seal-after-WB.json").exists())
 
     def test_native_observation_keeps_uv_as_guardian_root(self):
         with patch.object(
@@ -219,7 +310,12 @@ class DriverTests(unittest.TestCase):
         self.assertEqual(native["status"], "FAILED")
 
     def packaging_fixture(
-        self, destination, *, corrupt_record=False, changed_header=False
+        self,
+        destination,
+        *,
+        corrupt_record=False,
+        changed_header=False,
+        changed_content=False,
     ):
         destination.mkdir()
         dist = destination / "dist"
@@ -232,8 +328,12 @@ class DriverTests(unittest.TestCase):
             for index in range(1196):
                 name = "pyproject.toml" if index == 0 else f"payload-{index}"
                 data = generated if index == 0 else b"payload"
+                if index == 1 and changed_content:
+                    data = b"changed payload bytes"
                 member = tarfile.TarInfo("fastapi-0.119.1/" + name)
                 member.size = len(data)
+                if index == 0:
+                    member.mtime = self.metadata_time
                 archive.addfile(member, io.BytesIO(data))
         members = {f"fastapi/payload-{index}": b"payload" for index in range(56)}
         members["fastapi-0.119.1.dist-info/WHEEL"] = b"Generator: pdm-backend (2.5.0)\n"
@@ -266,6 +366,41 @@ class DriverTests(unittest.TestCase):
         }
         self.audit_impl = screen.archive_audit
 
+    def test_default_generated_times_are_proved_without_rewriting_archives(self):
+        self.use_real_audit()
+        built = []
+
+        def extract(archive, destination):
+            self.birth_seconds = 1700000000 + 10 * len(built)
+            self.metadata_time = float(self.birth_seconds)
+            self.packaging_fixture(destination)
+            built.append(destination)
+
+        self.extract = extract
+        rows, calls, audits = self.run_driver()
+        self.assertEqual((len(rows), calls, audits), (14, 14, 14))
+        screen.seal_rows(self.root, rows)
+        first, second = self.root / "build-00-C", self.root / "build-01-D"
+        a = screen.load(first / "full-headers.json")["sdist"][
+            screen.GENERATED_PYPROJECT
+        ]
+        b = screen.load(second / "full-headers.json")["sdist"][
+            screen.GENERATED_PYPROJECT
+        ]
+        self.assertNotEqual(a["mtime"], b["mtime"])
+        self.assertNotEqual(a["pax_headers"], b["pax_headers"])
+        with tarfile.open(second / "artifacts" / "fastapi-0.119.1.tar.gz") as archive:
+            self.assertEqual(
+                archive.getmember(screen.GENERATED_PYPROJECT).mtime, b["mtime"]
+            )
+        proof = second / "generated-metadata-proof.json"
+        self.assertEqual(rows[1]["generated_metadata_sha256"], screen.digest(proof))
+        (first / "stdout").write_bytes(b"changed after audit")
+        with self.assertRaisesRegex(
+            RuntimeError, "generated metadata evidence changed"
+        ):
+            screen.seal_rows(self.root, rows)
+
     def test_real_record_validation_is_fatal_through_driver(self):
         self.use_real_audit()
 
@@ -295,6 +430,20 @@ class DriverTests(unittest.TestCase):
         self.assertEqual(self.owned_calls, 2)
         self.assertEqual(len(screen.load(self.root / "rows.json")), 1)
         self.assertTrue((self.root / "build-01-D" / "full-headers.json").is_file())
+
+    def test_real_content_difference_is_not_a_timestamp_exception(self):
+        self.use_real_audit()
+        built = []
+
+        def extract(archive, destination):
+            self.packaging_fixture(destination, changed_content=bool(built))
+            built.append(destination)
+
+        self.extract = extract
+        with self.assertRaisesRegex(ValueError, "Full frozen archive"):
+            self.run_driver()
+        self.assertEqual(self.owned_calls, 2)
+        self.assertEqual(len(screen.load(self.root / "rows.json")), 1)
 
     def test_real_uv_ignore_and_raw_pyc_survive_all_driver_payload_replacements(self):
         self.use_real_audit()
@@ -353,6 +502,80 @@ class DriverTests(unittest.TestCase):
 
 
 class ContractTests(unittest.TestCase):
+    def test_new_outer_budget_accepts_600_before_storage_checks(self):
+        args = argparse.Namespace(
+            seconds=600,
+            output=Path(__file__).parent / ("test-work-budget-" + uuid.uuid4().hex),
+            control_cache=Path("C:\\control"),
+            candidate_cache=Path("D:\\control"),
+        )
+        self.addCleanup(shutil.rmtree, args.output)
+        with (
+            patch.object(screen, "validate_paths"),
+            patch.object(
+                screen, "volume_identity", side_effect=RuntimeError("storage sentinel")
+            ) as storage,
+        ):
+            with self.assertRaisesRegex(RuntimeError, "storage sentinel"):
+                screen.main(args)
+        storage.assert_called_once()
+        self.assertEqual(
+            screen.load(args.output / "result.json")["error"], "storage sentinel"
+        )
+
+    def test_invalid_budget_stops_before_creating_evidence(self):
+        output = Path(__file__).parent / ("test-work-budget-" + uuid.uuid4().hex)
+        for seconds in (0, -1, float("nan"), float("inf"), 600.001):
+            with self.subTest(seconds=seconds):
+                with patch.object(screen, "validate_paths"):
+                    with self.assertRaisesRegex(RuntimeError, "600s maximum"):
+                        screen.main(argparse.Namespace(seconds=seconds, output=output))
+                self.assertFalse(output.exists())
+
+    def test_setup_uv_handoff_reproduces_and_resolves_observed_ci_rejection(self):
+        inherited = {
+            "UV_PYTHON_INSTALL_DIR": "C:\\action-python",
+            "UV_TOOL_BIN_DIR": "C:\\action-tool-bin",
+            "uv_tool_dir": "C:\\action-tools",
+            "UV_CACHE_DIR": "C:\\setup-cache",
+            "TEMP": "C:\\scratch",
+            "TMP": "C:\\scratch",
+            "PATH": "original-path",
+            "GITHUB_TOKEN": "private-token",
+        }
+        original = dict(inherited)
+        with self.assertRaisesRegex(RuntimeError, "ambient benchmark overrides"):
+            screen.environment(Path("C:\\same\\cache"), inherited)
+        clean, evidence = screen.setup_uv_handoff(inherited)
+        control = screen.environment(Path("C:\\same\\cache"), clean)
+        candidate = screen.environment(Path("D:\\same\\cache"), clean)
+        self.assertEqual(inherited, original)
+        self.assertEqual(
+            evidence["removed_location_variables"],
+            ["UV_PYTHON_INSTALL_DIR", "UV_TOOL_BIN_DIR", "uv_tool_dir"],
+        )
+        self.assertNotIn("action-python", str(evidence))
+        self.assertNotIn("private-token", str(evidence))
+        self.assertEqual(
+            screen.environment_delta(control, candidate),
+            {"changed_keys": ["UV_CACHE_DIR"], "all_non_cache_values_equal": True},
+        )
+        self.assertEqual(
+            {name: value for name, value in control.items() if name != "UV_CACHE_DIR"},
+            {name: original[name] for name in ("TEMP", "TMP", "PATH", "GITHUB_TOKEN")},
+        )
+
+    def test_setup_uv_handoff_keeps_unknown_policy_overrides_fatal(self):
+        for name in ("UV_NO_CACHE", "UV_PYTHON", "UV_INDEX_URL", "PYTHONPATH"):
+            with self.subTest(name=name):
+                clean, _ = screen.setup_uv_handoff(
+                    {"UV_TOOL_DIR": "C:\\action-tools", name: "injected"}
+                )
+                with self.assertRaisesRegex(
+                    RuntimeError, "ambient benchmark overrides"
+                ):
+                    screen.environment(Path("C:\\same\\cache"), clean)
+
     def test_environment_evidence_binds_without_disclosing_credentials(self):
         env = {
             "UV_CACHE_DIR": "D:\\same\\cache",

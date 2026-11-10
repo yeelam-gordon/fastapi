@@ -1,7 +1,7 @@
 {
   "approved": true,
-  "sourcepins_sha256": "3b56dfa333e6aa33d08c20519b6c1f1c45bee7a238ed94ad02937802ed51ac0e",
+  "sourcepins_sha256": "3f53e3a78184325bacdee011b7cae0da33ae60ed72de1b58d0564b1734ac993e",
   "scope": "ONE_HOSTED_ORDINARY_REFS_CACHE_BUILD_SCREEN_ONLY",
   "maximum_jobs": 1,
-  "status": "SOURCE_READY_ONE_RUN_NATIVE_QUALIFICATION_REQUIRED"
+  "status": "SOURCE_AND_LOCAL_PHASE_QUALIFIED_ONE_FRESH600S_FORK_RUN_ONLY"
 }

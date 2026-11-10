@@ -15,7 +15,7 @@ jobs:
   storage-build:
     if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
     runs-on: windows-11-arm
-    timeout-minutes: 12
+    timeout-minutes: 15
     defaults:
       run:
         shell: pwsh
@@ -132,7 +132,7 @@ jobs:
           "wheels=$wheels" >> $env:GITHUB_OUTPUT
       - name: Paired complete packaging only
         if: steps.storage.outputs.eligible == 'true'
-        timeout-minutes: 8
+        timeout-minutes: 10
         env:
           CONTROL_CACHE: ${{ steps.storage.outputs.control-cache }}
           CANDIDATE_CACHE: ${{ steps.storage.outputs.candidate-cache }}
@@ -141,7 +141,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\hosted-nvme-refs-screen'
-          & $env:TARGET_PYTHON -I -B (Join-Path $helper 'screen.py') --python $env:TARGET_PYTHON --uv (Get-Command uv).Source --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --control-cache $env:CONTROL_CACHE --candidate-cache $env:CANDIDATE_CACHE --wheels $env:BACKEND_WHEELS --output (Join-Path $env:GITHUB_WORKSPACE 'storage-evidence\builds') --seconds 480
+          & $env:TARGET_PYTHON -I -B (Join-Path $helper 'screen.py') --python $env:TARGET_PYTHON --uv (Get-Command uv).Source --source (Join-Path $env:GITHUB_WORKSPACE 'package-source') --control-cache $env:CONTROL_CACHE --candidate-cache $env:CANDIDATE_CACHE --wheels $env:BACKEND_WHEELS --output (Join-Path $env:GITHUB_WORKSPACE 'storage-evidence\builds') --seconds 600
           exit $LASTEXITCODE
       - name: Record total elapsed separately
         if: always()
