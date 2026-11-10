@@ -2,18 +2,23 @@ name: Matched native ARM build reference (separate allocation required)
 
 on:
   workflow_call:
+    inputs:
+      reference-host:
+        type: string
+        default: both
 
 permissions:
   contents: read
 
 env:
+  MATCHED_REFERENCE_HOST: ${{ inputs.reference-host }}
   GIT_CONFIG_COUNT: "1"
   GIT_CONFIG_KEY_0: core.autocrlf
   GIT_CONFIG_VALUE_0: "false"
 
 jobs:
   windows:
-    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1' && github.event_name == 'workflow_dispatch'
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1' && github.event_name == 'workflow_dispatch' && inputs.reference-host != 'darwin'
     runs-on: windows-11-arm
     timeout-minutes: 15
     defaults:
@@ -45,6 +50,33 @@ jobs:
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
           & (Join-Path $helper 'Check-Release.ps1') *>&1 |
             Tee-Object -FilePath (Join-Path $env:GITHUB_WORKSPACE 'matched-job-evidence\readiness.txt')
+      - name: Select cached-only normal native metadata controller
+        id: controller
+        timeout-minutes: 1
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
+          $evidence = Join-Path $env:GITHUB_WORKSPACE 'matched-job-evidence'
+          try {
+            . (Join-Path $helper 'Cached-Controller.ps1')
+            $root = $env:RUNNER_TOOL_CACHE
+            if (-not $root -or ([IO.Path]::GetPathRoot($root)) -cne 'C:\') { throw 'Native C: RUNNER_TOOL_CACHE required' }
+            if ($env:AGENT_TOOLSDIRECTORY -and [IO.Path]::GetFullPath($env:AGENT_TOOLSDIRECTORY).TrimEnd('\') -ine [IO.Path]::GetFullPath($root).TrimEnd('\')) {
+              throw 'Tool-cache root aliases differ'
+            }
+            $candidate = Select-CachedController -Root $root
+            @{ directory = $candidate.Directory; version = $candidate.Version
+               executable = $candidate.Python; scope = 'CACHE_LAYOUT_SELECTION_NOT_RUNTIME_IDENTITY' } |
+              ConvertTo-Json -Depth 2 |
+              Set-Content -LiteralPath (Join-Path $evidence 'cached-controller-selection.json') -Encoding utf8
+            "python-path=$($candidate.Python)" >> $env:GITHUB_OUTPUT
+            "directory=$($candidate.Directory)" >> $env:GITHUB_OUTPUT
+            "version=$($candidate.Version)" >> $env:GITHUB_OUTPUT
+          } catch {
+            "NONCOMPARISON: cached-only launcher prerequisite failed: $($_.Exception.Message)" |
+              Set-Content -LiteralPath (Join-Path $evidence 'NONCOMPARISON.txt') -Encoding utf8
+            throw
+          }
       - name: Prepare only unused RAW NVMe as ordinary ReFS
         id: storage
         timeout-minutes: 1
@@ -83,47 +115,50 @@ jobs:
         with:
           version: "0.13.6"
           enable-cache: "false"
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
-        if: steps.storage.outputs.eligible == 'true'
-        id: controller
-        timeout-minutes: 1
-        with:
-          python-version: "3.13.15"
-          architecture: arm64
       - name: Observe private SDK and unseeded patch-request venv
+        id: stage
         if: steps.storage.outputs.eligible == 'true'
         timeout-minutes: 3
         env:
           CONTROLLER: ${{ steps.controller.outputs.python-path }}
+          CONTROLLER_DIRECTORY: ${{ steps.controller.outputs.directory }}
+          CONTROLLER_VERSION: ${{ steps.controller.outputs.version }}
         run: |
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
-          & $env:CONTROLLER -I -B (Join-Path $helper 'deploy.py') stage --workspace $env:GITHUB_WORKSPACE --uv (Get-Command uv).Source
+          & $env:CONTROLLER -I -B -S (Join-Path $helper 'deploy.py') stage --workspace $env:GITHUB_WORKSPACE --uv (Get-Command uv).Source --controller-directory $env:CONTROLLER_DIRECTORY --controller-version $env:CONTROLLER_VERSION
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
       - name: One default-I core then exact-target read-only raw verification
+        id: reference
         if: steps.storage.outputs.eligible == 'true'
         timeout-minutes: 15
         env:
           CONTROLLER: ${{ steps.controller.outputs.python-path }}
+          CONTROLLER_DIRECTORY: ${{ steps.controller.outputs.directory }}
+          CONTROLLER_VERSION: ${{ steps.controller.outputs.version }}
         run: |
           $helper = Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci'
-          & $env:CONTROLLER -I -B (Join-Path $helper 'deploy.py') run --workspace $env:GITHUB_WORKSPACE
+          & $env:CONTROLLER -I -B -S (Join-Path $helper 'deploy.py') run --workspace $env:GITHUB_WORKSPACE --controller-directory $env:CONTROLLER_DIRECTORY --controller-version $env:CONTROLLER_VERSION
           exit $LASTEXITCODE
       - name: Seal job clock and gate collection on actual drain
         id: finish
         if: always()
+        env:
+          MATCHED_ENTRY_MODE: windows-self-identity
+          MATCHED_STAGE_OUTCOME: ${{ steps.stage.outcome }}
+          MATCHED_RUN_OUTCOME: ${{ steps.reference.outcome }}
         run: |
           & (Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci\Finish-Job.ps1')
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        if: always()
+        if: always() && steps.finish.outputs.artifact-paths != ''
         with:
           name: matched-reference-windows-full-raw
-          path: ${{ steps.finish.outputs.artifact-paths || 'matched-job-evidence' }}
+          path: ${{ steps.finish.outputs.artifact-paths }}
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 14
 
   darwin:
-    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1' && github.event_name == 'workflow_dispatch'
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1' && github.event_name == 'workflow_dispatch' && (inputs.reference-host == 'both' || inputs.reference-host == 'darwin')
     runs-on: macos-15
     timeout-minutes: 15
     defaults:
@@ -192,13 +227,16 @@ jobs:
       - name: Seal job clock and gate collection on actual drain
         id: finish
         if: always()
+        env:
+          MATCHED_ENTRY_MODE: mac-existing-controller
+          MATCHED_JOB_STATUS: ${{ job.status }}
         run: |
           & (Join-Path $env:GITHUB_WORKSPACE 'tools\Generated Files\arm-build\matched-build-reference-ci\Finish-Job.ps1')
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        if: always()
+        if: always() && steps.finish.outputs.artifact-paths != ''
         with:
           name: matched-reference-darwin-full-raw
-          path: ${{ steps.finish.outputs.artifact-paths || 'matched-job-evidence' }}
+          path: ${{ steps.finish.outputs.artifact-paths }}
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 14

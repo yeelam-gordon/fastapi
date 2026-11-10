@@ -12,12 +12,14 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import bootstrap  # noqa: E402
 import case_contract as contract  # noqa: E402
+import controller_identity  # noqa: E402
 
 
 def authorize(env):
     review = json.loads((HERE / "PARENT-REVIEW.json").read_bytes())
-    bootstrap.require(review["approved"] is True and review["maximum_jobs"] == 2
+    bootstrap.require(review["approved"] is True
                       and review["delegated_native_admission"] is True, "NOTADMITTED: zero approved jobs")
+    contract.reference_allocation(review, env.get("MATCHED_REFERENCE_HOST", "both"), sys.platform)
     bootstrap.require(all(env.get(name) == value for name, value in {
         "GITHUB_REPOSITORY": "yeelam-gordon/fastapi", "GITHUB_RUN_ATTEMPT": "1",
         "GITHUB_EVENT_NAME": "workflow_dispatch", "RUNNER_ENVIRONMENT": "github-hosted",
@@ -31,6 +33,8 @@ def authorize(env):
     bootstrap.require(type(release["schema"]) is int and release["schema"] == 1
                       and release["hosted_raw_verifier_ready"] is True
                       and bootstrap.reference.source_preflight() == bootstrap.PIN, "source closure")
+    bootstrap.require(sys.platform != "win32" or release["windows_controller_mode"] == "self-identity-existing-entry-unowned-startup",
+                      "explicit Windows controller startup boundary required")
     for name, expected in release["files"].items():
         path = HERE.parents[2] / contract.release_member(name)
         bootstrap.require(bootstrap.sha(path) == expected, "combined release bytes")
@@ -175,8 +179,16 @@ def main():
     parser.add_argument("operation", choices=("stage", "run"))
     parser.add_argument("--workspace", type=Path, required=True)
     parser.add_argument("--uv", type=Path)
+    parser.add_argument("--controller-directory")
+    parser.add_argument("--controller-version")
     args = parser.parse_args()
     bootstrap.require(sys.flags.isolated == 1 and sys.dont_write_bytecode, "controller -I -B")
+    if sys.platform == "win32":
+        bootstrap.require(args.controller_directory and args.controller_version, "explicit metadata-controller cache association")
+        identity = controller_identity.observe_self(args.controller_directory, args.controller_version)
+        bootstrap.save(args.workspace / "matched-job-evidence" / f"metadata-controller-{args.operation}.json",
+                       {"operation": args.operation, "identity": identity,
+                        "scope": "SELF_IDENTITY_ONLY_NOT_OWNERSHIP_OR_MEASURED_SDK"})
     authorize(os.environ)
     if args.operation == "stage":
         bootstrap.require(args.uv is not None, "explicit qualified UV location")

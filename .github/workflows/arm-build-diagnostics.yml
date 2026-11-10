@@ -33,6 +33,14 @@ on:
           - setup-python
           - uv-managed
         default: setup-python
+      reference-host:
+        description: Matched native reference only; other modes ignore this selection.
+        type: choice
+        options:
+          - both
+          - windows
+          - darwin
+        default: both
 
 permissions:
   contents: read
@@ -46,6 +54,8 @@ jobs:
   matched-native-build-reference:
     if: inputs.platform == 'matched-native-build-reference' && github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == '1'
     uses: ./.github/workflows/matched-native-build-reference.yml
+    with:
+      reference-host: ${{ inputs.reference-host }}
 
   hosted-nvme-source-output-screen:
     if: inputs.platform == 'hosted-nvme-source-output-screen'

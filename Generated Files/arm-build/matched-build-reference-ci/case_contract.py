@@ -28,6 +28,20 @@ def decode(path, read):
 def canonical(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
 
+def reference_platforms(selection):
+    require(selection in {"both", "windows", "darwin"}, "Invalid reference-host selection")
+    return {"both": ("win32", "darwin"), "windows": ("win32",),
+            "darwin": ("darwin",)}[selection]
+
+
+def reference_allocation(review, selection, platform):
+    platforms = reference_platforms(selection)
+    require(review.get("reference_host", "both") == selection
+            and type(review["maximum_jobs"]) is int
+            and review["maximum_jobs"] == len(platforms) and platform in platforms,
+            "reference-host/platform/parent job ceiling mismatch")
+    return True
+
 
 def binding(path):
     return {"path": str(path), "sha256": bootstrap.sha(path)}
@@ -150,7 +164,8 @@ def authority(case, config, protocol, identity, initial, read):
     review = decode(Path(case["release_root"]) / "Generated Files" / "arm-build" /
                     "matched-build-reference-ci" / "PARENT-REVIEW.json", read)
     launch = decode(case["bindings"]["launch_marker"]["path"], read)
-    require(review["approved"] is True and review["maximum_jobs"] == 2
+    require(review["approved"] is True
+            and reference_allocation(review, review.get("reference_host", "both"), case["platform"])
             and review["delegated_native_admission"] is True
             and review["expected_run_number"] == case["run_number"]
             and 0 < review["expires_unix"] - review["issued_unix"] <= 1800
