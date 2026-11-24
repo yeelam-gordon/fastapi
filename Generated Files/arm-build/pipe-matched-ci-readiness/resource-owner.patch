@@ -1,0 +1,166 @@
+--- a/tests/test_tutorial/test_custom_docs_ui/test_tutorial001.py
++++ b/tests/test_tutorial/test_custom_docs_ui/test_tutorial001.py
+@@ -1,4 +1,3 @@
+-import os
+ from pathlib import Path
+ 
+ import pytest
+@@ -6,15 +5,16 @@
+ 
+ 
+ @pytest.fixture(scope="module")
+-def client():
+-    static_dir: Path = Path(os.getcwd()) / "static"
+-    print(static_dir)
+-    static_dir.mkdir(exist_ok=True)
+-    from docs_src.custom_docs_ui.tutorial001 import app
++def client(tmp_path_factory: pytest.TempPathFactory):
++    with pytest.MonkeyPatch.context() as mp:
++        mp.chdir(tmp_path_factory.mktemp("custom-docs-ui-001"))
++        static_dir = Path("static")
++        static_dir.mkdir()
++        from docs_src.custom_docs_ui.tutorial001 import app
+ 
+-    with TestClient(app) as client:
+-        yield client
+-    static_dir.rmdir()
++        with TestClient(app) as client:
++            yield client
++        static_dir.rmdir()
+ 
+ 
+ def test_swagger_ui_html(client: TestClient):
+--- a/tests/test_tutorial/test_custom_docs_ui/test_tutorial002.py
++++ b/tests/test_tutorial/test_custom_docs_ui/test_tutorial002.py
+@@ -1,4 +1,3 @@
+-import os
+ from pathlib import Path
+ 
+ import pytest
+@@ -6,15 +5,16 @@
+ 
+ 
+ @pytest.fixture(scope="module")
+-def client():
+-    static_dir: Path = Path(os.getcwd()) / "static"
+-    print(static_dir)
+-    static_dir.mkdir(exist_ok=True)
+-    from docs_src.custom_docs_ui.tutorial002 import app
++def client(tmp_path_factory: pytest.TempPathFactory):
++    with pytest.MonkeyPatch.context() as mp:
++        mp.chdir(tmp_path_factory.mktemp("custom-docs-ui-002"))
++        static_dir = Path("static")
++        static_dir.mkdir()
++        from docs_src.custom_docs_ui.tutorial002 import app
+ 
+-    with TestClient(app) as client:
+-        yield client
+-    static_dir.rmdir()
++        with TestClient(app) as client:
++            yield client
++        static_dir.rmdir()
+ 
+ 
+ def test_swagger_ui_html(client: TestClient):
+--- /dev/null
++++ b/conftest.py
+@@ -0,0 +1,25 @@
++import pytest
++
++
++@pytest.hookimpl(tryfirst=True)
++def pytest_collection_modifyitems(config, items):
++    argv = tuple(getattr(config, "workerinput", {}).get("mainargv", ()))
++    if config.getoption("dist", default=None) != "loadgroup" and "--dist=loadgroup" not in argv and not any(
++        left == "--dist" and right == "loadgroup" for left, right in zip(argv, argv[1:])
++    ):
++        return
++    shared = {"tests/test_application.py", "tests/test_path.py", "tests/test_query.py"}
++    workdir = {
++        "tests/test_tutorial/test_additional_responses/test_tutorial002.py",
++        "tests/test_tutorial/test_additional_responses/test_tutorial004.py",
++        "tests/test_tutorial/test_background_tasks/test_tutorial001.py",
++        "tests/test_tutorial/test_background_tasks/test_tutorial002.py",
++        "tests/test_tutorial/test_events/test_tutorial002.py",
++    }
++    for item in items:
++        if item.get_closest_marker("xdist_group") is None:
++            filename = item.nodeid.split("::", 1)[0]
++            group = "shared-main-app" if filename in shared else (
++                "workdir_lock" if filename in workdir else filename
++            )
++            item.add_marker(pytest.mark.xdist_group(name=group))
+diff --git a/tests/test_tutorial/test_websockets/test_tutorial003.py b/tests/test_tutorial/test_websockets/test_tutorial003.py
+index dbcad3b02..4c630f86e 100644
+--- a/tests/test_tutorial/test_websockets/test_tutorial003.py
++++ b/tests/test_tutorial/test_websockets/test_tutorial003.py
+@@ -11,17 +11,18 @@ def test_get():
+ 
+ 
+ def test_websocket_handle_disconnection():
+-    with client.websocket_connect("/ws/1234") as connection, client.websocket_connect(
+-        "/ws/5678"
+-    ) as connection_two:
+-        connection.send_text("Hello from 1234")
+-        data1 = connection.receive_text()
+-        assert data1 == "You wrote: Hello from 1234"
+-        data2 = connection_two.receive_text()
+-        client1_says = "Client #1234 says: Hello from 1234"
+-        assert data2 == client1_says
+-        data1 = connection.receive_text()
+-        assert data1 == client1_says
+-        connection_two.close()
+-        data1 = connection.receive_text()
+-        assert data1 == "Client #5678 left the chat"
++    with client:
++        with client.websocket_connect(
++            "/ws/1234"
++        ) as connection, client.websocket_connect("/ws/5678") as connection_two:
++            connection.send_text("Hello from 1234")
++            data1 = connection.receive_text()
++            assert data1 == "You wrote: Hello from 1234"
++            data2 = connection_two.receive_text()
++            client1_says = "Client #1234 says: Hello from 1234"
++            assert data2 == client1_says
++            data1 = connection.receive_text()
++            assert data1 == client1_says
++            connection_two.close()
++            data1 = connection.receive_text()
++            assert data1 == "Client #5678 left the chat"
+diff --git a/tests/test_tutorial/test_websockets/test_tutorial003_py39.py b/tests/test_tutorial/test_websockets/test_tutorial003_py39.py
+index 06c4a9279..055e84bd6 100644
+--- a/tests/test_tutorial/test_websockets/test_tutorial003_py39.py
++++ b/tests/test_tutorial/test_websockets/test_tutorial003_py39.py
+@@ -34,17 +34,18 @@ def test_get(client: TestClient, html: str):
+ 
+ @needs_py39
+ def test_websocket_handle_disconnection(client: TestClient):
+-    with client.websocket_connect("/ws/1234") as connection, client.websocket_connect(
+-        "/ws/5678"
+-    ) as connection_two:
+-        connection.send_text("Hello from 1234")
+-        data1 = connection.receive_text()
+-        assert data1 == "You wrote: Hello from 1234"
+-        data2 = connection_two.receive_text()
+-        client1_says = "Client #1234 says: Hello from 1234"
+-        assert data2 == client1_says
+-        data1 = connection.receive_text()
+-        assert data1 == client1_says
+-        connection_two.close()
+-        data1 = connection.receive_text()
+-        assert data1 == "Client #5678 left the chat"
++    with client:
++        with client.websocket_connect(
++            "/ws/1234"
++        ) as connection, client.websocket_connect("/ws/5678") as connection_two:
++            connection.send_text("Hello from 1234")
++            data1 = connection.receive_text()
++            assert data1 == "You wrote: Hello from 1234"
++            data2 = connection_two.receive_text()
++            client1_says = "Client #1234 says: Hello from 1234"
++            assert data2 == client1_says
++            data1 = connection.receive_text()
++            assert data1 == client1_says
++            connection_two.close()
++            data1 = connection.receive_text()
++            assert data1 == "Client #5678 left the chat"

@@ -1,0 +1,83 @@
+{
+  "approved": false,
+  "scope": "Transfer03 consumed and completed; no further allocation authorized",
+  "profile": "pipe-fixed-groups-ci82-v1",
+  "cli_identity_qualified": true,
+  "sourcepins_sha256": "4ee102156af162e3904d25304dc7622248915e87f430ece904ba7e410e277301",
+  "source_freeze_commit": "f3d8866a10b0ac9988fa1f60a9fdf212de0bf7d3",
+  "review_findings_closed": [
+    "MATCHED-001",
+    "MATCHED-002",
+    "MATCHED-003"
+  ],
+  "source_review": "Independent bounded CLI source review, coordinator postwait-lifetime correction, focused metadata and local runtime qualification",
+  "closed_allocation": {
+    "run_id": 41947559106,
+    "commit": "664d5b29ebd8584c71f8bf0b645d86380103f9a0",
+    "status": "FAILED/CLOSED",
+    "dispatches_consumed": 1,
+    "retries": 0
+  },
+  "closed_controlled_allocation": {
+    "id": "controlled-ci-transfer-02",
+    "run_id": 41969250383,
+    "commit": "7be53da4762b19bd26657122518e3c0a576afaea",
+    "status": "FAILED/CLOSED",
+    "dispatches_consumed": 1,
+    "retries": 0,
+    "unrecovered": "Mac generated log bytes, Windows A2 tests and full final audit",
+    "retained_evidence": "23 native shards rehashed read-only; Windows first-pair inputs and derived hashes verified; Mac native headers corroborate source-based platform policy, not old workflow PASS"
+  },
+  "local_repair_qualification": {
+    "one_cli_case": "PASS; actual stable handle/native parent association, source/runtime preservation and natural drain",
+    "one_offline_build": "PASS; complete frozen member/header/RECORD equality, source/runtime preservation and natural drain",
+    "mac_zip_creator": "Source-derived native value 3, not an actual Mac runtime qualification",
+    "performance_claim": false
+  },
+  "new_allocation": {
+    "id": "controlled-ci-transfer-03",
+    "run_id": 41972551771,
+    "result": "Workflow success; eight payloads independently verified with high scoped integrity/arithmetic confidence; primary parity NOT MET; causal confidence low",
+    "dispatches_consumed": 1,
+    "repository": "yeelam-gordon/fastapi",
+    "route": "pipe-controlled-ci",
+    "dispatches": 1,
+    "attempt": 1,
+    "jobs": 2,
+    "job_seconds": 600,
+    "queue_seconds": 300,
+    "final_audit_seconds": 120,
+    "payloads_per_host": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "workers": {
+      "windows": 4,
+      "macos": 3
+    },
+    "warmups": 0,
+    "retries": 0,
+    "traces": 0,
+    "question": "Transfer named-pipe benefit under identical fixed-group controls and measure position-matched Windows/Mac build, tests, whole-HOBL and case gaps",
+    "local_value": "controlled-full-01: 1.6590375s/3.6297013% AB and 0.8723528s/1.8869649% BA; all four strict raw/archive/case/source/runtime/CLI/drain gates passed",
+    "source_evidence": "Independent log/mode/budget source closures high; 107 helper metadata checks; all 87 staged blobs and actual workflow sparse checkout verified; unchanged native pipe/control/fixture",
+    "budget_basis": "Observed setup and completed native/audit times plus all nested reserves estimate547s; A2 remains unobserved,53s margin is not guaranteed; hard600s controlled-only limit",
+    "stop": "First-pair integrity failure, source/native readiness failure, queue/job bounds or allocation failure: retain evidence, no automatic rerun"
+  },
+  "blocking": [
+    "Position-matched Windows candidate whole-HOBL remains15.346s/10.190s slower than Mac",
+    "Windows ordered value gates pass, but two pairs and Mac identity drift do not establish a stable causal effect",
+    "No additional CI allocation is authorized",
+    "Physical twenty-core Windows versus sixteen-core Mac parity remains unmeasured"
+  ],
+  "acceptance": {
+    "windows_within_host": "At least 0.5 seconds and 1 percent whole savings in both orders, no covered-test regression, all integrity gates",
+    "cross_host": "Position-matched Windows B build/test/whole versus Mac B identity control, both orders; report failures honestly",
+    "mac_readiness": "Actual source/native wheel/runtime acceptance must pass inside the bounded pre-payload job",
+    "physical_parity": false,
+    "crypto_candidate_included": false
+  },
+  "closed_history": "Original local v2 administrative timeout remains CLOSED; no regrading or automatic retry"
+}

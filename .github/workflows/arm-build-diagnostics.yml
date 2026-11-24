@@ -2,195 +2,188 @@ name: ARM build diagnostics (analysis only)
 
 on:
   workflow_dispatch:
-    inputs:
-      platform:
-        description: Limit a follow-up allocation to the missing platform.
-        type: choice
-        options:
-          - both
-          - windows
-          - macos
-        default: both
-      native_traces:
-        description: Request capability/privacy-gated native diagnostics.
-        type: boolean
-        default: true
 
 permissions:
   contents: read
+  actions: read
 
 env:
   GIT_CONFIG_COUNT: "1"
   GIT_CONFIG_KEY_0: core.autocrlf
   GIT_CONFIG_VALUE_0: "false"
+  MATCHED_PROFILE: stock-hobl-storage-ci82-v1
+  MATCHED_JOB_SECONDS: "600"
+  PYTHONNOUSERSITE: "1"
 
 jobs:
-  diagnostics:
-    name: Analysis only (${{ matrix.platform }})
+  stock-reference:
+    if: github.repository == 'yeelam-gordon/fastapi' && github.run_attempt == 1
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
-        include: >-
-          ${{ fromJSON(
-            inputs.platform == 'macos' && '[{"runner":"macos-15","platform":"macos"}]' ||
-            inputs.platform == 'windows' && '[{"runner":"windows-11-arm","platform":"windows"}]' ||
-            inputs.platform == 'both' && '[{"runner":"windows-11-arm","platform":"windows"},{"runner":"macos-15","platform":"macos"}]' ||
-            '[]'
-          ) }}
+        include:
+          - runner: windows-11-arm
+            platform: windows
+            workers: 4
+          - runner: macos-15
+            platform: macos
+            workers: 3
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 25
     defaults:
       run:
         shell: pwsh
     steps:
-      - name: Record pre-checkout tool context
+      - name: Record job clock and existing storage
         run: |
-          $git = Get-Command git -ErrorAction Stop
-          $version = & $git.Source version
-          if ($LASTEXITCODE -or $version -notmatch '(\d+\.\d+(?:\.\d+)?)' -or [version]$Matches[1] -lt [version]'2.28') {
-            throw 'Git >= 2.28 is required; archive fallback is not permitted'
+          $ErrorActionPreference = 'Stop'
+          if ($env:RUNNER_ENVIRONMENT -ne 'github-hosted' -or
+              [Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString() -cne 'Arm64') {
+            throw 'Expected a standard hosted ARM64 runner'
           }
-          "Git executable: $($git.Source)"
-          git version --build-options
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          node -p "JSON.stringify({kind:'path-node',arch:process.arch,version:process.version,executable:process.execPath})"
-          exit $LASTEXITCODE
+          "MATCHED_STARTED=$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())" >> $env:GITHUB_ENV
+          if ($env:RUNNER_OS -eq 'Windows') {
+            foreach ($path in @($env:GITHUB_WORKSPACE, $env:RUNNER_TEMP, $env:RUNNER_TOOL_CACHE, $env:TEMP)) {
+              if ([IO.Path]::GetPathRoot($path) -ine 'C:\') { throw 'Expected Windows inputs on C:' }
+            }
+            $volume = Get-Volume -DriveLetter C
+            if ($volume.FileSystem -cne 'NTFS' -or $volume.HealthStatus -ne 'Healthy') {
+              throw 'Expected healthy C: NTFS'
+            }
+            Write-Output "Windows C: NTFS; image $env:ImageOS $env:ImageVersion"
+          } else {
+            & df -P $env:GITHUB_WORKSPACE
+            if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          }
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: ${{ github.sha }}
           path: tools
+          ref: ${{ github.sha }}
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /.gitattributes
-            /.github/.gitattributes
-            /.github/workflows/.gitattributes
             /.github/workflows/arm-build-diagnostics.yml
-            /Generated Files/.gitattributes
-            /Generated Files/arm-build/.gitattributes
-            /Generated Files/arm-build/setup_python.cjs
-            /Generated Files/arm-build/tooling.lock
-            /Generated Files/arm-build/diagnostics/.gitattributes
-            /Generated Files/arm-build/diagnostics/*.py
-            /Generated Files/arm-build/diagnostics/*.md
-            /Generated Files/arm-build/diagnostics/hook/*.py
-            /Generated Files/arm-build/diagnostics/action/.gitattributes
-            /Generated Files/arm-build/diagnostics/action/*.yml
-            /Generated Files/arm-build/diagnostics/action/*.cjs
-            /Generated Files/arm-build/protocol/backend.lock
-            /Generated Files/arm-build/protocol/owned_process.py
-            /Generated Files/arm-build/candidate/validate.py
-            /Generated Files/arm-build/candidate/actual-manifest.json
+            /Generated Files/arm-build/hosted-stock-reference-20261124/
+            /Generated Files/arm-build/hosted-devdrive-hobl-source-20261111/
+            /Generated Files/arm-build/pipe-matched-ci-readiness/
+            /Generated Files/arm-build/hobl-complete-ci/
+      - name: Verify reviewed workload and allocation before setup
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tools = Join-Path $env:GITHUB_WORKSPACE 'tools'
+          $arm = Join-Path $tools 'Generated Files\arm-build'
+          $lane = Join-Path $arm 'hosted-stock-reference-20261124'
+          & (Join-Path $lane 'Test-StockReference.ps1') -ToolRoot $tools
+          $env:HOBL_SOURCE_ROOT = Join-Path $arm 'pipe-matched-ci-readiness'
+          & (Join-Path $env:HOBL_SOURCE_ROOT 'queue_readiness.ps1')
+          "HOBL_SOURCE_ROOT=$env:HOBL_SOURCE_ROOT" >> $env:GITHUB_ENV
+          "HOBL_DRIVER=$(Join-Path $arm 'hosted-devdrive-hobl-source-20261111\controlled_ci.py')" >> $env:GITHUB_ENV
+          "HOBL_OUTPUT=$(Join-Path $env:GITHUB_WORKSPACE 'stock-evidence')" >> $env:GITHUB_ENV
+          "HOBL_SOURCE=$(Join-Path $env:GITHUB_WORKSPACE 'package-source')" >> $env:GITHUB_ENV
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: 79cab5bed28b24d92c185d236feb33f5783dfeb3
+          repository: fastapi/fastapi
+          ref: 864b569cf8453654fc3bc2c64108c0f644e2918c
           path: package-source
           persist-credentials: false
-      - name: Prepare owned analysis directories
-        env:
-          NATIVE_REQUESTED: ${{ inputs.native_traces }}
-        run: |
-          if (-not $env:GITHUB_RUN_ID -or -not $env:GITHUB_RUN_ATTEMPT) {
-            throw 'Run identity is required before creating an owned analysis directory'
-          }
-          $name = 'arm-analysis-{0}-{1}' -f $env:GITHUB_RUN_ID, $env:GITHUB_RUN_ATTEMPT
-          $root = if ($env:RUNNER_OS -eq 'Windows') {
-            Join-Path 'C:\' $name
-          } else {
-            Join-Path $env:GITHUB_WORKSPACE $name
-          }
-          New-Item -ItemType Directory -Path $root -ErrorAction Stop | Out-Null
-          foreach ($folder in @('bin', 'temp', 'wheelhouse')) {
-            New-Item -ItemType Directory -Path (Join-Path $root $folder) | Out-Null
-          }
-          Copy-Item -Recurse -Force tools (Join-Path $root 'tools')
-          Copy-Item -Recurse -Force package-source (Join-Path $root 'package-source')
-          @(
-            "DIAG_ROOT=$root"
-            "DIAG_TOOLS=$(Join-Path $root 'tools')"
-            "DIAG_SOURCE=$(Join-Path $root 'package-source')"
-            "DIAG_WHEELHOUSE=$(Join-Path $root 'wheelhouse')"
-            "ARM_DIAGNOSTIC_ACTION_JSON=$(Join-Path $root 'action-node.json')"
-            "DIAG_NATIVE_TRACES_REQUESTED=$env:NATIVE_REQUESTED"
-            "UV_CACHE_DIR=$(Join-Path $root 'cache')"
-            "UV_PYTHON_INSTALL_DIR=$(Join-Path $root 'python')"
-            "PIP_CACHE_DIR=$(Join-Path $root 'pip-cache')"
-            "TEMP=$(Join-Path $root 'temp')"
-            "TMP=$(Join-Path $root 'temp')"
-            "TMPDIR=$(Join-Path $root 'temp')"
-          ) | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - name: Record actual Actions Node runtime
-        uses: ./tools/Generated Files/arm-build/diagnostics/action
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        if: matrix.platform == 'macos'
+        id: python
         with:
-          output: ${{ env.ARM_DIAGNOSTIC_ACTION_JSON }}
+          python-version: "3.13.15"
+          architecture: arm64
+          update-environment: false
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7
         with:
           version: "0.13.6"
           enable-cache: "false"
-      - name: Prepare native Python and locked diagnostic tools
+      - name: Bind the qualified native uv image
         run: |
-          $windowsHost = $env:RUNNER_OS -eq 'Windows'
-          $bin = Join-Path $env:DIAG_ROOT 'bin'
-          $uvName = if ($windowsHost) { 'uv.exe' } else { 'uv' }
-          $uv = Join-Path $bin $uvName
-          Copy-Item (Get-Command uv -ErrorAction Stop).Source $uv
-          $env:PATH = "$bin$([IO.Path]::PathSeparator)$env:PATH"
-          $bin | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
-          "DIAG_UV=$uv" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
-          node (Join-Path $arm 'setup_python.cjs')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          $scripts = if ($windowsHost) { 'Scripts' } else { 'bin' }
-          $pythonName = if ($windowsHost) { 'python.exe' } else { 'python' }
-          $python = Join-Path (Join-Path (Join-Path $arm '.venv') $scripts) $pythonName
-          & $uv --no-config pip install --python $python --require-hashes --only-binary :all: -r (Join-Path $arm 'tooling.lock')
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          & $python -m pip check
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          & $python -m pip download --only-binary=:all: --require-hashes --index-url https://pypi.org/simple -r (Join-Path (Join-Path $arm 'protocol') 'backend.lock') --dest $env:DIAG_WHEELHOUSE
-          if ($LASTEXITCODE) { exit $LASTEXITCODE }
-          $wheelHashes = @{}
-          foreach ($wheel in Get-ChildItem -LiteralPath $env:DIAG_WHEELHOUSE -Filter '*.whl' -File) {
-            $wheelHashes[$wheel.Name] = (Get-FileHash -LiteralPath $wheel.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          $ErrorActionPreference = 'Stop'
+          $uv = (Get-Command uv -CommandType Application | Select-Object -First 1).Source
+          $actual = (Get-FileHash -LiteralPath $uv).Hash.ToLowerInvariant()
+          $expected = if ($env:RUNNER_OS -eq 'Windows') {
+            if ([IO.Path]::GetPathRoot($uv) -ine 'C:\') { throw 'Expected uv on C:' }
+            'ec27977d62b5f6091bce410a8e69d40d07541803314e0120905c0ad0affaa5cc'
+          } else {
+            '3996850e6d85e60b0142b40af4bd984822d65f736b52209921c47312450685cb'
           }
-          if ($wheelHashes.Count -eq 0) { throw 'Hash-verified backend download produced no wheel' }
-          $wheelHashes | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $env:DIAG_WHEELHOUSE 'sha256.json') -Encoding utf8
-          "DIAG_PYTHON=$python" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
-      - name: Check collector contracts
+          if ($actual -cne $expected) { throw "Unqualified uv image: $actual" }
+          "STOCK_UV=$uv" >> $env:GITHUB_ENV
+          Write-Output "Qualified uv SHA-256: $actual"
+      - name: Install private native Windows Python
+        if: matrix.platform == 'windows'
+        id: managed-python
+        timeout-minutes: 1
+        env:
+          UV_PYTHON_INSTALL_DIR: ${{ github.workspace }}\managed-python
+          UV_CACHE_DIR: ${{ github.workspace }}\managed-python-cache
+          UV_HTTP_RETRIES: "0"
+          UV_HTTP_TIMEOUT: "20"
         run: |
-          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
-          $diagnostics = Join-Path $arm 'diagnostics'
-          & $env:DIAG_PYTHON -m unittest discover -s $diagnostics -p 'test_*.py'
-          exit $LASTEXITCODE
-      - name: Collect read-only checkout tool context
+          $ErrorActionPreference = 'Stop'
+          $uv = $env:STOCK_UV
+          & $uv python install 3.13.15 --install-dir $env:UV_PYTHON_INSTALL_DIR --no-bin --no-registry --no-config --no-progress
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $python = & $uv python find 3.13.15 --managed-python --no-python-downloads --no-project --no-config --no-progress
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $root = [IO.Path]::GetFullPath($env:UV_PYTHON_INSTALL_DIR) + [IO.Path]::DirectorySeparatorChar
+          if (-not ([IO.Path]::GetFullPath($python)).StartsWith($root, [StringComparison]::OrdinalIgnoreCase)) {
+            throw 'Managed interpreter escaped private installation'
+          }
+          "python-path=$python" >> $env:GITHUB_OUTPUT
+      - name: Prepare the stock common82 workload
+        env:
+          BASE_PYTHON: ${{ steps.managed-python.outputs.python-path || steps.python.outputs.python-path }}
         run: |
-          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
-          $probe = Join-Path (Join-Path $arm 'diagnostics') 'git_context.py'
-          & $env:DIAG_PYTHON $probe --repo $env:DIAG_SOURCE --output (Join-Path (Join-Path $env:DIAG_ROOT 'context-upload') 'git-context.json') --repeats 3
+          $ErrorActionPreference = 'Stop'
+          foreach ($setting in 'PYTHONPATH', 'PYTHONHOME') {
+            if (Test-Path "Env:$setting") { throw "Unexpected Python startup setting: $setting" }
+          }
+          & $env:BASE_PYTHON -I -B -c "import os, platform, sys; print(sys.version, platform.machine(), os.cpu_count()); sys.exit(sys.version_info[:3] != (3, 13, 15) or platform.machine().lower() not in ('arm64', 'aarch64') or os.cpu_count() != ${{ matrix.workers }})"
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          $objects = & git -C $env:HOBL_SOURCE rev-parse --path-format=absolute --git-path objects
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+          if ($env:RUNNER_OS -eq 'Windows') {
+            foreach ($path in @($env:BASE_PYTHON, $env:HOBL_SOURCE, $objects)) {
+              $item = Get-Item -Force -LiteralPath $path
+              while ($null -ne $item) {
+                if ([IO.Path]::GetPathRoot($item.FullName) -ine 'C:\' -or
+                    ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) {
+                  throw "Expected a non-reparse C: path: $path"
+                }
+                $item = if ($item -is [IO.FileInfo]) { $item.Directory } else { $item.Parent }
+              }
+            }
+          }
+          Write-Output "Workload inputs: source=$env:HOBL_SOURCE; git objects=$objects; interpreter=$env:BASE_PYTHON; evidence=$env:HOBL_OUTPUT"
+          $remaining = [long]$env:MATCHED_JOB_SECONDS - ([DateTimeOffset]::UtcNow.ToUnixTimeSeconds() - [long]$env:MATCHED_STARTED) - 15
+          if ($remaining -le 120) { throw 'No finite preparation allocation remains' }
+          & $env:BASE_PYTHON -B $env:HOBL_DRIVER prepare --profile $env:MATCHED_PROFILE --source $env:HOBL_SOURCE --output $env:HOBL_OUTPUT --uv $env:STOCK_UV --workers ${{ matrix.workers }} --seconds $remaining
           exit $LASTEXITCODE
-      - name: Collect matched build diagnostics, not performance results
+      - name: Measure four complete stock workloads and verify them
         run: |
-          $arm = Join-Path (Join-Path $env:DIAG_TOOLS 'Generated Files') 'arm-build'
-          $collector = Join-Path (Join-Path $arm 'diagnostics') 'collect.py'
-          & $env:DIAG_PYTHON $collector --uv $env:DIAG_UV --source-checkout $env:DIAG_SOURCE --wheelhouse $env:DIAG_WHEELHOUSE --output (Join-Path $env:DIAG_ROOT 'evidence') --context-repeats 3
+          $ErrorActionPreference = 'Stop'
+          $remaining = [long]$env:MATCHED_JOB_SECONDS - ([DateTimeOffset]::UtcNow.ToUnixTimeSeconds() - [long]$env:MATCHED_STARTED) - 15
+          if ($remaining -le 120) { throw 'No finite workload and audit allocation remains' }
+          $python = if ($env:RUNNER_OS -eq 'Windows') { Join-Path $env:HOBL_OUTPUT 'venv\Scripts\python.exe' } else { Join-Path $env:HOBL_OUTPUT 'venv\bin\python' }
+          & $python -B $env:HOBL_DRIVER run --profile $env:MATCHED_PROFILE --source $env:HOBL_SOURCE --output $env:HOBL_OUTPUT --uv $env:STOCK_UV --workers ${{ matrix.workers }} --seconds $remaining
           exit $LASTEXITCODE
-      - name: Preserve safe diagnostic evidence even on failure
-        if: always() && env.DIAG_ROOT != ''
+      - name: Retain phase timings, audit receipts and raw evidence
+        if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: arm-analysis-${{ matrix.platform }}
+          name: stock-hobl-reference-${{ matrix.platform }}
           path: |
-            ${{ env.DIAG_ROOT }}/evidence/upload
-            ${{ env.DIAG_ROOT }}/context-upload
-          if-no-files-found: error
-          retention-days: 3
-      - name: Preserve native Python setup receipts
-        if: always() && env.DIAG_TOOLS != ''
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: arm-analysis-setup-${{ matrix.platform }}
-          path: |
-            ${{ env.DIAG_TOOLS }}/Generated Files/arm-build/results/bootstrap
-            ${{ env.ARM_DIAGNOSTIC_ACTION_JSON }}
+            tools/Generated Files/arm-build/hosted-devdrive-hobl-source-20261111/PARENT-REVIEW.json
+            stock-evidence/*.json
+            stock-evidence/*.stdout
+            stock-evidence/*.stderr
+            stock-evidence/*.toml
+            stock-evidence/*.txt
+            stock-evidence/payload-*
+          include-hidden-files: true
           if-no-files-found: warn
-          retention-days: 3
+          retention-days: 14
