@@ -18,7 +18,7 @@ from verify_stock_reference import decode, is_int, is_number, is_sha, require, s
 QUESTION = "hosted-stock-collection-boundaries"
 SCHEDULE = ("OFF", "ON", "ON", "OFF")
 STAGES = ("precollection", "collection", "finish_to_first_report")
-MODE_PROOF = "collection-boundary-proof.json"
+MODE_PROOF = "early-timing-validation.json"
 
 
 def review_options(review):

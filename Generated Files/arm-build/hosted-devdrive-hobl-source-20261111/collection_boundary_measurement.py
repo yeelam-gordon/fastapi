@@ -58,7 +58,7 @@ def audit_payload(profile, row, workers):
     identities = [load(path) for path in sorted(folder.glob("identity-*.json"))]
     receipt = SimpleNamespace(**load(folder / "test-receipt.json"))
     validate(folder, enabled, identities, receipt, workers=workers)
-    with (folder / "collection-boundary-proof.json").open(
+    with (folder / "early-timing-validation.json").open(
         "x", encoding="utf-8"
     ) as stream:
         json.dump(

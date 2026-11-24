@@ -2,7 +2,7 @@
   "approved": true,
   "profile": "stock-hobl-storage-ci82-v1",
   "cli_identity_qualified": true,
-  "sourcepins_sha256": "03c459044206c28e0471030c869d86ca027f9e0f595055161590a21c66da1c12",
+  "sourcepins_sha256": "6df0c208227e5bb494a8f7e025c09d4760b7dca8db0aea2a91a19ffaa0b0c0c3",
   "ci_execution": {
     "question": "hosted-stock-collection-boundaries",
     "repository": "yeelam-gordon/fastapi",
@@ -17,12 +17,12 @@
     "gate_sha256": "440228b78fb782c722c2752d3cd677f8d7d8c88ddb422dcb6101073132ec28c4",
     "cli_provenance_sha256": "b81755d0696a5e1dd5f73cfa664316d95bfb9f37b99dd2d270bc3c2411d454c3",
     "verifier_sha256": "1848b43461b2b819e03a448e4cd3c49b312aea84ce28bc83c2042e691e3557d4",
-    "diagnostic_verifier_sha256": "1cd2e151c41318a9eb644f440e08c649b6e8aaece0d5e80aedb2ac0a0650ece3",
+    "diagnostic_verifier_sha256": "87c7d3de8563c742537f81712c55e9a61c1b8481b800278ceceb31dfefc4167f",
     "question_sha256": "2a1ef54f12549742e2285739df97697b98198ac72c195d2e41f18a2c60cd8abe",
     "queue_sha256": {
       "queue_readiness.ps1": "7599ad8ccb207392c0efaef447da653fdd5b33ef29a95aaa2afd9c9981ad9c8b",
       "required-backend-ci-readiness/queue_clock.ps1": "c77c9f440fc71843999a02c37763b1dec3ce8fe19945a23bca5b1c14a104e620"
     },
-    "supersedes_failed_run": 45315177584
+    "supersedes_failed_run": 45316384030
   }
 }
