@@ -15,6 +15,70 @@ SOURCE = Path(os.environ["CORRECTNESS_SOURCE"])
 WORKER = "controller"
 OWNED = {}
 PHASE_STREAM: TextIO | None = None
+_EARLY_FLAG = os.environ.get("ARM_BUILD_EARLY_BOUNDARIES", "0")
+if _EARLY_FLAG not in ("0", "1"):
+    raise RuntimeError("FATAL: invalid ARM_BUILD_EARLY_BOUNDARIES opt-in")
+_EARLY_ENABLED = _EARLY_FLAG == "1"
+_EARLY_EVENTS = []
+_EARLY_CAPTURE_PENDING = False
+_EARLY_FIRST_REPORT = False
+
+
+def _early_mark(name):
+    global _EARLY_CAPTURE_PENDING
+    if not _EARLY_ENABLED:
+        return
+    if _EARLY_CAPTURE_PENDING:
+        raise RuntimeError("FATAL: early boundary capture failed; unqualified")
+    _EARLY_CAPTURE_PENDING = True
+    cpu = os.times()
+    user, system = cpu.user, cpu.system
+    if not all(
+        isinstance(value, float) and 0 <= value < float("inf")
+        for value in (user, system)
+    ):
+        raise RuntimeError("FATAL: invalid current-process CPU snapshot; unqualified")
+    _EARLY_EVENTS.append(
+        {
+            "name": name,
+            "cpu_user_seconds": user,
+            "cpu_system_seconds": system,
+            "monotonic_ns": time.monotonic_ns(),
+        }
+    )
+    _EARLY_CAPTURE_PENDING = False
+
+
+def _early_save():
+    if not _EARLY_ENABLED:
+        return
+    if _EARLY_CAPTURE_PENDING:
+        raise RuntimeError("FATAL: early boundary capture failed; unqualified")
+    with (OUT / ("early-boundaries-" + WORKER + ".json")).open(
+        "x", encoding="utf-8"
+    ) as stream:
+        json.dump(
+            {
+                "schema_version": 2,
+                "pid": os.getpid(),
+                "worker": WORKER,
+                "clock": "time.monotonic_ns",
+                "clock_scope": "same-host-only",
+                "cpu_scope": "current-process-all-threads/no-children",
+                "sample_order": "CPU-then-wall/non-atomic",
+                "events": _EARLY_EVENTS,
+            },
+            stream,
+            indent=2,
+        )
+        stream.write("\n")
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_collection(session):
+    _early_mark("pytest_collection.entry")
+    yield
+    _early_mark("pytest_collection.exit")
 
 
 def save(name, value):
@@ -22,18 +86,22 @@ def save(name, value):
 
 
 def pytest_configure(config):
+    _early_mark("pytest_configure.entry")
     global WORKER
     WORKER = (
         config.workerinput["workerid"]
         if hasattr(config, "workerinput")
         else "controller"
     )
+    _early_mark("pytest_configure.exit")
 
 
 def pytest_sessionstart(session):
+    _early_mark("pytest_sessionstart.entry")
     global PHASE_STREAM
     PHASE_STREAM = (OUT / ("phases-" + WORKER + ".jsonl")).open("w", encoding="utf-8")
     if os.environ.get("CHECK_COVERAGE") != "1":
+        _early_mark("pytest_sessionstart.exit")
         return
     import coverage
 
@@ -81,9 +149,11 @@ def pytest_sessionstart(session):
             "tracer": str(tracer),
         },
     )
+    _early_mark("pytest_sessionstart.exit")
 
 
 def pytest_collection_finish(session):
+    _early_mark("pytest_collection_finish.entry")
     ids = [item.nodeid for item in session.items]
     if ids:
         assert len(ids) == len(set(ids))
@@ -96,9 +166,14 @@ def pytest_collection_finish(session):
                 Path(fastapi.__file__).resolve() == SOURCE / "fastapi" / "__init__.py"
             )
         save("collection-" + WORKER + ".json", ids)
+    _early_mark("pytest_collection_finish.exit")
 
 
 def pytest_runtest_logreport(report):
+    global _EARLY_FIRST_REPORT
+    if _EARLY_ENABLED and not _EARLY_FIRST_REPORT:
+        _early_mark("pytest_runtest_logreport.first_entry")
+        _EARLY_FIRST_REPORT = True
     assert PHASE_STREAM is not None
     PHASE_STREAM.write(
         json.dumps(
@@ -118,10 +193,13 @@ def pytest_runtest_logreport(report):
 
 
 def pytest_sessionfinish(session, exitstatus):
+    _early_mark("pytest_sessionfinish.entry")
     global PHASE_STREAM
     assert PHASE_STREAM is not None
     PHASE_STREAM.close()
     PHASE_STREAM = None
+    _early_mark("pytest_sessionfinish.exit")
+    _early_save()
 
 
 @pytest.hookimpl(hookwrapper=True)

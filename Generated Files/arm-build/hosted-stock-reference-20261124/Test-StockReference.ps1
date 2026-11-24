@@ -21,11 +21,15 @@ if ($env:GITHUB_REPOSITORY -cne 'yeelam-gordon/fastapi' -or
     $review.approved -isnot [bool] -or -not $review.approved -or
     $review.cli_identity_qualified -isnot [bool] -or -not $review.cli_identity_qualified -or
     $review.profile -cne $env:MATCHED_PROFILE -or $review.sourcepins_sha256 -cne $manifestSha -or
-    $allocation.question -cne 'hosted-stock-ntfs-mac-reference' -or
+    $allocation.question -cne 'hosted-stock-collection-boundaries' -or
+    $env:HOBL_COLLECTION_BOUNDARY_DIAGNOSTIC -cne '1' -or
+    (@($allocation.observation_schedule) -join ',') -cne 'OFF,ON,ON,OFF' -or
+    $allocation.question_sha256 -cne (Get-Sha256 (Join-Path $PSScriptRoot 'COLLECTION-QUESTION.md')) -or
     $allocation.jobs -ne 2 -or $allocation.job_seconds -ne 600 -or $allocation.hobl_rows -cne 'AAAA' -or
     $allocation.workflow_sha256 -cne (Get-Sha256 $workflow) -or
     $allocation.cli_provenance_sha256 -cne (Get-Sha256 (Join-Path $PSScriptRoot 'CLI-PROVENANCE.md')) -or
     $allocation.verifier_sha256 -cne (Get-Sha256 (Join-Path $PSScriptRoot 'verify_stock_reference.py')) -or
+    $allocation.diagnostic_verifier_sha256 -cne (Get-Sha256 (Join-Path $PSScriptRoot 'verify_collection_boundaries.py')) -or
     $allocation.gate_sha256 -cne (Get-Sha256 $PSCommandPath)) {
     throw 'NoParityClaim: exact two-job stock source/allocation review required'
 }

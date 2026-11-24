@@ -2,6 +2,9 @@
 
 import observer as base
 from observer import (
+    pytest_collection as pytest_collection,
+)
+from observer import (
     pytest_configure as pytest_configure,
 )
 from observer import (

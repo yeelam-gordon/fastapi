@@ -184,6 +184,8 @@ def readiness(args):
 
 
 def environment(args, row):
+    from collection_boundary_measurement import observation_enabled
+
     env = {
         key: value
         for key, value in os.environ.items()
@@ -209,6 +211,7 @@ def environment(args, row):
         CHECK_COVERAGE="1",
         CHECK_FIXTURE="1",
         FULL_SUITE="1",
+        ARM_BUILD_EARLY_BOUNDARIES=str(int(observation_enabled(args.profile, row))),
         TEMP=str(temp),
         TMP=str(temp),
         TMPDIR=str(temp),
@@ -331,6 +334,11 @@ def worker(
     try:
         ready = (readiness if readiness_check is None else readiness_check)(args)
         rows = load(args.output / "payloads.json")
+        if os.environ.get("HOBL_COLLECTION_BOUNDARY_DIAGNOSTIC") == "1":
+            from collection_boundary_measurement import require_order
+
+            require_order(args.profile, rows)
+
 
         def phase(row, name, budget):
             folder = Path(row["folder"])

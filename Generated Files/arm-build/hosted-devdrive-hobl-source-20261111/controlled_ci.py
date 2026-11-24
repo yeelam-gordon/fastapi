@@ -90,6 +90,9 @@ def main(args):
     if getattr(args, "profile", PROFILE) != os.environ.get("MATCHED_PROFILE", PROFILE):
         raise ValueError("Selected profile differs from source-review allocation")
     admit()
+    from collection_boundary_measurement import require_diagnostic_allocation
+
+    require_diagnostic_allocation(__file__, args.profile)
     if args.action in ("prepare", "prepare-worker"):
         base.main(args)
     elif args.action == "run":
@@ -121,6 +124,10 @@ def main(args):
             raise ValueError("Controlled dispatch changed across payloads")
         if args.action == "cheap":
             save(Path(rows[0]["folder"]) / "controlled-dispatch-proof.json", proofs[0])
+        if args.action == "cheap":
+            from collection_boundary_measurement import audit_payload
+
+            audit_payload(args.profile, rows[0], args.workers)
         base.audit(args)
 
 
