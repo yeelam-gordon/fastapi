@@ -2,7 +2,7 @@
   "approved": true,
   "profile": "stock-hobl-storage-ci82-v1",
   "cli_identity_qualified": true,
-  "sourcepins_sha256": "e2a6a1ac357dddcb237f53d3fc13f4b124eeb1dc44a5a28c5c4da529e8131591",
+  "sourcepins_sha256": "03c459044206c28e0471030c869d86ca027f9e0f595055161590a21c66da1c12",
   "ci_execution": {
     "question": "hosted-stock-collection-boundaries",
     "repository": "yeelam-gordon/fastapi",
@@ -22,6 +22,7 @@
     "queue_sha256": {
       "queue_readiness.ps1": "7599ad8ccb207392c0efaef447da653fdd5b33ef29a95aaa2afd9c9981ad9c8b",
       "required-backend-ci-readiness/queue_clock.ps1": "c77c9f440fc71843999a02c37763b1dec3ce8fe19945a23bca5b1c14a104e620"
-    }
+    },
+    "supersedes_failed_run": 45315177584
   }
 }

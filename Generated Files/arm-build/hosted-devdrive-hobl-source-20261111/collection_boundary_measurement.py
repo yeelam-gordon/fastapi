@@ -5,7 +5,6 @@ import os
 from pathlib import Path
 from types import SimpleNamespace
 
-from cpu_sidecars import validate
 from screen import load
 
 MODE = "HOBL_COLLECTION_BOUNDARY_DIAGNOSTIC"
@@ -53,6 +52,8 @@ def audit_payload(profile, row, workers):
     enabled = observation_enabled(profile, row)
     if os.environ.get(MODE, "0") == "0":
         return
+    from cpu_sidecars import validate
+
     folder = Path(row["folder"])
     identities = [load(path) for path in sorted(folder.glob("identity-*.json"))]
     receipt = SimpleNamespace(**load(folder / "test-receipt.json"))
